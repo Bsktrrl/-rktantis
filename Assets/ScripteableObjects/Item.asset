@@ -1,0 +1,219 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8898d72f42247449855184dcbd203ca, type: 3}
+  m_Name: Item
+  m_EditorClassIdentifier: 
+  itemList:
+  - itemName: 0
+    categoryName: 0
+    subCategoryName: 0
+    itemSize: {x: 1, y: 1}
+    itemDescription: 
+    hotbarSprite: {fileID: 21300000, guid: e4c75704211c6834d9faa3a6419e11d0, type: 3}
+    itemSpriteList:
+    - {fileID: -74583670, guid: cb09d8518d394d04883b80b6a11c020d, type: 3}
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    isActive: 0
+    isEquipable: 0
+    HP: 0
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 1
+    categoryName: 2
+    subCategoryName: 1
+    itemSize: {x: 1, y: 1}
+    itemDescription: This is a stone that can be used in crafting recipes.
+    hotbarSprite: {fileID: 21300000, guid: fe3f0a8ab8fb2f24a8a7a2193adff5b9, type: 3}
+    itemSpriteList:
+    - {fileID: 814119140, guid: e0d49768a0faf0247873ec799af13b39, type: 3}
+    worldObjectPrefab: {fileID: 4279313669877795266, guid: 28be7c47a9c5332429ac67d42f39dbbc, type: 3}
+    equippedPrefab: {fileID: 0}
+    isActive: 1
+    isEquipable: 0
+    HP: 0
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 2
+    categoryName: 2
+    subCategoryName: 2
+    itemSize: {x: 2, y: 2}
+    itemDescription: This is a plank that can be used in crafting recipes.
+    hotbarSprite: {fileID: 21300000, guid: 40e49cc8761c2bd45b45d09fe2475239, type: 3}
+    itemSpriteList:
+    - {fileID: 1467642179, guid: 31d93cf0f344be047a6af13175521316, type: 3}
+    - {fileID: -1165045840, guid: 31d93cf0f344be047a6af13175521316, type: 3}
+    - {fileID: 252689115, guid: 31d93cf0f344be047a6af13175521316, type: 3}
+    - {fileID: -1340238267, guid: 31d93cf0f344be047a6af13175521316, type: 3}
+    worldObjectPrefab: {fileID: 2937703576817829625, guid: 88618f6b46af1d4499f8d961a3befbac, type: 3}
+    equippedPrefab: {fileID: 0}
+    isActive: 1
+    isEquipable: 0
+    HP: 0
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 3
+    categoryName: 2
+    subCategoryName: 3
+    itemSize: {x: 3, y: 3}
+    itemDescription: This is a leaf that can be used in crafting recipes.
+    hotbarSprite: {fileID: 21300000, guid: 0ff34107caa074b48a3712c4a6de622e, type: 3}
+    itemSpriteList:
+    - {fileID: 2114707314, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
+    - {fileID: -1665722997, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
+    - {fileID: -1311007148, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
+    - {fileID: 1618348052, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
+    - {fileID: -284258036, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
+    - {fileID: -841776077, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
+    - {fileID: -131188669, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
+    - {fileID: 916876052, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
+    - {fileID: -25507351, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
+    worldObjectPrefab: {fileID: 2833017258156135846, guid: 3fa7c29e95361c240985744d936a1edb, type: 3}
+    equippedPrefab: {fileID: 0}
+    isActive: 1
+    isEquipable: 0
+    HP: 0
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 1
+      amount: 1
+  - itemName: 4
+    categoryName: 4
+    subCategoryName: 5
+    itemSize: {x: 1, y: 2}
+    itemDescription: When Equipped, this Axe can be used to chop down trees and building
+      parts.
+    hotbarSprite: {fileID: 21300000, guid: e4303391985f79844908fe65043c04a0, type: 3}
+    itemSpriteList:
+    - {fileID: -1235552466, guid: a41c728b5482ff044bde4523a5f7f1ba, type: 3}
+    - {fileID: 55069962, guid: a41c728b5482ff044bde4523a5f7f1ba, type: 3}
+    worldObjectPrefab: {fileID: 4279313669877795266, guid: dc174aabc84666741a383722e6448947, type: 3}
+    equippedPrefab: {fileID: 2553926483823156083, guid: da39f2b4d3c87d44cbefd48ae6bd425f, type: 3}
+    isActive: 1
+    isEquipable: 1
+    HP: 5000
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 1
+      amount: 1
+    - itemName: 2
+      amount: 2
+    - itemName: 3
+      amount: 1
+  - itemName: 5
+    categoryName: 4
+    subCategoryName: 6
+    itemSize: {x: 1, y: 3}
+    itemDescription: When Equipped, this Building Hammer can be used to build building
+      parts in the world.
+    hotbarSprite: {fileID: 21300000, guid: 47bb401cd6c8522469986afca097fb21, type: 3}
+    itemSpriteList:
+    - {fileID: 46826578, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
+    - {fileID: -911672284, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
+    - {fileID: -243376414, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
+    worldObjectPrefab: {fileID: 4279313669877795266, guid: b0229b2dc402cd445b34321ee6111672, type: 3}
+    equippedPrefab: {fileID: 1693644012290509181, guid: 12d8621cfba74e24d95af7901dc50e1f, type: 3}
+    isActive: 1
+    isEquipable: 1
+    HP: 100000
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 2
+      amount: 4
+    - itemName: 3
+      amount: 2
+  - itemName: 6
+    categoryName: 3
+    subCategoryName: 10
+    itemSize: {x: 2, y: 1}
+    itemDescription: When holding a Small Chest, left click to spawn it into the
+      world. You can use it as a second storage.
+    hotbarSprite: {fileID: 21300000, guid: f19cfea4c93ca3548848c46ad9f3e844, type: 3}
+    itemSpriteList:
+    - {fileID: -1957503050, guid: 8f367c240c3818a45ad25c8ef947e1a4, type: 3}
+    - {fileID: -142297919, guid: 8f367c240c3818a45ad25c8ef947e1a4, type: 3}
+    worldObjectPrefab: {fileID: 4279313669877795266, guid: 8c70823081d6d8f438d5592c4857fbbf, type: 3}
+    equippedPrefab: {fileID: 0}
+    isActive: 1
+    isEquipable: 0
+    HP: 0
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 2
+      amount: 4
+    - itemName: 1
+      amount: 1
+    - itemName: 3
+      amount: 2
+  - itemName: 7
+    categoryName: 3
+    subCategoryName: 10
+    itemSize: {x: 3, y: 1}
+    itemDescription: When holding a Medium Chest, left click to spawn it into the
+      world. You can use it as a second storage.
+    hotbarSprite: {fileID: 21300000, guid: 8ab512eb68d8aa44895554fbaeadcce6, type: 3}
+    itemSpriteList:
+    - {fileID: 1310005785, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
+    - {fileID: 1118895527, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
+    - {fileID: -2018920849, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
+    worldObjectPrefab: {fileID: 4279313669877795266, guid: ee59082d7bf50da46b477b1c479ad7bd, type: 3}
+    equippedPrefab: {fileID: 0}
+    isActive: 1
+    isEquipable: 0
+    HP: 0
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 2
+      amount: 6
+    - itemName: 1
+      amount: 3
+    - itemName: 3
+      amount: 5
+  - itemName: 9
+    categoryName: 3
+    subCategoryName: 10
+    itemSize: {x: 1, y: 1}
+    itemDescription: Temp
+    hotbarSprite: {fileID: 21300000, guid: 424946d0e60d4314d8e0e42c00114bc2, type: 3}
+    itemSpriteList:
+    - {fileID: -34546620, guid: 06521b7ca3b82d74f8e75837a7cd33f5, type: 3}
+    worldObjectPrefab: {fileID: 4279313669877795266, guid: f2bde7fc4196fd44a8fcde2f934623b9, type: 3}
+    equippedPrefab: {fileID: 0}
+    isActive: 1
+    isEquipable: 0
+    HP: 0
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 2
+      amount: 3
+    - itemName: 1
+      amount: 1
+    - itemName: 3
+      amount: 30
