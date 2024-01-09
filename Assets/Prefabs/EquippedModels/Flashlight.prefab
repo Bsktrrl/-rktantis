@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 882547329525488168}
   - component: {fileID: 5950515217441991527}
+  - component: {fileID: 6645845668406109619}
   - component: {fileID: 7248165349685093021}
+  - component: {fileID: -5355833773656286783}
   m_Layer: 0
   m_Name: Flashlight
   m_TagString: InvisibleLight
@@ -56,6 +58,27 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 3.549603
   m_Center: {x: 0, y: 0, z: 3.549603}
+--- !u!95 &6645845668406109619
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2602820642190348203}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7248165349685093021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,6 +93,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereCollider: {fileID: 0}
   spherePos: {x: 0, y: 0, z: 0}
+--- !u!114 &-5355833773656286783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2602820642190348203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc24ee7acbc75234b9a9891c6efa648f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  subCategories: 0
 --- !u!1 &6697919030576817589
 GameObject:
   m_ObjectHideFlags: 0

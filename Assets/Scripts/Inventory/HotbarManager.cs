@@ -146,7 +146,8 @@ public class HotbarManager : MonoBehaviour
             EuipmentList.Clear();
 
             //Add the correct model to the hand
-            EuipmentList.Add(Instantiate(MainManager.instance.GetItem(selectedItem).equippedPrefab, Vector3.zero, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
+            EuipmentList.Add(Instantiate(MainManager.instance.GetItem(selectedItem).equippedPrefab, MainManager.instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
+            EuipmentList[EuipmentList.Count - 1].transform.SetLocalPositionAndRotation(MainManager.instance.GetItem(selectedItem).equippedPrefab.transform.position, Quaternion.identity);
         }
 
         //Remove BuildingmMenu

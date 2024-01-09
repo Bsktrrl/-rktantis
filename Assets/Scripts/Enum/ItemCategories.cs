@@ -33,7 +33,7 @@ public enum ItemSubCategories
     //Tools
     [Description("Axe")][InspectorName("Tools/Axe")] Axe,
     [Description("Building Hammer")][InspectorName("Tools/Building Hammer")] BuildingHammer,
-    [Description("T_C")][InspectorName("Tools/T_C")] T_C,
+    [Description("Flashlight")][InspectorName("Tools/Flashlight")] Flashlight,
 
     //Weapons
     [Description("Weapons")][InspectorName("Weapons/Weapons")] Weapons,
