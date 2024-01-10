@@ -23,6 +23,7 @@ public enum Items
     //Machines
     [Description("Crafting Table")][InspectorName("Machines/CraftingTable")] CraftingTable,
 
-    [Description("TempTest")][InspectorName("Other/TempTest")] tempTest
+    [Description("TempTest")][InspectorName("Other/TempTest")] tempTest,
+    [Description("Flashlight")][InspectorName("Tools/Flashlight")] Flashlight
 
 }
