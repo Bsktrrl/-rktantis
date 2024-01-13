@@ -8,7 +8,7 @@ public class WorldObjectManager : MonoBehaviour
 {
     public static WorldObjectManager instance; //Singleton
 
-    public float objectColliderRadius = 5;
+    //public float objectColliderRadius = 5;
 
     [Header("WorldObjects Parent")]
     [SerializeField] GameObject worldObjectParent;
