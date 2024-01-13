@@ -31,13 +31,13 @@ public class BuildingHammer : MonoBehaviour
         tempObj_Selected = null;
 
         //If selected Object is a BuildingBlock, instantiate new tempBlock as this BuildingBlock
-        if (BuildingManager.instance.buildingType_Selected != BuildingType.None && BuildingManager.instance.buildingMaterial_Selected != BuildingMaterial.None)
+        if (MoveableObjectManager.Instance.buildingType_Selected != BuildingType.None && MoveableObjectManager.Instance.buildingMaterial_Selected != BuildingMaterial.None)
         {
-            BuildingBlock_Parent temp = BuildingManager.instance.GetBuildingBlock(BuildingManager.instance.buildingType_Selected, BuildingManager.instance.buildingMaterial_Selected);
+            BuildingBlock_Parent temp = BuildingManager.instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected);
             
             for (int i = 0; i < temp.ghostList.Count; i++)
             {
-                if (temp.ghostList[i].GetComponent<Building_Ghost>().buildingType == BuildingManager.instance.buildingType_Selected)
+                if (temp.ghostList[i].GetComponent<Building_Ghost>().buildingType == MoveableObjectManager.Instance.buildingType_Selected)
                 {
                     tempObj_Selected = Instantiate(temp.ghostList[i], InventoryManager.instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
                     tempObj_Selected.transform.parent = BuildingManager.instance.tempBlock_Parent.transform;

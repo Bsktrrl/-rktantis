@@ -22,26 +22,47 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        BuildingManager.instance.buildingType_Selected = buildingType;
-        BuildingManager.instance.buildingMaterial_Selected = buildingMaterial;
+        MoveableObjectManager.Instance.moveableObjectType = objectType;
+        MoveableObjectManager.Instance.machineType = machineType;
+        MoveableObjectManager.Instance.furnitureType = furnitureType;
+
+        MoveableObjectManager.Instance.buildingType_Selected = buildingType;
+        MoveableObjectManager.Instance.buildingMaterial_Selected = buildingMaterial;
 
         BuildingSystemMenu.instance.SetSelectedImage(gameObject.GetComponent<Image>().sprite);
 
-        BuildingBlock_Parent tempParent = BuildingManager.instance.GetBuildingBlock(buildingType, buildingMaterial);
-        if (tempParent != null)
+        //If selected Object is a BuildingBlock
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
         {
-            //Set requirements for both BuildingMenu and on main screen
-            BuildingManager.instance.SetBuildingRequirements(tempParent, BuildingSystemMenu.instance.buildingRequirement_Parent);
-            BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(BuildingManager.instance.buildingType_Selected, BuildingManager.instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
+            BuildingBlock_Parent tempParent = BuildingManager.instance.GetBuildingBlock(buildingType, buildingMaterial);
+            if (tempParent != null)
+            {
+                //Set requirements for both BuildingMenu and on main screen
+                BuildingManager.instance.SetBuildingRequirements(tempParent, BuildingSystemMenu.instance.buildingRequirement_Parent);
+                BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
+            }
+
+            //Update "Free Block" if Hammer is selected
+            if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            {
+                EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+
+                print("200. New Selected Block Set: Type: " + buildingType + " | Material: " + buildingMaterial);
+            }
         }
 
-        //Update "Free Block" if Hammer is selected
-        if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+        //If selected Object is a Machine
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
         {
-            EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
 
-            print("200. New Selected Block Set: Type: " + buildingType + " | Material: " + buildingMaterial);
         }
+
+        //If selected Object is a Furniture
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
+        {
+
+        }
+
 
         BuildingManager.instance.SaveData();
     }
