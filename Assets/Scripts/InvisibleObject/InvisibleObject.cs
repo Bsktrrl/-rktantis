@@ -6,11 +6,11 @@ public class InvisibleObject : MonoBehaviour
 {
     [SerializeField] MeshRenderer renderer;
 
-    float transparencyValue = new float();
+    [SerializeField] float transparencyValue = new float();
 
-    Vector3 distancePos = new Vector3();
+    [SerializeField] Vector3 distancePos = new Vector3();
 
-    float ratio = new float();
+    [SerializeField] float ratio = new float();
 
 
     //--------------------
@@ -22,7 +22,7 @@ public class InvisibleObject : MonoBehaviour
     }
     private void Update()
     {
-        renderer.sharedMaterial.SetFloat("_TransparencyOnOff", transparencyValue);
+        renderer.sharedMaterial.SetFloat("_Transparency", transparencyValue);
     }
 
 

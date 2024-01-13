@@ -9,6 +9,8 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
 
     public void CategoryButton_OnClick()
     {
+        print("Category selected");
+
         SoundManager.instance.PlayChangeCraftingScreen_Clip();
 
         CraftingManager.instance.activeCategory = categoryType;
