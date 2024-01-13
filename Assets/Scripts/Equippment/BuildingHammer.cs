@@ -114,7 +114,7 @@ public class BuildingHammer : MonoBehaviour
         //-----
 
 
-        //Set Objec's Position and Rotation
+        //Set Object's Position and Rotation
         if (tempObj_Selected.GetComponent<Building_Ghost>() != null)
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);

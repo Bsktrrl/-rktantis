@@ -263,8 +263,8 @@ public class BuildingManager : MonoBehaviour
         //Set Preview image for the selected buildingBlock
         for (int i = 0; i < BuildingSystemMenu.instance.buildingBlockUIList.Count; i++)
         {
-            if (BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().BuildingType == buildingType_Selected
-                && BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().BuildingMaterial == buildingMaterial_Selected)
+            if (BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().buildingType == buildingType_Selected
+                && BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == buildingMaterial_Selected)
             {
                 BuildingSystemMenu.instance.SetSelectedImage(BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<Image>().sprite);
 

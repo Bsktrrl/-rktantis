@@ -39,3 +39,28 @@ public enum BuildingMaterial
     Stone,
     Iron
 }
+
+public enum MoveableObjectType
+{
+    None,
+
+    BuildingBlock,
+    Furniture,
+    Machine
+}
+
+public enum FurnitureType
+{
+    None,
+
+    StorageChest
+}
+
+public enum MachineType
+{
+    None,
+
+    CraftingTable,
+    SkillTreeTable,
+    GhostTank
+}

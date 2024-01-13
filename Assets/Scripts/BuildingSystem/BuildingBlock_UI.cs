@@ -6,17 +6,28 @@ using UnityEngine.EventSystems;
 
 public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
 {
-    public BuildingType BuildingType;
-    public BuildingMaterial BuildingMaterial;
+    [Header("Main Type")]
+    public MoveableObjectType objectType;
+
+    [Header("Building Type")]
+    public BuildingType buildingType;
+    public BuildingMaterial buildingMaterial;
+
+    [Header("Machine Type")]
+    public MachineType machineType;
+
+    [Header("FurnitureType Type")]
+    public FurnitureType furnitureType;
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        BuildingManager.instance.buildingType_Selected = BuildingType;
-        BuildingManager.instance.buildingMaterial_Selected = BuildingMaterial;
+        BuildingManager.instance.buildingType_Selected = buildingType;
+        BuildingManager.instance.buildingMaterial_Selected = buildingMaterial;
 
         BuildingSystemMenu.instance.SetSelectedImage(gameObject.GetComponent<Image>().sprite);
 
-        BuildingBlock_Parent tempParent = BuildingManager.instance.GetBuildingBlock(BuildingType, BuildingMaterial);
+        BuildingBlock_Parent tempParent = BuildingManager.instance.GetBuildingBlock(buildingType, buildingMaterial);
         if (tempParent != null)
         {
             //Set requirements for both BuildingMenu and on main screen
@@ -29,7 +40,7 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
         {
             EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
 
-            print("200. New Selected Block Set: Type: " + BuildingType + " | Material: " + BuildingMaterial);
+            print("200. New Selected Block Set: Type: " + buildingType + " | Material: " + buildingMaterial);
         }
 
         BuildingManager.instance.SaveData();

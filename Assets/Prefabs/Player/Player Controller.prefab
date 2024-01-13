@@ -196,8 +196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 6
-  BuildingMaterial: 2
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &314057770822017081
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,8 +334,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 12
-  BuildingMaterial: 1
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &381627304692283363
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,8 +580,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 8
-  BuildingMaterial: 1
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &509403535412850566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,6 +1624,7 @@ Transform:
   - {fileID: 3965968913770848483}
   - {fileID: 793718857219089574}
   - {fileID: 5699345888109270916}
+  - {fileID: 7731493627771937123}
   m_Father: {fileID: 2393431852032750973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1276451151706396041
@@ -2063,8 +2073,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 8
-  BuildingMaterial: 3
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &1588295463384543534
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,8 +2361,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 5
-  BuildingMaterial: 3
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &1700328813379068530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,8 +2605,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 7
-  BuildingMaterial: 1
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &1800656367798124340
 GameObject:
   m_ObjectHideFlags: 0
@@ -2994,8 +3013,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 13
-  BuildingMaterial: 1
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &1888606605245068615
 GameObject:
   m_ObjectHideFlags: 0
@@ -3267,8 +3289,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 7
-  BuildingMaterial: 3
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &2026380238259418878
 GameObject:
   m_ObjectHideFlags: 0
@@ -3533,8 +3558,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 1
-  BuildingMaterial: 2
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &2092764091761638887
 GameObject:
   m_ObjectHideFlags: 0
@@ -4174,8 +4202,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 6
-  BuildingMaterial: 3
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &2764073117532648320
 GameObject:
   m_ObjectHideFlags: 0
@@ -4239,6 +4270,50 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &2838342399422454243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7731493627771937123}
+  - component: {fileID: 1853983875320379006}
+  m_Layer: 0
+  m_Name: MoveableObjectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7731493627771937123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838342399422454243}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 908462092873944586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1853983875320379006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838342399422454243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71e682c864004b43a118d5d86ecd2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2885891136554884609
 GameObject:
   m_ObjectHideFlags: 0
@@ -4418,8 +4493,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 2
-  BuildingMaterial: 3
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &2959078432834900376
 GameObject:
   m_ObjectHideFlags: 0
@@ -5122,8 +5200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 8
-  BuildingMaterial: 2
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &3867430533258761736
 GameObject:
   m_ObjectHideFlags: 0
@@ -5406,8 +5487,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 5
-  BuildingMaterial: 2
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &4046101627966708185
 GameObject:
   m_ObjectHideFlags: 0
@@ -6231,8 +6315,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 6
-  BuildingMaterial: 1
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &4763713733300796049
 GameObject:
   m_ObjectHideFlags: 0
@@ -6397,8 +6484,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 3
-  BuildingMaterial: 3
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &4936723824553673744
 GameObject:
   m_ObjectHideFlags: 0
@@ -6532,8 +6622,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 11
-  BuildingMaterial: 1
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &5105094068383096079
 GameObject:
   m_ObjectHideFlags: 0
@@ -6667,8 +6760,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 13
-  BuildingMaterial: 2
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &5111272930689328876
 GameObject:
   m_ObjectHideFlags: 0
@@ -6802,8 +6898,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 10
-  BuildingMaterial: 1
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &5115784751274466938
 GameObject:
   m_ObjectHideFlags: 0
@@ -7597,8 +7696,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 5
-  BuildingMaterial: 1
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &6086809433715491809
 GameObject:
   m_ObjectHideFlags: 0
@@ -7770,8 +7872,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 10
-  BuildingMaterial: 2
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &6158465815874155082
 GameObject:
   m_ObjectHideFlags: 0
@@ -7905,8 +8010,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 1
-  BuildingMaterial: 3
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &6185928871193003071
 GameObject:
   m_ObjectHideFlags: 0
@@ -8376,8 +8484,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 11
-  BuildingMaterial: 2
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &7227525375398697953
 GameObject:
   m_ObjectHideFlags: 0
@@ -8511,8 +8622,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 12
-  BuildingMaterial: 3
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &7261974816292541449
 GameObject:
   m_ObjectHideFlags: 0
@@ -8646,8 +8760,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 11
-  BuildingMaterial: 3
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &7318314004830802720
 GameObject:
   m_ObjectHideFlags: 0
@@ -8968,8 +9085,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 3
-  BuildingMaterial: 1
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &7515070500592212625
 GameObject:
   m_ObjectHideFlags: 0
@@ -9659,8 +9779,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 7
-  BuildingMaterial: 2
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &7618827342662041262
 GameObject:
   m_ObjectHideFlags: 0
@@ -9923,8 +10046,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 13
-  BuildingMaterial: 3
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &7916470560036731742
 GameObject:
   m_ObjectHideFlags: 0
@@ -10159,8 +10285,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 12
-  BuildingMaterial: 2
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &8083735156897433318
 GameObject:
   m_ObjectHideFlags: 0
@@ -10394,8 +10523,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 2
-  BuildingMaterial: 1
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &8146286147402625604
 GameObject:
   m_ObjectHideFlags: 0
@@ -10731,8 +10863,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 2
-  BuildingMaterial: 2
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &8413863914771761510
 GameObject:
   m_ObjectHideFlags: 0
@@ -10960,8 +11095,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 10
-  BuildingMaterial: 3
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &8476688464367763412
 GameObject:
   m_ObjectHideFlags: 0
@@ -11271,8 +11409,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 3
-  BuildingMaterial: 2
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &8770930353480838055
 GameObject:
   m_ObjectHideFlags: 0
@@ -11482,8 +11623,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128de121d4c1d841b639d5ede6a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingType: 1
-  BuildingMaterial: 1
+  objectType: 0
+  buildingType: 0
+  buildingMaterial: 0
+  machineType: 0
+  furnitureType: 0
 --- !u!1 &9168250939243696274
 GameObject:
   m_ObjectHideFlags: 0
