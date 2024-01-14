@@ -30,27 +30,49 @@ public class BuildingHammer : MonoBehaviour
         Destroy(tempObj_Selected);
         tempObj_Selected = null;
 
-        //If selected Object is a BuildingBlock, instantiate new tempBlock as this BuildingBlock
-        if (BuildingManager.instance.buildingType_Selected != BuildingType.None && BuildingManager.instance.buildingMaterial_Selected != BuildingMaterial.None)
+        //If selected Object is a BuildingBlock
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
         {
-            BuildingBlock_Parent temp = BuildingManager.instance.GetBuildingBlock(BuildingManager.instance.buildingType_Selected, BuildingManager.instance.buildingMaterial_Selected);
-            
-            for (int i = 0; i < temp.ghostList.Count; i++)
-            {
-                if (temp.ghostList[i].GetComponent<Building_Ghost>().buildingType == BuildingManager.instance.buildingType_Selected)
-                {
-                    tempObj_Selected = Instantiate(temp.ghostList[i], InventoryManager.instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
-                    tempObj_Selected.transform.parent = BuildingManager.instance.tempBlock_Parent.transform;
+            print("1000. selected Object is a BuildingBlock");
 
-                    //Get the correct mesh
-                    tempObj_Selected.GetComponent<MeshFilter>().mesh = BuildingManager.instance.GetCorrectGhostMesh(tempObj_Selected);
-                    tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.instance.canPlace_Material;
-                    break;
+            if (MoveableObjectManager.Instance.buildingType_Selected != BuildingType.None && MoveableObjectManager.Instance.buildingMaterial_Selected != BuildingMaterial.None)
+            {
+                //Instantiate new tempBlock as this BuildingBlock
+                BuildingBlock_Parent temp = BuildingManager.instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected);
+
+                for (int i = 0; i < temp.ghostList.Count; i++)
+                {
+                    if (temp.ghostList[i].GetComponent<Building_Ghost>().buildingType == MoveableObjectManager.Instance.buildingType_Selected)
+                    {
+                        tempObj_Selected = Instantiate(temp.ghostList[i], InventoryManager.instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
+                        tempObj_Selected.transform.parent = BuildingManager.instance.tempBlock_Parent.transform;
+
+                        //Get the correct mesh
+                        tempObj_Selected.GetComponent<MeshFilter>().mesh = BuildingManager.instance.GetCorrectGhostMesh(tempObj_Selected);
+                        tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.instance.canPlace_Material;
+                        break;
+                    }
                 }
             }
         }
+
+        //If selected Object is a Machine or furniture
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine
+            || MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
+        {
+            print("1000. Selected Object is a Machine");
+
+            GameObject moveableObject = MoveableObjectManager.Instance.GetMoveableObject(MoveableObjectManager.Instance.moveableObjectType);
+            MoveableObjectManager.Instance.objectToMove = moveableObject;
+
+            tempObj_Selected = Instantiate(moveableObject, InventoryManager.instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
+            tempObj_Selected.transform.parent = BuildingManager.instance.tempBlock_Parent.transform;
+
+            //Get the correct mesh
+            tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.instance.canPlace_Material;
+        }
     }
-    
+
     public void UpdateSelectedBlockPosition()
     {
         if (tempObj_Selected == null) { return; }
@@ -114,7 +136,7 @@ public class BuildingHammer : MonoBehaviour
         //-----
 
 
-        //Set Objec's Position and Rotation
+        //Set Object's Position and Rotation
         if (tempObj_Selected.GetComponent<Building_Ghost>() != null)
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -145,6 +167,17 @@ public class BuildingHammer : MonoBehaviour
 
     public void PlaceBlock()
     {
-        BuildingManager.instance.PlaceBlock();
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
+        {
+            BuildingManager.instance.PlaceBlock();
+        }
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
+        {
+            MoveableObjectManager.Instance.PlaceObjectToMove();
+        }
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
+        {
+            MoveableObjectManager.Instance.PlaceObjectToMove();
+        }
     }
 }

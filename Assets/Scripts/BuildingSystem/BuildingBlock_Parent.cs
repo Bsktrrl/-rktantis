@@ -19,7 +19,6 @@ public class BuildingBlock_Parent : MonoBehaviour
     public List<BuildingBlockRequirement> removeBuildingRequirementList = new List<BuildingBlockRequirement>();
 
 
-
     //--------------------
 
 

@@ -72,7 +72,7 @@ public class HotbarManager : MonoBehaviour
 
         if (hotbarList[selectedSlot].GetComponent<HotbarSlot>().hotbarItemName == Items.BuildingHammer)
         {
-            BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(BuildingManager.instance.buildingType_Selected, BuildingManager.instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
+            BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
             BuildingManager.instance.buildingRequirement_Parent.SetActive(true);
         }
     }

@@ -84,7 +84,7 @@ public class InventoryManager : MonoBehaviour
         MainManager.instance.player.transform.SetPositionAndRotation(DataManager.instance.playerPos_Store, DataManager.instance.playerRot_Store);
 
         //Set Building Requirements
-        BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(BuildingManager.instance.buildingType_Selected, BuildingManager.instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
+        BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
         if (HotbarManager.instance.selectedItem == Items.BuildingHammer)
         {
             BuildingManager.instance.buildingRequirement_Parent.SetActive(true);
@@ -230,7 +230,7 @@ public class InventoryManager : MonoBehaviour
         PrepareInventoryUI(inventory, itemIsMoved);
         RemoveInventoriesUI();
 
-        BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(BuildingManager.instance.buildingType_Selected, BuildingManager.instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
+        BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
 
         return true;
     }
@@ -274,7 +274,7 @@ public class InventoryManager : MonoBehaviour
         PrepareInventoryUI(inventory, false);
         RemoveInventoriesUI();
 
-        BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(BuildingManager.instance.buildingType_Selected, BuildingManager.instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
+        BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
 
         return true;
     }
@@ -309,7 +309,7 @@ public class InventoryManager : MonoBehaviour
             CheckHotbarItemInInventory();
         }
 
-        BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(BuildingManager.instance.buildingType_Selected, BuildingManager.instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
+        BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
 
         SaveData();
     }
@@ -330,7 +330,7 @@ public class InventoryManager : MonoBehaviour
         RemoveInventoriesUI();
         PrepareInventoryUI(inventory, true);
 
-        BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(BuildingManager.instance.buildingType_Selected, BuildingManager.instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
+        BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
     }
 
     public void MoveItemToInventory(int inventory, GameObject obj)
