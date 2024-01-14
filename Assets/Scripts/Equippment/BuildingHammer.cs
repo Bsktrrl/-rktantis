@@ -56,20 +56,21 @@ public class BuildingHammer : MonoBehaviour
             }
         }
 
-        //If selected Object is a Machine
-        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
+        //If selected Object is a Machine or furniture
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine
+            || MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
             print("1000. Selected Object is a Machine");
 
+            GameObject moveableObject = MoveableObjectManager.Instance.GetMoveableObject(MoveableObjectManager.Instance.moveableObjectType);
+            MoveableObjectManager.Instance.objectToMove = moveableObject;
+
+            tempObj_Selected = Instantiate(moveableObject, InventoryManager.instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
+            tempObj_Selected.transform.parent = BuildingManager.instance.tempBlock_Parent.transform;
+
+            //Get the correct mesh
+            tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.instance.canPlace_Material;
         }
-
-        //If selected Object is a Furniture
-        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
-        {
-            print("1000. Selected Object is a Furniture");
-
-        }
-
     }
 
     public void UpdateSelectedBlockPosition()
@@ -166,6 +167,17 @@ public class BuildingHammer : MonoBehaviour
 
     public void PlaceBlock()
     {
-        BuildingManager.instance.PlaceBlock();
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
+        {
+            BuildingManager.instance.PlaceBlock();
+        }
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
+        {
+            MoveableObjectManager.Instance.PlaceObjectToMove();
+        }
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
+        {
+            MoveableObjectManager.Instance.PlaceObjectToMove();
+        }
     }
 }

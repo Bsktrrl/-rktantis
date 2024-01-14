@@ -53,7 +53,9 @@ public enum FurnitureType
 {
     None,
 
-    StorageChest
+    Small_StorageChest,
+    Medium_StorageChest,
+    Big_StorageChest,
 }
 
 public enum MachineType

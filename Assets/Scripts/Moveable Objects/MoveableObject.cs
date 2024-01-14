@@ -4,7 +4,30 @@ using UnityEngine;
 
 public class MoveableObject : MonoBehaviour
 {
+    [Header("General")]
     public bool canBePlaced;
+
+    [Header("FurnitureType Type")]
+    public FurnitureType furnitureType = FurnitureType.None;
+
+    [Header("MachineType Type")]
+    public MachineType machineType = MachineType.None;
+
+
+    //--------------------
+
+
+    private void Update()
+    {
+        if (canBePlaced)
+        {
+            gameObject.GetComponent<MeshRenderer>().material = BuildingManager.instance.canPlace_Material;
+        }
+        else
+        {
+            gameObject.GetComponent<MeshRenderer>().material = BuildingManager.instance.cannotPlace_Material;
+        }
+    }
 
 
     //--------------------

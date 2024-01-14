@@ -4320,6 +4320,11 @@ MonoBehaviour:
   machineType: 0
   buildingType_Selected: 0
   buildingMaterial_Selected: 0
+  objectToMove: {fileID: 0}
+  moveableObjectList:
+  - {fileID: 3705573567050246895, guid: cf9e7a3e09caeac47ae00bb153573af8, type: 3}
+  - {fileID: 1475861760331519805, guid: d53b9396a6b954d40b17f085e68a90db, type: 3}
+  - {fileID: 1475861760331519805, guid: 38d26bbe041a68747a7ac35f8f5ceab5, type: 3}
 --- !u!1 &2885891136554884609
 GameObject:
   m_ObjectHideFlags: 0
@@ -7367,90 +7372,6 @@ MonoBehaviour:
   canPlace_Material: {fileID: 2100000, guid: e278a96e1265f6a499cc3b2f57dfb5a2, type: 2}
   cannotPlace_Material: {fileID: 2100000, guid: 807fd160d720c6b4ab5e0acda7cd77ee,
     type: 2}
-  wood_Door_Mesh: {fileID: 6955122686471550693, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
-    type: 3}
-  wood_DoorFrame_Mesh: {fileID: 5033906361026140736, guid: 3101a03a1c6590445980bd988bedaf6d,
-    type: 3}
-  wood_Fence_Mesh: {fileID: -6896204695170084616, guid: 745b993dc0b861b4293d9eb234617f75,
-    type: 3}
-  wood_FenceDiagonaly_Mesh: {fileID: -3630542933291062790, guid: 7207d9821687a3b45a961a6ba502d215,
-    type: 3}
-  wood_Floor_Mesh: {fileID: 7730133331424604108, guid: 8db4d6796ba11f14a9ecded0378d0f2f,
-    type: 3}
-  wood_FloorTriangle_Mesh: {fileID: 1423509397519099677, guid: c5011a4d3ce036c4b85b5c7d87dcc5c2,
-    type: 3}
-  wood_Ramp_Mesh: {fileID: -308057849561109776, guid: aebc76212f2533a4189f0589131b040a,
-    type: 3}
-  wood_RampTriangle_Mesh: {fileID: -6698532245603282009, guid: 7e4ef06c284a9334e95fa33bd91d9bb6,
-    type: 3}
-  wood_RampCorner_Mesh: {fileID: -218769742726320549, guid: 94802b8e24b6d3b48a498736b84b2516,
-    type: 3}
-  wood_Stair_Mesh: {fileID: -3399822222672614403, guid: 42ffa7f6942457947b5669fddd7f3679,
-    type: 3}
-  wood_Wall_Mesh: {fileID: -3476961271436853940, guid: c6f2f76df4f3a8b408bb3df23b54fb1b,
-    type: 3}
-  wood_WallDiagonaly_Mesh: {fileID: -6124468900664536685, guid: ee55b31aad261de4780883fde7eceaad,
-    type: 3}
-  wood_WallTriangle_Mesh: {fileID: 1423509397519099677, guid: c5011a4d3ce036c4b85b5c7d87dcc5c2,
-    type: 3}
-  wood_Window_Mesh: {fileID: 6413668139619916810, guid: c1b6aa6ada38877458d3085f4714ae2a,
-    type: 3}
-  stone_Door_Mesh: {fileID: 8799078480644102893, guid: 16df1f12ee4f5944393a844e00919f49,
-    type: 3}
-  stone_DoorFrame_Mesh: {fileID: -1534599508274185176, guid: 9a3b02b91b4a4e5448b9d8275f44b36e,
-    type: 3}
-  stone_Fence_Mesh: {fileID: -3758312603865391639, guid: fc64704fa0936fe4c8ec8bfd43337ca3,
-    type: 3}
-  stone_FenceDiagonaly_Mesh: {fileID: -270880987213049710, guid: 33659516630310640885841f59e8f647,
-    type: 3}
-  stone_Floor_Mesh: {fileID: 3779347964051214410, guid: bca8048a4375f05469b7de705e87e4f8,
-    type: 3}
-  stone_FloorTriangle_Mesh: {fileID: 2478971994466520947, guid: e28ccf8360453364e9a009568ecc7d31,
-    type: 3}
-  stone_Ramp_Mesh: {fileID: 4724858661585603501, guid: 49de8105e6e6d24409289b0689783969,
-    type: 3}
-  stone_RampTriangle_Mesh: {fileID: 3877802316579797449, guid: 2be89d9b96066594ebf995672178f098,
-    type: 3}
-  stone_RampCorner_Mesh: {fileID: -4958501113434888699, guid: ef7b3fa97ff3646499d998c849551c64,
-    type: 3}
-  stone_Stair_Mesh: {fileID: -3894144242962988416, guid: 78e9ca8f258229d468e67cab395013f3,
-    type: 3}
-  stone_Wall_Mesh: {fileID: 3855339477592184746, guid: 3f8c93ae2dbaf734d88e0d7a0e036cd1,
-    type: 3}
-  stone_WallDiagonaly_Mesh: {fileID: 5546898999998450796, guid: e10ae98fee990264e9427ac83b27fdf6,
-    type: 3}
-  stone_WallTriangle_Mesh: {fileID: 2478971994466520947, guid: e28ccf8360453364e9a009568ecc7d31,
-    type: 3}
-  stone_Window_Mesh: {fileID: 726354786050087640, guid: 5753952cae09ff546ab4de865a777c00,
-    type: 3}
-  iron_Door_Mesh: {fileID: 7118395332795962122, guid: f3d08c180ce42814c9a4bca3b11465c2,
-    type: 3}
-  iron_DoorFrame_Mesh: {fileID: 5818853501113889963, guid: 50e80544d9d11404f92c0c381bf78c93,
-    type: 3}
-  iron_Fence_Mesh: {fileID: 5926770188630241643, guid: 6dd91a17c4bef564cb73d541cc8bb8d3,
-    type: 3}
-  iron_FenceDiagonaly_Mesh: {fileID: 2807013722769818539, guid: e557092e89c80fb46b7436fda86f89ae,
-    type: 3}
-  iron_Floor_Mesh: {fileID: 1221582291812793429, guid: dca966e3722817a4f81f47232f5d9ef9,
-    type: 3}
-  iron_FloorTriangle_Mesh: {fileID: -5252936328737203669, guid: 341f69c1d9e51604f9bcc6e01fe3807b,
-    type: 3}
-  iron_Ramp_Mesh: {fileID: 5558576429809368622, guid: 773bac27018d4814da852feafcd1ca6a,
-    type: 3}
-  iron_RampTriangle_Mesh: {fileID: 6475962122551288480, guid: c698e989a7fa18e44ac3efddf09f71d7,
-    type: 3}
-  iron_RampCorner_Mesh: {fileID: -4671824552232791720, guid: d5074afa828e8a149a266f8c0c02a099,
-    type: 3}
-  iron_Stair_Mesh: {fileID: 4305073454166628691, guid: b22489290f244694ca41910b3754ce00,
-    type: 3}
-  iron_Wall_Mesh: {fileID: 664590110140777628, guid: e75830003743b1f4bbb9763814ef5863,
-    type: 3}
-  iron_WallDiagonaly_Mesh: {fileID: -3028296843970610408, guid: cb063d029e4732c48b2fa0fe88d77efa,
-    type: 3}
-  iron_WallTriangle_Mesh: {fileID: -5252936328737203669, guid: 341f69c1d9e51604f9bcc6e01fe3807b,
-    type: 3}
-  iron_Window_Mesh: {fileID: -7324838701199341062, guid: d45648649152eda42a768f64c0fc47b4,
-    type: 3}
   mirroredBlocks: 0
   BuildingHammer_isActive: 0
   buildingRemoveRequirement_Parent: {fileID: 7618827342662041262}
