@@ -53,6 +53,8 @@ public class BuildingHammer : MonoBehaviour
                         break;
                     }
                 }
+
+                MoveableObjectManager.Instance.objectToMove = null;
             }
         }
 
