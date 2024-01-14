@@ -47,20 +47,30 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
             {
                 EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
 
-                print("200. New Selected Block Set: Type: " + buildingType + " | Material: " + buildingMaterial);
+                print("2000. New Selected Block Set: Type: " + buildingType + " | Material: " + buildingMaterial);
             }
         }
 
         //If selected Object is a Machine
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
         {
+            if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            {
+                EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
 
+                print("2000. Selected Object is a Machine");
+            }
         }
 
         //If selected Object is a Furniture
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
+            if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            {
+                EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
 
+                print("2000. Selected Object is a Furniture");
+            }
         }
 
 

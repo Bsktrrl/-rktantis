@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -84,56 +85,6 @@ public class BuildingManager : MonoBehaviour
     public Material ghost_Material;
     public Material canPlace_Material;
     public Material cannotPlace_Material;
-
-    #region Mesh List
-    [Header("Mesh List - Wood")]
-    [SerializeField] Mesh wood_Door_Mesh;
-    [SerializeField] Mesh wood_DoorFrame_Mesh;
-    [SerializeField] Mesh wood_Fence_Mesh;
-    [SerializeField] Mesh wood_FenceDiagonaly_Mesh;
-    [SerializeField] Mesh wood_Floor_Mesh;
-    [SerializeField] Mesh wood_FloorTriangle_Mesh;
-    [SerializeField] Mesh wood_Ramp_Mesh;
-    [SerializeField] Mesh wood_RampTriangle_Mesh;
-    [SerializeField] Mesh wood_RampCorner_Mesh;
-    [SerializeField] Mesh wood_Stair_Mesh;
-    [SerializeField] Mesh wood_Wall_Mesh;
-    [SerializeField] Mesh wood_WallDiagonaly_Mesh;
-    [SerializeField] Mesh wood_WallTriangle_Mesh;
-    [SerializeField] Mesh wood_Window_Mesh;
-
-    [Header("Mesh List - Stone")]
-    [SerializeField] Mesh stone_Door_Mesh;
-    [SerializeField] Mesh stone_DoorFrame_Mesh;
-    [SerializeField] Mesh stone_Fence_Mesh;
-    [SerializeField] Mesh stone_FenceDiagonaly_Mesh;
-    [SerializeField] Mesh stone_Floor_Mesh;
-    [SerializeField] Mesh stone_FloorTriangle_Mesh;
-    [SerializeField] Mesh stone_Ramp_Mesh;
-    [SerializeField] Mesh stone_RampTriangle_Mesh;
-    [SerializeField] Mesh stone_RampCorner_Mesh;
-    [SerializeField] Mesh stone_Stair_Mesh;
-    [SerializeField] Mesh stone_Wall_Mesh;
-    [SerializeField] Mesh stone_WallDiagonaly_Mesh;
-    [SerializeField] Mesh stone_WallTriangle_Mesh;
-    [SerializeField] Mesh stone_Window_Mesh;
-
-    [Header("Mesh List - Iron")]
-    [SerializeField] Mesh iron_Door_Mesh;
-    [SerializeField] Mesh iron_DoorFrame_Mesh;
-    [SerializeField] Mesh iron_Fence_Mesh;
-    [SerializeField] Mesh iron_FenceDiagonaly_Mesh;
-    [SerializeField] Mesh iron_Floor_Mesh;
-    [SerializeField] Mesh iron_FloorTriangle_Mesh;
-    [SerializeField] Mesh iron_Ramp_Mesh;
-    [SerializeField] Mesh iron_RampTriangle_Mesh;
-    [SerializeField] Mesh iron_RampCorner_Mesh;
-    [SerializeField] Mesh iron_Stair_Mesh;
-    [SerializeField] Mesh iron_Wall_Mesh;
-    [SerializeField] Mesh iron_WallDiagonaly_Mesh;
-    [SerializeField] Mesh iron_WallTriangle_Mesh;
-    [SerializeField] Mesh iron_Window_Mesh;
-    #endregion
 
     float timer = 0;
 
@@ -1001,37 +952,40 @@ public class BuildingManager : MonoBehaviour
     public Mesh GetCorrectGhostMesh(GameObject ghost_LookedAt)
     {
         Mesh chosenMesh = new Mesh();
+        SerializedObject obj;
 
         //Get correct Mesh on a ghost based on the selected material
         //Wood
         if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
         {
             if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Door)
-                chosenMesh = wood_DoorFrame_Mesh;
+                chosenMesh = builingBlock_Wood_Door.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.None)
-                chosenMesh = wood_Fence_Mesh;
+                chosenMesh = builingBlock_Wood_Fence.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = wood_FenceDiagonaly_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
-                chosenMesh = wood_Floor_Mesh;
+                chosenMesh = builingBlock_Wood_Fence_Diagonaly.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if(ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
+                chosenMesh = builingBlock_Wood_Floor.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor_Triangle)
-                chosenMesh = wood_FloorTriangle_Mesh;
+                chosenMesh = builingBlock_Wood_Floor_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp)
-                chosenMesh = wood_Ramp_Mesh;
+                chosenMesh = builingBlock_Wood_Ramp.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Triangle)
-                chosenMesh = wood_RampTriangle_Mesh;
+                chosenMesh = builingBlock_Wood_Ramp_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Corner)
-                chosenMesh = wood_RampCorner_Mesh;
+                chosenMesh = builingBlock_Wood_Ramp_Corner.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Stair)
-                chosenMesh = wood_Stair_Mesh;
+                chosenMesh = builingBlock_Wood_Stair.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.None)
-                chosenMesh = wood_Wall_Mesh;
+                chosenMesh = builingBlock_Wood_Wall.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = wood_WallDiagonaly_Mesh;
+                chosenMesh = builingBlock_Wood_Wall_Diagonal.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall_Triangle)
-                chosenMesh = wood_WallTriangle_Mesh;
+                chosenMesh = builingBlock_Wood_Wall_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Window)
-                chosenMesh = wood_Window_Mesh;
+                chosenMesh = builingBlock_Wood_Window.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
 
             else
                 chosenMesh = null;
@@ -1041,31 +995,33 @@ public class BuildingManager : MonoBehaviour
         else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
         {
             if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Door)
-                chosenMesh = stone_DoorFrame_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None)
-                chosenMesh = stone_Fence_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = stone_FenceDiagonaly_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
-                chosenMesh = stone_Floor_Mesh;
+                chosenMesh = builingBlock_Stone_Door.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.None)
+                chosenMesh = builingBlock_Stone_Fence.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.Diagonaly)
+                chosenMesh = builingBlock_Stone_Fence_Diagonaly.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if(ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
+                chosenMesh = builingBlock_Stone_Floor.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor_Triangle)
-                chosenMesh = stone_FloorTriangle_Mesh;
+                chosenMesh = builingBlock_Stone_Floor_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp)
-                chosenMesh = stone_Ramp_Mesh;
+                chosenMesh = builingBlock_Stone_Ramp.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Triangle)
-                chosenMesh = stone_RampTriangle_Mesh;
+                chosenMesh = builingBlock_Stone_Ramp_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Corner)
-                chosenMesh = stone_RampCorner_Mesh;
+                chosenMesh = builingBlock_Stone_Ramp_Corner.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Stair)
-                chosenMesh = stone_Stair_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None)
-                chosenMesh = stone_Wall_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = stone_WallDiagonaly_Mesh;
+                chosenMesh = builingBlock_Stone_Stair.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.None)
+                chosenMesh = builingBlock_Stone_Wall.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.Diagonaly)
+                chosenMesh = builingBlock_Stone_Wall_Diagonal.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall_Triangle)
-                chosenMesh = stone_WallTriangle_Mesh;
+                chosenMesh = builingBlock_Stone_Wall_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Window)
-                chosenMesh = stone_Window_Mesh;
+                chosenMesh = builingBlock_Stone_Window.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
 
             else
                 chosenMesh = null;
@@ -1075,31 +1031,33 @@ public class BuildingManager : MonoBehaviour
         else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
         {
             if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Door)
-                chosenMesh = iron_DoorFrame_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None)
-                chosenMesh = iron_Fence_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = iron_FenceDiagonaly_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
-                chosenMesh = iron_Floor_Mesh;
+                chosenMesh = builingBlock_Iron_Door.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.None)
+                chosenMesh = builingBlock_Iron_Fence.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.Diagonaly)
+                chosenMesh = builingBlock_Iron_Fence_Diagonaly.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if(ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
+                chosenMesh = builingBlock_Iron_Floor.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor_Triangle)
-                chosenMesh = iron_FloorTriangle_Mesh;
+                chosenMesh = builingBlock_Iron_Floor_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp)
-                chosenMesh = iron_Ramp_Mesh;
+                chosenMesh = builingBlock_Iron_Ramp.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Triangle)
-                chosenMesh = iron_RampTriangle_Mesh;
+                chosenMesh = builingBlock_Iron_Ramp_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Corner)
-                chosenMesh = iron_RampCorner_Mesh;
+                chosenMesh = builingBlock_Iron_Ramp_Corner.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Stair)
-                chosenMesh = iron_Stair_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None)
-                chosenMesh = iron_Wall_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = iron_WallDiagonaly_Mesh;
+                chosenMesh = builingBlock_Iron_Stair.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.None)
+                chosenMesh = builingBlock_Iron_Wall.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.Diagonaly)
+                chosenMesh = builingBlock_Iron_Wall_Diagonal.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall_Triangle)
-                chosenMesh = iron_WallTriangle_Mesh;
+                chosenMesh = builingBlock_Iron_Wall_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Window)
-                chosenMesh = iron_Window_Mesh;
+                chosenMesh = builingBlock_Iron_Window.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
 
             else
                 chosenMesh = null;
