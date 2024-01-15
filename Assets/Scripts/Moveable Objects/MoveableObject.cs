@@ -21,11 +21,11 @@ public class MoveableObject : MonoBehaviour
     {
         if (canBePlaced)
         {
-            gameObject.GetComponent<MeshRenderer>().material = BuildingManager.instance.canPlace_Material;
+            gameObject.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
         }
         else
         {
-            gameObject.GetComponent<MeshRenderer>().material = BuildingManager.instance.cannotPlace_Material;
+            gameObject.GetComponent<MeshRenderer>().material = BuildingManager.Instance.cannotPlace_Material;
         }
     }
 

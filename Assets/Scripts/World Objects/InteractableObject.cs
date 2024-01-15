@@ -48,14 +48,14 @@ public class InteractableObject : MonoBehaviour
                 print("Interract with a Pickup");
 
                 //Check If item can be added
-                if (InventoryManager.instance.AddItemToInventory(0, gameObject, false))
+                if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
                 {
                     //Remove Object from the worldObjectList
-                    for (int i = 0; i < InventoryManager.instance.worldObjectList.Count; i++)
+                    for (int i = 0; i < InventoryManager.Instance.worldObjectList.Count; i++)
                     {
-                        if (gameObject == InventoryManager.instance.worldObjectList[i].gameObject)
+                        if (gameObject == InventoryManager.Instance.worldObjectList[i].gameObject)
                         {
-                            InventoryManager.instance.worldObjectList.RemoveAt(i);
+                            InventoryManager.Instance.worldObjectList.RemoveAt(i);
 
                             break;
                         }
@@ -75,14 +75,14 @@ public class InteractableObject : MonoBehaviour
                 print("Interract with an Inventory");
 
                 //Open the player Inventory
-                InventoryManager.instance.OpenPlayerInventory();
+                InventoryManager.Instance.OpenPlayerInventory();
 
                 //Open the chest Inventory
-                InventoryManager.instance.chestInventoryOpen = inventoryIndex;
-                InventoryManager.instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Player Inventory
-                InventoryManager.instance.chestInventory_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.instance.inventories[inventoryIndex].inventorySize * InventoryManager.instance.cellsize;
-                InventoryManager.instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.instance.cellsize, InventoryManager.instance.cellsize);
-                InventoryManager.instance.chestInventory_Parent.SetActive(true);
+                InventoryManager.Instance.chestInventoryOpen = inventoryIndex;
+                InventoryManager.Instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Player Inventory
+                InventoryManager.Instance.chestInventory_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
+                InventoryManager.Instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
+                InventoryManager.Instance.chestInventory_Parent.SetActive(true);
 
                 MainManager.instance.menuStates = MenuStates.chestMenu;
             }

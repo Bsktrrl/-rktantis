@@ -6,6 +6,6 @@ public class Axe : MonoBehaviour
 {
     public void CutBlock()
     {
-        BuildingManager.instance.CutBlock();
+        BuildingManager.Instance.CutBlock();
     }
 }

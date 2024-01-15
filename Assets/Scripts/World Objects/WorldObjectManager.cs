@@ -4,10 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class WorldObjectManager : MonoBehaviour
+public class WorldObjectManager : Singleton<WorldObjectManager>
 {
-    public static WorldObjectManager instance; //Singleton
-
     //public float objectColliderRadius = 5;
 
     [Header("WorldObjects Parent")]
@@ -17,26 +15,6 @@ public class WorldObjectManager : MonoBehaviour
     [SerializeField] GameObject chestPrefab;
     public List<GameObject> worldObjectsList = new List<GameObject>();
     public List<ObjectClassSavingVariables> worldObjectsInfoList = new List<ObjectClassSavingVariables>();
-
-
-    //--------------------
-
-
-    private void Awake()
-    {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-
-        DataManager.dataIsSaving += Save;
-        DataManager.datahasLoaded += Load;
-    }
 
 
     //--------------------
@@ -92,13 +70,13 @@ public class WorldObjectManager : MonoBehaviour
     //--------------------
 
 
-    void Save()
+    void SaveData()
     {
         //DataManager.instance.worldObjects_StoreList = worldObjectsInfoList;
         
         //print("WorldObjectManager - All data Saved");
     }
-    void Load()
+    public void LoadData()
     {
         //DataPersistanceManager.instance.LoadGame();
         //worldObjectsInfoList = DataManager.instance.worldObjects_StoreList;

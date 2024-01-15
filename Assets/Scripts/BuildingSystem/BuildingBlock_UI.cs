@@ -34,12 +34,12 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
         //If selected Object is a BuildingBlock
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
         {
-            BuildingBlock_Parent tempParent = BuildingManager.instance.GetBuildingBlock(buildingType, buildingMaterial);
+            BuildingBlock_Parent tempParent = BuildingManager.Instance.GetBuildingBlock(buildingType, buildingMaterial);
             if (tempParent != null)
             {
                 //Set requirements for both BuildingMenu and on main screen
-                BuildingManager.instance.SetBuildingRequirements(tempParent, BuildingSystemMenu.instance.buildingRequirement_Parent);
-                BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
+                BuildingManager.Instance.SetBuildingRequirements(tempParent, BuildingSystemMenu.instance.buildingRequirement_Parent);
+                BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
             }
 
             //Update "Free Block" if Hammer is selected
@@ -74,6 +74,6 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
         }
 
 
-        BuildingManager.instance.SaveData();
+        BuildingManager.Instance.SaveData();
     }
 }

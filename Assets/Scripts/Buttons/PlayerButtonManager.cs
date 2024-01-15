@@ -76,7 +76,7 @@ public class PlayerButtonManager : MonoBehaviour
         #region
         else if (Input.GetKeyDown(KeyCode.Mouse0) && MainManager.instance.menuStates == MenuStates.None 
             && EquippmentManager.instance.toolHolderParent.transform.childCount > 0
-            && HotbarManager.instance.selectedItem != Items.None)
+            && HotbarManager.Instance.selectedItem != Items.None)
         {
             if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<EquippedItem>() != null)
             {

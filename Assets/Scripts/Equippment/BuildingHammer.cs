@@ -38,18 +38,18 @@ public class BuildingHammer : MonoBehaviour
             if (MoveableObjectManager.Instance.buildingType_Selected != BuildingType.None && MoveableObjectManager.Instance.buildingMaterial_Selected != BuildingMaterial.None)
             {
                 //Instantiate new tempBlock as this BuildingBlock
-                BuildingBlock_Parent temp = BuildingManager.instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected);
+                BuildingBlock_Parent temp = BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected);
 
                 for (int i = 0; i < temp.ghostList.Count; i++)
                 {
                     if (temp.ghostList[i].GetComponent<Building_Ghost>().buildingType == MoveableObjectManager.Instance.buildingType_Selected)
                     {
-                        tempObj_Selected = Instantiate(temp.ghostList[i], InventoryManager.instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
-                        tempObj_Selected.transform.parent = BuildingManager.instance.tempBlock_Parent.transform;
+                        tempObj_Selected = Instantiate(temp.ghostList[i], InventoryManager.Instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
+                        tempObj_Selected.transform.parent = BuildingManager.Instance.tempBlock_Parent.transform;
 
                         //Get the correct mesh
-                        tempObj_Selected.GetComponent<MeshFilter>().mesh = BuildingManager.instance.GetCorrectGhostMesh(tempObj_Selected);
-                        tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.instance.canPlace_Material;
+                        tempObj_Selected.GetComponent<MeshFilter>().mesh = BuildingManager.Instance.GetCorrectGhostMesh(tempObj_Selected);
+                        tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
                         break;
                     }
                 }
@@ -67,11 +67,11 @@ public class BuildingHammer : MonoBehaviour
             GameObject moveableObject = MoveableObjectManager.Instance.GetMoveableObject(MoveableObjectManager.Instance.moveableObjectType);
             MoveableObjectManager.Instance.objectToMove = moveableObject;
 
-            tempObj_Selected = Instantiate(moveableObject, InventoryManager.instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
-            tempObj_Selected.transform.parent = BuildingManager.instance.tempBlock_Parent.transform;
+            tempObj_Selected = Instantiate(moveableObject, InventoryManager.Instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
+            tempObj_Selected.transform.parent = BuildingManager.Instance.tempBlock_Parent.transform;
 
             //Get the correct mesh
-            tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.instance.canPlace_Material;
+            tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
         }
     }
 
@@ -84,7 +84,7 @@ public class BuildingHammer : MonoBehaviour
         {
             if (tempObj_Selected != null)
             {
-                BuildingManager.instance.freeGhost_LookedAt = null;
+                BuildingManager.Instance.freeGhost_LookedAt = null;
                 tempObj_Selected.SetActive(false);
             }
 
@@ -92,11 +92,11 @@ public class BuildingHammer : MonoBehaviour
         }
 
         //If player is looking at a Ghost, return
-        if (BuildingManager.instance.ghost_LookedAt != null)
+        if (BuildingManager.Instance.ghost_LookedAt != null)
         {
             if (tempObj_Selected != null)
             {
-                BuildingManager.instance.freeGhost_LookedAt = null;
+                BuildingManager.Instance.freeGhost_LookedAt = null;
                 tempObj_Selected.SetActive(false);
             }
 
@@ -104,18 +104,18 @@ public class BuildingHammer : MonoBehaviour
         }
 
         //If player is looking at a buildingBlock
-        if (BuildingManager.instance.BlockTagName == "BuildingBlock")
+        if (BuildingManager.Instance.BlockTagName == "BuildingBlock")
         {
             if (tempObj_Selected != null)
             {
-                BuildingManager.instance.freeGhost_LookedAt = null;
+                BuildingManager.Instance.freeGhost_LookedAt = null;
                 tempObj_Selected.SetActive(false);
             }
 
             return;
         }
 
-        if (BuildingManager.instance.blockisPlacing)
+        if (BuildingManager.Instance.blockisPlacing)
         {
             return;
         }
@@ -125,13 +125,13 @@ public class BuildingHammer : MonoBehaviour
 
 
         //Check if item can be placed and change its material accordingly
-        if (BuildingManager.instance.enoughItemsToBuild)
+        if (BuildingManager.Instance.enoughItemsToBuild)
         {
-            tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.instance.canPlace_Material;
+            tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
         }
         else
         {
-            tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.instance.cannotPlace_Material;
+            tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.cannotPlace_Material;
         }
 
 
@@ -142,23 +142,23 @@ public class BuildingHammer : MonoBehaviour
         if (tempObj_Selected.GetComponent<Building_Ghost>() != null)
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, BuildingManager.instance.BuildingDistance.x, layerMask_Ground))
+            if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_Ground))
             {
                 //Set the object's position to the ground height
-                BuildingManager.instance.freeGhost_LookedAt = tempObj_Selected;
+                BuildingManager.Instance.freeGhost_LookedAt = tempObj_Selected;
                 tempObj_Selected.SetActive(true);
 
                 tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
             }
             else
             {
-                BuildingManager.instance.freeGhost_LookedAt = null;
+                BuildingManager.Instance.freeGhost_LookedAt = null;
                 tempObj_Selected.SetActive(false);
             }
         }
         else
         {
-            BuildingManager.instance.freeGhost_LookedAt = null;
+            BuildingManager.Instance.freeGhost_LookedAt = null;
             tempObj_Selected.SetActive(false);
         }
     }
@@ -171,7 +171,7 @@ public class BuildingHammer : MonoBehaviour
     {
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
         {
-            BuildingManager.instance.PlaceBlock();
+            BuildingManager.Instance.PlaceBlock();
         }
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
         {

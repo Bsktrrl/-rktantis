@@ -57,7 +57,7 @@ public class MainManager : MonoBehaviour
     void UpdateGameStates()
     {
         //Set to Building
-        if (GetItem(HotbarManager.instance.selectedItem).subCategoryName == ItemSubCategories.BuildingHammer)
+        if (GetItem(HotbarManager.Instance.selectedItem).subCategoryName == ItemSubCategories.BuildingHammer)
         {
             gameStates = GameStates.Building;
         }

@@ -38,12 +38,12 @@ public class CraftButton : MonoBehaviour
 
                 for (int j = 0; j < amount; j++)
                 {
-                    InventoryManager.instance.RemoveItemFromInventory(0, itemName, false);
+                    InventoryManager.Instance.RemoveItemFromInventory(0, itemName, false);
                 }
             }
 
-            InventoryManager.instance.AddItemToInventory(0, CraftingManager.instance.itemSelected.itemName);
-            InventoryManager.instance.CheckHotbarItemInInventory();
+            InventoryManager.Instance.AddItemToInventory(0, CraftingManager.instance.itemSelected.itemName);
+            InventoryManager.Instance.CheckHotbarItemInInventory();
 
             SoundManager.instance.Playmenu_Crafting_Clip();
         }

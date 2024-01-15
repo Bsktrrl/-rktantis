@@ -4,10 +4,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildingManager : MonoBehaviour
+public class BuildingManager : Singleton<BuildingManager>
 {
-    public static BuildingManager instance { get; set; } //Singleton
-
     public GameObject buildingBlock_Parent;
     public List<GameObject> buildingBlockList = new List<GameObject>();
     [HideInInspector] public List<BuildingBlockSaveList> buildingBlockSaveList = new List<BuildingBlockSaveList>();
@@ -115,27 +113,13 @@ public class BuildingManager : MonoBehaviour
 
     private void Awake()
     {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-
         MoveableObjectManager.Instance.buildingType_Selected = BuildingType.None;
         MoveableObjectManager.Instance.buildingMaterial_Selected = BuildingMaterial.None;
-    }
-    private void Start()
-    {
-        DataManager.datahasLoaded += LoadData;
     }
 
     private void Update()
     {
-        if (Time.frameCount % MainManager.instance.updateInterval == 0 && HotbarManager.instance.selectedItem == Items.BuildingHammer)
+        if (Time.frameCount % MainManager.instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.BuildingHammer)
         {
             RaycastSetup_Hammer();
             buildingRequirement_Parent.SetActive(true);
@@ -158,7 +142,7 @@ public class BuildingManager : MonoBehaviour
                 buildingRequirement_Parent.SetActive(true);
             }
         }
-        else if (Time.frameCount % MainManager.instance.updateInterval == 0 && HotbarManager.instance.selectedItem == Items.Axe)
+        else if (Time.frameCount % MainManager.instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.Axe)
         {
             RaycastSetup_Axe();
 
@@ -195,20 +179,23 @@ public class BuildingManager : MonoBehaviour
 
     public void LoadData()
     {
-        print("Load_BuildingBlocks");
-
         //Set data based on what's saved
-        MoveableObjectManager.Instance.buildingType_Selected = DataManager.instance.buildingType_Store;
-        MoveableObjectManager.Instance.buildingMaterial_Selected = DataManager.instance.buildingMaterial_Store;
+        #region
+        MoveableObjectManager.Instance.buildingType_Selected = DataManager.Instance.buildingType_Store;
+        MoveableObjectManager.Instance.buildingMaterial_Selected = DataManager.Instance.buildingMaterial_Store;
+        #endregion
 
         //If data has not saved, set to "Wood Floor"
+        #region
         if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.None || MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.None)
         {
             MoveableObjectManager.Instance.buildingType_Selected = BuildingType.Floor;
             MoveableObjectManager.Instance.buildingMaterial_Selected = BuildingMaterial.Wood;
         }
+        #endregion
 
         //Set Preview image for the selected buildingBlock
+        #region
         for (int i = 0; i < BuildingSystemMenu.instance.buildingBlockUIList.Count; i++)
         {
             if (BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().buildingType == MoveableObjectManager.Instance.buildingType_Selected
@@ -219,15 +206,17 @@ public class BuildingManager : MonoBehaviour
                 break;
             }
         }
+        #endregion
 
         //Setup BuildingBlockList
+        #region
         for (int i = 0; i < buildingBlockList.Count; i++)
         {
             Destroy(buildingBlockList[i]);
         }
         buildingBlockList.Clear();
 
-        buildingBlockSaveList = DataManager.instance.buildingBlockList_StoreList;
+        buildingBlockSaveList = DataManager.Instance.buildingBlockList_StoreList;
         for (int i = 0; i < buildingBlockSaveList.Count; i++)
         {
             buildingBlockList.Add(Instantiate(SetupBuildingBlockFromSave(buildingBlockSaveList[i]), buildingBlockSaveList[i].buildingBlock_Position, buildingBlockSaveList[i].buildingBlock_Rotation) as GameObject);
@@ -235,6 +224,18 @@ public class BuildingManager : MonoBehaviour
 
             buildingBlockList[buildingBlockList.Count - 1].GetComponent<BuildingBlock_Parent>().blockID = buildingBlockSaveList[i].buildingID;
         }
+        #endregion
+
+        //Set Building Requirements
+        #region
+        SetBuildingRequirements(GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), buildingRequirement_Parent);
+
+        if (HotbarManager.Instance.selectedItem == Items.BuildingHammer)
+        {
+            buildingRequirement_Parent.SetActive(true);
+            BuildingHammer_isActive = true;
+        }
+        #endregion
     }
     public void SaveData()
     {
@@ -250,11 +251,11 @@ public class BuildingManager : MonoBehaviour
 
             tempList.Add(temp);
         }
-        DataManager.instance.buildingBlockList_StoreList = tempList;
+        DataManager.Instance.buildingBlockList_StoreList = tempList;
 
         //Save selected Building Type and Material
-        DataManager.instance.buildingType_Store = MoveableObjectManager.Instance.buildingType_Selected;
-        DataManager.instance.buildingMaterial_Store = MoveableObjectManager.Instance.buildingMaterial_Selected;
+        DataManager.Instance.buildingType_Store = MoveableObjectManager.Instance.buildingType_Selected;
+        DataManager.Instance.buildingMaterial_Store = MoveableObjectManager.Instance.buildingMaterial_Selected;
 
         print("Save buildingBlocks");
     }
@@ -1515,14 +1516,14 @@ public class BuildingManager : MonoBehaviour
                     {
                         for (int k = 0; k < tempParent.buildingRequirementList[i].amount; k++)
                         {
-                            InventoryManager.instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, false);
+                            InventoryManager.Instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, false);
                         }
                     }
                 }
                 
                 //Update the Hotbar
-                InventoryManager.instance.CheckHotbarItemInInventory();
-                InventoryManager.instance.RemoveInventoriesUI();
+                InventoryManager.Instance.CheckHotbarItemInInventory();
+                InventoryManager.Instance.RemoveInventoriesUI();
 
                 //Reset parameters
                 lastBuildingBlock_LookedAt = null;
@@ -1990,14 +1991,14 @@ public class BuildingManager : MonoBehaviour
                     {
                         for (int k = 0; k < tempParent.buildingRequirementList[i].amount; k++)
                         {
-                            InventoryManager.instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, false);
+                            InventoryManager.Instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, false);
                         }
                     }
                 }
 
                 //Update the Hotbar
-                InventoryManager.instance.CheckHotbarItemInInventory();
-                InventoryManager.instance.RemoveInventoriesUI();
+                InventoryManager.Instance.CheckHotbarItemInInventory();
+                InventoryManager.Instance.RemoveInventoriesUI();
 
                 //Reset parameters
                 freeGhost_LookedAt = null;
@@ -2095,7 +2096,7 @@ public class BuildingManager : MonoBehaviour
                                 {
                                     for (int k = 0; k < buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].amount; k++)
                                     {
-                                        InventoryManager.instance.AddItemToInventory(0, buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].itemName);
+                                        InventoryManager.Instance.AddItemToInventory(0, buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].itemName);
                                     }
                                 }
 
@@ -2245,9 +2246,9 @@ public class BuildingManager : MonoBehaviour
 
             int counter = 0;
 
-            for (int k = 0; k < InventoryManager.instance.inventories[0].itemsInInventory.Count; k++)
+            for (int k = 0; k < InventoryManager.Instance.inventories[0].itemsInInventory.Count; k++)
             {
-                if (blockParent.buildingRequirementList[i].itemName == InventoryManager.instance.inventories[0].itemsInInventory[k].itemName)
+                if (blockParent.buildingRequirementList[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
                 {
                     counter++;
                 }
@@ -2289,9 +2290,9 @@ public class BuildingManager : MonoBehaviour
 
             int counter = 0;
 
-            for (int k = 0; k < InventoryManager.instance.inventories[0].itemsInInventory.Count; k++)
+            for (int k = 0; k < InventoryManager.Instance.inventories[0].itemsInInventory.Count; k++)
             {
-                if (blockParent.removeBuildingRequirementList[i].itemName == InventoryManager.instance.inventories[0].itemsInInventory[k].itemName)
+                if (blockParent.removeBuildingRequirementList[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
                 {
                     counter++;
                 }

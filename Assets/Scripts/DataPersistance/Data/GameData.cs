@@ -8,21 +8,21 @@ public class GameData
     //Player Pos and Rotation
     [HideInInspector] public Vector3 playerPos_Save = new Vector3();
     [HideInInspector] public Quaternion playerRot_Save = new Quaternion();
-
-    //WorldObjects
-    [HideInInspector] public List<WorldObject> worldObject_SaveList = new List<WorldObject>();
-
+    
     //Inventories
     public List<Inventory> Inventories_SaveList = new List<Inventory>();
 
-    //Hotbar
-    [HideInInspector] public int selectedSlot_Save = new int();
-    public List<Items> hotbarItem_SaveList = new List<Items>();
+    //WorldObjects
+    [HideInInspector] public List<WorldObject> worldObject_SaveList = new List<WorldObject>();
 
     //BuidingSystem
     [HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_SaveList = new List<BuildingBlockSaveList>();
     [HideInInspector] public BuildingType buildingType_Save = new BuildingType();
     [HideInInspector] public BuildingMaterial buildingMaterial_Save = new BuildingMaterial();
+
+    //Hotbar
+    [HideInInspector] public int selectedSlot_Save = new int();
+    public List<Items> hotbarItem_SaveList = new List<Items>();
 
 
     //--------------------

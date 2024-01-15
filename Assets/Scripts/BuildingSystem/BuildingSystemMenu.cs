@@ -63,20 +63,20 @@ public class BuildingSystemMenu : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         MainManager.instance.menuStates = MenuStates.BuildingSystemMenu;
-        BuildingManager.instance.SetAllGhostState_Off();
+        BuildingManager.Instance.SetAllGhostState_Off();
 
         //Deactivate old directionObjectList
-        if (BuildingManager.instance.old_lastBuildingBlock_LookedAt != null)
+        if (BuildingManager.Instance.old_lastBuildingBlock_LookedAt != null)
         {
-            for (int i = 0; i < BuildingManager.instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList.Count; i++)
+            for (int i = 0; i < BuildingManager.Instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList.Count; i++)
             {
-                if (BuildingManager.instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList[i].activeInHierarchy)
+                if (BuildingManager.Instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList[i].activeInHierarchy)
                 {
-                    BuildingManager.instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList[i].SetActive(false);
+                    BuildingManager.Instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList[i].SetActive(false);
                 }
             }
 
-            BuildingManager.instance.old_lastBuildingBlock_LookedAt = null;
+            BuildingManager.Instance.old_lastBuildingBlock_LookedAt = null;
         }
 
         buildingSystemMenu.SetActive(true);
