@@ -6,6 +6,7 @@ public class MoveableObject : MonoBehaviour
 {
     [Header("General")]
     public bool canBePlaced;
+    public bool isSelectedForMovement;
 
     [Header("FurnitureType Type")]
     public FurnitureType furnitureType = FurnitureType.None;
@@ -13,19 +14,29 @@ public class MoveableObject : MonoBehaviour
     [Header("MachineType Type")]
     public MachineType machineType = MachineType.None;
 
+    [Header("Material")]
+    [SerializeField] Material material;
+
 
     //--------------------
 
 
     private void Update()
     {
-        if (canBePlaced)
+        if (isSelectedForMovement)
         {
-            gameObject.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
+            if (canBePlaced)
+            {
+                gameObject.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
+            }
+            else
+            {
+                gameObject.GetComponent<MeshRenderer>().material = BuildingManager.Instance.cannotPlace_Material;
+            }
         }
         else
         {
-            gameObject.GetComponent<MeshRenderer>().material = BuildingManager.Instance.cannotPlace_Material;
+            gameObject.GetComponent<MeshRenderer>().material = material;
         }
     }
 

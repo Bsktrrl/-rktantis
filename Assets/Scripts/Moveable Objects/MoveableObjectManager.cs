@@ -80,6 +80,6 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 
     public void PlaceObjectToMove()
     {
-
+        objectToMove.GetComponent<MoveableObject>().isSelectedForMovement = false;
     }
 }

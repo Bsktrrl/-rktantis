@@ -66,6 +66,7 @@ public class BuildingHammer : MonoBehaviour
 
             GameObject moveableObject = MoveableObjectManager.Instance.GetMoveableObject(MoveableObjectManager.Instance.moveableObjectType);
             MoveableObjectManager.Instance.objectToMove = moveableObject;
+            moveableObject.GetComponent<MoveableObject>().isSelectedForMovement = true;
 
             tempObj_Selected = Instantiate(moveableObject, InventoryManager.Instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
             tempObj_Selected.transform.parent = BuildingManager.Instance.tempBlock_Parent.transform;
