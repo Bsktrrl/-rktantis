@@ -953,7 +953,6 @@ public class BuildingManager : Singleton<BuildingManager>
     public Mesh GetCorrectGhostMesh(GameObject ghost_LookedAt)
     {
         Mesh chosenMesh = new Mesh();
-        SerializedObject obj;
 
         //Get correct Mesh on a ghost based on the selected material
         //Wood

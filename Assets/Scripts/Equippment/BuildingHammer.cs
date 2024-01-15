@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class BuildingHammer : MonoBehaviour
@@ -62,14 +59,16 @@ public class BuildingHammer : MonoBehaviour
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine
             || MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
-            print("1000. Selected Object is a Machine");
+            print("1000. Selected Object is a Machine or Furniture");
 
             GameObject moveableObject = MoveableObjectManager.Instance.GetMoveableObject(MoveableObjectManager.Instance.moveableObjectType);
             MoveableObjectManager.Instance.objectToMove = moveableObject;
-            moveableObject.GetComponent<MoveableObject>().isSelectedForMovement = true;
 
             tempObj_Selected = Instantiate(moveableObject, InventoryManager.Instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
             tempObj_Selected.transform.parent = BuildingManager.Instance.tempBlock_Parent.transform;
+
+            //Set selected For Movement
+            tempObj_Selected.GetComponent<MoveableObject>().isSelectedForMovement = true;
 
             //Get the correct mesh
             tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;

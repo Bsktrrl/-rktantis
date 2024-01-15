@@ -22,7 +22,8 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     public GameObject objectToMove;
 
     [Header("MoveableObjectList")]
-    public List<GameObject> moveableObjectList = new List<GameObject>();
+    public List<GameObject> moveableObject_Machine_List = new List<GameObject>();
+    public List<GameObject> moveableObject_Furniture_List = new List<GameObject>();
 
 
     //--------------------
@@ -45,11 +46,11 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         //Machine
         if (moveableObjectType == MoveableObjectType.Machine)
         {
-            for (int i = 0; i < moveableObjectList.Count; i++)
+            for (int i = 0; i < moveableObject_Machine_List.Count; i++)
             {
-                if (moveableObjectList[i].GetComponent<MoveableObject>().machineType == machineType)
+                if (moveableObject_Machine_List[i].GetComponent<MoveableObject>().machineType == machineType)
                 {
-                    return moveableObjectList[i];
+                    return moveableObject_Machine_List[i];
                 }
             }
         }
@@ -57,11 +58,11 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         //Furniture
         else if (moveableObjectType == MoveableObjectType.Furniture)
         {
-            for (int i = 0; i < moveableObjectList.Count; i++)
+            for (int i = 0; i < moveableObject_Furniture_List.Count; i++)
             {
-                if (moveableObjectList[i].GetComponent<MoveableObject>().furnitureType == furnitureType)
+                if (moveableObject_Furniture_List[i].GetComponent<MoveableObject>().furnitureType == furnitureType)
                 {
-                    return moveableObjectList[i];
+                    return moveableObject_Furniture_List[i];
                 }
             }
         }
