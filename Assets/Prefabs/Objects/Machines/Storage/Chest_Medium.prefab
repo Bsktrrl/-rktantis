@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 8.16, y: 0.8, z: 8.74}
-  m_LocalScale: {x: 2.328, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -148,8 +148,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBePlaced: 0
+  isSelectedForMovement: 0
   furnitureType: 2
   machineType: 0
+  material: {fileID: 0}
 --- !u!114 &6889509816970042223
 MonoBehaviour:
   m_ObjectHideFlags: 0

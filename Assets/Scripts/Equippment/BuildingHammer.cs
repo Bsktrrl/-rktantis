@@ -197,7 +197,8 @@ public class BuildingHammer : MonoBehaviour
                 tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
 
                 //Set the object's position to the buildingBlock height
-                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
+                float tempHeight = tempObj_Selected.transform.localScale.y / 2;
+                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + tempHeight, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
             }
             else if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_Ground))
             {
@@ -205,7 +206,8 @@ public class BuildingHammer : MonoBehaviour
                 tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.cannotPlace_Material;
 
                 //Set the object's position to the buildingBlock height
-                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
+                float tempHeight = tempObj_Selected.transform.localScale.y / 2;
+                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + tempHeight, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
             }
             else
             {
