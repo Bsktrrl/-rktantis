@@ -21,29 +21,6 @@ public class MoveableObject : MonoBehaviour
     //--------------------
 
 
-    private void Update()
-    {
-        if (isSelectedForMovement)
-        {
-            if (canBePlaced)
-            {
-                gameObject.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
-            }
-            else
-            {
-                gameObject.GetComponent<MeshRenderer>().material = BuildingManager.Instance.cannotPlace_Material;
-            }
-        }
-        else
-        {
-            gameObject.GetComponent<MeshRenderer>().material = material;
-        }
-    }
-
-
-    //--------------------
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "BuildingBlock")

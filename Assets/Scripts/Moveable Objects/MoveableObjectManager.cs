@@ -29,18 +29,6 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     //--------------------
 
 
-    private void Update()
-    {
-        if (objectToMove)
-        {
-            UpdateObjectToMovePosition();
-        }
-    }
-
-
-    //--------------------
-
-
     public GameObject GetMoveableObject(MoveableObjectType moveableObjectType)
     {
         //Machine
@@ -74,10 +62,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     //--------------------
 
 
-    public void UpdateObjectToMovePosition()
-    {
-
-    }
+    
 
     public void PlaceObjectToMove()
     {

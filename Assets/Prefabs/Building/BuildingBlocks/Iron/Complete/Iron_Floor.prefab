@@ -5502,7 +5502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4763889419513853116}
   - component: {fileID: 3674162178478198034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Iron_Floor
   m_TagString: BuildingBlock
   m_Icon: {fileID: 0}
@@ -11268,6 +11268,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4763889419513853116}
     m_Modifications:
+    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
+        type: 3}
+    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1221582291812793429, guid: dca966e3722817a4f81f47232f5d9ef9,
+        type: 3}
     - target: {fileID: -8679921383154817045, guid: dca966e3722817a4f81f47232f5d9ef9,
         type: 3}
       propertyPath: m_RootOrder
@@ -11345,6 +11357,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: dca966e3722817a4f81f47232f5d9ef9,
         type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dca966e3722817a4f81f47232f5d9ef9,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -11353,18 +11370,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: BuildingBlock
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
-        type: 3}
-    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1221582291812793429, guid: dca966e3722817a4f81f47232f5d9ef9,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

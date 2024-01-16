@@ -4382,7 +4382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4763889419513853116}
   - component: {fileID: 3674162178478198034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wood_Floor_Triangle
   m_TagString: BuildingBlock
   m_Icon: {fileID: 0}
@@ -10760,6 +10760,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4763889419513853116}
     m_Modifications:
+    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
+        type: 3}
+    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1423509397519099677, guid: c5011a4d3ce036c4b85b5c7d87dcc5c2,
+        type: 3}
     - target: {fileID: -8679921383154817045, guid: c5011a4d3ce036c4b85b5c7d87dcc5c2,
         type: 3}
       propertyPath: m_RootOrder
@@ -10835,6 +10847,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7645316377458052949, guid: c5011a4d3ce036c4b85b5c7d87dcc5c2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2989448365652587506, guid: c5011a4d3ce036c4b85b5c7d87dcc5c2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c5011a4d3ce036c4b85b5c7d87dcc5c2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c5011a4d3ce036c4b85b5c7d87dcc5c2,
         type: 3}
       propertyPath: m_IsActive
@@ -10845,18 +10872,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: BuildingBlock
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
-        type: 3}
-    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1423509397519099677, guid: c5011a4d3ce036c4b85b5c7d87dcc5c2,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

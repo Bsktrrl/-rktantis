@@ -4,6 +4,7 @@ using UnityEngine;
 public class BuildingHammer : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask_Ground;
+    [SerializeField] LayerMask layerMask_BuildingBlock;
     public GameObject tempObj_Selected = null;
 
     Ray ray;
@@ -16,6 +17,7 @@ public class BuildingHammer : MonoBehaviour
     private void Update()
     {
         UpdateSelectedBlockPosition();
+        UpdateObjectToMovePosition();
     }
 
 
@@ -159,6 +161,61 @@ public class BuildingHammer : MonoBehaviour
         else
         {
             BuildingManager.Instance.freeGhost_LookedAt = null;
+            tempObj_Selected.SetActive(false);
+        }
+    }
+
+    public void UpdateObjectToMovePosition()
+    {
+        //If tempObj_Selected isn't selected, return
+        if (tempObj_Selected == null) { return; }
+
+        //If any menu is open, return
+        if (MainManager.instance.menuStates != MenuStates.None)
+        {
+            if (tempObj_Selected != null)
+            {
+                tempObj_Selected.SetActive(false);
+            }
+
+            return;
+        }
+
+
+        //-----
+
+        //Set Object's Position and Rotation
+        if (tempObj_Selected != null)
+        {
+            tempObj_Selected.SetActive(true);
+
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_BuildingBlock))
+            {
+                //Change if object can be placed
+                tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
+
+                //Set the object's position to the buildingBlock height
+                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
+            }
+            else if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_Ground))
+            {
+                //Change if object can be placed
+                tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.cannotPlace_Material;
+
+                //Set the object's position to the buildingBlock height
+                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
+            }
+            else
+            {
+                tempObj_Selected.SetActive(false);
+                tempObj_Selected.GetComponent<MoveableObject>().canBePlaced = false;
+            }
+        }
+        else
+        {
+            tempObj_Selected.GetComponent<MoveableObject>().canBePlaced = false;
             tempObj_Selected.SetActive(false);
         }
     }
