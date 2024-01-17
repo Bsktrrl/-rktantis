@@ -24,6 +24,9 @@ public class GameData
     [HideInInspector] public int selectedSlot_Save = new int();
     public List<Items> hotbarItem_SaveList = new List<Items>();
 
+    //MoveableObjects
+    [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_SaveList = new List<MoveableObject_ToSave>();
+
 
     //--------------------
 
@@ -37,5 +40,6 @@ public class GameData
 
         this.Inventories_SaveList.Clear();
         this.hotbarItem_SaveList.Clear();
+        this.placedMoveableObjectsList_SaveList.Clear();
     }
 }

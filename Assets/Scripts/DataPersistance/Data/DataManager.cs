@@ -33,6 +33,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public BuildingType buildingType_Store = new BuildingType();
     [HideInInspector] public BuildingMaterial buildingMaterial_Store = new BuildingMaterial();
 
+    //MoveableObjects
+    [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_StoreList = new List<MoveableObject_ToSave>();
+
 
     //--------------------
 
@@ -54,6 +57,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.buildingBlockList_StoreList = gameData.buildingBlockList_SaveList;
         this.buildingType_Store = gameData.buildingType_Save;
         this.buildingMaterial_Store = gameData.buildingMaterial_Save;
+
+        this.placedMoveableObjectsList_StoreList = gameData.placedMoveableObjectsList_SaveList;
         #endregion
 
         //Load the saved data into the project
@@ -72,6 +77,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         WorldObjectManager.Instance.LoadData();
         print("4. WorldObjectManager has Loaded");
+
+        MoveableObjectManager.Instance.LoadData();
+        print("5. MoveableObjectManager has Loaded");
         #endregion
     }
 
@@ -93,6 +101,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.buildingBlockList_SaveList = this.buildingBlockList_StoreList;
         gameData.buildingType_Save = this.buildingType_Store;
         gameData.buildingMaterial_Save = this.buildingMaterial_Store;
+
+        gameData.placedMoveableObjectsList_SaveList = this.placedMoveableObjectsList_StoreList;
 
         print("Data has Saved");
     }
