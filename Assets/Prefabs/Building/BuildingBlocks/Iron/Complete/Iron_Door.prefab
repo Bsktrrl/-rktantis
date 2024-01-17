@@ -7122,6 +7122,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4763889419513853116}
     m_Modifications:
+    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
+        type: 3}
+    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 5818853501113889963, guid: 50e80544d9d11404f92c0c381bf78c93,
+        type: 3}
     - target: {fileID: -8679921383154817045, guid: 50e80544d9d11404f92c0c381bf78c93,
         type: 3}
       propertyPath: m_RootOrder
@@ -7207,18 +7219,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: BuildingBlock
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+    - target: {fileID: 4816028897863432546, guid: 50e80544d9d11404f92c0c381bf78c93,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
+      propertyPath: m_TagString
+      value: BuildingBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 7841275151686483071, guid: 50e80544d9d11404f92c0c381bf78c93,
         type: 3}
-    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 5818853501113889963, guid: 50e80544d9d11404f92c0c381bf78c93,
-        type: 3}
+      propertyPath: m_TagString
+      value: BuildingBlock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -13194,6 +13204,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 117803619147800036}
     m_Modifications:
+    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
+        type: 3}
+    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 7118395332795962122, guid: f3d08c180ce42814c9a4bca3b11465c2,
+        type: 3}
     - target: {fileID: -8679921383154817045, guid: f3d08c180ce42814c9a4bca3b11465c2,
         type: 3}
       propertyPath: m_RootOrder
@@ -13269,6 +13291,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6546268883557871847, guid: f3d08c180ce42814c9a4bca3b11465c2,
+        type: 3}
+      propertyPath: m_TagString
+      value: BuildingBlock
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f3d08c180ce42814c9a4bca3b11465c2,
         type: 3}
       propertyPath: m_IsActive
@@ -13279,18 +13306,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: BuildingBlock
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+    - target: {fileID: 6051139457239044523, guid: f3d08c180ce42814c9a4bca3b11465c2,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
-        type: 3}
-    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 7118395332795962122, guid: f3d08c180ce42814c9a4bca3b11465c2,
-        type: 3}
+      propertyPath: m_TagString
+      value: BuildingBlock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

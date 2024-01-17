@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6889509816970042223}
   m_Layer: 0
   m_Name: Chest_Small
-  m_TagString: Untagged
+  m_TagString: Furniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,9 +149,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBePlaced: 0
   isSelectedForMovement: 0
+  enoughItemsToBuild: 0
   furnitureType: 1
   machineType: 0
-  material: {fileID: 0}
 --- !u!114 &6889509816970042223
 MonoBehaviour:
   m_ObjectHideFlags: 0

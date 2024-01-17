@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -100,12 +100,15 @@ public class BuildingManager : Singleton<BuildingManager>
     public GameObject buildingRemoveRequirement_Parent;
     public GameObject buildingRequirement_Parent;
     public GameObject buildingRequirement_Prefab;
+    public GameObject buildingRequirementHeader_Prefab;
     [SerializeField] List<GameObject> buildingRequirement_List = new List<GameObject>();
     [SerializeField] List<GameObject> buildingRemoveRequirement_List = new List<GameObject>();
 
     public bool enoughItemsToBuild;
     public GameObject tempBlock_Parent;
     public bool blockisPlacing;
+
+    public List<GameObject> buildingBlock_UIList = new List<GameObject>();
 
 
     //--------------------
@@ -2050,6 +2053,19 @@ public class BuildingManager : Singleton<BuildingManager>
                     }
                 }
             }
+
+            else if (hitTransform.gameObject.CompareTag("Machine") || hitTransform.gameObject.CompareTag("Furniture"))
+            {
+                if (buildingBlockLookingAt_Axe != hitTransform.gameObject)
+                {
+                    buildingBlockLookingAt_Axe = hitTransform.gameObject;
+
+                    if (buildingBlockLookingAt_Axe.GetComponent<MoveableObject>() != null)
+                    {
+                        SetBuildingRemoveRequirements(MoveableObjectManager.Instance.GetMoveableObjectInfo(buildingBlockLookingAt_Axe.GetComponent<MoveableObject>()));
+                    }
+                }
+            }
             else
             {
                 if (buildingBlockLookingAt_Axe != null)
@@ -2062,69 +2078,94 @@ public class BuildingManager : Singleton<BuildingManager>
     }
     public void CutBlock()
     {
-        if (Physics.Raycast(oldRay, out hit_Axe))
+        ray_Axe = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray_Axe, out hit_Axe))
         {
+            var hitTransform = hit_Axe.transform;
+
             if (buildingBlockLookingAt_Axe != null)
             {
-                if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent != null)
+                if (hitTransform.gameObject.CompareTag("BuildingBlock"))
                 {
-                    if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>() != null)
+                    if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent != null)
                     {
-                        for (int i = 0; i < buildingBlockList.Count; i++)
+                        if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>() != null)
                         {
-                            if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent == buildingBlockList[i])
+                            for (int i = 0; i < buildingBlockList.Count; i++)
                             {
-                                print("6. Destroy Block");
+                                if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent == buildingBlockList[i])
+                                {
+                                    print("6. Destroy Block");
 
-                                //Play remove sound
-                                if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
-                                {
-                                    SoundManager.instance.PlayWood_Remove_Clip();
-                                }
-                                else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Stone)
-                                {
-                                    SoundManager.instance.PlayStone_Remove_Clip();
-                                }
-                                else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Iron)
-                                {
-                                    SoundManager.instance.PlayIron_Remove_Clip();
-                                }
-
-                                //Add items to inventory
-                                for (int j = 0; j < buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList.Count; j++)
-                                {
-                                    for (int k = 0; k < buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].amount; k++)
+                                    //Play remove sound
+                                    if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
                                     {
-                                        InventoryManager.Instance.AddItemToInventory(0, buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].itemName);
+                                        SoundManager.instance.PlayWood_Remove_Clip();
                                     }
+                                    else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Stone)
+                                    {
+                                        SoundManager.instance.PlayStone_Remove_Clip();
+                                    }
+                                    else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Iron)
+                                    {
+                                        SoundManager.instance.PlayIron_Remove_Clip();
+                                    }
+
+                                    //Add items to inventory
+                                    for (int j = 0; j < buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList.Count; j++)
+                                    {
+                                        for (int k = 0; k < buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].amount; k++)
+                                        {
+                                            InventoryManager.Instance.AddItemToInventory(0, buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].itemName);
+                                        }
+                                    }
+
+                                    //Remove Building Object
+                                    buildingBlockList.RemoveAt(i);
+                                    buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().DestroyThisObject();
+
+                                    //Reset parameters
+                                    buildingBlockLookingAt_Axe = null;
+                                    lastBuildingBlock_LookedAt = null;
+                                    old_lastBuildingBlock_LookedAt = null;
+
+                                    if (buildingBlockLookingAt_Axe != null)
+                                    {
+                                        SetBuildingRemoveRequirements(buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>());
+                                    }
+                                    else
+                                    {
+                                        buildingRemoveRequirement_Parent.SetActive(false);
+                                    }
+
+                                    SaveData();
+
+                                    break;
                                 }
-
-                                //Remove Building Object
-                                buildingBlockList.RemoveAt(i);
-                                buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().DestroyThisObject();
-
-                                //Reset parameters
-                                buildingBlockLookingAt_Axe = null;
-                                lastBuildingBlock_LookedAt = null;
-                                old_lastBuildingBlock_LookedAt = null;
-
-                                if (buildingBlockLookingAt_Axe != null)
-                                {
-                                    SetBuildingRemoveRequirements(buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>());
-                                }
-                                else
-                                {
-                                    buildingRemoveRequirement_Parent.SetActive(false);
-                                }
-
-                                SaveData();
-
-                                break;
                             }
                         }
                     }
                 }
+
+                //If looking at a Machine or Furniture
+                else if (hitTransform.gameObject.CompareTag("Machine") || hitTransform.gameObject.CompareTag("Furniture"))
+                {
+                    print("Tried to cut a Machine or Furniture");
+                }
+                else
+                {
+                    print("Doesn't hit at all");
+                }
             }
+            else
+            {
+                print("buildingBlockLookingAt_Axe == null");
+            }
+        }
+        else
+        {
+            print("Physics.Raycast Isn't hit");
         }
     }
 
@@ -2235,6 +2276,23 @@ public class BuildingManager : Singleton<BuildingManager>
         //Set "enoughItemsToBuild" = true by default
         enoughItemsToBuild = true;
 
+        //Setup Header of Requirements
+        #region
+        buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, ParentObject.transform) as GameObject);
+
+        for (int i = 0; i < buildingBlock_UIList.Count; i++)
+        {
+            if (buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType == blockParent.buildingType
+                && buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == blockParent.buildingMaterial)
+            {
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = buildingBlock_UIList[i].GetComponentInChildren<Image>().sprite;
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial + " " + buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
+
+                break;
+            }
+        }
+        #endregion
+
         //Setup new list of Requirements
         for (int i = 0; i < blockParent.buildingRequirementList.Count; i++)
         {
@@ -2283,6 +2341,22 @@ public class BuildingManager : Singleton<BuildingManager>
         //Set "enoughItemsToBuild" = true by default
         enoughItemsToBuild = true;
 
+        //Setup Header of Requirements
+        #region
+        buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, ParentObject.transform) as GameObject);
+
+        buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = moveableObject.objectSprite;
+
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
+        {
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObject.machineType.ToString();
+        }
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
+        {
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObject.furnitureType.ToString();
+        }
+        #endregion
+
         //Setup new list of Requirements
         for (int i = 0; i < moveableObject.craftingRequirements.Count; i++)
         {
@@ -2328,6 +2402,23 @@ public class BuildingManager : Singleton<BuildingManager>
         }
         buildingRemoveRequirement_List.Clear();
 
+        //Setup Header of Requirements
+        #region
+        buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
+
+        for (int i = 0; i < buildingBlock_UIList.Count; i++)
+        {
+            if (buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType == blockParent.buildingType
+                && buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == blockParent.buildingMaterial)
+            {
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = buildingBlock_UIList[i].GetComponentInChildren<Image>().sprite;
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial + " " + buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
+
+                break;
+            }
+        }
+        #endregion
+
         //Setup new list of Requirements
         for (int i = 0; i < blockParent.removeBuildingRequirementList.Count; i++)
         {
@@ -2351,7 +2442,54 @@ public class BuildingManager : Singleton<BuildingManager>
 
         buildingRemoveRequirement_Parent.SetActive(true);
     }
+    public void SetBuildingRemoveRequirements(MoveableObjectInfo moveableObjectInfo)
+    {
+        //Remove all childs
+        for (int i = buildingRemoveRequirement_Parent.transform.childCount - 1; i >= 0; i--)
+        {
+            buildingRemoveRequirement_Parent.transform.GetChild(i).GetComponent<BuildingRequirementSlot>().DestroyThisObject();
+        }
+        buildingRemoveRequirement_List.Clear();
 
+        //Setup Header of Requirements
+        #region
+        buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
+
+        buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = moveableObjectInfo.objectSprite;
+
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
+        {
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObjectInfo.machineType.ToString();
+        }
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
+        {
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObjectInfo.furnitureType.ToString();
+        }
+        #endregion
+
+        //Setup new list of Requirements
+        for (int i = 0; i < moveableObjectInfo.RemoveCraftingRequirements.Count; i++)
+        {
+            buildingRemoveRequirement_List.Add(Instantiate(buildingRequirement_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
+
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(moveableObjectInfo.RemoveCraftingRequirements[i].itemName).hotbarSprite;
+
+            int counter = 0;
+
+            for (int k = 0; k < InventoryManager.Instance.inventories[0].itemsInInventory.Count; k++)
+            {
+                if (moveableObjectInfo.RemoveCraftingRequirements[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
+                {
+                    counter++;
+                }
+            }
+
+            //Display Amount required + Amount in inventory
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + moveableObjectInfo.RemoveCraftingRequirements[i].amount.ToString() + " / " + counter;
+        }
+
+        buildingRemoveRequirement_Parent.SetActive(true);
+    }
 
     //--------------------
 

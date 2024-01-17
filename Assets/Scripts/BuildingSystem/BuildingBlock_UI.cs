@@ -19,7 +19,6 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
     [Header("FurnitureType Type")]
     public FurnitureType furnitureType;
 
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         MoveableObjectManager.Instance.moveableObjectType = objectType;

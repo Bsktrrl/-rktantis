@@ -12,14 +12,23 @@ public class MoveableObject_SO : ScriptableObject
 [Serializable]
 public class MoveableObjectInfo
 {
+    [Header("Name")]
+    public string Name;
+
     [Header("MoveableObjectTypes")]
     public MoveableObjectType moveableObjectType = MoveableObjectType.None;
     public FurnitureType furnitureType = FurnitureType.None;
     public MachineType machineType = MachineType.None;
+
+    [Header("Sprite")]
+    public Sprite objectSprite;
 
     [Header("ObjectToMove")]
     public GameObject objectToMove;
 
     [Header("Building Requirement")]
     public List<CraftingRequirements> craftingRequirements = new List<CraftingRequirements>();
+
+    [Header("Requirement of Removing the Object")]
+    public List<CraftingRequirements> RemoveCraftingRequirements = new List<CraftingRequirements>();
 }

@@ -109,6 +109,34 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 
         return null;
     }
+    public MoveableObjectInfo GetMoveableObjectInfo(MoveableObject moveableObject)
+    {
+        //Machine
+        if (moveableObject.machineType != MachineType.None)
+        {
+            for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
+            {
+                if (moveableObject_SO.moveableObjectList[i].machineType == moveableObject.machineType)
+                {
+                    return moveableObject_SO.moveableObjectList[i];
+                }
+            }
+        }
+
+        //Furniture
+        else if (moveableObject.furnitureType != FurnitureType.None)
+        {
+            for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
+            {
+                if (moveableObject_SO.moveableObjectList[i].furnitureType == moveableObject.furnitureType)
+                {
+                    return moveableObject_SO.moveableObjectList[i];
+                }
+            }
+        }
+
+        return null;
+    }
     public MoveableObjectInfo GetMoveableObject_SO()
     {
         //Machine

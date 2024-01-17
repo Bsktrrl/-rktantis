@@ -6740,6 +6740,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4763889419513853116}
     m_Modifications:
+    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
+        type: 3}
+    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 726354786050087640, guid: 5753952cae09ff546ab4de865a777c00,
+        type: 3}
     - target: {fileID: -8679921383154817045, guid: 5753952cae09ff546ab4de865a777c00,
         type: 3}
       propertyPath: m_RootOrder
@@ -6825,18 +6837,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: BuildingBlock
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+    - target: {fileID: 3743710464621244577, guid: 5753952cae09ff546ab4de865a777c00,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
+      propertyPath: m_TagString
+      value: BuildingBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732514690214389946, guid: 5753952cae09ff546ab4de865a777c00,
         type: 3}
-    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 726354786050087640, guid: 5753952cae09ff546ab4de865a777c00,
-        type: 3}
+      propertyPath: m_TagString
+      value: BuildingBlock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -13,25 +13,35 @@ MonoBehaviour:
   m_Name: MoveableObject
   m_EditorClassIdentifier: 
   moveableObjectList:
-  - moveableObjectType: 3
+  - Name: Crafting Table
+    moveableObjectType: 3
     furnitureType: 0
     machineType: 1
+    objectSprite: {fileID: 21300000, guid: 02cc63a93c4b086468ca721826443e9d, type: 3}
     objectToMove: {fileID: 3705573567050246895, guid: cf9e7a3e09caeac47ae00bb153573af8,
       type: 3}
     craftingRequirements:
     - itemName: 2
       amount: 1
-  - moveableObjectType: 2
+    RemoveCraftingRequirements: []
+  - Name: Small Storage Chest
+    moveableObjectType: 2
     furnitureType: 1
     machineType: 0
+    objectSprite: {fileID: 21300000, guid: 47a1672dc06ca93439e0c26accec12d4, type: 3}
     objectToMove: {fileID: 1475861760331519805, guid: d53b9396a6b954d40b17f085e68a90db,
       type: 3}
     craftingRequirements:
     - itemName: 1
       amount: 2
-  - moveableObjectType: 2
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 1
+  - Name: Medium Storage Chest
+    moveableObjectType: 2
     furnitureType: 2
     machineType: 0
+    objectSprite: {fileID: 21300000, guid: f25937bc1b291984f83c15a1e74b1850, type: 3}
     objectToMove: {fileID: 1475861760331519805, guid: 38d26bbe041a68747a7ac35f8f5ceab5,
       type: 3}
     craftingRequirements:
@@ -39,3 +49,6 @@ MonoBehaviour:
       amount: 1
     - itemName: 2
       amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 10
