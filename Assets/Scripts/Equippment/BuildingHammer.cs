@@ -26,9 +26,20 @@ public class BuildingHammer : MonoBehaviour
 
     public void SetNewSelectedBlock()
     {
-        Destroy(tempObj_Selected);
-        tempObj_Selected = null;
-
+        if (tempObj_Selected)
+        {
+            if (tempObj_Selected.GetComponent<InteractableObject>())
+            {
+                tempObj_Selected.GetComponent<InteractableObject>().DestroyObject();
+                tempObj_Selected = null;
+            }
+            else
+            {
+                Destroy(tempObj_Selected);
+                tempObj_Selected = null;
+            }
+        }
+        
         //If selected Object is a BuildingBlock
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
         {
@@ -63,7 +74,7 @@ public class BuildingHammer : MonoBehaviour
         {
             print("1000. Selected Object is a Machine or Furniture");
 
-            GameObject moveableObject = MoveableObjectManager.Instance.GetMoveableObject(MoveableObjectManager.Instance.moveableObjectType);
+            GameObject moveableObject = MoveableObjectManager.Instance.GetMoveableObject();
             MoveableObjectManager.Instance.objectToMove = moveableObject;
 
             tempObj_Selected = Instantiate(moveableObject, InventoryManager.Instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
@@ -165,6 +176,10 @@ public class BuildingHammer : MonoBehaviour
         }
     }
 
+
+    //--------------------
+
+
     public void UpdateObjectToMovePosition()
     {
         //If tempObj_Selected isn't selected, return
@@ -184,6 +199,7 @@ public class BuildingHammer : MonoBehaviour
 
         //-----
 
+
         //Set Object's Position and Rotation
         if (tempObj_Selected != null)
         {
@@ -191,35 +207,74 @@ public class BuildingHammer : MonoBehaviour
 
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_BuildingBlock))
-            {
-                //Change if object can be placed
-                tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
+            //Get the selected MoveableObject
+            MoveableObjectInfo tempInfo = MoveableObjectManager.Instance.GetMoveableObject_SO();
 
-                //Set the object's position to the buildingBlock height
-                float tempHeight = tempObj_Selected.transform.localScale.y / 2;
-                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + tempHeight, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
-            }
-            else if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_Ground))
+            //If Player inventory has the required Items
+            if (InventoryManager.Instance.GetInventoryRequirements(0, tempInfo.craftingRequirements))
             {
-                //Change if object can be placed
-                tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.cannotPlace_Material;
+                tempObj_Selected.GetComponent<MoveableObject>().enoughItemsToBuild = true;
 
-                //Set the object's position to the buildingBlock height
-                float tempHeight = tempObj_Selected.transform.localScale.y / 2;
-                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + tempHeight, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
+                if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_BuildingBlock))
+                {
+                    tempObj_Selected.GetComponent<MoveableObject>().canBePlaced = true;
+
+                    SetObjectMaterial(BuildingManager.Instance.canPlace_Material);
+                    SetMoveableObjectPositionAndRotation();
+                }
+                else if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_Ground))
+                {
+                    SetObjectMaterial(BuildingManager.Instance.cannotPlace_Material);
+                    SetMoveableObjectPositionAndRotation();
+                }
+                else
+                {
+                    tempObj_Selected.SetActive(false);
+                    tempObj_Selected.GetComponent<MoveableObject>().canBePlaced = false;
+                }
             }
+
+            //If Player inventory doesn't have the required Items
             else
             {
-                tempObj_Selected.SetActive(false);
+                tempObj_Selected.GetComponent<MoveableObject>().enoughItemsToBuild = false;
                 tempObj_Selected.GetComponent<MoveableObject>().canBePlaced = false;
+
+                if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_BuildingBlock))
+                {
+                    SetObjectMaterial(BuildingManager.Instance.cannotPlace_Material);
+                    SetMoveableObjectPositionAndRotation();
+                }
+                else if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_Ground))
+                {
+                    SetObjectMaterial(BuildingManager.Instance.cannotPlace_Material);
+                    SetMoveableObjectPositionAndRotation();
+                }
+                else
+                {
+                    tempObj_Selected.SetActive(false);
+                    tempObj_Selected.GetComponent<MoveableObject>().canBePlaced = false;
+                }
             }
         }
         else
         {
+            tempObj_Selected.GetComponent<MoveableObject>().enoughItemsToBuild = false;
+
             tempObj_Selected.GetComponent<MoveableObject>().canBePlaced = false;
             tempObj_Selected.SetActive(false);
         }
+    }
+    void SetObjectMaterial(Material material)
+    {
+        //Change "if object can be placed"-material
+        tempObj_Selected.GetComponent<MeshRenderer>().material = material;
+    }
+    void SetMoveableObjectPositionAndRotation()
+    {
+        //Set the object's position to the buildingBlock height
+        float tempHeight = tempObj_Selected.transform.localScale.y / 2;
+        tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + tempHeight, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
     }
 
 
@@ -232,13 +287,16 @@ public class BuildingHammer : MonoBehaviour
         {
             BuildingManager.Instance.PlaceBlock();
         }
-        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine
+            || MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
-            MoveableObjectManager.Instance.PlaceObjectToMove();
-        }
-        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
-        {
-            MoveableObjectManager.Instance.PlaceObjectToMove();
+            if (tempObj_Selected)
+            {
+                if (tempObj_Selected.GetComponent<MoveableObject>())
+                {
+                    MoveableObjectManager.Instance.PlaceObjectToMove(tempObj_Selected.GetComponent<MoveableObject>());
+                }
+            }
         }
     }
 }

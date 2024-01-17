@@ -7,15 +7,13 @@ public class MoveableObject : MonoBehaviour
     [Header("General")]
     public bool canBePlaced;
     public bool isSelectedForMovement;
+    public bool enoughItemsToBuild;
 
     [Header("FurnitureType Type")]
     public FurnitureType furnitureType = FurnitureType.None;
 
     [Header("MachineType Type")]
     public MachineType machineType = MachineType.None;
-
-    [Header("Material")]
-    [SerializeField] Material material;
 
 
     //--------------------

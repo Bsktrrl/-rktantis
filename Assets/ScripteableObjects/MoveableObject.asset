@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289499798f169394cbfb8a5bda89ea19, type: 3}
+  m_Name: MoveableObject
+  m_EditorClassIdentifier: 
+  moveableObjectList:
+  - moveableObjectType: 3
+    furnitureType: 0
+    machineType: 1
+    objectToMove: {fileID: 3705573567050246895, guid: cf9e7a3e09caeac47ae00bb153573af8,
+      type: 3}
+    craftingRequirements: []
+  - moveableObjectType: 2
+    furnitureType: 1
+    machineType: 0
+    objectToMove: {fileID: 1475861760331519805, guid: d53b9396a6b954d40b17f085e68a90db,
+      type: 3}
+    craftingRequirements:
+    - itemName: 1
+      amount: 20
+  - moveableObjectType: 2
+    furnitureType: 2
+    machineType: 0
+    objectToMove: {fileID: 1475861760331519805, guid: 38d26bbe041a68747a7ac35f8f5ceab5,
+      type: 3}
+    craftingRequirements: []

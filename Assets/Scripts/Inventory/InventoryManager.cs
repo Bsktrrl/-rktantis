@@ -375,6 +375,38 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    public int GetAmountOfItemInInventory(int inventory, Items itemName)
+    {
+        int counter = 0;
+
+        for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
+        {
+            if (inventories[inventory].itemsInInventory[i].itemName == itemName)
+            {
+                counter++;
+            }
+        }
+
+        return counter;
+    }
+
+    public bool GetInventoryRequirements(int inventory, List<CraftingRequirements> requirementList)
+    {
+        for (int i = 0; i < requirementList.Count; i++)
+        {
+            if (GetAmountOfItemInInventory(inventory, requirementList[i].itemName) < requirementList[i].amount)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    //--------------------
+
+
     public void PrepareInventoryUI(int inventory, bool isMovingItem)
     {
         int inventorySlots = (int)inventories[inventory].inventorySize.x * (int)inventories[inventory].inventorySize.y;

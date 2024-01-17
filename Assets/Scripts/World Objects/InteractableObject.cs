@@ -61,9 +61,6 @@ public class InteractableObject : MonoBehaviour
                         }
                     }
 
-                    //Unsubscribe from Event
-                    PlayerButtonManager.objectInterraction_isPressedDown -= ObjectInteraction;
-
                     //Destroy gameObject
                     Destroy(gameObject);
                 }
@@ -124,6 +121,20 @@ public class InteractableObject : MonoBehaviour
         {
             playerInRange = false;
         }
+    }
+
+
+    //--------------------
+
+
+    public void DestroyObject()
+    {
+        print("9000. Destroy an InteractableObject");
+
+        //Unsubscribe from Event
+        PlayerButtonManager.objectInterraction_isPressedDown -= ObjectInteraction;
+
+        Destroy(gameObject);
     }
 }
 
