@@ -210,7 +210,7 @@ public class InventoryManager : Singleton<InventoryManager>
         PrepareInventoryUI(inventory, itemIsMoved);
         RemoveInventoriesUI();
 
-        BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
+        SetBuildingRequirement();
 
         return true;
     }
@@ -254,7 +254,7 @@ public class InventoryManager : Singleton<InventoryManager>
         PrepareInventoryUI(inventory, false);
         RemoveInventoriesUI();
 
-        BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
+        SetBuildingRequirement();
 
         return true;
     }
@@ -289,7 +289,7 @@ public class InventoryManager : Singleton<InventoryManager>
             CheckHotbarItemInInventory();
         }
 
-        BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
+        SetBuildingRequirement();
 
         SaveData();
     }
@@ -310,7 +310,7 @@ public class InventoryManager : Singleton<InventoryManager>
         RemoveInventoriesUI();
         PrepareInventoryUI(inventory, true);
 
-        BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
+        SetBuildingRequirement();
     }
 
     public void MoveItemToInventory(int inventory, GameObject obj)
@@ -371,6 +371,19 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
+    void SetBuildingRequirement()
+    {
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
+        {
+            BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
+        }
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine
+            || MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
+        {
+            MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
+            BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
+        }
+    }
 
     //--------------------
 

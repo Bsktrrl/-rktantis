@@ -16,8 +16,6 @@ public class InteractableObject : MonoBehaviour
     [Header("If Object is an Inventory")]
     [SerializeField] int inventoryIndex;
 
-    //SphereCollider accessCollider = new SphereCollider();
-
 
     //--------------------
 
@@ -28,9 +26,6 @@ public class InteractableObject : MonoBehaviour
 
         //Add SphereCollider for the item
         Vector3 scale = gameObject.transform.lossyScale;
-        //accessCollider = gameObject.AddComponent<SphereCollider>();
-        //accessCollider.radius = WorldObjectManager.instance.objectColliderRadius / scale.x / 2; //Chenge to only "objectColliderRadius"
-        //accessCollider.isTrigger = true;
     }
 
 
@@ -39,6 +34,15 @@ public class InteractableObject : MonoBehaviour
 
     void ObjectInteraction()
     {
+        if (gameObject.GetComponent<MoveableObject>())
+        {
+            if (gameObject.GetComponent<MoveableObject>().isSelectedForMovement) { return; }
+        }
+        
+
+        //-----
+
+
         if (SelectionManager.instance.onTarget && SelectionManager.instance.selecedObject == gameObject
             && MainManager.instance.menuStates == MenuStates.None)
         {
@@ -62,7 +66,7 @@ public class InteractableObject : MonoBehaviour
                     }
 
                     //Destroy gameObject
-                    Destroy(gameObject);
+                    DestroyThisObject();
                 }
             }
 
@@ -93,11 +97,10 @@ public class InteractableObject : MonoBehaviour
                 CraftingManager.instance.OpenCraftingScreen();
             }
 
-            //If Object is a machine
+            //If Object is another machine
             else if (interacteableType == InteracteableType.Machine)
             {
                 print("Interract with a Machine");
-
             }
         }
     }
@@ -127,7 +130,7 @@ public class InteractableObject : MonoBehaviour
     //--------------------
 
 
-    public void DestroyObject()
+    public void DestroyThisObject()
     {
         print("9000. Destroy an InteractableObject");
 

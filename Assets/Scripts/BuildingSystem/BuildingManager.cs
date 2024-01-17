@@ -2271,6 +2271,54 @@ public class BuildingManager : Singleton<BuildingManager>
             }
         }
     }
+    public void SetBuildingRequirements(MoveableObjectInfo moveableObject, GameObject ParentObject)
+    {
+        //Remove all childs
+        for (int i = ParentObject.transform.childCount - 1; i >= 0; i--)
+        {
+            ParentObject.transform.GetChild(i).GetComponent<BuildingRequirementSlot>().DestroyThisObject();
+        }
+        buildingRequirement_List.Clear();
+
+        //Set "enoughItemsToBuild" = true by default
+        enoughItemsToBuild = true;
+
+        //Setup new list of Requirements
+        for (int i = 0; i < moveableObject.craftingRequirements.Count; i++)
+        {
+            //print("2. SetBuildingRequirements");
+            buildingRequirement_List.Add(Instantiate(buildingRequirement_Prefab, ParentObject.transform) as GameObject);
+
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.instance.GetItem(moveableObject.craftingRequirements[i].itemName).hotbarSprite;
+
+            int counter = 0;
+
+            for (int k = 0; k < InventoryManager.Instance.inventories[0].itemsInInventory.Count; k++)
+            {
+                if (moveableObject.craftingRequirements[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
+                {
+                    counter++;
+                }
+            }
+
+            //Display Amount required + Amount in inventory
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + counter + " / " + moveableObject.craftingRequirements[i].amount.ToString();
+
+            //If having enough items in inventory
+            if (counter >= moveableObject.craftingRequirements[i].amount)
+            {
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 1, 1, 1);
+                //enoughItemsToBuild = true;
+            }
+
+            //If not having enough items in inventory
+            else
+            {
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 0, 0, 1);
+                enoughItemsToBuild = false;
+            }
+        }
+    }
     public void SetBuildingRemoveRequirements(BuildingBlock_Parent blockParent)
     {
         //Remove all childs

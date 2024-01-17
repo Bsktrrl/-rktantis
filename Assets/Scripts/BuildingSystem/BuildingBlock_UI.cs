@@ -59,6 +59,12 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
                 EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
 
                 print("2000. Selected Object is a Machine");
+
+                //Set requirements for both BuildingMenu and on main screen
+                MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
+                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.instance.buildingRequirement_Parent);
+                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
+
             }
         }
 
@@ -70,9 +76,13 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
                 EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
 
                 print("2000. Selected Object is a Furniture");
+
+                //Set requirements for both BuildingMenu and on main screen
+                MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
+                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.instance.buildingRequirement_Parent);
+                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
             }
         }
-
 
         BuildingManager.Instance.SaveData();
     }

@@ -18,7 +18,9 @@ MonoBehaviour:
     machineType: 1
     objectToMove: {fileID: 3705573567050246895, guid: cf9e7a3e09caeac47ae00bb153573af8,
       type: 3}
-    craftingRequirements: []
+    craftingRequirements:
+    - itemName: 2
+      amount: 1
   - moveableObjectType: 2
     furnitureType: 1
     machineType: 0
@@ -26,10 +28,14 @@ MonoBehaviour:
       type: 3}
     craftingRequirements:
     - itemName: 1
-      amount: 20
+      amount: 2
   - moveableObjectType: 2
     furnitureType: 2
     machineType: 0
     objectToMove: {fileID: 1475861760331519805, guid: 38d26bbe041a68747a7ac35f8f5ceab5,
       type: 3}
-    craftingRequirements: []
+    craftingRequirements:
+    - itemName: 1
+      amount: 1
+    - itemName: 2
+      amount: 1

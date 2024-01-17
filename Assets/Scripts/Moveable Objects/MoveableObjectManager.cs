@@ -96,9 +96,6 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 
     //--------------------
 
-
-    
-
     public void PlaceObjectToMove(MoveableObject moveableObject)
     {
         if (moveableObject.canBePlaced && moveableObject.isSelectedForMovement && moveableObject.enoughItemsToBuild)

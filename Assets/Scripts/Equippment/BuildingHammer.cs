@@ -30,7 +30,7 @@ public class BuildingHammer : MonoBehaviour
         {
             if (tempObj_Selected.GetComponent<InteractableObject>())
             {
-                tempObj_Selected.GetComponent<InteractableObject>().DestroyObject();
+                tempObj_Selected.GetComponent<InteractableObject>().DestroyThisObject();
                 tempObj_Selected = null;
             }
             else
@@ -87,6 +87,10 @@ public class BuildingHammer : MonoBehaviour
             tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
         }
     }
+
+
+    //--------------------
+
 
     public void UpdateSelectedBlockPosition()
     {
