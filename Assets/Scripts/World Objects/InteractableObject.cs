@@ -16,8 +16,6 @@ public class InteractableObject : MonoBehaviour
     [Header("If Object is an Inventory")]
     [SerializeField] int inventoryIndex;
 
-    //SphereCollider accessCollider = new SphereCollider();
-
 
     //--------------------
 
@@ -28,9 +26,6 @@ public class InteractableObject : MonoBehaviour
 
         //Add SphereCollider for the item
         Vector3 scale = gameObject.transform.lossyScale;
-        //accessCollider = gameObject.AddComponent<SphereCollider>();
-        //accessCollider.radius = WorldObjectManager.instance.objectColliderRadius / scale.x / 2; //Chenge to only "objectColliderRadius"
-        //accessCollider.isTrigger = true;
     }
 
 
@@ -39,8 +34,17 @@ public class InteractableObject : MonoBehaviour
 
     void ObjectInteraction()
     {
+        if (gameObject.GetComponent<MoveableObject>())
+        {
+            if (gameObject.GetComponent<MoveableObject>().isSelectedForMovement) { return; }
+        }
+        
+
+        //-----
+
+
         if (SelectionManager.instance.onTarget && SelectionManager.instance.selecedObject == gameObject
-            && MainManager.instance.menuStates == MenuStates.None)
+            && MainManager.Instance.menuStates == MenuStates.None)
         {
             //If Object is a Pickup
             if (interacteableType == InteracteableType.Pickup)
@@ -48,24 +52,21 @@ public class InteractableObject : MonoBehaviour
                 print("Interract with a Pickup");
 
                 //Check If item can be added
-                if (InventoryManager.instance.AddItemToInventory(0, gameObject, false))
+                if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
                 {
                     //Remove Object from the worldObjectList
-                    for (int i = 0; i < InventoryManager.instance.worldObjectList.Count; i++)
+                    for (int i = 0; i < InventoryManager.Instance.worldObjectList.Count; i++)
                     {
-                        if (gameObject == InventoryManager.instance.worldObjectList[i].gameObject)
+                        if (gameObject == InventoryManager.Instance.worldObjectList[i].gameObject)
                         {
-                            InventoryManager.instance.worldObjectList.RemoveAt(i);
+                            InventoryManager.Instance.worldObjectList.RemoveAt(i);
 
                             break;
                         }
                     }
 
-                    //Unsubscribe from Event
-                    PlayerButtonManager.objectInterraction_isPressedDown -= ObjectInteraction;
-
                     //Destroy gameObject
-                    Destroy(gameObject);
+                    DestroyThisObject();
                 }
             }
 
@@ -75,16 +76,16 @@ public class InteractableObject : MonoBehaviour
                 print("Interract with an Inventory");
 
                 //Open the player Inventory
-                InventoryManager.instance.OpenPlayerInventory();
+                InventoryManager.Instance.OpenPlayerInventory();
 
                 //Open the chest Inventory
-                InventoryManager.instance.chestInventoryOpen = inventoryIndex;
-                InventoryManager.instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Player Inventory
-                InventoryManager.instance.chestInventory_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.instance.inventories[inventoryIndex].inventorySize * InventoryManager.instance.cellsize;
-                InventoryManager.instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.instance.cellsize, InventoryManager.instance.cellsize);
-                InventoryManager.instance.chestInventory_Parent.SetActive(true);
+                InventoryManager.Instance.chestInventoryOpen = inventoryIndex;
+                InventoryManager.Instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Player Inventory
+                InventoryManager.Instance.chestInventory_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
+                InventoryManager.Instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
+                InventoryManager.Instance.chestInventory_Parent.SetActive(true);
 
-                MainManager.instance.menuStates = MenuStates.chestMenu;
+                MainManager.Instance.menuStates = MenuStates.chestMenu;
             }
 
             //If Object is a Crafting Table
@@ -96,11 +97,10 @@ public class InteractableObject : MonoBehaviour
                 CraftingManager.instance.OpenCraftingScreen();
             }
 
-            //If Object is a machine
+            //If Object is another machine
             else if (interacteableType == InteracteableType.Machine)
             {
                 print("Interract with a Machine");
-
             }
         }
     }
@@ -124,6 +124,18 @@ public class InteractableObject : MonoBehaviour
         {
             playerInRange = false;
         }
+    }
+
+
+    //--------------------
+
+
+    public void DestroyThisObject()
+    {
+        //Unsubscribe from Event
+        PlayerButtonManager.objectInterraction_isPressedDown -= ObjectInteraction;
+
+        Destroy(gameObject);
     }
 }
 

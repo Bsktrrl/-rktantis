@@ -33,6 +33,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip stone_Removed;
     [SerializeField] AudioClip iron_Removed;
     [SerializeField] AudioClip buildingBlock_CannotPlaceBlock;
+    [SerializeField] AudioClip moveableObject_placed;
 
 
 
@@ -208,5 +209,16 @@ public class SoundManager : MonoBehaviour
             audioSource.Play();
         }
     }
+    public void PlayMoveableObject_Placed()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = moveableObject_placed;
+            audioSource.pitch = 1f;
+            audioSource.volume = 1f;
+            audioSource.Play();
+        }
+    }
+    
 
 }

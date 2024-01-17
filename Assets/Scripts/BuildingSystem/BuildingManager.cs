@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildingManager : MonoBehaviour
+public class BuildingManager : Singleton<BuildingManager>
 {
-    public static BuildingManager instance { get; set; } //Singleton
-
     public GameObject buildingBlock_Parent;
     public List<GameObject> buildingBlockList = new List<GameObject>();
     [HideInInspector] public List<BuildingBlockSaveList> buildingBlockSaveList = new List<BuildingBlockSaveList>();
@@ -25,9 +24,6 @@ public class BuildingManager : MonoBehaviour
 
     Ray oldRay = new Ray();
 
-    [Header("Selected")]
-    public BuildingType buildingType_Selected = BuildingType.None;
-    public BuildingMaterial buildingMaterial_Selected = BuildingMaterial.None;
 
     public Vector2 BuildingDistance;
     public BlockDirection_A blockDirection_X;
@@ -88,56 +84,6 @@ public class BuildingManager : MonoBehaviour
     public Material canPlace_Material;
     public Material cannotPlace_Material;
 
-    #region Mesh List
-    [Header("Mesh List - Wood")]
-    [SerializeField] Mesh wood_Door_Mesh;
-    [SerializeField] Mesh wood_DoorFrame_Mesh;
-    [SerializeField] Mesh wood_Fence_Mesh;
-    [SerializeField] Mesh wood_FenceDiagonaly_Mesh;
-    [SerializeField] Mesh wood_Floor_Mesh;
-    [SerializeField] Mesh wood_FloorTriangle_Mesh;
-    [SerializeField] Mesh wood_Ramp_Mesh;
-    [SerializeField] Mesh wood_RampTriangle_Mesh;
-    [SerializeField] Mesh wood_RampCorner_Mesh;
-    [SerializeField] Mesh wood_Stair_Mesh;
-    [SerializeField] Mesh wood_Wall_Mesh;
-    [SerializeField] Mesh wood_WallDiagonaly_Mesh;
-    [SerializeField] Mesh wood_WallTriangle_Mesh;
-    [SerializeField] Mesh wood_Window_Mesh;
-
-    [Header("Mesh List - Stone")]
-    [SerializeField] Mesh stone_Door_Mesh;
-    [SerializeField] Mesh stone_DoorFrame_Mesh;
-    [SerializeField] Mesh stone_Fence_Mesh;
-    [SerializeField] Mesh stone_FenceDiagonaly_Mesh;
-    [SerializeField] Mesh stone_Floor_Mesh;
-    [SerializeField] Mesh stone_FloorTriangle_Mesh;
-    [SerializeField] Mesh stone_Ramp_Mesh;
-    [SerializeField] Mesh stone_RampTriangle_Mesh;
-    [SerializeField] Mesh stone_RampCorner_Mesh;
-    [SerializeField] Mesh stone_Stair_Mesh;
-    [SerializeField] Mesh stone_Wall_Mesh;
-    [SerializeField] Mesh stone_WallDiagonaly_Mesh;
-    [SerializeField] Mesh stone_WallTriangle_Mesh;
-    [SerializeField] Mesh stone_Window_Mesh;
-
-    [Header("Mesh List - Iron")]
-    [SerializeField] Mesh iron_Door_Mesh;
-    [SerializeField] Mesh iron_DoorFrame_Mesh;
-    [SerializeField] Mesh iron_Fence_Mesh;
-    [SerializeField] Mesh iron_FenceDiagonaly_Mesh;
-    [SerializeField] Mesh iron_Floor_Mesh;
-    [SerializeField] Mesh iron_FloorTriangle_Mesh;
-    [SerializeField] Mesh iron_Ramp_Mesh;
-    [SerializeField] Mesh iron_RampTriangle_Mesh;
-    [SerializeField] Mesh iron_RampCorner_Mesh;
-    [SerializeField] Mesh iron_Stair_Mesh;
-    [SerializeField] Mesh iron_Wall_Mesh;
-    [SerializeField] Mesh iron_WallDiagonaly_Mesh;
-    [SerializeField] Mesh iron_WallTriangle_Mesh;
-    [SerializeField] Mesh iron_Window_Mesh;
-    #endregion
-
     float timer = 0;
 
     //When true, shift buildingGhosts available to the mirrored version
@@ -154,6 +100,7 @@ public class BuildingManager : MonoBehaviour
     public GameObject buildingRemoveRequirement_Parent;
     public GameObject buildingRequirement_Parent;
     public GameObject buildingRequirement_Prefab;
+    public GameObject buildingRequirementHeader_Prefab;
     [SerializeField] List<GameObject> buildingRequirement_List = new List<GameObject>();
     [SerializeField] List<GameObject> buildingRemoveRequirement_List = new List<GameObject>();
 
@@ -161,33 +108,21 @@ public class BuildingManager : MonoBehaviour
     public GameObject tempBlock_Parent;
     public bool blockisPlacing;
 
+    public List<GameObject> buildingBlock_UIList = new List<GameObject>();
+
 
     //--------------------
 
 
     private void Awake()
     {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-
-        buildingType_Selected = BuildingType.None;
-        buildingMaterial_Selected = BuildingMaterial.None;
-    }
-    private void Start()
-    {
-        DataManager.datahasLoaded += LoadData;
+        MoveableObjectManager.Instance.buildingType_Selected = BuildingType.None;
+        MoveableObjectManager.Instance.buildingMaterial_Selected = BuildingMaterial.None;
     }
 
     private void Update()
     {
-        if (Time.frameCount % MainManager.instance.updateInterval == 0 && HotbarManager.instance.selectedItem == Items.BuildingHammer)
+        if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.BuildingHammer)
         {
             RaycastSetup_Hammer();
             buildingRequirement_Parent.SetActive(true);
@@ -201,16 +136,16 @@ public class BuildingManager : MonoBehaviour
             }
 
             //Set BuildingRequirement UI
-            if (MainManager.instance.menuStates == MenuStates.BuildingSystemMenu)
+            if (MainManager.Instance.menuStates == MenuStates.BuildingSystemMenu)
             {
                 buildingRequirement_Parent.SetActive(false);
             }
-            else if (MainManager.instance.menuStates == MenuStates.None)
+            else if (MainManager.Instance.menuStates == MenuStates.None)
             {
                 buildingRequirement_Parent.SetActive(true);
             }
         }
-        else if (Time.frameCount % MainManager.instance.updateInterval == 0 && HotbarManager.instance.selectedItem == Items.Axe)
+        else if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.Axe)
         {
             RaycastSetup_Axe();
 
@@ -247,39 +182,44 @@ public class BuildingManager : MonoBehaviour
 
     public void LoadData()
     {
-        print("Load_BuildingBlocks");
-
         //Set data based on what's saved
-        buildingType_Selected = DataManager.instance.buildingType_Store;
-        buildingMaterial_Selected = DataManager.instance.buildingMaterial_Store;
+        #region
+        MoveableObjectManager.Instance.buildingType_Selected = DataManager.Instance.buildingType_Store;
+        MoveableObjectManager.Instance.buildingMaterial_Selected = DataManager.Instance.buildingMaterial_Store;
+        #endregion
 
         //If data has not saved, set to "Wood Floor"
-        if (buildingType_Selected == BuildingType.None || buildingMaterial_Selected == BuildingMaterial.None)
+        #region
+        if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.None || MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.None)
         {
-            buildingType_Selected = BuildingType.Floor;
-            buildingMaterial_Selected = BuildingMaterial.Wood;
+            MoveableObjectManager.Instance.buildingType_Selected = BuildingType.Floor;
+            MoveableObjectManager.Instance.buildingMaterial_Selected = BuildingMaterial.Wood;
         }
+        #endregion
 
         //Set Preview image for the selected buildingBlock
+        #region
         for (int i = 0; i < BuildingSystemMenu.instance.buildingBlockUIList.Count; i++)
         {
-            if (BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().BuildingType == buildingType_Selected
-                && BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().BuildingMaterial == buildingMaterial_Selected)
+            if (BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().buildingType == MoveableObjectManager.Instance.buildingType_Selected
+                && BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == MoveableObjectManager.Instance.buildingMaterial_Selected)
             {
                 BuildingSystemMenu.instance.SetSelectedImage(BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<Image>().sprite);
 
                 break;
             }
         }
+        #endregion
 
         //Setup BuildingBlockList
+        #region
         for (int i = 0; i < buildingBlockList.Count; i++)
         {
             Destroy(buildingBlockList[i]);
         }
         buildingBlockList.Clear();
 
-        buildingBlockSaveList = DataManager.instance.buildingBlockList_StoreList;
+        buildingBlockSaveList = DataManager.Instance.buildingBlockList_StoreList;
         for (int i = 0; i < buildingBlockSaveList.Count; i++)
         {
             buildingBlockList.Add(Instantiate(SetupBuildingBlockFromSave(buildingBlockSaveList[i]), buildingBlockSaveList[i].buildingBlock_Position, buildingBlockSaveList[i].buildingBlock_Rotation) as GameObject);
@@ -287,6 +227,18 @@ public class BuildingManager : MonoBehaviour
 
             buildingBlockList[buildingBlockList.Count - 1].GetComponent<BuildingBlock_Parent>().blockID = buildingBlockSaveList[i].buildingID;
         }
+        #endregion
+
+        //Set Building Requirements
+        #region
+        SetBuildingRequirements(GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), buildingRequirement_Parent);
+
+        if (HotbarManager.Instance.selectedItem == Items.BuildingHammer)
+        {
+            buildingRequirement_Parent.SetActive(true);
+            BuildingHammer_isActive = true;
+        }
+        #endregion
     }
     public void SaveData()
     {
@@ -302,11 +254,11 @@ public class BuildingManager : MonoBehaviour
 
             tempList.Add(temp);
         }
-        DataManager.instance.buildingBlockList_StoreList = tempList;
+        DataManager.Instance.buildingBlockList_StoreList = tempList;
 
         //Save selected Building Type and Material
-        DataManager.instance.buildingType_Store = buildingType_Selected;
-        DataManager.instance.buildingMaterial_Store = buildingMaterial_Selected;
+        DataManager.Instance.buildingType_Store = MoveableObjectManager.Instance.buildingType_Selected;
+        DataManager.Instance.buildingMaterial_Store = MoveableObjectManager.Instance.buildingMaterial_Selected;
 
         print("Save buildingBlocks");
     }
@@ -343,7 +295,7 @@ public class BuildingManager : MonoBehaviour
     }
     void RaycastBuildingDirectionMarkers()
     {
-        if (MainManager.instance.menuStates == MenuStates.None)
+        if (MainManager.Instance.menuStates == MenuStates.None)
         {
             ray_Hammer = Camera.main.ScreenPointToRay(Input.mousePosition);
             oldRay = ray_Hammer;
@@ -398,7 +350,7 @@ public class BuildingManager : MonoBehaviour
                     //Activate relevant directionObject from the list
                     for (int i = 0; i < lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList.Count; i++)
                     {
-                        if (lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList[i].GetComponent<BuildingBlockDirection>().BuildingType == buildingType_Selected)
+                        if (lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList[i].GetComponent<BuildingBlockDirection>().BuildingType == MoveableObjectManager.Instance.buildingType_Selected)
                         {
                             lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList[i].SetActive(true);
                         }
@@ -721,7 +673,7 @@ public class BuildingManager : MonoBehaviour
     public void SetGhostState_ON(BuildingBlock_Parent blockLookingAt, int i)
     {
         //Floor
-        if (buildingType_Selected == BuildingType.Floor)
+        if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Floor)
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Floor, BuildingSubType.None, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -732,7 +684,7 @@ public class BuildingManager : MonoBehaviour
         }
 
         //Floor_Triangle
-        else if (buildingType_Selected == BuildingType.Floor_Triangle)
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Floor_Triangle)
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Floor_Triangle, BuildingSubType.None, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -746,7 +698,7 @@ public class BuildingManager : MonoBehaviour
         }
 
         //Wall_Diagonaly
-        else if (buildingType_Selected == BuildingType.Wall && (blockLookingAt.buildingSubType == BuildingSubType.Diagonaly || blockDirection_X == BlockDirection_A.Cross_A || blockDirection_X == BlockDirection_A.Cross_B))
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Wall && (blockLookingAt.buildingSubType == BuildingSubType.Diagonaly || blockDirection_X == BlockDirection_A.Cross_A || blockDirection_X == BlockDirection_A.Cross_B))
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Wall, BuildingSubType.Diagonaly, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -760,7 +712,7 @@ public class BuildingManager : MonoBehaviour
         }
         
         //Wall
-        else if (buildingType_Selected == BuildingType.Wall && blockLookingAt.buildingSubType == BuildingSubType.None)
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Wall && blockLookingAt.buildingSubType == BuildingSubType.None)
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Wall, BuildingSubType.None, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -774,7 +726,7 @@ public class BuildingManager : MonoBehaviour
         }
 
         //Ramp
-        else if (buildingType_Selected == BuildingType.Ramp)
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Ramp)
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Ramp, BuildingSubType.None, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -788,7 +740,7 @@ public class BuildingManager : MonoBehaviour
         }
 
         //Ramp_Corner
-        else if (buildingType_Selected == BuildingType.Ramp_Corner)
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Ramp_Corner)
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Ramp_Corner, BuildingSubType.None, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -802,7 +754,7 @@ public class BuildingManager : MonoBehaviour
         }
 
         //Ramp_Triangle
-        else if (buildingType_Selected == BuildingType.Ramp_Triangle)
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Ramp_Triangle)
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Ramp_Triangle, BuildingSubType.None, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -816,7 +768,7 @@ public class BuildingManager : MonoBehaviour
         }
 
         //Wall_Triangle
-        else if (buildingType_Selected == BuildingType.Wall_Triangle)
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Wall_Triangle)
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Wall_Triangle, BuildingSubType.None, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -830,7 +782,7 @@ public class BuildingManager : MonoBehaviour
         }
 
         //Fence_Diagonaly
-        else if (buildingType_Selected == BuildingType.Fence && (blockLookingAt.buildingSubType == BuildingSubType.Diagonaly || blockDirection_X == BlockDirection_A.Cross_A || blockDirection_X == BlockDirection_A.Cross_B))
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Fence && (blockLookingAt.buildingSubType == BuildingSubType.Diagonaly || blockDirection_X == BlockDirection_A.Cross_A || blockDirection_X == BlockDirection_A.Cross_B))
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Fence, BuildingSubType.Diagonaly, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -844,7 +796,7 @@ public class BuildingManager : MonoBehaviour
         }
         
         //Fence
-        else if (buildingType_Selected == BuildingType.Fence && blockLookingAt.buildingSubType == BuildingSubType.None)
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Fence && blockLookingAt.buildingSubType == BuildingSubType.None)
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Fence, BuildingSubType.None, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -858,7 +810,7 @@ public class BuildingManager : MonoBehaviour
         }
 
         //Window
-        else if (buildingType_Selected == BuildingType.Window)
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Window)
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Window, BuildingSubType.None, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -872,7 +824,7 @@ public class BuildingManager : MonoBehaviour
         }
 
         //Door
-        else if (buildingType_Selected == BuildingType.Door)
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Door)
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Door, BuildingSubType.None, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -886,7 +838,7 @@ public class BuildingManager : MonoBehaviour
         }
 
         //Stair
-        else if (buildingType_Selected == BuildingType.Stair)
+        else if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.Stair)
         {
             //Wood
             BuidingBlockCanBePlacedCheck(blockLookingAt, i, BuildingType.Stair, BuildingSubType.None, canPlace_Material, cannotPlace_Material); //Change Material when Mesh is ready
@@ -1007,102 +959,108 @@ public class BuildingManager : MonoBehaviour
 
         //Get correct Mesh on a ghost based on the selected material
         //Wood
-        if (buildingMaterial_Selected == BuildingMaterial.Wood)
+        if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
         {
             if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Door)
-                chosenMesh = wood_DoorFrame_Mesh;
+                chosenMesh = builingBlock_Wood_Door.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.None)
-                chosenMesh = wood_Fence_Mesh;
+                chosenMesh = builingBlock_Wood_Fence.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = wood_FenceDiagonaly_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
-                chosenMesh = wood_Floor_Mesh;
+                chosenMesh = builingBlock_Wood_Fence_Diagonaly.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if(ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
+                chosenMesh = builingBlock_Wood_Floor.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor_Triangle)
-                chosenMesh = wood_FloorTriangle_Mesh;
+                chosenMesh = builingBlock_Wood_Floor_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp)
-                chosenMesh = wood_Ramp_Mesh;
+                chosenMesh = builingBlock_Wood_Ramp.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Triangle)
-                chosenMesh = wood_RampTriangle_Mesh;
+                chosenMesh = builingBlock_Wood_Ramp_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Corner)
-                chosenMesh = wood_RampCorner_Mesh;
+                chosenMesh = builingBlock_Wood_Ramp_Corner.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Stair)
-                chosenMesh = wood_Stair_Mesh;
+                chosenMesh = builingBlock_Wood_Stair.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.None)
-                chosenMesh = wood_Wall_Mesh;
+                chosenMesh = builingBlock_Wood_Wall.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = wood_WallDiagonaly_Mesh;
+                chosenMesh = builingBlock_Wood_Wall_Diagonal.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall_Triangle)
-                chosenMesh = wood_WallTriangle_Mesh;
+                chosenMesh = builingBlock_Wood_Wall_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Window)
-                chosenMesh = wood_Window_Mesh;
+                chosenMesh = builingBlock_Wood_Window.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
 
             else
                 chosenMesh = null;
         }
 
         //Stone
-        else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
         {
             if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Door)
-                chosenMesh = stone_DoorFrame_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None)
-                chosenMesh = stone_Fence_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = stone_FenceDiagonaly_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
-                chosenMesh = stone_Floor_Mesh;
+                chosenMesh = builingBlock_Stone_Door.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.None)
+                chosenMesh = builingBlock_Stone_Fence.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.Diagonaly)
+                chosenMesh = builingBlock_Stone_Fence_Diagonaly.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if(ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
+                chosenMesh = builingBlock_Stone_Floor.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor_Triangle)
-                chosenMesh = stone_FloorTriangle_Mesh;
+                chosenMesh = builingBlock_Stone_Floor_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp)
-                chosenMesh = stone_Ramp_Mesh;
+                chosenMesh = builingBlock_Stone_Ramp.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Triangle)
-                chosenMesh = stone_RampTriangle_Mesh;
+                chosenMesh = builingBlock_Stone_Ramp_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Corner)
-                chosenMesh = stone_RampCorner_Mesh;
+                chosenMesh = builingBlock_Stone_Ramp_Corner.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Stair)
-                chosenMesh = stone_Stair_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None)
-                chosenMesh = stone_Wall_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = stone_WallDiagonaly_Mesh;
+                chosenMesh = builingBlock_Stone_Stair.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.None)
+                chosenMesh = builingBlock_Stone_Wall.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.Diagonaly)
+                chosenMesh = builingBlock_Stone_Wall_Diagonal.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall_Triangle)
-                chosenMesh = stone_WallTriangle_Mesh;
+                chosenMesh = builingBlock_Stone_Wall_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Window)
-                chosenMesh = stone_Window_Mesh;
+                chosenMesh = builingBlock_Stone_Window.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
 
             else
                 chosenMesh = null;
         }
 
         //Iron
-        else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
         {
             if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Door)
-                chosenMesh = iron_DoorFrame_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None)
-                chosenMesh = iron_Fence_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = iron_FenceDiagonaly_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
-                chosenMesh = iron_Floor_Mesh;
+                chosenMesh = builingBlock_Iron_Door.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.None)
+                chosenMesh = builingBlock_Iron_Fence.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && buildingSubType == BuildingSubType.Diagonaly)
+                chosenMesh = builingBlock_Iron_Fence_Diagonaly.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if(ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
+                chosenMesh = builingBlock_Iron_Floor.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor_Triangle)
-                chosenMesh = iron_FloorTriangle_Mesh;
+                chosenMesh = builingBlock_Iron_Floor_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp)
-                chosenMesh = iron_Ramp_Mesh;
+                chosenMesh = builingBlock_Iron_Ramp.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Triangle)
-                chosenMesh = iron_RampTriangle_Mesh;
+                chosenMesh = builingBlock_Iron_Ramp_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Corner)
-                chosenMesh = iron_RampCorner_Mesh;
+                chosenMesh = builingBlock_Iron_Ramp_Corner.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Stair)
-                chosenMesh = iron_Stair_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None)
-                chosenMesh = iron_Wall_Mesh;
-            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.Diagonaly)
-                chosenMesh = iron_WallDiagonaly_Mesh;
+                chosenMesh = builingBlock_Iron_Stair.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.None)
+                chosenMesh = builingBlock_Iron_Wall.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+            else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && buildingSubType == BuildingSubType.Diagonaly)
+                chosenMesh = builingBlock_Iron_Wall_Diagonal.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall_Triangle)
-                chosenMesh = iron_WallTriangle_Mesh;
+                chosenMesh = builingBlock_Iron_Wall_Triangle.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
             else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Window)
-                chosenMesh = iron_Window_Mesh;
+                chosenMesh = builingBlock_Iron_Window.GetComponent<BuildingBlock_Parent>().BuildingBlock.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
 
             else
                 chosenMesh = null;
@@ -1126,15 +1084,15 @@ public class BuildingManager : MonoBehaviour
                 print("1. Place Block");
 
                 //Play Sound
-                if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                 {
                     SoundManager.instance.PlayWood_Placed_Clip();
                 }
-                else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                 {
                     SoundManager.instance.PlayStone_Placed_Clip();
                 }
-                else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                 {
                     SoundManager.instance.PlayIron_Placed_Clip();
                 }
@@ -1147,14 +1105,14 @@ public class BuildingManager : MonoBehaviour
                 if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor && ghost_LookedAt.GetComponent<Building_Ghost>().isSelected)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Floor");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Floor, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Floor");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Floor, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1162,7 +1120,7 @@ public class BuildingManager : MonoBehaviour
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Floor");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Floor, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1174,14 +1132,14 @@ public class BuildingManager : MonoBehaviour
                 else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor_Triangle && ghost_LookedAt.GetComponent<Building_Ghost>().isSelected)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Triangle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Floor_Triangle, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Triangle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Floor_Triangle, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1189,7 +1147,7 @@ public class BuildingManager : MonoBehaviour
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Triangle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Floor_Triangle, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1206,14 +1164,14 @@ public class BuildingManager : MonoBehaviour
                     if ((a == BlockDirection_A.North && b == BlockDirection_B.Left) || (a == BlockDirection_A.South && b == BlockDirection_B.Left) || (a == BlockDirection_A.North && b == BlockDirection_B.Right) || (a == BlockDirection_A.South && b == BlockDirection_B.Right))
                     {
                         //Wood
-                        if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                        if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                         {
                             //print("Placed: Wood Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Wood_Wall, ghost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Stone
-                        else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                         {
                             //print("Placed: Stone Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Stone_Wall, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1221,7 +1179,7 @@ public class BuildingManager : MonoBehaviour
                         }
 
                         //Iron
-                        else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                         {
                             //print("Placed: Iron Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Iron_Wall, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1231,14 +1189,14 @@ public class BuildingManager : MonoBehaviour
                     else
                     {
                         //Wood
-                        if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                        if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                         {
                             //print("Placed: Wood Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Wood_Wall_Diagonal, ghost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Stone
-                        else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                         {
                             //print("Placed: Stone Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Stone_Wall_Diagonal, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1246,7 +1204,7 @@ public class BuildingManager : MonoBehaviour
                         }
 
                         //Iron
-                        else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                         {
                             //print("Placed: Iron Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Iron_Wall_Diagonal, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1258,21 +1216,21 @@ public class BuildingManager : MonoBehaviour
                 else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None && ghost_LookedAt.GetComponent<Building_Ghost>().isSelected)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Wall");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Wall, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Wall");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Wall, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Wall");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Wall, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1283,21 +1241,21 @@ public class BuildingManager : MonoBehaviour
                 else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp && ghost_LookedAt.GetComponent<Building_Ghost>().isSelected)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Ramp, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Ramp, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Ramp, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1308,21 +1266,21 @@ public class BuildingManager : MonoBehaviour
                 else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Corner && ghost_LookedAt.GetComponent<Building_Ghost>().isSelected)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Ramp_Corner, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Ramp_Corner, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Ramp_Corner, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1333,21 +1291,21 @@ public class BuildingManager : MonoBehaviour
                 else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Triangle && ghost_LookedAt.GetComponent<Building_Ghost>().isSelected)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Ramp_Triangle, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Ramp_Triangle, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Ramp_Triangle, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1358,21 +1316,21 @@ public class BuildingManager : MonoBehaviour
                 else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall_Triangle && ghost_LookedAt.GetComponent<Building_Ghost>().isSelected)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Wall_Triangle, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Wall_Triangle, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Wall_Triangle, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1388,21 +1346,21 @@ public class BuildingManager : MonoBehaviour
                     if ((a == BlockDirection_A.North && b == BlockDirection_B.Left) || (a == BlockDirection_A.South && b == BlockDirection_B.Left) || (a == BlockDirection_A.North && b == BlockDirection_B.Right) || (a == BlockDirection_A.South && b == BlockDirection_B.Right))
                     {
                         //Wood
-                        if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                        if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                         {
                             //print("Placed: Wood Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Wood_Fence, ghost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Stone
-                        else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                         {
                             //print("Placed: Stone Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Stone_Fence, ghost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Iron
-                        else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                         {
                             //print("Placed: Iron Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Iron_Fence, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1411,21 +1369,21 @@ public class BuildingManager : MonoBehaviour
                     else
                     {
                         //Wood
-                        if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                        if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                         {
                             //print("Placed: Wood Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Wood_Fence_Diagonaly, ghost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Stone
-                        else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                         {
                             //print("Placed: Stone Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Stone_Fence_Diagonaly, ghost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Iron
-                        else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                         {
                             //print("Placed: Iron Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Iron_Fence_Diagonaly, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1437,21 +1395,21 @@ public class BuildingManager : MonoBehaviour
                 else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && ghost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None && ghost_LookedAt.GetComponent<Building_Ghost>().isSelected)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Fence, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Fence, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Fence, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1462,21 +1420,21 @@ public class BuildingManager : MonoBehaviour
                 else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Window && ghost_LookedAt.GetComponent<Building_Ghost>().isSelected)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Window, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Window, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Window, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1487,21 +1445,21 @@ public class BuildingManager : MonoBehaviour
                 else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Door && ghost_LookedAt.GetComponent<Building_Ghost>().isSelected)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Door, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Door, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Door, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1512,21 +1470,21 @@ public class BuildingManager : MonoBehaviour
                 else if (ghost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Stair && ghost_LookedAt.GetComponent<Building_Ghost>().isSelected)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Stair, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Stair, ghost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Stair, ghost_LookedAt.transform.position, rotation) as GameObject);
@@ -1548,26 +1506,26 @@ public class BuildingManager : MonoBehaviour
                 //Set info on the Block that got a block placed on it
                 BlockPlaced blockGotPlacedOn = new BlockPlaced();
                 blockGotPlacedOn.buildingBlock = buildingBlockList[buildingBlockList.Count - 1];
-                blockGotPlacedOn.buildingType = buildingType_Selected;
+                blockGotPlacedOn.buildingType = MoveableObjectManager.Instance.buildingType_Selected;
                 blockGotPlacedOn.buildingSubType = buildingBlockList[buildingBlockList.Count - 1].GetComponent<BuildingBlock_Parent>().buildingSubType;
                 #endregion
 
                 //Remove items from inventory
-                BuildingBlock_Parent tempParent = GetBuildingBlock(buildingType_Selected, buildingMaterial_Selected);
+                BuildingBlock_Parent tempParent = GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected);
                 if (tempParent.buildingRequirementList != null)
                 {
                     for (int i = 0; i < tempParent.buildingRequirementList.Count; i++)
                     {
                         for (int k = 0; k < tempParent.buildingRequirementList[i].amount; k++)
                         {
-                            InventoryManager.instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, false);
+                            InventoryManager.Instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, false);
                         }
                     }
                 }
                 
                 //Update the Hotbar
-                InventoryManager.instance.CheckHotbarItemInInventory();
-                InventoryManager.instance.RemoveInventoriesUI();
+                InventoryManager.Instance.CheckHotbarItemInInventory();
+                InventoryManager.Instance.RemoveInventoriesUI();
 
                 //Reset parameters
                 lastBuildingBlock_LookedAt = null;
@@ -1583,7 +1541,7 @@ public class BuildingManager : MonoBehaviour
                 print("1. Don't Place Block");
 
                 //Play Sound
-                if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                 {
                     SoundManager.instance.PlaybuildingBlock_CannotPlaceBlock();
                 }
@@ -1601,15 +1559,15 @@ public class BuildingManager : MonoBehaviour
                 blockisPlacing = true;
 
                 //Play Sound
-                if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                 {
                     SoundManager.instance.PlayWood_Placed_Clip();
                 }
-                else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                 {
                     SoundManager.instance.PlayStone_Placed_Clip();
                 }
-                else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                 {
                     SoundManager.instance.PlayIron_Placed_Clip();
                 }
@@ -1622,14 +1580,14 @@ public class BuildingManager : MonoBehaviour
                 if (freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Floor");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Floor, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Floor");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Floor, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1637,7 +1595,7 @@ public class BuildingManager : MonoBehaviour
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Floor");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Floor, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1649,14 +1607,14 @@ public class BuildingManager : MonoBehaviour
                 else if (freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Floor_Triangle)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Triangle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Floor_Triangle, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Triangle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Floor_Triangle, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1664,7 +1622,7 @@ public class BuildingManager : MonoBehaviour
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Triangle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Floor_Triangle, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1681,14 +1639,14 @@ public class BuildingManager : MonoBehaviour
                     if ((a == BlockDirection_A.North && b == BlockDirection_B.Left) || (a == BlockDirection_A.South && b == BlockDirection_B.Left) || (a == BlockDirection_A.North && b == BlockDirection_B.Right) || (a == BlockDirection_A.South && b == BlockDirection_B.Right))
                     {
                         //Wood
-                        if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                        if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                         {
                             //print("Placed: Wood Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Wood_Wall, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Stone
-                        else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                         {
                             //print("Placed: Stone Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Stone_Wall, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1696,7 +1654,7 @@ public class BuildingManager : MonoBehaviour
                         }
 
                         //Iron
-                        else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                         {
                             //print("Placed: Iron Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Iron_Wall, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1706,14 +1664,14 @@ public class BuildingManager : MonoBehaviour
                     else
                     {
                         //Wood
-                        if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                        if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                         {
                             //print("Placed: Wood Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Wood_Wall_Diagonal, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Stone
-                        else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                         {
                             //print("Placed: Stone Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Stone_Wall_Diagonal, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1721,7 +1679,7 @@ public class BuildingManager : MonoBehaviour
                         }
 
                         //Iron
-                        else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                         {
                             //print("Placed: Iron Wall_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Iron_Wall_Diagonal, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1733,21 +1691,21 @@ public class BuildingManager : MonoBehaviour
                 else if (freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall && freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Wall");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Wall, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Wall");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Wall, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Wall");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Wall, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1758,21 +1716,21 @@ public class BuildingManager : MonoBehaviour
                 else if (freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Ramp, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Ramp, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Ramp, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1783,21 +1741,21 @@ public class BuildingManager : MonoBehaviour
                 else if (freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Corner)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Ramp_Corner, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Ramp_Corner, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Ramp_Corner, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1808,21 +1766,21 @@ public class BuildingManager : MonoBehaviour
                 else if (freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Ramp_Triangle)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Ramp_Triangle, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Ramp_Triangle, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Ramp_Triangle, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1833,21 +1791,21 @@ public class BuildingManager : MonoBehaviour
                 else if (freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Wall_Triangle)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Wall_Triangle, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Wall_Triangle, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Wall_Triangle, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1863,21 +1821,21 @@ public class BuildingManager : MonoBehaviour
                     if ((a == BlockDirection_A.North && b == BlockDirection_B.Left) || (a == BlockDirection_A.South && b == BlockDirection_B.Left) || (a == BlockDirection_A.North && b == BlockDirection_B.Right) || (a == BlockDirection_A.South && b == BlockDirection_B.Right))
                     {
                         //Wood
-                        if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                        if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                         {
                             //print("Placed: Wood Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Wood_Fence, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Stone
-                        else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                         {
                             //print("Placed: Stone Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Stone_Fence, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Iron
-                        else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                         {
                             //print("Placed: Iron Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Iron_Fence, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1886,21 +1844,21 @@ public class BuildingManager : MonoBehaviour
                     else
                     {
                         //Wood
-                        if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                        if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                         {
                             //print("Placed: Wood Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Wood_Fence_Diagonaly, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Stone
-                        else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                         {
                             //print("Placed: Stone Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Stone_Fence_Diagonaly, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                         }
 
                         //Iron
-                        else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                        else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                         {
                             //print("Placed: Iron Fence_Diagonal");
                             buildingBlockList.Add(Instantiate(builingBlock_Iron_Fence_Diagonaly, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1912,21 +1870,21 @@ public class BuildingManager : MonoBehaviour
                 else if (freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Fence && freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingSubType == BuildingSubType.None)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Fence, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Fence, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Fence, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1937,21 +1895,21 @@ public class BuildingManager : MonoBehaviour
                 else if (freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Window)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Window, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Window, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Window, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1962,21 +1920,21 @@ public class BuildingManager : MonoBehaviour
                 else if (freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Door)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Door, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Door, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Door, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -1987,21 +1945,21 @@ public class BuildingManager : MonoBehaviour
                 else if (freeGhost_LookedAt.GetComponent<Building_Ghost>().buildingType == BuildingType.Stair)
                 {
                     //Wood
-                    if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                    if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                     {
                         //print("Placed: Wood Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Wood_Stair, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Stone
-                    else if (buildingMaterial_Selected == BuildingMaterial.Stone)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                     {
                         //print("Placed: Stone Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Stone_Stair, freeGhost_LookedAt.transform.position, rotation) as GameObject);
                     }
 
                     //Iron
-                    else if (buildingMaterial_Selected == BuildingMaterial.Iron)
+                    else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                     {
                         //print("Placed: Iron Angle");
                         buildingBlockList.Add(Instantiate(builingBlock_Iron_Stair, freeGhost_LookedAt.transform.position, rotation) as GameObject);
@@ -2023,26 +1981,26 @@ public class BuildingManager : MonoBehaviour
                 //Set info on the Block that got a block placed on it
                 BlockPlaced blockGotPlacedOn = new BlockPlaced();
                 blockGotPlacedOn.buildingBlock = buildingBlockList[buildingBlockList.Count - 1];
-                blockGotPlacedOn.buildingType = buildingType_Selected;
+                blockGotPlacedOn.buildingType = MoveableObjectManager.Instance.buildingType_Selected;
                 blockGotPlacedOn.buildingSubType = buildingBlockList[buildingBlockList.Count - 1].GetComponent<BuildingBlock_Parent>().buildingSubType;
                 #endregion
 
                 //Remove items from inventory
-                BuildingBlock_Parent tempParent = GetBuildingBlock(buildingType_Selected, buildingMaterial_Selected);
+                BuildingBlock_Parent tempParent = GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected);
                 if (tempParent.buildingRequirementList != null)
                 {
                     for (int i = 0; i < tempParent.buildingRequirementList.Count; i++)
                     {
                         for (int k = 0; k < tempParent.buildingRequirementList[i].amount; k++)
                         {
-                            InventoryManager.instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, false);
+                            InventoryManager.Instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, false);
                         }
                     }
                 }
 
                 //Update the Hotbar
-                InventoryManager.instance.CheckHotbarItemInInventory();
-                InventoryManager.instance.RemoveInventoriesUI();
+                InventoryManager.Instance.CheckHotbarItemInInventory();
+                InventoryManager.Instance.RemoveInventoriesUI();
 
                 //Reset parameters
                 freeGhost_LookedAt = null;
@@ -2059,7 +2017,7 @@ public class BuildingManager : MonoBehaviour
                 print("1. Don't Place Block");
 
                 //Play Sound
-                if (buildingMaterial_Selected == BuildingMaterial.Wood)
+                if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                 {
                     SoundManager.instance.PlaybuildingBlock_CannotPlaceBlock();
                 }
@@ -2095,6 +2053,19 @@ public class BuildingManager : MonoBehaviour
                     }
                 }
             }
+
+            else if (hitTransform.gameObject.CompareTag("Machine") || hitTransform.gameObject.CompareTag("Furniture"))
+            {
+                if (buildingBlockLookingAt_Axe != hitTransform.gameObject)
+                {
+                    buildingBlockLookingAt_Axe = hitTransform.gameObject;
+
+                    if (buildingBlockLookingAt_Axe.GetComponent<MoveableObject>() != null)
+                    {
+                        SetBuildingRemoveRequirements(MoveableObjectManager.Instance.GetMoveableObjectInfo(buildingBlockLookingAt_Axe.GetComponent<MoveableObject>()));
+                    }
+                }
+            }
             else
             {
                 if (buildingBlockLookingAt_Axe != null)
@@ -2107,69 +2078,94 @@ public class BuildingManager : MonoBehaviour
     }
     public void CutBlock()
     {
-        if (Physics.Raycast(oldRay, out hit_Axe))
+        ray_Axe = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray_Axe, out hit_Axe))
         {
+            var hitTransform = hit_Axe.transform;
+
             if (buildingBlockLookingAt_Axe != null)
             {
-                if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent != null)
+                if (hitTransform.gameObject.CompareTag("BuildingBlock"))
                 {
-                    if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>() != null)
+                    if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent != null)
                     {
-                        for (int i = 0; i < buildingBlockList.Count; i++)
+                        if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>() != null)
                         {
-                            if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent == buildingBlockList[i])
+                            for (int i = 0; i < buildingBlockList.Count; i++)
                             {
-                                print("6. Destroy Block");
+                                if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent == buildingBlockList[i])
+                                {
+                                    print("6. Destroy Block");
 
-                                //Play remove sound
-                                if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
-                                {
-                                    SoundManager.instance.PlayWood_Remove_Clip();
-                                }
-                                else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Stone)
-                                {
-                                    SoundManager.instance.PlayStone_Remove_Clip();
-                                }
-                                else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Iron)
-                                {
-                                    SoundManager.instance.PlayIron_Remove_Clip();
-                                }
-
-                                //Add items to inventory
-                                for (int j = 0; j < buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList.Count; j++)
-                                {
-                                    for (int k = 0; k < buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].amount; k++)
+                                    //Play remove sound
+                                    if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
                                     {
-                                        InventoryManager.instance.AddItemToInventory(0, buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].itemName);
+                                        SoundManager.instance.PlayWood_Remove_Clip();
                                     }
+                                    else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Stone)
+                                    {
+                                        SoundManager.instance.PlayStone_Remove_Clip();
+                                    }
+                                    else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Iron)
+                                    {
+                                        SoundManager.instance.PlayIron_Remove_Clip();
+                                    }
+
+                                    //Add items to inventory
+                                    for (int j = 0; j < buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList.Count; j++)
+                                    {
+                                        for (int k = 0; k < buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].amount; k++)
+                                        {
+                                            InventoryManager.Instance.AddItemToInventory(0, buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].itemName);
+                                        }
+                                    }
+
+                                    //Remove Building Object
+                                    buildingBlockList.RemoveAt(i);
+                                    buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().DestroyThisObject();
+
+                                    //Reset parameters
+                                    buildingBlockLookingAt_Axe = null;
+                                    lastBuildingBlock_LookedAt = null;
+                                    old_lastBuildingBlock_LookedAt = null;
+
+                                    if (buildingBlockLookingAt_Axe != null)
+                                    {
+                                        SetBuildingRemoveRequirements(buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>());
+                                    }
+                                    else
+                                    {
+                                        buildingRemoveRequirement_Parent.SetActive(false);
+                                    }
+
+                                    SaveData();
+
+                                    break;
                                 }
-
-                                //Remove Building Object
-                                buildingBlockList.RemoveAt(i);
-                                buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().DestroyThisObject();
-
-                                //Reset parameters
-                                buildingBlockLookingAt_Axe = null;
-                                lastBuildingBlock_LookedAt = null;
-                                old_lastBuildingBlock_LookedAt = null;
-
-                                if (buildingBlockLookingAt_Axe != null)
-                                {
-                                    SetBuildingRemoveRequirements(buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>());
-                                }
-                                else
-                                {
-                                    buildingRemoveRequirement_Parent.SetActive(false);
-                                }
-
-                                SaveData();
-
-                                break;
                             }
                         }
                     }
                 }
+
+                //If looking at a Machine or Furniture
+                else if (hitTransform.gameObject.CompareTag("Machine") || hitTransform.gameObject.CompareTag("Furniture"))
+                {
+                    print("Tried to cut a Machine or Furniture");
+                }
+                else
+                {
+                    print("Doesn't hit at all");
+                }
             }
+            else
+            {
+                print("buildingBlockLookingAt_Axe == null");
+            }
+        }
+        else
+        {
+            print("Physics.Raycast Isn't hit");
         }
     }
 
@@ -2238,8 +2234,8 @@ public class BuildingManager : MonoBehaviour
         else if (builingBlock_Stone_Stair.GetComponent<BuildingBlock_Parent>().buildingType == buildingType && builingBlock_Stone_Stair.GetComponent<BuildingBlock_Parent>().buildingMaterial == buildingMaterial)
             return builingBlock_Stone_Stair.GetComponent<BuildingBlock_Parent>();
 
-        else if (builingBlock_Iron_Floor.GetComponent<BuildingBlock_Parent>().buildingType == buildingType && builingBlock_Stone_Floor.GetComponent<BuildingBlock_Parent>().buildingMaterial == buildingMaterial)
-            return builingBlock_Stone_Floor.GetComponent<BuildingBlock_Parent>();
+        else if (builingBlock_Iron_Floor.GetComponent<BuildingBlock_Parent>().buildingType == buildingType && builingBlock_Iron_Floor.GetComponent<BuildingBlock_Parent>().buildingMaterial == buildingMaterial)
+            return builingBlock_Iron_Floor.GetComponent<BuildingBlock_Parent>();
         else if (builingBlock_Iron_Floor_Triangle.GetComponent<BuildingBlock_Parent>().buildingType == buildingType && builingBlock_Iron_Floor_Triangle.GetComponent<BuildingBlock_Parent>().buildingMaterial == buildingMaterial)
             return builingBlock_Iron_Floor_Triangle.GetComponent<BuildingBlock_Parent>();
         else if (builingBlock_Iron_Wall.GetComponent<BuildingBlock_Parent>().buildingType == buildingType && builingBlock_Iron_Wall.GetComponent<BuildingBlock_Parent>().buildingMaterial == buildingMaterial)
@@ -2280,19 +2276,36 @@ public class BuildingManager : MonoBehaviour
         //Set "enoughItemsToBuild" = true by default
         enoughItemsToBuild = true;
 
+        //Setup Header of Requirements
+        #region
+        buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, ParentObject.transform) as GameObject);
+
+        for (int i = 0; i < buildingBlock_UIList.Count; i++)
+        {
+            if (buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType == blockParent.buildingType
+                && buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == blockParent.buildingMaterial)
+            {
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = buildingBlock_UIList[i].GetComponentInChildren<Image>().sprite;
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial + " " + buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
+
+                break;
+            }
+        }
+        #endregion
+
         //Setup new list of Requirements
         for (int i = 0; i < blockParent.buildingRequirementList.Count; i++)
         {
             //print("2. SetBuildingRequirements");
             buildingRequirement_List.Add(Instantiate(buildingRequirement_Prefab, ParentObject.transform) as GameObject);
 
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.instance.GetItem(blockParent.buildingRequirementList[i].itemName).hotbarSprite;
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(blockParent.buildingRequirementList[i].itemName).hotbarSprite;
 
             int counter = 0;
 
-            for (int k = 0; k < InventoryManager.instance.inventories[0].itemsInInventory.Count; k++)
+            for (int k = 0; k < InventoryManager.Instance.inventories[0].itemsInInventory.Count; k++)
             {
-                if (blockParent.buildingRequirementList[i].itemName == InventoryManager.instance.inventories[0].itemsInInventory[k].itemName)
+                if (blockParent.buildingRequirementList[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
                 {
                     counter++;
                 }
@@ -2316,6 +2329,70 @@ public class BuildingManager : MonoBehaviour
             }
         }
     }
+    public void SetBuildingRequirements(MoveableObjectInfo moveableObject, GameObject ParentObject)
+    {
+        //Remove all childs
+        for (int i = ParentObject.transform.childCount - 1; i >= 0; i--)
+        {
+            ParentObject.transform.GetChild(i).GetComponent<BuildingRequirementSlot>().DestroyThisObject();
+        }
+        buildingRequirement_List.Clear();
+
+        //Set "enoughItemsToBuild" = true by default
+        enoughItemsToBuild = true;
+
+        //Setup Header of Requirements
+        #region
+        buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, ParentObject.transform) as GameObject);
+
+        buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = moveableObject.objectSprite;
+
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
+        {
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObject.machineType.ToString();
+        }
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
+        {
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObject.furnitureType.ToString();
+        }
+        #endregion
+
+        //Setup new list of Requirements
+        for (int i = 0; i < moveableObject.craftingRequirements.Count; i++)
+        {
+            //print("2. SetBuildingRequirements");
+            buildingRequirement_List.Add(Instantiate(buildingRequirement_Prefab, ParentObject.transform) as GameObject);
+
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(moveableObject.craftingRequirements[i].itemName).hotbarSprite;
+
+            int counter = 0;
+
+            for (int k = 0; k < InventoryManager.Instance.inventories[0].itemsInInventory.Count; k++)
+            {
+                if (moveableObject.craftingRequirements[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
+                {
+                    counter++;
+                }
+            }
+
+            //Display Amount required + Amount in inventory
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + counter + " / " + moveableObject.craftingRequirements[i].amount.ToString();
+
+            //If having enough items in inventory
+            if (counter >= moveableObject.craftingRequirements[i].amount)
+            {
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 1, 1, 1);
+                //enoughItemsToBuild = true;
+            }
+
+            //If not having enough items in inventory
+            else
+            {
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 0, 0, 1);
+                enoughItemsToBuild = false;
+            }
+        }
+    }
     public void SetBuildingRemoveRequirements(BuildingBlock_Parent blockParent)
     {
         //Remove all childs
@@ -2325,18 +2402,35 @@ public class BuildingManager : MonoBehaviour
         }
         buildingRemoveRequirement_List.Clear();
 
+        //Setup Header of Requirements
+        #region
+        buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
+
+        for (int i = 0; i < buildingBlock_UIList.Count; i++)
+        {
+            if (buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType == blockParent.buildingType
+                && buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == blockParent.buildingMaterial)
+            {
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = buildingBlock_UIList[i].GetComponentInChildren<Image>().sprite;
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial + " " + buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
+
+                break;
+            }
+        }
+        #endregion
+
         //Setup new list of Requirements
         for (int i = 0; i < blockParent.removeBuildingRequirementList.Count; i++)
         {
             buildingRemoveRequirement_List.Add(Instantiate(buildingRequirement_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
 
-            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.instance.GetItem(blockParent.removeBuildingRequirementList[i].itemName).hotbarSprite;
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(blockParent.removeBuildingRequirementList[i].itemName).hotbarSprite;
 
             int counter = 0;
 
-            for (int k = 0; k < InventoryManager.instance.inventories[0].itemsInInventory.Count; k++)
+            for (int k = 0; k < InventoryManager.Instance.inventories[0].itemsInInventory.Count; k++)
             {
-                if (blockParent.removeBuildingRequirementList[i].itemName == InventoryManager.instance.inventories[0].itemsInInventory[k].itemName)
+                if (blockParent.removeBuildingRequirementList[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
                 {
                     counter++;
                 }
@@ -2348,7 +2442,54 @@ public class BuildingManager : MonoBehaviour
 
         buildingRemoveRequirement_Parent.SetActive(true);
     }
+    public void SetBuildingRemoveRequirements(MoveableObjectInfo moveableObjectInfo)
+    {
+        //Remove all childs
+        for (int i = buildingRemoveRequirement_Parent.transform.childCount - 1; i >= 0; i--)
+        {
+            buildingRemoveRequirement_Parent.transform.GetChild(i).GetComponent<BuildingRequirementSlot>().DestroyThisObject();
+        }
+        buildingRemoveRequirement_List.Clear();
 
+        //Setup Header of Requirements
+        #region
+        buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
+
+        buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = moveableObjectInfo.objectSprite;
+
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
+        {
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObjectInfo.machineType.ToString();
+        }
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
+        {
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObjectInfo.furnitureType.ToString();
+        }
+        #endregion
+
+        //Setup new list of Requirements
+        for (int i = 0; i < moveableObjectInfo.RemoveCraftingRequirements.Count; i++)
+        {
+            buildingRemoveRequirement_List.Add(Instantiate(buildingRequirement_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
+
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(moveableObjectInfo.RemoveCraftingRequirements[i].itemName).hotbarSprite;
+
+            int counter = 0;
+
+            for (int k = 0; k < InventoryManager.Instance.inventories[0].itemsInInventory.Count; k++)
+            {
+                if (moveableObjectInfo.RemoveCraftingRequirements[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
+                {
+                    counter++;
+                }
+            }
+
+            //Display Amount required + Amount in inventory
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + moveableObjectInfo.RemoveCraftingRequirements[i].amount.ToString() + " / " + counter;
+        }
+
+        buildingRemoveRequirement_Parent.SetActive(true);
+    }
 
     //--------------------
 

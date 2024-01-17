@@ -2749,7 +2749,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 117803619147800036}
+  - {fileID: 6786005873060007195}
   - {fileID: 2625528976293517347}
   - {fileID: 6640580791625575775}
   - {fileID: 4461548600013731557}
@@ -7124,8 +7124,20 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4763889419513853116}
+    m_TransformParent: {fileID: 6786005873060007195}
     m_Modifications:
+    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
+        type: 3}
+    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 5033906361026140736, guid: 3101a03a1c6590445980bd988bedaf6d,
+        type: 3}
     - target: {fileID: -8679921383154817045, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
         type: 3}
       propertyPath: m_RootOrder
@@ -7169,17 +7181,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
         type: 3}
@@ -7201,6 +7213,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6418343921376521978, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
+        type: 3}
+      propertyPath: m_TagString
+      value: BuildingBlock
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
         type: 3}
       propertyPath: m_IsActive
@@ -7211,25 +7228,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: BuildingBlock
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+    - target: {fileID: 5541374508155757370, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
-        type: 3}
-    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 5033906361026140736, guid: 3101a03a1c6590445980bd988bedaf6d,
-        type: 3}
+      propertyPath: m_TagString
+      value: BuildingBlock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6786005873060007195}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
         type: 3}
@@ -13196,8 +13202,20 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 117803619147800036}
+    m_TransformParent: {fileID: 4763889419513853116}
     m_Modifications:
+    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
+        type: 3}
+    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 6955122686471550693, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
+        type: 3}
     - target: {fileID: -8679921383154817045, guid: 3101a03a1c6590445980bd988bedaf6d,
         type: 3}
       propertyPath: m_RootOrder
@@ -13273,6 +13291,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -430191331120682288, guid: 3101a03a1c6590445980bd988bedaf6d,
+        type: 3}
+      propertyPath: m_TagString
+      value: BuildingBlock
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3101a03a1c6590445980bd988bedaf6d,
         type: 3}
       propertyPath: m_IsActive
@@ -13283,21 +13306,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: BuildingBlock
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
+    - target: {fileID: 1044778341498640038, guid: 3101a03a1c6590445980bd988bedaf6d,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -4610143280253574502, guid: fd2181bb73ea8824bb12c11a7d60e62e,
-        type: 3}
-    - target: {fileID: -5754084199372789682, guid: c9b941a8aa6c7b340bdf934dcbbf744e,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 6955122686471550693, guid: 4f9fccfff0ece1c4c8781578d9abeac9,
-        type: 3}
+      propertyPath: m_TagString
+      value: BuildingBlock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3101a03a1c6590445980bd988bedaf6d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 117803619147800036}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3101a03a1c6590445980bd988bedaf6d,
         type: 3}

@@ -19,7 +19,6 @@ public class BuildingBlock_Parent : MonoBehaviour
     public List<BuildingBlockRequirement> removeBuildingRequirementList = new List<BuildingBlockRequirement>();
 
 
-
     //--------------------
 
 
@@ -28,13 +27,13 @@ public class BuildingBlock_Parent : MonoBehaviour
         //Let the player don't collide with all directionObjects
         for (int i = 0; i < directionObjectList.Count; i++)
         {
-            Physics.IgnoreCollision(MainManager.instance.player.GetComponent<CharacterController>(), directionObjectList[i].GetComponent<Collider>(), true);
+            Physics.IgnoreCollision(MainManager.Instance.player.GetComponent<CharacterController>(), directionObjectList[i].GetComponent<Collider>(), true);
         }
 
         //Let the player don't collide with all ghostListObjects
         for (int i = 0; i < ghostList.Count; i++)
         {
-            Physics.IgnoreCollision(MainManager.instance.player.GetComponent<CharacterController>(), ghostList[i].GetComponent<Collider>(), true);
+            Physics.IgnoreCollision(MainManager.Instance.player.GetComponent<CharacterController>(), ghostList[i].GetComponent<Collider>(), true);
         }
     }
 

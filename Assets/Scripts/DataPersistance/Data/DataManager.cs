@@ -5,10 +5,8 @@ using System.Net.NetworkInformation;
 using UnityEngine;
 
 [System.Serializable]
-public class DataManager : MonoBehaviour, IDataPersistance
+public class DataManager : Singleton<DataManager>, IDataPersistance
 {
-    public static DataManager instance { get; private set; } //Singleton
-
     public static Action dataIsSaving;
     public static Action datahasLoaded;
 
@@ -35,23 +33,8 @@ public class DataManager : MonoBehaviour, IDataPersistance
     [HideInInspector] public BuildingType buildingType_Store = new BuildingType();
     [HideInInspector] public BuildingMaterial buildingMaterial_Store = new BuildingMaterial();
 
-
-
-    //--------------------
-
-
-    private void Awake()
-    {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
+    //MoveableObjects
+    [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_StoreList = new List<MoveableObject_ToSave>();
 
 
     //--------------------
@@ -59,7 +42,8 @@ public class DataManager : MonoBehaviour, IDataPersistance
 
     public void LoadData(GameData gameData)
     {
-        //Input what to store
+        //Get saved data from file to be loaded into the project
+        #region
         this.playerPos_Store = gameData.playerPos_Save;
         this.playerRot_Store = gameData.playerRot_Save;
 
@@ -74,9 +58,29 @@ public class DataManager : MonoBehaviour, IDataPersistance
         this.buildingType_Store = gameData.buildingType_Save;
         this.buildingMaterial_Store = gameData.buildingMaterial_Save;
 
-        datahasLoaded?.Invoke();
+        this.placedMoveableObjectsList_StoreList = gameData.placedMoveableObjectsList_SaveList;
+        #endregion
 
-        print("Data has Loaded");
+        //Load the saved data into the project
+        #region
+        //datahasLoaded?.Invoke();
+        print("0. Data has Loaded");
+
+        InventoryManager.Instance.LoadData();
+        print("1. InventoryManager has Loaded");
+
+        BuildingManager.Instance.LoadData();
+        print("2. BuildingManager has Loaded");
+
+        HotbarManager.Instance.LoadData();
+        print("3. HotbarManager has Loaded");
+
+        WorldObjectManager.Instance.LoadData();
+        print("4. WorldObjectManager has Loaded");
+
+        MoveableObjectManager.Instance.LoadData();
+        print("5. MoveableObjectManager has Loaded");
+        #endregion
     }
 
     public void SaveData(ref GameData gameData)
@@ -84,8 +88,8 @@ public class DataManager : MonoBehaviour, IDataPersistance
         dataIsSaving?.Invoke();
 
         //Input what to save
-        gameData.playerPos_Save = MainManager.instance.player.transform.position;
-        gameData.playerRot_Save = MainManager.instance.player.transform.rotation;
+        gameData.playerPos_Save = MainManager.Instance.player.transform.position;
+        gameData.playerRot_Save = MainManager.Instance.player.transform.rotation;
 
         gameData.worldObject_SaveList = this.worldObject_StoreList;
 
@@ -97,6 +101,8 @@ public class DataManager : MonoBehaviour, IDataPersistance
         gameData.buildingBlockList_SaveList = this.buildingBlockList_StoreList;
         gameData.buildingType_Save = this.buildingType_Store;
         gameData.buildingMaterial_Save = this.buildingMaterial_Store;
+
+        gameData.placedMoveableObjectsList_SaveList = this.placedMoveableObjectsList_StoreList;
 
         print("Data has Saved");
     }

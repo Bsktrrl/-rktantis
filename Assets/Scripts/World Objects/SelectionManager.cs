@@ -40,12 +40,12 @@ public class SelectionManager : MonoBehaviour
     }
     void Update()
     {
-        if (Time.frameCount % MainManager.instance.updateInterval == 0 && MainManager.instance.menuStates == MenuStates.None)
+        if (Time.frameCount % MainManager.Instance.updateInterval == 0 && MainManager.Instance.menuStates == MenuStates.None)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, MainManager.instance.InteractableDistance))
+            if (Physics.Raycast(ray, out hit, MainManager.Instance.InteractableDistance))
             {
                 Transform selectionTransform = hit.transform;
 

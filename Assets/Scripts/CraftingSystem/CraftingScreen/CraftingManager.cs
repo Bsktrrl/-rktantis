@@ -85,7 +85,7 @@ public class CraftingManager : MonoBehaviour
     }
     private void Update()
     {
-        if (MainManager.instance.menuStates == MenuStates.CraftingMenu)
+        if (MainManager.Instance.menuStates == MenuStates.CraftingMenu)
         {
             CheckForRequiermentsMet();
         }
@@ -159,7 +159,7 @@ public class CraftingManager : MonoBehaviour
         }
 
         //Turn available subCategories on
-        for (int k = 1; k < MainManager.instance.item_SO.itemList.Count; k++)
+        for (int k = 1; k < MainManager.Instance.item_SO.itemList.Count; k++)
         {
             for (int i = 1; i < itemCategory_SO.ItemCategoryList.Count; i++)
             {
@@ -167,7 +167,7 @@ public class CraftingManager : MonoBehaviour
                 {
                     for (int j = 0; j < itemCategory_SO.ItemCategoryList[i].subCategoryName.Count; j++)
                     {
-                        if (MainManager.instance.item_SO.itemList[k].subCategoryName == itemCategory_SO.ItemCategoryList[i].subCategoryName[j])
+                        if (MainManager.Instance.item_SO.itemList[k].subCategoryName == itemCategory_SO.ItemCategoryList[i].subCategoryName[j])
                         {
                             selectionSubActiveList[j] = true;
                         }
@@ -235,16 +235,16 @@ public class CraftingManager : MonoBehaviour
         for (int i = 0; i < selectionSubGridLayoutGroupList.Count; i++)
         {
             //Find amount of items
-            for (int j = 0; j < MainManager.instance.item_SO.itemList.Count; j++)
+            for (int j = 0; j < MainManager.Instance.item_SO.itemList.Count; j++)
             {
-                if (MainManager.instance.item_SO.itemList[j].isActive
-                    && MainManager.instance.item_SO.itemList[j].categoryName == activeCategory
-                    && MainManager.instance.item_SO.itemList[j].subCategoryName == selectionSubGridLayoutGroupList[i].GetComponent<SelectionSubPanel>().panelName)
+                if (MainManager.Instance.item_SO.itemList[j].isActive
+                    && MainManager.Instance.item_SO.itemList[j].categoryName == activeCategory
+                    && MainManager.Instance.item_SO.itemList[j].subCategoryName == selectionSubGridLayoutGroupList[i].GetComponent<SelectionSubPanel>().panelName)
                 {
                     selectionButtonPrefabList.Add(Instantiate(selectionButton_Prefab) as GameObject);
                     selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].transform.SetParent(selectionSubGridLayoutGroupList[i].transform);
 
-                    selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().item = MainManager.instance.item_SO.itemList[j];
+                    selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().item = MainManager.Instance.item_SO.itemList[j];
                     selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().SetDisplay();
                 }
             }
@@ -280,11 +280,11 @@ public class CraftingManager : MonoBehaviour
             
             requirementPrefabList[requirementPrefabList.Count - 1].GetComponent<CraftingRequirementPrefab>().requirements = item.craftingRequirements[i];
 
-            for (int j = 0; j < MainManager.instance.item_SO.itemList.Count; j++)
+            for (int j = 0; j < MainManager.Instance.item_SO.itemList.Count; j++)
             {
-                if (MainManager.instance.item_SO.itemList[j].itemName == item.craftingRequirements[i].itemName)
+                if (MainManager.Instance.item_SO.itemList[j].itemName == item.craftingRequirements[i].itemName)
                 {
-                    requirementPrefabList[requirementPrefabList.Count - 1].GetComponent<CraftingRequirementPrefab>().craftingItemSprite = MainManager.instance.GetItem(MainManager.instance.item_SO.itemList[j].itemName).hotbarSprite;
+                    requirementPrefabList[requirementPrefabList.Count - 1].GetComponent<CraftingRequirementPrefab>().craftingItemSprite = MainManager.Instance.GetItem(MainManager.Instance.item_SO.itemList[j].itemName).hotbarSprite;
 
                     break;
                 }
@@ -341,11 +341,11 @@ public class CraftingManager : MonoBehaviour
 
     void ActivateItemInScripteableObject(Items itemName)
     {
-        MainManager.instance.GetItem(itemName).isActive = true;
+        MainManager.Instance.GetItem(itemName).isActive = true;
     }
     bool IsItemActivatedInScripteableObject(Items itemName)
     {
-        if (MainManager.instance.GetItem(itemName).isActive)
+        if (MainManager.Instance.GetItem(itemName).isActive)
         {
             return true;
         }
@@ -365,7 +365,7 @@ public class CraftingManager : MonoBehaviour
         UpdateSelectionSubActiveList();
 
         Cursor.lockState = CursorLockMode.None;
-        MainManager.instance.menuStates = MenuStates.CraftingMenu;
+        MainManager.Instance.menuStates = MenuStates.CraftingMenu;
 
         craftingMenu.SetActive(true);
         overviewScreen.SetActive(true);
@@ -384,6 +384,6 @@ public class CraftingManager : MonoBehaviour
         selectionScreen.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
-        MainManager.instance.menuStates = MenuStates.None;
+        MainManager.Instance.menuStates = MenuStates.None;
     }
 }

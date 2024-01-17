@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainManager : MonoBehaviour
+public class MainManager : Singleton<MainManager>
 {
-    public static MainManager instance { get; set; } //Singleton
-
     [Header("Player")]
     public GameObject player;
 
@@ -29,18 +27,6 @@ public class MainManager : MonoBehaviour
     //--------------------
 
 
-    private void Awake()
-    {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -57,7 +43,7 @@ public class MainManager : MonoBehaviour
     void UpdateGameStates()
     {
         //Set to Building
-        if (GetItem(HotbarManager.instance.selectedItem).subCategoryName == ItemSubCategories.BuildingHammer)
+        if (GetItem(HotbarManager.Instance.selectedItem).subCategoryName == ItemSubCategories.BuildingHammer)
         {
             gameStates = GameStates.Building;
         }

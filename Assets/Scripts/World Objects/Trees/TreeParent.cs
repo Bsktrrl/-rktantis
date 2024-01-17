@@ -27,7 +27,7 @@ public class TreeParent : MonoBehaviour
     {
         if (Healthytree.GetComponent<ChoppableTree>().playerInRange && Healthytree.GetComponent<ChoppableTree>().canBeChopped
             && SelectionManager.instance.selectedTree == gameObject.GetComponentInChildren<ChoppableTree>().gameObject
-            && MainManager.instance.menuStates == MenuStates.None)
+            && MainManager.Instance.menuStates == MenuStates.None)
         {
             print("ObjectInteraction");
             HP -= 1;
@@ -57,7 +57,7 @@ public class TreeParent : MonoBehaviour
 
         for (int i = 0; i < temp; i++)
         {
-            choppedTree.transform.GetChild(0).parent = MainManager.instance.treeParent.transform;
+            choppedTree.transform.GetChild(0).parent = MainManager.Instance.treeParent.transform;
         }
         
         Destroy(gameObject);

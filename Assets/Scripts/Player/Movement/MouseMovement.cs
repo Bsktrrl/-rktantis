@@ -15,7 +15,7 @@ public class MouseMovement : MonoBehaviour
 
     void Update()
     {
-        if (MainManager.instance.menuStates == MenuStates.None)
+        if (MainManager.Instance.menuStates == MenuStates.None)
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.smoothDeltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.smoothDeltaTime;

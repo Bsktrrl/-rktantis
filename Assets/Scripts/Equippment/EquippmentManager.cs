@@ -44,7 +44,7 @@ public class EquippmentManager : MonoBehaviour
         }
 
         //Check if the selected item has the required states
-        if (MainManager.instance.GetItem(HotbarManager.instance.selectedItem).isEquipable
+        if (MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).isEquipable
             && toolHolderParent.GetComponentInChildren<EquippedItem>() != null)
         {
             //Play animation

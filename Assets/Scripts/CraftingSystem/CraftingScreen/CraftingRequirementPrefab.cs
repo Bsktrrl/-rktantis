@@ -31,7 +31,7 @@ public class CraftingRequirementPrefab : MonoBehaviour
     }
     private void Update()
     {
-        if (MainManager.instance.menuStates == MenuStates.CraftingMenu)
+        if (MainManager.Instance.menuStates == MenuStates.CraftingMenu)
         {
             SetDisplay();
             CheckRequrement();
@@ -72,7 +72,7 @@ public class CraftingRequirementPrefab : MonoBehaviour
         int itemInPlayerInventoryCounter = 0;
 
         //Get player inventory
-        Inventory itemList = InventoryManager.instance.inventories[0];
+        Inventory itemList = InventoryManager.Instance.inventories[0];
 
         for (int i = 0; i < itemList.itemsInInventory.Count; i++)
         {

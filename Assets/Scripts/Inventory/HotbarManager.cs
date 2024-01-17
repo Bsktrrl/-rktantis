@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HotbarManager : MonoBehaviour
+public class HotbarManager : Singleton<HotbarManager>
 {
-    public static HotbarManager instance { get; private set; } //Singleton
-
     public GameObject EquipmentHolder;
     public List<GameObject> EuipmentList = new List<GameObject>();
 
@@ -19,22 +17,8 @@ public class HotbarManager : MonoBehaviour
     //--------------------
 
 
-    private void Awake()
-    {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
     private void Start()
     {
-        DataManager.datahasLoaded += LoadData;
-
         PlayerButtonManager.hotbarSelectionDown_isPressed += HandSelection_Down;
         PlayerButtonManager.hotbarSelectionUp_isPressed += HandSelection_UP;
 
@@ -52,15 +36,17 @@ public class HotbarManager : MonoBehaviour
     public void LoadData()
     {
         //Set selectedSlot
-        selectedSlot = DataManager.instance.selectedSlot_Store;
-        print("Load_Hotbar");
+        #region
+        selectedSlot = DataManager.Instance.selectedSlot_Store;
+        #endregion
 
         //Setup each HotbarSlot based on saved data
+        #region
         for (int i = 0; i < hotbarList.Count; i++)
         {
-            if (DataManager.instance.hotbarItem_StoreList.Count == hotbarList.Count)
+            if (DataManager.Instance.hotbarItem_StoreList.Count == hotbarList.Count)
             {
-                hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName = DataManager.instance.hotbarItem_StoreList[i];
+                hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName = DataManager.Instance.hotbarItem_StoreList[i];
                 hotbarList[i].GetComponent<HotbarSlot>().SetHotbarSlotImage();
             }
         }
@@ -72,28 +58,29 @@ public class HotbarManager : MonoBehaviour
 
         if (hotbarList[selectedSlot].GetComponent<HotbarSlot>().hotbarItemName == Items.BuildingHammer)
         {
-            BuildingManager.instance.SetBuildingRequirements(BuildingManager.instance.GetBuildingBlock(BuildingManager.instance.buildingType_Selected, BuildingManager.instance.buildingMaterial_Selected), BuildingManager.instance.buildingRequirement_Parent);
-            BuildingManager.instance.buildingRequirement_Parent.SetActive(true);
+            BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
+            BuildingManager.Instance.buildingRequirement_Parent.SetActive(true);
         }
+        #endregion
     }
     public void SaveData()
     {
-        DataManager.instance.selectedSlot_Store = selectedSlot;
+        DataManager.Instance.selectedSlot_Store = selectedSlot;
 
-        DataManager.instance.hotbarItem_StoreList.Clear();
+        DataManager.Instance.hotbarItem_StoreList.Clear();
         for (int i = 0; i < hotbarList.Count; i++)
         {
-            DataManager.instance.hotbarItem_StoreList.Add(hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName);
+            DataManager.Instance.hotbarItem_StoreList.Add(hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName);
         }
     }
     public void SaveData(ref GameData gameData)
     {
-        DataManager.instance.selectedSlot_Store = selectedSlot;
+        DataManager.Instance.selectedSlot_Store = selectedSlot;
 
-        DataManager.instance.hotbarItem_StoreList.Clear();
+        DataManager.Instance.hotbarItem_StoreList.Clear();
         for (int i = 0; i < hotbarList.Count; i++)
         {
-            DataManager.instance.hotbarItem_StoreList.Add(hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName);
+            DataManager.Instance.hotbarItem_StoreList.Add(hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName);
         }
         print("Save_Hotbar");
     }
@@ -116,14 +103,14 @@ public class HotbarManager : MonoBehaviour
 
             EuipmentList.Clear();
 
-            //Remove BuildingmMenu
+            //Remove BuildingMenu
             BuildingSystemMenu.instance.buildingSystemMenu.SetActive(false);
 
             return;
         }
 
         //if selected Item doesn't have an "equipped model"
-        if (MainManager.instance.GetItem(selectedItem).equippedPrefab == null)
+        if (MainManager.Instance.GetItem(selectedItem).equippedPrefab == null)
         {
             //Remove all equipped models
             for (int i = 0; i < EuipmentList.Count; i++)
@@ -146,8 +133,8 @@ public class HotbarManager : MonoBehaviour
             EuipmentList.Clear();
 
             //Add the correct model to the hand
-            EuipmentList.Add(Instantiate(MainManager.instance.GetItem(selectedItem).equippedPrefab, MainManager.instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
-            EuipmentList[EuipmentList.Count - 1].transform.SetLocalPositionAndRotation(MainManager.instance.GetItem(selectedItem).equippedPrefab.transform.position, Quaternion.identity);
+            EuipmentList.Add(Instantiate(MainManager.Instance.GetItem(selectedItem).equippedPrefab, MainManager.Instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
+            EuipmentList[EuipmentList.Count - 1].transform.SetLocalPositionAndRotation(MainManager.Instance.GetItem(selectedItem).equippedPrefab.transform.position, Quaternion.identity);
         }
 
         //Remove BuildingmMenu
