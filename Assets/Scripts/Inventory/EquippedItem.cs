@@ -61,15 +61,19 @@ public class EquippedItem : MonoBehaviour
         //If Equipped Object is a BuildingHammer
         if (gameObject.GetComponent<BuildingHammer>() != null)
         {
-            if (gameObject.GetComponent<BuildingHammer>().tempObj_Selected.GetComponent<InteractableObject>())
+            if (gameObject.GetComponent<BuildingHammer>().tempObj_Selected)
             {
-                gameObject.GetComponent<BuildingHammer>().tempObj_Selected.GetComponent<InteractableObject>().DestroyThisObject();
+                if (gameObject.GetComponent<BuildingHammer>().tempObj_Selected.GetComponent<InteractableObject>())
+                {
+                    gameObject.GetComponent<BuildingHammer>().tempObj_Selected.GetComponent<InteractableObject>().DestroyThisObject();
+                    gameObject.GetComponent<BuildingHammer>().DestroyThisObject();
+                }
+                else
+                {
+                    Destroy(gameObject.GetComponent<BuildingHammer>().tempObj_Selected);
+                }
             }
-            else
-            {
-                Destroy(gameObject.GetComponent<BuildingHammer>().tempObj_Selected);
-            }
-
+            
             gameObject.GetComponent<BuildingHammer>().tempObj_Selected = null;
         }
 

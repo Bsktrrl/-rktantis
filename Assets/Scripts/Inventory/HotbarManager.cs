@@ -103,14 +103,14 @@ public class HotbarManager : Singleton<HotbarManager>
 
             EuipmentList.Clear();
 
-            //Remove BuildingmMenu
+            //Remove BuildingMenu
             BuildingSystemMenu.instance.buildingSystemMenu.SetActive(false);
 
             return;
         }
 
         //if selected Item doesn't have an "equipped model"
-        if (MainManager.instance.GetItem(selectedItem).equippedPrefab == null)
+        if (MainManager.Instance.GetItem(selectedItem).equippedPrefab == null)
         {
             //Remove all equipped models
             for (int i = 0; i < EuipmentList.Count; i++)
@@ -133,8 +133,8 @@ public class HotbarManager : Singleton<HotbarManager>
             EuipmentList.Clear();
 
             //Add the correct model to the hand
-            EuipmentList.Add(Instantiate(MainManager.instance.GetItem(selectedItem).equippedPrefab, MainManager.instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
-            EuipmentList[EuipmentList.Count - 1].transform.SetLocalPositionAndRotation(MainManager.instance.GetItem(selectedItem).equippedPrefab.transform.position, Quaternion.identity);
+            EuipmentList.Add(Instantiate(MainManager.Instance.GetItem(selectedItem).equippedPrefab, MainManager.Instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
+            EuipmentList[EuipmentList.Count - 1].transform.SetLocalPositionAndRotation(MainManager.Instance.GetItem(selectedItem).equippedPrefab.transform.position, Quaternion.identity);
         }
 
         //Remove BuildingmMenu

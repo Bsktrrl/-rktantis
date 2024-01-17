@@ -88,8 +88,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         dataIsSaving?.Invoke();
 
         //Input what to save
-        gameData.playerPos_Save = MainManager.instance.player.transform.position;
-        gameData.playerRot_Save = MainManager.instance.player.transform.rotation;
+        gameData.playerPos_Save = MainManager.Instance.player.transform.position;
+        gameData.playerRot_Save = MainManager.Instance.player.transform.rotation;
 
         gameData.worldObject_SaveList = this.worldObject_StoreList;
 

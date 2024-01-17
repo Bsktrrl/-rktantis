@@ -11,7 +11,7 @@ public class CraftButton : MonoBehaviour
 
     private void Update()
     {
-        if (MainManager.instance.menuStates == MenuStates.CraftingMenu)
+        if (MainManager.Instance.menuStates == MenuStates.CraftingMenu)
         {
             if (CraftingManager.instance.totalRequirementMet)
             {

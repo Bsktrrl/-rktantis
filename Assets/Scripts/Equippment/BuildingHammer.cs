@@ -7,6 +7,9 @@ public class BuildingHammer : MonoBehaviour
     [SerializeField] LayerMask layerMask_BuildingBlock;
     public GameObject tempObj_Selected = null;
 
+    [SerializeField] float rotationSpeed = 100;
+    [SerializeField] float rotationValue = 0;
+
     Ray ray;
     RaycastHit hit;
 
@@ -14,6 +17,13 @@ public class BuildingHammer : MonoBehaviour
     //--------------------
 
 
+    private void Start()
+    {
+        PlayerButtonManager.isPressed_MoveableRotation_Right += ManipulateObjectRotation_Right;
+        PlayerButtonManager.isPressed_MoveableRotation_Left += ManipulateObjectRotation_Left;
+
+        rotationSpeed = 150;
+    }
     private void Update()
     {
         UpdateSelectedBlockPosition();
@@ -26,6 +36,9 @@ public class BuildingHammer : MonoBehaviour
 
     public void SetNewSelectedBlock()
     {
+        //Reset Rotation
+        rotationValue = 0;
+
         if (tempObj_Selected)
         {
             if (tempObj_Selected.GetComponent<InteractableObject>())
@@ -97,7 +110,7 @@ public class BuildingHammer : MonoBehaviour
         if (tempObj_Selected == null) { return; }
 
         //If any menu is open, return
-        if (MainManager.instance.menuStates != MenuStates.None)
+        if (MainManager.Instance.menuStates != MenuStates.None)
         {
             if (tempObj_Selected != null)
             {
@@ -190,7 +203,7 @@ public class BuildingHammer : MonoBehaviour
         if (tempObj_Selected == null) { return; }
 
         //If any menu is open, return
-        if (MainManager.instance.menuStates != MenuStates.None)
+        if (MainManager.Instance.menuStates != MenuStates.None)
         {
             if (tempObj_Selected != null)
             {
@@ -278,7 +291,19 @@ public class BuildingHammer : MonoBehaviour
     {
         //Set the object's position to the buildingBlock height
         float tempHeight = tempObj_Selected.transform.localScale.y / 2;
-        tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + tempHeight, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
+        tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + tempHeight, hit.point.z), Quaternion.Euler(0.0f, rotationValue, 0.0f));
+    }
+    void ManipulateObjectRotation_Right()
+    {
+        print("Rotating Right");
+
+        rotationValue += rotationSpeed * Time.deltaTime;
+    }
+    void ManipulateObjectRotation_Left()
+    {
+        print("Rotating Left");
+
+        rotationValue -= rotationSpeed * Time.deltaTime;
     }
 
 
@@ -302,5 +327,15 @@ public class BuildingHammer : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    //--------------------
+
+
+    public void DestroyThisObject()
+    {
+        PlayerButtonManager.isPressed_MoveableRotation_Right -= ManipulateObjectRotation_Right;
+        PlayerButtonManager.isPressed_MoveableRotation_Left -= ManipulateObjectRotation_Left;
     }
 }

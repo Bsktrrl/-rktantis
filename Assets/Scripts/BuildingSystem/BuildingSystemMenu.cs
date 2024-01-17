@@ -62,7 +62,7 @@ public class BuildingSystemMenu : MonoBehaviour
         buildingSystemMenu_isOpen = true;
 
         Cursor.lockState = CursorLockMode.None;
-        MainManager.instance.menuStates = MenuStates.BuildingSystemMenu;
+        MainManager.Instance.menuStates = MenuStates.BuildingSystemMenu;
         BuildingManager.Instance.SetAllGhostState_Off();
 
         //Deactivate old directionObjectList
@@ -86,7 +86,7 @@ public class BuildingSystemMenu : MonoBehaviour
         buildingSystemMenu.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
-        MainManager.instance.menuStates = MenuStates.None;
+        MainManager.Instance.menuStates = MenuStates.None;
 
         buildingSystemMenu_isOpen = false;
     }

@@ -68,7 +68,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
         #region Player Position
         //Set Player position - The "LoadData()" doesen't activate in the relevant playerMovement script
-        MainManager.instance.player.transform.SetPositionAndRotation(DataManager.Instance.playerPos_Store, DataManager.Instance.playerRot_Store);
+        MainManager.Instance.player.transform.SetPositionAndRotation(DataManager.Instance.playerPos_Store, DataManager.Instance.playerRot_Store);
         #endregion
 
         #region WorldObjectList
@@ -163,7 +163,7 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             item.inventoryIndex = inventory;
             item.itemName = obj.GetComponent<ItemSlot>().itemName;
-            item.itemSize = MainManager.instance.GetItem(obj.GetComponent<ItemSlot>().itemName).itemSize;
+            item.itemSize = MainManager.Instance.GetItem(obj.GetComponent<ItemSlot>().itemName).itemSize;
             item.itemID = obj.GetComponent<ItemSlot>().itemID;
 
             lastItemToGet = obj.GetComponent<ItemSlot>().itemName;
@@ -175,7 +175,7 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             item.inventoryIndex = inventory;
             item.itemName = obj.GetComponent<InteractableObject>().itemName;
-            item.itemSize = MainManager.instance.GetItem(obj.GetComponent<InteractableObject>().itemName).itemSize;
+            item.itemSize = MainManager.Instance.GetItem(obj.GetComponent<InteractableObject>().itemName).itemSize;
 
             lastItemToGet = obj.GetComponent<InteractableObject>().itemName;
 
@@ -220,7 +220,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
         item.inventoryIndex = inventory;
         item.itemName = itemName;
-        item.itemSize = MainManager.instance.GetItem(itemName).itemSize;
+        item.itemSize = MainManager.Instance.GetItem(itemName).itemSize;
 
         lastItemToGet = itemName;
 
@@ -276,7 +276,7 @@ public class InventoryManager : Singleton<InventoryManager>
         PrepareInventoryUI(inventory, false);
 
         //Spawn item into the World
-        worldObjectList.Add(Instantiate(MainManager.instance.GetItem(itemName).worldObjectPrefab, handDropPoint.transform.position, Quaternion.identity) as GameObject);
+        worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, handDropPoint.transform.position, Quaternion.identity) as GameObject);
         worldObjectList[worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
 
         //Set Gravity true on the worldObject
@@ -534,8 +534,8 @@ public class InventoryManager : Singleton<InventoryManager>
                 //If slot is empty, check if item can be placed in its range
                 if (inventoryList[i].GetComponent<ItemSlot>().itemName == Items.None)
                 {
-                    int itemSizeX = (int)MainManager.instance.GetItem(inventories[inventory].itemsInInventory[j].itemName).itemSize.x;
-                    int itemSizeY = (int)MainManager.instance.GetItem(inventories[inventory].itemsInInventory[j].itemName).itemSize.y;
+                    int itemSizeX = (int)MainManager.Instance.GetItem(inventories[inventory].itemsInInventory[j].itemName).itemSize.x;
+                    int itemSizeY = (int)MainManager.Instance.GetItem(inventories[inventory].itemsInInventory[j].itemName).itemSize.y;
 
                     //Check if Item's x-value is inside the x-size of the grid
                     #region
@@ -613,7 +613,7 @@ public class InventoryManager : Singleton<InventoryManager>
                                     inventoryList[posList[k]].GetComponent<ItemSlot>().itemID = inventories[inventory].itemsInInventory[j].itemID;
 
                                     inventoryList[posList[k]].GetComponent<Image>().color = new Color(1, 1, 1, 1);
-                                    inventoryList[posList[k]].GetComponent<Image>().sprite = MainManager.instance.GetItem(inventories[inventory].itemsInInventory[j].itemName).itemSpriteList[k];
+                                    inventoryList[posList[k]].GetComponent<Image>().sprite = MainManager.Instance.GetItem(inventories[inventory].itemsInInventory[j].itemName).itemSpriteList[k];
                                 }
 
                                 break;
@@ -694,7 +694,7 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         if (worldObj.objectName != Items.None)
         {
-            return MainManager.instance.GetItem(worldObj.objectName).worldObjectPrefab;
+            return MainManager.Instance.GetItem(worldObj.objectName).worldObjectPrefab;
         }
         else
         {
@@ -716,7 +716,7 @@ public class InventoryManager : Singleton<InventoryManager>
         else
         {
             Cursor.lockState = CursorLockMode.None;
-            MainManager.instance.menuStates = MenuStates.InventoryMenu;
+            MainManager.Instance.menuStates = MenuStates.InventoryMenu;
 
             PrepareInventoryUI(0, false); //Prepare PLAYER Inventory
 
@@ -735,7 +735,7 @@ public class InventoryManager : Singleton<InventoryManager>
         RemoveInventoriesUI();
 
         Cursor.lockState = CursorLockMode.Locked;
-        MainManager.instance.menuStates = MenuStates.None;
+        MainManager.Instance.menuStates = MenuStates.None;
 
         inventoryIsOpen = false;
     }

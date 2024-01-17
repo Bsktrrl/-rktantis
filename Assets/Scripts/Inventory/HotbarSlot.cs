@@ -26,11 +26,11 @@ public class HotbarSlot : MonoBehaviour
 
     public void SetHotbarSlotImage()
     {
-        image.sprite = MainManager.instance.GetItem(hotbarItemName).hotbarSprite;
+        image.sprite = MainManager.Instance.GetItem(hotbarItemName).hotbarSprite;
     }
     public void RemoVeHotbarSlotImage()
     {
-        image.sprite = MainManager.instance.GetItem(0).hotbarSprite;
+        image.sprite = MainManager.Instance.GetItem(0).hotbarSprite;
     }
 
     public void ResetHotbarItem()

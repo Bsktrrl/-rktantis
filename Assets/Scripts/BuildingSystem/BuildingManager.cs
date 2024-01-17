@@ -119,7 +119,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
     private void Update()
     {
-        if (Time.frameCount % MainManager.instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.BuildingHammer)
+        if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.BuildingHammer)
         {
             RaycastSetup_Hammer();
             buildingRequirement_Parent.SetActive(true);
@@ -133,16 +133,16 @@ public class BuildingManager : Singleton<BuildingManager>
             }
 
             //Set BuildingRequirement UI
-            if (MainManager.instance.menuStates == MenuStates.BuildingSystemMenu)
+            if (MainManager.Instance.menuStates == MenuStates.BuildingSystemMenu)
             {
                 buildingRequirement_Parent.SetActive(false);
             }
-            else if (MainManager.instance.menuStates == MenuStates.None)
+            else if (MainManager.Instance.menuStates == MenuStates.None)
             {
                 buildingRequirement_Parent.SetActive(true);
             }
         }
-        else if (Time.frameCount % MainManager.instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.Axe)
+        else if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.Axe)
         {
             RaycastSetup_Axe();
 
@@ -292,7 +292,7 @@ public class BuildingManager : Singleton<BuildingManager>
     }
     void RaycastBuildingDirectionMarkers()
     {
-        if (MainManager.instance.menuStates == MenuStates.None)
+        if (MainManager.Instance.menuStates == MenuStates.None)
         {
             ray_Hammer = Camera.main.ScreenPointToRay(Input.mousePosition);
             oldRay = ray_Hammer;
@@ -2241,7 +2241,7 @@ public class BuildingManager : Singleton<BuildingManager>
             //print("2. SetBuildingRequirements");
             buildingRequirement_List.Add(Instantiate(buildingRequirement_Prefab, ParentObject.transform) as GameObject);
 
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.instance.GetItem(blockParent.buildingRequirementList[i].itemName).hotbarSprite;
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(blockParent.buildingRequirementList[i].itemName).hotbarSprite;
 
             int counter = 0;
 
@@ -2289,7 +2289,7 @@ public class BuildingManager : Singleton<BuildingManager>
             //print("2. SetBuildingRequirements");
             buildingRequirement_List.Add(Instantiate(buildingRequirement_Prefab, ParentObject.transform) as GameObject);
 
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.instance.GetItem(moveableObject.craftingRequirements[i].itemName).hotbarSprite;
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(moveableObject.craftingRequirements[i].itemName).hotbarSprite;
 
             int counter = 0;
 
@@ -2333,7 +2333,7 @@ public class BuildingManager : Singleton<BuildingManager>
         {
             buildingRemoveRequirement_List.Add(Instantiate(buildingRequirement_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
 
-            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.instance.GetItem(blockParent.removeBuildingRequirementList[i].itemName).hotbarSprite;
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(blockParent.removeBuildingRequirementList[i].itemName).hotbarSprite;
 
             int counter = 0;
 

@@ -44,7 +44,7 @@ public class InteractableObject : MonoBehaviour
 
 
         if (SelectionManager.instance.onTarget && SelectionManager.instance.selecedObject == gameObject
-            && MainManager.instance.menuStates == MenuStates.None)
+            && MainManager.Instance.menuStates == MenuStates.None)
         {
             //If Object is a Pickup
             if (interacteableType == InteracteableType.Pickup)
@@ -85,7 +85,7 @@ public class InteractableObject : MonoBehaviour
                 InventoryManager.Instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
                 InventoryManager.Instance.chestInventory_Parent.SetActive(true);
 
-                MainManager.instance.menuStates = MenuStates.chestMenu;
+                MainManager.Instance.menuStates = MenuStates.chestMenu;
             }
 
             //If Object is a Crafting Table

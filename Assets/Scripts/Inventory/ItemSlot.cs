@@ -19,7 +19,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler
         //print("You clicked on item: " + itemName + " with index: " + itemID + " and from inventory: " + inventoryIndex);
 
         //If only player inventory is used
-        if (MainManager.instance.menuStates == MenuStates.InventoryMenu)
+        if (MainManager.Instance.menuStates == MenuStates.InventoryMenu)
         {
             //If the right Mouse button is pressed - Remove item from inventory
             if (eventData.button == PointerEventData.InputButton.Right)
@@ -65,7 +65,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler
         }
 
         //If player is in a chest
-        else if (MainManager.instance.menuStates == MenuStates.chestMenu)
+        else if (MainManager.Instance.menuStates == MenuStates.chestMenu)
         {
             //If the left Mouse button is pressed - Move this item between the open inventories, if possible
             if (eventData.button == PointerEventData.InputButton.Right && itemName != Items.None)
