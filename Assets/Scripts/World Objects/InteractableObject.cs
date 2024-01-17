@@ -132,8 +132,6 @@ public class InteractableObject : MonoBehaviour
 
     public void DestroyThisObject()
     {
-        print("9000. Destroy an InteractableObject");
-
         //Unsubscribe from Event
         PlayerButtonManager.objectInterraction_isPressedDown -= ObjectInteraction;
 

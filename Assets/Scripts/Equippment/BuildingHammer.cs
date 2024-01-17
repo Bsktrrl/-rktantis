@@ -56,8 +56,6 @@ public class BuildingHammer : MonoBehaviour
         //If selected Object is a BuildingBlock
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
         {
-            print("1000. selected Object is a BuildingBlock");
-
             if (MoveableObjectManager.Instance.buildingType_Selected != BuildingType.None && MoveableObjectManager.Instance.buildingMaterial_Selected != BuildingMaterial.None)
             {
                 //Instantiate new tempBlock as this BuildingBlock
@@ -85,8 +83,6 @@ public class BuildingHammer : MonoBehaviour
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine
             || MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
-            print("1000. Selected Object is a Machine or Furniture");
-
             GameObject moveableObject = MoveableObjectManager.Instance.GetMoveableObject();
             MoveableObjectManager.Instance.objectToMove = moveableObject;
 
@@ -107,7 +103,14 @@ public class BuildingHammer : MonoBehaviour
 
     public void UpdateSelectedBlockPosition()
     {
+        #region Return Section
         if (tempObj_Selected == null) { return; }
+
+        //If selected block is a MoveableObject, return
+        if (tempObj_Selected.GetComponent<MoveableObject>())
+        {
+            return;
+        }
 
         //If any menu is open, return
         if (MainManager.Instance.menuStates != MenuStates.None)
@@ -149,10 +152,13 @@ public class BuildingHammer : MonoBehaviour
         {
             return;
         }
+        #endregion
 
 
         //-----
 
+
+        print("3000. UpdateSelectedBlockPosition");
 
         //Check if item can be placed and change its material accordingly
         if (BuildingManager.Instance.enoughItemsToBuild)
@@ -172,13 +178,15 @@ public class BuildingHammer : MonoBehaviour
         if (tempObj_Selected.GetComponent<Building_Ghost>() != null)
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
             if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_Ground))
             {
                 //Set the object's position to the ground height
                 BuildingManager.Instance.freeGhost_LookedAt = tempObj_Selected;
                 tempObj_Selected.SetActive(true);
 
-                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
+                //tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
+                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), Quaternion.Euler(0.0f, rotationValue, 0.0f));
             }
             else
             {
@@ -199,8 +207,15 @@ public class BuildingHammer : MonoBehaviour
 
     public void UpdateObjectToMovePosition()
     {
+        #region Return Section
         //If tempObj_Selected isn't selected, return
         if (tempObj_Selected == null) { return; }
+
+        //If selected block is a BuildingBlock, return
+        if (tempObj_Selected.GetComponent<Building_Ghost>())
+        {
+            return;
+        }
 
         //If any menu is open, return
         if (MainManager.Instance.menuStates != MenuStates.None)
@@ -212,10 +227,13 @@ public class BuildingHammer : MonoBehaviour
 
             return;
         }
+        #endregion
 
 
         //-----
 
+
+        print("2222. UpdateObjectToMovePosition");
 
         //Set Object's Position and Rotation
         if (tempObj_Selected != null)
@@ -293,6 +311,11 @@ public class BuildingHammer : MonoBehaviour
         float tempHeight = tempObj_Selected.transform.localScale.y / 2;
         tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + tempHeight, hit.point.z), Quaternion.Euler(0.0f, rotationValue, 0.0f));
     }
+
+
+    //--------------------
+
+
     void ManipulateObjectRotation_Right()
     {
         print("Rotating Right");
