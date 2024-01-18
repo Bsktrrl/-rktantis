@@ -158,7 +158,7 @@ public class BuildingHammer : MonoBehaviour
         //-----
 
 
-        print("3000. UpdateSelectedBlockPosition");
+        //print("3000. UpdateSelectedBlockPosition");
 
         //Check if item can be placed and change its material accordingly
         if (BuildingManager.Instance.enoughItemsToBuild)

@@ -46,7 +46,7 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
             {
                 EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
 
-                print("2000. New Selected Block Set: Type: " + buildingType + " | Material: " + buildingMaterial);
+                //print("2000. New Selected Block Set: Type: " + buildingType + " | Material: " + buildingMaterial);
             }
         }
 

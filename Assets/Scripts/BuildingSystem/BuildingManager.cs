@@ -614,9 +614,8 @@ public class BuildingManager : Singleton<BuildingManager>
                     }
                 }
 
-                //If raycarsting is not on a BuidingDirectionMarkers or ghostBlock
-                if ((blockDirection_X != BlockDirection_A.None
-                    && blockDirection_Y != BlockDirection_B.None)
+                //If raycasting isn't on a BuidingDirectionMarkers or ghostBlock
+                if ((blockDirection_X != BlockDirection_A.None && blockDirection_Y != BlockDirection_B.None)
                     || blockDirection_X != BlockDirection_A.None
                     || blockDirection_Y != BlockDirection_B.None)
                 {
@@ -635,8 +634,7 @@ public class BuildingManager : Singleton<BuildingManager>
         else
         {
             //When raycast doesn't hit any BuildingObjects
-            if ((blockDirection_X != BlockDirection_A.None
-                && blockDirection_Y != BlockDirection_B.None)
+            if ((blockDirection_X != BlockDirection_A.None && blockDirection_Y != BlockDirection_B.None)
                 || blockDirection_X != BlockDirection_A.None
                 || blockDirection_Y != BlockDirection_B.None)
             {
@@ -902,11 +900,15 @@ public class BuildingManager : Singleton<BuildingManager>
     {
         if (blockLookingAt.ghostList[i].GetComponent<Building_Ghost>().buildingType != buildingType)
         {
+            print("100000. BuildingBlock return without setting a Ghost");
+
             return;
         }
 
+        print("100001. BuildingBlock return with a Ghost - Success");
+
         //Reset all ghost before setting a new one
-        if (ghost_LookedAt != blockLookingAt.ghostList[i])
+        if (true /*ghost_LookedAt != blockLookingAt.ghostList[i]*/)
         {
             SetAllGhostState_Off();
             ghost_LookedAt = blockLookingAt.ghostList[i];
