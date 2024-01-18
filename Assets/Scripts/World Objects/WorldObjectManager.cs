@@ -1,20 +1,95 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
 public class WorldObjectManager : Singleton<WorldObjectManager>
 {
-    //public float objectColliderRadius = 5;
-
     [Header("WorldObjects Parent")]
     [SerializeField] GameObject worldObjectParent;
 
     [Header("WorldObjects To Be Saved")]
+    public List<GameObject> worldObjectList = new List<GameObject>();
+    public List<WorldObject> worldObjectList_ToSave = new List<WorldObject>();
+
+    [Header("WorldObjects to be placed into the world")]
     [SerializeField] GameObject chestPrefab;
-    public List<GameObject> worldObjectsList = new List<GameObject>();
-    public List<ObjectClassSavingVariables> worldObjectsInfoList = new List<ObjectClassSavingVariables>();
+
+
+    //--------------------
+
+
+    public void LoadData()
+    {
+        //Load all Objects that's not MoveableObjects
+        #region 
+        //Safty reset the list
+        for (int i = 0; i < worldObjectList.Count; i++)
+        {
+            Destroy(worldObjectList[i]);
+        }
+        worldObjectList.Clear();
+
+        //Insert saved info to list
+        worldObjectList_ToSave = DataManager.Instance.worldObject_StoreList;
+
+        //Instantiate Objects into the world
+        for (int i = 0; i < worldObjectList_ToSave.Count; i++)
+        {
+            worldObjectList.Add(Instantiate(GetSavedObject(worldObjectList_ToSave[i]), worldObjectList_ToSave[i].objectPosition, worldObjectList_ToSave[i].objectRotation) as GameObject);
+            worldObjectList[worldObjectList.Count - 1].transform.parent = worldObjectParent.transform;
+
+            //If it's not a stationary Object, activate Gravity
+            if (!worldObjectList[worldObjectList.Count - 1].GetComponent<InteractableObject>().isMachine)
+            {
+                worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
+                worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
+            }
+        }
+        #endregion
+
+        //Load all MoveableObjects
+        BuildObjectsFromLoad();
+    }
+    void SaveData()
+    {
+        DataManager.Instance.worldObject_StoreList = worldObjectList_ToSave;
+    }
+
+
+    //--------------------
+
+
+    public void WorldObject_SaveState_AddObjectToWorld(Items itemName, GameObject interacteableObject)
+    {
+        WorldObject tempObject = new WorldObject();
+
+        tempObject.objectName = itemName;
+        tempObject.objectPosition = interacteableObject.gameObject.transform.position;
+        tempObject.objectRotation = interacteableObject.gameObject.transform.rotation;
+
+        worldObjectList_ToSave.Add(tempObject);
+
+        SaveData();
+    }
+    public void WorldObject_SaveState_RemoveObjectFromWorld(GameObject objectToRemove)
+    {
+        for (int i = 0; i < worldObjectList.Count; i++)
+        {
+            if (worldObjectList[i] == objectToRemove)
+            {
+                worldObjectList.RemoveAt(i);
+                worldObjectList_ToSave.RemoveAt(i);
+
+                break;
+            }
+        }
+
+        SaveData();
+    }
 
 
     //--------------------
@@ -69,23 +144,6 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
 
     //--------------------
 
-
-    void SaveData()
-    {
-        //DataManager.instance.worldObjects_StoreList = worldObjectsInfoList;
-        
-        //print("WorldObjectManager - All data Saved");
-    }
-    public void LoadData()
-    {
-        //DataPersistanceManager.instance.LoadGame();
-        //worldObjectsInfoList = DataManager.instance.worldObjects_StoreList;
-
-        BuildObjectsFromLoad();
-
-        //print("WorldObjectManager - All data Loaded");
-    }
-
     void StoreObjectToSave(int i)
     {
         //worldObjectsInfoList[i].objectType = ObjectType.Inventory;
@@ -115,4 +173,31 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
         //    }
         //}
     }
+
+
+    //--------------------
+
+
+    GameObject GetSavedObject(WorldObject worldObj)
+    {
+        if (worldObj.objectName != Items.None)
+        {
+            return MainManager.Instance.GetItem(worldObj.objectName).worldObjectPrefab;
+        }
+        else
+        {
+            return null;
+        }
+    }
+}
+
+[Serializable]
+public struct WorldObject
+{
+    [Header("General")]
+    public Items objectName;
+
+    [Header("Position")]
+    public Vector3 objectPosition;
+    public Quaternion objectRotation;
 }

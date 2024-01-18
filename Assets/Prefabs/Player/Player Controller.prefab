@@ -393,8 +393,6 @@ MonoBehaviour:
   handDropPoint: {fileID: 5115784751274466938}
   worldObject_Parent: {fileID: 1547551414693340152}
   inventories: []
-  worldObjectList: []
-  worldObjectSaveList: []
   itemSlotList_Player: []
   itemSlotList_Chest: []
   chestInventoryOpen: 0
@@ -442,11 +440,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39d170c9cc6d5a489bb44f956df1c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldObjectParent: {fileID: 0}
+  worldObjectParent: {fileID: 1547551414693340152}
+  worldObjectList: []
+  worldObjectList_ToSave: []
   chestPrefab: {fileID: 1475861760331519805, guid: d53b9396a6b954d40b17f085e68a90db,
     type: 3}
-  worldObjectsList: []
-  worldObjectsInfoList: []
 --- !u!1 &471958505505139135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,9 +1369,13 @@ MonoBehaviour:
   selectedSlot_Store: 0
   hotbarItem_StoreList: 
   buildingBlockList_StoreList: []
-  buildingType_Store: 0
-  buildingMaterial_Store: 0
   placedMoveableObjectsList_StoreList: []
+  moveableObjectSelected_Store:
+    moveableObjectType: 0
+    machineType: 0
+    furnitureType: 0
+    buildingType: 0
+    buildingMaterial: 0
 --- !u!1 &1100630027922050337
 GameObject:
   m_ObjectHideFlags: 0
@@ -4327,6 +4329,12 @@ MonoBehaviour:
   objectToMove: {fileID: 0}
   placedMoveableObjectsList: []
   placedMoveableObjectsList_ToSave: []
+  moveableObjectSelected_ToSave:
+    moveableObjectType: 0
+    machineType: 0
+    furnitureType: 0
+    buildingType: 0
+    buildingMaterial: 0
 --- !u!1 &2885891136554884609
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,15 +55,7 @@ public class InteractableObject : MonoBehaviour
                 if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
                 {
                     //Remove Object from the worldObjectList
-                    for (int i = 0; i < InventoryManager.Instance.worldObjectList.Count; i++)
-                    {
-                        if (gameObject == InventoryManager.Instance.worldObjectList[i].gameObject)
-                        {
-                            InventoryManager.Instance.worldObjectList.RemoveAt(i);
-
-                            break;
-                        }
-                    }
+                    WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
 
                     //Destroy gameObject
                     DestroyThisObject();

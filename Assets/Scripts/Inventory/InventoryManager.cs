@@ -23,8 +23,6 @@ public class InventoryManager : Singleton<InventoryManager>
 
     [Header("Lists")]
     public List<Inventory> inventories = new List<Inventory>();
-    public List<GameObject> worldObjectList = new List<GameObject>();
-    public List<WorldObject> worldObjectSaveList = new List<WorldObject>();
 
     public List<GameObject> itemSlotList_Player = new List<GameObject>();
     public List<GameObject> itemSlotList_Chest = new List<GameObject>();
@@ -70,54 +68,14 @@ public class InventoryManager : Singleton<InventoryManager>
         //Set Player position - The "LoadData()" doesen't activate in the relevant playerMovement script
         MainManager.Instance.player.transform.SetPositionAndRotation(DataManager.Instance.playerPos_Store, DataManager.Instance.playerRot_Store);
         #endregion
-
-        #region WorldObjectList
-        //Setup WorldObjectList
-        for (int i = 0; i < worldObjectList.Count; i++)
-        {
-            Destroy(worldObjectList[i]);
-        }
-        worldObjectList.Clear();
-
-        worldObjectSaveList = DataManager.Instance.worldObject_StoreList;
-
-        for (int i = 0; i < worldObjectSaveList.Count; i++)
-        {
-            worldObjectList.Add(Instantiate(SetupWorldObjectFromSave(worldObjectSaveList[i]), worldObjectSaveList[i].objectPosition, worldObjectSaveList[i].objectRotation) as GameObject);
-            worldObjectList[worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
-
-            //If it's not a stationary Object, activate Gravity
-            if (!worldObjectList[worldObjectList.Count - 1].GetComponent<InteractableObject>().isMachine)
-            {
-                worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
-                worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
-            }
-        }
-        #endregion
     }
     public void SaveData()
     {
         DataManager.Instance.Inventories_StoreList = inventories;
-
-        //Save WorldObject into a saveable list
-        List<WorldObject> tempList = new List<WorldObject>();
-        for (int i = 0; i < worldObjectList.Count; i++)
-        {
-            WorldObject temp = new WorldObject();
-
-            temp.objectName = worldObjectList[i].GetComponent<InteractableObject>().itemName;
-            temp.objectPosition = worldObjectList[i].transform.position;
-            temp.objectRotation = worldObjectList[i].transform.rotation;
-
-            tempList.Add(temp);
-        }
-
-        DataManager.Instance.worldObject_StoreList = tempList;
     }
     public void SaveData(ref GameData gameData)
     {
         DataManager.Instance.Inventories_StoreList = inventories;
-        DataManager.Instance.worldObject_StoreList = worldObjectSaveList;
 
         print("Save_Inventories");
     }
@@ -262,8 +220,7 @@ public class InventoryManager : Singleton<InventoryManager>
     }
     public void RemoveItemFromInventory(int inventory, Items itemName)
     {
-        //print("100. item : " + itemName + " is removed from inventory: " + inventory);
-
+        //From inventory to World
         for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
         {
             if (inventories[inventory].itemsInInventory[i].itemName == itemName)
@@ -278,12 +235,15 @@ public class InventoryManager : Singleton<InventoryManager>
         PrepareInventoryUI(inventory, false);
 
         //Spawn item into the World
-        worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, handDropPoint.transform.position, Quaternion.identity) as GameObject);
-        worldObjectList[worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
+        WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, handDropPoint.transform.position, Quaternion.identity) as GameObject);
+        WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
 
         //Set Gravity true on the worldObject
-        worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
-        worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
+        WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
+        WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
+
+        //Update item in the World
+        WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName, WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]);
 
         //If item is removed from the inventory, update the Hotbar
         if (inventory <= 0)
@@ -297,7 +257,7 @@ public class InventoryManager : Singleton<InventoryManager>
     }
     public void RemoveItemFromInventory(int inventory, Items itemName, bool itemIsMoved)
     {
-        //print("200. item : " + itemName + " is removed from inventory: " + inventory);
+        //From inventory to another Inventory or crafting
 
         for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
         {
@@ -695,21 +655,6 @@ public class InventoryManager : Singleton<InventoryManager>
     }
 
 
-    //--------------------
-
-
-    GameObject SetupWorldObjectFromSave(WorldObject worldObj)
-    {
-        if (worldObj.objectName != Items.None)
-        {
-            return MainManager.Instance.GetItem(worldObj.objectName).worldObjectPrefab;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
 
     //--------------------
 
@@ -770,12 +715,4 @@ public class InventoryItem
 
     public int inventoryIndex;
     public int itemID; //Find all other item in the UI grid with this ID
-}
-
-[Serializable]
-public struct WorldObject
-{
-    public Items objectName;
-    public Vector3 objectPosition;
-    public Quaternion objectRotation;
 }
