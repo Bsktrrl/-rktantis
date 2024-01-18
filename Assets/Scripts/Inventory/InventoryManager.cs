@@ -80,6 +80,7 @@ public class InventoryManager : Singleton<InventoryManager>
         worldObjectList.Clear();
 
         worldObjectSaveList = DataManager.Instance.worldObject_StoreList;
+
         for (int i = 0; i < worldObjectSaveList.Count; i++)
         {
             worldObjectList.Add(Instantiate(SetupWorldObjectFromSave(worldObjectSaveList[i]), worldObjectSaveList[i].objectPosition, worldObjectSaveList[i].objectRotation) as GameObject);
@@ -110,6 +111,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
             tempList.Add(temp);
         }
+
         DataManager.Instance.worldObject_StoreList = tempList;
     }
     public void SaveData(ref GameData gameData)

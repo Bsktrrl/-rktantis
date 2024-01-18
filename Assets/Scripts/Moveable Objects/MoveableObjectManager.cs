@@ -66,7 +66,13 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         buildingMaterial_Selected = temp.buildingMaterial;
 
         //Set BuildingHammer UpToDate
-        EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+        if (EquippmentManager.instance.toolHolderParent)
+        {
+            if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>())
+            {
+                EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+            }
+        }
     }
     public void SaveGame()
     {
