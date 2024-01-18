@@ -120,12 +120,27 @@ public class BuildingManager : Singleton<BuildingManager>
         MoveableObjectManager.Instance.buildingMaterial_Selected = BuildingMaterial.None;
     }
 
+    private void Start()
+    {
+        buildingRemoveRequirement_Parent.SetActive(false);
+        buildingRequirement_Parent.SetActive(false);
+    }
+
     private void Update()
     {
         if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.BuildingHammer)
         {
             RaycastSetup_Hammer();
-            buildingRequirement_Parent.SetActive(true);
+
+            if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+            {
+                buildingRequirement_Parent.SetActive(false);
+            }
+            else
+            {
+                buildingRequirement_Parent.SetActive(true);
+            }
+
             buildingRemoveRequirement_Parent.SetActive(false);
 
             buildingBlockLookingAt_Axe = null;
@@ -142,7 +157,14 @@ public class BuildingManager : Singleton<BuildingManager>
             }
             else if (MainManager.Instance.menuStates == MenuStates.None)
             {
-                buildingRequirement_Parent.SetActive(true);
+                if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+                {
+                    buildingRequirement_Parent.SetActive(false);
+                }
+                else
+                {
+                    buildingRequirement_Parent.SetActive(true);
+                }
             }
         }
         else if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.Axe)
@@ -182,12 +204,6 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void LoadData()
     {
-        //Set data based on what's saved
-        #region
-        MoveableObjectManager.Instance.buildingType_Selected = DataManager.Instance.buildingType_Store;
-        MoveableObjectManager.Instance.buildingMaterial_Selected = DataManager.Instance.buildingMaterial_Store;
-        #endregion
-
         //If data has not saved, set to "Wood Floor"
         #region
         if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.None || MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.None)
@@ -255,10 +271,6 @@ public class BuildingManager : Singleton<BuildingManager>
             tempList.Add(temp);
         }
         DataManager.Instance.buildingBlockList_StoreList = tempList;
-
-        //Save selected Building Type and Material
-        DataManager.Instance.buildingType_Store = MoveableObjectManager.Instance.buildingType_Selected;
-        DataManager.Instance.buildingMaterial_Store = MoveableObjectManager.Instance.buildingMaterial_Selected;
 
         print("Save buildingBlocks");
     }
@@ -614,9 +626,8 @@ public class BuildingManager : Singleton<BuildingManager>
                     }
                 }
 
-                //If raycarsting is not on a BuidingDirectionMarkers or ghostBlock
-                if ((blockDirection_X != BlockDirection_A.None
-                    && blockDirection_Y != BlockDirection_B.None)
+                //If raycasting isn't on a BuidingDirectionMarkers or ghostBlock
+                if ((blockDirection_X != BlockDirection_A.None && blockDirection_Y != BlockDirection_B.None)
                     || blockDirection_X != BlockDirection_A.None
                     || blockDirection_Y != BlockDirection_B.None)
                 {
@@ -635,8 +646,7 @@ public class BuildingManager : Singleton<BuildingManager>
         else
         {
             //When raycast doesn't hit any BuildingObjects
-            if ((blockDirection_X != BlockDirection_A.None
-                && blockDirection_Y != BlockDirection_B.None)
+            if ((blockDirection_X != BlockDirection_A.None && blockDirection_Y != BlockDirection_B.None)
                 || blockDirection_X != BlockDirection_A.None
                 || blockDirection_Y != BlockDirection_B.None)
             {
@@ -902,11 +912,15 @@ public class BuildingManager : Singleton<BuildingManager>
     {
         if (blockLookingAt.ghostList[i].GetComponent<Building_Ghost>().buildingType != buildingType)
         {
+            print("100000. BuildingBlock return without setting a Ghost");
+
             return;
         }
 
+        print("100001. BuildingBlock return with a Ghost - Success");
+
         //Reset all ghost before setting a new one
-        if (ghost_LookedAt != blockLookingAt.ghostList[i])
+        if (true /*ghost_LookedAt != blockLookingAt.ghostList[i]*/)
         {
             SetAllGhostState_Off();
             ghost_LookedAt = blockLookingAt.ghostList[i];
@@ -2266,6 +2280,16 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void SetBuildingRequirements(BuildingBlock_Parent blockParent, GameObject ParentObject)
     {
+        //If Selected Object is Empty
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+        {
+            buildingRequirement_Parent.SetActive(false);
+
+            return;
+        }
+
+        buildingRequirement_Parent.SetActive(true);
+
         //Remove all childs
         for (int i = ParentObject.transform.childCount - 1; i >= 0; i--)
         {
@@ -2331,6 +2355,16 @@ public class BuildingManager : Singleton<BuildingManager>
     }
     public void SetBuildingRequirements(MoveableObjectInfo moveableObject, GameObject ParentObject)
     {
+        //If Selected Object is Empty
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+        {
+            buildingRequirement_Parent.SetActive(false);
+
+            return;
+        }
+
+        buildingRequirement_Parent.SetActive(true);
+
         //Remove all childs
         for (int i = ParentObject.transform.childCount - 1; i >= 0; i--)
         {

@@ -17,8 +17,6 @@ public class GameData
 
     //BuidingSystem
     [HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_SaveList = new List<BuildingBlockSaveList>();
-    [HideInInspector] public BuildingType buildingType_Save = new BuildingType();
-    [HideInInspector] public BuildingMaterial buildingMaterial_Save = new BuildingMaterial();
 
     //Hotbar
     [HideInInspector] public int selectedSlot_Save = new int();
@@ -26,6 +24,7 @@ public class GameData
 
     //MoveableObjects
     [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_SaveList = new List<MoveableObject_ToSave>();
+    [HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Save = new MoveableObjectSelected_ToSave();
 
 
     //--------------------

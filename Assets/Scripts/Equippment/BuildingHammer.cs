@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BuildingHammer : MonoBehaviour
+public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
 {
     [SerializeField] LayerMask layerMask_Ground;
     [SerializeField] LayerMask layerMask_BuildingBlock;
@@ -23,6 +23,8 @@ public class BuildingHammer : MonoBehaviour
         PlayerButtonManager.isPressed_MoveableRotation_Left += ManipulateObjectRotation_Left;
 
         rotationSpeed = 150;
+
+        SetNewSelectedBlock();
     }
     private void Update()
     {
@@ -39,6 +41,8 @@ public class BuildingHammer : MonoBehaviour
         //Reset Rotation
         rotationValue = 0;
 
+        BuildingManager.Instance.buildingRequirement_Parent.SetActive(true);
+
         if (tempObj_Selected)
         {
             if (tempObj_Selected.GetComponent<InteractableObject>())
@@ -52,9 +56,15 @@ public class BuildingHammer : MonoBehaviour
                 tempObj_Selected = null;
             }
         }
-        
+
+        //If selected Object is Empty
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+        {
+            tempObj_Selected = null;
+        }
+
         //If selected Object is a BuildingBlock
-        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
         {
             if (MoveableObjectManager.Instance.buildingType_Selected != BuildingType.None && MoveableObjectManager.Instance.buildingMaterial_Selected != BuildingMaterial.None)
             {
@@ -157,8 +167,6 @@ public class BuildingHammer : MonoBehaviour
 
         //-----
 
-
-        print("3000. UpdateSelectedBlockPosition");
 
         //Check if item can be placed and change its material accordingly
         if (BuildingManager.Instance.enoughItemsToBuild)
@@ -360,5 +368,7 @@ public class BuildingHammer : MonoBehaviour
     {
         PlayerButtonManager.isPressed_MoveableRotation_Right -= ManipulateObjectRotation_Right;
         PlayerButtonManager.isPressed_MoveableRotation_Left -= ManipulateObjectRotation_Left;
+
+        BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
     }
 }
