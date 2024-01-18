@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BuildingHammer : MonoBehaviour
+public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
 {
     [SerializeField] LayerMask layerMask_Ground;
     [SerializeField] LayerMask layerMask_BuildingBlock;
@@ -23,6 +23,8 @@ public class BuildingHammer : MonoBehaviour
         PlayerButtonManager.isPressed_MoveableRotation_Left += ManipulateObjectRotation_Left;
 
         rotationSpeed = 150;
+
+        SetNewSelectedBlock();
     }
     private void Update()
     {
@@ -38,6 +40,8 @@ public class BuildingHammer : MonoBehaviour
     {
         //Reset Rotation
         rotationValue = 0;
+
+        BuildingManager.Instance.buildingRequirement_Parent.SetActive(true);
 
         if (tempObj_Selected)
         {
@@ -360,5 +364,7 @@ public class BuildingHammer : MonoBehaviour
     {
         PlayerButtonManager.isPressed_MoveableRotation_Right -= ManipulateObjectRotation_Right;
         PlayerButtonManager.isPressed_MoveableRotation_Left -= ManipulateObjectRotation_Left;
+
+        BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
     }
 }

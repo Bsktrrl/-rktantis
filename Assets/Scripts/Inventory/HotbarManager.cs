@@ -90,7 +90,7 @@ public class HotbarManager : Singleton<HotbarManager>
     //--------------------
 
 
-    void ChangeItemInHand()
+    public void ChangeItemInHand()
     {
         //if selected item is empty, leave the hand empty
         if (selectedItem == Items.None)
@@ -98,7 +98,10 @@ public class HotbarManager : Singleton<HotbarManager>
             //Remove all equipped models
             for (int i = 0; i < EuipmentList.Count; i++)
             {
-                EuipmentList[i].GetComponent<EquippedItem>().DestroyObject();
+                if (EuipmentList[i].GetComponent<EquippedItem>())
+                {
+                    EuipmentList[i].GetComponent<EquippedItem>().DestroyObject();
+                }
             }
 
             EuipmentList.Clear();

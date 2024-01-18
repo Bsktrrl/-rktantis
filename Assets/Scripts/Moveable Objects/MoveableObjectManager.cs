@@ -30,6 +30,8 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     [Header("Object Placed List")]
     public List<GameObject> placedMoveableObjectsList = new List<GameObject>();
     public List<MoveableObject_ToSave> placedMoveableObjectsList_ToSave = new List<MoveableObject_ToSave>();
+
+    public MoveableObjectSelected_ToSave moveableObjectSelected_ToSave = new MoveableObjectSelected_ToSave();
     #endregion
 
 
@@ -53,11 +55,34 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
                 placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].transform.parent = moveableObject_Parent.transform;
             }
         }
+
+        //Load State for MoveableObject selected from BuildingHammer
+        MoveableObjectSelected_ToSave temp = new MoveableObjectSelected_ToSave();
+        temp = DataManager.Instance.moveableObjectSelected_Store;
+        moveableObjectType = temp.moveableObjectType;
+        machineType = temp.machineType;
+        furnitureType = temp.furnitureType;
+        buildingType_Selected = temp.buildingType;
+        buildingMaterial_Selected = temp.buildingMaterial;
+
+        //Set BuildingHammer UpToDate
+        EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
     }
-    void SaveGame()
+    public void SaveGame()
     {
         print("placedMoveableObjectsList_ToSave SAVED");
+
+        //Save all MoveableObjects placed into the world
         DataManager.Instance.placedMoveableObjectsList_StoreList = placedMoveableObjectsList_ToSave;
+
+        //Save State for MoveableObject selected from BuildingHammer
+        MoveableObjectSelected_ToSave temp = new MoveableObjectSelected_ToSave();
+        temp.moveableObjectType = moveableObjectType;
+        temp.machineType = machineType;
+        temp.furnitureType = furnitureType;
+        temp.buildingType = buildingType_Selected;
+        temp.buildingMaterial = buildingMaterial_Selected;
+        DataManager.Instance.moveableObjectSelected_Store = temp;
     }
 
     GameObject GetObjectFrom_SO(MoveableObjectType moveableObjectType, MachineType machineType, FurnitureType furnitureType)
@@ -230,4 +255,15 @@ public class MoveableObject_ToSave
 
     public Vector3 objectPos = new Vector3();
     public Quaternion objectRot = new Quaternion();
+}
+
+[Serializable]
+public class MoveableObjectSelected_ToSave
+{
+    public MoveableObjectType moveableObjectType = MoveableObjectType.None;
+    public MachineType machineType = MachineType.None;
+    public FurnitureType furnitureType = FurnitureType.None;
+
+    public BuildingType buildingType = BuildingType.None;
+    public BuildingMaterial buildingMaterial = BuildingMaterial.None;
 }

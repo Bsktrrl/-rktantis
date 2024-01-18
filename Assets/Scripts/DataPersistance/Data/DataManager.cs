@@ -35,6 +35,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
     //MoveableObjects
     [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_StoreList = new List<MoveableObject_ToSave>();
+    [HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Store = new MoveableObjectSelected_ToSave();
 
 
     //--------------------
@@ -59,6 +60,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.buildingMaterial_Store = gameData.buildingMaterial_Save;
 
         this.placedMoveableObjectsList_StoreList = gameData.placedMoveableObjectsList_SaveList;
+        this.moveableObjectSelected_Store = gameData.moveableObjectSelected_Save;
         #endregion
 
         //Load the saved data into the project
@@ -103,6 +105,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.buildingMaterial_Save = this.buildingMaterial_Store;
 
         gameData.placedMoveableObjectsList_SaveList = this.placedMoveableObjectsList_StoreList;
+        gameData.moveableObjectSelected_Save = this.moveableObjectSelected_Store;
 
         print("Data has Saved");
     }

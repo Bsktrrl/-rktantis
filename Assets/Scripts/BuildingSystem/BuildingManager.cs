@@ -120,6 +120,12 @@ public class BuildingManager : Singleton<BuildingManager>
         MoveableObjectManager.Instance.buildingMaterial_Selected = BuildingMaterial.None;
     }
 
+    private void Start()
+    {
+        buildingRemoveRequirement_Parent.SetActive(false);
+        buildingRequirement_Parent.SetActive(false);
+    }
+
     private void Update()
     {
         if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.BuildingHammer)

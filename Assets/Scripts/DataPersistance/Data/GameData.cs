@@ -26,6 +26,7 @@ public class GameData
 
     //MoveableObjects
     [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_SaveList = new List<MoveableObject_ToSave>();
+    [HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Save = new MoveableObjectSelected_ToSave();
 
 
     //--------------------

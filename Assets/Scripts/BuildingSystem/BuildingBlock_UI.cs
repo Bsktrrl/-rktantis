@@ -80,5 +80,6 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
         }
 
         BuildingManager.Instance.SaveData();
+        MoveableObjectManager.Instance.SaveGame();
     }
 }

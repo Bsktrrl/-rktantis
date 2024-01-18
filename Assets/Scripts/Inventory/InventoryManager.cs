@@ -329,12 +329,14 @@ public class InventoryManager : Singleton<InventoryManager>
             AddItemToInventory(0, obj, true);
         }
 
-
         RemoveInventoriesUI();
         PrepareInventoryUI(0, true);
         PrepareInventoryUI(chestInventoryOpen, true);
 
         CheckHotbarItemInInventory();
+
+        //Update the Hand to see if slot is empty
+        HotbarManager.Instance.ChangeItemInHand();
     }
 
     public void CheckHotbarItemInInventory()
@@ -365,8 +367,11 @@ public class InventoryManager : Singleton<InventoryManager>
                     HotbarManager.Instance.selectedItem = Items.None;
                 }
 
-                HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().RemoVeHotbarSlotImage();
+                HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
                 HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().ResetHotbarItem();
+
+                //Update the Hand to see if slot is empty
+                HotbarManager.Instance.ChangeItemInHand();
             }
         }
     }
@@ -384,6 +389,7 @@ public class InventoryManager : Singleton<InventoryManager>
             BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
         }
     }
+
 
     //--------------------
 

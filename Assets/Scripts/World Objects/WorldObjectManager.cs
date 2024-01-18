@@ -40,30 +40,30 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
     }
     //public void DeleteObjectFromTheWorld(ObjectType obj, int worldObjectIndex, int inventoryIndex)
     //{
-    //    ////Remove selected object from both lists
-    //    //worldObjectsList.RemoveAt(worldObjectIndex);
-    //    //worldObjectsInfoList.RemoveAt(worldObjectIndex);
+    //    //Remove selected object from both lists
+    //    worldObjectsList.RemoveAt(worldObjectIndex);
+    //    worldObjectsInfoList.RemoveAt(worldObjectIndex);
 
-    //    ////If object is an Inventory also execute this
-    //    //if (obj == ObjectType.Inventory && inventoryIndex > 1) //>1 because of Main inventory (0) and SelectPanel (1)
-    //    //{
-    //    //    InventoryManager.instance.RemoveInventory(inventoryIndex);
+    //    //If object is an Inventory also execute this
+    //    if (obj == ObjectType.Inventory && inventoryIndex > 1) //>1 because of Main inventory (0) and SelectPanel (1)
+    //    {
+    //        InventoryManager.instance.RemoveInventory(inventoryIndex);
 
-    //    //    for (int i = worldObjectIndex; i < worldObjectsList.Count; i++)
-    //    //    {
-    //    //        worldObjectsList[i].GetComponent<InventoryObject>().inventoryIndex -= 1;
-    //    //        worldObjectsInfoList[i].inventoryIndex -= 1;
-    //    //    }
-    //    //}
+    //        for (int i = worldObjectIndex; i < worldObjectsList.Count; i++)
+    //        {
+    //            worldObjectsList[i].GetComponent<InventoryObject>().inventoryIndex -= 1;
+    //            worldObjectsInfoList[i].inventoryIndex -= 1;
+    //        }
+    //    }
 
-    //    ////Shift the index of all GameObjects -1 to match the new list
-    //    //for (int i = worldObjectIndex; i < worldObjectsList.Count; i++)
-    //    //{
-    //    //    worldObjectsList[i].GetComponent<InventoryObject>().objectIndex -= 1;
-    //    //    worldObjectsInfoList[i].worldObjectIndex -= 1;
-    //    //}
+    //    //Shift the index of all GameObjects -1 to match the new list
+    //    for (int i = worldObjectIndex; i < worldObjectsList.Count; i++)
+    //    {
+    //        worldObjectsList[i].GetComponent<InventoryObject>().objectIndex -= 1;
+    //        worldObjectsInfoList[i].worldObjectIndex -= 1;
+    //    }
 
-    //    //Save();
+    //    Save();
     //}
 
 

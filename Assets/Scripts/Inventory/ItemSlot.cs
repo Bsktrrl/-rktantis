@@ -41,8 +41,11 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler
                             && HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName == itemName)
                         {
                             HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName = Items.None;
-                            HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().RemoVeHotbarSlotImage();
+                            HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
                             HotbarManager.Instance.SetSelectedItem();
+
+                            //Update the Hand to see if slot is empty
+                            HotbarManager.Instance.ChangeItemInHand();
 
                             return;
                         }
@@ -56,6 +59,9 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler
                             HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName = itemName;
                             HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().SetHotbarSlotImage();
                             HotbarManager.Instance.SetSelectedItem();
+
+                            //Update the Hand to see if slot is empty
+                            HotbarManager.Instance.ChangeItemInHand();
 
                             return;
                         }
@@ -97,8 +103,11 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler
                             && HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName == itemName)
                         {
                             HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName = Items.None;
-                            HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().RemoVeHotbarSlotImage();
+                            HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
                             HotbarManager.Instance.SetSelectedItem();
+
+                            //Update the Hand to see if slot is empty
+                            HotbarManager.Instance.ChangeItemInHand();
 
                             return;
                         }
@@ -112,6 +121,9 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler
                             HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName = itemName;
                             HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().SetHotbarSlotImage();
                             HotbarManager.Instance.SetSelectedItem();
+
+                            //Update the Hand to see if slot is empty
+                            HotbarManager.Instance.ChangeItemInHand();
 
                             return;
                         }
