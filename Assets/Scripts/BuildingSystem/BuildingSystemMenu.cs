@@ -49,7 +49,15 @@ public class BuildingSystemMenu : MonoBehaviour
 
     public void SetSelectedImage(Sprite sprite)
     {
-        selectedBuildingBlockImage.sprite = sprite;
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+        {
+            selectedBuildingBlockImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            selectedBuildingBlockImage.gameObject.SetActive(true);
+            selectedBuildingBlockImage.sprite = sprite;
+        }
     }
     
 
