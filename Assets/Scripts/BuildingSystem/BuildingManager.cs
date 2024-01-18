@@ -188,12 +188,6 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void LoadData()
     {
-        //Set data based on what's saved
-        #region
-        MoveableObjectManager.Instance.buildingType_Selected = DataManager.Instance.buildingType_Store;
-        MoveableObjectManager.Instance.buildingMaterial_Selected = DataManager.Instance.buildingMaterial_Store;
-        #endregion
-
         //If data has not saved, set to "Wood Floor"
         #region
         if (MoveableObjectManager.Instance.buildingType_Selected == BuildingType.None || MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.None)
@@ -261,10 +255,6 @@ public class BuildingManager : Singleton<BuildingManager>
             tempList.Add(temp);
         }
         DataManager.Instance.buildingBlockList_StoreList = tempList;
-
-        //Save selected Building Type and Material
-        DataManager.Instance.buildingType_Store = MoveableObjectManager.Instance.buildingType_Selected;
-        DataManager.Instance.buildingMaterial_Store = MoveableObjectManager.Instance.buildingMaterial_Selected;
 
         print("Save buildingBlocks");
     }

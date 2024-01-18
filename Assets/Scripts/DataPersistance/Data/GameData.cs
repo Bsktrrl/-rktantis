@@ -17,8 +17,6 @@ public class GameData
 
     //BuidingSystem
     [HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_SaveList = new List<BuildingBlockSaveList>();
-    [HideInInspector] public BuildingType buildingType_Save = new BuildingType();
-    [HideInInspector] public BuildingMaterial buildingMaterial_Save = new BuildingMaterial();
 
     //Hotbar
     [HideInInspector] public int selectedSlot_Save = new int();
