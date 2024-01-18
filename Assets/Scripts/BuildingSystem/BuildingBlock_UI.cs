@@ -30,8 +30,28 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
 
         BuildingSystemMenu.instance.SetSelectedImage(gameObject.GetComponent<Image>().sprite);
 
+        //Hide Panel if Object is Empty
+        if (objectType == MoveableObjectType.None)
+        {
+            BuildingSystemMenu.instance.buildingRequirement_Parent.SetActive(false);
+        }
+        else
+        {
+            BuildingSystemMenu.instance.buildingRequirement_Parent.SetActive(true);
+        }
+
+        //If selected Object is Empty
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+        {
+            //Update "Free Block" if Hammer is selected
+            if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            {
+                EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+            }
+        }
+
         //If selected Object is a BuildingBlock
-        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
         {
             BuildingBlock_Parent tempParent = BuildingManager.Instance.GetBuildingBlock(buildingType, buildingMaterial);
             if (tempParent != null)

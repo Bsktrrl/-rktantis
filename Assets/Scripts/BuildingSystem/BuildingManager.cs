@@ -131,7 +131,16 @@ public class BuildingManager : Singleton<BuildingManager>
         if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.BuildingHammer)
         {
             RaycastSetup_Hammer();
-            buildingRequirement_Parent.SetActive(true);
+
+            if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+            {
+                buildingRequirement_Parent.SetActive(false);
+            }
+            else
+            {
+                buildingRequirement_Parent.SetActive(true);
+            }
+
             buildingRemoveRequirement_Parent.SetActive(false);
 
             buildingBlockLookingAt_Axe = null;
@@ -148,7 +157,14 @@ public class BuildingManager : Singleton<BuildingManager>
             }
             else if (MainManager.Instance.menuStates == MenuStates.None)
             {
-                buildingRequirement_Parent.SetActive(true);
+                if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+                {
+                    buildingRequirement_Parent.SetActive(false);
+                }
+                else
+                {
+                    buildingRequirement_Parent.SetActive(true);
+                }
             }
         }
         else if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.Axe)
@@ -2264,6 +2280,16 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void SetBuildingRequirements(BuildingBlock_Parent blockParent, GameObject ParentObject)
     {
+        //If Selected Object is Empty
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+        {
+            buildingRequirement_Parent.SetActive(false);
+
+            return;
+        }
+
+        buildingRequirement_Parent.SetActive(true);
+
         //Remove all childs
         for (int i = ParentObject.transform.childCount - 1; i >= 0; i--)
         {
@@ -2329,6 +2355,16 @@ public class BuildingManager : Singleton<BuildingManager>
     }
     public void SetBuildingRequirements(MoveableObjectInfo moveableObject, GameObject ParentObject)
     {
+        //If Selected Object is Empty
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+        {
+            buildingRequirement_Parent.SetActive(false);
+
+            return;
+        }
+
+        buildingRequirement_Parent.SetActive(true);
+
         //Remove all childs
         for (int i = ParentObject.transform.childCount - 1; i >= 0; i--)
         {

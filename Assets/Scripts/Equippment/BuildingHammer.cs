@@ -56,9 +56,15 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
                 tempObj_Selected = null;
             }
         }
-        
+
+        //If selected Object is Empty
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+        {
+            tempObj_Selected = null;
+        }
+
         //If selected Object is a BuildingBlock
-        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
         {
             if (MoveableObjectManager.Instance.buildingType_Selected != BuildingType.None && MoveableObjectManager.Instance.buildingMaterial_Selected != BuildingMaterial.None)
             {
@@ -161,8 +167,6 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
 
         //-----
 
-
-        //print("3000. UpdateSelectedBlockPosition");
 
         //Check if item can be placed and change its material accordingly
         if (BuildingManager.Instance.enoughItemsToBuild)
