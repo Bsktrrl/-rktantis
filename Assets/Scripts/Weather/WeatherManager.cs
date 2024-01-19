@@ -9,16 +9,26 @@ public class WeatherManager : Singleton<WeatherManager>
 
     [SerializeField] GameObject temperatureDisplay_Parent;
     [SerializeField] TextMeshProUGUI temperatureDisplay;
+    [SerializeField] TextMeshProUGUI playerTemperatureDisplay;
     public float temperature;
     public float playerTemperature;
 
     public int maxTemperature = 50;
     public int minTemperature = -10;
+    public int idealTemperature = 20;
 
     [Header("Temperature Resistances")]
+    public float coverValue;
     public float equippment;
     public float skillTree;
     public float waterCooler;
+
+    [Header("Cover Values")]
+    public float wood_Cover = 5;
+    public float stone_Cover = 10;
+    public float iron_Cover = 15;
+
+    RaycastHit hit;
 
 
     //--------------------
@@ -28,8 +38,9 @@ public class WeatherManager : Singleton<WeatherManager>
     {
         SetSunRotation();
 
+        CheckIfPlayerIsInTheCoverageOfBuildingBlock();
         SetTemperature();
-        SetPlayerTemperature(equippment, skillTree, waterCooler);
+        SetPlayerTemperature(coverValue);
         SetTemperatureDisplay();
     }
 
@@ -75,15 +86,111 @@ public class WeatherManager : Singleton<WeatherManager>
             temperature = Mathf.FloorToInt(maxTemperature + calculatingTemperature);
         }
     }
-    void SetPlayerTemperature(float equippment, float skillTree, float waterCooler)
+    void SetPlayerTemperature(float coverValue)
     {
-        playerTemperature = temperature;
-        playerTemperature += equippment;
-        playerTemperature += skillTree;
-        playerTemperature += waterCooler;
+        //Set Temperature for BuildingBlock Coverage (doesn't affect temperature under idealTemperature)
+        #region
+        float temperatureResistance = coverValue;
+        float awayFromIdealtemperature = Mathf.Abs(temperature - idealTemperature);
+
+        if (temperature >= idealTemperature)
+        {
+            if (temperatureResistance < awayFromIdealtemperature)
+            {
+                playerTemperature = temperature - temperatureResistance;
+            }
+            else if (temperatureResistance >= awayFromIdealtemperature)
+            {
+                playerTemperature = idealTemperature;
+            }
+        }
+        else
+        {
+            playerTemperature = temperature;
+        }
+        //else if (temperature < idealTemperature)
+        //{
+        //    if (temperatureResistance < awayFromIdealtemperature)
+        //    {
+        //        playerTemperature = temperature + temperatureResistance;
+        //    }
+        //    else if (temperatureResistance >= awayFromIdealtemperature)
+        //    {
+        //        playerTemperature = idealTemperature;
+        //    }
+        //}
+        #endregion
     }
     void SetTemperatureDisplay()
     {
         temperatureDisplay.text = temperature + "°C";
+        playerTemperatureDisplay.text = playerTemperature + "°C";
+    }
+
+
+    //--------------------
+
+
+    void CheckIfPlayerIsInTheCoverageOfBuildingBlock()
+    {
+        //Check if there is daylight
+        if (TimeManager.Instance.timeOfDay == TimeOfDay.Night) { return; }
+
+
+        //-----
+
+
+        float maxRange = 100;
+
+        Vector3 sunDirection = sun_Light.transform.forward;
+
+        if (Physics.Raycast(MainManager.Instance.player.transform.position, -sunDirection, out hit, maxRange))
+        {
+            if (hit.transform.CompareTag("BuildingBlock"))
+            {
+                if (hit.transform.gameObject.GetComponent<BuildingBlock>())
+                {
+                    //If standing in a shadow from a Wood Block
+                    if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
+                    {
+                        print("Stands behind a Wood Block");
+
+                        coverValue = wood_Cover;
+                    }
+
+                    //If standing in a shadow from a Stone Block
+                    else if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Stone)
+                    {
+                        print("Stands behind a Stone Block");
+
+                        coverValue = stone_Cover;
+                    }
+
+                    //If standing in a shadow from a Iron Block
+                    else if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Iron)
+                    {
+                        print("Stands behind a Iron Block");
+
+                        coverValue = iron_Cover;
+                    }
+                    else
+                    {
+                        coverValue = 0;
+                    }
+                }
+                else
+                {
+                    coverValue = 0;
+                }
+            }
+            else
+            {
+                coverValue = 0;
+            }
+        }
+        else
+        {
+            coverValue = 0;
+        }
     }
 }
