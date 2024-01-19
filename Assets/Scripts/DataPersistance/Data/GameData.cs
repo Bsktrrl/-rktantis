@@ -26,6 +26,13 @@ public class GameData
     [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_SaveList = new List<MoveableObject_ToSave>();
     [HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Save = new MoveableObjectSelected_ToSave();
 
+    //HealthParameter
+    [HideInInspector] public HealthToSave health_Save = new HealthToSave();
+
+    //Time
+    [HideInInspector] public float currentTime_Save = new float();
+    [HideInInspector] public int day_Save = new int();
+
 
     //--------------------
 
