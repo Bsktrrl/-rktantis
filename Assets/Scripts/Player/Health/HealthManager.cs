@@ -71,12 +71,6 @@ public class HealthManager : Singleton<HealthManager>
             mainHealthValueMultiplier_Image[i].SetActive(false);
         }
         #endregion
-
-        //Set All Multipliers to 0
-        //hungerValueMultiplier_Check = HealthValueMultiplier.None;
-        //heatResistanceValueMultiplier_Check = HealthValueMultiplier.None;
-        //thirstValueMultiplier_Check = HealthValueMultiplier.None;
-        //mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
     }
     private void Update()
     {

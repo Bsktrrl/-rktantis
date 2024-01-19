@@ -2806,7 +2806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4163a7d6935a9449bae3dbdfb6692ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionalLight: {fileID: 5502287358390508000}
+  sun_Light: {fileID: 5502287358390508000}
 --- !u!1 &1700328813379068530
 GameObject:
   m_ObjectHideFlags: 0
@@ -14336,7 +14336,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.7
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
