@@ -7,6 +7,8 @@ public class TimeManager : Singleton<TimeManager>
 {
     public GameObject TimeDisplay_Parent;
 
+    public TimeOfDay timeOfDay;
+
     public TextMeshProUGUI clockText;
     public TextMeshProUGUI dayText;
     float secondsPerMinute = 60f;
@@ -27,6 +29,7 @@ public class TimeManager : Singleton<TimeManager>
     private void Update()
     {
         RunClock();
+        SetTimeOfDay();
 
         SaveData();
     }
@@ -109,6 +112,29 @@ public class TimeManager : Singleton<TimeManager>
             }
         }
     }
+    void SetTimeOfDay()
+    {
+        if (GetTime() <= GetHour(5)) //Night
+        {
+            timeOfDay = TimeOfDay.Night;
+        }
+        else if (GetTime() <= GetHour(7))
+        {
+            timeOfDay = TimeOfDay.Morning;
+        }
+        else if (GetTime() <= GetHour(17))
+        {
+            timeOfDay = TimeOfDay.Day;
+        }
+        else if (GetTime() <= GetHour(19))
+        {
+            timeOfDay = TimeOfDay.Evening;
+        }
+        else
+        {
+            timeOfDay = TimeOfDay.Night;
+        }
+    }
 
     public float GetTime()
     {
@@ -123,4 +149,16 @@ public class TimeManager : Singleton<TimeManager>
             return currentTime;
         }
     }
+    int GetHour(int hour)
+    {
+        return 3600 * hour;
+    }
+}
+
+public enum TimeOfDay
+{
+    Morning,
+    Day,
+    Evening,
+    Night
 }
