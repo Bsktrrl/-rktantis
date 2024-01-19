@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,37 +6,46 @@ using UnityEngine.UI;
 
 public class HealthManager : Singleton<HealthManager>
 {
+    #region Variables
     public GameObject health_Parent;
 
-    public float healthSpeed;
+    public HealthToSave health_ToSave;
+
+    public float hunger_Speed = 0.00001f;
+    public float heatResistance_Speed = 0.00001f;
+    public float thirst_Speed = 0.00001f;
+    public float mainHealth_Speed = 0.000025f;
 
     [Header("Hunger Parameter")]
     [SerializeField] Image hunger_Image;
     public float hungerValue = 1;
     [SerializeField] List<GameObject> hungerValueMultiplier_Image = new List<GameObject>();
-    public HealthValueMultiplier hungerValueMultiplier_Check;
+    public HealthValueMultiplier hungerValueMultiplier_Check = HealthValueMultiplier.None;
     public int healthValueMultiplier;
 
     [Header("HeatResistance Parameter")]
     [SerializeField] Image heatResistance_Image;
     public float heatResistanceValue = 1;
     [SerializeField] List<GameObject> heatResistanceValueMultiplier_Image = new List<GameObject>();
-    public HealthValueMultiplier heatResistanceValueMultiplier_Check;
+    public HealthValueMultiplier heatResistanceValueMultiplier_Check = HealthValueMultiplier.None;
     public int heatResistanceValueMultiplier;
 
     [Header("Thirst Parameter")]
     [SerializeField] Image thirst_Image;
     public float thirstValue = 1;
     [SerializeField] List<GameObject> thirstValueMultiplier_Image = new List<GameObject>();
-    public HealthValueMultiplier thirstValueMultiplier_Check;
+    public HealthValueMultiplier thirstValueMultiplier_Check = HealthValueMultiplier.None;
     public int thirstValueMultiplier;
 
     [Header("MainHealth Parameter")]
     [SerializeField] Image mainHealth_Image;
     public float mainHealthValue = 1;
     [SerializeField] List<GameObject> mainHealthValueMultiplier_Image = new List<GameObject>();
-    public HealthValueMultiplier mainHealthValueMultiplier_Check;
+    public HealthValueMultiplier mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
     public int mainHealthValueMultiplier;
+
+    bool dataHasLoaded = false;
+    #endregion
 
 
     //--------------------
@@ -64,23 +74,71 @@ public class HealthManager : Singleton<HealthManager>
             mainHealthValueMultiplier_Image[i].SetActive(false);
         }
         #endregion
-
-        //Set All Multipliers to 0
-        hungerValueMultiplier_Check = HealthValueMultiplier.None;
-        heatResistanceValueMultiplier_Check = HealthValueMultiplier.None;
-        thirstValueMultiplier_Check = HealthValueMultiplier.None;
-        mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
     }
     private void Update()
     {
-        SetHealthValues();
-        SetHealthDisplay();
+        if (dataHasLoaded)
+        {
+            SetHealthValues();
+            SetHealthDisplay();
+
+            SetPlayerHeatResistance();
+
+            SaveData();
+        }
     }
 
 
     //--------------------
 
-    
+
+    public void LoadData()
+    {
+        HealthToSave tempHealth = DataManager.Instance.health_Store;
+
+        hungerValue = tempHealth.hungerValue;
+        hungerValueMultiplier_Check = tempHealth.hungerValueMultiplier_Check;
+        healthValueMultiplier = tempHealth.healthValueMultiplier;
+
+        heatResistanceValue = tempHealth.heatResistanceValue;
+        heatResistanceValueMultiplier_Check = tempHealth.heatResistanceValueMultiplier_Check;
+        heatResistanceValueMultiplier = tempHealth.heatResistanceValueMultiplier;
+
+        thirstValue = tempHealth.thirstValue;
+        thirstValueMultiplier_Check = tempHealth.thirstValueMultiplier_Check;
+        thirstValueMultiplier = tempHealth.thirstValueMultiplier;
+
+        mainHealthValue = tempHealth.mainHealthValue;
+        mainHealthValueMultiplier_Check = tempHealth.mainHealthValueMultiplier_Check;
+        mainHealthValueMultiplier = tempHealth.mainHealthValueMultiplier;
+
+        dataHasLoaded = true;
+    }
+    void SaveData()
+    {
+        health_ToSave.hungerValue = hungerValue;
+        health_ToSave.hungerValueMultiplier_Check = hungerValueMultiplier_Check;
+        health_ToSave.healthValueMultiplier = healthValueMultiplier;
+
+        health_ToSave.heatResistanceValue = heatResistanceValue;
+        health_ToSave.heatResistanceValueMultiplier_Check = heatResistanceValueMultiplier_Check;
+        health_ToSave.heatResistanceValueMultiplier = heatResistanceValueMultiplier;
+
+        health_ToSave.thirstValue = thirstValue;
+        health_ToSave.thirstValueMultiplier_Check = thirstValueMultiplier_Check;
+        health_ToSave.thirstValueMultiplier = thirstValueMultiplier;
+
+        health_ToSave.mainHealthValue = mainHealthValue;
+        health_ToSave.mainHealthValueMultiplier_Check = mainHealthValueMultiplier_Check;
+        health_ToSave.mainHealthValueMultiplier = mainHealthValueMultiplier;
+
+        DataManager.Instance.health_Store = health_ToSave;
+    }
+
+
+    //--------------------
+
+
     void SetHealthValues()
     {
         //Multiplier Check
@@ -92,19 +150,19 @@ public class HealthManager : Singleton<HealthManager>
 
         //Speed Check
         #region
-        hungerValue += (healthSpeed * healthValueMultiplier);
+        hungerValue += (hunger_Speed * healthValueMultiplier);
         if (hungerValue <= 0)
             hungerValue = 0;
         else if (hungerValue >= 1)
             hungerValue = 1;
 
-        heatResistanceValue += (healthSpeed * heatResistanceValueMultiplier);
+        heatResistanceValue += (heatResistance_Speed * heatResistanceValueMultiplier);
         if (heatResistanceValue <= 0)
             heatResistanceValue = 0;
         else if (heatResistanceValue >= 1)
             heatResistanceValue = 1;
 
-        thirstValue += (healthSpeed * thirstValueMultiplier);
+        thirstValue += (thirst_Speed * thirstValueMultiplier);
         if (thirstValue <= 0)
             thirstValue = 0;
         else if (thirstValue >= 1)
@@ -125,11 +183,11 @@ public class HealthManager : Singleton<HealthManager>
 
         if (counter <= 0)
         {
-            mainHealthValue += Mathf.Abs(healthSpeed);
+            mainHealthValue += Mathf.Abs(mainHealth_Speed);
         }
         else
         {
-            mainHealthValue += -Mathf.Abs(healthSpeed * counter);
+            mainHealthValue += -Mathf.Abs(mainHealth_Speed * counter);
         }
        
         if (mainHealthValue <= 0)
@@ -284,6 +342,98 @@ public class HealthManager : Singleton<HealthManager>
                 break;
         }
     }
+
+
+    //--------------------
+
+
+    void SetPlayerHeatResistance()
+    {
+        switch (WeatherManager.Instance.playerTemperature)
+        {
+            //High Temperature (26 - 50)
+            case >= 50:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_6;
+                break;
+            case >= 45:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_5;
+                break;
+            case >= 40:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_4;
+                break;
+            case >= 35:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_3;
+                break;
+            case >= 30:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_2;
+                break;
+            case > 25:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_1;
+                break;
+
+            //None (25)
+            case 25:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.None;
+                break;
+
+            //Up (16 - 24)
+            case 24:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_1;
+                break;
+            case 23:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_2;
+                break;
+            case 22:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_3;
+                break;
+            case 21:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_4;
+                break;
+            case 20:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_5;
+                break;
+            case 19:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_4;
+                break;
+            case 18:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_3;
+                break;
+            case 17:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_2;
+                break;
+            case 16:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_1;
+                break;
+
+            //None(15)
+            case 15:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.None;
+                break;
+
+            //Low Temperature (-15 - 14)
+            case >= 10:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_1;
+                break;
+            case >= 5:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_2;
+                break;
+            case >= 0:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_3;
+                break;
+            case >= -5:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_4;
+                break;
+            case >= -10:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_5;
+                break;
+            case < -10:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_6;
+                break;
+
+            default:
+                break;
+        }
+    }
 }
 
 public enum HealthValueMultiplier
@@ -301,4 +451,24 @@ public enum HealthValueMultiplier
     Up_4,
     Up_5,
     Up_6
+}
+
+[Serializable]
+public class HealthToSave
+{
+    public float hungerValue = new float();
+    public HealthValueMultiplier hungerValueMultiplier_Check = new HealthValueMultiplier();
+    public int healthValueMultiplier = new int();
+
+    public float heatResistanceValue = new float();
+    public HealthValueMultiplier heatResistanceValueMultiplier_Check = new HealthValueMultiplier();
+    public int heatResistanceValueMultiplier = new int();
+
+    public float thirstValue = new float();
+    public HealthValueMultiplier thirstValueMultiplier_Check = new HealthValueMultiplier();
+    public int thirstValueMultiplier = new int();
+
+    public float mainHealthValue = new float();
+    public HealthValueMultiplier mainHealthValueMultiplier_Check = new HealthValueMultiplier();
+    public int mainHealthValueMultiplier = new int();
 }

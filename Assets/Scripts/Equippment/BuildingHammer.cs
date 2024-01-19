@@ -81,6 +81,12 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
                         //Get the correct mesh
                         tempObj_Selected.GetComponent<MeshFilter>().mesh = BuildingManager.Instance.GetCorrectGhostMesh(tempObj_Selected);
                         tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
+
+                        //Remove its BoxCollider
+                        if (tempObj_Selected.GetComponent<BoxCollider>())
+                        {
+                            tempObj_Selected.GetComponent<BoxCollider>().enabled = !tempObj_Selected.GetComponent<BoxCollider>().enabled;
+                        }
                         break;
                     }
                 }
@@ -104,6 +110,12 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
 
             //Get the correct mesh
             tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
+
+            //Remove its BoxCollider
+            if (tempObj_Selected.GetComponent<BoxCollider>())
+            {
+                tempObj_Selected.GetComponent<BoxCollider>().enabled = !tempObj_Selected.GetComponent<BoxCollider>().enabled;
+            }
         }
     }
 
