@@ -11,7 +11,10 @@ public class HealthManager : Singleton<HealthManager>
 
     public HealthToSave health_ToSave;
 
-    public float healthSpeed;
+    public float hunger_Speed = 0.00001f;
+    public float heatResistance_Speed = 0.00001f;
+    public float thirst_Speed = 0.00001f;
+    public float mainHealth_Speed = 0.000025f;
 
     [Header("Hunger Parameter")]
     [SerializeField] Image hunger_Image;
@@ -79,6 +82,8 @@ public class HealthManager : Singleton<HealthManager>
             SetHealthValues();
             SetHealthDisplay();
 
+            SetPlayerHeatResistance();
+
             SaveData();
         }
     }
@@ -145,19 +150,19 @@ public class HealthManager : Singleton<HealthManager>
 
         //Speed Check
         #region
-        hungerValue += (healthSpeed * healthValueMultiplier);
+        hungerValue += (hunger_Speed * healthValueMultiplier);
         if (hungerValue <= 0)
             hungerValue = 0;
         else if (hungerValue >= 1)
             hungerValue = 1;
 
-        heatResistanceValue += (healthSpeed * heatResistanceValueMultiplier);
+        heatResistanceValue += (heatResistance_Speed * heatResistanceValueMultiplier);
         if (heatResistanceValue <= 0)
             heatResistanceValue = 0;
         else if (heatResistanceValue >= 1)
             heatResistanceValue = 1;
 
-        thirstValue += (healthSpeed * thirstValueMultiplier);
+        thirstValue += (thirst_Speed * thirstValueMultiplier);
         if (thirstValue <= 0)
             thirstValue = 0;
         else if (thirstValue >= 1)
@@ -178,11 +183,11 @@ public class HealthManager : Singleton<HealthManager>
 
         if (counter <= 0)
         {
-            mainHealthValue += Mathf.Abs(healthSpeed);
+            mainHealthValue += Mathf.Abs(mainHealth_Speed);
         }
         else
         {
-            mainHealthValue += -Mathf.Abs(healthSpeed * counter);
+            mainHealthValue += -Mathf.Abs(mainHealth_Speed * counter);
         }
        
         if (mainHealthValue <= 0)
@@ -331,6 +336,98 @@ public class HealthManager : Singleton<HealthManager>
                 imagesList[4].SetActive(true);
                 imagesList[5].SetActive(true);
                 imagesList[6].SetActive(true);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+
+    //--------------------
+
+
+    void SetPlayerHeatResistance()
+    {
+        switch (WeatherManager.Instance.playerTemperature)
+        {
+            //High Temperature (26 - 50)
+            case >= 50:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_6;
+                break;
+            case >= 45:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_5;
+                break;
+            case >= 40:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_4;
+                break;
+            case >= 35:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_3;
+                break;
+            case >= 30:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_2;
+                break;
+            case > 25:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_1;
+                break;
+
+            //None (25)
+            case 25:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.None;
+                break;
+
+            //Up (16 - 24)
+            case 24:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_1;
+                break;
+            case 23:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_2;
+                break;
+            case 22:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_3;
+                break;
+            case 21:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_4;
+                break;
+            case 20:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_5;
+                break;
+            case 19:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_4;
+                break;
+            case 18:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_3;
+                break;
+            case 17:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_2;
+                break;
+            case 16:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_1;
+                break;
+
+            //None(15)
+            case 15:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.None;
+                break;
+
+            //Low Temperature (-15 - 14)
+            case >= 10:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_1;
+                break;
+            case >= 5:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_2;
+                break;
+            case >= 0:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_3;
+                break;
+            case >= -5:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_4;
+                break;
+            case >= -10:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_5;
+                break;
+            case < -10:
+                heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_6;
                 break;
 
             default:

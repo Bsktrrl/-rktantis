@@ -149,7 +149,7 @@ public class TimeManager : Singleton<TimeManager>
             return currentTime;
         }
     }
-    int GetHour(int hour)
+    public int GetHour(int hour)
     {
         return 3600 * hour;
     }
