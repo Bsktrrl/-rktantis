@@ -11,19 +11,22 @@ public class GhostAnimations : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         sneeze = transform.Find("Armature_Ghost/Spine1_Jnt/Spine2_Jnt/Spine3_Jnt/Neck_Jnt/Head_Jnt").GetComponent<ParticleSystem>();
+        StartCoroutine(IdleAnimations(5));
     }
 
     
-    void Update()
+    IEnumerator IdleAnimations(float waitTime)
     {
         if (anim.GetInteger("IdleAnimation") != 0)
         {
             anim.SetInteger("IdleAnimation", 0);
         }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        else
         {
-            anim.SetInteger("IdleAnimation", Random.Range(0, 8));
+            anim.SetInteger("IdleAnimation", Random.Range(0,8));
         }
+        yield return new WaitForSeconds(waitTime);
+        StartCoroutine(IdleAnimations(5));
     }
 
     public void Sneeze()
