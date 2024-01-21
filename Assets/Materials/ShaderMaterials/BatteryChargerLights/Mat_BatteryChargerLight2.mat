@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Wood
+  m_Name: Mat_BatteryChargerLight2
   m_Shader: {fileID: -6465566751694194690, guid: 31e3f5f25523376408f06797d2eb794a,
     type: 3}
   m_Parent: {fileID: 0}
@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AlbedoMap:
-        m_Texture: {fileID: 2800000, guid: 3c8398dadf835c14e9148130e3e544a6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7cf2a7aad9c251541b0036e481667fea, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: ba5241830033fca42ab53d50056011a9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 65ada3a5ec294c142a205fccbbe540be, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -73,7 +73,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RoughnessMap:
-        m_Texture: {fileID: 2800000, guid: 94e1089857a2425449d036090f428c54, type: 3}
+        m_Texture: {fileID: 2800000, guid: cfb1e9ec01fdb1d40bc37f00ad8ea6d2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2DLOD_2ef41d3d7c8944b9a92c797e327ffd40_Texture_1_Texture2D:
@@ -157,7 +157,7 @@ Material:
     - _Dither: 0.5
     - _DrawOrder: 0
     - _DstBlend: 0
-    - _EmissionStrength: 0
+    - _EmissionStrength: 1
     - _EnvironmentReflections: 1
     - _GlitterSpeed: 0
     - _GlossMapScale: 0
@@ -184,7 +184,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - _AlbedoColor: {r: 0.5372549, g: 0.9098039, b: 0.9098039, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
