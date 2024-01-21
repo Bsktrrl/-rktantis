@@ -11,7 +11,7 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
     {
         print("Category selected");
 
-        SoundManager.instance.PlayChangeCraftingScreen_Clip();
+        SoundManager.Instance.PlayChangeCraftingScreen_Clip();
 
         CraftingManager.instance.activeCategory = categoryType;
         CraftingManager.instance.SetupSelectionScreen();
@@ -21,6 +21,6 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        SoundManager.instance.PlaySelect_Clip();
+        SoundManager.Instance.PlaySelect_Clip();
     }
 }

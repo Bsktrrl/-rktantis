@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : Singleton<SoundManager>
 {
-    public static SoundManager instance { get; set; } //Singleton
-
     public AudioSource audioSource;
+
+    //Menu
+    [Header("Menu")]
+    [SerializeField] AudioClip menu_SelectPanel_Clip;
 
     //Inventory
     [Header("Inventory")]
@@ -36,26 +38,19 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip moveableObject_placed;
 
 
-
     //--------------------
-
-
-    private void Awake()
+    
+    
+    //Menu
+    public void PlaySelectPanel_Clip()
     {
-        //Singleton
-        if (instance != null && instance != this)
+        if (audioSource != null)
         {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
+            audioSource.clip = menu_SelectPanel_Clip;
+            audioSource.volume = 0.50f;
+            audioSource.Play();
         }
     }
-
-
-    //--------------------
-
 
     //inventory
     public void PlaySelect_Clip()

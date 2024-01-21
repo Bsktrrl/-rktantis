@@ -1100,15 +1100,15 @@ public class BuildingManager : Singleton<BuildingManager>
                 //Play Sound
                 if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                 {
-                    SoundManager.instance.PlayWood_Placed_Clip();
+                    SoundManager.Instance.PlayWood_Placed_Clip();
                 }
                 else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                 {
-                    SoundManager.instance.PlayStone_Placed_Clip();
+                    SoundManager.Instance.PlayStone_Placed_Clip();
                 }
                 else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                 {
-                    SoundManager.instance.PlayIron_Placed_Clip();
+                    SoundManager.Instance.PlayIron_Placed_Clip();
                 }
 
                 //SetRotation of BuildingBlock
@@ -1557,7 +1557,7 @@ public class BuildingManager : Singleton<BuildingManager>
                 //Play Sound
                 if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                 {
-                    SoundManager.instance.PlaybuildingBlock_CannotPlaceBlock();
+                    SoundManager.Instance.PlaybuildingBlock_CannotPlaceBlock();
                 }
             }
         }
@@ -1575,15 +1575,15 @@ public class BuildingManager : Singleton<BuildingManager>
                 //Play Sound
                 if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                 {
-                    SoundManager.instance.PlayWood_Placed_Clip();
+                    SoundManager.Instance.PlayWood_Placed_Clip();
                 }
                 else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
                 {
-                    SoundManager.instance.PlayStone_Placed_Clip();
+                    SoundManager.Instance.PlayStone_Placed_Clip();
                 }
                 else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
                 {
-                    SoundManager.instance.PlayIron_Placed_Clip();
+                    SoundManager.Instance.PlayIron_Placed_Clip();
                 }
 
                 //SetRotation of BuildingBlock
@@ -2033,7 +2033,7 @@ public class BuildingManager : Singleton<BuildingManager>
                 //Play Sound
                 if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
                 {
-                    SoundManager.instance.PlaybuildingBlock_CannotPlaceBlock();
+                    SoundManager.Instance.PlaybuildingBlock_CannotPlaceBlock();
                 }
             }
         }
@@ -2115,15 +2115,15 @@ public class BuildingManager : Singleton<BuildingManager>
                                     //Play remove sound
                                     if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
                                     {
-                                        SoundManager.instance.PlayWood_Remove_Clip();
+                                        SoundManager.Instance.PlayWood_Remove_Clip();
                                     }
                                     else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Stone)
                                     {
-                                        SoundManager.instance.PlayStone_Remove_Clip();
+                                        SoundManager.Instance.PlayStone_Remove_Clip();
                                     }
                                     else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Iron)
                                     {
-                                        SoundManager.instance.PlayIron_Remove_Clip();
+                                        SoundManager.Instance.PlayIron_Remove_Clip();
                                     }
 
                                     //Add items to inventory
