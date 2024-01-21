@@ -241,7 +241,8 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: -4767962739000185131, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+    type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -308,19 +309,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IdleAnimation
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isAttacking
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -458,7 +459,8 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: -6602912746013483167, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+    type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -578,13 +580,13 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 6453263055538928300}
-    second:
-    - {fileID: -8856409698719327697}
   - first: {fileID: 8040698966715655840}
     second:
     - {fileID: -5988995237761348416}
     - {fileID: 4743770650262152745}
+  - first: {fileID: 6453263055538928300}
+    second:
+    - {fileID: -8856409698719327697}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -10, y: 210, z: 0}
   m_EntryPosition: {x: 240, y: 310, z: 0}
