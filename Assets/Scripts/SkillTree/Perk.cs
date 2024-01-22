@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +11,9 @@ public class Perk : MonoBehaviour
     public Image perkImage;
     public PerkInfo perkInfo;
 
-    //Temp
-    //public LineRenderer line;
-    //public GameObject pos1;
-    //public GameObject pos2;
-    //public GameObject pos3;
+    public float lineWidth = 5;
+    Vector2 graphScale = Vector2.one;
+
 
     //--------------------
 
@@ -22,21 +21,46 @@ public class Perk : MonoBehaviour
     private void Start()
     {
         perk_BG_Image.sprite = SkillTreeManager.Instance.BG_Passive;
+
+        for (int i = 0; i < perkInfo.perkConnectionList.Count; i++)
+        {
+            MakeLine(gameObject.GetComponent<RectTransform>().localPosition, perkInfo.perkConnectionList[i].GetComponent<RectTransform>().localPosition);
+        }
     }
     private void Update()
     {
         UpdateState();
-
-        //line = GetComponent<LineRenderer>();
-        //line.positionCount = 3;
-
-        //line.SetPosition(0, pos1.GetComponent<RectTransform>().position);
-        //line.SetPosition(1, pos2.GetComponent<RectTransform>().position);
-        //line.SetPosition(2, pos3.GetComponent<RectTransform>().position);
     }
 
 
     //--------------------
+
+
+    void MakeLine(Vector2 lineA, Vector2 lineB)
+    {
+        GameObject NewObj = new GameObject();
+        NewObj.name = "line from " + lineA.x + " to " + lineB.x;
+
+        Image NewImage = NewObj.AddComponent<Image>();
+        NewImage.sprite = SkillTreeManager.Instance.line;
+        NewImage.color = SkillTreeManager.Instance.lineColor;
+
+        RectTransform rect = NewObj.GetComponent<RectTransform>();
+        rect.SetParent(SkillTreeManager.Instance.SkillTreeLine_Parent.transform);
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.zero;
+        rect.localScale = Vector3.one;
+
+        Vector3 a = new Vector3(lineA.x * graphScale.x, lineA.y * graphScale.y, 0);
+        Vector3 b = new Vector3(lineB.x * graphScale.x, lineB.y * graphScale.y, 0);
+
+        rect.localPosition = (a + b) / 2;
+
+        Vector3 dif = a - b;
+        rect.sizeDelta = new Vector3(dif.magnitude, lineWidth);
+        rect.localRotation = Quaternion.Euler(new Vector3(0, 0, 180 * Mathf.Atan(dif.y / dif.x) / Mathf.PI));
+
+    }
 
 
     void UpdateState()

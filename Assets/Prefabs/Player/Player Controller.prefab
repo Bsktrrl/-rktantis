@@ -721,11 +721,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499033573468123864}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1483342980061051482}
   - {fileID: 4337765889358473132}
   - {fileID: 9173096870199531571}
   - {fileID: 3253840274472527623}
@@ -736,7 +737,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0.00012207031, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &509403535412850566
 GameObject:
@@ -9584,6 +9585,41 @@ MonoBehaviour:
   buildingMaterial: 0
   machineType: 0
   furnitureType: 1
+--- !u!1 &4909393813640749518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1483342980061051482}
+  m_Layer: 5
+  m_Name: SkillTreeLines
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1483342980061051482
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4909393813640749518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8488523046690054658}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4936723824553673744
 GameObject:
   m_ObjectHideFlags: 0
@@ -12612,6 +12648,9 @@ MonoBehaviour:
   SkillTree_Clothes_Parent: {fileID: 4495187643314934471}
   SkillTree_GhostCapture_Parent: {fileID: 3887338598867083444}
   SkillTree_Light_Parent: {fileID: 2986756044393717417}
+  SkillTreeLine_Parent: {fileID: 4909393813640749518}
+  line: {fileID: 21300000, guid: 0e6ba199c89434c43adb24261fd24403, type: 3}
+  lineColor: {r: 1, g: 1, b: 1, a: 1}
   BG_Passive: {fileID: 489051636, guid: e0ecb318e38451949a9cc2f52d2d6c17, type: 3}
   BG_Ready: {fileID: -1130111390, guid: e0ecb318e38451949a9cc2f52d2d6c17, type: 3}
   BG_Active: {fileID: 194700368, guid: e0ecb318e38451949a9cc2f52d2d6c17, type: 3}

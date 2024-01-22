@@ -12,6 +12,11 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     [SerializeField] GameObject SkillTree_Clothes_Parent;
     [SerializeField] GameObject SkillTree_GhostCapture_Parent;
     [SerializeField] GameObject SkillTree_Light_Parent;
+    public GameObject SkillTreeLine_Parent;
+
+    [Header("Line")]
+    public Sprite line;
+    public Color lineColor;
 
     [Header("Sprites")]
     public Sprite BG_Passive;
