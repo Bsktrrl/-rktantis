@@ -10,6 +10,7 @@ public class TabletManager : Singleton<TabletManager>
     public TabletMenuState tabletMenuState;
 
     [Header("Menus")]
+    int menuAmount = 4;
     [SerializeField] GameObject menu_Inventory;
     [SerializeField] GameObject menu_CraftingTable;
     [SerializeField] GameObject menu_Skilltree;
@@ -28,6 +29,7 @@ public class TabletManager : Singleton<TabletManager>
     [Header("Tablet")]
     [SerializeField] GameObject tablet_Parent;
     [SerializeField] GameObject tablet_BG;
+    [SerializeField] GameObject menuButton_Background;
 
     [Header("Health Parameters")]
     [SerializeField] GameObject healthParameters_Tablet_Parent;
@@ -180,6 +182,9 @@ public class TabletManager : Singleton<TabletManager>
 
     public void OpenTablet()
     {
+        //Set the MenuButtonBackround size
+        menuButton_Background.GetComponent<RectTransform>().sizeDelta = new Vector2((150 * menuAmount) + 35, menuButton_Background.GetComponent<RectTransform>().sizeDelta.y) ;
+
         //Open correct menu
         tablet_Parent.SetActive(true);
         SetMenuDisplay(true);
