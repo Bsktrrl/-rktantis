@@ -45,6 +45,7 @@ public class HealthManager : Singleton<HealthManager>
     public int mainHealthValueMultiplier;
 
     bool dataHasLoaded = false;
+    public int mainHealthCounter = 0;
     #endregion
 
 
@@ -80,7 +81,10 @@ public class HealthManager : Singleton<HealthManager>
         if (dataHasLoaded)
         {
             SetHealthValues();
-            SetHealthDisplay();
+            SetHealthDisplay(hunger_Image, hungerValueMultiplier_Image,
+                             heatResistance_Image, heatResistanceValueMultiplier_Image,
+                             thirst_Image, thirstValueMultiplier_Image,
+                             mainHealth_Image);
 
             SetPlayerHeatResistance();
 
@@ -171,23 +175,24 @@ public class HealthManager : Singleton<HealthManager>
 
         //Set Main Health Parameter
         #region
-        int counter = 0;
+        mainHealthCounter = 0;
+
         if (hungerValue <= 0)
-            counter++;
+            mainHealthCounter++;
 
         if (heatResistanceValue <= 0)
-            counter++;
+            mainHealthCounter++;
 
         if (thirstValue <= 0)
-            counter++;
+            mainHealthCounter++;
 
-        if (counter <= 0)
+        if (mainHealthCounter <= 0)
         {
             mainHealthValue += Mathf.Abs(mainHealth_Speed);
         }
         else
         {
-            mainHealthValue += -Mathf.Abs(mainHealth_Speed * counter);
+            mainHealthValue += -Mathf.Abs(mainHealth_Speed * mainHealthCounter);
         }
        
         if (mainHealthValue <= 0)
@@ -197,36 +202,7 @@ public class HealthManager : Singleton<HealthManager>
         #endregion
 
         //Set Arrow Display
-        #region
-        for (int i = 0; i < mainHealthValueMultiplier_Image.Count; i++)
-        {
-            mainHealthValueMultiplier_Image[i].SetActive(false);
-        }
-
-        if (counter <= 0 && mainHealthValue >= 1)
-        {
-            
-        }
-        else if (counter <= 0)
-        {
-            mainHealthValueMultiplier_Image[4].SetActive(true);
-        }
-        else if (counter == 1)
-        {
-            mainHealthValueMultiplier_Image[2].SetActive(true);
-        }
-        else if (counter == 2)
-        {
-            mainHealthValueMultiplier_Image[1].SetActive(true);
-            mainHealthValueMultiplier_Image[2].SetActive(true);
-        }
-        else if (counter >= 3)
-        {
-            mainHealthValueMultiplier_Image[0].SetActive(true);
-            mainHealthValueMultiplier_Image[1].SetActive(true);
-            mainHealthValueMultiplier_Image[2].SetActive(true);
-        }
-        #endregion
+        SetHealthArrowDisplay(mainHealthValueMultiplier_Image);
     }
 
     int MultiplierCheck(HealthValueMultiplier multiplier_Check)
@@ -264,8 +240,44 @@ public class HealthManager : Singleton<HealthManager>
                 return 0;
         }
     }
+    public void SetHealthArrowDisplay(List<GameObject> mainHealthValueMultiplier_Image)
+    {
+        #region
+        for (int i = 0; i < mainHealthValueMultiplier_Image.Count; i++)
+        {
+            mainHealthValueMultiplier_Image[i].SetActive(false);
+        }
 
-    void SetHealthDisplay()
+        if (mainHealthCounter <= 0 && mainHealthValue >= 1)
+        {
+            mainHealthValueMultiplier_Image[3].SetActive(true);
+        }
+        else if (mainHealthCounter <= 0)
+        {
+            mainHealthValueMultiplier_Image[4].SetActive(true);
+        }
+        else if (mainHealthCounter == 1)
+        {
+            mainHealthValueMultiplier_Image[2].SetActive(true);
+        }
+        else if (mainHealthCounter == 2)
+        {
+            mainHealthValueMultiplier_Image[1].SetActive(true);
+            mainHealthValueMultiplier_Image[2].SetActive(true);
+        }
+        else if (mainHealthCounter >= 3)
+        {
+            mainHealthValueMultiplier_Image[0].SetActive(true);
+            mainHealthValueMultiplier_Image[1].SetActive(true);
+            mainHealthValueMultiplier_Image[2].SetActive(true);
+        }
+        #endregion
+    }
+
+    public void SetHealthDisplay(Image hunger_Image, List<GameObject> hungerValueMultiplier_Image,
+                                 Image heatResistance_Image, List<GameObject> heatResistanceValueMultiplier_Image,
+                                 Image thirst_Image, List<GameObject> thirstValueMultiplier_Image,
+                                 Image mainHealth_Image)
     {
         hunger_Image.fillAmount = hungerValue;
         heatResistance_Image.fillAmount = heatResistanceValue;
@@ -273,11 +285,11 @@ public class HealthManager : Singleton<HealthManager>
         mainHealth_Image.fillAmount = mainHealthValue;
 
         //Set active arrows
-        ArrowSetActive(hungerValueMultiplier_Check, hungerValueMultiplier_Image);
-        ArrowSetActive(heatResistanceValueMultiplier_Check, heatResistanceValueMultiplier_Image);
-        ArrowSetActive(thirstValueMultiplier_Check, thirstValueMultiplier_Image);
+        ArrowSetActive(hungerValueMultiplier_Check, hungerValueMultiplier_Image, hungerValue);
+        ArrowSetActive(heatResistanceValueMultiplier_Check, heatResistanceValueMultiplier_Image, heatResistanceValue);
+        ArrowSetActive(thirstValueMultiplier_Check, thirstValueMultiplier_Image, thirstValue);
     }
-    void ArrowSetActive(HealthValueMultiplier multiplier, List<GameObject> imagesList)
+    void ArrowSetActive(HealthValueMultiplier multiplier, List<GameObject> imagesList, float value)
     {
         //Unactivate all arrows
         for (int i = 0; i < imagesList.Count; i++)
@@ -285,61 +297,68 @@ public class HealthManager : Singleton<HealthManager>
             imagesList[i].SetActive(false);
         }
 
-        switch (multiplier)
+        if (value >= 1)
         {
-            case HealthValueMultiplier.Down_6:
-                imagesList[0].SetActive(true);
-                imagesList[1].SetActive(true);
-                imagesList[2].SetActive(true);
-                break;
-            case HealthValueMultiplier.Down_5:
-                imagesList[0].SetActive(true);
-                imagesList[1].SetActive(true);
-                imagesList[2].SetActive(true);
-                break;
-            case HealthValueMultiplier.Down_4:
-                imagesList[1].SetActive(true);
-                imagesList[2].SetActive(true);
-                break;
-            case HealthValueMultiplier.Down_3:
-                imagesList[1].SetActive(true);
-                imagesList[2].SetActive(true);
-                break;
-            case HealthValueMultiplier.Down_2:
-                imagesList[2].SetActive(true);
-                break;
-            case HealthValueMultiplier.Down_1:
-                imagesList[2].SetActive(true);
-                break;
-            case HealthValueMultiplier.None:
-                break;
-            case HealthValueMultiplier.Up_1:
-                imagesList[4].SetActive(true);
-                break;
-            case HealthValueMultiplier.Up_2:
-                imagesList[4].SetActive(true);
-                break;
-            case HealthValueMultiplier.Up_3:
-                imagesList[4].SetActive(true);
-                imagesList[5].SetActive(true);
-                break;
-            case HealthValueMultiplier.Up_4:
-                imagesList[4].SetActive(true);
-                imagesList[5].SetActive(true);
-                break;
-            case HealthValueMultiplier.Up_5:
-                imagesList[4].SetActive(true);
-                imagesList[5].SetActive(true);
-                imagesList[6].SetActive(true);
-                break;
-            case HealthValueMultiplier.Up_6:
-                imagesList[4].SetActive(true);
-                imagesList[5].SetActive(true);
-                imagesList[6].SetActive(true);
-                break;
+            imagesList[3].SetActive(true);
+        }
+        else
+        {
+            switch (multiplier)
+            {
+                case HealthValueMultiplier.Down_6:
+                    imagesList[0].SetActive(true);
+                    imagesList[1].SetActive(true);
+                    imagesList[2].SetActive(true);
+                    break;
+                case HealthValueMultiplier.Down_5:
+                    imagesList[0].SetActive(true);
+                    imagesList[1].SetActive(true);
+                    imagesList[2].SetActive(true);
+                    break;
+                case HealthValueMultiplier.Down_4:
+                    imagesList[1].SetActive(true);
+                    imagesList[2].SetActive(true);
+                    break;
+                case HealthValueMultiplier.Down_3:
+                    imagesList[1].SetActive(true);
+                    imagesList[2].SetActive(true);
+                    break;
+                case HealthValueMultiplier.Down_2:
+                    imagesList[2].SetActive(true);
+                    break;
+                case HealthValueMultiplier.Down_1:
+                    imagesList[2].SetActive(true);
+                    break;
+                case HealthValueMultiplier.None:
+                    break;
+                case HealthValueMultiplier.Up_1:
+                    imagesList[4].SetActive(true);
+                    break;
+                case HealthValueMultiplier.Up_2:
+                    imagesList[4].SetActive(true);
+                    break;
+                case HealthValueMultiplier.Up_3:
+                    imagesList[4].SetActive(true);
+                    imagesList[5].SetActive(true);
+                    break;
+                case HealthValueMultiplier.Up_4:
+                    imagesList[4].SetActive(true);
+                    imagesList[5].SetActive(true);
+                    break;
+                case HealthValueMultiplier.Up_5:
+                    imagesList[4].SetActive(true);
+                    imagesList[5].SetActive(true);
+                    imagesList[6].SetActive(true);
+                    break;
+                case HealthValueMultiplier.Up_6:
+                    imagesList[4].SetActive(true);
+                    imagesList[5].SetActive(true);
+                    imagesList[6].SetActive(true);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
     }
 

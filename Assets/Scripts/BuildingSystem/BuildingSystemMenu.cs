@@ -5,10 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BuildingSystemMenu : MonoBehaviour
+public class BuildingSystemMenu : Singleton<BuildingSystemMenu>
 {
-    public static BuildingSystemMenu instance { get; set; } //Singleton
-
     public GameObject buildingSystemMenu;
     public Image selectedBuildingBlockImage;
 
@@ -23,18 +21,7 @@ public class BuildingSystemMenu : MonoBehaviour
 
     //--------------------
 
-    private void Awake()
-    {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
+
     private void Start()
     {
         PlayerButtonManager.isPressed_BuildingSystemMenu_Enter += BuildingBlockSelecter_Enter;
@@ -88,9 +75,13 @@ public class BuildingSystemMenu : MonoBehaviour
         }
 
         buildingSystemMenu.SetActive(true);
+        TabletManager.Instance.tabletMenuState = TabletMenuState.MoveableObjects;
+        TabletManager.Instance.OpenTablet();
     }
     void BuildingBlockSelecter_Exit()
     {
+        TabletManager.Instance.CloseTablet();
+        TabletManager.Instance.tabletMenuState = TabletMenuState.Inventory;
         buildingSystemMenu.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;

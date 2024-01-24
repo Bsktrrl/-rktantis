@@ -69,6 +69,7 @@ public class InteractableObject : MonoBehaviour
 
                 //Open the player Inventory
                 InventoryManager.Instance.OpenPlayerInventory();
+                TabletManager.Instance.OpenTablet();
 
                 //Open the chest Inventory
                 InventoryManager.Instance.chestInventoryOpen = inventoryIndex;

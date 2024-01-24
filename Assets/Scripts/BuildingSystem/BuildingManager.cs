@@ -215,12 +215,12 @@ public class BuildingManager : Singleton<BuildingManager>
 
         //Set Preview image for the selected buildingBlock
         #region
-        for (int i = 0; i < BuildingSystemMenu.instance.buildingBlockUIList.Count; i++)
+        for (int i = 0; i < BuildingSystemMenu.Instance.buildingBlockUIList.Count; i++)
         {
-            if (BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().buildingType == MoveableObjectManager.Instance.buildingType_Selected
-                && BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == MoveableObjectManager.Instance.buildingMaterial_Selected)
+            if (BuildingSystemMenu.Instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().buildingType == MoveableObjectManager.Instance.buildingType_Selected
+                && BuildingSystemMenu.Instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == MoveableObjectManager.Instance.buildingMaterial_Selected)
             {
-                BuildingSystemMenu.instance.SetSelectedImage(BuildingSystemMenu.instance.buildingBlockUIList[i].GetComponent<Image>().sprite);
+                BuildingSystemMenu.Instance.SetSelectedImage(BuildingSystemMenu.Instance.buildingBlockUIList[i].GetComponent<Image>().sprite);
 
                 break;
             }
@@ -282,7 +282,7 @@ public class BuildingManager : Singleton<BuildingManager>
     void RaycastSetup_Hammer()
     {
         //Only active when not in a menu
-        if (!BuildingSystemMenu.instance.buildingSystemMenu_isOpen)
+        if (!BuildingSystemMenu.Instance.buildingSystemMenu_isOpen)
         {
             RaycastBuildingDirectionMarkers();
         }

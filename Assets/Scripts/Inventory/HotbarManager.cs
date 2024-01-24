@@ -107,7 +107,7 @@ public class HotbarManager : Singleton<HotbarManager>
             EuipmentList.Clear();
 
             //Remove BuildingMenu
-            BuildingSystemMenu.instance.buildingSystemMenu.SetActive(false);
+            BuildingSystemMenu.Instance.buildingSystemMenu.SetActive(false);
 
             return;
         }
@@ -141,7 +141,7 @@ public class HotbarManager : Singleton<HotbarManager>
         }
 
         //Remove BuildingmMenu
-        BuildingSystemMenu.instance.buildingSystemMenu.SetActive(false);
+        BuildingSystemMenu.Instance.buildingSystemMenu.SetActive(false);
     }
 
 

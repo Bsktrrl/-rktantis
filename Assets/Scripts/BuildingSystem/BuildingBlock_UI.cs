@@ -28,16 +28,16 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
         MoveableObjectManager.Instance.buildingType_Selected = buildingType;
         MoveableObjectManager.Instance.buildingMaterial_Selected = buildingMaterial;
 
-        BuildingSystemMenu.instance.SetSelectedImage(gameObject.GetComponent<Image>().sprite);
+        BuildingSystemMenu.Instance.SetSelectedImage(gameObject.GetComponent<Image>().sprite);
 
         //Hide Panel if Object is Empty
         if (objectType == MoveableObjectType.None)
         {
-            BuildingSystemMenu.instance.buildingRequirement_Parent.SetActive(false);
+            BuildingSystemMenu.Instance.buildingRequirement_Parent.SetActive(false);
         }
         else
         {
-            BuildingSystemMenu.instance.buildingRequirement_Parent.SetActive(true);
+            BuildingSystemMenu.Instance.buildingRequirement_Parent.SetActive(true);
         }
 
         //If selected Object is Empty
@@ -57,7 +57,7 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
             if (tempParent != null)
             {
                 //Set requirements for both BuildingMenu and on main screen
-                BuildingManager.Instance.SetBuildingRequirements(tempParent, BuildingSystemMenu.instance.buildingRequirement_Parent);
+                BuildingManager.Instance.SetBuildingRequirements(tempParent, BuildingSystemMenu.Instance.buildingRequirement_Parent);
                 BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
             }
 
@@ -79,7 +79,7 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
 
                 //Set requirements for both BuildingMenu and on main screen
                 MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
-                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.instance.buildingRequirement_Parent);
+                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.Instance.buildingRequirement_Parent);
                 BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
 
             }
@@ -94,7 +94,7 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
 
                 //Set requirements for both BuildingMenu and on main screen
                 MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
-                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.instance.buildingRequirement_Parent);
+                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.Instance.buildingRequirement_Parent);
                 BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
             }
         }
