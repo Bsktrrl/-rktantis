@@ -250,13 +250,13 @@ public class TabletManager : Singleton<TabletManager>
                 }
                 else
                 {
+                    tabletMenuState = TabletMenuState.Inventory;
+
                     chestInventory_MainParent.SetActive(false);
                     equipInventory_MainParent.SetActive(true);
 
                     menu_Chest_Button.SetActive(false);
                     menu_Equipment_Button.SetActive(false);
-
-                    tabletMenuState = TabletMenuState.Inventory;
                 }
 
                 playerInventory_MainParent.SetActive(true);
@@ -313,7 +313,7 @@ public class TabletManager : Singleton<TabletManager>
                 break;
             case TabletMenuState.Equipment:
                 chestInventory_MainParent.SetActive(false);
-                tabletMenuState = TabletMenuState.Inventory;
+                tabletMenuState = TabletMenuState.Equipment;
 
                 playerInventory_MainParent.SetActive(true);
                 equipInventory_MainParent.SetActive(true);

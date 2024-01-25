@@ -34,7 +34,6 @@ RectTransform:
   m_Children:
   - {fileID: 1912920045184869583}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -69,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1471483409, guid: 82a50d140a584064189756c2cef998df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -108,10 +107,11 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 1935816759, guid: 82a50d140a584064189756c2cef998df, type: 3}
-    m_PressedSprite: {fileID: 945395126, guid: 82a50d140a584064189756c2cef998df, type: 3}
-    m_SelectedSprite: {fileID: 757532216, guid: 82a50d140a584064189756c2cef998df, type: 3}
-    m_DisabledSprite: {fileID: -446691640, guid: 82a50d140a584064189756c2cef998df, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -152,10 +152,17 @@ MonoBehaviour:
     itemName: 0
     categoryName: 0
     subCategoryName: 0
-    itemSprite: {fileID: 0}
+    itemSize: {x: 0, y: 0}
     itemDescription: 
+    hotbarSprite: {fileID: 0}
+    itemSpriteList: []
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
     isActive: 0
-    itemStackMax: 0
+    isEquipable: 0
+    HP: 0
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
     isCrafteable: 0
     craftingRequirements: []
 --- !u!1 &5756569427089054915
@@ -189,7 +196,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3264605750794968454}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

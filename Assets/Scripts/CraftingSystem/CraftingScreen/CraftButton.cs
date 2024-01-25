@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class CraftButton : MonoBehaviour
 {
     [SerializeField] Button craftingButton;
-    [SerializeField] Color craftingButtonColor_Inactive;
-    [SerializeField] Color craftingButtonColor_Active;
+    [SerializeField] Sprite craftingButtonColor_Inactive;
+    [SerializeField] Sprite craftingButtonColor_Active;
 
     private void Update()
     {
@@ -15,11 +15,11 @@ public class CraftButton : MonoBehaviour
         {
             if (CraftingManager.Instance.totalRequirementMet)
             {
-                craftingButton.GetComponent<Image>().color = craftingButtonColor_Active;
+                craftingButton.GetComponent<Image>().sprite = craftingButtonColor_Active;
             }
             else
             {
-                craftingButton.GetComponent<Image>().color = craftingButtonColor_Inactive;
+                craftingButton.GetComponent<Image>().sprite = craftingButtonColor_Inactive;
             }
         }
     }
