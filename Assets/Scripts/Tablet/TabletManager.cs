@@ -13,6 +13,10 @@ public class TabletManager : Singleton<TabletManager>
     [Header("Menus")]
     int menuAmount = 4;
     [SerializeField] GameObject menu_Inventory;
+    public GameObject playerInventory_MainParent;
+    public GameObject chestInventory_MainParent;
+    public GameObject equipInventory_MainParent;
+
     [SerializeField] GameObject menu_CraftingTable;
     [SerializeField] GameObject menu_Skilltree;
     [SerializeField] GameObject menu_MoveableObjects;
@@ -22,6 +26,9 @@ public class TabletManager : Singleton<TabletManager>
     [SerializeField] GameObject menu_CraftingTable_Button;
     [SerializeField] GameObject menu_Skilltree_Button;
     [SerializeField] GameObject menu_MoveableObjects_Button;
+
+    [SerializeField] GameObject menu_Equipment_Button;
+    [SerializeField] GameObject menu_Chest_Button;
 
     [Header("Button Images")]
     [SerializeField] Sprite menuButton_Passive;
@@ -127,6 +134,26 @@ public class TabletManager : Singleton<TabletManager>
             MenuTransition(tabletMenuState, TabletMenuState.MoveableObjects);
         }
     }
+    public void MenuButton_Chest_onClick()
+    {
+        if (!BuildingSystemMenu.Instance.buildingSystemMenu_isOpen)
+        {
+            MenuTransition(tabletMenuState, TabletMenuState.Inventory);
+
+            menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
+            menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Active;
+        }
+    }
+    public void MenuButton_Equipment_onClick()
+    {
+        if (!BuildingSystemMenu.Instance.buildingSystemMenu_isOpen)
+        {
+            MenuTransition(tabletMenuState, TabletMenuState.Equipment);
+
+            menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Active;
+            menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        }
+    }
     #endregion
 
 
@@ -139,8 +166,8 @@ public class TabletManager : Singleton<TabletManager>
         switch (currentMenu)
         {
             case TabletMenuState.None:
-                InventoryManager.Instance.playerInventory_MainParent.SetActive(false);
-                InventoryManager.Instance.chestInventory_MainParent.SetActive(false);
+                playerInventory_MainParent.SetActive(false);
+                chestInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(false);
                 menu_CraftingTable.SetActive(false);
                 menu_Skilltree.SetActive(false);
@@ -173,8 +200,8 @@ public class TabletManager : Singleton<TabletManager>
                 break;
 
             default:
-                InventoryManager.Instance.playerInventory_MainParent.SetActive(false);
-                InventoryManager.Instance.chestInventory_MainParent.SetActive(false);
+                playerInventory_MainParent.SetActive(false);
+                chestInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(false);
                 menu_CraftingTable.SetActive(false);
                 menu_Skilltree.SetActive(false);
@@ -192,9 +219,15 @@ public class TabletManager : Singleton<TabletManager>
             case TabletMenuState.ChestInventory:
                 InventoryManager.Instance.OpenPlayerInventory();
 
-                InventoryManager.Instance.playerInventory_MainParent.SetActive(true);
-                InventoryManager.Instance.chestInventory_MainParent.SetActive(true);
+                playerInventory_MainParent.SetActive(true);
+                chestInventory_MainParent.SetActive(true);
+                equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(true);
+
+                menu_Equipment_Button.SetActive(true);
+                menu_Chest_Button.SetActive(true);
+                menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Active;
 
                 tabletMenuState = TabletMenuState.ChestInventory;
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
@@ -205,16 +238,28 @@ public class TabletManager : Singleton<TabletManager>
 
                 if (objectInteractingWith == ObjectInteractingWith.Chest)
                 {
-                    InventoryManager.Instance.chestInventory_MainParent.SetActive(true);
-                    tabletMenuState = TabletMenuState.ChestInventory;
+                    tabletMenuState = TabletMenuState.Inventory;
+                    chestInventory_MainParent.SetActive(true);
+                    equipInventory_MainParent.SetActive(false);
+
+                    menu_Chest_Button.SetActive(true);
+                    menu_Equipment_Button.SetActive(true);
+
+                    menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                    menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Active;
                 }
                 else
                 {
-                    InventoryManager.Instance.chestInventory_MainParent.SetActive(false);
+                    chestInventory_MainParent.SetActive(false);
+                    equipInventory_MainParent.SetActive(true);
+
+                    menu_Chest_Button.SetActive(false);
+                    menu_Equipment_Button.SetActive(false);
+
                     tabletMenuState = TabletMenuState.Inventory;
                 }
 
-                InventoryManager.Instance.playerInventory_MainParent.SetActive(true);
+                playerInventory_MainParent.SetActive(true);
                 menu_Inventory.SetActive(true);
 
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
@@ -224,8 +269,12 @@ public class TabletManager : Singleton<TabletManager>
                 CraftingManager.Instance.OpenCraftingScreen();
                 menu_CraftingTable.SetActive(true);
 
-                InventoryManager.Instance.playerInventory_MainParent.SetActive(true);
-                InventoryManager.Instance.chestInventory_MainParent.SetActive(false);
+                menu_Equipment_Button.SetActive(false);
+                menu_Chest_Button.SetActive(false);
+
+                playerInventory_MainParent.SetActive(true);
+                chestInventory_MainParent.SetActive(false);
+                equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(true);
 
                 tabletMenuState = TabletMenuState.CraftingTable;
@@ -235,8 +284,12 @@ public class TabletManager : Singleton<TabletManager>
             case TabletMenuState.SkillTree:
                 menu_Skilltree.SetActive(true);
 
-                InventoryManager.Instance.playerInventory_MainParent.SetActive(false);
-                InventoryManager.Instance.chestInventory_MainParent.SetActive(false);
+                menu_Equipment_Button.SetActive(false);
+                menu_Chest_Button.SetActive(false);
+
+                playerInventory_MainParent.SetActive(false);
+                chestInventory_MainParent.SetActive(false);
+                equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(false);
 
                 tabletMenuState = TabletMenuState.SkillTree;
@@ -246,13 +299,28 @@ public class TabletManager : Singleton<TabletManager>
             case TabletMenuState.MoveableObjects:
                 menu_MoveableObjects.SetActive(true);
 
-                InventoryManager.Instance.playerInventory_MainParent.SetActive(false);
-                InventoryManager.Instance.chestInventory_MainParent.SetActive(false);
+                menu_Equipment_Button.SetActive(false);
+                menu_Chest_Button.SetActive(false);
+
+                playerInventory_MainParent.SetActive(false);
+                chestInventory_MainParent.SetActive(false);
+                equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(false);
 
                 tabletMenuState = TabletMenuState.MoveableObjects;
                 menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Active;
                 MainManager.Instance.menuStates = MenuStates.MoveableObjectMenu;
+                break;
+            case TabletMenuState.Equipment:
+                chestInventory_MainParent.SetActive(false);
+                tabletMenuState = TabletMenuState.Inventory;
+
+                playerInventory_MainParent.SetActive(true);
+                equipInventory_MainParent.SetActive(true);
+                menu_Inventory.SetActive(true);
+
+                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
+                MainManager.Instance.menuStates = MenuStates.InventoryMenu;
                 break;
 
             default:
@@ -270,7 +338,7 @@ public class TabletManager : Singleton<TabletManager>
         InventoryManager.Instance.SetPlayerItemInfo(Items.None, true);
         InventoryManager.Instance.SetPlayerItemInfo(Items.None, false);
 
-        InventoryManager.Instance.chestInventory_MainParent.SetActive(false);
+        chestInventory_MainParent.SetActive(false);
 
         //Open correct menu
         tablet_Parent.SetActive(true);
@@ -286,6 +354,10 @@ public class TabletManager : Singleton<TabletManager>
 
         //Hide itemName
         SelectionManager.Instance.interaction_Info_UI.SetActive(false);
+
+        //Hide Equipment_Button
+        menu_Chest_Button.SetActive(false);
+        menu_Equipment_Button.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
     }
@@ -387,7 +459,8 @@ public enum TabletMenuState
     CraftingTable,
     SkillTree,
     MoveableObjects,
-    ChestInventory
+    ChestInventory,
+    Equipment
 }
 public enum ObjectInteractingWith
 {

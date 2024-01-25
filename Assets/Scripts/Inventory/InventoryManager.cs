@@ -19,8 +19,6 @@ public class InventoryManager : Singleton<InventoryManager>
     [SerializeField] TextMeshProUGUI chest_ItemDescription_Display;
 
     [Header("GameObjects")]
-    public GameObject playerInventory_MainParent;
-    public GameObject chestInventory_MainParent;
     public GameObject playerInventory_Parent;
     public GameObject chestInventory_Parent;
 
