@@ -70,7 +70,7 @@ public class CraftingManager : MonoBehaviour
     }
     private void Start()
     {
-        PlayerButtonManager.isPressed_CloseCraftingMenu += CloseCraftingScreen;
+        //PlayerButtonManager.isPressed_CloseCraftingMenu += CloseCraftingScreen;
 
         craftingMenu.SetActive(false);
         overviewScreen.SetActive(false);

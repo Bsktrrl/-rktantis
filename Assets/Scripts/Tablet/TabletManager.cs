@@ -165,21 +165,25 @@ public class TabletManager : Singleton<TabletManager>
                 menu_Inventory.SetActive(true);
                 tabletMenuState = TabletMenuState.Inventory;
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
+                MainManager.Instance.menuStates = MenuStates.InventoryMenu;
                 break;
             case TabletMenuState.CraftingTable:
                 menu_CraftingTable.SetActive(true);
                 tabletMenuState = TabletMenuState.CraftingTable;
                 menu_CraftingTable_Button.GetComponent<Image>().sprite = menuButton_Active;
+                MainManager.Instance.menuStates = MenuStates.CraftingMenu;
                 break;
             case TabletMenuState.SkillTree:
                 menu_Skilltree.SetActive(true);
                 tabletMenuState = TabletMenuState.SkillTree;
                 menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Active;
+                MainManager.Instance.menuStates = MenuStates.SkillTree;
                 break;
             case TabletMenuState.MoveableObjects:
                 menu_MoveableObjects.SetActive(true);
                 tabletMenuState = TabletMenuState.MoveableObjects;
                 menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Active;
+                MainManager.Instance.menuStates = MenuStates.MoveableObjectMenu;
                 break;
 
             default:
@@ -192,6 +196,10 @@ public class TabletManager : Singleton<TabletManager>
         //Set the MenuButtonBackround size
         menuButton_Background.GetComponent<RectTransform>().sizeDelta = new Vector2((150 * menuAmount) + 35, menuButton_Background.GetComponent<RectTransform>().sizeDelta.y) ;
 
+        //Set ItemTextInfo for both player and chest
+        InventoryManager.Instance.SetPlayerItemInfo(Items.None, true);
+        InventoryManager.Instance.SetPlayerItemInfo(Items.None, false);
+
         //Open correct menu
         tablet_Parent.SetActive(true);
         SetMenuDisplay(true);
@@ -203,6 +211,11 @@ public class TabletManager : Singleton<TabletManager>
 
         //Hide Player Hotbar
         HotbarManager.Instance.hotbar_Parent.SetActive(false);
+
+        //Hide itemName
+        SelectionManager.Instance.interaction_Info_UI.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.None;
     }
     public void CloseTablet()
     {
@@ -217,6 +230,11 @@ public class TabletManager : Singleton<TabletManager>
 
         //Activate Player Hotbar
         HotbarManager.Instance.hotbar_Parent.SetActive(true);
+
+        //Activate itemName
+        SelectionManager.Instance.interaction_Info_UI.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
     void SetMenuDisplay(bool state)
     {

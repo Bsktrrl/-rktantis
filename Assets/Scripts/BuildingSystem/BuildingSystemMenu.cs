@@ -57,7 +57,7 @@ public class BuildingSystemMenu : Singleton<BuildingSystemMenu>
         buildingSystemMenu_isOpen = true;
 
         Cursor.lockState = CursorLockMode.None;
-        MainManager.Instance.menuStates = MenuStates.BuildingSystemMenu;
+        MainManager.Instance.menuStates = MenuStates.MoveableObjectMenu;
         BuildingManager.Instance.SetAllGhostState_Off();
 
         //Deactivate old directionObjectList

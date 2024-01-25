@@ -2,10 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectionManager : MonoBehaviour
+public class SelectionManager : Singleton<SelectionManager>
 {
-    public static SelectionManager instance { get; set; } //Singleton
-
     public GameObject interaction_Info_UI;
     TextMeshProUGUI interaction_text;
 
@@ -22,18 +20,6 @@ public class SelectionManager : MonoBehaviour
     //--------------------
 
 
-    private void Awake()
-    {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
     private void Start()
     {
         interaction_text = interaction_Info_UI.GetComponent<TextMeshProUGUI>();

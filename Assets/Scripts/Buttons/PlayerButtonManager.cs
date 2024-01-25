@@ -49,7 +49,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
             isPressed_BuildingSystemMenu_Enter?.Invoke();
         }
         else if (Input.GetKeyUp(KeyCode.Mouse1) && MainManager.Instance.gameStates == GameStates.Building
-            && (MainManager.Instance.menuStates == MenuStates.None || MainManager.Instance.menuStates == MenuStates.BuildingSystemMenu))
+            && (MainManager.Instance.menuStates == MenuStates.None || MainManager.Instance.menuStates == MenuStates.MoveableObjectMenu))
         {
             isPressed_BuildingSystemMenu_Exit?.Invoke();
         }
@@ -70,11 +70,11 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
         //Crafting
         #region
-        else if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape))
-            && MainManager.Instance.menuStates == MenuStates.CraftingMenu)
-        {
-            isPressed_CloseCraftingMenu?.Invoke();
-        }
+        //else if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape))
+        //    && MainManager.Instance.menuStates == MenuStates.CraftingMenu)
+        //{
+        //    isPressed_CloseCraftingMenu?.Invoke();
+        //}
         #endregion
 
         //PlayerInventory
@@ -84,7 +84,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
             OpenPlayerInventory_isPressedDown?.Invoke();
         }
         else if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape))
-            && (MainManager.Instance.menuStates == MenuStates.InventoryMenu || MainManager.Instance.menuStates == MenuStates.chestMenu))
+            && (MainManager.Instance.menuStates != MenuStates.None))
         {
             ClosePlayerInventory_isPressedDown?.Invoke();
         }  
@@ -100,11 +100,11 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
         //Hotbar
         #region
-        else if (Input.GetAxis("Mouse ScrollWheel") > 0 && MainManager.Instance.menuStates == MenuStates.None)
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0 && MainManager.Instance.menuStates != MenuStates.MoveableObjectMenu && MainManager.Instance.menuStates != MenuStates.SkillTree)
         {
             hotbarSelectionDown_isPressed?.Invoke();
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && MainManager.Instance.menuStates == MenuStates.None)
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && MainManager.Instance.menuStates != MenuStates.MoveableObjectMenu && MainManager.Instance.menuStates != MenuStates.SkillTree)
         {
             hotbarSelectionUp_isPressed?.Invoke();
         }
@@ -123,6 +123,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         #endregion
 
         //MoveableObject Rotation
+        #region
         else if (Input.GetKey(KeyCode.R) && MainManager.Instance.menuStates == MenuStates.None && MainManager.Instance.gameStates == GameStates.Building)
         {
             isPressed_MoveableRotation_Right?.Invoke();
@@ -131,6 +132,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         {
             isPressed_MoveableRotation_Left?.Invoke();
         }
+        #endregion
 
         //Left Mouse
         #region

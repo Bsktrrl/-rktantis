@@ -23,7 +23,7 @@ public class EquippedItem : MonoBehaviour
 
     public void HitAnimation()
     {
-        GameObject selectedTree = SelectionManager.instance.selectedTree;
+        GameObject selectedTree = SelectionManager.Instance.selectedTree;
 
         if (selectedTree != null)
         {
@@ -38,11 +38,11 @@ public class EquippedItem : MonoBehaviour
         //The point in the animation where equipped item hits
 
         //If Axe is equipped
-        if (subCategories == ItemSubCategories.Axe && SelectionManager.instance.selectedTree != null)
+        if (subCategories == ItemSubCategories.Axe && SelectionManager.Instance.selectedTree != null)
         {
-            if (SelectionManager.instance.selectedTree.GetComponent<ChoppableTree>().treeParent != null)
+            if (SelectionManager.Instance.selectedTree.GetComponent<ChoppableTree>().treeParent != null)
             {
-                SelectionManager.instance.selectedTree.GetComponent<ChoppableTree>().treeParent.gameObject.GetComponent<TreeParent>().ObjectInteraction();
+                SelectionManager.Instance.selectedTree.GetComponent<ChoppableTree>().treeParent.gameObject.GetComponent<TreeParent>().ObjectInteraction();
             }
         }
     }

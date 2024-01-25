@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,12 +9,18 @@ public class InventoryManager : Singleton<InventoryManager>
 {
     [Header("Inventory")]
     public Vector2 inventorySize;
-    public int cellsize = 100;
+    public int cellsize = 70;
 
     [Header("Item")]
     public Items lastItemToGet;
+    [SerializeField] TextMeshProUGUI player_ItemName_Display;
+    [SerializeField] TextMeshProUGUI player_ItemDescription_Display;
+    [SerializeField] TextMeshProUGUI chest_ItemName_Display;
+    [SerializeField] TextMeshProUGUI chest_ItemDescription_Display;
 
     [Header("GameObjects")]
+    public GameObject playerInventory_MainParent;
+    public GameObject chestInventory_MainParent;
     public GameObject playerInventory_Parent;
     public GameObject chestInventory_Parent;
 
@@ -26,6 +34,11 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public List<GameObject> itemSlotList_Player = new List<GameObject>();
     public List<GameObject> itemSlotList_Chest = new List<GameObject>();
+
+    public GameObject playerInventory_Fake_Parent;
+    public GameObject chestInventory_Fake_Parent;
+    [SerializeField] List<GameObject> player_FakeSlot_List = new List<GameObject>();
+    [SerializeField] List<GameObject> chest_FakeSlot_List = new List<GameObject>();
 
     bool inventoryIsOpen;
 
@@ -43,6 +56,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
         playerInventory_Parent.SetActive(false);
         chestInventory_Parent.SetActive(false);
+        playerInventory_Fake_Parent.SetActive(false);
+        chestInventory_Fake_Parent.SetActive(false);
     }
 
 
@@ -352,6 +367,39 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
+    public void SetPlayerItemInfo(Items itemName, bool inventory) //true = player, false = chest
+    {
+        //If playerInventory
+        if (inventory)
+        {
+            if (itemName == Items.None)
+            {
+                player_ItemName_Display.text = "";
+                player_ItemDescription_Display.text = "";
+            }
+            else
+            {
+                player_ItemName_Display.text = itemName.ToString();
+                player_ItemDescription_Display.text = MainManager.Instance.GetItem(itemName).itemDescription;
+            }
+        }
+
+        //If chestInventory
+        else
+        {
+            if (itemName == Items.None)
+            {
+                chest_ItemName_Display.text = "";
+                chest_ItemDescription_Display.text = "";
+            }
+            else
+            {
+                chest_ItemName_Display.text = itemName.ToString();
+                chest_ItemDescription_Display.text = MainManager.Instance.GetItem(itemName).itemDescription;
+            }
+        }
+    }
+
 
     //--------------------
 
@@ -411,7 +459,17 @@ public class InventoryManager : Singleton<InventoryManager>
                 itemSlotList_Chest[itemSlotList_Chest.Count - 1].GetComponent<ItemSlot>().inventoryIndex = inventory;
             }
         }
-        
+
+        //Set Fake Slots
+        if (inventory <= 0)
+        {
+            SetFakeItemSlotAmount(inventorySlots, player_FakeSlot_List);
+        }
+        else
+        {
+            SetFakeItemSlotAmount(inventorySlots, chest_FakeSlot_List);
+        }
+
         //Sort inventory so the biggest items are first
         SortInventory(inventory);
 
@@ -595,8 +653,6 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
 
-        //print("20. itemPlaced: " + itemPlaced + " | inventory.Count: " + inventories[inventory].itemsInInventory.Count);
-
         //If there isn't enough room for the item in the inventory
         if (itemPlaced < inventories[inventory].itemsInInventory.Count)
         {
@@ -632,7 +688,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
         }
-    } // Under PrepareInventoryUI
+    }
 
     public void RemoveInventoriesUI()
     {
@@ -654,6 +710,18 @@ public class InventoryManager : Singleton<InventoryManager>
         itemSlotList_Chest.Clear();
     }
 
+    public void SetFakeItemSlotAmount(int slotAmount, List<GameObject> itemSlotList)
+    {
+        for (int i = 0; i < itemSlotList.Count; i++)
+        {
+            itemSlotList[i].SetActive(false);
+        }
+
+        for (int i = 0; i < slotAmount; i++)
+        {
+            itemSlotList[i].SetActive(true);
+        }
+    }
 
 
     //--------------------
@@ -677,6 +745,10 @@ public class InventoryManager : Singleton<InventoryManager>
             playerInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(cellsize, cellsize);
             playerInventory_Parent.SetActive(true);
 
+            playerInventory_Fake_Parent.GetComponent<RectTransform>().sizeDelta = inventories[0].inventorySize * cellsize;
+            playerInventory_Fake_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(cellsize, cellsize);
+            playerInventory_Fake_Parent.SetActive(true);
+
             inventoryIsOpen = true;
         }
     }
@@ -684,6 +756,8 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         playerInventory_Parent.SetActive(false);
         chestInventory_Parent.SetActive(false);
+        playerInventory_Fake_Parent.SetActive(false);
+        chestInventory_Fake_Parent.SetActive(false);
 
         RemoveInventoriesUI();
 

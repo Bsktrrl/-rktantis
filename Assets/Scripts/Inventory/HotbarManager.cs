@@ -28,6 +28,8 @@ public class HotbarManager : Singleton<HotbarManager>
         PlayerButtonManager.isPressed_3 += QuickHotbarSelect_3;
         PlayerButtonManager.isPressed_4 += QuickHotbarSelect_4;
         PlayerButtonManager.isPressed_5 += QuickHotbarSelect_5;
+
+        hotbar_Parent.SetActive(true);
     }
 
 

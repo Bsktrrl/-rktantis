@@ -43,7 +43,7 @@ public class InteractableObject : MonoBehaviour
         //-----
 
 
-        if (SelectionManager.instance.onTarget && SelectionManager.instance.selecedObject == gameObject
+        if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selecedObject == gameObject
             && MainManager.Instance.menuStates == MenuStates.None)
         {
             //If Object is a Pickup
@@ -77,6 +77,10 @@ public class InteractableObject : MonoBehaviour
                 InventoryManager.Instance.chestInventory_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
                 InventoryManager.Instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
                 InventoryManager.Instance.chestInventory_Parent.SetActive(true);
+
+                InventoryManager.Instance.chestInventory_Fake_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
+                InventoryManager.Instance.chestInventory_Fake_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
+                InventoryManager.Instance.chestInventory_Fake_Parent.SetActive(true);
 
                 MainManager.Instance.menuStates = MenuStates.chestMenu;
             }

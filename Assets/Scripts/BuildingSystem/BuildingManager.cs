@@ -151,7 +151,7 @@ public class BuildingManager : Singleton<BuildingManager>
             }
 
             //Set BuildingRequirement UI
-            if (MainManager.Instance.menuStates == MenuStates.BuildingSystemMenu)
+            if (MainManager.Instance.menuStates == MenuStates.MoveableObjectMenu)
             {
                 buildingRequirement_Parent.SetActive(false);
             }
