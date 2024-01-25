@@ -137,6 +137,17 @@ public class TabletManager : Singleton<TabletManager>
         //Turn of current menu
         switch (currentMenu)
         {
+            case TabletMenuState.None:
+                menu_Inventory.SetActive(false);
+                menu_CraftingTable.SetActive(false);
+                menu_Skilltree.SetActive(false);
+                menu_MoveableObjects.SetActive(false);
+                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                menu_CraftingTable_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                break;
+
             case TabletMenuState.Inventory:
                 menu_Inventory.SetActive(false);
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
@@ -155,6 +166,14 @@ public class TabletManager : Singleton<TabletManager>
                 break;
 
             default:
+                menu_Inventory.SetActive(false);
+                menu_CraftingTable.SetActive(false);
+                menu_Skilltree.SetActive(false);
+                menu_MoveableObjects.SetActive(false);
+                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                menu_CraftingTable_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 break;
         }
 
@@ -162,12 +181,14 @@ public class TabletManager : Singleton<TabletManager>
         switch (newMenu)
         {
             case TabletMenuState.Inventory:
+                InventoryManager.Instance.OpenPlayerInventory();
                 menu_Inventory.SetActive(true);
                 tabletMenuState = TabletMenuState.Inventory;
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
                 MainManager.Instance.menuStates = MenuStates.InventoryMenu;
                 break;
             case TabletMenuState.CraftingTable:
+                CraftingManager.Instance.OpenCraftingScreen();
                 menu_CraftingTable.SetActive(true);
                 tabletMenuState = TabletMenuState.CraftingTable;
                 menu_CraftingTable_Button.GetComponent<Image>().sprite = menuButton_Active;
@@ -216,6 +237,13 @@ public class TabletManager : Singleton<TabletManager>
         SelectionManager.Instance.interaction_Info_UI.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void OpenTablet(TabletMenuState menuToOpen)
+    {
+        OpenTablet();
+
+        MenuTransition(TabletMenuState.None, menuToOpen);
     }
     public void CloseTablet()
     {
@@ -299,6 +327,8 @@ public class TabletManager : Singleton<TabletManager>
 
 public enum TabletMenuState
 {
+    None,
+
     Inventory,
     CraftingTable,
     SkillTree,

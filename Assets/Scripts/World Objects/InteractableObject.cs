@@ -91,7 +91,7 @@ public class InteractableObject : MonoBehaviour
                 print("Interract with a CraftingTable");
 
                 //Open the crafting menu
-                CraftingManager.instance.OpenCraftingScreen();
+                TabletManager.Instance.OpenTablet(TabletMenuState.CraftingTable);
             }
 
             //If Object is another machine

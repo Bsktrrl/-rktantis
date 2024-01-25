@@ -4,10 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CraftingManager : MonoBehaviour
+public class CraftingManager : Singleton<CraftingManager>
 {
-    public static CraftingManager instance { get; set; } //Singleton
-
     #region Variables
     [Header("Main Screen")]
     [SerializeField] GameObject craftingMenu;
@@ -56,18 +54,6 @@ public class CraftingManager : MonoBehaviour
     //--------------------
 
 
-    private void Awake()
-    {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
     private void Start()
     {
         //PlayerButtonManager.isPressed_CloseCraftingMenu += CloseCraftingScreen;

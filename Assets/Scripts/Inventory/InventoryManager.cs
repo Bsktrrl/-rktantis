@@ -732,7 +732,7 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         if (inventoryIsOpen)
         {
-            ClosePlayerInventory();
+            //ClosePlayerInventory();
         }
         else
         {
