@@ -55,6 +55,10 @@ public class TabletManager : Singleton<TabletManager>
     [SerializeField] TextMeshProUGUI temperatureDisplay;
     [SerializeField] TextMeshProUGUI playerTemperatureDisplay;
 
+    [Header("Hotbar")]
+    [SerializeField] List<Image> hotbarFrameImageList_Tablet = new List<Image>();
+    [SerializeField] List<Image> hotbarIconImageList_Tablet = new List<Image>();
+
 
     //--------------------
 
@@ -83,6 +87,9 @@ public class TabletManager : Singleton<TabletManager>
 
             //Set Temperature Display
             WeatherManager.Instance.SetTemperatureDisplay(temperatureDisplay, playerTemperatureDisplay);
+
+            //Set the images of the Hotbar
+            SetHotbarImages();
         }
     }
 
@@ -193,6 +200,9 @@ public class TabletManager : Singleton<TabletManager>
         healthParameters_Tablet_Parent.SetActive(true);
         healthParameters_PlayerScreen_Parent.SetActive(false);
         MainManager.Instance.centerImage.SetActive(false);
+
+        //Hide Player Hotbar
+        HotbarManager.Instance.hotbar_Parent.SetActive(false);
     }
     public void CloseTablet()
     {
@@ -204,6 +214,9 @@ public class TabletManager : Singleton<TabletManager>
         healthParameters_Tablet_Parent.SetActive(false);
         healthParameters_PlayerScreen_Parent.SetActive(true);
         MainManager.Instance.centerImage.SetActive(true);
+
+        //Activate Player Hotbar
+        HotbarManager.Instance.hotbar_Parent.SetActive(true);
     }
     void SetMenuDisplay(bool state)
     {
@@ -247,6 +260,23 @@ public class TabletManager : Singleton<TabletManager>
             }
         }
     }
+
+    void SetHotbarImages()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (HotbarManager.Instance.selectedSlot == i)
+            {
+                hotbarFrameImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].transform.GetChild(1).GetComponent<Image>().sprite;
+            }
+            else
+            {
+                hotbarFrameImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].GetComponent<Image>().sprite;
+            }
+            
+            hotbarIconImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].transform.GetChild(0).GetComponent<Image>().sprite;
+        }
+      }
 }
 
 public enum TabletMenuState

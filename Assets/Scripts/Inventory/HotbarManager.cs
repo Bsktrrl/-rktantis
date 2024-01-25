@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HotbarManager : Singleton<HotbarManager>
 {
+    public GameObject hotbar_Parent;
     public GameObject EquipmentHolder;
     public List<GameObject> EuipmentList = new List<GameObject>();
 
