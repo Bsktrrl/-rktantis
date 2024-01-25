@@ -69,7 +69,7 @@ public class InteractableObject : MonoBehaviour
 
                 //Open the player Inventory
                 InventoryManager.Instance.OpenPlayerInventory();
-                TabletManager.Instance.OpenTablet();
+                TabletManager.Instance.OpenTablet(TabletMenuState.ChestInventory);
 
                 //Open the chest Inventory
                 InventoryManager.Instance.chestInventoryOpen = inventoryIndex;
@@ -83,6 +83,7 @@ public class InteractableObject : MonoBehaviour
                 InventoryManager.Instance.chestInventory_Fake_Parent.SetActive(true);
 
                 MainManager.Instance.menuStates = MenuStates.chestMenu;
+                TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.Chest;
             }
 
             //If Object is a Crafting Table
@@ -92,6 +93,19 @@ public class InteractableObject : MonoBehaviour
 
                 //Open the crafting menu
                 TabletManager.Instance.OpenTablet(TabletMenuState.CraftingTable);
+
+                TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.CraftingTable;
+            }
+
+            //If Object is a SkillTree
+            else if (interacteableType == InteracteableType.SkillTree)
+            {
+                print("Interract with a SkillTree");
+
+                //Open the crafting menu
+                TabletManager.Instance.OpenTablet(TabletMenuState.SkillTree);
+
+                TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.SkillTree;
             }
 
             //If Object is another machine
@@ -143,5 +157,6 @@ public enum InteracteableType
     Pickup,
     Inventory,
     CraftingTable,
+    SkillTree,
     Machine
 }
