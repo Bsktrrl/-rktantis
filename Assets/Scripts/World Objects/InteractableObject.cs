@@ -68,15 +68,13 @@ public class InteractableObject : MonoBehaviour
                 print("Interract with an Inventory");
 
                 //Open the player Inventory
-                InventoryManager.Instance.OpenPlayerInventory();
-                TabletManager.Instance.OpenTablet(TabletMenuState.ChestInventory);
 
                 //Open the chest Inventory
                 InventoryManager.Instance.chestInventoryOpen = inventoryIndex;
-                InventoryManager.Instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Player Inventory
-                InventoryManager.Instance.chestInventory_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
-                InventoryManager.Instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
-                InventoryManager.Instance.chestInventory_Parent.SetActive(true);
+                InventoryManager.Instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Chest Inventory
+                TabletManager.Instance.chestInventory_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
+                TabletManager.Instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
+                TabletManager.Instance.chestInventory_Parent.SetActive(true);
 
                 InventoryManager.Instance.chestInventory_Fake_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
                 InventoryManager.Instance.chestInventory_Fake_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
@@ -84,6 +82,10 @@ public class InteractableObject : MonoBehaviour
 
                 MainManager.Instance.menuStates = MenuStates.chestMenu;
                 TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.Chest;
+
+                InventoryManager.Instance.ClosePlayerInventory();
+                InventoryManager.Instance.OpenPlayerInventory();
+                TabletManager.Instance.OpenTablet(TabletMenuState.ChestInventory);
             }
 
             //If Object is a Crafting Table

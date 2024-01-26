@@ -19,9 +19,6 @@ public class InventoryManager : Singleton<InventoryManager>
     [SerializeField] TextMeshProUGUI chest_ItemDescription_Display;
 
     [Header("GameObjects")]
-    public GameObject playerInventory_Parent;
-    public GameObject chestInventory_Parent;
-
     public GameObject itemSlot_Prefab;
 
     public GameObject handDropPoint;
@@ -49,11 +46,11 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void Start()
     {
-        PlayerButtonManager.OpenPlayerInventory_isPressedDown += OpenPlayerInventory;
-        PlayerButtonManager.ClosePlayerInventory_isPressedDown += ClosePlayerInventory;
+        //PlayerButtonManager.OpenPlayerInventory_isPressedDown += OpenPlayerInventory;
+        //PlayerButtonManager.ClosePlayerInventory_isPressedDown += ClosePlayerInventory;
 
-        playerInventory_Parent.SetActive(false);
-        chestInventory_Parent.SetActive(false);
+        TabletManager.Instance.playerInventory_Parent.SetActive(false);
+        TabletManager.Instance.chestInventory_Parent.SetActive(false);
         playerInventory_Fake_Parent.SetActive(false);
         chestInventory_Fake_Parent.SetActive(false);
     }
@@ -445,7 +442,7 @@ public class InventoryManager : Singleton<InventoryManager>
             if (inventory <= 0)
             {
                 itemSlotList_Player.Add(Instantiate(itemSlot_Prefab, Vector3.zero, Quaternion.identity) as GameObject);
-                itemSlotList_Player[itemSlotList_Player.Count - 1].transform.parent = playerInventory_Parent.transform;
+                itemSlotList_Player[itemSlotList_Player.Count - 1].transform.parent = TabletManager.Instance.playerInventory_Parent.transform;
                 itemSlotList_Player[itemSlotList_Player.Count - 1].GetComponent<ItemSlot>().inventoryIndex = inventory;
             }
 
@@ -453,7 +450,7 @@ public class InventoryManager : Singleton<InventoryManager>
             else
             {
                 itemSlotList_Chest.Add(Instantiate(itemSlot_Prefab, Vector3.zero, Quaternion.identity) as GameObject);
-                itemSlotList_Chest[itemSlotList_Chest.Count - 1].transform.parent = chestInventory_Parent.transform;
+                itemSlotList_Chest[itemSlotList_Chest.Count - 1].transform.parent = TabletManager.Instance.chestInventory_Parent.transform;
                 itemSlotList_Chest[itemSlotList_Chest.Count - 1].GetComponent<ItemSlot>().inventoryIndex = inventory;
             }
         }
@@ -734,14 +731,14 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         else
         {
-            Cursor.lockState = CursorLockMode.None;
-            MainManager.Instance.menuStates = MenuStates.InventoryMenu;
+            //Cursor.lockState = CursorLockMode.None;
+            //MainManager.Instance.menuStates = MenuStates.InventoryMenu;
 
             PrepareInventoryUI(0, false); //Prepare PLAYER Inventory
 
-            playerInventory_Parent.GetComponent<RectTransform>().sizeDelta = inventories[0].inventorySize * cellsize;
-            playerInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(cellsize, cellsize);
-            playerInventory_Parent.SetActive(true);
+            TabletManager.Instance.playerInventory_Parent.GetComponent<RectTransform>().sizeDelta = inventories[0].inventorySize * cellsize;
+            TabletManager.Instance.playerInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(cellsize, cellsize);
+            TabletManager.Instance.playerInventory_Parent.SetActive(true);
 
             playerInventory_Fake_Parent.GetComponent<RectTransform>().sizeDelta = inventories[0].inventorySize * cellsize;
             playerInventory_Fake_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(cellsize, cellsize);
@@ -750,17 +747,17 @@ public class InventoryManager : Singleton<InventoryManager>
             inventoryIsOpen = true;
         }
     }
-    void ClosePlayerInventory()
+    public void ClosePlayerInventory()
     {
-        playerInventory_Parent.SetActive(false);
-        chestInventory_Parent.SetActive(false);
+        TabletManager.Instance.playerInventory_Parent.SetActive(false);
+        TabletManager.Instance.chestInventory_Parent.SetActive(false);
         playerInventory_Fake_Parent.SetActive(false);
         chestInventory_Fake_Parent.SetActive(false);
 
         RemoveInventoriesUI();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        MainManager.Instance.menuStates = MenuStates.None;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //MainManager.Instance.menuStates = MenuStates.None;
 
         inventoryIsOpen = false;
     }

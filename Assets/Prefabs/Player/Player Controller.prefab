@@ -1285,6 +1285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e749acc5b010a4242bedf88703507f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInventory_Parent: {fileID: 3694456795635356067}
+  chestInventory_Parent: {fileID: 8083735156897433318}
   inventorySize: {x: 5, y: 7}
   cellsize: 70
   lastItemToGet: 0
@@ -1292,8 +1294,6 @@ MonoBehaviour:
   player_ItemDescription_Display: {fileID: 722030145348219572}
   chest_ItemName_Display: {fileID: 8341269178275338428}
   chest_ItemDescription_Display: {fileID: 4144976532129020349}
-  playerInventory_Parent: {fileID: 3694456795635356067}
-  chestInventory_Parent: {fileID: 8083735156897433318}
   itemSlot_Prefab: {fileID: 1854939340351178791, guid: 25dced00452408945af2d0e6643bf8c6,
     type: 3}
   handDropPoint: {fileID: 5115784751274466938}
@@ -1522,6 +1522,8 @@ MonoBehaviour:
   playerInventory_MainParent: {fileID: 8682934751925168776}
   chestInventory_MainParent: {fileID: 782554221728811425}
   equipInventory_MainParent: {fileID: 5948482154386022624}
+  playerInventory_Parent: {fileID: 3694456795635356067}
+  chestInventory_Parent: {fileID: 8083735156897433318}
   menu_CraftingTable: {fileID: 7515070500592212625}
   menu_Skilltree: {fileID: 499033573468123864}
   menu_MoveableObjects: {fileID: 8563157440695284561}
