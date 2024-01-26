@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class TabletManager : Singleton<TabletManager>
 {
+    #region Main Tablet
     [Header("General")]
     public TabletMenuState tabletMenuState;
     public ObjectInteractingWith objectInteractingWith;
@@ -33,8 +34,10 @@ public class TabletManager : Singleton<TabletManager>
     [SerializeField] GameObject menu_Chest_Button;
 
     [Header("Button Images")]
-    [SerializeField] Sprite menuButton_Passive;
-    [SerializeField] Sprite menuButton_Active;
+    public Sprite menuButton_Passive;
+    public Sprite menuButton_Active;
+    public Sprite squareButton_Passive;
+    public Sprite squareButton_Active;
 
     [Header("Tablet")]
     [SerializeField] GameObject tablet_Parent;
@@ -68,6 +71,19 @@ public class TabletManager : Singleton<TabletManager>
     [Header("Hotbar")]
     [SerializeField] List<Image> hotbarFrameImageList_Tablet = new List<Image>();
     [SerializeField] List<Image> hotbarIconImageList_Tablet = new List<Image>();
+    #endregion
+    #region SkillTree Menu
+    [Header("SkillTree Menu")]
+    public GameObject skillTree_Inventory_Parent;
+    public GameObject skillTree_Equipment_Parent;
+    public GameObject skillTree_GhostCapture_Parent;
+    public GameObject skillTree_CrystalLight_Parent;
+
+    public GameObject skillTree_Inventory_Button;
+    public GameObject skillTree_Equipment_Button;
+    public GameObject skillTree_GhostCapture_Button;
+    public GameObject skillTree_CrystalLight_Button;
+    #endregion
 
 
     //--------------------
@@ -158,6 +174,73 @@ public class TabletManager : Singleton<TabletManager>
     }
     #endregion
 
+    #region SkillTree Buttons
+    public void SkillTreeButton_Inventory_onClick()
+    {
+        skillTree_Inventory_Parent.SetActive(true);
+        skillTree_Equipment_Parent.SetActive(false);
+        skillTree_GhostCapture_Parent.SetActive(false);
+        skillTree_CrystalLight_Parent.SetActive(false);
+
+        skillTree_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
+        skillTree_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        skillTree_GhostCapture_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        skillTree_CrystalLight_Button.GetComponent<Image>().sprite = menuButton_Passive;
+
+        SkillTreeManager.Instance.skillTreeMenu_Type = SkillTreeType.Inventory;
+
+        SkillTreeManager.Instance.ResetSkillTree_Information();
+    }
+    public void SkillTreeButton_Equipment_onClick()
+    {
+        skillTree_Inventory_Parent.SetActive(false);
+        skillTree_Equipment_Parent.SetActive(true);
+        skillTree_GhostCapture_Parent.SetActive(false);
+        skillTree_CrystalLight_Parent.SetActive(false);
+
+        skillTree_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        skillTree_Equipment_Button.GetComponent<Image>().sprite = menuButton_Active;
+        skillTree_GhostCapture_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        skillTree_CrystalLight_Button.GetComponent<Image>().sprite = menuButton_Passive;
+
+        SkillTreeManager.Instance.skillTreeMenu_Type = SkillTreeType.Equipment;
+
+        SkillTreeManager.Instance.ResetSkillTree_Information();
+    }
+    public void SkillTreeButton_GhostCapture_onClick()
+    {
+        skillTree_Inventory_Parent.SetActive(false);
+        skillTree_Equipment_Parent.SetActive(false);
+        skillTree_GhostCapture_Parent.SetActive(true);
+        skillTree_CrystalLight_Parent.SetActive(false);
+
+        skillTree_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        skillTree_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        skillTree_GhostCapture_Button.GetComponent<Image>().sprite = menuButton_Active;
+        skillTree_CrystalLight_Button.GetComponent<Image>().sprite = menuButton_Passive;
+
+        SkillTreeManager.Instance.skillTreeMenu_Type = SkillTreeType.GhostCapture;
+
+        SkillTreeManager.Instance.ResetSkillTree_Information();
+    }
+    public void SkillTreeButton_CrystalLight_onClick()
+    {
+        skillTree_Inventory_Parent.SetActive(false);
+        skillTree_Equipment_Parent.SetActive(false);
+        skillTree_GhostCapture_Parent.SetActive(false);
+        skillTree_CrystalLight_Parent.SetActive(true);
+
+        skillTree_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        skillTree_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        skillTree_GhostCapture_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        skillTree_CrystalLight_Button.GetComponent<Image>().sprite = menuButton_Active;
+
+        SkillTreeManager.Instance.skillTreeMenu_Type = SkillTreeType.CrystalLight;
+
+        SkillTreeManager.Instance.ResetSkillTree_Information();
+    }
+    #endregion
+
 
     //--------------------
 
@@ -188,6 +271,12 @@ public class TabletManager : Singleton<TabletManager>
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 InventoryManager.Instance.ClosePlayerInventory();
                 break;
+            case TabletMenuState.Equipment:
+                equipInventory_MainParent.SetActive(false);
+                menu_Inventory.SetActive(false);
+                menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                InventoryManager.Instance.ClosePlayerInventory();
+                break;
             case TabletMenuState.Inventory:
                 menu_Inventory.SetActive(false);
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
@@ -205,12 +294,6 @@ public class TabletManager : Singleton<TabletManager>
             case TabletMenuState.MoveableObjects:
                 menu_MoveableObjects.SetActive(false);
                 menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Passive;
-                break;
-            case TabletMenuState.Equipment:
-                equipInventory_MainParent.SetActive(false);
-                menu_Inventory.SetActive(false);
-                menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
-                InventoryManager.Instance.ClosePlayerInventory();
                 break;
 
             default:
@@ -254,6 +337,18 @@ public class TabletManager : Singleton<TabletManager>
                 menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Active;
 
                 tabletMenuState = TabletMenuState.ChestInventory;
+                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
+                MainManager.Instance.menuStates = MenuStates.InventoryMenu;
+                break;
+            case TabletMenuState.Equipment:
+                InventoryManager.Instance.OpenPlayerInventory();
+                chestInventory_MainParent.SetActive(false);
+                tabletMenuState = TabletMenuState.Equipment;
+
+                playerInventory_MainParent.SetActive(true);
+                equipInventory_MainParent.SetActive(true);
+                menu_Inventory.SetActive(true);
+
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
                 MainManager.Instance.menuStates = MenuStates.InventoryMenu;
                 break;
@@ -304,6 +399,8 @@ public class TabletManager : Singleton<TabletManager>
                 menu_Equipment_Button.SetActive(false);
                 menu_Chest_Button.SetActive(false);
 
+                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+
                 playerInventory_MainParent.SetActive(true);
                 chestInventory_MainParent.SetActive(false);
                 equipInventory_MainParent.SetActive(false);
@@ -324,6 +421,8 @@ public class TabletManager : Singleton<TabletManager>
                 equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(false);
 
+                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+
                 tabletMenuState = TabletMenuState.SkillTree;
                 menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Active;
                 MainManager.Instance.menuStates = MenuStates.SkillTree;
@@ -339,21 +438,11 @@ public class TabletManager : Singleton<TabletManager>
                 equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(false);
 
+                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+
                 tabletMenuState = TabletMenuState.MoveableObjects;
                 menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Active;
                 MainManager.Instance.menuStates = MenuStates.MoveableObjectMenu;
-                break;
-            case TabletMenuState.Equipment:
-                InventoryManager.Instance.OpenPlayerInventory();
-                chestInventory_MainParent.SetActive(false);
-                tabletMenuState = TabletMenuState.Equipment;
-
-                playerInventory_MainParent.SetActive(true);
-                equipInventory_MainParent.SetActive(true);
-                menu_Inventory.SetActive(true);
-
-                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
-                MainManager.Instance.menuStates = MenuStates.InventoryMenu;
                 break;
 
             default:
@@ -487,6 +576,12 @@ public class TabletManager : Singleton<TabletManager>
             hotbarIconImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].transform.GetChild(0).GetComponent<Image>().sprite;
         }
       }
+
+
+    //--------------------
+
+
+
 }
 
 public enum TabletMenuState
