@@ -79,6 +79,13 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     {
         if (perk.perkInfo.perkState == PerkState.Active) { return; }
 
+        if (perk.perkInfo.requirementList.Count <= 0 && perk.perkInfo.perkConnectionList.Count <= 0)
+        {
+            perk.perkInfo.perkState = PerkState.Ready;
+
+            return;
+        }
+
         #region Requirements
         int requirementCounter = 0;
 

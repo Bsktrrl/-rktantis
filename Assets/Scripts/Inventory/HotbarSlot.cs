@@ -15,7 +15,7 @@ public class HotbarSlot : MonoBehaviour
     //--------------------
 
 
-    private void Awake()
+    private void Start()
     {
         selectedImage.gameObject.SetActive(false);
     }
