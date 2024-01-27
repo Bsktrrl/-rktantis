@@ -15,6 +15,9 @@ public class MoveableObject : MonoBehaviour
     [Header("MachineType Type")]
     public MachineType machineType = MachineType.None;
 
+    [Header("Mesh")]
+    public SkinnedMeshRenderer meshRenderer;
+
 
     //--------------------
 

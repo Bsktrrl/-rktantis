@@ -28,7 +28,10 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
         MoveableObjectManager.Instance.buildingType_Selected = buildingType;
         MoveableObjectManager.Instance.buildingMaterial_Selected = buildingMaterial;
 
-        BuildingSystemMenu.Instance.SetSelectedImage(gameObject.GetComponent<Image>().sprite);
+        if (gameObject.GetComponent<Image>())
+        {
+            BuildingSystemMenu.Instance.SetSelectedImage(gameObject.GetComponent<Image>().sprite);
+        }
 
         //Hide Panel if Object is Empty
         if (objectType == MoveableObjectType.None)
