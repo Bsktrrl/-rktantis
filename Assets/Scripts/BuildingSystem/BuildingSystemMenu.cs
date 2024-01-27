@@ -24,8 +24,8 @@ public class BuildingSystemMenu : Singleton<BuildingSystemMenu>
 
     private void Start()
     {
-        PlayerButtonManager.isPressed_BuildingSystemMenu_Enter += BuildingBlockSelecter_Enter;
-        PlayerButtonManager.isPressed_BuildingSystemMenu_Exit += BuildingBlockSelecter_Exit;
+        //PlayerButtonManager.isPressed_BuildingSystemMenu_Enter += BuildingBlockSelecter_Enter;
+        //PlayerButtonManager.isPressed_BuildingSystemMenu_Exit += BuildingBlockSelecter_Exit;
 
         buildingSystemMenu.SetActive(false);
     }

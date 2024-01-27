@@ -220,7 +220,7 @@ public class BuildingManager : Singleton<BuildingManager>
             if (BuildingSystemMenu.Instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().buildingType == MoveableObjectManager.Instance.buildingType_Selected
                 && BuildingSystemMenu.Instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == MoveableObjectManager.Instance.buildingMaterial_Selected)
             {
-                BuildingSystemMenu.Instance.SetSelectedImage(BuildingSystemMenu.Instance.buildingBlockUIList[i].GetComponent<Image>().sprite);
+                BuildingSystemMenu.Instance.SetSelectedImage(BuildingSystemMenu.Instance.buildingBlockUIList[i].GetComponent<BuildingBlock_UI>().parent.GetComponent<Image>().sprite);
 
                 break;
             }
@@ -2309,7 +2309,7 @@ public class BuildingManager : Singleton<BuildingManager>
             if (buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType == blockParent.buildingType
                 && buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == blockParent.buildingMaterial)
             {
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = buildingBlock_UIList[i].GetComponentInChildren<Image>().sprite;
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().parent.GetComponent<Image>().sprite;
                 buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial + " " + buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
 
                 break;

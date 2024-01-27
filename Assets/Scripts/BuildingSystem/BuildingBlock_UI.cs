@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
+public class BuildingBlock_UI : MonoBehaviour
 {
+    public static Action objectClicked;
+
     [Header("Main Type")]
     public MoveableObjectType objectType;
 
@@ -19,8 +19,34 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
     [Header("FurnitureType Type")]
     public FurnitureType furnitureType;
 
-    public void OnPointerEnter(PointerEventData eventData)
+    [Header("Parent")]
+    public GameObject parent;
+
+
+    //--------------------
+
+
+    private void Start()
     {
+        objectClicked += OtherButtonClicked;
+    }
+
+
+    //--------------------
+
+
+    void OtherButtonClicked()
+    {
+        //Set Frame Blue
+        GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Active;
+    }
+    public void OnObjectClicked()
+    {
+        objectClicked?.Invoke();
+
+        //Set Frame Orange
+        GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Passive;
+
         MoveableObjectManager.Instance.moveableObjectType = objectType;
         MoveableObjectManager.Instance.machineType = machineType;
         MoveableObjectManager.Instance.furnitureType = furnitureType;
@@ -28,9 +54,9 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
         MoveableObjectManager.Instance.buildingType_Selected = buildingType;
         MoveableObjectManager.Instance.buildingMaterial_Selected = buildingMaterial;
 
-        if (gameObject.GetComponent<Image>())
+        if (parent.GetComponent<Image>())
         {
-            BuildingSystemMenu.Instance.SetSelectedImage(gameObject.GetComponent<Image>().sprite);
+            BuildingSystemMenu.Instance.SetSelectedImage(parent.GetComponent<Image>().sprite);
         }
 
         //Hide Panel if Object is Empty
@@ -68,8 +94,6 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
             if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
             {
                 EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
-
-                //print("2000. New Selected Block Set: Type: " + buildingType + " | Material: " + buildingMaterial);
             }
         }
 
@@ -84,7 +108,6 @@ public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
                 MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
                 BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.Instance.buildingRequirement_Parent);
                 BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
-
             }
         }
 

@@ -104,9 +104,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2604940307130278556}
-  - {fileID: 8488388465877079491}
-  - {fileID: 2195629758515799742}
+  - {fileID: 2270549169748454640}
+  - {fileID: 1866948561154427752}
+  - {fileID: 8951825587196685045}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 140160575934701674}
   - component: {fileID: 3799066015904094260}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,11 +542,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6547171821927780354}
+  m_Children:
+  - {fileID: 6547171821927780354}
+  m_Father: {fileID: 4858208946845625891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -578,8 +579,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 9b9b87be9dfa9f64d99ccfd387d76c7f, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -829,7 +830,7 @@ GameObject:
   - component: {fileID: 583359398087589792}
   - component: {fileID: 9151833145663300703}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -846,12 +847,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4335558766605938135}
-  m_Father: {fileID: 5101982559616818666}
+  m_Children: []
+  m_Father: {fileID: 4335558766605938135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -883,8 +883,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ab439e7d9ffe03248a011e67ee6e0f6e, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -892,7 +892,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &583359398087589792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,7 +912,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -922,9 +922,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -936,7 +937,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1898509246878670958}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9151833145663300703}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9151833145663300703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,6 +967,7 @@ MonoBehaviour:
   buildingMaterial: 2
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 2951669654334203987}
 --- !u!1 &273959889729231851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,7 +1057,7 @@ GameObject:
   - component: {fileID: 743429126568320780}
   - component: {fileID: 8341832923893217830}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1060,12 +1074,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2270549169748454640}
-  m_Father: {fileID: 1069495010393194188}
+  m_Children: []
+  m_Father: {fileID: 2270549169748454640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1097,8 +1110,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 32bcd098f6f84794589fe3e9080a7a33, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1106,7 +1119,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &743429126568320780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,7 +1139,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1136,9 +1149,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -1150,7 +1164,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2646824674068259597}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8341832923893217830}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8341832923893217830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,6 +1194,7 @@ MonoBehaviour:
   buildingMaterial: 1
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 6280756748212971881}
 --- !u!1 &336473647471167997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,7 +1844,7 @@ GameObject:
   - component: {fileID: 7007013441075129861}
   - component: {fileID: 7813339578860693250}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1834,12 +1861,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2875112969646162042}
-  m_Father: {fileID: 857292389708979810}
+  m_Children: []
+  m_Father: {fileID: 2875112969646162042}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1871,8 +1897,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d8855c2a95c7e2c449468ec1a60113b8, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1880,7 +1906,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &7007013441075129861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1900,7 +1926,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1910,9 +1936,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -1924,7 +1951,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 990317527630790748}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7813339578860693250}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7813339578860693250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1942,6 +1981,7 @@ MonoBehaviour:
   buildingMaterial: 1
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 5409543133780390649}
 --- !u!1 &499033573468123864
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,7 +3116,7 @@ GameObject:
   - component: {fileID: 5065681700279888287}
   - component: {fileID: 421948754080686323}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3093,11 +3133,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8901973581462515030}
+  m_Children:
+  - {fileID: 8901973581462515030}
+  m_Father: {fileID: 7100662848391072799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3129,8 +3170,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: bb31161876820f34d8117a11d77d9de3, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3793,7 +3834,7 @@ GameObject:
   - component: {fileID: 139113471660158338}
   - component: {fileID: 6096118807515749025}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3810,11 +3851,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7381254477270276382}
+  m_Children:
+  - {fileID: 7381254477270276382}
+  m_Father: {fileID: 4740078651597644543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3846,8 +3888,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 878ca5fedb5015646b868e9ca4baa2ef, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3868,7 +3910,7 @@ GameObject:
   - component: {fileID: 823373721209214709}
   - component: {fileID: 5611125751296859478}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: CraftingTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3885,11 +3927,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1152326865240167141}
+  m_Children:
+  - {fileID: 1152326865240167141}
+  m_Father: {fileID: 6600098771820278321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3921,8 +3964,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 437a0febf47ca0f4c9100b0b033f390e, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4936,7 +4979,7 @@ GameObject:
   - component: {fileID: 810512541957348969}
   - component: {fileID: 4004346795592182340}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4949,15 +4992,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382421621591330613}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 327827553569543595}
+  m_Children:
+  - {fileID: 327827553569543595}
+  m_Father: {fileID: 4740078651597644543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4989,8 +5033,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 23a03be913365904390807499be04b02, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5606,9 +5650,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6783061040210108685}
-  - {fileID: 4385486656889884491}
-  - {fileID: 8940628403352226807}
+  - {fileID: 8403869499583665744}
+  - {fileID: 150461521002731460}
+  - {fileID: 7433996585842605304}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5818,7 +5862,7 @@ GameObject:
   - component: {fileID: 2798719094419825339}
   - component: {fileID: 8377600404621879832}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5835,12 +5879,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3074371980993007821}
-  m_Father: {fileID: 857292389708979810}
+  m_Children: []
+  m_Father: {fileID: 3074371980993007821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5872,8 +5915,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0f6008fa89b294249a6c4b9403535ee1, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5881,7 +5924,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &2798719094419825339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5901,7 +5944,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -5911,9 +5954,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -5925,7 +5969,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7018755543500789782}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8377600404621879832}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8377600404621879832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5943,6 +5999,7 @@ MonoBehaviour:
   buildingMaterial: 3
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 8777667023058698911}
 --- !u!1 &1588295463384543534
 GameObject:
   m_ObjectHideFlags: 0
@@ -6182,7 +6239,7 @@ GameObject:
   - component: {fileID: 3481125510046655965}
   - component: {fileID: 8774907084250998669}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6199,12 +6256,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7433996585842605304}
-  m_Father: {fileID: 2507209311430859095}
+  m_Children: []
+  m_Father: {fileID: 7433996585842605304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6236,8 +6292,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: af9afa8dc24bdba44b9ff65088535bab, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6245,7 +6301,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &3481125510046655965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6265,7 +6321,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -6275,9 +6331,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -6289,7 +6346,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 197006238464825330}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8774907084250998669}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8774907084250998669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6307,6 +6376,7 @@ MonoBehaviour:
   buildingMaterial: 3
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 3287609037790734064}
 --- !u!1 &1627152634206070905
 GameObject:
   m_ObjectHideFlags: 0
@@ -6454,7 +6524,7 @@ GameObject:
   - component: {fileID: 2410134946031269063}
   - component: {fileID: 955246511534799836}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Medium Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6471,11 +6541,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1196996213992648509}
+  m_Children:
+  - {fileID: 1196996213992648509}
+  m_Father: {fileID: 6600098771820278321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6507,8 +6578,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: cba38c55d4475a64f91ca31389e074a4, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7013,7 +7084,7 @@ GameObject:
   - component: {fileID: 7542899849021256999}
   - component: {fileID: 7124071223630409111}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7030,14 +7101,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 361388210653458633}
-  m_Father: {fileID: 477231682882187357}
+  m_Children: []
+  m_Father: {fileID: 361388210653458633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -40}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5765590555318282657
 CanvasRenderer:
@@ -7067,8 +7137,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c62734418b9367b45a6380059d9b86af, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7076,7 +7146,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &7542899849021256999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7096,7 +7166,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -7106,9 +7176,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -7120,7 +7191,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6889389776895855358}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7124071223630409111}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7124071223630409111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7138,6 +7221,7 @@ MonoBehaviour:
   buildingMaterial: 1
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 7144023366016838895}
 --- !u!1 &1800656367798124340
 GameObject:
   m_ObjectHideFlags: 0
@@ -7497,7 +7581,7 @@ GameObject:
   - component: {fileID: 3159900930175734921}
   - component: {fileID: 9142269629248431521}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7514,14 +7598,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2201230958072437457}
-  m_Father: {fileID: 4858208946845625891}
+  m_Children: []
+  m_Father: {fileID: 2201230958072437457}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -40}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8733543889355376885
 CanvasRenderer:
@@ -7551,8 +7634,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5e42648298d6cc846845c99106fbf4db, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7560,7 +7643,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &3159900930175734921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7580,7 +7663,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -7590,9 +7673,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -7604,7 +7688,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4136125031425102779}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9142269629248431521}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9142269629248431521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7622,6 +7718,7 @@ MonoBehaviour:
   buildingMaterial: 1
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 2304931061981237295}
 --- !u!1 &1875211504855207577
 GameObject:
   m_ObjectHideFlags: 0
@@ -7788,7 +7885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &477231682882187357
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7801,15 +7898,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6075393085748859694}
-  - {fileID: 3107174210256672922}
-  - {fileID: 6024566185791086436}
+  - {fileID: 361388210653458633}
+  - {fileID: 6360598455791336473}
+  - {fileID: 1693416471205029679}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 465, y: -142.5}
-  m_SizeDelta: {x: 80, y: 285}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5957771254359747324
 MonoBehaviour:
@@ -7999,7 +8096,7 @@ GameObject:
   - component: {fileID: 6781634377224491386}
   - component: {fileID: 3728645519297469577}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8016,14 +8113,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1693416471205029679}
-  m_Father: {fileID: 477231682882187357}
+  m_Children: []
+  m_Father: {fileID: 1693416471205029679}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -210}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &207839578247224645
 CanvasRenderer:
@@ -8053,8 +8149,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6e935fabff609884c96833fda277e9c6, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8062,7 +8158,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &6781634377224491386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8082,7 +8178,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -8092,9 +8188,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -8106,7 +8203,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5214351475643870234}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3728645519297469577}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3728645519297469577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8124,6 +8233,7 @@ MonoBehaviour:
   buildingMaterial: 3
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 8172854215679793738}
 --- !u!1 &1952085966451854645
 GameObject:
   m_ObjectHideFlags: 0
@@ -8566,7 +8676,7 @@ GameObject:
   - component: {fileID: 7721711621899499926}
   - component: {fileID: 4944777410993325579}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8583,11 +8693,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7176199522082047478}
+  m_Children:
+  - {fileID: 7176199522082047478}
+  m_Father: {fileID: 857292389708979810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8619,8 +8730,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 556d650db6bd70441944c35a38cbd9ef, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8703,7 +8814,7 @@ GameObject:
   - component: {fileID: 8545601480746685049}
   - component: {fileID: 621641823508717825}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8720,12 +8831,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1931336701625900318}
-  m_Father: {fileID: 4740078651597644543}
+  m_Children: []
+  m_Father: {fileID: 1931336701625900318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8757,8 +8867,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 878ca5fedb5015646b868e9ca4baa2ef, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8766,7 +8876,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &8545601480746685049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8786,7 +8896,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -8796,9 +8906,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -8810,7 +8921,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2873440413250749215}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 621641823508717825}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &621641823508717825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8828,6 +8951,7 @@ MonoBehaviour:
   buildingMaterial: 2
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 1070360432789996307}
 --- !u!1 &2092764091761638887
 GameObject:
   m_ObjectHideFlags: 0
@@ -9270,7 +9394,7 @@ GameObject:
   - component: {fileID: 6848068877093137098}
   - component: {fileID: 6199290873795374339}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9287,11 +9411,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6913156662695131686}
+  m_Children:
+  - {fileID: 6913156662695131686}
+  m_Father: {fileID: 5101982559616818666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9323,8 +9448,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 7ee3d34934391eb408d217e224214a61, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -9704,7 +9829,7 @@ GameObject:
   - component: {fileID: 3824006493472326016}
   - component: {fileID: 5367098702800424665}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9721,11 +9846,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 482870432394693067}
+  m_Children:
+  - {fileID: 482870432394693067}
+  m_Father: {fileID: 4858208946845625891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9757,8 +9883,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 5e42648298d6cc846845c99106fbf4db, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11103,7 +11229,7 @@ GameObject:
   - component: {fileID: 341522710396773980}
   - component: {fileID: 101893279748840003}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Nothing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11120,11 +11246,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5202232411323482226}
+  m_Children:
+  - {fileID: 5202232411323482226}
+  m_Father: {fileID: 6547470765209264613}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11156,8 +11283,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 3a78a82eff9085347a4146c15abfa6de, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11274,7 +11401,7 @@ GameObject:
   - component: {fileID: 7950953057931883542}
   - component: {fileID: 395881713405351329}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11291,12 +11418,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5971367799615444146}
-  m_Father: {fileID: 5101982559616818666}
+  m_Children: []
+  m_Father: {fileID: 5971367799615444146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11328,8 +11454,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7ee3d34934391eb408d217e224214a61, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11337,7 +11463,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &7950953057931883542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11357,7 +11483,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -11367,9 +11493,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -11381,7 +11508,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2846329628027465515}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 395881713405351329}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &395881713405351329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11399,6 +11538,7 @@ MonoBehaviour:
   buildingMaterial: 3
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 2243073231493656081}
 --- !u!1 &2764073117532648320
 GameObject:
   m_ObjectHideFlags: 0
@@ -11415,7 +11555,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4858208946845625891
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11428,15 +11568,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 482870432394693067}
-  - {fileID: 6547171821927780354}
-  - {fileID: 8922776506263495743}
+  - {fileID: 2201230958072437457}
+  - {fileID: 3130124164576350218}
+  - {fileID: 1804589966422595728}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 635, y: -142.5}
-  m_SizeDelta: {x: 80, y: 285}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6942147084473744135
 MonoBehaviour:
@@ -11474,7 +11614,7 @@ GameObject:
   - component: {fileID: 4005728697954861114}
   - component: {fileID: 1856230730358125057}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11491,11 +11631,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6133845010224381637}
+  m_Children:
+  - {fileID: 6133845010224381637}
+  m_Father: {fileID: 7100662848391072799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11527,8 +11668,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 01a6aaaaebe4e8d4ab943188b92bf39f, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -12193,7 +12334,7 @@ GameObject:
   - component: {fileID: 7532744938431496426}
   - component: {fileID: 1057707093974862513}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12210,14 +12351,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7147400833938329554}
-  m_Father: {fileID: 8887780129250466248}
+  m_Children: []
+  m_Father: {fileID: 7147400833938329554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -210}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1294068362342910430
 CanvasRenderer:
@@ -12247,8 +12387,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 328754a3a619e3143acc43549a89ed74, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -12256,7 +12396,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &7532744938431496426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12276,7 +12416,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -12286,9 +12426,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -12300,7 +12441,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1669961020680179325}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1057707093974862513}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1057707093974862513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12318,6 +12471,7 @@ MonoBehaviour:
   buildingMaterial: 3
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 8534719280615548842}
 --- !u!1 &2951343504258005443
 GameObject:
   m_ObjectHideFlags: 0
@@ -12368,7 +12522,7 @@ GameObject:
   - component: {fileID: 2446022311912198472}
   - component: {fileID: 3244879933821497208}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12385,11 +12539,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3348232703126629584}
+  m_Children:
+  - {fileID: 3348232703126629584}
+  m_Father: {fileID: 5101982559616818666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12421,8 +12576,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: ab439e7d9ffe03248a011e67ee6e0f6e, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -12800,7 +12955,7 @@ GameObject:
   - component: {fileID: 2915868924894464087}
   - component: {fileID: 2382466279015353892}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12817,11 +12972,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4385486656889884491}
+  m_Children:
+  - {fileID: 4385486656889884491}
+  m_Father: {fileID: 2507209311430859095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12853,8 +13009,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 12a7085a510cbdf4b8bbd703cdb3b006, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -13088,9 +13244,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2366106478213305618}
-  - {fileID: 5241371210209198020}
-  - {fileID: 8261696755403928523}
+  - {fileID: 776114234455125091}
+  - {fileID: 8391279481665073743}
+  - {fileID: 2803529382373349612}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -13398,7 +13554,7 @@ GameObject:
   - component: {fileID: 8988026758741139387}
   - component: {fileID: 5497289621680868214}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13415,11 +13571,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2195629758515799742}
+  m_Children:
+  - {fileID: 2195629758515799742}
+  m_Father: {fileID: 1069495010393194188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13451,8 +13608,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 7cd9bd7c464c8914aaee0a4f5a54e2f3, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -13586,7 +13743,7 @@ GameObject:
   - component: {fileID: 5920109270718500439}
   - component: {fileID: 3590296943882050674}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13603,11 +13760,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8940628403352226807}
+  m_Children:
+  - {fileID: 8940628403352226807}
+  m_Father: {fileID: 2507209311430859095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13639,8 +13797,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: af9afa8dc24bdba44b9ff65088535bab, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -15095,7 +15253,7 @@ GameObject:
   - component: {fileID: 2797438192038368923}
   - component: {fileID: 7008268785560665133}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15112,11 +15270,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5843784150584015523}
+  m_Children:
+  - {fileID: 5843784150584015523}
+  m_Father: {fileID: 8887780129250466248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15148,8 +15307,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6c6994425cda5404784f9bd4e0c4e5c9, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -15990,10 +16149,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5202232411323482226}
   - component: {fileID: 7561126049315649786}
+  - component: {fileID: 733526768596328350}
   - component: {fileID: 7394012205046744173}
   - component: {fileID: 6458743031938615859}
   m_Layer: 5
-  m_Name: Nothing
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16010,12 +16170,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1170171107273064531}
-  m_Father: {fileID: 6547470765209264613}
+  m_Children: []
+  m_Father: {fileID: 1170171107273064531}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16027,6 +16186,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3842639706893177266}
   m_CullTransparentMesh: 1
+--- !u!114 &733526768596328350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842639706893177266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &7394012205046744173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16046,7 +16235,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -16056,9 +16245,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -16067,10 +16257,22 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 733526768596328350}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6458743031938615859}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6458743031938615859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16088,6 +16290,7 @@ MonoBehaviour:
   buildingMaterial: 0
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 2699581352970265615}
 --- !u!1 &3842851024324497622
 GameObject:
   m_ObjectHideFlags: 0
@@ -16177,7 +16380,7 @@ GameObject:
   - component: {fileID: 559410205292625338}
   - component: {fileID: 1901890526904898608}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16194,12 +16397,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 596913038218390679}
-  m_Father: {fileID: 857292389708979810}
+  m_Children: []
+  m_Father: {fileID: 596913038218390679}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16231,8 +16433,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 556d650db6bd70441944c35a38cbd9ef, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -16240,7 +16442,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &559410205292625338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16260,7 +16462,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -16270,9 +16472,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -16284,7 +16487,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 555889325855946640}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1901890526904898608}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1901890526904898608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16302,6 +16517,7 @@ MonoBehaviour:
   buildingMaterial: 2
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 2058830432509920135}
 --- !u!1 &3865793858874485819
 GameObject:
   m_ObjectHideFlags: 0
@@ -16670,7 +16886,7 @@ GameObject:
   - component: {fileID: 2508411630106256035}
   - component: {fileID: 3316122753677136288}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16687,11 +16903,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 418834069620582952}
+  m_Children:
+  - {fileID: 418834069620582952}
+  m_Father: {fileID: 3233825501593351291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16723,8 +16940,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 04e4d26741e3cb74e820f16f1334c4e0, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -16780,7 +16997,7 @@ GameObject:
   - component: {fileID: 8072889853615070249}
   - component: {fileID: 5643216660728172711}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Small Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16797,11 +17014,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 415637937984630733}
+  m_Children:
+  - {fileID: 415637937984630733}
+  m_Father: {fileID: 6600098771820278321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16833,8 +17051,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: cf7a2eed0e0a485469e68a67d5832d2f, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -17261,7 +17479,7 @@ GameObject:
   - component: {fileID: 2444314552548312793}
   - component: {fileID: 6625368498321806536}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17278,14 +17496,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 150461521002731460}
-  m_Father: {fileID: 2507209311430859095}
+  m_Children: []
+  m_Father: {fileID: 150461521002731460}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -125}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3357323319710497095
 CanvasRenderer:
@@ -17315,8 +17532,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 12a7085a510cbdf4b8bbd703cdb3b006, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -17324,7 +17541,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &2444314552548312793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17344,7 +17561,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -17354,9 +17571,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -17368,7 +17586,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2665574219364962082}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6625368498321806536}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6625368498321806536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17386,6 +17616,7 @@ MonoBehaviour:
   buildingMaterial: 2
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 3078390074439210442}
 --- !u!1 &4037529880489128851
 GameObject:
   m_ObjectHideFlags: 0
@@ -17806,7 +18037,7 @@ GameObject:
   - component: {fileID: 2207324995257615383}
   - component: {fileID: 915139919978744059}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17823,11 +18054,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5241371210209198020}
+  m_Children:
+  - {fileID: 5241371210209198020}
+  m_Father: {fileID: 4021702374491353297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -17859,8 +18091,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 282c513610a06af44a876dfc13f50f3d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -18903,7 +19135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8887780129250466248
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18916,15 +19148,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5843784150584015523}
-  - {fileID: 8551244172951145201}
-  - {fileID: 3422894344332613070}
+  - {fileID: 3666144593158653053}
+  - {fileID: 7746568838139340691}
+  - {fileID: 7147400833938329554}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 210, y: -142.5}
-  m_SizeDelta: {x: 80, y: 285}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &373788915177884450
 MonoBehaviour:
@@ -20727,9 +20959,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 418834069620582952}
-  - {fileID: 2090153402428967296}
-  - {fileID: 4941776038845318071}
+  - {fileID: 4354429727882705736}
+  - {fileID: 2198636490361578350}
+  - {fileID: 2813370611458045201}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -21015,7 +21247,7 @@ GameObject:
   - component: {fileID: 7096114639480585345}
   - component: {fileID: 8103580699637343612}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21032,12 +21264,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 808654909017973125}
-  m_Father: {fileID: 5101982559616818666}
+  m_Children: []
+  m_Father: {fileID: 808654909017973125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -21069,8 +21300,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c79f481f2c200a44a302957a33225cc, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -21078,7 +21309,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &7096114639480585345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21098,7 +21329,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -21108,9 +21339,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -21122,7 +21354,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4789622007372378035}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8103580699637343612}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8103580699637343612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21140,6 +21384,7 @@ MonoBehaviour:
   buildingMaterial: 1
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 5402107123669932503}
 --- !u!1 &4763713733300796049
 GameObject:
   m_ObjectHideFlags: 0
@@ -21333,7 +21578,7 @@ GameObject:
   - component: {fileID: 5511651668734681204}
   - component: {fileID: 6033776065909759687}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21350,11 +21595,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3107174210256672922}
+  m_Children:
+  - {fileID: 3107174210256672922}
+  m_Father: {fileID: 477231682882187357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -21386,8 +21632,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 3b6a93d614b806142ad612cd9091fb74, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -21595,7 +21841,7 @@ GameObject:
   - component: {fileID: 7496644131619828848}
   - component: {fileID: 3949988195100910842}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21612,12 +21858,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3809031765707064251}
-  m_Father: {fileID: 7100662848391072799}
+  m_Children: []
+  m_Father: {fileID: 3809031765707064251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -21649,8 +21894,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bb31161876820f34d8117a11d77d9de3, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -21658,7 +21903,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &7496644131619828848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21678,7 +21923,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -21688,9 +21933,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -21702,7 +21948,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3323116523285584599}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3949988195100910842}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3949988195100910842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21720,6 +21978,7 @@ MonoBehaviour:
   buildingMaterial: 3
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 896215037300769422}
 --- !u!1 &4890447890468936483
 GameObject:
   m_ObjectHideFlags: 0
@@ -21734,7 +21993,7 @@ GameObject:
   - component: {fileID: 6670940890561234594}
   - component: {fileID: 9149900638342910700}
   m_Layer: 5
-  m_Name: Small Chest
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21751,12 +22010,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5979626136103548167}
-  m_Father: {fileID: 6600098771820278321}
+  m_Children: []
+  m_Father: {fileID: 5979626136103548167}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -21788,8 +22046,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cf7a2eed0e0a485469e68a67d5832d2f, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -21797,7 +22055,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &6670940890561234594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21817,7 +22075,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -21827,9 +22085,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -21841,7 +22100,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 785023343429071236}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9149900638342910700}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9149900638342910700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21859,6 +22130,7 @@ MonoBehaviour:
   buildingMaterial: 0
   machineType: 0
   furnitureType: 1
+  parent: {fileID: 3930057181685141491}
 --- !u!1 &4909393813640749518
 GameObject:
   m_ObjectHideFlags: 0
@@ -21908,7 +22180,7 @@ GameObject:
   - component: {fileID: 1521085115391086018}
   - component: {fileID: 7355445579624502901}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21925,12 +22197,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 776114234455125091}
-  m_Father: {fileID: 4021702374491353297}
+  m_Children: []
+  m_Father: {fileID: 776114234455125091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -21962,8 +22233,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b2fc43b15025c854a81af454756b9e63, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -21971,7 +22242,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &1521085115391086018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21991,7 +22262,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -22001,9 +22272,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -22015,7 +22287,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5623324997767332764}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7355445579624502901}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7355445579624502901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22033,6 +22317,7 @@ MonoBehaviour:
   buildingMaterial: 1
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 6527870917287024667}
 --- !u!1 &4957522597208663726
 GameObject:
   m_ObjectHideFlags: 0
@@ -22325,9 +22610,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1152326865240167141}
-  - {fileID: 415637937984630733}
-  - {fileID: 1196996213992648509}
+  - {fileID: 7168182816898998963}
+  - {fileID: 5979626136103548167}
+  - {fileID: 5287317354049601303}
   m_Father: {fileID: 2884584240139712108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -22371,7 +22656,7 @@ GameObject:
   - component: {fileID: 2463596582220600409}
   - component: {fileID: 3540840852180356303}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22388,11 +22673,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4382191136597877971}
+  m_Children:
+  - {fileID: 4382191136597877971}
+  m_Father: {fileID: 7100662848391072799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -22424,8 +22710,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 3c2c0c2584e591742a9bac7ff5351c45, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -22523,7 +22809,7 @@ GameObject:
   - component: {fileID: 2978332135965815836}
   - component: {fileID: 3372936073213021774}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22540,14 +22826,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3130124164576350218}
-  m_Father: {fileID: 4858208946845625891}
+  m_Children: []
+  m_Father: {fileID: 3130124164576350218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -125}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7505950086482464826
 CanvasRenderer:
@@ -22577,8 +22862,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9b9b87be9dfa9f64d99ccfd387d76c7f, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -22586,7 +22871,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &2978332135965815836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22606,7 +22891,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -22616,9 +22901,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -22630,7 +22916,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7326817206282107417}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3372936073213021774}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3372936073213021774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22648,6 +22946,7 @@ MonoBehaviour:
   buildingMaterial: 2
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 125688748722345388}
 --- !u!1 &5105846597012157105
 GameObject:
   m_ObjectHideFlags: 0
@@ -22739,7 +23038,7 @@ GameObject:
   - component: {fileID: 5378566347328880776}
   - component: {fileID: 5308125038148603644}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22756,12 +23055,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4354429727882705736}
-  m_Father: {fileID: 3233825501593351291}
+  m_Children: []
+  m_Father: {fileID: 4354429727882705736}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -22793,8 +23091,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 04e4d26741e3cb74e820f16f1334c4e0, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -22802,7 +23100,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &5378566347328880776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22822,7 +23120,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -22832,9 +23130,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -22846,7 +23145,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7658031483520794053}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5308125038148603644}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5308125038148603644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22864,6 +23175,7 @@ MonoBehaviour:
   buildingMaterial: 1
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 3898899849229503263}
 --- !u!1 &5115784751274466938
 GameObject:
   m_ObjectHideFlags: 0
@@ -22991,7 +23303,7 @@ GameObject:
   - component: {fileID: 936953374437063595}
   - component: {fileID: 6483951645834105024}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23008,11 +23320,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8261696755403928523}
+  m_Children:
+  - {fileID: 8261696755403928523}
+  m_Father: {fileID: 4021702374491353297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -23044,8 +23357,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 1b2d24f52df8d3a4eaca7939d45a00fa, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -23429,7 +23742,7 @@ GameObject:
   - component: {fileID: 8973252903486521898}
   - component: {fileID: 2307127915598282391}
   m_Layer: 5
-  m_Name: Medium Chest
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23446,12 +23759,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5287317354049601303}
-  m_Father: {fileID: 6600098771820278321}
+  m_Children: []
+  m_Father: {fileID: 5287317354049601303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -23483,8 +23795,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cba38c55d4475a64f91ca31389e074a4, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -23492,7 +23804,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &8973252903486521898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23512,7 +23824,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -23522,9 +23834,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -23536,7 +23849,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5398494581191191903}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2307127915598282391}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2307127915598282391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23554,6 +23879,7 @@ MonoBehaviour:
   buildingMaterial: 0
   machineType: 0
   furnitureType: 2
+  parent: {fileID: 1698160379185558284}
 --- !u!1 &5341378708837520714
 GameObject:
   m_ObjectHideFlags: 0
@@ -23850,7 +24176,7 @@ GameObject:
   - component: {fileID: 9082012933288054291}
   - component: {fileID: 2453629150736662331}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23867,11 +24193,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7931172224891045335}
+  m_Children:
+  - {fileID: 7931172224891045335}
+  m_Father: {fileID: 5101982559616818666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -23903,8 +24230,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 2c79f481f2c200a44a302957a33225cc, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -23925,7 +24252,7 @@ GameObject:
   - component: {fileID: 1394896737420310105}
   - component: {fileID: 2349712148406615494}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23942,11 +24269,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8627072352091319653}
+  m_Children:
+  - {fileID: 8627072352091319653}
+  m_Father: {fileID: 857292389708979810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -23978,8 +24306,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: d8855c2a95c7e2c449468ec1a60113b8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -24430,7 +24758,7 @@ GameObject:
   - component: {fileID: 6387675357220632632}
   - component: {fileID: 4424046537395131020}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24447,11 +24775,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6386979631589799262}
+  m_Children:
+  - {fileID: 6386979631589799262}
+  m_Father: {fileID: 4740078651597644543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -24483,8 +24812,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 05186a0b75068bc4781a867f129d95a2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -26321,7 +26650,7 @@ GameObject:
   - component: {fileID: 4994975713823111325}
   - component: {fileID: 2124533123364355293}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26338,11 +26667,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8551244172951145201}
+  m_Children:
+  - {fileID: 8551244172951145201}
+  m_Father: {fileID: 8887780129250466248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -26374,8 +26704,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 678af0e19a599454f93fc9dfb3a3958b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -26735,7 +27065,7 @@ GameObject:
   - component: {fileID: 1242637903843155075}
   - component: {fileID: 3105978794191363077}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26752,12 +27082,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8403869499583665744}
-  m_Father: {fileID: 2507209311430859095}
+  m_Children: []
+  m_Father: {fileID: 8403869499583665744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -26789,8 +27118,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fc21753648d377344a297826a2cac235, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -26798,7 +27127,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &1242637903843155075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26818,7 +27147,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -26828,9 +27157,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -26842,7 +27172,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7671679161601906759}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3105978794191363077}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3105978794191363077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26860,6 +27202,7 @@ MonoBehaviour:
   buildingMaterial: 1
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 9009314792587496269}
 --- !u!1 &6086809433715491809
 GameObject:
   m_ObjectHideFlags: 0
@@ -27027,7 +27370,7 @@ GameObject:
   - component: {fileID: 7673991789478842634}
   - component: {fileID: 3333463165389854533}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27044,12 +27387,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2198636490361578350}
-  m_Father: {fileID: 3233825501593351291}
+  m_Children: []
+  m_Father: {fileID: 2198636490361578350}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -27081,8 +27423,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5f4cf6219fab7124e9c71b2ac8665a6c, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -27090,7 +27432,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &7673991789478842634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27110,7 +27452,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -27120,9 +27462,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -27134,7 +27477,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2974440767864872191}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3333463165389854533}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3333463165389854533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27152,6 +27507,7 @@ MonoBehaviour:
   buildingMaterial: 2
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 7541838155880673503}
 --- !u!1 &6141255706464404451
 GameObject:
   m_ObjectHideFlags: 0
@@ -27391,7 +27747,7 @@ GameObject:
   - component: {fileID: 8076113183388058605}
   - component: {fileID: 2462112432560454686}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27408,12 +27764,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4774955467244289009}
-  m_Father: {fileID: 4740078651597644543}
+  m_Children: []
+  m_Father: {fileID: 4774955467244289009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -27445,8 +27800,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 05186a0b75068bc4781a867f129d95a2, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -27454,7 +27809,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &8076113183388058605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27474,7 +27829,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -27484,9 +27839,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -27498,7 +27854,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6807523557072329295}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2462112432560454686}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2462112432560454686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27516,6 +27884,7 @@ MonoBehaviour:
   buildingMaterial: 3
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 5469926365486496555}
 --- !u!1 &6182861183769623488
 GameObject:
   m_ObjectHideFlags: 0
@@ -27528,7 +27897,7 @@ GameObject:
   - component: {fileID: 8608153245742536017}
   - component: {fileID: 2244348015452961321}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27545,11 +27914,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4941776038845318071}
+  m_Children:
+  - {fileID: 4941776038845318071}
+  m_Father: {fileID: 3233825501593351291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -27581,8 +27951,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 9322dbc216d78af4e877cdcb36d67bd7, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -28067,7 +28437,7 @@ GameObject:
   - component: {fileID: 4147424017796722194}
   - component: {fileID: 1898268655580816223}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28084,11 +28454,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2604940307130278556}
+  m_Children:
+  - {fileID: 2604940307130278556}
+  m_Father: {fileID: 1069495010393194188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -28120,8 +28491,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 32bcd098f6f84794589fe3e9080a7a33, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -28694,9 +29065,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4382191136597877971}
-  - {fileID: 6133845010224381637}
-  - {fileID: 8901973581462515030}
+  - {fileID: 7887411386035796364}
+  - {fileID: 1427859822209552936}
+  - {fileID: 3809031765707064251}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -28976,7 +29347,7 @@ GameObject:
   - component: {fileID: 2765795016943696125}
   - component: {fileID: 2477767551925427502}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28993,11 +29364,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2366106478213305618}
+  m_Children:
+  - {fileID: 2366106478213305618}
+  m_Father: {fileID: 4021702374491353297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -29029,8 +29401,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: b2fc43b15025c854a81af454756b9e63, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -29255,7 +29627,7 @@ GameObject:
   - component: {fileID: 7747176256174495489}
   - component: {fileID: 7310755903148703759}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29272,11 +29644,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8488388465877079491}
+  m_Children:
+  - {fileID: 8488388465877079491}
+  m_Father: {fileID: 1069495010393194188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -29308,8 +29681,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 7672cdda266f9be49a309b8191ee3270, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -30423,7 +30796,7 @@ GameObject:
   - component: {fileID: 1723891970107421532}
   - component: {fileID: 674125972431909769}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30440,12 +30813,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8391279481665073743}
-  m_Father: {fileID: 4021702374491353297}
+  m_Children: []
+  m_Father: {fileID: 8391279481665073743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -30477,8 +30849,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 282c513610a06af44a876dfc13f50f3d, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -30486,7 +30858,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &1723891970107421532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30506,7 +30878,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -30516,9 +30888,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -30530,7 +30903,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3151374522509963394}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 674125972431909769}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &674125972431909769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30548,6 +30933,7 @@ MonoBehaviour:
   buildingMaterial: 2
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 4165146118057722875}
 --- !u!1 &6973669851835768428
 GameObject:
   m_ObjectHideFlags: 0
@@ -31152,7 +31538,7 @@ GameObject:
   - component: {fileID: 8375149893177321800}
   - component: {fileID: 5269428369141559803}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31169,11 +31555,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6075393085748859694}
+  m_Children:
+  - {fileID: 6075393085748859694}
+  m_Father: {fileID: 477231682882187357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -31205,8 +31592,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: c62734418b9367b45a6380059d9b86af, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -31363,7 +31750,7 @@ GameObject:
   - component: {fileID: 2264499553198630400}
   - component: {fileID: 498085664610329464}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31380,12 +31767,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8951825587196685045}
-  m_Father: {fileID: 1069495010393194188}
+  m_Children: []
+  m_Father: {fileID: 8951825587196685045}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -31417,8 +31803,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7cd9bd7c464c8914aaee0a4f5a54e2f3, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -31426,7 +31812,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &2264499553198630400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31446,7 +31832,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -31456,9 +31842,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -31470,7 +31857,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1076869344213721088}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 498085664610329464}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &498085664610329464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31488,6 +31887,7 @@ MonoBehaviour:
   buildingMaterial: 3
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 3224867885401524028}
 --- !u!1 &7261974816292541449
 GameObject:
   m_ObjectHideFlags: 0
@@ -31502,7 +31902,7 @@ GameObject:
   - component: {fileID: 6291245125179744386}
   - component: {fileID: 4014527465374032603}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31519,12 +31919,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2803529382373349612}
-  m_Father: {fileID: 4021702374491353297}
+  m_Children: []
+  m_Father: {fileID: 2803529382373349612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -31556,8 +31955,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b2d24f52df8d3a4eaca7939d45a00fa, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -31565,7 +31964,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &6291245125179744386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31585,7 +31984,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -31595,9 +31994,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -31609,7 +32009,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2303930704776141723}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4014527465374032603}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4014527465374032603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31627,6 +32039,7 @@ MonoBehaviour:
   buildingMaterial: 3
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 5177589964806092661}
 --- !u!1 &7272671384917134698
 GameObject:
   m_ObjectHideFlags: 0
@@ -32446,7 +32859,7 @@ GameObject:
   - component: {fileID: 3096290891860832609}
   - component: {fileID: 4422306324968206830}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32463,12 +32876,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7887411386035796364}
-  m_Father: {fileID: 7100662848391072799}
+  m_Children: []
+  m_Father: {fileID: 7887411386035796364}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -32500,8 +32912,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3c2c0c2584e591742a9bac7ff5351c45, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -32509,7 +32921,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &3096290891860832609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32529,7 +32941,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -32539,9 +32951,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -32553,7 +32966,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 175266951771451007}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4422306324968206830}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4422306324968206830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32571,6 +32996,7 @@ MonoBehaviour:
   buildingMaterial: 1
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 5031683023980867505}
 --- !u!1 &7515070500592212625
 GameObject:
   m_ObjectHideFlags: 0
@@ -32733,7 +33159,7 @@ GameObject:
   - component: {fileID: 1249431469289525872}
   - component: {fileID: 3870596230670837448}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32750,11 +33176,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2090153402428967296}
+  m_Children:
+  - {fileID: 2090153402428967296}
+  m_Father: {fileID: 3233825501593351291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -32786,8 +33213,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 5f4cf6219fab7124e9c71b2ac8665a6c, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -32885,7 +33312,7 @@ GameObject:
   - component: {fileID: 8769019820752031821}
   - component: {fileID: 4215019267963262268}
   m_Layer: 5
-  m_Name: CraftingTable
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32902,12 +33329,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7168182816898998963}
-  m_Father: {fileID: 6600098771820278321}
+  m_Children: []
+  m_Father: {fileID: 7168182816898998963}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -32939,8 +33365,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 437a0febf47ca0f4c9100b0b033f390e, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -32948,7 +33374,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &8769019820752031821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32968,7 +33394,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -32978,9 +33404,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -32992,7 +33419,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1533330529306313481}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4215019267963262268}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4215019267963262268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33010,6 +33449,7 @@ MonoBehaviour:
   buildingMaterial: 0
   machineType: 1
   furnitureType: 0
+  parent: {fileID: 1081519239215240237}
 --- !u!1 &7573938918095559531
 GameObject:
   m_ObjectHideFlags: 0
@@ -33392,7 +33832,7 @@ GameObject:
   - component: {fileID: 1033609832277884219}
   - component: {fileID: 6545272194050056126}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33409,14 +33849,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6360598455791336473}
-  m_Father: {fileID: 477231682882187357}
+  m_Children: []
+  m_Father: {fileID: 6360598455791336473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -125}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3056254303678673889
 CanvasRenderer:
@@ -33446,8 +33885,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3b6a93d614b806142ad612cd9091fb74, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -33455,7 +33894,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &1033609832277884219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33475,7 +33914,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -33485,9 +33924,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -33499,7 +33939,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7960031958575922680}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6545272194050056126}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6545272194050056126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33517,6 +33969,7 @@ MonoBehaviour:
   buildingMaterial: 2
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 4818368463904206689}
 --- !u!1 &7618827342662041262
 GameObject:
   m_ObjectHideFlags: 0
@@ -34116,7 +34569,7 @@ GameObject:
   - component: {fileID: 5236895015424816264}
   - component: {fileID: 1511553126365846242}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34133,14 +34586,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1804589966422595728}
-  m_Father: {fileID: 4858208946845625891}
+  m_Children: []
+  m_Father: {fileID: 1804589966422595728}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -210}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &102540343160610872
 CanvasRenderer:
@@ -34170,8 +34622,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 370f10ef9616ecd4ba8ddba0e19e638e, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -34179,7 +34631,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &5236895015424816264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34199,7 +34651,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -34209,9 +34661,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -34223,7 +34676,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4808931067236806055}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1511553126365846242}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1511553126365846242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34241,6 +34706,7 @@ MonoBehaviour:
   buildingMaterial: 3
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 8434346867152414848}
 --- !u!1 &7884881762132385833
 GameObject:
   m_ObjectHideFlags: 0
@@ -34753,7 +35219,7 @@ GameObject:
   - component: {fileID: 3999113312413119924}
   - component: {fileID: 5566403914202007768}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34770,12 +35236,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1866948561154427752}
-  m_Father: {fileID: 1069495010393194188}
+  m_Children: []
+  m_Father: {fileID: 1866948561154427752}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -34807,8 +35272,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7672cdda266f9be49a309b8191ee3270, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -34816,7 +35281,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &3999113312413119924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34836,7 +35301,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -34846,9 +35311,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -34860,7 +35326,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 367978013025861920}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5566403914202007768}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5566403914202007768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34878,6 +35356,7 @@ MonoBehaviour:
   buildingMaterial: 2
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 6738486076288465672}
 --- !u!1 &8035652874911318318
 GameObject:
   m_ObjectHideFlags: 0
@@ -35149,7 +35628,7 @@ GameObject:
   - component: {fileID: 2902240449271255342}
   - component: {fileID: 967796615518164180}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35166,14 +35645,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3666144593158653053}
-  m_Father: {fileID: 8887780129250466248}
+  m_Children: []
+  m_Father: {fileID: 3666144593158653053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -40}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2579894850787378373
 CanvasRenderer:
@@ -35203,8 +35681,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6c6994425cda5404784f9bd4e0c4e5c9, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -35212,7 +35690,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &2902240449271255342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35232,7 +35710,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -35242,9 +35720,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -35256,7 +35735,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3485046824882937877}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 967796615518164180}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &967796615518164180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35274,6 +35765,7 @@ MonoBehaviour:
   buildingMaterial: 1
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 3596606900935375589}
 --- !u!1 &8146286147402625604
 GameObject:
   m_ObjectHideFlags: 0
@@ -35362,7 +35854,7 @@ GameObject:
   - component: {fileID: 6467373009028996996}
   - component: {fileID: 7440881857915338936}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35379,11 +35871,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6024566185791086436}
+  m_Children:
+  - {fileID: 6024566185791086436}
+  m_Father: {fileID: 477231682882187357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -35415,8 +35908,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6e935fabff609884c96833fda277e9c6, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -35641,9 +36134,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8627072352091319653}
-  - {fileID: 7176199522082047478}
-  - {fileID: 916625929966366366}
+  - {fileID: 2875112969646162042}
+  - {fileID: 596913038218390679}
+  - {fileID: 3074371980993007821}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -35704,9 +36197,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 327827553569543595}
-  - {fileID: 7381254477270276382}
-  - {fileID: 6386979631589799262}
+  - {fileID: 6523206046036537320}
+  - {fileID: 1931336701625900318}
+  - {fileID: 4774955467244289009}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -36281,7 +36774,7 @@ GameObject:
   - component: {fileID: 7511710241868613229}
   - component: {fileID: 9043385080989889982}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36298,14 +36791,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7746568838139340691}
-  m_Father: {fileID: 8887780129250466248}
+  m_Children: []
+  m_Father: {fileID: 7746568838139340691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -125}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4195060320662245849
 CanvasRenderer:
@@ -36335,8 +36827,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 678af0e19a599454f93fc9dfb3a3958b, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -36344,7 +36836,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &7511710241868613229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36364,7 +36856,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -36374,9 +36866,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -36388,7 +36881,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3902558946560626393}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9043385080989889982}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9043385080989889982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36406,6 +36911,7 @@ MonoBehaviour:
   buildingMaterial: 2
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 5955109775077905931}
 --- !u!1 &8375424010361338638
 GameObject:
   m_ObjectHideFlags: 0
@@ -36897,7 +37403,7 @@ GameObject:
   - component: {fileID: 8812223939993493850}
   - component: {fileID: 4054036123434288416}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36914,11 +37420,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8922776506263495743}
+  m_Children:
+  - {fileID: 8922776506263495743}
+  m_Father: {fileID: 4858208946845625891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -36950,8 +37457,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 370f10ef9616ecd4ba8ddba0e19e638e, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -37064,7 +37571,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5202232411323482226}
+  - {fileID: 1170171107273064531}
   m_Father: {fileID: 2884584240139712108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -37185,7 +37692,7 @@ GameObject:
   - component: {fileID: 1305938332198648010}
   - component: {fileID: 1736723503939560026}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37202,12 +37709,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2813370611458045201}
-  m_Father: {fileID: 3233825501593351291}
+  m_Children: []
+  m_Father: {fileID: 2813370611458045201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -37239,8 +37745,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9322dbc216d78af4e877cdcb36d67bd7, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -37248,7 +37754,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &1305938332198648010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37268,7 +37774,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -37278,9 +37784,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -37292,7 +37799,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4123767978110507403}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1736723503939560026}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1736723503939560026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37310,6 +37829,7 @@ MonoBehaviour:
   buildingMaterial: 3
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 6182861183769623488}
 --- !u!1 &8463186396146516389
 GameObject:
   m_ObjectHideFlags: 0
@@ -37489,9 +38009,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7931172224891045335}
-  - {fileID: 3348232703126629584}
-  - {fileID: 6913156662695131686}
+  - {fileID: 808654909017973125}
+  - {fileID: 4335558766605938135}
+  - {fileID: 5971367799615444146}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -37535,7 +38055,7 @@ GameObject:
   - component: {fileID: 7168168420903657921}
   - component: {fileID: 2643027624313006022}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37552,11 +38072,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3422894344332613070}
+  m_Children:
+  - {fileID: 3422894344332613070}
+  m_Father: {fileID: 8887780129250466248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -37588,8 +38109,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 328754a3a619e3143acc43549a89ed74, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -38065,7 +38586,7 @@ GameObject:
   - component: {fileID: 8487959724698665436}
   - component: {fileID: 1754363974665288893}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38082,12 +38603,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1427859822209552936}
-  m_Father: {fileID: 7100662848391072799}
+  m_Children: []
+  m_Father: {fileID: 1427859822209552936}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -38119,8 +38639,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 01a6aaaaebe4e8d4ab943188b92bf39f, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -38128,7 +38648,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &8487959724698665436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38148,7 +38668,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -38158,9 +38678,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -38172,7 +38693,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4432939861573986802}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1754363974665288893}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1754363974665288893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38190,6 +38723,7 @@ MonoBehaviour:
   buildingMaterial: 2
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 2777666214818988016}
 --- !u!1 &8717101006176538976
 GameObject:
   m_ObjectHideFlags: 0
@@ -38505,7 +39039,7 @@ GameObject:
   - component: {fileID: 6296227451189937675}
   - component: {fileID: 8432815266683916379}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38522,11 +39056,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 916625929966366366}
+  m_Children:
+  - {fileID: 916625929966366366}
+  m_Father: {fileID: 857292389708979810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -38558,8 +39093,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 0f6008fa89b294249a6c4b9403535ee1, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -39232,7 +39767,7 @@ GameObject:
   - component: {fileID: 327282811923652036}
   - component: {fileID: 3551926130018953104}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39249,11 +39784,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6783061040210108685}
+  m_Children:
+  - {fileID: 6783061040210108685}
+  m_Father: {fileID: 2507209311430859095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -39285,8 +39821,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: fc21753648d377344a297826a2cac235, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -39686,7 +40222,7 @@ GameObject:
   - component: {fileID: 8527025384802895700}
   - component: {fileID: 2803693730381089196}
   m_Layer: 5
-  m_Name: Wood
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39703,12 +40239,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6523206046036537320}
-  m_Father: {fileID: 4740078651597644543}
+  m_Children: []
+  m_Father: {fileID: 6523206046036537320}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -39740,8 +40275,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 23a03be913365904390807499be04b02, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e533b769204f86c4bb3476313cd48d2b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -39749,7 +40284,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!114 &8527025384802895700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39769,7 +40304,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -39779,9 +40314,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 5ed98621fe54d16489194ed36f746cff, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: fd3699cb647f0fc408d58067d8d67408, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -39793,7 +40329,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6694092012097160013}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2803693730381089196}
+        m_TargetAssemblyTypeName: BuildingBlock_UI, Assembly-CSharp
+        m_MethodName: OnObjectClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2803693730381089196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39811,6 +40359,7 @@ MonoBehaviour:
   buildingMaterial: 1
   machineType: 0
   furnitureType: 0
+  parent: {fileID: 1382421621591330613}
 --- !u!1 &9074669570193108691
 GameObject:
   m_ObjectHideFlags: 0
