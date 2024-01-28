@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class InteractableObject : MonoBehaviour
 {
     [Header("Is the player in range?")]
-    public bool playerInRange;
+    [HideInInspector] public bool playerInRange;
 
     [Header("Stats")]
     public Items itemName;
     public InteracteableType interacteableType;
-    public bool isMachine;
+    //public bool isMachine;
 
     [Header("If Object is an Inventory")]
-    [SerializeField] int inventoryIndex;
+    [HideInInspector] [SerializeField] int inventoryIndex;
 
 
     //--------------------
@@ -43,13 +43,13 @@ public class InteractableObject : MonoBehaviour
         //-----
 
 
-        if (SelectionManager.instance.onTarget && SelectionManager.instance.selecedObject == gameObject
+        if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selecedObject == gameObject
             && MainManager.Instance.menuStates == MenuStates.None)
         {
             //If Object is a Pickup
             if (interacteableType == InteracteableType.Pickup)
             {
-                print("Interract with a Pickup");
+                //print("Interract with a Pickup");
 
                 //Check If item can be added
                 if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
@@ -65,34 +65,53 @@ public class InteractableObject : MonoBehaviour
             //If Object is an Inventory
             else if (interacteableType == InteracteableType.Inventory)
             {
-                print("Interract with an Inventory");
-
-                //Open the player Inventory
-                InventoryManager.Instance.OpenPlayerInventory();
+                //print("Interract with an Inventory");
 
                 //Open the chest Inventory
                 InventoryManager.Instance.chestInventoryOpen = inventoryIndex;
-                InventoryManager.Instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Player Inventory
-                InventoryManager.Instance.chestInventory_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
-                InventoryManager.Instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
-                InventoryManager.Instance.chestInventory_Parent.SetActive(true);
+                InventoryManager.Instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Chest Inventory
+                TabletManager.Instance.chestInventory_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
+                TabletManager.Instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
+                TabletManager.Instance.chestInventory_Parent.SetActive(true);
 
-                MainManager.Instance.menuStates = MenuStates.chestMenu;
+                InventoryManager.Instance.chestInventory_Fake_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
+                InventoryManager.Instance.chestInventory_Fake_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
+                InventoryManager.Instance.chestInventory_Fake_Parent.SetActive(true);
+
+                MainManager.Instance.menuStates = MenuStates.ChestMenu;
+                TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.Chest;
+
+                InventoryManager.Instance.ClosePlayerInventory();
+                InventoryManager.Instance.OpenPlayerInventory();
+                TabletManager.Instance.OpenTablet(TabletMenuState.ChestInventory);
             }
 
             //If Object is a Crafting Table
             else if (interacteableType == InteracteableType.CraftingTable)
             {
-                print("Interract with a CraftingTable");
+                //print("Interract with a CraftingTable");
 
                 //Open the crafting menu
-                CraftingManager.instance.OpenCraftingScreen();
+                TabletManager.Instance.OpenTablet(TabletMenuState.CraftingTable);
+
+                TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.CraftingTable;
             }
 
-            //If Object is another machine
-            else if (interacteableType == InteracteableType.Machine)
+            //If Object is a SkillTree
+            else if (interacteableType == InteracteableType.SkillTree)
             {
-                print("Interract with a Machine");
+                //print("Interract with a SkillTree");
+
+                //Open the crafting menu
+                TabletManager.Instance.OpenTablet(TabletMenuState.SkillTree);
+
+                TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.SkillTree;
+            }
+
+            //If Object is a GhostTank
+            else if (interacteableType == InteracteableType.GhostTank)
+            {
+                print("Interract with a GhostTank");
             }
         }
     }
@@ -138,5 +157,6 @@ public enum InteracteableType
     Pickup,
     Inventory,
     CraftingTable,
-    Machine
+    SkillTree,
+    GhostTank
 }

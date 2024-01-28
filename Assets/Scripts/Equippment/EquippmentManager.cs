@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquippmentManager : MonoBehaviour
+public class EquippmentManager : Singleton<EquippmentManager>
 {
-    public static EquippmentManager instance { get; private set; } //Singleton
-
     [Header("Parent")]
     public GameObject toolHolderParent;
 
@@ -13,18 +11,6 @@ public class EquippmentManager : MonoBehaviour
     //--------------------
 
 
-    private void Awake()
-    {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
     private void Start()
     {
         PlayerButtonManager.isPressed_EquipmentActivate += ActivateEquippedItem;

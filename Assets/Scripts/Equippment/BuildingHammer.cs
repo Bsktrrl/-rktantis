@@ -1,4 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
@@ -100,21 +103,25 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
             || MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
             GameObject moveableObject = MoveableObjectManager.Instance.GetMoveableObject();
-            MoveableObjectManager.Instance.objectToMove = moveableObject;
 
-            tempObj_Selected = Instantiate(moveableObject, InventoryManager.Instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
-            tempObj_Selected.transform.parent = BuildingManager.Instance.tempBlock_Parent.transform;
-
-            //Set selected For Movement
-            tempObj_Selected.GetComponent<MoveableObject>().isSelectedForMovement = true;
-
-            //Get the correct mesh
-            tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
-
-            //Remove its BoxCollider
-            if (tempObj_Selected.GetComponent<BoxCollider>())
+            if (moveableObject)
             {
-                tempObj_Selected.GetComponent<BoxCollider>().enabled = !tempObj_Selected.GetComponent<BoxCollider>().enabled;
+                MoveableObjectManager.Instance.objectToMove = moveableObject;
+
+                tempObj_Selected = Instantiate(moveableObject, InventoryManager.Instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
+                tempObj_Selected.transform.parent = BuildingManager.Instance.tempBlock_Parent.transform;
+
+                //Set selected For Movement
+                tempObj_Selected.GetComponent<MoveableObject>().isSelectedForMovement = true;
+
+                //Get the correct material
+                //tempObj_Selected.GetComponent<MoveableObject>().meshRenderer.material = BuildingManager.Instance.canPlace_Material;
+
+                //Remove its BoxCollider
+                if (tempObj_Selected.GetComponent<BoxCollider>())
+                {
+                    tempObj_Selected.GetComponent<BoxCollider>().enabled = !tempObj_Selected.GetComponent<BoxCollider>().enabled;
+                }
             }
         }
     }
@@ -205,7 +212,6 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
                 BuildingManager.Instance.freeGhost_LookedAt = tempObj_Selected;
                 tempObj_Selected.SetActive(true);
 
-                //tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)));
                 tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), Quaternion.Euler(0.0f, rotationValue, 0.0f));
             }
             else
@@ -253,8 +259,6 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
         //-----
 
 
-        print("2222. UpdateObjectToMovePosition");
-
         //Set Object's Position and Rotation
         if (tempObj_Selected != null)
         {
@@ -272,6 +276,8 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
 
                 if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_BuildingBlock))
                 {
+                    //print("333. canPlace_Material");
+
                     tempObj_Selected.GetComponent<MoveableObject>().canBePlaced = true;
 
                     SetObjectMaterial(BuildingManager.Instance.canPlace_Material);
@@ -279,11 +285,14 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
                 }
                 else if (Physics.Raycast(ray, out hit, BuildingManager.Instance.BuildingDistance.x, layerMask_Ground))
                 {
+                    //print("333. cannotPlace_Material");
+
                     SetObjectMaterial(BuildingManager.Instance.cannotPlace_Material);
                     SetMoveableObjectPositionAndRotation();
                 }
                 else
                 {
+                    SetObjectMaterial(BuildingManager.Instance.cannotPlace_Material);
                     tempObj_Selected.SetActive(false);
                     tempObj_Selected.GetComponent<MoveableObject>().canBePlaced = false;
                 }
@@ -307,6 +316,7 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
                 }
                 else
                 {
+                    SetObjectMaterial(BuildingManager.Instance.cannotPlace_Material);
                     tempObj_Selected.SetActive(false);
                     tempObj_Selected.GetComponent<MoveableObject>().canBePlaced = false;
                 }
@@ -322,14 +332,20 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
     }
     void SetObjectMaterial(Material material)
     {
-        //Change "if object can be placed"-material
-        tempObj_Selected.GetComponent<MeshRenderer>().material = material;
+        List<Material> objectMaterials = tempObj_Selected.GetComponent<MoveableObject>().meshRenderer.materials.ToList();
+        
+        print("MaterialCount: " + objectMaterials.Count + " | Material: " + material.name);
+
+        for (int i = 0; i < objectMaterials.Count; i++)
+        {
+            objectMaterials[i] = material;
+        }
+
+        tempObj_Selected.GetComponent<MoveableObject>().meshRenderer.materials = objectMaterials.ToArray();
     }
     void SetMoveableObjectPositionAndRotation()
     {
-        //Set the object's position to the buildingBlock height
-        float tempHeight = tempObj_Selected.transform.localScale.y / 2;
-        tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + tempHeight, hit.point.z), Quaternion.Euler(0.0f, rotationValue, 0.0f));
+        tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y - 0.03f /*+ tempHeight*/, hit.point.z), Quaternion.Euler(0.0f, rotationValue, 0.0f));
     }
 
 
@@ -382,5 +398,7 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
         PlayerButtonManager.isPressed_MoveableRotation_Left -= ManipulateObjectRotation_Left;
 
         BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
+
+        MoveableObjectManager.Instance.objectToMove = null;
     }
 }

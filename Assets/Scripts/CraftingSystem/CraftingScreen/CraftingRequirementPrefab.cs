@@ -26,8 +26,8 @@ public class CraftingRequirementPrefab : MonoBehaviour
     private void Start()
     {
         requirementIsMet = false;
-        craftingItemImageOverlay.color = new Color(overlayColor_Inactive.r, overlayColor_Inactive.g, overlayColor_Inactive.b, overlayColor_Inactive.a);
-        craftingItemName.color = new Color(0.80f, 0.69f, 0.48f, 0.5f);
+        //craftingItemImageOverlay.color = new Color(overlayColor_Inactive.r, overlayColor_Inactive.g, overlayColor_Inactive.b, overlayColor_Inactive.a);
+        //craftingItemName.color = new Color(0.80f, 0.69f, 0.48f, 0.5f);
     }
     private void Update()
     {
@@ -55,15 +55,15 @@ public class CraftingRequirementPrefab : MonoBehaviour
         {
             requirementIsMet = true;
             craftingItemImageOverlay.color = new Color(overlayColor_Active.r, overlayColor_Active.g, overlayColor_Active.b, overlayColor_Active.a);
-            craftingItemImage.color = new Color(1, 1, 1, 1);
-            craftingItemName.color = new Color(0.80f, 0.69f, 0.48f, 1);
+            //craftingItemImage.color = new Color(1, 1, 1, 1);
+            //craftingItemName.color = new Color(0.80f, 0.69f, 0.48f, 1);
         }
         else
         {
             requirementIsMet = false;
             craftingItemImageOverlay.color = new Color(overlayColor_Inactive.r, overlayColor_Inactive.g, overlayColor_Inactive.b, overlayColor_Inactive.a);
-            craftingItemImage.color = new Color(1, 1, 1, 0.75f);
-            craftingItemName.color = new Color(0.80f, 0.69f, 0.48f, 0.5f);
+            //craftingItemImage.color = new Color(1, 1, 1, 0.75f);
+            //craftingItemName.color = new Color(0.80f, 0.69f, 0.48f, 0.5f);
         }
     }
 

@@ -7,7 +7,7 @@ public class WeatherManager : Singleton<WeatherManager>
 {
     public Light sun_Light;
 
-    [SerializeField] GameObject temperatureDisplay_Parent;
+    public GameObject temperatureDisplay_Parent;
     [SerializeField] TextMeshProUGUI temperatureDisplay;
     [SerializeField] TextMeshProUGUI playerTemperatureDisplay;
     public float temperature;
@@ -34,6 +34,10 @@ public class WeatherManager : Singleton<WeatherManager>
     //--------------------
 
 
+    private void Start()
+    {
+        sun_Light.transform.SetPositionAndRotation(new Vector3(270, 0, 0), transform.rotation);
+    }
     private void Update()
     {
         SetSunRotation();
@@ -41,7 +45,7 @@ public class WeatherManager : Singleton<WeatherManager>
         CheckIfPlayerIsInTheCoverageOfBuildingBlock();
         SetTemperature();
         SetPlayerTemperature(coverValue);
-        SetTemperatureDisplay();
+        SetTemperatureDisplay(temperatureDisplay, playerTemperatureDisplay);
     }
 
 
@@ -121,7 +125,7 @@ public class WeatherManager : Singleton<WeatherManager>
         //}
         #endregion
     }
-    void SetTemperatureDisplay()
+    public void SetTemperatureDisplay(TextMeshProUGUI temperatureDisplay, TextMeshProUGUI playerTemperatureDisplay)
     {
         temperatureDisplay.text = temperature + "°C";
         playerTemperatureDisplay.text = playerTemperature + "°C";

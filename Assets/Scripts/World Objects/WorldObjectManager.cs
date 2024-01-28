@@ -42,8 +42,8 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
             worldObjectList.Add(Instantiate(GetSavedObject(worldObjectList_ToSave[i]), worldObjectList_ToSave[i].objectPosition, worldObjectList_ToSave[i].objectRotation) as GameObject);
             worldObjectList[worldObjectList.Count - 1].transform.parent = worldObjectParent.transform;
 
-            //If it's not a stationary Object, activate Gravity
-            if (!worldObjectList[worldObjectList.Count - 1].GetComponent<InteractableObject>().isMachine)
+            //If Object is a Pickup, activate Gravity
+            if (worldObjectList[worldObjectList.Count - 1].GetComponent<InteractableObject>().interacteableType == InteracteableType.Pickup)
             {
                 worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
                 worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;

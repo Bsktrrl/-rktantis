@@ -23,6 +23,9 @@ public class MainManager : Singleton<MainManager>
     //Interactable Distance - Distace between player and raycast interactable
     public float InteractableDistance = 2.5f;
 
+    //CenterImage
+    public GameObject centerImage;
+
 
     //--------------------
 
@@ -30,6 +33,8 @@ public class MainManager : Singleton<MainManager>
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+        centerImage.SetActive(true);
     }
     private void Update()
     {
@@ -88,10 +93,13 @@ public enum MenuStates
 
     MainMenu,
     PauseMenu,
+    SettingsMenu,
     InventoryMenu,
-    chestMenu,
-    BuildingSystemMenu,
-    CraftingMenu
+    ChestMenu,
+    EquipmentMenu,
+    MoveableObjectMenu,
+    CraftingMenu,
+    SkillTreeMenu
 }
 
 public enum GameStates

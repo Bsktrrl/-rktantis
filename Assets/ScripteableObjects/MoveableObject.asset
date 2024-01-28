@@ -18,7 +18,7 @@ MonoBehaviour:
     furnitureType: 0
     machineType: 1
     objectSprite: {fileID: 21300000, guid: 02cc63a93c4b086468ca721826443e9d, type: 3}
-    objectToMove: {fileID: 3705573567050246895, guid: cf9e7a3e09caeac47ae00bb153573af8,
+    objectToMove: {fileID: 7136088843378850041, guid: 23a81b18b8aeb8e448bf68be14121ae8,
       type: 3}
     craftingRequirements:
     - itemName: 2
@@ -29,7 +29,7 @@ MonoBehaviour:
     furnitureType: 1
     machineType: 0
     objectSprite: {fileID: 21300000, guid: 47a1672dc06ca93439e0c26accec12d4, type: 3}
-    objectToMove: {fileID: 1475861760331519805, guid: d53b9396a6b954d40b17f085e68a90db,
+    objectToMove: {fileID: 500029343382258194, guid: 66c524b356e5e2941913b722865489c3,
       type: 3}
     craftingRequirements:
     - itemName: 1
@@ -42,7 +42,7 @@ MonoBehaviour:
     furnitureType: 2
     machineType: 0
     objectSprite: {fileID: 21300000, guid: f25937bc1b291984f83c15a1e74b1850, type: 3}
-    objectToMove: {fileID: 1475861760331519805, guid: 38d26bbe041a68747a7ac35f8f5ceab5,
+    objectToMove: {fileID: 4228448781326590327, guid: 48398d00d2f8d3d4880105f84f22f29e,
       type: 3}
     craftingRequirements:
     - itemName: 1
@@ -52,3 +52,12 @@ MonoBehaviour:
     RemoveCraftingRequirements:
     - itemName: 1
       amount: 10
+  - Name: GhostTank
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 3
+    objectSprite: {fileID: 21300000, guid: af3c8ff787f167a49a3a0555956eedda, type: 3}
+    objectToMove: {fileID: 6696127574697431146, guid: 8bc26cec8c8aabd488024547ebf73f55,
+      type: 3}
+    craftingRequirements: []
+    RemoveCraftingRequirements: []

@@ -20,9 +20,9 @@ public class SelectionSubButtonPrefab : MonoBehaviour, IPointerEnterHandler
     {
         SoundManager.Instance.PlayChangeCraftingScreen_Clip();
 
-        CraftingManager.instance.itemSelected = item;
-        CraftingManager.instance.SetupCraftingScreen(item);
-        CraftingManager.instance.craftingScreen.SetActive(true);
+        CraftingManager.Instance.itemSelected = item;
+        CraftingManager.Instance.SetupCraftingScreen(item);
+        CraftingManager.Instance.craftingScreen.SetActive(true);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

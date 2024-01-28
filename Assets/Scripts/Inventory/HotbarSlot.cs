@@ -15,15 +15,6 @@ public class HotbarSlot : MonoBehaviour
     //--------------------
 
 
-    private void Awake()
-    {
-        selectedImage.gameObject.SetActive(false);
-    }
-
-
-    //--------------------
-
-
     public void SetHotbarSlotImage()
     {
         image.sprite = MainManager.Instance.GetItem(hotbarItemName).hotbarSprite;

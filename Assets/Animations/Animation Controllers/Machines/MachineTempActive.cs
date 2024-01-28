@@ -8,6 +8,10 @@ public class MachineTempActive : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
         anim.SetBool("isActive", true);
     }
 }

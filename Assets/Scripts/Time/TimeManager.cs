@@ -24,7 +24,7 @@ public class TimeManager : Singleton<TimeManager>
 
     private void Start()
     {
-        TimeDisplay_Parent.SetActive(true);
+        //TimeDisplay_Parent.SetActive(true);
     }
     private void Update()
     {
@@ -56,6 +56,13 @@ public class TimeManager : Singleton<TimeManager>
     void RunClock()
     {
         //Add time
+        Addtime();
+
+        //Update Timer
+        SetTimerDisplay(clockText, dayText);
+    }
+    void Addtime()
+    {
         if (currentTime >= (float.MaxValue - 10000))
         {
             currentTime = 0;
@@ -65,7 +72,9 @@ public class TimeManager : Singleton<TimeManager>
         {
             currentTime += timeSpeed * Time.deltaTime;
         }
-
+    }
+    public void SetTimerDisplay(TextMeshProUGUI clockText, TextMeshProUGUI dayText)
+    {
         //Calculate hours and minutes
         int hours = Mathf.FloorToInt(currentTime / secondsPerMinute / 60f) % 12;
         int minutes = Mathf.FloorToInt(currentTime / secondsPerMinute) % 60;
@@ -74,8 +83,6 @@ public class TimeManager : Singleton<TimeManager>
         day = Mathf.FloorToInt(currentTime / 86400) + loops;
         dayText.text = "Day: " + day;
 
-        //Make readable string
-        //string timeString = string.Format("{0:D2}:{1:D2} {2}", hours == -1 ? 11 : hours, minutes/*, hours <= 11 ? "am" : "pm"*/);
         string timeString = "";
         if (hours < 10)
             timeString += "0" + hours + ":";
@@ -86,7 +93,6 @@ public class TimeManager : Singleton<TimeManager>
         else
             timeString += minutes;
 
-        //Update Timer
         if (clockText != null)
         {
             clockText.text = timeString;
@@ -112,6 +118,7 @@ public class TimeManager : Singleton<TimeManager>
             }
         }
     }
+
     void SetTimeOfDay()
     {
         if (GetTime() <= GetHour(5)) //Night
@@ -135,6 +142,7 @@ public class TimeManager : Singleton<TimeManager>
             timeOfDay = TimeOfDay.Night;
         }
     }
+    
 
     public float GetTime()
     {

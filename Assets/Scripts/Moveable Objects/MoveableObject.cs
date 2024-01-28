@@ -5,15 +5,16 @@ using UnityEngine;
 public class MoveableObject : MonoBehaviour
 {
     [Header("General")]
-    public bool canBePlaced;
-    public bool isSelectedForMovement;
-    public bool enoughItemsToBuild;
+    [HideInInspector] public bool canBePlaced;
+    [HideInInspector] public bool isSelectedForMovement;
+    [HideInInspector] public bool enoughItemsToBuild;
 
-    [Header("FurnitureType Type")]
+    [Header("MoveableObject Type")]
     public FurnitureType furnitureType = FurnitureType.None;
-
-    [Header("MachineType Type")]
     public MachineType machineType = MachineType.None;
+
+    [Header("Mesh")]
+    public SkinnedMeshRenderer meshRenderer;
 
 
     //--------------------

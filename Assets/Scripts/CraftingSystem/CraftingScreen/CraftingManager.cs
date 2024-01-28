@@ -4,10 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CraftingManager : MonoBehaviour
+public class CraftingManager : Singleton<CraftingManager>
 {
-    public static CraftingManager instance { get; set; } //Singleton
-
     #region Variables
     [Header("Main Screen")]
     [SerializeField] GameObject craftingMenu;
@@ -56,21 +54,9 @@ public class CraftingManager : MonoBehaviour
     //--------------------
 
 
-    private void Awake()
-    {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
     private void Start()
     {
-        PlayerButtonManager.isPressed_CloseCraftingMenu += CloseCraftingScreen;
+        //PlayerButtonManager.isPressed_CloseCraftingMenu += CloseCraftingScreen;
 
         craftingMenu.SetActive(false);
         overviewScreen.SetActive(false);
@@ -108,7 +94,7 @@ public class CraftingManager : MonoBehaviour
         }
 
         //Reset Panel Size
-        overviewScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 20);
+        overviewScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 100);
 
         //Instantiate CategoryButtons
         for (int i = 1; i < itemCategory_SO.ItemCategoryList.Count; i++)
@@ -120,8 +106,10 @@ public class CraftingManager : MonoBehaviour
             categoryButtonPrefabList[categoryButtonPrefabList.Count - 1].GetComponent<CategoryButton>().categoryType = itemCategory_SO.ItemCategoryList[i].categoryName;
 
             //Adjust Frame
-            overviewScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 85);
+            overviewScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(70 + 5, 0);
         }
+
+        overviewScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(5, 0);
     }
 
 
@@ -294,8 +282,10 @@ public class CraftingManager : MonoBehaviour
             requirementPrefabList[requirementPrefabList.Count - 1].GetComponent<CraftingRequirementPrefab>().SetDisplay();
 
             //Adjust Frame
-            craftingScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 67);
+            craftingScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 65);
         }
+
+        craftingScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 12);
     }
     private void CheckForRequiermentsMet()
     {

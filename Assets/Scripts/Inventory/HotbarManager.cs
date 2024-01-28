@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HotbarManager : Singleton<HotbarManager>
 {
+    public GameObject hotbar_Parent;
     public GameObject EquipmentHolder;
     public List<GameObject> EuipmentList = new List<GameObject>();
 
@@ -27,6 +28,8 @@ public class HotbarManager : Singleton<HotbarManager>
         PlayerButtonManager.isPressed_3 += QuickHotbarSelect_3;
         PlayerButtonManager.isPressed_4 += QuickHotbarSelect_4;
         PlayerButtonManager.isPressed_5 += QuickHotbarSelect_5;
+
+        hotbar_Parent.SetActive(true);
     }
 
 
@@ -107,7 +110,7 @@ public class HotbarManager : Singleton<HotbarManager>
             EuipmentList.Clear();
 
             //Remove BuildingMenu
-            BuildingSystemMenu.instance.buildingSystemMenu.SetActive(false);
+            //BuildingSystemMenu.Instance.buildingSystemMenu.SetActive(false);
 
             return;
         }
@@ -141,7 +144,7 @@ public class HotbarManager : Singleton<HotbarManager>
         }
 
         //Remove BuildingmMenu
-        BuildingSystemMenu.instance.buildingSystemMenu.SetActive(false);
+        //BuildingSystemMenu.Instance.buildingSystemMenu.SetActive(false);
     }
 
 

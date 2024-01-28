@@ -5,10 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BuildingSystemMenu : MonoBehaviour
+public class BuildingSystemMenu : Singleton<BuildingSystemMenu>
 {
-    public static BuildingSystemMenu instance { get; set; } //Singleton
-
     public GameObject buildingSystemMenu;
     public Image selectedBuildingBlockImage;
 
@@ -23,22 +21,11 @@ public class BuildingSystemMenu : MonoBehaviour
 
     //--------------------
 
-    private void Awake()
-    {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
+
     private void Start()
     {
-        PlayerButtonManager.isPressed_BuildingSystemMenu_Enter += BuildingBlockSelecter_Enter;
-        PlayerButtonManager.isPressed_BuildingSystemMenu_Exit += BuildingBlockSelecter_Exit;
+        //PlayerButtonManager.isPressed_BuildingSystemMenu_Enter += BuildingBlockSelecter_Enter;
+        //PlayerButtonManager.isPressed_BuildingSystemMenu_Exit += BuildingBlockSelecter_Exit;
 
         buildingSystemMenu.SetActive(false);
     }
@@ -65,12 +52,12 @@ public class BuildingSystemMenu : MonoBehaviour
     //--------------------
 
 
-    void BuildingBlockSelecter_Enter()
+    public void BuildingBlockSelecter_Enter()
     {
         buildingSystemMenu_isOpen = true;
 
-        Cursor.lockState = CursorLockMode.None;
-        MainManager.Instance.menuStates = MenuStates.BuildingSystemMenu;
+        //Cursor.lockState = CursorLockMode.None;
+        //MainManager.Instance.menuStates = MenuStates.MoveableObjectMenu;
         BuildingManager.Instance.SetAllGhostState_Off();
 
         //Deactivate old directionObjectList
@@ -87,14 +74,18 @@ public class BuildingSystemMenu : MonoBehaviour
             BuildingManager.Instance.old_lastBuildingBlock_LookedAt = null;
         }
 
-        buildingSystemMenu.SetActive(true);
+        //buildingSystemMenu.SetActive(true);
+        //TabletManager.Instance.tabletMenuState = TabletMenuState.MoveableObjects;
+        //TabletManager.Instance.OpenTablet();
     }
-    void BuildingBlockSelecter_Exit()
+    public void BuildingBlockSelecter_Exit()
     {
-        buildingSystemMenu.SetActive(false);
+        //TabletManager.Instance.CloseTablet();
+        //TabletManager.Instance.tabletMenuState = TabletMenuState.Inventory;
+        //buildingSystemMenu.SetActive(false);
 
-        Cursor.lockState = CursorLockMode.Locked;
-        MainManager.Instance.menuStates = MenuStates.None;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //MainManager.Instance.menuStates = MenuStates.None;
 
         buildingSystemMenu_isOpen = false;
     }

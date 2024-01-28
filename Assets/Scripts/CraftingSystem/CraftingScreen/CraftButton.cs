@@ -6,35 +6,35 @@ using UnityEngine.UI;
 public class CraftButton : MonoBehaviour
 {
     [SerializeField] Button craftingButton;
-    [SerializeField] Color craftingButtonColor_Inactive;
-    [SerializeField] Color craftingButtonColor_Active;
+    [SerializeField] Sprite craftingButtonColor_Inactive;
+    [SerializeField] Sprite craftingButtonColor_Active;
 
     private void Update()
     {
         if (MainManager.Instance.menuStates == MenuStates.CraftingMenu)
         {
-            if (CraftingManager.instance.totalRequirementMet)
+            if (CraftingManager.Instance.totalRequirementMet)
             {
-                craftingButton.GetComponent<Image>().color = craftingButtonColor_Active;
+                craftingButton.GetComponent<Image>().sprite = craftingButtonColor_Active;
             }
             else
             {
-                craftingButton.GetComponent<Image>().color = craftingButtonColor_Inactive;
+                craftingButton.GetComponent<Image>().sprite = craftingButtonColor_Inactive;
             }
         }
     }
 
     public void CraftingButton_OnClick()
     {
-        if (CraftingManager.instance.totalRequirementMet)
+        if (CraftingManager.Instance.totalRequirementMet)
         {
             print("CraftingButton - TotalRequirementMet = true");
 
             //Remove items from inventory
-            for (int i = 0; i < CraftingManager.instance.requirementPrefabList.Count; i++)
+            for (int i = 0; i < CraftingManager.Instance.requirementPrefabList.Count; i++)
             {
-                Items itemName = CraftingManager.instance.requirementPrefabList[i].GetComponent<CraftingRequirementPrefab>().requirements.itemName;
-                int amount = CraftingManager.instance.requirementPrefabList[i].GetComponent<CraftingRequirementPrefab>().requirements.amount;
+                Items itemName = CraftingManager.Instance.requirementPrefabList[i].GetComponent<CraftingRequirementPrefab>().requirements.itemName;
+                int amount = CraftingManager.Instance.requirementPrefabList[i].GetComponent<CraftingRequirementPrefab>().requirements.amount;
 
                 for (int j = 0; j < amount; j++)
                 {
@@ -42,7 +42,7 @@ public class CraftButton : MonoBehaviour
                 }
             }
 
-            InventoryManager.Instance.AddItemToInventory(0, CraftingManager.instance.itemSelected.itemName);
+            InventoryManager.Instance.AddItemToInventory(0, CraftingManager.Instance.itemSelected.itemName);
             InventoryManager.Instance.CheckHotbarItemInInventory();
 
             SoundManager.Instance.Playmenu_Crafting_Clip();

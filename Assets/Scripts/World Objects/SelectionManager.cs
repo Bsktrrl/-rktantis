@@ -2,10 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectionManager : MonoBehaviour
+public class SelectionManager : Singleton<SelectionManager>
 {
-    public static SelectionManager instance { get; set; } //Singleton
-
     public GameObject interaction_Info_UI;
     TextMeshProUGUI interaction_text;
 
@@ -22,18 +20,6 @@ public class SelectionManager : MonoBehaviour
     //--------------------
 
 
-    private void Awake()
-    {
-        //Singleton
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
     private void Start()
     {
         interaction_text = interaction_Info_UI.GetComponent<TextMeshProUGUI>();
@@ -77,17 +63,16 @@ public class SelectionManager : MonoBehaviour
                         interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
                         interaction_Info_UI.SetActive(true);
                     }
-                    else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.CraftingTable
-                        || selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Machine)
-                    {
-                        //Set correct UI-info for Machine to be displayed
-                        interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
-                        interaction_Info_UI.SetActive(true);
-                    }
                     else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Inventory)
                     {
                         //Set correct UI-info for Inventory/Chest to be displayed
                         interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
+                    }
+                    else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.CraftingTable)
+                    {
+                        //Set correct UI-info for Machine to be displayed
+                        interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
+                        interaction_Info_UI.SetActive(true);
                     }
 
                     //Set UI screen Active
