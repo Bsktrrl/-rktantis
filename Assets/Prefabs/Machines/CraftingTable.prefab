@@ -87,11 +87,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 04d7e046f6152d54cb23ade89e6da539,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -5259886074077466484}
+      addedObject: {fileID: 2883986187514139018}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 04d7e046f6152d54cb23ade89e6da539,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2883986187514139018}
+      addedObject: {fileID: -5259886074077466484}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 04d7e046f6152d54cb23ade89e6da539,
         type: 3}
       insertIndex: -1
@@ -178,6 +178,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2883986187514139018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7136088843378850041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723c2b76ce662894cb31d94f240770fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInRange: 0
+  itemName: 8
+  interacteableType: 3
+  isMachine: 1
+  inventoryIndex: 0
 --- !u!114 &-5259886074077466484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,24 +213,6 @@ MonoBehaviour:
   furnitureType: 0
   machineType: 1
   meshRenderer: {fileID: 4529887815197846475}
-  meshParent: {fileID: 8944322934818101132}
---- !u!114 &2883986187514139018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7136088843378850041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 723c2b76ce662894cb31d94f240770fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInRange: 0
-  itemName: 8
-  interacteableType: 3
-  isMachine: 1
-  inventoryIndex: 0
 --- !u!114 &8377522084278110936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,9 +225,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b72052c85ec9746aa2880f936bee62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8944322934818101132 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -7788538506090769884, guid: 04d7e046f6152d54cb23ade89e6da539,
-    type: 3}
-  m_PrefabInstance: {fileID: 8054990503113147816}
-  m_PrefabAsset: {fileID: 0}

@@ -1,9 +1,16 @@
 Todo - Sunday 28.01.24
 
-- Swap Mesh on "CraftingTable, "Chest_Small" and "Chest_Medium" (Change placement setings to the .y-value (move down 0.03f when placed))
 - Make "Chest_Small" and "Chest_Medium" work when placed in the world (Saving/Loading of new inventories)
-- Add GhostTank containing a working Ghost inside to the MoveableObjectMenu to be demonstrated
-- Make the Crafting/SkillTree only work when interacting with the object
+
+- Make the Crafting/SkillTree ONLY work when interacting with its object
+
+- Fix Requirement UI on main Screen
+	- Give correct images
+	- Always appear when BuildingHammer is in hand
+
+- Make "RemoveObject" work with Machines/Furniture
+
+- Make sure the "Player Controller" works in the new Scene
 
 
 --------------------

@@ -63,17 +63,16 @@ public class SelectionManager : Singleton<SelectionManager>
                         interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
                         interaction_Info_UI.SetActive(true);
                     }
-                    else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.CraftingTable
-                        || selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Machine)
-                    {
-                        //Set correct UI-info for Machine to be displayed
-                        interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
-                        interaction_Info_UI.SetActive(true);
-                    }
                     else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Inventory)
                     {
                         //Set correct UI-info for Inventory/Chest to be displayed
                         interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
+                    }
+                    else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.CraftingTable)
+                    {
+                        //Set correct UI-info for Machine to be displayed
+                        interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
+                        interaction_Info_UI.SetActive(true);
                     }
 
                     //Set UI screen Active

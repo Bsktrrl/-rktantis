@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class InteractableObject : MonoBehaviour
 {
     [Header("Is the player in range?")]
-    public bool playerInRange;
+    [HideInInspector] public bool playerInRange;
 
     [Header("Stats")]
     public Items itemName;
     public InteracteableType interacteableType;
-    public bool isMachine;
+    //public bool isMachine;
 
     [Header("If Object is an Inventory")]
-    [SerializeField] int inventoryIndex;
+    [HideInInspector] [SerializeField] int inventoryIndex;
 
 
     //--------------------
@@ -108,10 +108,10 @@ public class InteractableObject : MonoBehaviour
                 TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.SkillTree;
             }
 
-            //If Object is another machine
-            else if (interacteableType == InteracteableType.Machine)
+            //If Object is a GhostTank
+            else if (interacteableType == InteracteableType.GhostTank)
             {
-                //print("Interract with a Machine");
+                print("Interract with a GhostTank");
             }
         }
     }
@@ -158,5 +158,5 @@ public enum InteracteableType
     Inventory,
     CraftingTable,
     SkillTree,
-    Machine
+    GhostTank
 }
