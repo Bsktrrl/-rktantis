@@ -126,51 +126,33 @@ public class TabletManager : Singleton<TabletManager>
     #region Menu Buttons
     public void MenuButton_Inventory_onClick()
     {
-        if (!BuildingSystemMenu.Instance.buildingSystemMenu_isOpen)
-        {
-            MenuTransition(tabletMenuState, TabletMenuState.Inventory);
-        }
+        MenuTransition(tabletMenuState, TabletMenuState.Inventory);
     }
     public void MenuButton_CraftingTable_onClick()
     {
-        if (!BuildingSystemMenu.Instance.buildingSystemMenu_isOpen)
-        {
-            MenuTransition(tabletMenuState, TabletMenuState.CraftingTable);
-        }
+        MenuTransition(tabletMenuState, TabletMenuState.CraftingTable);
     }
     public void MenuButton_Skilltree_onClick()
     {
-        if (!BuildingSystemMenu.Instance.buildingSystemMenu_isOpen)
-        {
-            MenuTransition(tabletMenuState, TabletMenuState.SkillTree);
-        }
+        MenuTransition(tabletMenuState, TabletMenuState.SkillTree);
     }
     public void MenuButton_MoveableObjects_onClick()
     {
-        if (!BuildingSystemMenu.Instance.buildingSystemMenu_isOpen)
-        {
-            MenuTransition(tabletMenuState, TabletMenuState.MoveableObjects);
-        }
+        MenuTransition(tabletMenuState, TabletMenuState.MoveableObjects);
     }
     public void MenuButton_Chest_onClick()
     {
-        if (!BuildingSystemMenu.Instance.buildingSystemMenu_isOpen)
-        {
-            MenuTransition(tabletMenuState, TabletMenuState.Inventory);
+        MenuTransition(tabletMenuState, TabletMenuState.Inventory);
 
-            menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
-            menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Active;
-        }
+        menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Active;
     }
     public void MenuButton_Equipment_onClick()
     {
-        if (!BuildingSystemMenu.Instance.buildingSystemMenu_isOpen)
-        {
-            MenuTransition(tabletMenuState, TabletMenuState.Equipment);
+        MenuTransition(tabletMenuState, TabletMenuState.Equipment);
 
-            menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Active;
-            menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Passive;
-        }
+        menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Active;
+        menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Passive;
     }
     #endregion
 
@@ -247,7 +229,7 @@ public class TabletManager : Singleton<TabletManager>
 
     void MenuTransition(TabletMenuState currentMenu, TabletMenuState newMenu)
     {
-        //Turn of current menu
+        //Exit current menu
         switch (currentMenu)
         {
             case TabletMenuState.None:
@@ -294,6 +276,7 @@ public class TabletManager : Singleton<TabletManager>
             case TabletMenuState.MoveableObjects:
                 menu_MoveableObjects.SetActive(false);
                 menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                BuildingSystemMenu.Instance.BuildingBlockSelecter_Exit();
                 break;
 
             default:
@@ -313,7 +296,7 @@ public class TabletManager : Singleton<TabletManager>
                 break;
         }
 
-        //Turn on new menu
+        //Enter new menu
         switch (newMenu)
         {
             case TabletMenuState.ChestInventory:
@@ -443,6 +426,8 @@ public class TabletManager : Singleton<TabletManager>
                 tabletMenuState = TabletMenuState.MoveableObjects;
                 menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Active;
                 MainManager.Instance.menuStates = MenuStates.MoveableObjectMenu;
+
+                BuildingSystemMenu.Instance.BuildingBlockSelecter_Enter();
                 break;
 
             default:
@@ -500,6 +485,7 @@ public class TabletManager : Singleton<TabletManager>
         SetMenuDisplay(false);
 
         InventoryManager.Instance.ClosePlayerInventory();
+        BuildingSystemMenu.Instance.BuildingBlockSelecter_Exit();
 
         //Rearrange the HealthParameter Displays
         healthParameters_Tablet_Parent.SetActive(false);

@@ -100,21 +100,25 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
             || MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
             GameObject moveableObject = MoveableObjectManager.Instance.GetMoveableObject();
-            MoveableObjectManager.Instance.objectToMove = moveableObject;
 
-            tempObj_Selected = Instantiate(moveableObject, InventoryManager.Instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
-            tempObj_Selected.transform.parent = BuildingManager.Instance.tempBlock_Parent.transform;
-
-            //Set selected For Movement
-            tempObj_Selected.GetComponent<MoveableObject>().isSelectedForMovement = true;
-
-            //Get the correct mesh
-            tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
-
-            //Remove its BoxCollider
-            if (tempObj_Selected.GetComponent<BoxCollider>())
+            if (moveableObject)
             {
-                tempObj_Selected.GetComponent<BoxCollider>().enabled = !tempObj_Selected.GetComponent<BoxCollider>().enabled;
+                MoveableObjectManager.Instance.objectToMove = moveableObject;
+
+                tempObj_Selected = Instantiate(moveableObject, InventoryManager.Instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
+                tempObj_Selected.transform.parent = BuildingManager.Instance.tempBlock_Parent.transform;
+
+                //Set selected For Movement
+                tempObj_Selected.GetComponent<MoveableObject>().isSelectedForMovement = true;
+
+                //Get the correct mesh
+                tempObj_Selected.GetComponent<MeshRenderer>().material = BuildingManager.Instance.canPlace_Material;
+
+                //Remove its BoxCollider
+                if (tempObj_Selected.GetComponent<BoxCollider>())
+                {
+                    tempObj_Selected.GetComponent<BoxCollider>().enabled = !tempObj_Selected.GetComponent<BoxCollider>().enabled;
+                }
             }
         }
     }
@@ -382,5 +386,7 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
         PlayerButtonManager.isPressed_MoveableRotation_Left -= ManipulateObjectRotation_Left;
 
         BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
+
+        MoveableObjectManager.Instance.objectToMove = null;
     }
 }

@@ -66,11 +66,11 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         buildingMaterial_Selected = temp.buildingMaterial;
 
         //Set BuildingHammer UpToDate
-        if (EquippmentManager.instance.toolHolderParent)
+        if (EquippmentManager.Instance.toolHolderParent)
         {
-            if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>())
+            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>())
             {
-                EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+                EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
             }
         }
     }

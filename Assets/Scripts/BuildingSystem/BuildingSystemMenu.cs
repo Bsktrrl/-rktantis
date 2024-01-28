@@ -52,12 +52,12 @@ public class BuildingSystemMenu : Singleton<BuildingSystemMenu>
     //--------------------
 
 
-    void BuildingBlockSelecter_Enter()
+    public void BuildingBlockSelecter_Enter()
     {
         buildingSystemMenu_isOpen = true;
 
-        Cursor.lockState = CursorLockMode.None;
-        MainManager.Instance.menuStates = MenuStates.MoveableObjectMenu;
+        //Cursor.lockState = CursorLockMode.None;
+        //MainManager.Instance.menuStates = MenuStates.MoveableObjectMenu;
         BuildingManager.Instance.SetAllGhostState_Off();
 
         //Deactivate old directionObjectList
@@ -74,18 +74,18 @@ public class BuildingSystemMenu : Singleton<BuildingSystemMenu>
             BuildingManager.Instance.old_lastBuildingBlock_LookedAt = null;
         }
 
-        buildingSystemMenu.SetActive(true);
-        TabletManager.Instance.tabletMenuState = TabletMenuState.MoveableObjects;
-        TabletManager.Instance.OpenTablet();
+        //buildingSystemMenu.SetActive(true);
+        //TabletManager.Instance.tabletMenuState = TabletMenuState.MoveableObjects;
+        //TabletManager.Instance.OpenTablet();
     }
-    void BuildingBlockSelecter_Exit()
+    public void BuildingBlockSelecter_Exit()
     {
-        TabletManager.Instance.CloseTablet();
-        TabletManager.Instance.tabletMenuState = TabletMenuState.Inventory;
-        buildingSystemMenu.SetActive(false);
+        //TabletManager.Instance.CloseTablet();
+        //TabletManager.Instance.tabletMenuState = TabletMenuState.Inventory;
+        //buildingSystemMenu.SetActive(false);
 
-        Cursor.lockState = CursorLockMode.Locked;
-        MainManager.Instance.menuStates = MenuStates.None;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //MainManager.Instance.menuStates = MenuStates.None;
 
         buildingSystemMenu_isOpen = false;
     }

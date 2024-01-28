@@ -58,10 +58,10 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         //Equipment
         #region
         else if (Input.GetKeyDown(KeyCode.Mouse0) && MainManager.Instance.menuStates == MenuStates.None 
-            && EquippmentManager.instance.toolHolderParent.transform.childCount > 0
+            && EquippmentManager.Instance.toolHolderParent.transform.childCount > 0
             && HotbarManager.Instance.selectedItem != Items.None)
         {
-            if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<EquippedItem>() != null)
+            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<EquippedItem>() != null)
             {
                 isPressed_EquipmentActivate?.Invoke();
             }

@@ -73,9 +73,9 @@ public class BuildingBlock_UI : MonoBehaviour
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
         {
             //Update "Free Block" if Hammer is selected
-            if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
             {
-                EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+                EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
             }
         }
 
@@ -91,18 +91,18 @@ public class BuildingBlock_UI : MonoBehaviour
             }
 
             //Update "Free Block" if Hammer is selected
-            if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
             {
-                EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+                EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
             }
         }
 
         //If selected Object is a Machine
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
         {
-            if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
             {
-                EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+                EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
 
                 //Set requirements for both BuildingMenu and on main screen
                 MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
@@ -114,9 +114,9 @@ public class BuildingBlock_UI : MonoBehaviour
         //If selected Object is a Furniture
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
-            if (EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
             {
-                EquippmentManager.instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+                EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
 
                 //Set requirements for both BuildingMenu and on main screen
                 MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();

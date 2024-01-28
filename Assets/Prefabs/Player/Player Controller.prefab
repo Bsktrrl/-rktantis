@@ -546,10 +546,10 @@ RectTransform:
   - {fileID: 6547171821927780354}
   m_Father: {fileID: 4858208946845625891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -125}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &140160575934701674
 CanvasRenderer:
@@ -830,7 +830,7 @@ GameObject:
   - component: {fileID: 583359398087589792}
   - component: {fileID: 9151833145663300703}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: RampCorner_Stone_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1057,7 +1057,7 @@ GameObject:
   - component: {fileID: 743429126568320780}
   - component: {fileID: 8341832923893217830}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: WallTriagle_Wood_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1844,7 +1844,7 @@ GameObject:
   - component: {fileID: 7007013441075129861}
   - component: {fileID: 7813339578860693250}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Fence_Wood_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5862,7 +5862,7 @@ GameObject:
   - component: {fileID: 2798719094419825339}
   - component: {fileID: 8377600404621879832}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Fence_Iron_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6239,7 +6239,7 @@ GameObject:
   - component: {fileID: 3481125510046655965}
   - component: {fileID: 8774907084250998669}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Ramp_Iron_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7084,7 +7084,7 @@ GameObject:
   - component: {fileID: 7542899849021256999}
   - component: {fileID: 7124071223630409111}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: WallTriagle_Wood_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7581,7 +7581,7 @@ GameObject:
   - component: {fileID: 3159900930175734921}
   - component: {fileID: 9142269629248431521}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: RampTriangle_Wood_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7885,7 +7885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &477231682882187357
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7903,10 +7903,10 @@ RectTransform:
   - {fileID: 1693416471205029679}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 465, y: -125}
+  m_SizeDelta: {x: 80, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5957771254359747324
 MonoBehaviour:
@@ -8096,7 +8096,7 @@ GameObject:
   - component: {fileID: 6781634377224491386}
   - component: {fileID: 3728645519297469577}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: WallTriagle_Iron_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8814,7 +8814,7 @@ GameObject:
   - component: {fileID: 8545601480746685049}
   - component: {fileID: 621641823508717825}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Floor_Stone_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9850,10 +9850,10 @@ RectTransform:
   - {fileID: 482870432394693067}
   m_Father: {fileID: 4858208946845625891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -40}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3824006493472326016
 CanvasRenderer:
@@ -11401,7 +11401,7 @@ GameObject:
   - component: {fileID: 7950953057931883542}
   - component: {fileID: 395881713405351329}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: RampCorner_Iron_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11555,7 +11555,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4858208946845625891
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11573,10 +11573,10 @@ RectTransform:
   - {fileID: 1804589966422595728}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 720, y: -125}
+  m_SizeDelta: {x: 80, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6942147084473744135
 MonoBehaviour:
@@ -12334,7 +12334,7 @@ GameObject:
   - component: {fileID: 7532744938431496426}
   - component: {fileID: 1057707093974862513}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: FloorTriangle_Iron_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15274,10 +15274,10 @@ RectTransform:
   - {fileID: 5843784150584015523}
   m_Father: {fileID: 8887780129250466248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -40}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2797438192038368923
 CanvasRenderer:
@@ -16153,7 +16153,7 @@ GameObject:
   - component: {fileID: 7394012205046744173}
   - component: {fileID: 6458743031938615859}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Nothing_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16380,7 +16380,7 @@ GameObject:
   - component: {fileID: 559410205292625338}
   - component: {fileID: 1901890526904898608}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Fence_Stone_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17479,7 +17479,7 @@ GameObject:
   - component: {fileID: 2444314552548312793}
   - component: {fileID: 6625368498321806536}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Ramp_Stone_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17499,10 +17499,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 150461521002731460}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -125}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3357323319710497095
 CanvasRenderer:
@@ -19135,7 +19135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8887780129250466248
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19153,10 +19153,10 @@ RectTransform:
   - {fileID: 7147400833938329554}
   m_Father: {fileID: 3026697493387645226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -125}
+  m_SizeDelta: {x: 80, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &373788915177884450
 MonoBehaviour:
@@ -21247,7 +21247,7 @@ GameObject:
   - component: {fileID: 7096114639480585345}
   - component: {fileID: 8103580699637343612}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: RampCorner_Wood_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21599,10 +21599,10 @@ RectTransform:
   - {fileID: 3107174210256672922}
   m_Father: {fileID: 477231682882187357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -125}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5511651668734681204
 CanvasRenderer:
@@ -21841,7 +21841,7 @@ GameObject:
   - component: {fileID: 7496644131619828848}
   - component: {fileID: 3949988195100910842}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wall_Iron_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21993,7 +21993,7 @@ GameObject:
   - component: {fileID: 6670940890561234594}
   - component: {fileID: 9149900638342910700}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Small Chest_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22180,7 +22180,7 @@ GameObject:
   - component: {fileID: 1521085115391086018}
   - component: {fileID: 7355445579624502901}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Door_Wood_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22809,7 +22809,7 @@ GameObject:
   - component: {fileID: 2978332135965815836}
   - component: {fileID: 3372936073213021774}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: RampTriangle_Stone_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23038,7 +23038,7 @@ GameObject:
   - component: {fileID: 5378566347328880776}
   - component: {fileID: 5308125038148603644}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Window_Wood_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23742,7 +23742,7 @@ GameObject:
   - component: {fileID: 8973252903486521898}
   - component: {fileID: 2307127915598282391}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Medium Chest_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26671,10 +26671,10 @@ RectTransform:
   - {fileID: 8551244172951145201}
   m_Father: {fileID: 8887780129250466248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -125}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4994975713823111325
 CanvasRenderer:
@@ -27065,7 +27065,7 @@ GameObject:
   - component: {fileID: 1242637903843155075}
   - component: {fileID: 3105978794191363077}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Ramp_Wood_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27370,7 +27370,7 @@ GameObject:
   - component: {fileID: 7673991789478842634}
   - component: {fileID: 3333463165389854533}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Window_Stone_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27747,7 +27747,7 @@ GameObject:
   - component: {fileID: 8076113183388058605}
   - component: {fileID: 2462112432560454686}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Floor_Iron_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30796,7 +30796,7 @@ GameObject:
   - component: {fileID: 1723891970107421532}
   - component: {fileID: 674125972431909769}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Door_Stone_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31559,10 +31559,10 @@ RectTransform:
   - {fileID: 6075393085748859694}
   m_Father: {fileID: 477231682882187357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -40}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8375149893177321800
 CanvasRenderer:
@@ -31750,7 +31750,7 @@ GameObject:
   - component: {fileID: 2264499553198630400}
   - component: {fileID: 498085664610329464}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: WallTriagle_Iron_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31902,7 +31902,7 @@ GameObject:
   - component: {fileID: 6291245125179744386}
   - component: {fileID: 4014527465374032603}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Door_Iron_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32859,7 +32859,7 @@ GameObject:
   - component: {fileID: 3096290891860832609}
   - component: {fileID: 4422306324968206830}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wall_Wood_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33312,7 +33312,7 @@ GameObject:
   - component: {fileID: 8769019820752031821}
   - component: {fileID: 4215019267963262268}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: CraftingTable_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33832,7 +33832,7 @@ GameObject:
   - component: {fileID: 1033609832277884219}
   - component: {fileID: 6545272194050056126}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: WallTriagle_Stone_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34569,7 +34569,7 @@ GameObject:
   - component: {fileID: 5236895015424816264}
   - component: {fileID: 1511553126365846242}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: RampTriangle_Iron_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35219,7 +35219,7 @@ GameObject:
   - component: {fileID: 3999113312413119924}
   - component: {fileID: 5566403914202007768}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: WallTriagle_Stone_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35628,7 +35628,7 @@ GameObject:
   - component: {fileID: 2902240449271255342}
   - component: {fileID: 967796615518164180}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: FloorTriangle_Wood_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35875,10 +35875,10 @@ RectTransform:
   - {fileID: 6024566185791086436}
   m_Father: {fileID: 477231682882187357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -210}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6467373009028996996
 CanvasRenderer:
@@ -36774,7 +36774,7 @@ GameObject:
   - component: {fileID: 7511710241868613229}
   - component: {fileID: 9043385080989889982}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: FloorTriangle_Stone_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37424,10 +37424,10 @@ RectTransform:
   - {fileID: 8922776506263495743}
   m_Father: {fileID: 4858208946845625891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -210}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8812223939993493850
 CanvasRenderer:
@@ -37692,7 +37692,7 @@ GameObject:
   - component: {fileID: 1305938332198648010}
   - component: {fileID: 1736723503939560026}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Window_Iron_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38076,10 +38076,10 @@ RectTransform:
   - {fileID: 3422894344332613070}
   m_Father: {fileID: 8887780129250466248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -210}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7168168420903657921
 CanvasRenderer:
@@ -38586,7 +38586,7 @@ GameObject:
   - component: {fileID: 8487959724698665436}
   - component: {fileID: 1754363974665288893}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Wall_Stone_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40222,7 +40222,7 @@ GameObject:
   - component: {fileID: 8527025384802895700}
   - component: {fileID: 2803693730381089196}
   m_Layer: 5
-  m_Name: Frame
+  m_Name: Floor_Wood_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

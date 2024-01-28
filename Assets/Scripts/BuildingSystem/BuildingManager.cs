@@ -11,7 +11,7 @@ public class BuildingManager : Singleton<BuildingManager>
     [HideInInspector] public List<BuildingBlockSaveList> buildingBlockSaveList = new List<BuildingBlockSaveList>();
 
     [Header("Ghost")]
-    public GameObject buildingBlockLookingAt_Axe;
+    public GameObject Axe_buildingBlockLookingAt;
     public GameObject lastBuildingBlock_LookedAt;
     [HideInInspector] public GameObject old_lastBuildingBlock_LookedAt;
     public GameObject ghost_LookedAt;
@@ -143,7 +143,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
             buildingRemoveRequirement_Parent.SetActive(false);
 
-            buildingBlockLookingAt_Axe = null;
+            Axe_buildingBlockLookingAt = null;
 
             if (!BuildingHammer_isActive)
             {
@@ -281,6 +281,8 @@ public class BuildingManager : Singleton<BuildingManager>
 
     void RaycastSetup_Hammer()
     {
+        print("2. Hammer Raycasting");
+
         //Only active when not in a menu
         if (!BuildingSystemMenu.Instance.buildingSystemMenu_isOpen)
         {
@@ -307,11 +309,15 @@ public class BuildingManager : Singleton<BuildingManager>
     }
     void RaycastBuildingDirectionMarkers()
     {
+        print("3. Hammer Raycasting");
+
         if (MainManager.Instance.menuStates == MenuStates.None)
         {
             ray_Hammer = Camera.main.ScreenPointToRay(Input.mousePosition);
             oldRay = ray_Hammer;
         }
+
+        print("4. Hammer Raycasting");
 
         if (Physics.Raycast(oldRay, out hit_Hammer))
         {
@@ -322,6 +328,8 @@ public class BuildingManager : Singleton<BuildingManager>
             {
                 BlockTagName = hitTransform.tag;
             }
+
+            print("5. Hammer Raycasting: " + hitTransform.tag);
 
             //Check BuidingDirectionMarkers
             if (hitTransform.gameObject.CompareTag("BuidingDirectionMarkers"))
@@ -2054,15 +2062,15 @@ public class BuildingManager : Singleton<BuildingManager>
 
             if (hitTransform.gameObject.CompareTag("BuildingBlock"))
             {
-                if (buildingBlockLookingAt_Axe != hitTransform.gameObject)
+                if (Axe_buildingBlockLookingAt != hitTransform.gameObject)
                 {
-                    buildingBlockLookingAt_Axe = hitTransform.gameObject;
+                    Axe_buildingBlockLookingAt = hitTransform.gameObject;
 
-                    if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>() != null)
+                    if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>() != null)
                     {
-                        if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>() != null)
+                        if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>() != null)
                         {
-                            SetBuildingRemoveRequirements(buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>());
+                            SetBuildingRemoveRequirements(Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>());
                         }
                     }
                 }
@@ -2070,21 +2078,21 @@ public class BuildingManager : Singleton<BuildingManager>
 
             else if (hitTransform.gameObject.CompareTag("Machine") || hitTransform.gameObject.CompareTag("Furniture"))
             {
-                if (buildingBlockLookingAt_Axe != hitTransform.gameObject)
+                if (Axe_buildingBlockLookingAt != hitTransform.gameObject)
                 {
-                    buildingBlockLookingAt_Axe = hitTransform.gameObject;
+                    Axe_buildingBlockLookingAt = hitTransform.gameObject;
 
-                    if (buildingBlockLookingAt_Axe.GetComponent<MoveableObject>() != null)
+                    if (Axe_buildingBlockLookingAt.GetComponent<MoveableObject>() != null)
                     {
-                        SetBuildingRemoveRequirements(MoveableObjectManager.Instance.GetMoveableObjectInfo(buildingBlockLookingAt_Axe.GetComponent<MoveableObject>()));
+                        SetBuildingRemoveRequirements(MoveableObjectManager.Instance.GetMoveableObjectInfo(Axe_buildingBlockLookingAt.GetComponent<MoveableObject>()));
                     }
                 }
             }
             else
             {
-                if (buildingBlockLookingAt_Axe != null)
+                if (Axe_buildingBlockLookingAt != null)
                 {
-                    buildingBlockLookingAt_Axe = null;
+                    Axe_buildingBlockLookingAt = null;
                     buildingRemoveRequirement_Parent.SetActive(false);
                 }
             }
@@ -2098,55 +2106,55 @@ public class BuildingManager : Singleton<BuildingManager>
         {
             var hitTransform = hit_Axe.transform;
 
-            if (buildingBlockLookingAt_Axe != null)
+            if (Axe_buildingBlockLookingAt != null)
             {
                 if (hitTransform.gameObject.CompareTag("BuildingBlock"))
                 {
-                    if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent != null)
+                    if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent != null)
                     {
-                        if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>() != null)
+                        if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>() != null)
                         {
                             for (int i = 0; i < buildingBlockList.Count; i++)
                             {
-                                if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent == buildingBlockList[i])
+                                if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent == buildingBlockList[i])
                                 {
                                     print("6. Destroy Block");
 
                                     //Play remove sound
-                                    if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
+                                    if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
                                     {
                                         SoundManager.Instance.PlayWood_Remove_Clip();
                                     }
-                                    else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Stone)
+                                    else if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Stone)
                                     {
                                         SoundManager.Instance.PlayStone_Remove_Clip();
                                     }
-                                    else if (buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Iron)
+                                    else if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Iron)
                                     {
                                         SoundManager.Instance.PlayIron_Remove_Clip();
                                     }
 
                                     //Add items to inventory
-                                    for (int j = 0; j < buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList.Count; j++)
+                                    for (int j = 0; j < Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList.Count; j++)
                                     {
-                                        for (int k = 0; k < buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].amount; k++)
+                                        for (int k = 0; k < Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].amount; k++)
                                         {
-                                            InventoryManager.Instance.AddItemToInventory(0, buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].itemName);
+                                            InventoryManager.Instance.AddItemToInventory(0, Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().removeBuildingRequirementList[j].itemName);
                                         }
                                     }
 
                                     //Remove Building Object
                                     buildingBlockList.RemoveAt(i);
-                                    buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().DestroyThisObject();
+                                    Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().DestroyThisObject();
 
                                     //Reset parameters
-                                    buildingBlockLookingAt_Axe = null;
+                                    Axe_buildingBlockLookingAt = null;
                                     lastBuildingBlock_LookedAt = null;
                                     old_lastBuildingBlock_LookedAt = null;
 
-                                    if (buildingBlockLookingAt_Axe != null)
+                                    if (Axe_buildingBlockLookingAt != null)
                                     {
-                                        SetBuildingRemoveRequirements(buildingBlockLookingAt_Axe.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>());
+                                        SetBuildingRemoveRequirements(Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>());
                                     }
                                     else
                                     {
@@ -2280,6 +2288,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void SetBuildingRequirements(BuildingBlock_Parent blockParent, GameObject ParentObject)
     {
+        #region Setup
         //If Selected Object is Empty
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
         {
@@ -2296,6 +2305,7 @@ public class BuildingManager : Singleton<BuildingManager>
             ParentObject.transform.GetChild(i).GetComponent<BuildingRequirementSlot>().DestroyThisObject();
         }
         buildingRequirement_List.Clear();
+        #endregion
 
         //Set "enoughItemsToBuild" = true by default
         enoughItemsToBuild = true;
@@ -2355,6 +2365,7 @@ public class BuildingManager : Singleton<BuildingManager>
     }
     public void SetBuildingRequirements(MoveableObjectInfo moveableObject, GameObject ParentObject)
     {
+        #region Setup
         //If Selected Object is Empty
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
         {
@@ -2371,6 +2382,7 @@ public class BuildingManager : Singleton<BuildingManager>
             ParentObject.transform.GetChild(i).GetComponent<BuildingRequirementSlot>().DestroyThisObject();
         }
         buildingRequirement_List.Clear();
+        #endregion
 
         //Set "enoughItemsToBuild" = true by default
         enoughItemsToBuild = true;
@@ -2379,7 +2391,8 @@ public class BuildingManager : Singleton<BuildingManager>
         #region
         buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, ParentObject.transform) as GameObject);
 
-        buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = moveableObject.objectSprite;
+        buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = moveableObject.objectSprite;
+        //buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = moveableObject.objectSprite;
 
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
         {
@@ -2445,7 +2458,7 @@ public class BuildingManager : Singleton<BuildingManager>
             if (buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType == blockParent.buildingType
                 && buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == blockParent.buildingMaterial)
             {
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = buildingBlock_UIList[i].GetComponentInChildren<Image>().sprite;
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = buildingBlock_UIList[i].GetComponentInChildren<Image>().sprite;
                 buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial + " " + buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
 
                 break;
@@ -2489,7 +2502,7 @@ public class BuildingManager : Singleton<BuildingManager>
         #region
         buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
 
-        buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = moveableObjectInfo.objectSprite;
+        buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = moveableObjectInfo.objectSprite;
 
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
         {
