@@ -97,6 +97,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         TimeManager.Instance.LoadData();
         print("7. TimeManager has Loaded");
         #endregion
+
+        print("------------------------------");
     }
 
     public void SaveData(ref GameData gameData)

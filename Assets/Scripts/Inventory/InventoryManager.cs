@@ -687,7 +687,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public void RemoveInventoriesUI()
     {
-        print("Reset Both Inventories");
+        //print("Reset Both Inventories");
 
         for (int i = 0; i < itemSlotList_Player.Count; i++)
         {

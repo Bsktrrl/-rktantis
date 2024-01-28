@@ -58,6 +58,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7788538506090769884, guid: 04d7e046f6152d54cb23ade89e6da539,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 04d7e046f6152d54cb23ade89e6da539,
         type: 3}
       propertyPath: m_Name
@@ -191,8 +196,7 @@ MonoBehaviour:
   furnitureType: 0
   machineType: 1
   meshRenderer: {fileID: 4529887815197846475}
-  materialList:
-  - {fileID: 0}
+  meshParent: {fileID: 8944322934818101132}
 --- !u!114 &2883986187514139018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,3 +226,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b72052c85ec9746aa2880f936bee62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8944322934818101132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7788538506090769884, guid: 04d7e046f6152d54cb23ade89e6da539,
+    type: 3}
+  m_PrefabInstance: {fileID: 8054990503113147816}
+  m_PrefabAsset: {fileID: 0}

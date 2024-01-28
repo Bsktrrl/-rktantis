@@ -179,7 +179,7 @@ public class BuildingManager : Singleton<BuildingManager>
                 SetAllGhostState_Off();
                 SetAllDirectionObjectState_Off();
 
-                print("1. Set Ghosts OFF");
+                //print("1. Set Ghosts OFF");
             }
         }
         else
@@ -194,7 +194,7 @@ public class BuildingManager : Singleton<BuildingManager>
                 SetAllGhostState_Off();
                 SetAllDirectionObjectState_Off();
 
-                print("2. Set Ghosts OFF");
+                //print("2. Set Ghosts OFF");
             }
         }
     }
@@ -281,8 +281,6 @@ public class BuildingManager : Singleton<BuildingManager>
 
     void RaycastSetup_Hammer()
     {
-        print("2. Hammer Raycasting");
-
         //Only active when not in a menu
         if (!BuildingSystemMenu.Instance.buildingSystemMenu_isOpen)
         {
@@ -309,15 +307,11 @@ public class BuildingManager : Singleton<BuildingManager>
     }
     void RaycastBuildingDirectionMarkers()
     {
-        print("3. Hammer Raycasting");
-
         if (MainManager.Instance.menuStates == MenuStates.None)
         {
             ray_Hammer = Camera.main.ScreenPointToRay(Input.mousePosition);
             oldRay = ray_Hammer;
         }
-
-        print("4. Hammer Raycasting");
 
         if (Physics.Raycast(oldRay, out hit_Hammer))
         {
@@ -328,8 +322,6 @@ public class BuildingManager : Singleton<BuildingManager>
             {
                 BlockTagName = hitTransform.tag;
             }
-
-            print("5. Hammer Raycasting: " + hitTransform.tag);
 
             //Check BuidingDirectionMarkers
             if (hitTransform.gameObject.CompareTag("BuidingDirectionMarkers"))

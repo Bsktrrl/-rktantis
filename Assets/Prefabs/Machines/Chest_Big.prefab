@@ -58,6 +58,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 183020828014507030, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
         type: 3}
       propertyPath: m_Name
@@ -92,6 +97,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -2523189389046659669}
   m_SourcePrefab: {fileID: 100100000, guid: 08d6f09a53d011f4a9eaabd96bbbe43d, type: 3}
+--- !u!137 &1192526037546764022 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2802270372014824144, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3922386865502198822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4228448781326590327 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
@@ -196,6 +207,8 @@ MonoBehaviour:
   enoughItemsToBuild: 0
   furnitureType: 2
   machineType: 0
+  meshRenderer: {fileID: 1192526037546764022}
+  meshParent: {fileID: 7167948095266452337}
 --- !u!114 &-2523189389046659669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,3 +226,9 @@ MonoBehaviour:
   interacteableType: 2
   isMachine: 1
   inventoryIndex: 0
+--- !u!1 &7167948095266452337 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3092085347767423145, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3922386865502198822}
+  m_PrefabAsset: {fileID: 0}

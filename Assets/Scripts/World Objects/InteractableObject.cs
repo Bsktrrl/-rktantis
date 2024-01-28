@@ -49,7 +49,7 @@ public class InteractableObject : MonoBehaviour
             //If Object is a Pickup
             if (interacteableType == InteracteableType.Pickup)
             {
-                print("Interract with a Pickup");
+                //print("Interract with a Pickup");
 
                 //Check If item can be added
                 if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
@@ -65,7 +65,7 @@ public class InteractableObject : MonoBehaviour
             //If Object is an Inventory
             else if (interacteableType == InteracteableType.Inventory)
             {
-                print("Interract with an Inventory");
+                //print("Interract with an Inventory");
 
                 //Open the chest Inventory
                 InventoryManager.Instance.chestInventoryOpen = inventoryIndex;
@@ -89,7 +89,7 @@ public class InteractableObject : MonoBehaviour
             //If Object is a Crafting Table
             else if (interacteableType == InteracteableType.CraftingTable)
             {
-                print("Interract with a CraftingTable");
+                //print("Interract with a CraftingTable");
 
                 //Open the crafting menu
                 TabletManager.Instance.OpenTablet(TabletMenuState.CraftingTable);
@@ -100,7 +100,7 @@ public class InteractableObject : MonoBehaviour
             //If Object is a SkillTree
             else if (interacteableType == InteracteableType.SkillTree)
             {
-                print("Interract with a SkillTree");
+                //print("Interract with a SkillTree");
 
                 //Open the crafting menu
                 TabletManager.Instance.OpenTablet(TabletMenuState.SkillTree);
@@ -111,7 +111,7 @@ public class InteractableObject : MonoBehaviour
             //If Object is another machine
             else if (interacteableType == InteracteableType.Machine)
             {
-                print("Interract with a Machine");
+                //print("Interract with a Machine");
             }
         }
     }

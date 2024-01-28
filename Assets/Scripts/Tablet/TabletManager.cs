@@ -420,6 +420,8 @@ public class TabletManager : Singleton<TabletManager>
     //When Opening Tablet from hand
     public void OpenTablet()
     {
+        InventoryManager.Instance.ClosePlayerInventory();
+
         //If BuildingHammer is in hand, open the MoveableObjectMenu
         if (MainManager.Instance.gameStates == GameStates.Building)
         {
