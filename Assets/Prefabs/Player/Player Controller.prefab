@@ -5519,9 +5519,9 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 5a9b7c815d892f148b70ef7ee4516208,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 99d21cffd02a1f248bb4f63035d73a5e, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 99d21cffd02a1f248bb4f63035d73a5e, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 5a9b7c815d892f148b70ef7ee4516208, type: 3}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -18434,9 +18434,9 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 5a9b7c815d892f148b70ef7ee4516208,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 99d21cffd02a1f248bb4f63035d73a5e, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 99d21cffd02a1f248bb4f63035d73a5e, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 5a9b7c815d892f148b70ef7ee4516208, type: 3}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -19832,9 +19832,9 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 5a9b7c815d892f148b70ef7ee4516208,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 99d21cffd02a1f248bb4f63035d73a5e, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 99d21cffd02a1f248bb4f63035d73a5e, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 5a9b7c815d892f148b70ef7ee4516208, type: 3}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -25899,7 +25899,7 @@ MonoBehaviour:
   buildingBlock_Parent: {fileID: 1799600767325498200}
   buildingBlockList: []
   buildingBlockSaveList: []
-  buildingBlockLookingAt_Axe: {fileID: 0}
+  Axe_buildingBlockLookingAt: {fileID: 0}
   lastBuildingBlock_LookedAt: {fileID: 0}
   old_lastBuildingBlock_LookedAt: {fileID: 0}
   ghost_LookedAt: {fileID: 0}
@@ -30241,7 +30241,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -30251,7 +30251,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5a9b7c815d892f148b70ef7ee4516208,
+      type: 3}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -34326,9 +34327,9 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 5a9b7c815d892f148b70ef7ee4516208,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 99d21cffd02a1f248bb4f63035d73a5e, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 99d21cffd02a1f248bb4f63035d73a5e, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 5a9b7c815d892f148b70ef7ee4516208, type: 3}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -37185,7 +37186,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -37195,7 +37196,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5a9b7c815d892f148b70ef7ee4516208,
+      type: 3}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}

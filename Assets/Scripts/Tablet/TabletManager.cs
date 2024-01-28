@@ -229,70 +229,55 @@ public class TabletManager : Singleton<TabletManager>
 
     void MenuTransition(TabletMenuState currentMenu, TabletMenuState newMenu)
     {
+        menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        menu_CraftingTable_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Passive;
+
+        playerInventory_MainParent.SetActive(false);
+        chestInventory_MainParent.SetActive(false);
+        equipInventory_MainParent.SetActive(false);
+        menu_Inventory.SetActive(false);
+        menu_CraftingTable.SetActive(false);
+        menu_Skilltree.SetActive(false);
+        menu_MoveableObjects.SetActive(false);
+
         //Exit current menu
         switch (currentMenu)
         {
             case TabletMenuState.None:
                 InventoryManager.Instance.ClosePlayerInventory();
-
-                playerInventory_MainParent.SetActive(false);
-                chestInventory_MainParent.SetActive(false);
-                equipInventory_MainParent.SetActive(false);
-                menu_Inventory.SetActive(false);
-                menu_CraftingTable.SetActive(false);
-                menu_Skilltree.SetActive(false);
-                menu_MoveableObjects.SetActive(false);
-                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
-                menu_CraftingTable_Button.GetComponent<Image>().sprite = menuButton_Passive;
-                menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Passive;
-                menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 break;
 
             case TabletMenuState.ChestInventory:
                 menu_Inventory.SetActive(false);
-                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.Equipment:
                 equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(false);
-                menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.Inventory:
                 menu_Inventory.SetActive(false);
-                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.CraftingTable:
                 menu_CraftingTable.SetActive(false);
-                menu_CraftingTable_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.SkillTree:
                 menu_Skilltree.SetActive(false);
-                menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 break;
             case TabletMenuState.MoveableObjects:
                 menu_MoveableObjects.SetActive(false);
-                menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 BuildingSystemMenu.Instance.BuildingBlockSelecter_Exit();
                 break;
 
             default:
                 InventoryManager.Instance.ClosePlayerInventory();
-
-                playerInventory_MainParent.SetActive(false);
-                chestInventory_MainParent.SetActive(false);
-                equipInventory_MainParent.SetActive(false);
-                menu_Inventory.SetActive(false);
-                menu_CraftingTable.SetActive(false);
-                menu_Skilltree.SetActive(false);
-                menu_MoveableObjects.SetActive(false);
-                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
-                menu_CraftingTable_Button.GetComponent<Image>().sprite = menuButton_Passive;
-                menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Passive;
-                menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 break;
         }
 
@@ -438,6 +423,12 @@ public class TabletManager : Singleton<TabletManager>
     //When Opening Tablet from hand
     public void OpenTablet()
     {
+        //If BuildingHammer is in hand, open the MoveableObjectMenu
+        if (MainManager.Instance.gameStates == GameStates.Building)
+        {
+            MenuTransition(tabletMenuState, TabletMenuState.MoveableObjects);
+        }
+
         //Set the MenuButtonBackround size
         menuButton_Background.GetComponent<RectTransform>().sizeDelta = new Vector2((150 * menuAmount) + 35, menuButton_Background.GetComponent<RectTransform>().sizeDelta.y) ;
 
