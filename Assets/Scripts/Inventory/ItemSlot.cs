@@ -71,7 +71,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         }
 
         //If player is in a chest
-        else if (MainManager.Instance.menuStates == MenuStates.chestMenu)
+        else if (MainManager.Instance.menuStates == MenuStates.ChestMenu)
         {
             //If the left Mouse button is pressed - Move this item between the open inventories, if possible
             if (eventData.button == PointerEventData.InputButton.Right && itemName != Items.None)

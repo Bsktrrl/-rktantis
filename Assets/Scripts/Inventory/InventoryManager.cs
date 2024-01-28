@@ -177,8 +177,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
         inventories[inventory].itemsInInventory.Add(item);
 
-        PrepareInventoryUI(inventory, itemIsMoved);
         RemoveInventoriesUI();
+        PrepareInventoryUI(inventory, itemIsMoved);
 
         SetBuildingRequirement();
 
@@ -221,8 +221,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
         inventories[inventory].itemsInInventory.Add(item);
 
-        PrepareInventoryUI(inventory, false);
         RemoveInventoriesUI();
+        PrepareInventoryUI(inventory, false);
 
         SetBuildingRequirement();
 

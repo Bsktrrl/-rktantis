@@ -67,8 +67,6 @@ public class InteractableObject : MonoBehaviour
             {
                 print("Interract with an Inventory");
 
-                //Open the player Inventory
-
                 //Open the chest Inventory
                 InventoryManager.Instance.chestInventoryOpen = inventoryIndex;
                 InventoryManager.Instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Chest Inventory
@@ -80,7 +78,7 @@ public class InteractableObject : MonoBehaviour
                 InventoryManager.Instance.chestInventory_Fake_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
                 InventoryManager.Instance.chestInventory_Fake_Parent.SetActive(true);
 
-                MainManager.Instance.menuStates = MenuStates.chestMenu;
+                MainManager.Instance.menuStates = MenuStates.ChestMenu;
                 TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.Chest;
 
                 InventoryManager.Instance.ClosePlayerInventory();

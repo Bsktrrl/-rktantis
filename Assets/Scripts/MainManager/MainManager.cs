@@ -93,11 +93,13 @@ public enum MenuStates
 
     MainMenu,
     PauseMenu,
+    SettingsMenu,
     InventoryMenu,
-    chestMenu,
+    ChestMenu,
+    EquipmentMenu,
     MoveableObjectMenu,
     CraftingMenu,
-    SkillTree
+    SkillTreeMenu
 }
 
 public enum GameStates
