@@ -112,6 +112,11 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 
     public GameObject GetMoveableObject()
     {
+        //if (moveableObjectType != MoveableObjectType.None)
+        //{
+        //    return null;
+        //}
+
         //Machine
         if (moveableObjectType == MoveableObjectType.Machine)
         {
@@ -142,6 +147,11 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     }
     public MoveableObjectInfo GetMoveableObjectInfo(MoveableObject moveableObject)
     {
+        //if (moveableObjectType != MoveableObjectType.None)
+        //{
+        //    return null;
+        //}
+
         //Machine
         if (moveableObject.machineType != MachineType.None)
         {
@@ -170,6 +180,11 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     }
     public MoveableObjectInfo GetMoveableObject_SO()
     {
+        //if (moveableObjectType != MoveableObjectType.None)
+        //{
+        //    return null;
+        //}
+
         //Machine
         if (moveableObjectType == MoveableObjectType.Machine)
         {
@@ -217,7 +232,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             placedMoveableObjectsList.Add(Instantiate(tempInfo.objectToMove, moveableObject.gameObject.transform.position, moveableObject.gameObject.transform.rotation) as GameObject);
             placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].transform.SetParent(moveableObject_Parent.transform);
 
-            //Add MOveableObjectList to save
+            //Add MoveableObjectList to save
             MoveableObject_ToSave tempToSave = new MoveableObject_ToSave();
             tempToSave.moveableObjectType = tempInfo.moveableObjectType;
             tempToSave.machineType = tempInfo.machineType;

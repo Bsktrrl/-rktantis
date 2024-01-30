@@ -10,8 +10,7 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
     [SerializeField] LayerMask layerMask_BuildingBlock;
     public GameObject tempObj_Selected = null;
 
-    [SerializeField] float rotationSpeed = 100;
-    [SerializeField] float rotationValue = 0;
+    [SerializeField] float rotationSpeed = 75;
 
     Ray ray;
     RaycastHit hit;
@@ -42,7 +41,7 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
     public void SetNewSelectedBlock()
     {
         //Reset Rotation
-        rotationValue = 0;
+        //rotationValue = 0;
 
         BuildingManager.Instance.buildingRequirement_Parent.SetActive(true);
 
@@ -212,7 +211,7 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
                 BuildingManager.Instance.freeGhost_LookedAt = tempObj_Selected;
                 tempObj_Selected.SetActive(true);
 
-                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), Quaternion.Euler(0.0f, rotationValue, 0.0f));
+                tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), Quaternion.Euler(0.0f, BuildingManager.Instance.rotationValue, 0.0f));
             }
             else
             {
@@ -345,7 +344,7 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
     }
     void SetMoveableObjectPositionAndRotation()
     {
-        tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y - 0.03f /*+ tempHeight*/, hit.point.z), Quaternion.Euler(0.0f, rotationValue, 0.0f));
+        tempObj_Selected.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y - 0.03f /*+ tempHeight*/, hit.point.z), Quaternion.Euler(0.0f, BuildingManager.Instance.rotationValue, 0.0f));
     }
 
 
@@ -356,13 +355,13 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
     {
         print("Rotating Right");
 
-        rotationValue += rotationSpeed * Time.deltaTime;
+        BuildingManager.Instance.rotationValue += rotationSpeed * Time.deltaTime;
     }
     void ManipulateObjectRotation_Left()
     {
         print("Rotating Left");
 
-        rotationValue -= rotationSpeed * Time.deltaTime;
+        BuildingManager.Instance.rotationValue -= rotationSpeed * Time.deltaTime;
     }
 
 

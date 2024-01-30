@@ -24,6 +24,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
     Ray oldRay = new Ray();
 
+    public float rotationValue = 0;
 
     public Vector2 BuildingDistance;
     public BlockDirection_A blockDirection_X;
@@ -2529,6 +2530,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
         buildingRemoveRequirement_Parent.SetActive(true);
     }
+
 
     //--------------------
 

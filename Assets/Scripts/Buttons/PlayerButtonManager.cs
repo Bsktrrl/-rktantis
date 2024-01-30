@@ -41,9 +41,15 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
     private void Update()
     {
+        //Exit Game
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
         //BuildingSystem
         #region
-        if (Input.GetKeyDown(KeyCode.Mouse1) && MainManager.Instance.gameStates == GameStates.Building
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && MainManager.Instance.gameStates == GameStates.Building
             && MainManager.Instance.menuStates == MenuStates.None)
         {
             isPressed_BuildingSystemMenu_Enter?.Invoke();

@@ -156,7 +156,27 @@ public enum InteracteableType
 
     Pickup,
     Inventory,
+
     CraftingTable,
     SkillTree,
-    GhostTank
+    GhostTank,
+    Extractor,
+    GhostRepeller,
+    HeatRegulator,
+    ResourceConverter,
+
+    BatteryCharger_1,
+    BatteryCharger_2,
+    BatteryCharger_3,
+
+    CropPlot_1,
+    CropPlot_2,
+    CropPlot_3,
+
+    Grill_Manual,
+    Grill_1,
+    Grill_2,
+    Grill_4,
+
+    SkillTreeTable
 }
