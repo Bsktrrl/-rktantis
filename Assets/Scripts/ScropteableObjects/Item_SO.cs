@@ -24,6 +24,7 @@ public class Item
     [Header("Sprites")]
     public Sprite hotbarSprite;
     public List<Sprite> itemSpriteList = new List<Sprite>();
+    public List<Sprite> itemSelected_SpriteList = new List<Sprite>();
 
     [Header("Prefabs")]
     public GameObject worldObjectPrefab;

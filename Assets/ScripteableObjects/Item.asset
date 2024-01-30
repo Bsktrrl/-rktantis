@@ -21,6 +21,7 @@ MonoBehaviour:
     hotbarSprite: {fileID: 21300000, guid: e4c75704211c6834d9faa3a6419e11d0, type: 3}
     itemSpriteList:
     - {fileID: -74583670, guid: cb09d8518d394d04883b80b6a11c020d, type: 3}
+    itemSelected_SpriteList: []
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     isActive: 0
@@ -38,6 +39,7 @@ MonoBehaviour:
     hotbarSprite: {fileID: 21300000, guid: fe3f0a8ab8fb2f24a8a7a2193adff5b9, type: 3}
     itemSpriteList:
     - {fileID: 814119140, guid: e0d49768a0faf0247873ec799af13b39, type: 3}
+    itemSelected_SpriteList: []
     worldObjectPrefab: {fileID: 4279313669877795266, guid: 28be7c47a9c5332429ac67d42f39dbbc,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -57,8 +59,13 @@ MonoBehaviour:
     itemSpriteList:
     - {fileID: 1467642179, guid: 31d93cf0f344be047a6af13175521316, type: 3}
     - {fileID: -1165045840, guid: 31d93cf0f344be047a6af13175521316, type: 3}
+    - {fileID: 951967960, guid: 31d93cf0f344be047a6af13175521316, type: 3}
+    - {fileID: 1932310414, guid: 31d93cf0f344be047a6af13175521316, type: 3}
+    itemSelected_SpriteList:
     - {fileID: 252689115, guid: 31d93cf0f344be047a6af13175521316, type: 3}
     - {fileID: -1340238267, guid: 31d93cf0f344be047a6af13175521316, type: 3}
+    - {fileID: -779394655, guid: 31d93cf0f344be047a6af13175521316, type: 3}
+    - {fileID: -382038669, guid: 31d93cf0f344be047a6af13175521316, type: 3}
     worldObjectPrefab: {fileID: 2937703576817829625, guid: 88618f6b46af1d4499f8d961a3befbac,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -85,6 +92,7 @@ MonoBehaviour:
     - {fileID: -131188669, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
     - {fileID: 916876052, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
     - {fileID: -25507351, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
+    itemSelected_SpriteList: []
     worldObjectPrefab: {fileID: 2833017258156135846, guid: 3fa7c29e95361c240985744d936a1edb,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -95,7 +103,7 @@ MonoBehaviour:
     actionAnimation: {fileID: 0}
     isCrafteable: 1
     craftingRequirements:
-    - itemName: 1
+    - itemName: 2
       amount: 1
   - itemName: 4
     categoryName: 4
@@ -107,6 +115,7 @@ MonoBehaviour:
     itemSpriteList:
     - {fileID: -1235552466, guid: a41c728b5482ff044bde4523a5f7f1ba, type: 3}
     - {fileID: 55069962, guid: a41c728b5482ff044bde4523a5f7f1ba, type: 3}
+    itemSelected_SpriteList: []
     worldObjectPrefab: {fileID: 4279313669877795266, guid: dc174aabc84666741a383722e6448947,
       type: 3}
     equippedPrefab: {fileID: 2553926483823156083, guid: da39f2b4d3c87d44cbefd48ae6bd425f,
@@ -135,6 +144,7 @@ MonoBehaviour:
     - {fileID: 46826578, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
     - {fileID: -911672284, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
     - {fileID: -243376414, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
+    itemSelected_SpriteList: []
     worldObjectPrefab: {fileID: 4279313669877795266, guid: b0229b2dc402cd445b34321ee6111672,
       type: 3}
     equippedPrefab: {fileID: 1693644012290509181, guid: 12d8621cfba74e24d95af7901dc50e1f,
@@ -160,6 +170,7 @@ MonoBehaviour:
     itemSpriteList:
     - {fileID: -1957503050, guid: 8f367c240c3818a45ad25c8ef947e1a4, type: 3}
     - {fileID: -142297919, guid: 8f367c240c3818a45ad25c8ef947e1a4, type: 3}
+    itemSelected_SpriteList: []
     worldObjectPrefab: {fileID: 4279313669877795266, guid: 8c70823081d6d8f438d5592c4857fbbf,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -187,6 +198,7 @@ MonoBehaviour:
     - {fileID: 1310005785, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
     - {fileID: 1118895527, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
     - {fileID: -2018920849, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
+    itemSelected_SpriteList: []
     worldObjectPrefab: {fileID: 4279313669877795266, guid: ee59082d7bf50da46b477b1c479ad7bd,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -211,6 +223,7 @@ MonoBehaviour:
     hotbarSprite: {fileID: 21300000, guid: 424946d0e60d4314d8e0e42c00114bc2, type: 3}
     itemSpriteList:
     - {fileID: -34546620, guid: 06521b7ca3b82d74f8e75837a7cd33f5, type: 3}
+    itemSelected_SpriteList: []
     worldObjectPrefab: {fileID: 4279313669877795266, guid: f2bde7fc4196fd44a8fcde2f934623b9,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -236,6 +249,7 @@ MonoBehaviour:
     itemSpriteList:
     - {fileID: -622452534, guid: a94781366b008fb4884c07e70d9b41e2, type: 3}
     - {fileID: 1839007233, guid: a94781366b008fb4884c07e70d9b41e2, type: 3}
+    itemSelected_SpriteList: []
     worldObjectPrefab: {fileID: 4279313669877795266, guid: e35908c9e58908044bb29489eedb6b30,
       type: 3}
     equippedPrefab: {fileID: 2602820642190348203, guid: 97ba8c2de77ab3847952c90f86079d9e,

@@ -395,6 +395,61 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
+    public void SetItemSelectedHighlight_Active(int inventory, int ID, Items itemName, bool activate)
+    {
+        int counter = 0;
+
+        //If it's player inventory
+        if (inventory <= 0)
+        {
+            for (int i = 0; i < itemSlotList_Player.Count; i++)
+            {
+                //Find item of correct ID
+                if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == ID && itemSlotList_Player[i].GetComponent<ItemSlot>().itemName == itemName)
+                {
+                    //If cursor enters ItemSlot
+                    if (activate)
+                    {
+                        itemSlotList_Player[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSelected_SpriteList[counter];
+                    }
+
+                    //If cursor exits ItemSlot
+                    else
+                    {
+                        itemSlotList_Player[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSpriteList[counter];
+                    }
+
+                    counter++;
+                }
+            }
+        }
+
+        //If it's a chest
+        else
+        {
+            for (int i = 0; i < itemSlotList_Chest.Count; i++)
+            {
+                //Find item of correct ID
+                if (itemSlotList_Chest[i].GetComponent<ItemSlot>().itemID == ID && itemSlotList_Chest[i].GetComponent<ItemSlot>().itemName == itemName)
+                {
+                    //If cursor enters ItemSlot
+                    if (activate)
+                    {
+                        itemSlotList_Chest[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSelected_SpriteList[counter];
+                    }
+
+                    //If cursor exits ItemSlot
+                    else
+                    {
+                        itemSlotList_Chest[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSpriteList[counter];
+                    }
+
+                    counter++;
+                }
+            }
+        }
+    }
+
 
     //--------------------
 

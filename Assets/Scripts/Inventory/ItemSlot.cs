@@ -152,6 +152,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         {
             InventoryManager.Instance.SetPlayerItemInfo(itemName, false);
         }
+
+        InventoryManager.Instance.SetItemSelectedHighlight_Active(inventoryIndex, itemID, itemName, true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -164,5 +166,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         {
             InventoryManager.Instance.SetPlayerItemInfo(Items.None, false);
         }
+
+        InventoryManager.Instance.SetItemSelectedHighlight_Active(inventoryIndex, itemID, itemName, false);
     }
 }
