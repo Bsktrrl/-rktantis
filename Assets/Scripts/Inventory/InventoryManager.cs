@@ -282,8 +282,6 @@ public class InventoryManager : Singleton<InventoryManager>
             if (inventories[inventory].itemsInInventory[i].itemName == itemName
                 && inventories[inventory].itemsInInventory[i].itemID == ID)
             {
-                print("100000. Removed Item from Inventory, based on its ID");
-
                 RemoveItemFromHotbarBeforeBeingRemoved(inventories[inventory].itemsInInventory[i], false);
 
                 inventories[inventory].itemsInInventory.RemoveAt(i);
@@ -332,8 +330,6 @@ public class InventoryManager : Singleton<InventoryManager>
                 {
                     if (inventories[inventory].itemsInInventory[i].itemName == itemName)
                     {
-                        print("200000. Removed Item from Inventory, after checking Hotbar");
-
                         //RemoveItemFromHotbarBeforeBeingRemoved(inventories[inventory].itemsInInventory[i]);
 
                         inventories[inventory].itemsInInventory.RemoveAt(i);
@@ -380,8 +376,6 @@ public class InventoryManager : Singleton<InventoryManager>
 
                     if (counter >= hotbarCounter)
                     {
-                        print("2 50000. Removed Item from Inventory, after checking it's not on Hotbar");
-
                         inventories[inventory].itemsInInventory.RemoveAt(i);
 
                         RemoveInventoriesUI();
@@ -409,8 +403,6 @@ public class InventoryManager : Singleton<InventoryManager>
                     {
                         if (inventories[inventory].itemsInInventory[i].itemName == HotbarManager.Instance.hotbarList[j].itemName)
                         {
-                            print("300000. Removed Item from Hotbar");
-
                             RemoveItemFromHotbarBeforeBeingRemoved(inventories[inventory].itemsInInventory[i], true);
 
                             inventories[inventory].itemsInInventory.RemoveAt(i);
@@ -426,123 +418,6 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
         }
-        #endregion
-
-        print("400000. Didn't remove any item");
-
-        #region Old
-        //int tempSlotIndex = 0;
-
-        //if (counter <= 0)
-        //{
-        //    for (int j = 0; j < HotbarManager.Instance.hotbarList.Count; j++)
-        //    {
-        //        if (HotbarManager.Instance.hotbarList[j].itemName == inventories[inventory].itemsInInventory[i].itemName
-        //            && HotbarManager.Instance.hotbarList[j].itemID == inventories[inventory].itemsInInventory[i].itemID)
-        //        {
-        //            RemoveItemFromHotbarBeforeBeingRemoved(inventories[inventory].itemsInInventory[i]);
-
-        //            inventories[inventory].itemsInInventory.RemoveAt(i);
-
-        //            RemoveInventoriesUI();
-        //            PrepareInventoryUI(inventory, true);
-
-        //            SetBuildingRequirement();
-
-        //            return;
-        //        }
-        //    }
-        //}
-        //else
-        //{
-        //    for (int j = 0; j < HotbarManager.Instance.hotbarList.Count; j++)
-        //    {
-        //        if (HotbarManager.Instance.hotbarList[j].itemName == inventories[inventory].itemsInInventory[i].itemName
-        //            && HotbarManager.Instance.hotbarList[j].itemID == inventories[inventory].itemsInInventory[i].itemID)
-        //        {
-        //            RemoveItemFromHotbarBeforeBeingRemoved(inventories[inventory].itemsInInventory[i]);
-
-        //            inventories[inventory].itemsInInventory.RemoveAt(i);
-
-        //            RemoveInventoriesUI();
-        //            PrepareInventoryUI(inventory, true);
-
-        //            SetBuildingRequirement();
-
-        //            return;
-        //        }
-        //    }
-        //}
-
-
-
-
-
-        //else if (inventories[inventory].itemsInInventory[i].itemName == itemName
-        //        && ID <= -1)
-        //{
-        //    int counter = 0;
-
-        //    for (int j = 0; j < HotbarManager.Instance.hotbarList.Count; j++)
-        //    {
-        //        if (HotbarManager.Instance.hotbarList[j].itemName == inventories[inventory].itemsInInventory[i].itemName
-        //            && HotbarManager.Instance.hotbarList[j].itemID == inventories[inventory].itemsInInventory[i].itemID)
-        //        {
-        //            counter++;
-        //        }
-        //    }
-
-
-
-
-
-        //RemoveItemFromHotbarBeforeBeingRemoved(inventories[inventory].itemsInInventory[i]);
-
-        //inventories[inventory].itemsInInventory.RemoveAt(i);
-
-        //RemoveInventoriesUI();
-        //PrepareInventoryUI(inventory, true);
-
-        //SetBuildingRequirement();
-
-        //return;
-
-        //int hotbarItemsCounter = 0;
-
-        //for (int j = 0; j < HotbarManager.Instance.hotbarList.Count; j++)
-        //{
-        //    if (HotbarManager.Instance.hotbarList[j].itemID == inventories[inventory].itemsInInventory[i].itemID)
-        //    {
-        //        tempSlotIndex = j;
-
-        //        hotbarItemsCounter++;
-        //    }
-        //}
-
-        ////If item isn't on the Hotbar, remove it
-        //if (hotbarItemsCounter <= 0)
-        //{
-        //    inventories[inventory].itemsInInventory.RemoveAt(i);
-
-        //    RemoveInventoriesUI();
-        //    PrepareInventoryUI(inventory, true);
-
-        //    SetBuildingRequirement();
-
-        //    return;
-        //}
-        //}
-
-        //RemoveItemFromHotbarBeforeBeingRemoved(inventories[inventory].itemsInInventory[tempSlotIndex]);
-        ////CheckHotbarItemInInventory(inventories[inventory].itemsInInventory[tempSlotIndex].itemID);
-
-        ////If no other item is in inventory, remove the one from the Hotbar
-        //inventories[inventory].itemsInInventory.RemoveAt(tempSlotIndex);
-
-        //RemoveInventoriesUI();
-        //PrepareInventoryUI(inventory, true);
-
-        //SetBuildingRequirement();
         #endregion
     }
 
