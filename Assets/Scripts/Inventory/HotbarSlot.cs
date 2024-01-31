@@ -10,6 +10,7 @@ public class HotbarSlot : MonoBehaviour
 
     public int ID;
     public Items hotbarItemName;
+    public int hotbarItemsID;
 
 
     //--------------------

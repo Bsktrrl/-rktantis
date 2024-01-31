@@ -250,13 +250,13 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
                 {
                     for (int k = 0; k < tempInfo.craftingRequirements[i].amount; k++)
                     {
-                        InventoryManager.Instance.RemoveItemFromInventory(0, tempInfo.craftingRequirements[i].itemName, false);
+                        InventoryManager.Instance.RemoveItemFromInventory(0, tempInfo.craftingRequirements[i].itemName, -1, false);
                     }
                 }
             }
 
             //Update the Hotbar
-            InventoryManager.Instance.CheckHotbarItemInInventory();
+            //InventoryManager.Instance.CheckHotbarItemInInventory();
             InventoryManager.Instance.RemoveInventoriesUI();
         }
         else

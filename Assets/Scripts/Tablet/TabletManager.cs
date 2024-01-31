@@ -558,14 +558,14 @@ public class TabletManager : Singleton<TabletManager>
         {
             if (HotbarManager.Instance.selectedSlot == i)
             {
-                hotbarFrameImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].transform.GetChild(1).GetComponent<Image>().sprite;
+                hotbarFrameImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].hotbar.transform.GetChild(1).GetComponent<Image>().sprite;
             }
             else
             {
-                hotbarFrameImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].GetComponent<Image>().sprite;
+                hotbarFrameImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<Image>().sprite;
             }
             
-            hotbarIconImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].transform.GetChild(0).GetComponent<Image>().sprite;
+            hotbarIconImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].hotbar.transform.GetChild(0).GetComponent<Image>().sprite;
         }
       }
 

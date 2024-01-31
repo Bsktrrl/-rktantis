@@ -9,7 +9,7 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
 
     public void CategoryButton_OnClick()
     {
-        print("Category selected");
+        //print("Category selected");
 
         SoundManager.Instance.PlayChangeCraftingScreen_Clip();
 

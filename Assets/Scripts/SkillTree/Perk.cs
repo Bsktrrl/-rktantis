@@ -145,7 +145,7 @@ public class Perk : MonoBehaviour, IPointerEnterHandler
             {
                 for (int j = 0; j < perkInfo.requirementList[i].amount; j++)
                 {
-                    InventoryManager.Instance.RemoveItemFromInventory(0, perkInfo.requirementList[i].itemName, false);
+                    InventoryManager.Instance.RemoveItemFromInventory(0, perkInfo.requirementList[i].itemName, -1, false);
                 }
             }
 

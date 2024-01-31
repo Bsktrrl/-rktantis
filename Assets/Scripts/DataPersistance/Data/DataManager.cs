@@ -26,7 +26,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
     //Hotbar
     [HideInInspector] public int selectedSlot_Store = new int();
-    public List<Items> hotbarItem_StoreList = new List<Items>();
+    public List<Hotbar> hotbarItem_StoreList = new List<Hotbar>();
 
     //BuidingSystem
     [HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_StoreList = new List<BuildingBlockSaveList>();
