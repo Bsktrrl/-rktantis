@@ -85,6 +85,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 6be07d8d6900a9b428452cf3084449e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_1b2f90eebe954c7b99f4710c67050955_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: fc4c43134846a9f4a8a6da15907a07dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_3562124e55e2481d8d97233c43a3e9b0_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 6be07d8d6900a9b428452cf3084449e6, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -97,11 +101,27 @@ Material:
         m_Texture: {fileID: 2800000, guid: 6be07d8d6900a9b428452cf3084449e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_68d2bcbe95444731b43e7512fdda25ac_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: fc4c43134846a9f4a8a6da15907a07dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_8a96c0c6f1f94166b63e1c14e1df0a2e_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 6be07d8d6900a9b428452cf3084449e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_965d53bfdcd44b30ac1729063fdf0d94_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: fc4c43134846a9f4a8a6da15907a07dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_b2a1b27077fc4893ad9388ae22a70bc3_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: fc4c43134846a9f4a8a6da15907a07dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_cc9722364e21416fbceeec22c9a7b758_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: fc4c43134846a9f4a8a6da15907a07dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ea95c0b85906480e9bafc71ca298492e_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: fc4c43134846a9f4a8a6da15907a07dd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -134,6 +154,8 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _CloudDensity: 1.75
+    - _CloudSize: 2
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -156,6 +178,7 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _WindSpeed: 0.1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
