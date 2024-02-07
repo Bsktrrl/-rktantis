@@ -28,7 +28,7 @@ public class CraftButton : MonoBehaviour
     {
         if (CraftingManager.Instance.totalRequirementMet)
         {
-            print("CraftingButton - TotalRequirementMet = true");
+            //print("CraftingButton - TotalRequirementMet = true");
 
             //Remove items from inventory
             for (int i = 0; i < CraftingManager.Instance.requirementPrefabList.Count; i++)
@@ -38,18 +38,18 @@ public class CraftButton : MonoBehaviour
 
                 for (int j = 0; j < amount; j++)
                 {
-                    InventoryManager.Instance.RemoveItemFromInventory(0, itemName, false);
+                    InventoryManager.Instance.RemoveItemFromInventory(0, itemName, -1, false);
                 }
             }
 
             InventoryManager.Instance.AddItemToInventory(0, CraftingManager.Instance.itemSelected.itemName);
-            InventoryManager.Instance.CheckHotbarItemInInventory();
+            //InventoryManager.Instance.CheckHotbarItemInInventory();
 
             SoundManager.Instance.Playmenu_Crafting_Clip();
         }
         else
         {
-            print("CraftingButton - TotalRequirementMet = false");
+            //print("CraftingButton - TotalRequirementMet = false");
             SoundManager.Instance.Playmenu_CanntoCraft_Clip();
         }
     }

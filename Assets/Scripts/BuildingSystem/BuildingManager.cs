@@ -1533,13 +1533,13 @@ public class BuildingManager : Singleton<BuildingManager>
                     {
                         for (int k = 0; k < tempParent.buildingRequirementList[i].amount; k++)
                         {
-                            InventoryManager.Instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, false);
+                            InventoryManager.Instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, -1, false);
                         }
                     }
                 }
                 
                 //Update the Hotbar
-                InventoryManager.Instance.CheckHotbarItemInInventory();
+                //InventoryManager.Instance.CheckHotbarItemInInventory();
                 InventoryManager.Instance.RemoveInventoriesUI();
 
                 //Reset parameters
@@ -2008,13 +2008,13 @@ public class BuildingManager : Singleton<BuildingManager>
                     {
                         for (int k = 0; k < tempParent.buildingRequirementList[i].amount; k++)
                         {
-                            InventoryManager.Instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, false);
+                            InventoryManager.Instance.RemoveItemFromInventory(0, tempParent.buildingRequirementList[i].itemName, -1, false);
                         }
                     }
                 }
 
                 //Update the Hotbar
-                InventoryManager.Instance.CheckHotbarItemInInventory();
+                //InventoryManager.Instance.CheckHotbarItemInInventory();
                 InventoryManager.Instance.RemoveInventoriesUI();
 
                 //Reset parameters

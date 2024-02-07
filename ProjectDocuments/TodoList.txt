@@ -10,9 +10,26 @@ Todo - Sunday 28.01.24
 
 - Make "RemoveObject" work with Machines/Furniture
 
-- Make sure the "Player Controller" works in the new Scene
+- Add Highlight to single Items hovered/selected in the inventory
 
 
 --------------------
 
+
+- Fix saving/Loading with Hotbar
+- Make it so that each selected Item on the Hotbar has a little icon in top-left of the inventoryItem to display which Hotbar it i assigned to
+
+
+--------------------
+
+
+- Get BuildingBlock to work with temperature under IdealTemperature
+	- Stop Raycast Sun when under idealtemperature
+	- Start raycast up to see if under roof to get the buff
+- Make Night Speed go faster (1.25 or 1.50)
+	- Multiply timer input when during enum Night
+- Make HeatParameter-Display ala. Sarah
+- Make the Tablet Journal
+- Make all items
+- Make all ItemsCategories to Crafting
 

@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using static UnityEditor.Progress;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
@@ -39,6 +43,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public int chestInventoryOpen;
     GameObject itemTemp;
+
 
 
     //--------------------
@@ -228,12 +233,13 @@ public class InventoryManager : Singleton<InventoryManager>
 
         return true;
     }
-    public void RemoveItemFromInventory(int inventory, Items itemName)
+    public void RemoveItemFromInventory(int inventory, Items itemName, int ID)
     {
         //From inventory to World
         for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
         {
-            if (inventories[inventory].itemsInInventory[i].itemName == itemName)
+            if (inventories[inventory].itemsInInventory[i].itemName == itemName
+                && inventories[inventory].itemsInInventory[i].itemID == ID)
             {
                 inventories[inventory].itemsInInventory.RemoveAt(i);
 
@@ -258,46 +264,176 @@ public class InventoryManager : Singleton<InventoryManager>
         //If item is removed from the inventory, update the Hotbar
         if (inventory <= 0)
         {
-            CheckHotbarItemInInventory();
+            CheckHotbarItemInInventory(ID);
         }
 
         SetBuildingRequirement();
 
         SaveData();
     }
-    public void RemoveItemFromInventory(int inventory, Items itemName, bool itemIsMoved)
+    public void RemoveItemFromInventory(int inventory, Items itemName, int ID, bool itemIsMoved)
     {
-        //From inventory to another Inventory or crafting
+        //From inventory to another Inventory, or crafting
 
+        //if item has itemID = ID, find it and remove it
+        #region
         for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
         {
-            if (inventories[inventory].itemsInInventory[i].itemName == itemName)
+            if (inventories[inventory].itemsInInventory[i].itemName == itemName
+                && inventories[inventory].itemsInInventory[i].itemID == ID)
             {
+                RemoveItemFromHotbarBeforeBeingRemoved(inventories[inventory].itemsInInventory[i], false);
+
                 inventories[inventory].itemsInInventory.RemoveAt(i);
 
-                break;
+                RemoveInventoriesUI();
+                PrepareInventoryUI(inventory, true);
+
+                SetBuildingRequirement();
+
+                return;
             }
         }
+        #endregion
 
-        RemoveInventoriesUI();
-        PrepareInventoryUI(inventory, true);
 
-        SetBuildingRequirement();
+        //--------------------
+
+
+        //If itemID <= -1 - Remove THIS if its item type isn't on Hotbar
+        #region
+        if (ID <= -1)
+        {
+            int counter = 0;
+
+            //check if there are any of this item on the Hotbar. If not, remove it
+            for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
+            {
+                if (inventories[inventory].itemsInInventory[i].itemName == itemName)
+                {
+                    for (int j = 0; j < HotbarManager.Instance.hotbarList.Count; j++)
+                    {
+                        if (inventories[inventory].itemsInInventory[i].itemName == HotbarManager.Instance.hotbarList[j].itemName)
+                        {
+                            counter = 100;
+
+                            j = HotbarManager.Instance.hotbarList.Count;
+                            i = inventories[inventory].itemsInInventory.Count;
+                        }
+                    }
+                }
+            }
+
+            if (counter <= 0)
+            {
+                for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
+                {
+                    if (inventories[inventory].itemsInInventory[i].itemName == itemName)
+                    {
+                        //RemoveItemFromHotbarBeforeBeingRemoved(inventories[inventory].itemsInInventory[i]);
+
+                        inventories[inventory].itemsInInventory.RemoveAt(i);
+
+                        RemoveInventoriesUI();
+                        PrepareInventoryUI(inventory, true);
+
+                        SetBuildingRequirement();
+
+                        return;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        //If itemID <= -1 - Remove if THIS spesific item isn't on Hotbar
+        #region
+        if (ID <= -1)
+        {
+            //check if this item isn't on the Hotbar. If not, remove it
+            for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
+            {
+                if (inventories[inventory].itemsInInventory[i].itemName == itemName)
+                {
+                    int counter = 0;
+                    int hotbarCounter = 0;
+
+                    for (int j = 0; j < HotbarManager.Instance.hotbarList.Count; j++)
+                    {
+                        //Count number of item represented on the Hotbar
+                        if (HotbarManager.Instance.hotbarList[j].itemName == inventories[inventory].itemsInInventory[i].itemName)
+                        {
+                            hotbarCounter++;
+                        }
+
+                        //Count if item isn't on the Hotbar
+                        if (inventories[inventory].itemsInInventory[i].itemName == HotbarManager.Instance.hotbarList[j].itemName
+                            && inventories[inventory].itemsInInventory[i].itemID != HotbarManager.Instance.hotbarList[j].itemID)
+                        {
+                            counter++;
+                        }
+                    }
+
+                    if (counter >= hotbarCounter)
+                    {
+                        inventories[inventory].itemsInInventory.RemoveAt(i);
+
+                        RemoveInventoriesUI();
+                        PrepareInventoryUI(inventory, true);
+
+                        SetBuildingRequirement();
+
+                        return;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        //If itemID <= -1 - Remove the last item from the Hotbar
+        #region
+        if (ID <= -1)
+        {
+            //Remove the last item on the Hotbar of this type
+            for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
+            {
+                if (inventories[inventory].itemsInInventory[i].itemName == itemName)
+                {
+                    for (int j = 0; j < HotbarManager.Instance.hotbarList.Count; j++)
+                    {
+                        if (inventories[inventory].itemsInInventory[i].itemName == HotbarManager.Instance.hotbarList[j].itemName)
+                        {
+                            RemoveItemFromHotbarBeforeBeingRemoved(inventories[inventory].itemsInInventory[i], true);
+
+                            inventories[inventory].itemsInInventory.RemoveAt(i);
+
+                            RemoveInventoriesUI();
+                            PrepareInventoryUI(inventory, true);
+
+                            SetBuildingRequirement();
+
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
     }
 
-    public void MoveItemToInventory(int inventory, GameObject obj)
+    public void MoveItemToInventory(int inventory, GameObject obj, int ID)
     {
         //Move item to Player Inventory
         if (inventory <= 0)
         {
-            RemoveItemFromInventory(0, obj.GetComponent<ItemSlot>().itemName, true);
+            RemoveItemFromInventory(0, obj.GetComponent<ItemSlot>().itemName, ID, true);
             AddItemToInventory(chestInventoryOpen, obj, true);
         }
 
         //Move item to Chest Inventory
         else
         {
-            RemoveItemFromInventory(chestInventoryOpen, obj.GetComponent<ItemSlot>().itemName, true);
+            RemoveItemFromInventory(chestInventoryOpen, obj.GetComponent<ItemSlot>().itemName, ID, true);
             AddItemToInventory(0, obj, true);
         }
 
@@ -305,45 +441,99 @@ public class InventoryManager : Singleton<InventoryManager>
         PrepareInventoryUI(0, true);
         PrepareInventoryUI(chestInventoryOpen, true);
 
-        CheckHotbarItemInInventory();
+        CheckHotbarItemInInventory(ID);
 
         //Update the Hand to see if slot is empty
         HotbarManager.Instance.ChangeItemInHand();
     }
 
-    public void CheckHotbarItemInInventory()
+    public void CheckHotbarItemInInventory(int ID)
     {
-        //print("100. CheckHotbarItemInInventory");
-
+        print("1. ID: " + ID);
         for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
         {
-            bool isIncluded = false;
+            bool isInInventory = false;
 
-            //Check if HotbarItem is in the inventory
+            //Check if Hotbar item is in the player inventory
             for (int j = 0; j < inventories[0].itemsInInventory.Count; j++)
             {
-                if (HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName != Items.None
-                    && HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName == inventories[0].itemsInInventory[j].itemName)
+                if (HotbarManager.Instance.hotbarList[i].itemName != Items.None
+                    && HotbarManager.Instance.hotbarList[i].itemName == inventories[0].itemsInInventory[j].itemName
+                    && HotbarManager.Instance.hotbarList[i].itemID == inventories[0].itemsInInventory[j].itemID)
                 {
-                    isIncluded = true;
+                    isInInventory = true;
 
                     break;
                 }
             }
 
             //If HotbarItem isn't in the inventory, remove it from the Hotbar
-            if (!isIncluded)
+            if (!isInInventory)
             {
-                if (HotbarManager.Instance.selectedItem == HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().hotbarItemName)
-                {
-                    HotbarManager.Instance.selectedItem = Items.None;
-                }
+                HotbarManager.Instance.selectedItem = Items.None;
 
-                HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
-                HotbarManager.Instance.hotbarList[i].GetComponent<HotbarSlot>().ResetHotbarItem();
+                HotbarManager.Instance.hotbarList[i].itemName = Items.None;
+                HotbarManager.Instance.hotbarList[i].itemID = -1;
+                HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
+                HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
 
                 //Update the Hand to see if slot is empty
                 HotbarManager.Instance.ChangeItemInHand();
+            }
+        }
+
+        HotbarManager.Instance.SaveData();
+    }
+    public void RemoveItemFromHotbarBeforeBeingRemoved(InventoryItem item, bool reverse)
+    {
+        if (reverse)
+        {
+            for (int i = HotbarManager.Instance.hotbarList.Count - 1; i >= 0; i--)
+            {
+                //Check if HotbarItem is in the player inventory
+                if (HotbarManager.Instance.hotbarList[i].itemName != Items.None
+                    && HotbarManager.Instance.hotbarList[i].itemName == item.itemName
+                    && HotbarManager.Instance.hotbarList[i].itemID == item.itemID)
+                {
+                    HotbarManager.Instance.selectedItem = Items.None;
+
+                    HotbarManager.Instance.hotbarList[i].itemName = Items.None;
+                    HotbarManager.Instance.hotbarList[i].itemID = -1;
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
+
+                    //Update the Hand to see if slot is empty
+                    HotbarManager.Instance.ChangeItemInHand();
+
+                    HotbarManager.Instance.SaveData();
+
+                    return;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
+            {
+                //Check if HotbarItem is in the player inventory
+                if (HotbarManager.Instance.hotbarList[i].itemName != Items.None
+                    && HotbarManager.Instance.hotbarList[i].itemName == item.itemName
+                    && HotbarManager.Instance.hotbarList[i].itemID == item.itemID)
+                {
+                    HotbarManager.Instance.selectedItem = Items.None;
+
+                    HotbarManager.Instance.hotbarList[i].itemName = Items.None;
+                    HotbarManager.Instance.hotbarList[i].itemID = -1;
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
+
+                    //Update the Hand to see if slot is empty
+                    HotbarManager.Instance.ChangeItemInHand();
+
+                    HotbarManager.Instance.SaveData();
+
+                    return;
+                }
             }
         }
     }
@@ -395,6 +585,91 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
+    public void SetItemSelectedHighlight_Active(int inventory, int ID, Items itemName, bool activate)
+    {
+        int itemSizeCounter = 0;
+
+        //If it's player inventory
+        if (inventory <= 0)
+        {
+            for (int i = 0; i < itemSlotList_Player.Count; i++)
+            {
+                //Find item of correct ID
+                if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == ID && itemSlotList_Player[i].GetComponent<ItemSlot>().itemName == itemName
+                    && itemSlotList_Player[i].GetComponent<ItemSlot>().itemName != Items.None)
+                {
+                    //If cursor enters ItemSlot
+                    if (activate)
+                    {
+                        if (itemSizeCounter <= 0)
+                        {
+                            itemSlotList_Player[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSelected_SpriteList[0];
+                        }
+                        else
+                        {
+                            itemSlotList_Player[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSelected_SpriteList[itemSizeCounter];
+                        }
+                    }
+
+                    //If cursor exits ItemSlot
+                    else
+                    {
+                        if (itemSizeCounter <= 0)
+                        {
+                            itemSlotList_Player[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSpriteList[0];
+                        }
+                        else
+                        {
+                            itemSlotList_Player[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSpriteList[itemSizeCounter];
+                        }
+                    }
+
+                    itemSizeCounter++;
+                }
+            }
+        }
+
+        //If it's a chest
+        else
+        {
+            for (int i = 0; i < itemSlotList_Chest.Count; i++)
+            {
+                //Find item of correct ID
+                if (itemSlotList_Chest[i].GetComponent<ItemSlot>().itemID == ID && itemSlotList_Chest[i].GetComponent<ItemSlot>().itemName == itemName
+                    && itemSlotList_Chest[i].GetComponent<ItemSlot>().itemName != Items.None)
+                {
+                    //If cursor enters ItemSlot
+                    if (activate)
+                    {
+                        if (itemSizeCounter <= 0)
+                        {
+                            itemSlotList_Chest[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSelected_SpriteList[0];
+                        }
+                        else
+                        {
+                            itemSlotList_Chest[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSelected_SpriteList[itemSizeCounter];
+                        }
+                    }
+
+                    //If cursor exits ItemSlot
+                    else
+                    {
+                        if (itemSizeCounter <= 0)
+                        {
+                            itemSlotList_Chest[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSpriteList[0];
+                        }
+                        else
+                        {
+                            itemSlotList_Chest[i].GetComponent<Image>().sprite = MainManager.Instance.GetItem(itemName).itemSpriteList[itemSizeCounter];
+                        }
+                    }
+
+                    itemSizeCounter++;
+                }
+            }
+        }
+    }
+
 
     //--------------------
 
@@ -431,6 +706,27 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    public void SelectItemToHotbar(Items itemName, int ID)
+    {
+        //Get selected item
+        //itemSlotList_Player.
+
+        //Mark the item as selected to the hotbar (and add its hotbarNumber on the selected hotbar)
+
+    }
+    public void DeselectItemToHotbar(Items itemName, int ID)
+    {
+        //Get selected item
+
+
+        //Remove the selected HotbarMark from this item
+
+    }
+
+
+    //--------------------
+
+
     public void PrepareInventoryUI(int inventory, bool isMovingItem)
     {
         int inventorySlots = (int)inventories[inventory].inventorySize.x * (int)inventories[inventory].inventorySize.y;
@@ -442,7 +738,7 @@ public class InventoryManager : Singleton<InventoryManager>
             if (inventory <= 0)
             {
                 itemSlotList_Player.Add(Instantiate(itemSlot_Prefab, Vector3.zero, Quaternion.identity) as GameObject);
-                itemSlotList_Player[itemSlotList_Player.Count - 1].transform.parent = TabletManager.Instance.playerInventory_Parent.transform;
+                itemSlotList_Player[itemSlotList_Player.Count - 1].transform.SetParent(TabletManager.Instance.playerInventory_Parent.transform);
                 itemSlotList_Player[itemSlotList_Player.Count - 1].GetComponent<ItemSlot>().inventoryIndex = inventory;
             }
 
@@ -450,7 +746,7 @@ public class InventoryManager : Singleton<InventoryManager>
             else
             {
                 itemSlotList_Chest.Add(Instantiate(itemSlot_Prefab, Vector3.zero, Quaternion.identity) as GameObject);
-                itemSlotList_Chest[itemSlotList_Chest.Count - 1].transform.parent = TabletManager.Instance.chestInventory_Parent.transform;
+                itemSlotList_Chest[itemSlotList_Chest.Count - 1].transform.SetParent(TabletManager.Instance.chestInventory_Parent.transform);
                 itemSlotList_Chest[itemSlotList_Chest.Count - 1].GetComponent<ItemSlot>().inventoryIndex = inventory;
             }
         }
@@ -661,7 +957,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     //If Item was attempted moved into another inventory
                     if (isMovingItem)
                     {
-                        RemoveItemFromInventory(inventory, lastItemToGet, true);
+                        RemoveItemFromInventory(inventory, lastItemToGet, inventories[inventory].itemsInInventory[i].itemID, true);
 
                         if (inventory <= 0)
                         {
@@ -676,7 +972,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     //If Item was attemptd picked up
                     else
                     {
-                        RemoveItemFromInventory(inventory, lastItemToGet);
+                        RemoveItemFromInventory(inventory, lastItemToGet, inventories[inventory].itemsInInventory[i].itemID);
                     }
 
                     break;

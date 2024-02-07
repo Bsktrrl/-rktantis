@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -75,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -87,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -99,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -171,8 +176,8 @@ TextureImporter:
       name: TempGridItem_3x3_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 500
+        x: 1500
+        y: 1000
         width: 500
         height: 500
       alignment: 0
@@ -192,8 +197,8 @@ TextureImporter:
       name: TempGridItem_3x3_4
       rect:
         serializedVersion: 2
-        x: 500
-        y: 500
+        x: 2000
+        y: 1000
         width: 500
         height: 500
       alignment: 0
@@ -213,8 +218,8 @@ TextureImporter:
       name: TempGridItem_3x3_5
       rect:
         serializedVersion: 2
-        x: 1000
-        y: 500
+        x: 2500
+        y: 1000
         width: 500
         height: 500
       alignment: 0
@@ -235,7 +240,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 500
         width: 500
         height: 500
       alignment: 0
@@ -256,7 +261,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 500
-        y: 0
+        y: 500
         width: 500
         height: 500
       alignment: 0
@@ -277,7 +282,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1000
-        y: 0
+        y: 500
         width: 500
         height: 500
       alignment: 0
@@ -293,6 +298,195 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: TempGridItem_3x3_9
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f2fab422314fa045b8dc1f3c166388f
+      internalID: 1971737014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempGridItem_3x3_10
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36c298894f052b64e9ab8d0371e3a91b
+      internalID: 1051284130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempGridItem_3x3_11
+      rect:
+        serializedVersion: 2
+        x: 2500
+        y: 500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 249fc1c328c5127428a960fc23751141
+      internalID: 758338304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempGridItem_3x3_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81866c96f290d2c41924e7c4873b0c67
+      internalID: 1237612938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempGridItem_3x3_13
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2dafc33c5587be4199bcd15c3bc07f9
+      internalID: -38569215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempGridItem_3x3_14
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f07fcbe3eb810f748837370717a3c7cf
+      internalID: -99089556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempGridItem_3x3_15
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5bb7842792e353478d2a785ea6d1cf1
+      internalID: -568579335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempGridItem_3x3_16
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a66778cd7805bc40bb24b315795b6a0
+      internalID: -845829192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempGridItem_3x3_17
+      rect:
+        serializedVersion: 2
+        x: 2500
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f46091d22cc39c4c99cac1bb545e3c4
+      internalID: -430475090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -304,18 +498,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TempGridItem_3x3_7: 916876052
-      TempGridItem_3x3_3: 1618348052
-      TempGridItem_3x3_8: -25507351
-      TempGridItem_3x3_2: -1311007148
       TempGridItem_3x3_0: 2114707314
-      TempGridItem_3x3_5: -841776077
       TempGridItem_3x3_1: -1665722997
-      TempGridItem_3x3_6: -131188669
+      TempGridItem_3x3_10: 1051284130
+      TempGridItem_3x3_11: 758338304
+      TempGridItem_3x3_12: 1237612938
+      TempGridItem_3x3_13: -38569215
+      TempGridItem_3x3_14: -99089556
+      TempGridItem_3x3_15: -568579335
+      TempGridItem_3x3_16: -845829192
+      TempGridItem_3x3_17: -430475090
+      TempGridItem_3x3_2: -1311007148
+      TempGridItem_3x3_3: 1618348052
       TempGridItem_3x3_4: -284258036
-  spritePackingTag: 
+      TempGridItem_3x3_5: -841776077
+      TempGridItem_3x3_6: -131188669
+      TempGridItem_3x3_7: 916876052
+      TempGridItem_3x3_8: -25507351
+      TempGridItem_3x3_9: 1971737014
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

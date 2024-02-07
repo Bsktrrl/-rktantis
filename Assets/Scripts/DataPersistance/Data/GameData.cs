@@ -20,7 +20,7 @@ public class GameData
 
     //Hotbar
     [HideInInspector] public int selectedSlot_Save = new int();
-    public List<Items> hotbarItem_SaveList = new List<Items>();
+    public List<Hotbar> hotbarItem_SaveList = new List<Hotbar>();
 
     //MoveableObjects
     [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_SaveList = new List<MoveableObject_ToSave>();
