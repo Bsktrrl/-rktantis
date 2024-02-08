@@ -1,4 +1,4 @@
-Todo - Sunday 28.01.24
+Todo before thirsday 13. - 5 days left
 
 - Make "Chest_Small" and "Chest_Medium" work when placed in the world (Saving/Loading of new inventories)
 
@@ -9,8 +9,6 @@ Todo - Sunday 28.01.24
 	- Always appear when BuildingHammer is in hand
 
 - Make "RemoveObject" work with Machines/Furniture
-
-- Add Highlight to single Items hovered/selected in the inventory
 
 
 --------------------
@@ -26,8 +24,10 @@ Todo - Sunday 28.01.24
 - Get BuildingBlock to work with temperature under IdealTemperature
 	- Stop Raycast Sun when under idealtemperature
 	- Start raycast up to see if under roof to get the buff
+
 - Make Night Speed go faster (1.25 or 1.50)
 	- Multiply timer input when during enum Night
+
 - Make HeatParameter-Display ala. Sarah
 
 - Make the Tablet Journal
@@ -39,6 +39,10 @@ Todo - Sunday 28.01.24
 - Add WorldObjects to all InventoryItems in the game
 	- Assign the WorldItems to the items in the itemsList_SO
 
-- Fix error with CraftingMenu, where the GridLayoutGroup isnt updated when there are more than 4 items of a given type
+- Make Equippeable items work again
+	- Make only isEquipeable items go to Hotbar when clicked
+	- Add different display for items in the inventory
+		- Equipeable items
+		- Consumeable items
+		- Static items
 
-- Set Requirements/Removement cost on BuildingBlocks

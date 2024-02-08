@@ -97,7 +97,7 @@ public class CraftingManager : Singleton<CraftingManager>
         overviewScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 100);
 
         //Instantiate CategoryButtons
-        for (int i = 1; i < itemCategory_SO.ItemCategoryList.Count; i++)
+        for (int i = 0; i < itemCategory_SO.ItemCategoryList.Count; i++)
         {
             categoryButtonPrefabList.Add(Instantiate(categoryButton_Prefab) as GameObject);
             categoryButtonPrefabList[categoryButtonPrefabList.Count - 1].transform.SetParent(overviewGridLayoutGroup.transform);
@@ -121,7 +121,7 @@ public class CraftingManager : Singleton<CraftingManager>
         categorySelectedName.text = FindActiveCategoryType().categoryName.ToString();
 
         //Reset Panel Size
-        selectionScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(350, 110);
+        selectionScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(380, 110);
 
         //Instantitate InstantiateSubGridLayoutGroup
         UpdateSelectionSubActiveList();
@@ -133,7 +133,7 @@ public class CraftingManager : Singleton<CraftingManager>
         selectionSubActiveList.Clear();
 
         //Build List
-        for (int i = 1; i < itemCategory_SO.ItemCategoryList.Count; i++)
+        for (int i = 0; i < itemCategory_SO.ItemCategoryList.Count; i++)
         {
             if (itemCategory_SO.ItemCategoryList[i].categoryName == activeCategory)
             {
@@ -147,9 +147,9 @@ public class CraftingManager : Singleton<CraftingManager>
         }
 
         //Turn available subCategories on
-        for (int k = 1; k < MainManager.Instance.item_SO.itemList.Count; k++)
+        for (int k = 0; k < MainManager.Instance.item_SO.itemList.Count; k++)
         {
-            for (int i = 1; i < itemCategory_SO.ItemCategoryList.Count; i++)
+            for (int i = 0; i < itemCategory_SO.ItemCategoryList.Count; i++)
             {
                 if (itemCategory_SO.ItemCategoryList[i].categoryName == activeCategory)
                 {
@@ -199,7 +199,7 @@ public class CraftingManager : Singleton<CraftingManager>
                 }
 
                 //Adjust Frame
-                selectionScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 67);
+                selectionScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 60);
             }
         }
     }
@@ -235,6 +235,37 @@ public class CraftingManager : Singleton<CraftingManager>
                     selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().item = MainManager.Instance.item_SO.itemList[j];
                     selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().SetDisplay();
                 }
+            }
+        }
+
+        //Adjust panel size if there are more than 6 items of a subCategory
+        for (int i = 0; i < selectionSubGridLayoutGroupList.Count; i++)
+        {
+            int count = 0;
+
+            for (int j = 0; j < selectionButtonPrefabList.Count; j++)
+            {
+                if (selectionButtonPrefabList[j].GetComponent<SelectionSubButtonPrefab>().item.subCategoryName == selectionSubGridLayoutGroupList[i].GetComponent<SelectionSubPanel>().panelName)
+                {
+                    count++;
+                }
+            }
+
+            if (count < 6)
+            {
+
+            }
+            else if (count < 12)
+            {
+                selectionScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 60);
+            }
+            else if (count < 18)
+            {
+                selectionScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 60);
+            }
+            else if (count < 24)
+            {
+                selectionScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 60);
             }
         }
     }

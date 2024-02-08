@@ -3228,15 +3228,13 @@ MonoBehaviour:
   - {fileID: 8485780545999922535}
   - {fileID: 9159860975924287553}
   - {fileID: 5468385497875828121}
-  buildingRequirementList: []
+  buildingRequirementList:
+  - itemName: 6
+    amount: 1
+  - itemName: 66
+    amount: 1
   removeBuildingRequirementList:
-  - itemName: 1
-    amount: 1
-  - itemName: 2
-    amount: 1
-  - itemName: 3
-    amount: 1
-  - itemName: 9
+  - itemName: 6
     amount: 1
 --- !u!1 &5010806098134141352
 GameObject:

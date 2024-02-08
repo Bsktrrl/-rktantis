@@ -41,13 +41,13 @@ public enum ItemSubCategories
 
     //Materials
     [Description("Raw")][InspectorName("Materials/Raw")] Raw,
-    [Description("BuildingMaterial")][InspectorName("Materials/BuildingMaterial")] BuildingMaterial,
+    [Description("Building Material")][InspectorName("Materials/Building Material")] BuildingMaterial,
 
 
     //PlantMaterials
-    [Description("Liquid")][InspectorName("PlantMaterials/Liquid")] Liquid,
-    [Description("Cloth")][InspectorName("PlantMaterials/Cloth")] Cloth,
-    [Description("Flowers")][InspectorName("PlantMaterials/Flower")] Flower,
+    [Description("Liquid")][InspectorName("Plant Materials/Liquid")] Liquid,
+    [Description("Cloth")][InspectorName("Plant Materials/Cloth")] Cloth,
+    [Description("Flowers")][InspectorName("Plant Materials/Flower")] Flower,
 
 
     //Seeds
@@ -56,9 +56,9 @@ public enum ItemSubCategories
 
 
     //CraftingMaterials
-    [Description("Machine Parts")][InspectorName("CraftingMaterials/Machine Parts")] MachineParts,
-    [Description("Bio")][InspectorName("CraftingMaterials/Bio")] Bio,
-    [Description("Material")][InspectorName("CraftingMaterials/Material")] Material,
+    [Description("Machine Parts")][InspectorName("Crafting Materials/Machine Parts")] MachineParts,
+    [Description("Bio")][InspectorName("Crafting Materials/Bio")] Bio,
+    [Description("Material")][InspectorName("Crafting Materials/Material")] Material,
 
 
     //Tools
