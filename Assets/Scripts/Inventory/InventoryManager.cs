@@ -714,15 +714,12 @@ public class InventoryManager : Singleton<InventoryManager>
                 if (itemSlotList_Player[j].GetComponent<ItemSlot>().itemName == inventories[0].itemsInInventory[i].itemName
                     && itemSlotList_Player[j].GetComponent<ItemSlot>().itemID == inventories[0].itemsInInventory[i].itemID)
                 {
-                    print("1000.");
-
                     //If the selected item is in the Hotbar
                     for (int k = 0; k < HotbarManager.Instance.hotbarList.Count; k++)
                     {
                         if (HotbarManager.Instance.hotbarList[k].itemName == itemSlotList_Player[j].GetComponent<ItemSlot>().itemName
                             && HotbarManager.Instance.hotbarList[k].itemID == itemSlotList_Player[j].GetComponent<ItemSlot>().itemID)
                         {
-                            print("2000.");
                             itemSlotList_Player[j].GetComponent<ItemSlot>().ActivateHotbarInfoToItemSlot(k + 1);
 
                             //Go to the next item in the inventoryList, skipping the rest of the itemSlots for this item

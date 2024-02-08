@@ -16,15 +16,6 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     //--------------------
 
 
-    private void Start()
-    {
-        //hotbarSelectorParent.SetActive(false);
-    }
-
-
-    //--------------------
-
-
     public void OnPointerUp(PointerEventData eventData)
     {
         

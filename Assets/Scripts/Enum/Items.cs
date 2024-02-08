@@ -201,13 +201,13 @@ public enum Items
 
     //Machines
     #region
-    [Description("Crop Plot x1")][InspectorName("Machines/Crop Plot x1")] CropPlot_x1,
-    [Description("Crop Plot x2")][InspectorName("Machines/Crop Plot x2")] CropPlot_x2,
-    [Description("Crop Plot x4")][InspectorName("Machines/Crop Plot x4")] CropPlot_x4,
+    [Description("Small Crop Plot")][InspectorName("Machines/Small Crop Plot")] SmallCropPlot,
+    [Description("Medium Crop Plot")][InspectorName("Machines/Medium Crop Plot")] MediumCropPlot,
+    [Description("Large Crop Plot")][InspectorName("Machines/Large Crop Plot")] LargeCropPlot,
 
-    [Description("Grill x1")][InspectorName("Machines/Grill x1")] Grill_x1,
-    [Description("Grill x2")][InspectorName("Machines/Grill x2")] Grill_x2,
-    [Description("Grill x4")][InspectorName("Machines/Grill x4")] Grill_x4,
+    [Description("Small Grill")][InspectorName("Machines/Small Grill")] SmallGrill,
+    [Description("Medium Grill")][InspectorName("Machines/Medium Grill")] MediumGrill,
+    [Description("Large Grill")][InspectorName("Machines/Large Grill")] LargeGrill,
 
     [Description("Extractor")][InspectorName("Machines/Extractor")] Extractor,
     [Description("Heat Regulator")][InspectorName("Machines/Heat Regulator")] HeatRegulator,
@@ -217,9 +217,9 @@ public enum Items
     [Description("Energy Storage Tank")][InspectorName("Machines/Energy Storage Tank")] EnergyStorageTank,
     [Description("Ghost Repeller")][InspectorName("Machines/Ghost Repeller")] GhostRepeller,
 
-    [Description("Battery x1")][InspectorName("Machines/Battery x1")] Battery_x1,
-    [Description("Battery x2")][InspectorName("Machines/Battery x2")] Battery_x2,
-    [Description("Battery x3")][InspectorName("Machines/Battery x3")] Battery_x3,
+    [Description("Small Battery")][InspectorName("Machines/Small Battery")] SmallBattery,
+    [Description("Medium Battery")][InspectorName("Machines/Medium Battery")] MediumBattery,
+    [Description("Large Battery")][InspectorName("Machines/Large Battery")] LargeBattery,
 
     [Description("Other1")][InspectorName("Machines/Other1")] MA_Other1,
     [Description("Other2")][InspectorName("Machines/Other2")] MA_Other2,

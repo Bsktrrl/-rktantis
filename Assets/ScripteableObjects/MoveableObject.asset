@@ -14,24 +14,352 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveableObjectList:
   - Name: Crafting Table
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 1
-    objectSprite: {fileID: 21300000, guid: 02cc63a93c4b086468ca721826443e9d, type: 3}
-    objectToMove: {fileID: 7136088843378850041, guid: 23a81b18b8aeb8e448bf68be14121ae8,
-      type: 3}
-    craftingRequirements:
-    - itemName: 2
-      amount: 1
-    RemoveCraftingRequirements: []
-  - Name: Small Storage Chest
     moveableObjectType: 2
     furnitureType: 1
     machineType: 0
-    objectSprite: {fileID: 21300000, guid: 47a1672dc06ca93439e0c26accec12d4, type: 3}
+    objectSprite: {fileID: 1245441075, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 7136088843378850041, guid: 23a81b18b8aeb8e448bf68be14121ae8,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 1
+      amount: 4
+    - itemName: 68
+      amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 3
+  - Name: SkillTree Table
+    moveableObjectType: 2
+    furnitureType: 2
+    machineType: 0
+    objectSprite: {fileID: -922280156, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 139275631102618609, guid: eb01aac661b18b64389ac297f2fe7e5e,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 2
+    - itemName: 1
+      amount: 4
+    - itemName: 68
+      amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 3
+  - Name: GhostTank
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 11
+    objectSprite: {fileID: -968311457, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 6696127574697431146, guid: 8bc26cec8c8aabd488024547ebf73f55,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 4
+    - itemName: 68
+      amount: 1
+    - itemName: 5
+      amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 3
+    - itemName: 5
+      amount: 1
+  - Name: Energy Storage Tank
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 12
+    objectSprite: {fileID: 1964361736, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 0}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 4
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 3
+  - Name: Ghost Repeller
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 13
+    objectSprite: {fileID: 40363623, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 7691678261347042717, guid: 815a760ca5110e047ba7dc7986ddaf8c,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 3
+    - itemName: 68
+      amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 2
+  - Name: Extractor
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 7
+    objectSprite: {fileID: -124361089, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 8459850325938242880, guid: 9fb446c887bd09d459a372bf0c8d4b62,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 4
+    - itemName: 68
+      amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 3
+  - Name: Heat Regulator
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 8
+    objectSprite: {fileID: -1295368278, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 1166608564756666444, guid: 832a8dbc01d66b445af9a16f3151fea5,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 4
+    - itemName: 68
+      amount: 2
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 3
+  - Name: Resource Converter
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 10
+    objectSprite: {fileID: 1782163914, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 1462341472873619843, guid: 9a2314747aa2ec84e8fb8f6913f2db61,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 2
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 8
+    - itemName: 68
+      amount: 5
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 3
+  - Name: Blender
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 9
+    objectSprite: {fileID: -1602623267, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 0}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 4
+    - itemName: 68
+      amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 3
+  - Name: Small Crop Plot
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 1
+    objectSprite: {fileID: -285864306, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 4275314147420099132, guid: 5896e64affd0b5d4fbe172d1a545597d,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 2
+    - itemName: 68
+      amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 1
+  - Name: Medium Crop Plot
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 2
+    objectSprite: {fileID: -1542803645, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 4333115439732136680, guid: 5d9f9c4dba00eab43b930a5a74ef8759,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 3
+    - itemName: 68
+      amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 2
+  - Name: Big Crop Plot
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 3
+    objectSprite: {fileID: 685261889, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 1857051026409611558, guid: 5a9d1b27ddceb7040bf758674d93f2f4,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 5
+    - itemName: 68
+      amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 4
+  - Name: Small Grill
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 4
+    objectSprite: {fileID: 37225080, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 4099384838741391481, guid: ff5ecbd78940ed04b91b6b0de70566c7,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 1
+    - itemName: 68
+      amount: 1
+    RemoveCraftingRequirements: []
+  - Name: Medium grill
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 5
+    objectSprite: {fileID: 2086798069, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 0}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 3
+    - itemName: 68
+      amount: 2
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 3
+  - Name: Big Grill
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 6
+    objectSprite: {fileID: -1024762388, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 5239036645969742127, guid: 00b4bb617fcb0c3428f0a88d2da96ec5,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 2
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 5
+    - itemName: 68
+      amount: 3
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 4
+  - Name: Small Battery Charger
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 14
+    objectSprite: {fileID: 1853877765, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 6563888868913054650, guid: 953b249eb23eeff4bbf9cdc9cf43cdea,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 3
+    - itemName: 68
+      amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 2
+  - Name: Medium Battery Charger
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 15
+    objectSprite: {fileID: 1553896230, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 8588478629812196970, guid: 0aa32c293e1673a44a4ff74719071cdc,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 5
+    - itemName: 68
+      amount: 2
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 4
+  - Name: Big Battery Charger
+    moveableObjectType: 3
+    furnitureType: 0
+    machineType: 16
+    objectSprite: {fileID: -704012984, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 9178004706848406452, guid: 001cbcc60eb62274c99933a49a26ec7d,
+      type: 3}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 18
+      amount: 1
+    - itemName: 1
+      amount: 7
+    - itemName: 68
+      amount: 3
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 6
+  - Name: Small Storage Chest
+    moveableObjectType: 2
+    furnitureType: 3
+    machineType: 0
+    objectSprite: {fileID: -1913574161, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     objectToMove: {fileID: 500029343382258194, guid: 66c524b356e5e2941913b722865489c3,
       type: 3}
     craftingRequirements:
+    - itemName: 6
+      amount: 5
     - itemName: 1
       amount: 2
     RemoveCraftingRequirements:
@@ -39,142 +367,56 @@ MonoBehaviour:
       amount: 1
   - Name: Medium Storage Chest
     moveableObjectType: 2
-    furnitureType: 2
+    furnitureType: 4
     machineType: 0
-    objectSprite: {fileID: 21300000, guid: f25937bc1b291984f83c15a1e74b1850, type: 3}
+    objectSprite: {fileID: 551587976, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     objectToMove: {fileID: 4228448781326590327, guid: 48398d00d2f8d3d4880105f84f22f29e,
       type: 3}
     craftingRequirements:
-    - itemName: 1
+    - itemName: 17
       amount: 1
-    - itemName: 2
+    - itemName: 1
+      amount: 5
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 4
+  - Name: Lamp
+    moveableObjectType: 2
+    furnitureType: 5
+    machineType: 0
+    objectSprite: {fileID: -231569863, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 0}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 1
+      amount: 3
+    - itemName: 5
+      amount: 1
+    - itemName: 68
       amount: 1
     RemoveCraftingRequirements:
     - itemName: 1
-      amount: 10
-  - Name: SkillTree Table
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 2
-    objectSprite: {fileID: 21300000, guid: e2eeadaeb715b1040b12bf7fec9c21d1, type: 3}
-    objectToMove: {fileID: 139275631102618609, guid: eb01aac661b18b64389ac297f2fe7e5e,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: GhostTank
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 3
-    objectSprite: {fileID: 21300000, guid: af3c8ff787f167a49a3a0555956eedda, type: 3}
-    objectToMove: {fileID: 6696127574697431146, guid: 8bc26cec8c8aabd488024547ebf73f55,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Extractor
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 4
-    objectSprite: {fileID: 21300000, guid: 47e4ceb0a7b7f7f4386d4326016f1d06, type: 3}
-    objectToMove: {fileID: 8459850325938242880, guid: 9fb446c887bd09d459a372bf0c8d4b62,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Ghost Repeller
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 5
-    objectSprite: {fileID: 21300000, guid: 0a266c2ce798d5f498ab04d2c53c0e2d, type: 3}
-    objectToMove: {fileID: 7691678261347042717, guid: 815a760ca5110e047ba7dc7986ddaf8c,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Heat Regulator
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 6
-    objectSprite: {fileID: 21300000, guid: 809ec756306df464093e2c8173e1fa81, type: 3}
-    objectToMove: {fileID: 1166608564756666444, guid: 832a8dbc01d66b445af9a16f3151fea5,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Resource Converter
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 7
-    objectSprite: {fileID: 21300000, guid: b4a1a38b00a98de4eb64525b4fd70e9a, type: 3}
-    objectToMove: {fileID: 1462341472873619843, guid: 9a2314747aa2ec84e8fb8f6913f2db61,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Small Battery Charger
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 8
-    objectSprite: {fileID: 21300000, guid: 36faab823c356e441a4081c2cde109b9, type: 3}
-    objectToMove: {fileID: 6563888868913054650, guid: 953b249eb23eeff4bbf9cdc9cf43cdea,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Medium Battery Charger
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 9
-    objectSprite: {fileID: 21300000, guid: 5d88b45bede75cd438ca7b189848e5b6, type: 3}
-    objectToMove: {fileID: 8588478629812196970, guid: 0aa32c293e1673a44a4ff74719071cdc,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Big Battery Charger
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 10
-    objectSprite: {fileID: 21300000, guid: 501a641cfc4c9814dab376593d6894a8, type: 3}
-    objectToMove: {fileID: 9178004706848406452, guid: 001cbcc60eb62274c99933a49a26ec7d,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Small Crop Plot
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 11
-    objectSprite: {fileID: 21300000, guid: 5ba9c37c73232a84a8b87cbda18980a7, type: 3}
-    objectToMove: {fileID: 4275314147420099132, guid: 5896e64affd0b5d4fbe172d1a545597d,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Medium Crop Plot
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 12
-    objectSprite: {fileID: 21300000, guid: 0b4b17d87ada03249aba59d0442c5e5f, type: 3}
-    objectToMove: {fileID: 4333115439732136680, guid: 5d9f9c4dba00eab43b930a5a74ef8759,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Big Crop Plot
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 13
-    objectSprite: {fileID: 21300000, guid: 4930442c3e5cd524c9a38bc79ff168b2, type: 3}
-    objectToMove: {fileID: 1857051026409611558, guid: 5a9d1b27ddceb7040bf758674d93f2f4,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Small Grill
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 15
-    objectSprite: {fileID: 21300000, guid: 53f6d4606e029b847aa1f23c464ebde6, type: 3}
-    objectToMove: {fileID: 4099384838741391481, guid: ff5ecbd78940ed04b91b6b0de70566c7,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
-  - Name: Big Grill
-    moveableObjectType: 3
-    furnitureType: 0
-    machineType: 17
-    objectSprite: {fileID: 21300000, guid: 8c345a3ed0fddcf47899ede004e1467f, type: 3}
-    objectToMove: {fileID: 5239036645969742127, guid: 00b4bb617fcb0c3428f0a88d2da96ec5,
-      type: 3}
-    craftingRequirements: []
-    RemoveCraftingRequirements: []
+      amount: 2
+    - itemName: 5
+      amount: 1
+  - Name: Spot Lamp
+    moveableObjectType: 2
+    furnitureType: 6
+    machineType: 0
+    objectSprite: {fileID: -328414422, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 0}
+    craftingRequirements:
+    - itemName: 17
+      amount: 1
+    - itemName: 1
+      amount: 3
+    - itemName: 5
+      amount: 1
+    - itemName: 68
+      amount: 1
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 3
+    - itemName: 5
+      amount: 1

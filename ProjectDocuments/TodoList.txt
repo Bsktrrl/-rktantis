@@ -14,13 +14,6 @@ Todo before thirsday 13. - 5 days left
 --------------------
 
 
-- Fix saving/Loading with Hotbar
-- Make it so that each selected Item on the Hotbar has a little icon in top-left of the inventoryItem to display which Hotbar it i assigned to
-
-
---------------------
-
-
 - Get BuildingBlock to work with temperature under IdealTemperature
 	- Stop Raycast Sun when under idealtemperature
 	- Start raycast up to see if under roof to get the buff
@@ -35,16 +28,16 @@ Todo before thirsday 13. - 5 days left
 - Make Tree Cutting
 
 - Make functionalty with all new plants
+	- Also make cutting functionality for trees with axe
 
 - Add WorldObjects to all InventoryItems in the game
 	- Assign the WorldItems to the items in the itemsList_SO
 
-- Make Equippeable items work again
-	- Make only isEquipeable items go to Hotbar when clicked
-	- Add different display for items in the inventory
-		- Equipeable items
-		- Consumeable items
-		- Static items
+- Make Equippeable items appear/work from the handagain
+- Add different displays for items in the inventory
+	- Equipeable items
+	- Consumeable items
+	- Static items
 
 - Make item be equipped to clothing ("AssignItemToClothingSlot" in "ItemSLot.cs")
 

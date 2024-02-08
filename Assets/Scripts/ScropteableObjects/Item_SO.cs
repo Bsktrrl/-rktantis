@@ -26,18 +26,18 @@ public class Item
     public List<Sprite> itemSpriteList = new List<Sprite>();
     public List<Sprite> itemSelected_SpriteList = new List<Sprite>();
 
-    [Header("Prefabs")]
-    public GameObject worldObjectPrefab;
-    public GameObject equippedPrefab;
-
-    [Header("Durability")]
-    public int Durability;
-
     [Header("Stats")]
     public bool isActive = true;
     public bool isConsumeable;
     public bool isEquipableInHand;
     public bool isEquipableClothes;
+
+    [Header("Durability")]
+    public int Durability;
+
+    [Header("Prefabs")]
+    public GameObject worldObjectPrefab;
+    public GameObject equippedPrefab;
 
     [Header("Animations")]
     public Animation idleAnimation;

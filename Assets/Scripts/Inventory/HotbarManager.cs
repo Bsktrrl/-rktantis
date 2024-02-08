@@ -135,50 +135,50 @@ public class HotbarManager : Singleton<HotbarManager>
         if (selectedItem == Items.None)
         {
             //Remove all equipped models
-            for (int i = 0; i < EuipmentList.Count; i++)
-            {
-                if (EuipmentList[i].GetComponent<EquippedItem>())
-                {
-                    EuipmentList[i].GetComponent<EquippedItem>().DestroyObject();
-                }
-            }
-
+            RemoveAllEquipedModels();
             EuipmentList.Clear();
 
             SaveData();
-
             return;
         }
 
-        //if selected Item doesn't have an "equipped model"
-        if (MainManager.Instance.GetItem(selectedItem).equippedPrefab == null)
+        //if selected Item doesn't have an "equipped model" or is suited for equipment to Hand, leave the Hand empty
+        if (MainManager.Instance.GetItem(selectedItem).equippedPrefab == null
+            || MainManager.Instance.GetItem(selectedItem).isEquipableInHand == false)
         {
             //Remove all equipped models
-            for (int i = 0; i < EuipmentList.Count; i++)
-            {
-                EuipmentList[i].GetComponent<EquippedItem>().DestroyObject();
-            }
-
+            RemoveAllEquipedModels();
             EuipmentList.Clear();
+
+            SaveData();
+            return;
         }
 
-        //if selected Item have an "equipped model"
+        //if selected Item have an "equipped model" AND are suited for equipment to Hand, spawn it in Hand
         else
         {
             //Remove all equipped models
-            for (int i = 0; i < EuipmentList.Count; i++)
+            RemoveAllEquipedModels();
+            EuipmentList.Clear();
+
+            //Add the correct model to the Hand
+            EuipmentList.Add(Instantiate(MainManager.Instance.GetItem(selectedItem).equippedPrefab, MainManager.Instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
+            EuipmentList[EuipmentList.Count - 1].transform.SetLocalPositionAndRotation(MainManager.Instance.GetItem(selectedItem).equippedPrefab.transform.position, Quaternion.identity);
+
+
+            SaveData();
+            return;
+        }
+    }
+    void RemoveAllEquipedModels()
+    {
+        for (int i = 0; i < EuipmentList.Count; i++)
+        {
+            if (EuipmentList[i].GetComponent<EquippedItem>())
             {
                 EuipmentList[i].GetComponent<EquippedItem>().DestroyObject();
             }
-
-            EuipmentList.Clear();
-
-            //Add the correct model to the hand
-            EuipmentList.Add(Instantiate(MainManager.Instance.GetItem(selectedItem).equippedPrefab, MainManager.Instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
-            EuipmentList[EuipmentList.Count - 1].transform.SetLocalPositionAndRotation(MainManager.Instance.GetItem(selectedItem).equippedPrefab.transform.position, Quaternion.identity);
         }
-
-        SaveData();
     }
 
 
