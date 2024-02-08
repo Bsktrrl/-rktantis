@@ -145,9 +145,6 @@ public class HotbarManager : Singleton<HotbarManager>
 
             EuipmentList.Clear();
 
-            //Remove BuildingMenu
-            //BuildingSystemMenu.Instance.buildingSystemMenu.SetActive(false);
-
             SaveData();
 
             return;
@@ -180,9 +177,6 @@ public class HotbarManager : Singleton<HotbarManager>
             EuipmentList.Add(Instantiate(MainManager.Instance.GetItem(selectedItem).equippedPrefab, MainManager.Instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
             EuipmentList[EuipmentList.Count - 1].transform.SetLocalPositionAndRotation(MainManager.Instance.GetItem(selectedItem).equippedPrefab.transform.position, Quaternion.identity);
         }
-
-        //Remove BuildingmMenu
-        //BuildingSystemMenu.Instance.buildingSystemMenu.SetActive(false);
 
         SaveData();
     }

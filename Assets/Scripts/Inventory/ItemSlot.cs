@@ -1,14 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Items itemName = Items.None;
     public int itemID;
     public int inventoryIndex;
+
+    [Header("HotbarSelectInfo")]
+    public GameObject hotbarSelectorParent;
+    public TextMeshProUGUI hotbarIndex_Text;
+
+
+    //--------------------
+
+
+    private void Start()
+    {
+        //hotbarSelectorParent.SetActive(false);
+    }
 
 
     //--------------------
@@ -101,7 +112,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
                     HotbarManager.Instance.SetSelectedItem();
 
-                    InventoryManager.Instance.DeselectItemToHotbar(itemName, itemID);
+                    InventoryManager.Instance.DeselectItemInfoToHotbar(itemName, itemID);
 
                     //Update the Hand to see if slot is empty
                     HotbarManager.Instance.ChangeItemInHand();
@@ -122,7 +133,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarItemID(itemID);
                     HotbarManager.Instance.SetSelectedItem();
 
-                    InventoryManager.Instance.SelectItemToHotbar(itemName, itemID);
+                    InventoryManager.Instance.SelectItemInfoToHotbar(i, itemName, itemID);
 
                     //Update the Hand to see if slot is empty
                     HotbarManager.Instance.ChangeItemInHand();
@@ -152,6 +163,10 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
     }
 
+
+    //--------------------
+
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (inventoryIndex <= 0)
@@ -178,6 +193,20 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         }
 
         InventoryManager.Instance.SetItemSelectedHighlight_Active(inventoryIndex, itemID, itemName, false);
+    }
+
+
+    //--------------------
+
+
+    public void ActivateHotbarInfoToItemSlot(int hotbarIndex)
+    {
+        hotbarIndex_Text.text = hotbarIndex.ToString();
+        hotbarSelectorParent.SetActive(true);
+    }
+    public void DeactivateHotbarInfoToItemSlot()
+    {
+        hotbarSelectorParent.SetActive(false);
     }
 
 

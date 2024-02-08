@@ -51,9 +51,6 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void Start()
     {
-        //PlayerButtonManager.OpenPlayerInventory_isPressedDown += OpenPlayerInventory;
-        //PlayerButtonManager.ClosePlayerInventory_isPressedDown += ClosePlayerInventory;
-
         TabletManager.Instance.playerInventory_Parent.SetActive(false);
         TabletManager.Instance.chestInventory_Parent.SetActive(false);
         playerInventory_Fake_Parent.SetActive(false);
@@ -706,21 +703,73 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
-    public void SelectItemToHotbar(Items itemName, int ID)
+    public void SelectItemInfoToHotbar()
     {
-        //Get selected item
-        //itemSlotList_Player.
+        //Assign HotbarInfo to the correct ItemSlot
+        for (int i = 0; i < inventories[0].itemsInInventory.Count; i++)
+        {
+            for (int j = 0; j < itemSlotList_Player.Count; j++)
+            {
+                //Find relevant item
+                if (itemSlotList_Player[j].GetComponent<ItemSlot>().itemName == inventories[0].itemsInInventory[i].itemName
+                    && itemSlotList_Player[j].GetComponent<ItemSlot>().itemID == inventories[0].itemsInInventory[i].itemID)
+                {
+                    print("1000.");
 
-        //Mark the item as selected to the hotbar (and add its hotbarNumber on the selected hotbar)
+                    //If the selected item is in the Hotbar
+                    for (int k = 0; k < HotbarManager.Instance.hotbarList.Count; k++)
+                    {
+                        if (HotbarManager.Instance.hotbarList[k].itemName == itemSlotList_Player[j].GetComponent<ItemSlot>().itemName
+                            && HotbarManager.Instance.hotbarList[k].itemID == itemSlotList_Player[j].GetComponent<ItemSlot>().itemID)
+                        {
+                            print("2000.");
+                            itemSlotList_Player[j].GetComponent<ItemSlot>().ActivateHotbarInfoToItemSlot(k + 1);
 
+                            //Go to the next item in the inventoryList, skipping the rest of the itemSlots for this item
+                            j = itemSlotList_Player.Count;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
     }
-    public void DeselectItemToHotbar(Items itemName, int ID)
+    public void SelectItemInfoToHotbar(int hotbarSlot, Items itemName, int ID)
     {
-        //Get selected item
+        //Assign HotbarInfo to the correct ItemSlot
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemName == itemName
+                && itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == ID)
+            {
+                itemSlotList_Player[i].GetComponent<ItemSlot>().ActivateHotbarInfoToItemSlot(hotbarSlot + 1);
 
+                return;
+            }
+        }
+    }
+    public void DeselectItemInfoToHotbar()
+    {
+        //Hide HotbarInfo from the correct ItemSlot
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            itemSlotList_Player[i].GetComponent<ItemSlot>().DeactivateHotbarInfoToItemSlot();
+        }
+    }
+    public void DeselectItemInfoToHotbar(Items itemName, int ID)
+    {
+        //Hide HotbarInfo from the correct ItemSlot
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemName == itemName
+                && itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == ID)
+            {
+                itemSlotList_Player[i].GetComponent<ItemSlot>().DeactivateHotbarInfoToItemSlot();
 
-        //Remove the selected HotbarMark from this item
-
+                return;
+            }
+        }
     }
 
 
@@ -1021,15 +1070,8 @@ public class InventoryManager : Singleton<InventoryManager>
     #region Open/Close Inventory Menu
     public void OpenPlayerInventory()
     {
-        if (inventoryIsOpen)
+        if (!inventoryIsOpen)
         {
-            //ClosePlayerInventory();
-        }
-        else
-        {
-            //Cursor.lockState = CursorLockMode.None;
-            //MainManager.Instance.menuStates = MenuStates.InventoryMenu;
-
             PrepareInventoryUI(0, false); //Prepare PLAYER Inventory
 
             TabletManager.Instance.playerInventory_Parent.GetComponent<RectTransform>().sizeDelta = inventories[0].inventorySize * cellsize;
@@ -1039,6 +1081,9 @@ public class InventoryManager : Singleton<InventoryManager>
             playerInventory_Fake_Parent.GetComponent<RectTransform>().sizeDelta = inventories[0].inventorySize * cellsize;
             playerInventory_Fake_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(cellsize, cellsize);
             playerInventory_Fake_Parent.SetActive(true);
+
+            //Set HotbarInfo on inventoryItems
+            SelectItemInfoToHotbar();
 
             inventoryIsOpen = true;
         }
@@ -1054,6 +1099,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
         //Cursor.lockState = CursorLockMode.Locked;
         //MainManager.Instance.menuStates = MenuStates.None;
+
+        //Hide HotbarInfo on inventoryItems
+        DeselectItemInfoToHotbar();
 
         inventoryIsOpen = false;
     }

@@ -116,15 +116,15 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         }
 
         //QuickSlots
-        else if (Input.GetKey(KeyCode.Alpha1) && MainManager.Instance.menuStates == MenuStates.None)
+        else if (Input.GetKey(KeyCode.Alpha1) && MainManager.Instance.menuStates != MenuStates.MoveableObjectMenu && MainManager.Instance.menuStates != MenuStates.SkillTreeMenu)
             isPressed_1?.Invoke();
-        else if (Input.GetKey(KeyCode.Alpha2) && MainManager.Instance.menuStates == MenuStates.None)
+        else if (Input.GetKey(KeyCode.Alpha2) && MainManager.Instance.menuStates != MenuStates.MoveableObjectMenu && MainManager.Instance.menuStates != MenuStates.SkillTreeMenu)
             isPressed_2?.Invoke();
-        else if (Input.GetKey(KeyCode.Alpha3) && MainManager.Instance.menuStates == MenuStates.None)
+        else if (Input.GetKey(KeyCode.Alpha3) && MainManager.Instance.menuStates != MenuStates.MoveableObjectMenu && MainManager.Instance.menuStates != MenuStates.SkillTreeMenu)
             isPressed_3?.Invoke();
-        else if (Input.GetKey(KeyCode.Alpha4) && MainManager.Instance.menuStates == MenuStates.None)
+        else if (Input.GetKey(KeyCode.Alpha4) && MainManager.Instance.menuStates != MenuStates.MoveableObjectMenu && MainManager.Instance.menuStates != MenuStates.SkillTreeMenu)
             isPressed_4?.Invoke();
-        else if (Input.GetKey(KeyCode.Alpha5) && MainManager.Instance.menuStates == MenuStates.None)
+        else if (Input.GetKey(KeyCode.Alpha5) && MainManager.Instance.menuStates != MenuStates.MoveableObjectMenu && MainManager.Instance.menuStates != MenuStates.SkillTreeMenu)
             isPressed_5?.Invoke();
         #endregion
 
