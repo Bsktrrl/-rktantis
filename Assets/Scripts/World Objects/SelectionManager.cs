@@ -60,18 +60,18 @@ public class SelectionManager : Singleton<SelectionManager>
                     if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Pickup)
                     {
                         //Set correct UI-info for Pickup to be displayed
-                        interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
+                        interaction_text.text = SpaceTextConverting.Instance.SetText(selecedObject.GetComponent<InteractableObject>().itemName.ToString());
                         interaction_Info_UI.SetActive(true);
                     }
                     else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Inventory)
                     {
                         //Set correct UI-info for Inventory/Chest to be displayed
-                        interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
+                        interaction_text.text = SpaceTextConverting.Instance.SetText(selecedObject.GetComponent<InteractableObject>().itemName.ToString());
                     }
                     else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.CraftingTable)
                     {
                         //Set correct UI-info for Machine to be displayed
-                        interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
+                        interaction_text.text = SpaceTextConverting.Instance.SetText(selecedObject.GetComponent<InteractableObject>().itemName.ToString());
                         interaction_Info_UI.SetActive(true);
                     }
 

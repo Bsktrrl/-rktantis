@@ -98,7 +98,6 @@ public class HotbarManager : Singleton<HotbarManager>
             Hotbar hotbarTemp = new Hotbar();
             hotbarTemp.itemName = hotbarList[i].itemName;
             hotbarTemp.itemID = hotbarList[i].itemID;
-            print("1000. hotbarList[i].itemName: " + hotbarList[i].itemName);
 
             if (hotbarTemp.itemID <= 0)
             {
@@ -107,7 +106,6 @@ public class HotbarManager : Singleton<HotbarManager>
             else
             { 
                 hotbarTemp.itemID = hotbarList[i].itemID;
-                print("2000. hotbarList[i].itemID: " + hotbarList[i].itemID);
             }
 
             //Safty Check for empty slot

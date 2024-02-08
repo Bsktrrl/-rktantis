@@ -2319,7 +2319,7 @@ public class BuildingManager : Singleton<BuildingManager>
                 && buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == blockParent.buildingMaterial)
             {
                 buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().parent.GetComponent<Image>().sprite;
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial + " " + buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial.ToString()) + " " + SpaceTextConverting.Instance.SetText(buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType.ToString()) /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
 
                 break;
             }
@@ -2395,11 +2395,11 @@ public class BuildingManager : Singleton<BuildingManager>
 
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
         {
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObject.machineType.ToString();
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(moveableObject.machineType.ToString());
         }
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObject.furnitureType.ToString();
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(moveableObject.furnitureType.ToString());
         }
         #endregion
 
@@ -2458,7 +2458,7 @@ public class BuildingManager : Singleton<BuildingManager>
                 && buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == blockParent.buildingMaterial)
             {
                 buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = buildingBlock_UIList[i].GetComponentInChildren<Image>().sprite;
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial + " " + buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial.ToString()) + " " + SpaceTextConverting.Instance.SetText(buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType.ToString())  /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
 
                 break;
             }
@@ -2505,11 +2505,11 @@ public class BuildingManager : Singleton<BuildingManager>
 
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
         {
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObjectInfo.machineType.ToString();
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(moveableObjectInfo.machineType.ToString());
         }
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObjectInfo.furnitureType.ToString();
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(moveableObjectInfo.furnitureType.ToString());
         }
         #endregion
 

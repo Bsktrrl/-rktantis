@@ -562,9 +562,9 @@ public class InventoryManager : Singleton<InventoryManager>
                 player_ItemName_Display.text = "";
                 player_ItemDescription_Display.text = "";
             }
-            else
+            else 
             {
-                player_ItemName_Display.text = itemName.ToString();
+                player_ItemName_Display.text = SpaceTextConverting.Instance.SetText(itemName.ToString());
                 player_ItemDescription_Display.text = MainManager.Instance.GetItem(itemName).itemDescription;
             }
         }
@@ -579,7 +579,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
             else
             {
-                chest_ItemName_Display.text = itemName.ToString();
+                chest_ItemName_Display.text = SpaceTextConverting.Instance.SetText(itemName.ToString());
                 chest_ItemDescription_Display.text = MainManager.Instance.GetItem(itemName).itemDescription;
             }
         }

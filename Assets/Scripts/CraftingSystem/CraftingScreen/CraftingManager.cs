@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class CraftingManager : Singleton<CraftingManager>
 {
@@ -118,7 +119,7 @@ public class CraftingManager : Singleton<CraftingManager>
     {
         //CategoryDisplay
         categorySelectedImage.sprite = FindActiveCategoryType().categorySprite;
-        categorySelectedName.text = FindActiveCategoryType().categoryName.ToString();
+        categorySelectedName.text = SpaceTextConverting.Instance.SetText(FindActiveCategoryType().categoryName.ToString());
 
         //Reset Panel Size
         selectionScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(380, 110);
@@ -226,6 +227,8 @@ public class CraftingManager : Singleton<CraftingManager>
             for (int j = 0; j < MainManager.Instance.item_SO.itemList.Count; j++)
             {
                 if (MainManager.Instance.item_SO.itemList[j].isActive
+                    && MainManager.Instance.item_SO.itemList[j].isCrafteable
+                    && MainManager.Instance.item_SO.itemList[j].craftingRequirements.Count > 0
                     && MainManager.Instance.item_SO.itemList[j].categoryName == activeCategory
                     && MainManager.Instance.item_SO.itemList[j].subCategoryName == selectionSubGridLayoutGroupList[i].GetComponent<SelectionSubPanel>().panelName)
                 {
@@ -285,7 +288,7 @@ public class CraftingManager : Singleton<CraftingManager>
         craftingScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(270, 220);
 
         categoryCraftingImage.sprite = item.hotbarSprite;
-        categoryCraftingName.text = item.itemName.ToString();
+        categoryCraftingName.text = SpaceTextConverting.Instance.SetText(item.itemName.ToString());
         categoryCraftingDescription.text = item.itemDescription;
 
         InstantiateCraftingRequirementPrefabs(item);
