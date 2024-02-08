@@ -129,7 +129,9 @@ public class BuildingManager : Singleton<BuildingManager>
 
     private void Update()
     {
-        if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.BuildingHammer)
+        if ((Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer)
+            || (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer)
+            || (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer))
         {
             RaycastSetup_Hammer();
 
@@ -168,7 +170,9 @@ public class BuildingManager : Singleton<BuildingManager>
                 }
             }
         }
-        else if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.Axe)
+        else if ((Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.WoodAxe)
+            || (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.StoneAxe)
+            || (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.CryoniteAxe))
         {
             RaycastSetup_Axe();
 
@@ -250,7 +254,9 @@ public class BuildingManager : Singleton<BuildingManager>
         #region
         SetBuildingRequirements(GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), buildingRequirement_Parent);
 
-        if (HotbarManager.Instance.selectedItem == Items.BuildingHammer)
+        if (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer
+            || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer
+            || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
         {
             buildingRequirement_Parent.SetActive(true);
             BuildingHammer_isActive = true;

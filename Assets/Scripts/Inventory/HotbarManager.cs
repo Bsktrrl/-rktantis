@@ -65,7 +65,9 @@ public class HotbarManager : Singleton<HotbarManager>
 
         ChangeItemInHand();
 
-        if (hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName == Items.BuildingHammer)
+        if (hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName == Items.WoodBuildingHammer
+            || hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName == Items.StoneBuildingHammer
+            || hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName == Items.CryoniteBuildingHammer)
         {
             BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
             BuildingManager.Instance.buildingRequirement_Parent.SetActive(true);

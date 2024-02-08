@@ -150,8 +150,9 @@ MonoBehaviour:
   canBePlaced: 0
   isSelectedForMovement: 0
   enoughItemsToBuild: 0
-  furnitureType: 1
+  furnitureType: 3
   machineType: 0
+  meshRenderer: {fileID: 0}
 --- !u!114 &6889509816970042223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInRange: 0
-  itemName: 6
+  itemName: 151
   interacteableType: 2
-  isMachine: 1
   inventoryIndex: 0

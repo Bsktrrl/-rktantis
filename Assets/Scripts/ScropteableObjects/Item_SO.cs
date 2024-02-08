@@ -30,17 +30,21 @@ public class Item
     public GameObject worldObjectPrefab;
     public GameObject equippedPrefab;
 
+    [Header("Durability")]
+    public int Durability;
+
     [Header("Stats")]
-    public bool isActive;
-    public bool isEquipable;
-    public int HP;
+    public bool isActive = true;
+    public bool isConsumeable;
+    public bool isEquipableInHand;
+    public bool isEquipableClothes;
 
     [Header("Animations")]
     public Animation idleAnimation;
     public Animation actionAnimation;
 
     [Header("Crafting")]
-    public bool isCrafteable = false;
+    public bool isCrafteable;
     public List<CraftingRequirements> craftingRequirements = new List<CraftingRequirements>();
 }
 
