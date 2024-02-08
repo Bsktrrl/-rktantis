@@ -48,9 +48,13 @@ public class MainManager : Singleton<MainManager>
     void UpdateGameStates()
     {
         //Set to Building
-        if (GetItem(HotbarManager.Instance.selectedItem).subCategoryName == ItemSubCategories.BuildingHammer)
+
+        if(HotbarManager.Instance.selectedItem != Items.None)
         {
-            gameStates = GameStates.Building;
+            if (GetItem(HotbarManager.Instance.selectedItem).subCategoryName == ItemSubCategories.BuildingHammer)
+            {
+                gameStates = GameStates.Building;
+            }
         }
 
         //Set to None
