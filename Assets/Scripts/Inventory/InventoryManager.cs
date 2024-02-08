@@ -474,7 +474,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
                 HotbarManager.Instance.hotbarList[i].itemName = Items.None;
                 HotbarManager.Instance.hotbarList[i].itemID = -1;
-                HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
+                HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
                 HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
 
                 //Update the Hand to see if slot is empty
@@ -499,7 +499,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
                     HotbarManager.Instance.hotbarList[i].itemName = Items.None;
                     HotbarManager.Instance.hotbarList[i].itemID = -1;
-                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
 
                     //Update the Hand to see if slot is empty
@@ -524,7 +524,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
                     HotbarManager.Instance.hotbarList[i].itemName = Items.None;
                     HotbarManager.Instance.hotbarList[i].itemID = -1;
-                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
 
                     //Update the Hand to see if slot is empty

@@ -46,16 +46,23 @@ public class HotbarManager : Singleton<HotbarManager>
 
         //Setup each HotbarSlot based on saved data
         #region
+
+        List<Hotbar> hotbarTemp = new List<Hotbar>();
+        hotbarTemp = DataManager.Instance.hotbarItem_StoreList;
+
         for (int i = 0; i < hotbarList.Count; i++)
         {
-            if (DataManager.Instance.hotbarItem_StoreList.Count == hotbarList.Count)
+            if (hotbarTemp.Count == hotbarList.Count)
             {
-                hotbarList[i].itemName = DataManager.Instance.hotbarItem_StoreList[i].itemName;
+                //Set Name
+                hotbarList[i].itemName = hotbarTemp[i].itemName;
                 hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName = hotbarList[i].itemName;
 
-                hotbarList[i].itemID = DataManager.Instance.hotbarItem_StoreList[i].itemID;
+                //Set ID
+                hotbarList[i].itemID = hotbarTemp[i].itemID;
                 hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemsID = hotbarList[i].itemID;
 
+                //Set Image
                 hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotImage();
             }
         }
@@ -65,6 +72,7 @@ public class HotbarManager : Singleton<HotbarManager>
 
         ChangeItemInHand();
 
+        //If a BuildingHammer is selected
         if (hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName == Items.WoodBuildingHammer
             || hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName == Items.StoneBuildingHammer
             || hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName == Items.CryoniteBuildingHammer)
@@ -72,25 +80,34 @@ public class HotbarManager : Singleton<HotbarManager>
             BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
             BuildingManager.Instance.buildingRequirement_Parent.SetActive(true);
         }
+        else
+        {
+            BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
+        }
         #endregion
     }
     public void SaveData()
     {
+        //Save Selected Slot
         DataManager.Instance.selectedSlot_Store = selectedSlot;
 
+        //Save Hotbar Items
         DataManager.Instance.hotbarItem_StoreList.Clear();
         for (int i = 0; i < hotbarList.Count; i++)
         {
             Hotbar hotbarTemp = new Hotbar();
             hotbarTemp.itemName = hotbarList[i].itemName;
+            hotbarTemp.itemID = hotbarList[i].itemID;
+            print("1000. hotbarList[i].itemName: " + hotbarList[i].itemName);
 
             if (hotbarTemp.itemID <= 0)
             {
                 hotbarTemp.itemID = -1;
             }
             else
-            {
+            { 
                 hotbarTemp.itemID = hotbarList[i].itemID;
+                print("2000. hotbarList[i].itemID: " + hotbarList[i].itemID);
             }
 
             //Safty Check for empty slot
@@ -104,31 +121,7 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     public void SaveData(ref GameData gameData)
     {
-        DataManager.Instance.selectedSlot_Store = selectedSlot;
-
-        DataManager.Instance.hotbarItem_StoreList.Clear();
-        for (int i = 0; i < hotbarList.Count; i++)
-        {
-            Hotbar hotbarTemp = new Hotbar();
-            hotbarTemp.itemName = hotbarList[i].itemName;
-
-            if (hotbarTemp.itemID <= 0)
-            {
-                hotbarTemp.itemID = -1;
-            }
-            else
-            {
-                hotbarTemp.itemID = hotbarList[i].itemID;
-            }
-
-            //Safty Check for empty slot
-            if (hotbarTemp.itemID <= -1)
-            {
-                hotbarTemp.itemName = Items.None;
-            }
-
-            DataManager.Instance.hotbarItem_StoreList.Add(hotbarTemp);
-        }
+        SaveData();
 
         print("Save_Hotbar");
     }

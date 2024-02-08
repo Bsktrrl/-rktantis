@@ -38,14 +38,15 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                     //Check if item is already on the Hotbar, to remove it
                     for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
                     {
-                        if (HotbarManager.Instance.hotbarList[i].itemName != Items.None
-                            && HotbarManager.Instance.hotbarList[i].itemName == itemName
-                            && HotbarManager.Instance.hotbarList[i].itemID == itemID)
+                        if (HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName != Items.None
+                            && HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName == itemName
+                            && HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemsID == itemID)
                         {
-                            HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName = Items.None;
-                            HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
+                            HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
+
                             HotbarManager.Instance.hotbarList[i].itemName = Items.None;
                             HotbarManager.Instance.hotbarList[i].itemID = -1;
+
                             HotbarManager.Instance.SetSelectedItem();
 
                             InventoryManager.Instance.DeselectItemToHotbar(itemName, itemID);
@@ -66,6 +67,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                             HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotImage();
                             HotbarManager.Instance.hotbarList[i].itemName = itemName;
                             HotbarManager.Instance.hotbarList[i].itemID = itemID;
+                            HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarItemID(itemID);
                             HotbarManager.Instance.SetSelectedItem();
 
                             InventoryManager.Instance.SelectItemToHotbar(itemName, itemID);
@@ -113,7 +115,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                             && HotbarManager.Instance.hotbarList[i].itemName == itemName)
                         {
                             HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName = Items.None;
-                            HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
+                            HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
                             HotbarManager.Instance.hotbarList[i].itemName = Items.None;
                             HotbarManager.Instance.hotbarList[i].itemID = -1;
                             HotbarManager.Instance.SetSelectedItem();

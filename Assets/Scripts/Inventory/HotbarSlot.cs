@@ -8,7 +8,6 @@ public class HotbarSlot : MonoBehaviour
     [SerializeField] Image image;
     [SerializeField] Image selectedImage;
 
-    public int ID;
     public Items hotbarItemName;
     public int hotbarItemsID;
 
@@ -23,9 +22,19 @@ public class HotbarSlot : MonoBehaviour
             image.sprite = MainManager.Instance.GetItem(hotbarItemName).hotbarSprite;
         }
     }
-    public void RemoveHotbarSlotImage()
+    public void SetHotbarItemID(int id)
     {
-        image.sprite = MainManager.Instance.GetItem(0).hotbarSprite;
+        hotbarItemsID = id;
+    }
+
+    public void RemoveItemFromHotbar()
+    {
+        if (hotbarItemName != Items.None)
+        {
+            image.sprite = MainManager.Instance.GetItem(0).hotbarSprite;
+            hotbarItemName = Items.None;
+            hotbarItemsID = 0;
+        }
     }
 
     public void ResetHotbarItem()
