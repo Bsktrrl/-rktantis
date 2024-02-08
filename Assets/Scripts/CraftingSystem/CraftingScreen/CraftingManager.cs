@@ -49,6 +49,7 @@ public class CraftingManager : Singleton<CraftingManager>
     [Header("Other")]
     public ItemCategories activeCategory;
     public Item itemSelected;
+    public GameObject activeItemToCraft;
     #endregion
 
 
@@ -67,7 +68,7 @@ public class CraftingManager : Singleton<CraftingManager>
         SetupItemCategoryList();
 
         //Set the first useable Category in the itemCategory_SO.ItemCategoryList to be active by default
-        activeCategory = itemCategory_SO.ItemCategoryList[1].categoryName;
+        activeCategory = itemCategory_SO.ItemCategoryList[0].categoryName;
         SetupSelectionScreen();
     }
     private void Update()
@@ -91,7 +92,7 @@ public class CraftingManager : Singleton<CraftingManager>
         //Destroy all Children of overviewGridLayoutGroup to prepare for reset
         while (overviewGridLayoutGroup.transform.childCount > 0)
         {
-            DestroyImmediate(overviewGridLayoutGroup.transform.GetChild(0).gameObject);
+            overviewGridLayoutGroup.transform.GetChild(0).GetComponent<CategoryButton>().OnDestroyCategoryObject();
         }
 
         //Reset Panel Size
@@ -111,6 +112,18 @@ public class CraftingManager : Singleton<CraftingManager>
         }
 
         overviewScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(5, 0);
+
+        //Change frame on the selected Category
+        for (int i = 0; i < categoryButtonPrefabList.Count; i++)
+        {
+            if (categoryButtonPrefabList[i].GetComponent<CategoryButton>().categoryType == activeCategory)
+            {
+                //Set Frame Orange
+                categoryButtonPrefabList[i].GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Passive;
+
+                break;
+            }
+        }
     }
 
 
@@ -206,6 +219,10 @@ public class CraftingManager : Singleton<CraftingManager>
     }
     void InstantiateSelectionButton_Prefab()
     {
+        //for (int i = selectionButtonPrefabList.Count - 1; i >= 0; i--)
+        //{
+        //    selectionButtonPrefabList[i].transform.GetChild(i).GetComponent<SelectionSubButtonPrefab>().OnDestroySubCategoryObject();
+        //}
         selectionButtonPrefabList.Clear();
 
         int ItemCategoryListIndex = 0;
@@ -399,6 +416,12 @@ public class CraftingManager : Singleton<CraftingManager>
         for (int i = 0; i < selectionSubGridLayoutGroupList.Count; i++)
         {
             selectionSubGridLayoutGroupList[i].GetComponent<RectTransform>().rotation = Quaternion.identity;
+        }
+
+        //Set the Frame of the Active Craftable item to orange 
+        if(activeItemToCraft != null)
+        {
+            activeItemToCraft.GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Passive;
         }
     }
     public void CloseCraftingScreen()

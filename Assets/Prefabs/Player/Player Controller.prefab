@@ -12714,7 +12714,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 3663053275658301492}
   selectedImage: {fileID: 514924930124915216}
-  ID: 5
   hotbarItemName: 0
   hotbarItemsID: 0
 --- !u!1 &2751401989572006546
@@ -18849,7 +18848,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 3675492947096459723}
   selectedImage: {fileID: 0}
-  ID: 4
   hotbarItemName: 0
   hotbarItemsID: 0
 --- !u!1 &3887338598867083444
@@ -21402,7 +21400,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1735714938196726708}
   selectedImage: {fileID: 8150068154919775656}
-  ID: 1
   hotbarItemName: 0
   hotbarItemsID: 0
 --- !u!1 &4334637171731182037
@@ -23254,6 +23251,7 @@ MonoBehaviour:
     actionAnimation: {fileID: 0}
     isCrafteable: 0
     craftingRequirements: []
+  activeItemToCraft: {fileID: 0}
 --- !u!1 &4687060046151735845
 GameObject:
   m_ObjectHideFlags: 0
@@ -27898,7 +27896,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 3568898365257401193}
   selectedImage: {fileID: 7917263559174382587}
-  ID: 4
   hotbarItemName: 0
   hotbarItemsID: 0
 --- !u!1 &5688164207203477984
@@ -28716,6 +28713,8 @@ MonoBehaviour:
   - {fileID: 471958505505139135}
   - {fileID: 3855838661930646502}
   - {fileID: 1577383612080852258}
+  requirementMetColor: {r: 1, g: 1, b: 1, a: 0}
+  requirementNOTMetColor: {r: 0.9411765, g: 0.5176471, b: 0.31764707, a: 0.74509805}
 --- !u!1 &5852061909310452731
 GameObject:
   m_ObjectHideFlags: 0
@@ -29198,7 +29197,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 7800403424520949461}
   selectedImage: {fileID: 0}
-  ID: 5
   hotbarItemName: 0
   hotbarItemsID: 0
 --- !u!1 &5947247487675080515
@@ -32184,7 +32182,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 7286714671035184249}
   selectedImage: {fileID: 0}
-  ID: 1
   hotbarItemName: 0
   hotbarItemsID: 0
 --- !u!1 &6629683941584482471
@@ -35874,7 +35871,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 8262971494379984053}
   selectedImage: {fileID: 0}
-  ID: 2
   hotbarItemName: 0
   hotbarItemsID: 0
 --- !u!1 &7369045270194760725
@@ -37337,7 +37333,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 6895464356234123497}
   selectedImage: {fileID: 756334751800762308}
-  ID: 3
   hotbarItemName: 0
   hotbarItemsID: 0
 --- !u!1 &7611722550099832330
@@ -41736,7 +41731,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 9091001256379268381}
   selectedImage: {fileID: 3144921907511087051}
-  ID: 2
   hotbarItemName: 0
   hotbarItemsID: 0
 --- !u!1 &8418700736126904956
@@ -44934,7 +44928,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 945200122701159632}
   selectedImage: {fileID: 0}
-  ID: 3
   hotbarItemName: 0
   hotbarItemsID: 0
 --- !u!1 &9056315150894188334

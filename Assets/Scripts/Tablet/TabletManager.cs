@@ -258,25 +258,20 @@ public class TabletManager : Singleton<TabletManager>
         switch (currentMenu)
         {
             case TabletMenuState.None:
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
 
             case TabletMenuState.ChestInventory:
                 menu_Inventory.SetActive(false);
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.Equipment:
                 equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(false);
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.Inventory:
                 menu_Inventory.SetActive(false);
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.CraftingTable:
                 menu_CraftingTable.SetActive(false);
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.SkillTree:
                 menu_Skilltree.SetActive(false);
@@ -287,7 +282,6 @@ public class TabletManager : Singleton<TabletManager>
                 break;
 
             default:
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
         }
 
@@ -344,6 +338,7 @@ public class TabletManager : Singleton<TabletManager>
 
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
                 break;
+
             case TabletMenuState.CraftingTable:
                 MainManager.Instance.menuStates = MenuStates.CraftingMenu;
                 tabletMenuState = TabletMenuState.CraftingTable;

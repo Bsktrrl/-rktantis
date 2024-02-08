@@ -111,6 +111,10 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public List<GameObject> buildingBlock_UIList = new List<GameObject>();
 
+    [Header("RequiermentColors")]
+    public Color requirementMetColor;
+    public Color requirementNOTMetColor;
+
 
     //--------------------
 
@@ -2350,14 +2354,14 @@ public class BuildingManager : Singleton<BuildingManager>
             //If having enough items in inventory
             if (counter >= blockParent.buildingRequirementList[i].amount)
             {
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 1, 1, 1);
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = requirementMetColor;
                 //enoughItemsToBuild = true;
             }
 
             //If not having enough items in inventory
             else
             {
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 0, 0, 1);
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = requirementNOTMetColor;
                 enoughItemsToBuild = false;
             }
         }
@@ -2427,14 +2431,14 @@ public class BuildingManager : Singleton<BuildingManager>
             //If having enough items in inventory
             if (counter >= moveableObject.craftingRequirements[i].amount)
             {
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 1, 1, 1);
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = requirementMetColor;
                 //enoughItemsToBuild = true;
             }
 
             //If not having enough items in inventory
             else
             {
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 0, 0, 1);
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = requirementNOTMetColor;
                 enoughItemsToBuild = false;
             }
         }
