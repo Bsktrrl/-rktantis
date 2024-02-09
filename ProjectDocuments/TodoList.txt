@@ -11,13 +11,9 @@ Todo before thirsday 13. - 5 days left
 	- Assign the WorldItems to the items in the itemsList_SO
 
 3 - Fix Requirement UI on main Screen so it appears when it should
-	- When removing axe, hide the list as well
+	- Make Axe removeRequirements show up with movableObjets as well
 
 4 - Make "RemoveObject" work with Machines/Furniture
-
-2 - Get BuildingBlocks to work with temperature under IdealTemperature
-	- Stop Raycast Sun when under idealtemperature
-	- Then start raycast upwards to see if you're under roof to get the buff
 
 8 - Look into UI Screen Resolution
 
@@ -42,3 +38,5 @@ Todo before thirsday 13. - 5 days left
 
 - Make LookAt_informationUI for when the player are looking at interracteableObject (Trees/Cutable, Machines, Furniture, Pickups)
 	- Make an outline around the pickup/Object looking at???
+
+- Make the Flashlight reach longer (swap Sphere collider  with Capsule collider) 

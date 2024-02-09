@@ -77,6 +77,12 @@ public class EquippedItem : MonoBehaviour
             gameObject.GetComponent<BuildingHammer>().tempObj_Selected = null;
         }
 
+        //If Equipped Object is an Axe
+        else if (gameObject.GetComponent<Axe>() != null)
+        {
+            gameObject.GetComponent<Axe>().DestroyThisObject();
+        }
+
         Destroy(gameObject);
     }
 }

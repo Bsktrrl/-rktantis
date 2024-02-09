@@ -187,8 +187,6 @@ public class HotbarManager : Singleton<HotbarManager>
 
     void HandSelection_Down()
     {
-        //if (MainManager.instance.menuStates != MenuStates.None) { return; }
-
         selectedSlot--;
 
         if (selectedSlot < 0)
@@ -209,8 +207,6 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void HandSelection_UP()
     {
-        //if (MainManager.instance.menuStates != MenuStates.None) { return; }
-
         selectedSlot++;
 
         if (selectedSlot > 4)
