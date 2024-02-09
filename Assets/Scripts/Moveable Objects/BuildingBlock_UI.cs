@@ -126,6 +126,6 @@ public class BuildingBlock_UI : MonoBehaviour
         }
 
         BuildingManager.Instance.SaveData();
-        MoveableObjectManager.Instance.SaveGame();
+        MoveableObjectManager.Instance.SaveData();
     }
 }

@@ -35,6 +35,10 @@ public class InteractableObject : MonoBehaviour
 
     void ObjectInteraction()
     {
+        if (gameObject)
+        {
+
+        }
         if (gameObject.GetComponent<MoveableObject>())
         {
             if (gameObject.GetComponent<MoveableObject>().isSelectedForMovement) { return; }

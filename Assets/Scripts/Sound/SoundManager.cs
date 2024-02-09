@@ -35,7 +35,8 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip stone_Removed;
     [SerializeField] AudioClip iron_Removed;
     [SerializeField] AudioClip buildingBlock_CannotPlaceBlock;
-    [SerializeField] AudioClip moveableObject_placed;
+    [SerializeField] AudioClip moveableObject_Placed;
+    [SerializeField] AudioClip moveableObject_Removed;
 
 
     //InteractableObjects
@@ -223,7 +224,17 @@ public class SoundManager : Singleton<SoundManager>
     {
         if (audioSource != null)
         {
-            audioSource.clip = moveableObject_placed;
+            audioSource.clip = moveableObject_Placed;
+            audioSource.pitch = 1f;
+            audioSource.volume = 1f;
+            audioSource.Play();
+        }
+    }
+    public void PlayMoveableObject_Removed()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = moveableObject_Removed;
             audioSource.pitch = 1f;
             audioSource.volume = 1f;
             audioSource.Play();

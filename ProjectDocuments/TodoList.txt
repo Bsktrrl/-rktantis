@@ -10,10 +10,10 @@ Todo before thirsday 13. - 5 days left
 6 - Add WorldObjects to all InventoryItems in the game
 	- Assign the WorldItems to the items in the itemsList_SO
 
-3 - Fix Requirement UI on main Screen so it appears when it should
-	- Make Axe removeRequirements show up with movableObjets as well
-
 4 - Make "RemoveObject" work with Machines/Furniture
+	- Also make it work with Chests
+		- Remove the Chest from World and Inventories
+		- Prevent Chest of being removed if it contains items
 
 8 - Look into UI Screen Resolution
 
@@ -25,6 +25,7 @@ Todo before thirsday 13. - 5 days left
 - Make/Save-Load DurabilityBar on HandEquipments in inventory and Hotbar
 	- Hotbar: A Bar at the side
 	- InventoryItem: A Sircle at the bottom left
+	- Make the tools Having different speed on its animations based of material-type
 
 - Make HeatParameter-Display ala. Sarah
 - Make WeatherDisplay
@@ -40,3 +41,7 @@ Todo before thirsday 13. - 5 days left
 	- Make an outline around the pickup/Object looking at???
 
 - Make the Flashlight reach longer (swap Sphere collider  with Capsule collider) 
+
+- Make it so that the MovableObjectMenu swap selectedItem, even if BuildingHammer isn't in hand
+	- It works for BuildingBlocks, so take a closer look at the differences
+	- Move the "SetNewSelectedBlock()" from the BuildingHammer to "BuildingSystemMenu"

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -2111,6 +2112,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
             if (Axe_buildingBlockLookingAt != null)
             {
+                //If looking at a BuildingBlock
                 if (hitTransform.gameObject.CompareTag("BuildingBlock"))
                 {
                     if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent != null)
@@ -2121,7 +2123,7 @@ public class BuildingManager : Singleton<BuildingManager>
                             {
                                 if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent == buildingBlockList[i])
                                 {
-                                    print("6. Destroy Block");
+                                    print("6. Destroy BuildingBlock");
 
                                     //Play remove sound
                                     if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
@@ -2176,7 +2178,82 @@ public class BuildingManager : Singleton<BuildingManager>
                 //If looking at a Machine or Furniture
                 else if (hitTransform.gameObject.CompareTag("Machine") || hitTransform.gameObject.CompareTag("Furniture"))
                 {
-                    print("Tried to cut a Machine or Furniture");
+                    print("7. Tried to cut a Machine or Furniture");
+
+                    //If the object has a MoveableObject attached
+                    if (hitTransform.gameObject.GetComponent<MoveableObject>())
+                    {
+                        for (int i = 0; i < MoveableObjectManager.Instance.placedMoveableWorldObjectsList.Count; i++)
+                        {
+                            //If we have chosen the correct movableObject
+                            if (hitTransform.gameObject == MoveableObjectManager.Instance.placedMoveableWorldObjectsList[i])
+                            {
+                                MoveableObjectInfo tempMovableObject_SO = MoveableObjectManager.Instance.GetObjectInfoFromMoveableObject_SO(hitTransform.gameObject.GetComponent<MoveableObject>().machineType, hitTransform.gameObject.GetComponent<MoveableObject>().furnitureType);
+
+                                //If object is a chest
+                                #region
+                                if (tempMovableObject_SO.machineType == MachineType.None
+                                    &&
+                                    (tempMovableObject_SO.furnitureType == FurnitureType.SmallChest
+                                    || tempMovableObject_SO.furnitureType == FurnitureType.BigChest))
+                                {
+                                    if (MoveableObjectManager.Instance.placedMoveableWorldObjectsList[i].GetComponent<InteractableObject>())
+                                    {
+                                        //If chest contain items, don't remove it
+                                        if (InventoryManager.Instance.inventories[MoveableObjectManager.Instance.placedMoveableWorldObjectsList[i].GetComponent<InteractableObject>().inventoryIndex].itemsInInventory.Count > 0)
+                                        {
+                                            SoundManager.Instance.PlaybuildingBlock_CannotPlaceBlock();
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            InventoryManager.Instance.RemoveInventory(MoveableObjectManager.Instance.placedMoveableWorldObjectsList[i].GetComponent<InteractableObject>().inventoryIndex);
+                                        }
+                                    }
+                                }
+                                #endregion
+
+                                //If Object can be removed
+                                #region
+                                print("8. Machine or Furniture");
+
+                                //Add items to playerInventory
+                                for (int j = 0; j < tempMovableObject_SO.RemoveCraftingRequirements.Count; j++)
+                                {
+                                    for (int k = 0; k < tempMovableObject_SO.RemoveCraftingRequirements[j].amount; k++)
+                                    {
+                                        InventoryManager.Instance.AddItemToInventory(0, tempMovableObject_SO.RemoveCraftingRequirements[j].itemName);
+                                    }
+                                }
+
+                                if (Axe_buildingBlockLookingAt.GetComponent<InteractableObject>())
+                                {
+                                    //Remove MovableObject
+                                    MoveableObjectManager.Instance.placedMoveableObjectsList_ToSave.RemoveAt(i);
+                                    MoveableObjectManager.Instance.placedMoveableWorldObjectsList.RemoveAt(i);
+
+                                    Axe_buildingBlockLookingAt.GetComponent<InteractableObject>().DestroyThisObject();
+                                }
+
+                                //Reset parameters
+                                Axe_buildingBlockLookingAt = null;
+                                lastBuildingBlock_LookedAt = null;
+                                old_lastBuildingBlock_LookedAt = null;
+
+                                buildingRemoveRequirement_Parent.SetActive(false);
+                                buildingRequirement_Parent.SetActive(false);
+
+                                //Play Remove-Sound
+                                SoundManager.Instance.PlayMoveableObject_Removed();
+
+                                SaveData();
+                                MoveableObjectManager.Instance.SaveData();
+
+                                break;
+                                #endregion
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -2510,20 +2587,6 @@ public class BuildingManager : Singleton<BuildingManager>
 
         //Setup Header of Requirements
         #region
-        buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = moveableObject.objectSprite;
-        //buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<Image>().sprite = moveableObject.objectSprite;
-
-        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
-        {
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(moveableObject.machineType.ToString());
-        }
-        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
-        {
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(moveableObject.furnitureType.ToString());
-        }
-
-        //-----
-
         buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
 
         buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = moveableObject.objectSprite;

@@ -28,7 +28,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     public GameObject objectToMove;
 
     [Header("Object Placed List")]
-    public List<GameObject> placedMoveableObjectsList = new List<GameObject>();
+    public List<GameObject> placedMoveableWorldObjectsList = new List<GameObject>();
     public List<MoveableObject_ToSave> placedMoveableObjectsList_ToSave = new List<MoveableObject_ToSave>();
 
     public MoveableObjectSelected_ToSave moveableObjectSelected_ToSave = new MoveableObjectSelected_ToSave();
@@ -49,20 +49,20 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         for (int i = 0; i < placedMoveableObjectsList_ToSave.Count; i++)
         {
             //Find MoveableObject from _SO
-            GameObject tempObject = GetObjectFrom_SO(placedMoveableObjectsList_ToSave[i].moveableObjectType, placedMoveableObjectsList_ToSave[i].machineType, placedMoveableObjectsList_ToSave[i].furnitureType);
+            GameObject tempObject = GetObjectFromMoveableObject_SO(placedMoveableObjectsList_ToSave[i].moveableObjectType, placedMoveableObjectsList_ToSave[i].machineType, placedMoveableObjectsList_ToSave[i].furnitureType);
             if (tempObject)
             {
                 //Add it to the list
-                placedMoveableObjectsList.Add(Instantiate(tempObject, placedMoveableObjectsList_ToSave[i].objectPos, placedMoveableObjectsList_ToSave[i].objectRot) as GameObject);
-                placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].transform.parent = moveableObject_Parent.transform;
+                placedMoveableWorldObjectsList.Add(Instantiate(tempObject, placedMoveableObjectsList_ToSave[i].objectPos, placedMoveableObjectsList_ToSave[i].objectRot) as GameObject);
+                placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].transform.parent = moveableObject_Parent.transform;
 
                 //If a chest is loaded
                 if (placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureType.SmallChest
                     || placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureType.BigChest)
                 {
-                    if (placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].GetComponent<InteractableObject>())
+                    if (placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>())
                     {
-                        placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].GetComponent<InteractableObject>().inventoryIndex = placedMoveableObjectsList_ToSave[i].chestIndex;
+                        placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>().inventoryIndex = placedMoveableObjectsList_ToSave[i].chestIndex;
                     }
                 }
             }
@@ -88,8 +88,10 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             }
         }
         #endregion
+
+        print("1. WorldObject: " + placedMoveableWorldObjectsList.Count + " | SaveObject: " + placedMoveableObjectsList_ToSave.Count);
     }
-    public void SaveGame()
+    public void SaveData()
     {
         print("placedMoveableObjectsList_ToSave SAVED");
 
@@ -107,7 +109,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         DataManager.Instance.moveableObjectSelected_Store = temp;
     }
 
-    GameObject GetObjectFrom_SO(MoveableObjectType moveableObjectType, MachineType machineType, FurnitureType furnitureType)
+    public GameObject GetObjectFromMoveableObject_SO(MoveableObjectType moveableObjectType, MachineType machineType, FurnitureType furnitureType)
     {
         for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
         {
@@ -116,6 +118,19 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
                 && moveableObject_SO.moveableObjectList[i].furnitureType == furnitureType)
             {
                 return moveableObject_SO.moveableObjectList[i].objectToMove;
+            }
+        }
+
+        return null;
+    }
+    public MoveableObjectInfo GetObjectInfoFromMoveableObject_SO(MachineType machineType, FurnitureType furnitureType)
+    {
+        for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
+        {
+            if (moveableObject_SO.moveableObjectList[i].machineType == machineType
+                && moveableObject_SO.moveableObjectList[i].furnitureType == furnitureType)
+            {
+                return moveableObject_SO.moveableObjectList[i];
             }
         }
 
@@ -230,8 +245,8 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             MoveableObjectInfo tempInfo = GetMoveableObject_SO();
 
             //Instantiate a MoveableObejct
-            placedMoveableObjectsList.Add(Instantiate(tempInfo.objectToMove, moveableObject.gameObject.transform.position, moveableObject.gameObject.transform.rotation) as GameObject);
-            placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].transform.SetParent(moveableObject_Parent.transform);
+            placedMoveableWorldObjectsList.Add(Instantiate(tempInfo.objectToMove, moveableObject.gameObject.transform.position, moveableObject.gameObject.transform.rotation) as GameObject);
+            placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].transform.SetParent(moveableObject_Parent.transform);
 
             //Add MoveableObjectList to save
             #region
@@ -239,13 +254,13 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             tempToSave.moveableObjectType = tempInfo.moveableObjectType;
             tempToSave.machineType = tempInfo.machineType;
             tempToSave.furnitureType = tempInfo.furnitureType;
-            tempToSave.objectPos = placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].transform.position;
-            tempToSave.objectRot = placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].transform.rotation;
+            tempToSave.objectPos = placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].transform.position;
+            tempToSave.objectRot = placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].transform.rotation;
             
             //If a small chest, update inventory info
             if (tempToSave.furnitureType == FurnitureType.SmallChest)
             {
-                InventoryManager.Instance.AddInventory(placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.smallChest_Size);
+                InventoryManager.Instance.AddInventory(placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.smallChest_Size);
 
                 tempToSave.chestIndex = InventoryManager.Instance.inventories.Count - 1;
             }
@@ -253,7 +268,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             //If a big chest, update inventory info
             else if (tempToSave.furnitureType == FurnitureType.BigChest)
             {
-                InventoryManager.Instance.AddInventory(placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.bigChest_Size);
+                InventoryManager.Instance.AddInventory(placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.bigChest_Size);
 
                 tempToSave.chestIndex = InventoryManager.Instance.inventories.Count - 1;
             }
@@ -262,8 +277,9 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             placedMoveableObjectsList_ToSave.Add(tempToSave);
             #endregion
 
+            print("2. WorldObject: " + placedMoveableWorldObjectsList.Count + " | SaveObject: " + placedMoveableObjectsList_ToSave.Count);
 
-            SaveGame();
+            SaveData();
 
             //Remove Items from inventory
             if (tempInfo.craftingRequirements != null)

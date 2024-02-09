@@ -55,6 +55,10 @@ public class MainManager : Singleton<MainManager>
             {
                 gameStates = GameStates.Building;
             }
+            else if (GetItem(HotbarManager.Instance.selectedItem).subCategoryName == ItemSubCategories.Axe)
+            {
+                gameStates = GameStates.Cutting;
+            }
         }
 
         //Set to None

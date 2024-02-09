@@ -269,16 +269,19 @@ public class InventoryManager : Singleton<InventoryManager>
         RemoveInventoriesUI();
         PrepareInventoryUI(inventory, false);
 
-        //Spawn item into the World
-        WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, handDropPoint.transform.position, Quaternion.identity) as GameObject);
-        WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
+        //Spawn item into the World, if the item have a WorldObject attached
+        if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
+        {
+            WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, handDropPoint.transform.position, Quaternion.identity) as GameObject);
+            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
 
-        //Set Gravity true on the worldObject
-        WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
-        WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
+            //Set Gravity true on the worldObject
+            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
+            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
 
-        //Update item in the World
-        WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName, WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]);
+            //Update item in the World
+            WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName, WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]);
+        }
 
         //If item is removed from the inventory, update the Hotbar
         if (inventory <= 0)

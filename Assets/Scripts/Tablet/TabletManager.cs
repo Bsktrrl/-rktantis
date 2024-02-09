@@ -515,6 +515,14 @@ public class TabletManager : Singleton<TabletManager>
 
         Cursor.lockState = CursorLockMode.Locked;
         MainManager.Instance.menuStates = MenuStates.None;
+
+        //Hide all Requirement_Parents
+        BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
+
+        if (MainManager.Instance.gameStates != GameStates.Cutting)
+        {
+            BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(false);
+        }
     }
     
     void SetMenuDisplay(bool state)
