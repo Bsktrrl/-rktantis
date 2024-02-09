@@ -78,12 +78,33 @@ public class SelectionManager : Singleton<SelectionManager>
                     //Set UI screen Active
                     interaction_Info_UI.SetActive(true);
                 }
+
                 //If there is a Hit without an interacteable script
                 else
                 {
                     interaction_Info_UI.SetActive(false);
                     onTarget = false;
                 }
+
+
+                //-----
+
+
+                //If looking at an Object that can have an outline
+                if (selecedObject)
+                {
+                    if (selecedObject.GetComponent<Outliner>())
+                    {
+                        selecedObject.GetComponent<Outliner>().ShowOutliner();
+                    }
+                    else
+                    {
+                        selecedObject.GetComponent<Outliner>().HideOutliner();
+                    }
+                }
+
+
+                //-----
 
 
                 // || Trees || //
@@ -116,6 +137,15 @@ public class SelectionManager : Singleton<SelectionManager>
             {
                 interaction_Info_UI.SetActive(false);
                 onTarget = false;
+
+                //If don't looking at an Object that can have an outline
+                if (selecedObject)
+                {
+                    if (selecedObject.GetComponent<Outliner>())
+                    {
+                        selecedObject.GetComponent<Outliner>().HideOutliner();
+                    }
+                }
             }
         }
     }

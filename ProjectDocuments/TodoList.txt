@@ -1,43 +1,47 @@
 Todo before thirsday 13. - 5 days left
 
+- Add different displays for items in the inventory/Main Screen
+	- Equipeable items
+	- Consumeable items
+	- Static items
+
 - Make "Chest_Small" and "Chest_Medium" work when placed in the world (Saving/Loading of new inventories)
 
-- Make the Crafting/SkillTree ONLY work when interacting with its object
+- Make functionalty with all new plants
+	- Also make cutting functionality for trees with axe
+- Add WorldObjects to all InventoryItems in the game
+	- Assign the WorldItems to the items in the itemsList_SO
 
-- Fix Requirement UI on main Screen
-	- Give correct images
-	- Always appear when BuildingHammer is in hand
+- Fix Requirement UI on main Screen so it appear when it should
+	- When removing axe, hide the list
 
 - Make "RemoveObject" work with Machines/Furniture
+
+- Get BuildingBlock to work with temperature under IdealTemperature
+	- Stop Raycast Sun when under idealtemperature
+	- Then start raycast up to see if under roof to get the buff
+
+- Make Night Speed go faster (1.25 or 1.50)
+	- Multiply timer input when during enum Night
+
 
 
 --------------------
 
 
-- Get BuildingBlock to work with temperature under IdealTemperature
-	- Stop Raycast Sun when under idealtemperature
-	- Start raycast up to see if under roof to get the buff
+- Make the Crafting/SkillTree ONLY work when interacting with its object
 
-- Make Night Speed go faster (1.25 or 1.50)
-	- Multiply timer input when during enum Night
+- Make/Save/Load DurabilityBar on HandEquipments in inventory and Hotbar
+	- Hotbar: A Bar at the side
+	- InventoryItem: A Sircle at the bottom left
 
 - Make HeatParameter-Display ala. Sarah
 
+
+- Make item be equipped to clothing
+	- ("AssignItemToClothingSlot" in "ItemSLot.cs")
+
 - Make the Tablet Journal
 
-- Make Tree Cutting
-
-- Make functionalty with all new plants
-	- Also make cutting functionality for trees with axe
-
-- Add WorldObjects to all InventoryItems in the game
-	- Assign the WorldItems to the items in the itemsList_SO
-
-- Make Equippeable items appear/work from the handagain
-- Add different displays for items in the inventory
-	- Equipeable items
-	- Consumeable items
-	- Static items
-
-- Make item be equipped to clothing ("AssignItemToClothingSlot" in "ItemSLot.cs")
-
+- Make LookAt_informationUI for when the player are looking at interracteableObject (Trees/Cutable, Machines, Furniture, Pickups)
+	- Make an outline around the pickup/Object looking at
