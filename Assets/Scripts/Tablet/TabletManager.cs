@@ -10,6 +10,7 @@ public class TabletManager : Singleton<TabletManager>
     [Header("General")]
     public TabletMenuState tabletMenuState;
     public ObjectInteractingWith objectInteractingWith;
+    public GameObject objectInteractingWith_Object;
 
     [Header("Menus")]
     int menuAmount = 4;
@@ -500,6 +501,14 @@ public class TabletManager : Singleton<TabletManager>
 
         tabletMenuState = TabletMenuState.None;
         objectInteractingWith = ObjectInteractingWith.None;
+
+        //Stop Animation when not used anymore
+        if (objectInteractingWith_Object.GetComponent<Animations_Objects>())
+        {
+            objectInteractingWith_Object.GetComponent<Animations_Objects>().StopAnimation();
+        }
+        objectInteractingWith_Object = null;
+
         Cursor.lockState = CursorLockMode.Locked;
         MainManager.Instance.menuStates = MenuStates.None;
     }

@@ -91,17 +91,17 @@ public class SelectionManager : Singleton<SelectionManager>
 
 
                 //If looking at an Object that can have an outline
-                if (selecedObject)
-                {
-                    if (selecedObject.GetComponent<Outliner>())
-                    {
-                        selecedObject.GetComponent<Outliner>().ShowOutliner();
-                    }
-                    else
-                    {
-                        selecedObject.GetComponent<Outliner>().HideOutliner();
-                    }
-                }
+                //if (selecedObject)
+                //{
+                //    if (selecedObject.GetComponent<Outliner>())
+                //    {
+                //        selecedObject.GetComponent<Outliner>().ShowOutliner();
+                //    }
+                //    else
+                //    {
+                //        selecedObject.GetComponent<Outliner>().HideOutliner();
+                //    }
+                //}
 
 
                 //-----
@@ -139,13 +139,13 @@ public class SelectionManager : Singleton<SelectionManager>
                 onTarget = false;
 
                 //If don't looking at an Object that can have an outline
-                if (selecedObject)
-                {
-                    if (selecedObject.GetComponent<Outliner>())
-                    {
-                        selecedObject.GetComponent<Outliner>().HideOutliner();
-                    }
-                }
+                //if (selecedObject)
+                //{
+                //    if (selecedObject.GetComponent<Outliner>())
+                //    {
+                //        selecedObject.GetComponent<Outliner>().HideOutliner();
+                //    }
+                //}
             }
         }
     }

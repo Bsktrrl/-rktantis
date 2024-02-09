@@ -15,6 +15,9 @@ public class InventoryManager : Singleton<InventoryManager>
     public Vector2 inventorySize;
     public int cellsize = 70;
 
+    public Vector2 smallChest_Size = new Vector2(4, 4);
+    public Vector2 bigChest_Size = new Vector2(7, 7);
+
     [Header("Item")]
     public Items lastItemToGet;
     [SerializeField] TextMeshProUGUI player_ItemName_Display;
@@ -76,6 +79,11 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         #endregion
 
+        #region Chest Sizes
+        smallChest_Size = DataManager.Instance.smallChest_Size_Store;
+        bigChest_Size = DataManager.Instance.bigChest_Size_Store;
+        #endregion
+
         #region Player Position
         //Set Player position - The "LoadData()" doesen't activate in the relevant playerMovement script
         MainManager.Instance.player.transform.SetPositionAndRotation(DataManager.Instance.playerPos_Store, DataManager.Instance.playerRot_Store);
@@ -83,11 +91,16 @@ public class InventoryManager : Singleton<InventoryManager>
     }
     public void SaveData()
     {
+        //All Inventories
         DataManager.Instance.Inventories_StoreList = inventories;
-    }
+
+        //Chest Sizes (may be upgraded in the SkillTree
+        DataManager.Instance.smallChest_Size_Store = smallChest_Size;
+        DataManager.Instance.bigChest_Size_Store = bigChest_Size;
+}
     public void SaveData(ref GameData gameData)
     {
-        DataManager.Instance.Inventories_StoreList = inventories;
+        SaveData();
 
         print("Save_Inventories");
     }
@@ -106,6 +119,15 @@ public class InventoryManager : Singleton<InventoryManager>
         //Set inventory stats
         inventories[inventories.Count - 1].inventoryIndex = inventories.Count - 1;
         inventories[inventories.Count - 1].inventorySize = size;
+
+        SaveData();
+    }
+    public void AddInventory(InteractableObject chest, Vector2 size)
+    {
+        AddInventory(size);
+
+        //Add index to the chest to connect it to the inventoriesList
+        chest.inventoryIndex = inventories.Count - 1;
 
         SaveData();
     }
@@ -261,7 +283,7 @@ public class InventoryManager : Singleton<InventoryManager>
         //If item is removed from the inventory, update the Hotbar
         if (inventory <= 0)
         {
-            CheckHotbarItemInInventory(ID);
+            CheckHotbarItemInInventory();
         }
 
         SetBuildingRequirement();
@@ -438,15 +460,14 @@ public class InventoryManager : Singleton<InventoryManager>
         PrepareInventoryUI(0, true);
         PrepareInventoryUI(chestInventoryOpen, true);
 
-        CheckHotbarItemInInventory(ID);
+        CheckHotbarItemInInventory();
 
         //Update the Hand to see if slot is empty
         HotbarManager.Instance.ChangeItemInHand();
     }
 
-    public void CheckHotbarItemInInventory(int ID)
+    public void CheckHotbarItemInInventory()
     {
-        print("1. ID: " + ID);
         for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
         {
             bool isInInventory = false;
@@ -812,6 +833,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
         //Setup the grid with all items
         SetupUIGrid(inventory, isMovingItem);
+
+        //Set HotbarInfo on inventoryItems
+        SelectItemInfoToHotbar();
     }
     void SortInventory(int inventory)
     {
@@ -1078,9 +1102,6 @@ public class InventoryManager : Singleton<InventoryManager>
             playerInventory_Fake_Parent.GetComponent<RectTransform>().sizeDelta = inventories[0].inventorySize * cellsize;
             playerInventory_Fake_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(cellsize, cellsize);
             playerInventory_Fake_Parent.SetActive(true);
-
-            //Set HotbarInfo on inventoryItems
-            SelectItemInfoToHotbar();
 
             inventoryIsOpen = true;
         }

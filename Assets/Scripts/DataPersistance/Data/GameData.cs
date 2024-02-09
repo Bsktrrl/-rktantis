@@ -11,6 +11,8 @@ public class GameData
     
     //Inventories
     public List<Inventory> Inventories_SaveList = new List<Inventory>();
+    [HideInInspector] public Vector2 smallChest_Size_Save;
+    [HideInInspector] public Vector2 bigChest_Size_Save;
 
     //WorldObjects
     [HideInInspector] public List<WorldObject> worldObject_SaveList = new List<WorldObject>();

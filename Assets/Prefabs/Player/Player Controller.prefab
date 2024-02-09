@@ -1392,6 +1392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySize: {x: 5, y: 7}
   cellsize: 70
+  smallChest_Size: {x: 4, y: 4}
+  bigChest_Size: {x: 7, y: 7}
   lastItemToGet: 0
   player_ItemName_Display: {fileID: 8036225011402889609}
   player_ItemDescription_Display: {fileID: 722030145348219572}
@@ -1621,6 +1623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tabletMenuState: 0
   objectInteractingWith: 0
+  objectInteractingWith_Object: {fileID: 0}
   menu_Inventory: {fileID: 6086809433715491809}
   playerInventory_MainParent: {fileID: 8682934751925168776}
   chestInventory_MainParent: {fileID: 782554221728811425}
@@ -4516,6 +4519,8 @@ MonoBehaviour:
   playerRot_Store: {x: 0, y: 0, z: 0, w: 0}
   worldObject_StoreList: []
   Inventories_StoreList: []
+  smallChest_Size_Store: {x: 0, y: 0}
+  bigChest_Size_Store: {x: 0, y: 0}
   selectedSlot_Store: 0
   hotbarItem_StoreList: []
   buildingBlockList_StoreList: []
@@ -4832,6 +4837,10 @@ MonoBehaviour:
   buildingBlock_CannotPlaceBlock: {fileID: 8300000, guid: 136e698311287924b8242fd2cf1b33de,
     type: 3}
   moveableObject_placed: {fileID: 0}
+  openSmallChest: {fileID: 8300000, guid: aeec90aa82ece4846b03e294aaa90a86, type: 3}
+  closeSmallChest: {fileID: 8300000, guid: 79b4e45b6009e8c47b15085a2591e9fb, type: 3}
+  openBigChest: {fileID: 8300000, guid: 7511d9fe11c403444ad365b383e03005, type: 3}
+  closeBigChest: {fileID: 8300000, guid: 6b51661a2fa1143488fa467c800e53ee, type: 3}
 --- !u!1 &1124252078268214199
 GameObject:
   m_ObjectHideFlags: 0

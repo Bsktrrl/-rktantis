@@ -38,10 +38,19 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip moveableObject_placed;
 
 
+    //InteractableObjects
+    [Header("Interactable Objects")]
+    [SerializeField] AudioClip openSmallChest;
+    [SerializeField] AudioClip closeSmallChest;
+    [SerializeField] AudioClip openBigChest;
+    [SerializeField] AudioClip closeBigChest;
+
+
     //--------------------
-    
-    
+
+
     //Menu
+    #region
     public void PlaySelectPanel_Clip()
     {
         if (audioSource != null)
@@ -51,8 +60,10 @@ public class SoundManager : Singleton<SoundManager>
             audioSource.Play();
         }
     }
+    #endregion
 
     //inventory
+    #region
     public void PlaySelect_Clip()
     {
         if (audioSource != null)
@@ -116,8 +127,10 @@ public class SoundManager : Singleton<SoundManager>
             audioSource.Play();
         }
     }
+    #endregion
 
     //Crafting
+    #region
     public void Playmenu_Crafting_Clip()
     {
         if (audioSource != null)
@@ -136,8 +149,10 @@ public class SoundManager : Singleton<SoundManager>
             audioSource.Play();
         }
     }
+    #endregion
 
     //Building
+    #region
     public void PlayWood_Placed_Clip()
     {
         if (audioSource != null)
@@ -214,6 +229,45 @@ public class SoundManager : Singleton<SoundManager>
             audioSource.Play();
         }
     }
-    
+    #endregion
 
+    //Interacteable Objects
+    #region
+    public void PlayOpenSmallChest_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = openSmallChest;
+            audioSource.volume = 1f;
+            audioSource.Play();
+        }
+    }
+    public void PlayCloseSmallChest_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = closeSmallChest;
+            audioSource.volume = 0.7f;
+            audioSource.Play();
+        }
+    }
+    public void PlayOpenBigChest_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = openBigChest;
+            audioSource.volume = 0.5f;
+            audioSource.Play();
+        }
+    }
+    public void PlayCloseBigChest_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = closeBigChest;
+            audioSource.volume = 0.5f;
+            audioSource.Play();
+        }
+    }
+    #endregion
 }

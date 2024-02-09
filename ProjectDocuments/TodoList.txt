@@ -1,29 +1,26 @@
 Todo before thirsday 13. - 5 days left
 
-- Add different displays for items in the inventory/Main Screen
+7 - Add different displays for items in the inventory/Main Screen
 	- Equipeable items
 	- Consumeable items
 	- Static items
 
-- Make "Chest_Small" and "Chest_Medium" work when placed in the world (Saving/Loading of new inventories)
+1 - Make "Chest_Small" and "Chest_Medium" work when placed in the world
+	- (Saving/Loading of new inventories)
 
-- Make functionalty with all new plants
+5 - Make functionalty with all new plants
 	- Also make cutting functionality for trees with axe
-- Add WorldObjects to all InventoryItems in the game
+6 - Add WorldObjects to all InventoryItems in the game
 	- Assign the WorldItems to the items in the itemsList_SO
 
-- Fix Requirement UI on main Screen so it appear when it should
-	- When removing axe, hide the list
+3 - Fix Requirement UI on main Screen so it appears when it should
+	- When removing axe, hide the list as well
 
-- Make "RemoveObject" work with Machines/Furniture
+4 - Make "RemoveObject" work with Machines/Furniture
 
-- Get BuildingBlock to work with temperature under IdealTemperature
+2 - Get BuildingBlocks to work with temperature under IdealTemperature
 	- Stop Raycast Sun when under idealtemperature
-	- Then start raycast up to see if under roof to get the buff
-
-- Make Night Speed go faster (1.25 or 1.50)
-	- Multiply timer input when during enum Night
-
+	- Then start raycast upwards to see if you're under roof to get the buff
 
 
 --------------------
@@ -31,12 +28,13 @@ Todo before thirsday 13. - 5 days left
 
 - Make the Crafting/SkillTree ONLY work when interacting with its object
 
-- Make/Save/Load DurabilityBar on HandEquipments in inventory and Hotbar
+- Make/Save-Load DurabilityBar on HandEquipments in inventory and Hotbar
 	- Hotbar: A Bar at the side
 	- InventoryItem: A Sircle at the bottom left
 
 - Make HeatParameter-Display ala. Sarah
 
+- Rebuild the playerMovement
 
 - Make item be equipped to clothing
 	- ("AssignItemToClothingSlot" in "ItemSLot.cs")

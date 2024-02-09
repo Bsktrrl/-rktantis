@@ -40,10 +40,12 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 
     public void LoadData()
     {
+        //Load placedMoveableObjectsList_ToSave
+        #region
         placedMoveableObjectsList_ToSave.Clear();
         placedMoveableObjectsList_ToSave = DataManager.Instance.placedMoveableObjectsList_StoreList;
 
-        //Setup MoveableObjects into the World
+        //Place MoveableObjects into the World
         for (int i = 0; i < placedMoveableObjectsList_ToSave.Count; i++)
         {
             //Find MoveableObject from _SO
@@ -53,10 +55,22 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
                 //Add it to the list
                 placedMoveableObjectsList.Add(Instantiate(tempObject, placedMoveableObjectsList_ToSave[i].objectPos, placedMoveableObjectsList_ToSave[i].objectRot) as GameObject);
                 placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].transform.parent = moveableObject_Parent.transform;
+
+                //If a chest is loaded
+                if (placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureType.SmallChest
+                    || placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureType.BigChest)
+                {
+                    if (placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].GetComponent<InteractableObject>())
+                    {
+                        placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].GetComponent<InteractableObject>().inventoryIndex = placedMoveableObjectsList_ToSave[i].chestIndex;
+                    }
+                }
             }
         }
+        #endregion
 
         //Load State for MoveableObject selected from BuildingHammer
+        #region
         MoveableObjectSelected_ToSave temp = new MoveableObjectSelected_ToSave();
         temp = DataManager.Instance.moveableObjectSelected_Store;
         moveableObjectType = temp.moveableObjectType;
@@ -73,6 +87,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
                 EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
             }
         }
+        #endregion
     }
     public void SaveGame()
     {
@@ -88,6 +103,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         temp.furnitureType = furnitureType;
         temp.buildingType = buildingType_Selected;
         temp.buildingMaterial = buildingMaterial_Selected;
+
         DataManager.Instance.moveableObjectSelected_Store = temp;
     }
 
@@ -112,11 +128,6 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 
     public GameObject GetMoveableObject()
     {
-        //if (moveableObjectType != MoveableObjectType.None)
-        //{
-        //    return null;
-        //}
-
         //Machine
         if (moveableObjectType == MoveableObjectType.Machine)
         {
@@ -147,11 +158,6 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     }
     public MoveableObjectInfo GetMoveableObjectInfo(MoveableObject moveableObject)
     {
-        //if (moveableObjectType != MoveableObjectType.None)
-        //{
-        //    return null;
-        //}
-
         //Machine
         if (moveableObject.machineType != MachineType.None)
         {
@@ -180,11 +186,6 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     }
     public MoveableObjectInfo GetMoveableObject_SO()
     {
-        //if (moveableObjectType != MoveableObjectType.None)
-        //{
-        //    return null;
-        //}
-
         //Machine
         if (moveableObjectType == MoveableObjectType.Machine)
         {
@@ -233,13 +234,34 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].transform.SetParent(moveableObject_Parent.transform);
 
             //Add MoveableObjectList to save
+            #region
             MoveableObject_ToSave tempToSave = new MoveableObject_ToSave();
             tempToSave.moveableObjectType = tempInfo.moveableObjectType;
             tempToSave.machineType = tempInfo.machineType;
             tempToSave.furnitureType = tempInfo.furnitureType;
             tempToSave.objectPos = placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].transform.position;
             tempToSave.objectRot = placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].transform.rotation;
+            
+            //If a small chest, update inventory info
+            if (tempToSave.furnitureType == FurnitureType.SmallChest)
+            {
+                InventoryManager.Instance.AddInventory(placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.smallChest_Size);
+
+                tempToSave.chestIndex = InventoryManager.Instance.inventories.Count - 1;
+            }
+
+            //If a big chest, update inventory info
+            else if (tempToSave.furnitureType == FurnitureType.BigChest)
+            {
+                InventoryManager.Instance.AddInventory(placedMoveableObjectsList[placedMoveableObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.bigChest_Size);
+
+                tempToSave.chestIndex = InventoryManager.Instance.inventories.Count - 1;
+            }
+
+            //Add all info to the list
             placedMoveableObjectsList_ToSave.Add(tempToSave);
+            #endregion
+
 
             SaveGame();
 
@@ -257,6 +279,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 
             //Update the Hotbar
             //InventoryManager.Instance.CheckHotbarItemInInventory();
+
             InventoryManager.Instance.RemoveInventoriesUI();
         }
         else
@@ -276,6 +299,8 @@ public class MoveableObject_ToSave
 
     public Vector3 objectPos = new Vector3();
     public Quaternion objectRot = new Quaternion();
+
+    public int chestIndex = 0;
 }
 
 [Serializable]

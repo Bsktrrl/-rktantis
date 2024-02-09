@@ -357,29 +357,17 @@ MonoBehaviour:
     objectSprite: {fileID: -1913574161, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     objectToMove: {fileID: 500029343382258194, guid: 66c524b356e5e2941913b722865489c3,
       type: 3}
-    craftingRequirements:
-    - itemName: 6
-      amount: 5
-    - itemName: 1
-      amount: 2
-    RemoveCraftingRequirements:
-    - itemName: 1
-      amount: 1
-  - Name: Medium Storage Chest
+    craftingRequirements: []
+    RemoveCraftingRequirements: []
+  - Name: Big Storage Chest
     moveableObjectType: 2
     furnitureType: 4
     machineType: 0
     objectSprite: {fileID: 551587976, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     objectToMove: {fileID: 4228448781326590327, guid: 48398d00d2f8d3d4880105f84f22f29e,
       type: 3}
-    craftingRequirements:
-    - itemName: 17
-      amount: 1
-    - itemName: 1
-      amount: 5
-    RemoveCraftingRequirements:
-    - itemName: 1
-      amount: 4
+    craftingRequirements: []
+    RemoveCraftingRequirements: []
   - Name: Lamp
     moveableObjectType: 2
     furnitureType: 5

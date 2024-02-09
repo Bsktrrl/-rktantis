@@ -15,7 +15,7 @@ public class InteractableObject : MonoBehaviour
     //public bool isMachine;
 
     [Header("If Object is an Inventory")]
-    [HideInInspector] [SerializeField] int inventoryIndex;
+    public int inventoryIndex;
 
 
     //--------------------
@@ -68,6 +68,14 @@ public class InteractableObject : MonoBehaviour
             {
                 //print("Interract with an Inventory");
 
+                TabletManager.Instance.objectInteractingWith_Object = gameObject;
+
+                //Set Open Chest Animation
+                if (gameObject.GetComponent<Animations_Objects>())
+                {
+                    gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                }
+
                 //Open the chest Inventory
                 InventoryManager.Instance.chestInventoryOpen = inventoryIndex;
                 InventoryManager.Instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Chest Inventory
@@ -92,6 +100,14 @@ public class InteractableObject : MonoBehaviour
             {
                 //print("Interract with a CraftingTable");
 
+                TabletManager.Instance.objectInteractingWith_Object = gameObject;
+
+                //Set Crafting Table Animation
+                if (gameObject.GetComponent<Animations_Objects>())
+                {
+                    gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                }
+
                 //Open the crafting menu
                 TabletManager.Instance.OpenTablet(TabletMenuState.CraftingTable);
 
@@ -102,6 +118,14 @@ public class InteractableObject : MonoBehaviour
             else if (interacteableType == InteracteableType.SkillTreeTable)
             {
                 //print("Interract with a SkillTree");
+
+                TabletManager.Instance.objectInteractingWith_Object = gameObject;
+
+                //Set SkillTree Animation
+                if (gameObject.GetComponent<Animations_Objects>())
+                {
+                    gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                }
 
                 //Open the crafting menu
                 TabletManager.Instance.OpenTablet(TabletMenuState.SkillTree);
@@ -178,30 +202,4 @@ public enum InteracteableType
     [Description("Battery x1")][InspectorName("Battery x1")] Battery_x1,
     [Description("Battery x2")][InspectorName("Battery x2")] Battery_x2,
     [Description("Battery x3")][InspectorName("Battery x3")] Battery_x3
-
-    //Pickup,
-    //Inventory,
-
-    //CraftingTable,
-    //SkillTreeTable,
-    //GhostTank,
-    //Extractor,
-    //GhostRepeller,
-    //HeatRegulator,
-    //ResourceConverter,
-
-    //BatteryCharger_1,
-    //BatteryCharger_2,
-    //BatteryCharger_3,
-
-    //CropPlot_x1,
-    //CropPlot_x2,
-    //CropPlot_x3,
-
-    //Grill_Manual,
-    //Grill_1,
-    //Grill_2,
-    //Grill_4,
-
-    //SkillTreeTable
 }
