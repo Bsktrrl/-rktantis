@@ -23,6 +23,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
     //Inventories
     [HideInInspector] public List<Inventory> Inventories_StoreList = new List<Inventory>();
+    [HideInInspector] public Vector2 smallChest_Size_Store;
+    [HideInInspector] public Vector2 bigChest_Size_Store;
 
     //Hotbar
     [HideInInspector] public int selectedSlot_Store = new int();
@@ -56,6 +58,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.worldObject_StoreList = gameData.worldObject_SaveList;
 
         this.Inventories_StoreList = gameData.Inventories_SaveList;
+
+        this.smallChest_Size_Store = gameData.smallChest_Size_Save;
+        this.bigChest_Size_Store = gameData.bigChest_Size_Save;
 
         this.hotbarItem_StoreList = gameData.hotbarItem_SaveList;
         this.selectedSlot_Store = gameData.selectedSlot_Save;
@@ -112,6 +117,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.worldObject_SaveList = this.worldObject_StoreList;
 
         gameData.Inventories_SaveList = this.Inventories_StoreList;
+        gameData.smallChest_Size_Save = this.smallChest_Size_Store;
+        gameData.bigChest_Size_Save = this.bigChest_Size_Store;
 
         gameData.hotbarItem_SaveList = this.hotbarItem_StoreList;
         gameData.selectedSlot_Save = this.selectedSlot_Store;

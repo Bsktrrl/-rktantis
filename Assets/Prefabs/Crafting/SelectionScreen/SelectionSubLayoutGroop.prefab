@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -58,8 +57,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 60, y: 60}
-  m_Spacing: {x: 7, y: 0}
+  m_CellSize: {x: 50, y: 50}
+  m_Spacing: {x: 5, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &7953858849349886337
@@ -74,3 +73,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08a4198d908adc4aa79cbe6ad4864ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelName: 0

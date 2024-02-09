@@ -70,7 +70,14 @@ public class TimeManager : Singleton<TimeManager>
         }
         else
         {
-            currentTime += timeSpeed * Time.deltaTime;
+            if (timeOfDay == TimeOfDay.Night)
+            {
+                currentTime += timeSpeed * Time.deltaTime * 1.75f;
+            }
+            else
+            {
+                currentTime += timeSpeed * Time.deltaTime;
+            }
         }
     }
     public void SetTimerDisplay(TextMeshProUGUI clockText, TextMeshProUGUI dayText)

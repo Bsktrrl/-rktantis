@@ -26,21 +26,25 @@ public class Item
     public List<Sprite> itemSpriteList = new List<Sprite>();
     public List<Sprite> itemSelected_SpriteList = new List<Sprite>();
 
+    [Header("Stats")]
+    public bool isActive = true;
+    public bool isConsumeable;
+    public bool isEquipableInHand;
+    public bool isEquipableClothes;
+
+    [Header("Durability")]
+    public int Durability;
+
     [Header("Prefabs")]
     public GameObject worldObjectPrefab;
     public GameObject equippedPrefab;
-
-    [Header("Stats")]
-    public bool isActive;
-    public bool isEquipable;
-    public int HP;
 
     [Header("Animations")]
     public Animation idleAnimation;
     public Animation actionAnimation;
 
     [Header("Crafting")]
-    public bool isCrafteable = false;
+    public bool isCrafteable;
     public List<CraftingRequirements> craftingRequirements = new List<CraftingRequirements>();
 }
 

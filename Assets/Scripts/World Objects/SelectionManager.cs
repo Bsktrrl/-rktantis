@@ -60,30 +60,51 @@ public class SelectionManager : Singleton<SelectionManager>
                     if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Pickup)
                     {
                         //Set correct UI-info for Pickup to be displayed
-                        interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
+                        interaction_text.text = SpaceTextConverting.Instance.SetText(selecedObject.GetComponent<InteractableObject>().itemName.ToString());
                         interaction_Info_UI.SetActive(true);
                     }
                     else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Inventory)
                     {
                         //Set correct UI-info for Inventory/Chest to be displayed
-                        interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
+                        interaction_text.text = SpaceTextConverting.Instance.SetText(selecedObject.GetComponent<InteractableObject>().itemName.ToString());
                     }
                     else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.CraftingTable)
                     {
                         //Set correct UI-info for Machine to be displayed
-                        interaction_text.text = selecedObject.GetComponent<InteractableObject>().itemName.ToString();
+                        interaction_text.text = SpaceTextConverting.Instance.SetText(selecedObject.GetComponent<InteractableObject>().itemName.ToString());
                         interaction_Info_UI.SetActive(true);
                     }
 
                     //Set UI screen Active
                     interaction_Info_UI.SetActive(true);
                 }
+
                 //If there is a Hit without an interacteable script
                 else
                 {
                     interaction_Info_UI.SetActive(false);
                     onTarget = false;
                 }
+
+
+                //-----
+
+
+                //If looking at an Object that can have an outline
+                //if (selecedObject)
+                //{
+                //    if (selecedObject.GetComponent<Outliner>())
+                //    {
+                //        selecedObject.GetComponent<Outliner>().ShowOutliner();
+                //    }
+                //    else
+                //    {
+                //        selecedObject.GetComponent<Outliner>().HideOutliner();
+                //    }
+                //}
+
+
+                //-----
 
 
                 // || Trees || //
@@ -116,6 +137,15 @@ public class SelectionManager : Singleton<SelectionManager>
             {
                 interaction_Info_UI.SetActive(false);
                 onTarget = false;
+
+                //If don't looking at an Object that can have an outline
+                //if (selecedObject)
+                //{
+                //    if (selecedObject.GetComponent<Outliner>())
+                //    {
+                //        selecedObject.GetComponent<Outliner>().HideOutliner();
+                //    }
+                //}
             }
         }
     }

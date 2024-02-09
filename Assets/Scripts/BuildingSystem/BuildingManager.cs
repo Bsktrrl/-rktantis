@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -111,6 +112,10 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public List<GameObject> buildingBlock_UIList = new List<GameObject>();
 
+    [Header("RequiermentColors")]
+    public Color requirementMetColor;
+    public Color requirementNOTMetColor;
+
 
     //--------------------
 
@@ -129,7 +134,9 @@ public class BuildingManager : Singleton<BuildingManager>
 
     private void Update()
     {
-        if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.BuildingHammer)
+        if ((Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer)
+            || (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer)
+            || (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer))
         {
             RaycastSetup_Hammer();
 
@@ -168,7 +175,9 @@ public class BuildingManager : Singleton<BuildingManager>
                 }
             }
         }
-        else if (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.Axe)
+        else if ((Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.WoodAxe)
+            || (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.StoneAxe)
+            || (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.CryoniteAxe))
         {
             RaycastSetup_Axe();
 
@@ -250,7 +259,9 @@ public class BuildingManager : Singleton<BuildingManager>
         #region
         SetBuildingRequirements(GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), buildingRequirement_Parent);
 
-        if (HotbarManager.Instance.selectedItem == Items.BuildingHammer)
+        if (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer
+            || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer
+            || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
         {
             buildingRequirement_Parent.SetActive(true);
             BuildingHammer_isActive = true;
@@ -2101,6 +2112,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
             if (Axe_buildingBlockLookingAt != null)
             {
+                //If looking at a BuildingBlock
                 if (hitTransform.gameObject.CompareTag("BuildingBlock"))
                 {
                     if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent != null)
@@ -2111,7 +2123,7 @@ public class BuildingManager : Singleton<BuildingManager>
                             {
                                 if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent == buildingBlockList[i])
                                 {
-                                    print("6. Destroy Block");
+                                    print("6. Destroy BuildingBlock");
 
                                     //Play remove sound
                                     if (Axe_buildingBlockLookingAt.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
@@ -2166,7 +2178,82 @@ public class BuildingManager : Singleton<BuildingManager>
                 //If looking at a Machine or Furniture
                 else if (hitTransform.gameObject.CompareTag("Machine") || hitTransform.gameObject.CompareTag("Furniture"))
                 {
-                    print("Tried to cut a Machine or Furniture");
+                    print("7. Tried to cut a Machine or Furniture");
+
+                    //If the object has a MoveableObject attached
+                    if (hitTransform.gameObject.GetComponent<MoveableObject>())
+                    {
+                        for (int i = 0; i < MoveableObjectManager.Instance.placedMoveableWorldObjectsList.Count; i++)
+                        {
+                            //If we have chosen the correct movableObject
+                            if (hitTransform.gameObject == MoveableObjectManager.Instance.placedMoveableWorldObjectsList[i])
+                            {
+                                MoveableObjectInfo tempMovableObject_SO = MoveableObjectManager.Instance.GetObjectInfoFromMoveableObject_SO(hitTransform.gameObject.GetComponent<MoveableObject>().machineType, hitTransform.gameObject.GetComponent<MoveableObject>().furnitureType);
+
+                                //If object is a chest
+                                #region
+                                if (tempMovableObject_SO.machineType == MachineType.None
+                                    &&
+                                    (tempMovableObject_SO.furnitureType == FurnitureType.SmallChest
+                                    || tempMovableObject_SO.furnitureType == FurnitureType.BigChest))
+                                {
+                                    if (MoveableObjectManager.Instance.placedMoveableWorldObjectsList[i].GetComponent<InteractableObject>())
+                                    {
+                                        //If chest contain items, don't remove it
+                                        if (InventoryManager.Instance.inventories[MoveableObjectManager.Instance.placedMoveableWorldObjectsList[i].GetComponent<InteractableObject>().inventoryIndex].itemsInInventory.Count > 0)
+                                        {
+                                            SoundManager.Instance.PlaybuildingBlock_CannotPlaceBlock();
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            InventoryManager.Instance.RemoveInventory(MoveableObjectManager.Instance.placedMoveableWorldObjectsList[i].GetComponent<InteractableObject>().inventoryIndex);
+                                        }
+                                    }
+                                }
+                                #endregion
+
+                                //If Object can be removed
+                                #region
+                                print("8. Machine or Furniture");
+
+                                //Add items to playerInventory
+                                for (int j = 0; j < tempMovableObject_SO.RemoveCraftingRequirements.Count; j++)
+                                {
+                                    for (int k = 0; k < tempMovableObject_SO.RemoveCraftingRequirements[j].amount; k++)
+                                    {
+                                        InventoryManager.Instance.AddItemToInventory(0, tempMovableObject_SO.RemoveCraftingRequirements[j].itemName);
+                                    }
+                                }
+
+                                if (Axe_buildingBlockLookingAt.GetComponent<InteractableObject>())
+                                {
+                                    //Remove MovableObject
+                                    MoveableObjectManager.Instance.placedMoveableObjectsList_ToSave.RemoveAt(i);
+                                    MoveableObjectManager.Instance.placedMoveableWorldObjectsList.RemoveAt(i);
+
+                                    Axe_buildingBlockLookingAt.GetComponent<InteractableObject>().DestroyThisObject();
+                                }
+
+                                //Reset parameters
+                                Axe_buildingBlockLookingAt = null;
+                                lastBuildingBlock_LookedAt = null;
+                                old_lastBuildingBlock_LookedAt = null;
+
+                                buildingRemoveRequirement_Parent.SetActive(false);
+                                buildingRequirement_Parent.SetActive(false);
+
+                                //Play Remove-Sound
+                                SoundManager.Instance.PlayMoveableObject_Removed();
+
+                                SaveData();
+                                MoveableObjectManager.Instance.SaveData();
+
+                                break;
+                                #endregion
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -2279,6 +2366,11 @@ public class BuildingManager : Singleton<BuildingManager>
         return null;
     }
 
+
+    //--------------------
+
+
+    //BuildingBlocks
     public void SetBuildingRequirements(BuildingBlock_Parent blockParent, GameObject ParentObject)
     {
         #region Setup
@@ -2313,7 +2405,7 @@ public class BuildingManager : Singleton<BuildingManager>
                 && buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == blockParent.buildingMaterial)
             {
                 buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().parent.GetComponent<Image>().sprite;
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial + " " + buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial.ToString()) + " " + SpaceTextConverting.Instance.SetText(buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType.ToString()) /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
 
                 break;
             }
@@ -2344,18 +2436,69 @@ public class BuildingManager : Singleton<BuildingManager>
             //If having enough items in inventory
             if (counter >= blockParent.buildingRequirementList[i].amount)
             {
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 1, 1, 1);
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = requirementMetColor;
                 //enoughItemsToBuild = true;
             }
 
             //If not having enough items in inventory
             else
             {
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 0, 0, 1);
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = requirementNOTMetColor;
                 enoughItemsToBuild = false;
             }
         }
+    } 
+    public void SetBuildingRemoveRequirements(BuildingBlock_Parent blockParent)
+    {
+        //Remove all childs
+        for (int i = buildingRemoveRequirement_Parent.transform.childCount - 1; i >= 0; i--)
+        {
+            buildingRemoveRequirement_Parent.transform.GetChild(i).GetComponent<BuildingRequirementSlot>().DestroyThisObject();
+        }
+        buildingRemoveRequirement_List.Clear();
+
+        //Setup Header of Requirements
+        #region
+        buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
+
+        for (int i = 0; i < buildingBlock_UIList.Count; i++)
+        {
+            if (buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType == blockParent.buildingType
+                && buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == blockParent.buildingMaterial)
+            {
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().parent.GetComponent<Image>().sprite;
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial.ToString()) + " " + SpaceTextConverting.Instance.SetText(buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType.ToString())  /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
+
+                break;
+            }
+        }
+        #endregion
+
+        //Setup new list of Requirements
+        for (int i = 0; i < blockParent.removeBuildingRequirementList.Count; i++)
+        {
+            buildingRemoveRequirement_List.Add(Instantiate(buildingRequirement_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
+
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(blockParent.removeBuildingRequirementList[i].itemName).hotbarSprite;
+
+            int counter = 0;
+
+            for (int k = 0; k < InventoryManager.Instance.inventories[0].itemsInInventory.Count; k++)
+            {
+                if (blockParent.removeBuildingRequirementList[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
+                {
+                    counter++;
+                }
+            }
+
+            //Display Amount required + Amount in inventory
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + blockParent.removeBuildingRequirementList[i].amount.ToString() + " / " + counter;
+        }
+
+        buildingRemoveRequirement_Parent.SetActive(true);
     }
+
+    //MovableObjects
     public void SetBuildingRequirements(MoveableObjectInfo moveableObject, GameObject ParentObject)
     {
         #region Setup
@@ -2389,11 +2532,11 @@ public class BuildingManager : Singleton<BuildingManager>
 
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
         {
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObject.machineType.ToString();
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(moveableObject.machineType.ToString());
         }
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObject.furnitureType.ToString();
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(moveableObject.furnitureType.ToString());
         }
         #endregion
 
@@ -2421,19 +2564,19 @@ public class BuildingManager : Singleton<BuildingManager>
             //If having enough items in inventory
             if (counter >= moveableObject.craftingRequirements[i].amount)
             {
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 1, 1, 1);
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = requirementMetColor;
                 //enoughItemsToBuild = true;
             }
 
             //If not having enough items in inventory
             else
             {
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = new Color(1, 0, 0, 1);
+                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = requirementNOTMetColor;
                 enoughItemsToBuild = false;
             }
         }
     }
-    public void SetBuildingRemoveRequirements(BuildingBlock_Parent blockParent)
+    public void SetBuildingRemoveRequirements(MoveableObjectInfo moveableObject)
     {
         //Remove all childs
         for (int i = buildingRemoveRequirement_Parent.transform.childCount - 1; i >= 0; i--)
@@ -2446,86 +2589,37 @@ public class BuildingManager : Singleton<BuildingManager>
         #region
         buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
 
-        for (int i = 0; i < buildingBlock_UIList.Count; i++)
-        {
-            if (buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType == blockParent.buildingType
-                && buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial == blockParent.buildingMaterial)
-            {
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = buildingBlock_UIList[i].GetComponentInChildren<Image>().sprite;
-                buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingMaterial + " " + buildingBlock_UIList[i].GetComponent<BuildingBlock_UI>().buildingType /*blockParent.buildingMaterial.ToString() + " " + blockParent.buildingType.ToString()*/;
-
-                break;
-            }
-        }
-        #endregion
-
-        //Setup new list of Requirements
-        for (int i = 0; i < blockParent.removeBuildingRequirementList.Count; i++)
-        {
-            buildingRemoveRequirement_List.Add(Instantiate(buildingRequirement_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
-
-            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(blockParent.removeBuildingRequirementList[i].itemName).hotbarSprite;
-
-            int counter = 0;
-
-            for (int k = 0; k < InventoryManager.Instance.inventories[0].itemsInInventory.Count; k++)
-            {
-                if (blockParent.removeBuildingRequirementList[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
-                {
-                    counter++;
-                }
-            }
-
-            //Display Amount required + Amount in inventory
-            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + blockParent.removeBuildingRequirementList[i].amount.ToString() + " / " + counter;
-        }
-
-        buildingRemoveRequirement_Parent.SetActive(true);
-    }
-    public void SetBuildingRemoveRequirements(MoveableObjectInfo moveableObjectInfo)
-    {
-        //Remove all childs
-        for (int i = buildingRemoveRequirement_Parent.transform.childCount - 1; i >= 0; i--)
-        {
-            buildingRemoveRequirement_Parent.transform.GetChild(i).GetComponent<BuildingRequirementSlot>().DestroyThisObject();
-        }
-        buildingRemoveRequirement_List.Clear();
-
-        //Setup Header of Requirements
-        #region
-        buildingRequirement_List.Add(Instantiate(buildingRequirementHeader_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
-
-        buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = moveableObjectInfo.objectSprite;
+        buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = moveableObject.objectSprite;
 
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
         {
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObjectInfo.machineType.ToString();
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(moveableObject.machineType.ToString());
         }
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
-            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = moveableObjectInfo.furnitureType.ToString();
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponentInChildren<TextMeshProUGUI>().text = SpaceTextConverting.Instance.SetText(moveableObject.furnitureType.ToString());
         }
         #endregion
 
         //Setup new list of Requirements
-        for (int i = 0; i < moveableObjectInfo.RemoveCraftingRequirements.Count; i++)
+        for (int i = 0; i < moveableObject.RemoveCraftingRequirements.Count; i++)
         {
             buildingRemoveRequirement_List.Add(Instantiate(buildingRequirement_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
 
-            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(moveableObjectInfo.RemoveCraftingRequirements[i].itemName).hotbarSprite;
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(moveableObject.RemoveCraftingRequirements[i].itemName).hotbarSprite;
 
             int counter = 0;
 
             for (int k = 0; k < InventoryManager.Instance.inventories[0].itemsInInventory.Count; k++)
             {
-                if (moveableObjectInfo.RemoveCraftingRequirements[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
+                if (moveableObject.RemoveCraftingRequirements[i].itemName == InventoryManager.Instance.inventories[0].itemsInInventory[k].itemName)
                 {
                     counter++;
                 }
             }
 
             //Display Amount required + Amount in inventory
-            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + moveableObjectInfo.RemoveCraftingRequirements[i].amount.ToString() + " / " + counter;
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + moveableObject.RemoveCraftingRequirements[i].amount.ToString() + " / " + counter;
         }
 
         buildingRemoveRequirement_Parent.SetActive(true);

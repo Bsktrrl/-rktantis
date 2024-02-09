@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 60, y: 60}
+  m_SizeDelta: {x: 55, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6389794815643082238
 CanvasRenderer:
@@ -156,11 +156,14 @@ MonoBehaviour:
     itemDescription: 
     hotbarSprite: {fileID: 0}
     itemSpriteList: []
+    itemSelected_SpriteList: []
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
+    Durability: 0
     isActive: 0
-    isEquipable: 0
-    HP: 0
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 0

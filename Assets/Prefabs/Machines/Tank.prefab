@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f3638f5d2eeab474985da6408b460bd8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Machine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -186,9 +191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInRange: 0
-  itemName: 11
+  itemName: 138
   interacteableType: 5
-  isMachine: 1
   inventoryIndex: 0
 --- !u!114 &1910089391727248810
 MonoBehaviour:
@@ -206,7 +210,7 @@ MonoBehaviour:
   isSelectedForMovement: 0
   enoughItemsToBuild: 0
   furnitureType: 0
-  machineType: 3
+  machineType: 11
   meshRenderer: {fileID: 3116739682350178368}
 --- !u!114 &6551397370652277614
 MonoBehaviour:

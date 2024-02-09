@@ -40,9 +40,6 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
 
     public void SetNewSelectedBlock()
     {
-        //Reset Rotation
-        //rotationValue = 0;
-
         BuildingManager.Instance.buildingRequirement_Parent.SetActive(true);
 
         if (tempObj_Selected)

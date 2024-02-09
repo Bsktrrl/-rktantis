@@ -45,7 +45,7 @@ public class CraftingRequirementPrefab : MonoBehaviour
     public void SetDisplay()
     {
         craftingItemImage.sprite = craftingItemSprite;
-        craftingItemName.text = requirements.itemName.ToString();
+        craftingItemName.text = SpaceTextConverting.Instance.SetText(requirements.itemName.ToString());
         craftingItemAmountDisplay.text = GetItemAmontInPlayerInventory(requirements).ToString() + "/" + requirements.amount;
     }
 

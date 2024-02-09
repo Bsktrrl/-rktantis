@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CropPlotMachine_Medium
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 817042d1ff79903459c698beefb8f975,
+        type: 3}
+      propertyPath: m_TagString
+      value: Machine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -180,8 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInRange: 0
-  itemName: 20
-  interacteableType: 14
+  itemName: 129
+  interacteableType: 11
   inventoryIndex: 0
 --- !u!114 &6184868367319860552
 MonoBehaviour:
@@ -199,7 +204,7 @@ MonoBehaviour:
   isSelectedForMovement: 0
   enoughItemsToBuild: 0
   furnitureType: 0
-  machineType: 12
+  machineType: 2
   meshRenderer: {fileID: 6482004491760588271}
 --- !u!114 &3142025932055965003
 MonoBehaviour:

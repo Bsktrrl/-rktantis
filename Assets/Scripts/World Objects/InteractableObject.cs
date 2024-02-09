@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ public class InteractableObject : MonoBehaviour
     //public bool isMachine;
 
     [Header("If Object is an Inventory")]
-    [HideInInspector] [SerializeField] int inventoryIndex;
+    public int inventoryIndex;
 
 
     //--------------------
@@ -34,6 +35,10 @@ public class InteractableObject : MonoBehaviour
 
     void ObjectInteraction()
     {
+        if (gameObject)
+        {
+
+        }
         if (gameObject.GetComponent<MoveableObject>())
         {
             if (gameObject.GetComponent<MoveableObject>().isSelectedForMovement) { return; }
@@ -67,6 +72,14 @@ public class InteractableObject : MonoBehaviour
             {
                 //print("Interract with an Inventory");
 
+                TabletManager.Instance.objectInteractingWith_Object = gameObject;
+
+                //Set Open Chest Animation
+                if (gameObject.GetComponent<Animations_Objects>())
+                {
+                    gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                }
+
                 //Open the chest Inventory
                 InventoryManager.Instance.chestInventoryOpen = inventoryIndex;
                 InventoryManager.Instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Chest Inventory
@@ -91,6 +104,14 @@ public class InteractableObject : MonoBehaviour
             {
                 //print("Interract with a CraftingTable");
 
+                TabletManager.Instance.objectInteractingWith_Object = gameObject;
+
+                //Set Crafting Table Animation
+                if (gameObject.GetComponent<Animations_Objects>())
+                {
+                    gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                }
+
                 //Open the crafting menu
                 TabletManager.Instance.OpenTablet(TabletMenuState.CraftingTable);
 
@@ -98,9 +119,17 @@ public class InteractableObject : MonoBehaviour
             }
 
             //If Object is a SkillTree
-            else if (interacteableType == InteracteableType.SkillTree)
+            else if (interacteableType == InteracteableType.SkillTreeTable)
             {
                 //print("Interract with a SkillTree");
+
+                TabletManager.Instance.objectInteractingWith_Object = gameObject;
+
+                //Set SkillTree Animation
+                if (gameObject.GetComponent<Animations_Objects>())
+                {
+                    gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                }
 
                 //Open the crafting menu
                 TabletManager.Instance.OpenTablet(TabletMenuState.SkillTree);
@@ -152,31 +181,29 @@ public class InteractableObject : MonoBehaviour
 
 public enum InteracteableType
 {
-    None,
+    [Description("")][InspectorName("None")] None,
 
-    Pickup,
-    Inventory,
+    [Description("Pickup")][InspectorName("Pickup")] Pickup,
+    [Description("Inventory")][InspectorName("Inventory")] Inventory,
 
-    CraftingTable,
-    SkillTree,
-    GhostTank,
-    Extractor,
-    GhostRepeller,
-    HeatRegulator,
-    ResourceConverter,
+    [Description("Crafting Table")][InspectorName("Crafting Table")] CraftingTable,
+    [Description("SkillTree Table")][InspectorName("SkillTree Table")] SkillTreeTable,
 
-    BatteryCharger_1,
-    BatteryCharger_2,
-    BatteryCharger_3,
+    [Description("GhostTank")][InspectorName("GhostTank")] GhostTank,
+    [Description("Extractor")][InspectorName("Extractor")] Extractor,
+    [Description("Ghost Repeller")][InspectorName("Ghost Repeller")] GhostRepeller,
+    [Description("Heat Regulator")][InspectorName("Heat Regulator")] HeatRegulator,
+    [Description("Resource Converter")][InspectorName("Resource Converter")] ResourceConverter,
 
-    CropPlot_1,
-    CropPlot_2,
-    CropPlot_3,
+    [Description("CropPlot x1")][InspectorName("CropPlot x1")] CropPlot_x1,
+    [Description("CropPlot x2")][InspectorName("CropPlot x2")] CropPlot_x2,
+    [Description("CropPlot x4")][InspectorName("CropPlot x4")] CropPlot_x4,
 
-    Grill_Manual,
-    Grill_1,
-    Grill_2,
-    Grill_4,
+    [Description("Grill x1")][InspectorName("Grill x1")] Grill_x1,
+    [Description("Grill x2")][InspectorName("Grill x2")] Grill_x2,
+    [Description("Grill x4")][InspectorName("Grill x4")] Grill_x4,
 
-    SkillTreeTable
+    [Description("Battery x1")][InspectorName("Battery x1")] Battery_x1,
+    [Description("Battery x2")][InspectorName("Battery x2")] Battery_x2,
+    [Description("Battery x3")][InspectorName("Battery x3")] Battery_x3
 }

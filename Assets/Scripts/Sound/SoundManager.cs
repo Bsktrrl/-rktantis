@@ -35,13 +35,23 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip stone_Removed;
     [SerializeField] AudioClip iron_Removed;
     [SerializeField] AudioClip buildingBlock_CannotPlaceBlock;
-    [SerializeField] AudioClip moveableObject_placed;
+    [SerializeField] AudioClip moveableObject_Placed;
+    [SerializeField] AudioClip moveableObject_Removed;
+
+
+    //InteractableObjects
+    [Header("Interactable Objects")]
+    [SerializeField] AudioClip openSmallChest;
+    [SerializeField] AudioClip closeSmallChest;
+    [SerializeField] AudioClip openBigChest;
+    [SerializeField] AudioClip closeBigChest;
 
 
     //--------------------
-    
-    
+
+
     //Menu
+    #region
     public void PlaySelectPanel_Clip()
     {
         if (audioSource != null)
@@ -51,8 +61,10 @@ public class SoundManager : Singleton<SoundManager>
             audioSource.Play();
         }
     }
+    #endregion
 
     //inventory
+    #region
     public void PlaySelect_Clip()
     {
         if (audioSource != null)
@@ -116,8 +128,10 @@ public class SoundManager : Singleton<SoundManager>
             audioSource.Play();
         }
     }
+    #endregion
 
     //Crafting
+    #region
     public void Playmenu_Crafting_Clip()
     {
         if (audioSource != null)
@@ -136,8 +150,10 @@ public class SoundManager : Singleton<SoundManager>
             audioSource.Play();
         }
     }
+    #endregion
 
     //Building
+    #region
     public void PlayWood_Placed_Clip()
     {
         if (audioSource != null)
@@ -208,12 +224,61 @@ public class SoundManager : Singleton<SoundManager>
     {
         if (audioSource != null)
         {
-            audioSource.clip = moveableObject_placed;
+            audioSource.clip = moveableObject_Placed;
             audioSource.pitch = 1f;
             audioSource.volume = 1f;
             audioSource.Play();
         }
     }
-    
+    public void PlayMoveableObject_Removed()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = moveableObject_Removed;
+            audioSource.pitch = 1f;
+            audioSource.volume = 1f;
+            audioSource.Play();
+        }
+    }
+    #endregion
 
+    //Interacteable Objects
+    #region
+    public void PlayOpenSmallChest_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = openSmallChest;
+            audioSource.volume = 1f;
+            audioSource.Play();
+        }
+    }
+    public void PlayCloseSmallChest_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = closeSmallChest;
+            audioSource.volume = 0.7f;
+            audioSource.Play();
+        }
+    }
+    public void PlayOpenBigChest_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = openBigChest;
+            audioSource.volume = 0.5f;
+            audioSource.Play();
+        }
+    }
+    public void PlayCloseBigChest_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = closeBigChest;
+            audioSource.volume = 0.5f;
+            audioSource.Play();
+        }
+    }
+    #endregion
 }

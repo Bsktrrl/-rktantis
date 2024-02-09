@@ -17,273 +17,1915 @@ MonoBehaviour:
     categoryName: 0
     subCategoryName: 0
     itemSize: {x: 1, y: 1}
-    itemDescription: 
-    hotbarSprite: {fileID: 21300000, guid: e4c75704211c6834d9faa3a6419e11d0, type: 3}
+    itemDescription: "A base Resource found in the desert of Ar\xEDdea, used in crafting
+      recipes"
+    hotbarSprite: {fileID: -680981526, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
-    - {fileID: -74583670, guid: cb09d8518d394d04883b80b6a11c020d, type: 3}
+    - {fileID: -680981526, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSelected_SpriteList:
-    - {fileID: -74583670, guid: cb09d8518d394d04883b80b6a11c020d, type: 3}
+    - {fileID: -680981526, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isActive: 0
-    isEquipable: 0
-    HP: 0
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 1
-    categoryName: 2
+    categoryName: 1
     subCategoryName: 1
     itemSize: {x: 1, y: 1}
-    itemDescription: This is a stone that can be used in crafting recipes.
-    hotbarSprite: {fileID: 21300000, guid: fe3f0a8ab8fb2f24a8a7a2193adff5b9, type: 3}
+    itemDescription: "A base Resource found in the desert of Ar\xEDdea, used in crafting
+      recipes"
+    hotbarSprite: {fileID: -966535816, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
-    - {fileID: 814119140, guid: e0d49768a0faf0247873ec799af13b39, type: 3}
+    - {fileID: -1420553561, guid: 24a0c511ea97b8949a2431518b5f9a0d, type: 3}
     itemSelected_SpriteList:
-    - {fileID: -1103718043, guid: e0d49768a0faf0247873ec799af13b39, type: 3}
-    worldObjectPrefab: {fileID: 4279313669877795266, guid: 28be7c47a9c5332429ac67d42f39dbbc,
-      type: 3}
-    equippedPrefab: {fileID: 0}
+    - {fileID: 1281791656, guid: 24a0c511ea97b8949a2431518b5f9a0d, type: 3}
     isActive: 1
-    isEquipable: 0
-    HP: 0
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 2
-    categoryName: 2
-    subCategoryName: 2
-    itemSize: {x: 2, y: 2}
-    itemDescription: This is a plank that can be used in crafting recipes.
-    hotbarSprite: {fileID: 21300000, guid: 40e49cc8761c2bd45b45d09fe2475239, type: 3}
+    categoryName: 1
+    subCategoryName: 1
+    itemSize: {x: 1, y: 1}
+    itemDescription: "A base Resource found in the desert of Ar\xEDdea, used in Machinery
+      crafting recipes"
+    hotbarSprite: {fileID: -822714839, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
-    - {fileID: 1467642179, guid: 31d93cf0f344be047a6af13175521316, type: 3}
-    - {fileID: -1165045840, guid: 31d93cf0f344be047a6af13175521316, type: 3}
-    - {fileID: 951967960, guid: 31d93cf0f344be047a6af13175521316, type: 3}
-    - {fileID: 1932310414, guid: 31d93cf0f344be047a6af13175521316, type: 3}
+    - {fileID: 1252519662, guid: 89da9632d866f4a41af4a19d4d81bd2a, type: 3}
     itemSelected_SpriteList:
-    - {fileID: 252689115, guid: 31d93cf0f344be047a6af13175521316, type: 3}
-    - {fileID: -1340238267, guid: 31d93cf0f344be047a6af13175521316, type: 3}
-    - {fileID: -779394655, guid: 31d93cf0f344be047a6af13175521316, type: 3}
-    - {fileID: -382038669, guid: 31d93cf0f344be047a6af13175521316, type: 3}
-    worldObjectPrefab: {fileID: 2937703576817829625, guid: 88618f6b46af1d4499f8d961a3befbac,
-      type: 3}
-    equippedPrefab: {fileID: 0}
+    - {fileID: 533259706, guid: 89da9632d866f4a41af4a19d4d81bd2a, type: 3}
     isActive: 1
-    isEquipable: 0
-    HP: 0
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 3
-    categoryName: 2
-    subCategoryName: 3
-    itemSize: {x: 3, y: 3}
-    itemDescription: This is a leaf that can be used in crafting recipes.
-    hotbarSprite: {fileID: 21300000, guid: 0ff34107caa074b48a3712c4a6de622e, type: 3}
+    categoryName: 1
+    subCategoryName: 1
+    itemSize: {x: 1, y: 1}
+    itemDescription: "A base Resource found in the desert of Ar\xEDdea, used in Advanced
+      Machinery crafting recipes"
+    hotbarSprite: {fileID: -1069739488, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
-    - {fileID: 2114707314, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: -1665722997, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: -1311007148, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: -131188669, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: 916876052, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: -25507351, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: 1237612938, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: -38569215, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: -99089556, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
+    - {fileID: 1678025238, guid: 47c0e9e3988d078449367c00ac7bcb00, type: 3}
     itemSelected_SpriteList:
-    - {fileID: 1618348052, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: -284258036, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: -841776077, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: 1971737014, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: 1051284130, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: 758338304, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: -568579335, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: -845829192, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    - {fileID: -430475090, guid: 7832d3651709a6645ba8056c7d194b07, type: 3}
-    worldObjectPrefab: {fileID: 2833017258156135846, guid: 3fa7c29e95361c240985744d936a1edb,
-      type: 3}
-    equippedPrefab: {fileID: 0}
+    - {fileID: -346856270, guid: 47c0e9e3988d078449367c00ac7bcb00, type: 3}
     isActive: 1
-    isEquipable: 0
-    HP: 0
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 4
+    categoryName: 1
+    subCategoryName: 1
+    itemSize: {x: 1, y: 1}
+    itemDescription: "A base Resource found in the desert of Ar\xEDdea, used in crafting
+      recipes with area of effect abilities"
+    hotbarSprite: {fileID: -1055317877, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1684565607, guid: eca11ef929b378b43aa865538ca71870, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 2098494842, guid: eca11ef929b378b43aa865538ca71870, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 5
+    categoryName: 8
+    subCategoryName: 23
+    itemSize: {x: 1, y: 1}
+    itemDescription: An ancient crystal revealing the remnant of the past
+    hotbarSprite: {fileID: 911357743, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -373963793, guid: ffc4c92ea6d69a443ad8d5cc5bd361cc, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1667955227, guid: ffc4c92ea6d69a443ad8d5cc5bd361cc, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
     craftingRequirements:
+    - itemName: 69
+      amount: 4
+  - itemName: 6
+    categoryName: 1
+    subCategoryName: 2
+    itemSize: {x: 1, y: 1}
+    itemDescription: "A wooden log gathered from Ar\xEDdea Desert trees. Can be used
+      to build structures with a slighlty cover from the sun"
+    hotbarSprite: {fileID: 1942792787, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -324388394, guid: 2935337b6ebf6094185069e8bdf9d061, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 576400157, guid: 2935337b6ebf6094185069e8bdf9d061, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements: []
+  - itemName: 7
+    categoryName: 1
+    subCategoryName: 2
+    itemSize: {x: 1, y: 1}
+    itemDescription: "A stone gathered from Ar\xEDdea Desert mountains. Can be used
+      to build structures with a moderate cover from the sun"
+    hotbarSprite: {fileID: -1945203360, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 685043060, guid: 882eefa2a52cfd3488e78e1125067a65, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 609018281, guid: 882eefa2a52cfd3488e78e1125067a65, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements: []
+  - itemName: 8
+    categoryName: 1
+    subCategoryName: 2
+    itemSize: {x: 1, y: 1}
+    itemDescription: "A stone gathered from Ar\xEDdea Desert mountains. Can be used
+      to build structures with a strong cover from the sun"
+    hotbarSprite: {fileID: 1806627703, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -430788035, guid: 5907fae0428b33046bff4cba9687ff5c, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1421282536, guid: 5907fae0428b33046bff4cba9687ff5c, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements: []
+  - itemName: 14
+    categoryName: 8
+    subCategoryName: 22
+    itemSize: {x: 2, y: 2}
+    itemDescription: A cube with the ability to unlock Perks in the Skill Tree from
+      the early stages of the game
+    hotbarSprite: {fileID: -141408487, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1493471287, guid: b72f45c6a0256174c842f701808d6b5a, type: 3}
+    - {fileID: -1491988245, guid: b72f45c6a0256174c842f701808d6b5a, type: 3}
+    - {fileID: 1776510876, guid: b72f45c6a0256174c842f701808d6b5a, type: 3}
+    - {fileID: -1047864791, guid: b72f45c6a0256174c842f701808d6b5a, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -575460940, guid: b72f45c6a0256174c842f701808d6b5a, type: 3}
+    - {fileID: 778576971, guid: b72f45c6a0256174c842f701808d6b5a, type: 3}
+    - {fileID: -1855411354, guid: b72f45c6a0256174c842f701808d6b5a, type: 3}
+    - {fileID: 1592750805, guid: b72f45c6a0256174c842f701808d6b5a, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 1
+      amount: 1
+    - itemName: 65
+      amount: 1
+    - itemName: 6
+      amount: 1
     - itemName: 2
       amount: 1
-  - itemName: 4
-    categoryName: 4
-    subCategoryName: 5
-    itemSize: {x: 1, y: 2}
-    itemDescription: When Equipped, this Axe can be used to chop down trees and building
-      parts.
-    hotbarSprite: {fileID: 21300000, guid: e4303391985f79844908fe65043c04a0, type: 3}
+  - itemName: 15
+    categoryName: 8
+    subCategoryName: 22
+    itemSize: {x: 2, y: 2}
+    itemDescription: A cube with the ability to unlock Perks in the Skill Tree from
+      the middle stages of the game
+    hotbarSprite: {fileID: 343490048, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
-    - {fileID: -1235552466, guid: a41c728b5482ff044bde4523a5f7f1ba, type: 3}
-    - {fileID: -1067696970, guid: a41c728b5482ff044bde4523a5f7f1ba, type: 3}
+    - {fileID: 269051658, guid: b113a315d81c3fb48a7713d4bf9e24f4, type: 3}
+    - {fileID: 2004231545, guid: b113a315d81c3fb48a7713d4bf9e24f4, type: 3}
+    - {fileID: -644863698, guid: b113a315d81c3fb48a7713d4bf9e24f4, type: 3}
+    - {fileID: 1437388739, guid: b113a315d81c3fb48a7713d4bf9e24f4, type: 3}
     itemSelected_SpriteList:
-    - {fileID: 55069962, guid: a41c728b5482ff044bde4523a5f7f1ba, type: 3}
-    - {fileID: -1161967225, guid: a41c728b5482ff044bde4523a5f7f1ba, type: 3}
-    worldObjectPrefab: {fileID: 4279313669877795266, guid: dc174aabc84666741a383722e6448947,
-      type: 3}
+    - {fileID: -1418478071, guid: b113a315d81c3fb48a7713d4bf9e24f4, type: 3}
+    - {fileID: 199388393, guid: b113a315d81c3fb48a7713d4bf9e24f4, type: 3}
+    - {fileID: -1943705483, guid: b113a315d81c3fb48a7713d4bf9e24f4, type: 3}
+    - {fileID: -747084233, guid: b113a315d81c3fb48a7713d4bf9e24f4, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 14
+      amount: 1
+    - itemName: 1
+      amount: 1
+    - itemName: 7
+      amount: 1
+    - itemName: 3
+      amount: 1
+  - itemName: 16
+    categoryName: 8
+    subCategoryName: 22
+    itemSize: {x: 2, y: 2}
+    itemDescription: A cube with the ability to unlock Perks in the Skill Tree from
+      the late stages of the game
+    hotbarSprite: {fileID: 69658046, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1758707795, guid: 13112c1f818fe7d49a7bc82aeb5b1239, type: 3}
+    - {fileID: -1374036695, guid: 13112c1f818fe7d49a7bc82aeb5b1239, type: 3}
+    - {fileID: 1412073347, guid: 13112c1f818fe7d49a7bc82aeb5b1239, type: 3}
+    - {fileID: 1553188486, guid: 13112c1f818fe7d49a7bc82aeb5b1239, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1034274377, guid: 13112c1f818fe7d49a7bc82aeb5b1239, type: 3}
+    - {fileID: 2105929776, guid: 13112c1f818fe7d49a7bc82aeb5b1239, type: 3}
+    - {fileID: 2119349438, guid: 13112c1f818fe7d49a7bc82aeb5b1239, type: 3}
+    - {fileID: 1110890751, guid: 13112c1f818fe7d49a7bc82aeb5b1239, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 15
+      amount: 1
+    - itemName: 1
+      amount: 1
+    - itemName: 8
+      amount: 1
+    - itemName: 4
+      amount: 1
+  - itemName: 17
+    categoryName: 4
+    subCategoryName: 8
+    itemSize: {x: 2, y: 2}
+    itemDescription: The core of any Machine
+    hotbarSprite: {fileID: -1792453577, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1914993333, guid: f1b2d7c3f795f7947a6379141681a792, type: 3}
+    - {fileID: 947956401, guid: f1b2d7c3f795f7947a6379141681a792, type: 3}
+    - {fileID: -1167115922, guid: f1b2d7c3f795f7947a6379141681a792, type: 3}
+    - {fileID: -542283599, guid: f1b2d7c3f795f7947a6379141681a792, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 812672419, guid: f1b2d7c3f795f7947a6379141681a792, type: 3}
+    - {fileID: 1190146338, guid: f1b2d7c3f795f7947a6379141681a792, type: 3}
+    - {fileID: -115358352, guid: f1b2d7c3f795f7947a6379141681a792, type: 3}
+    - {fileID: -1676233999, guid: f1b2d7c3f795f7947a6379141681a792, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 1
+      amount: 1
+    - itemName: 2
+      amount: 2
+  - itemName: 18
+    categoryName: 8
+    subCategoryName: 23
+    itemSize: {x: 1, y: 2}
+    itemDescription: Enables any Machine to use Ghost energy
+    hotbarSprite: {fileID: -2117151816, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1038535126, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
+    - {fileID: 933157543, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1477072057, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
+    - {fileID: 619935025, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 1
+      amount: 1
+    - itemName: 69
+      amount: 1
+  - itemName: 34
+    categoryName: 5
+    subCategoryName: 12
+    itemSize: {x: 1, y: 2}
+    itemDescription: 'A slow Axe that can cut down trees and building structures '
+    hotbarSprite: {fileID: 838281966, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1034364007, guid: b9f9f83eee5583f469abca6ddfe1b8c1, type: 3}
+    - {fileID: 724429282, guid: b9f9f83eee5583f469abca6ddfe1b8c1, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1917061912, guid: b9f9f83eee5583f469abca6ddfe1b8c1, type: 3}
+    - {fileID: -1316037092, guid: b9f9f83eee5583f469abca6ddfe1b8c1, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 2553926483823156083, guid: da39f2b4d3c87d44cbefd48ae6bd425f,
       type: 3}
-    isActive: 1
-    isEquipable: 1
-    HP: 5000
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
     craftingRequirements:
-    - itemName: 1
-      amount: 1
-    - itemName: 2
-      amount: 2
-    - itemName: 3
-      amount: 1
-  - itemName: 5
-    categoryName: 4
-    subCategoryName: 6
-    itemSize: {x: 1, y: 3}
-    itemDescription: When Equipped, this Building Hammer can be used to build building
-      parts in the world.
-    hotbarSprite: {fileID: 21300000, guid: 47bb401cd6c8522469986afca097fb21, type: 3}
+    - itemName: 6
+      amount: 4
+  - itemName: 35
+    categoryName: 5
+    subCategoryName: 13
+    itemSize: {x: 2, y: 2}
+    itemDescription: A slow Pickaxe that can gather materials from the Desert
+    hotbarSprite: {fileID: -1470706050, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
-    - {fileID: 46826578, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
-    - {fileID: -243376414, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
-    - {fileID: 1179726815, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
+    - {fileID: 1187905662, guid: 7a338c3e0a164d34b97d8f17bcbc8129, type: 3}
+    - {fileID: 596725752, guid: 7a338c3e0a164d34b97d8f17bcbc8129, type: 3}
+    - {fileID: -632814541, guid: 7a338c3e0a164d34b97d8f17bcbc8129, type: 3}
+    - {fileID: -1055552110, guid: 7a338c3e0a164d34b97d8f17bcbc8129, type: 3}
     itemSelected_SpriteList:
-    - {fileID: -911672284, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
-    - {fileID: -1287892632, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
-    - {fileID: 1212099806, guid: 4067dd9d1da0355428903292832fab9a, type: 3}
-    worldObjectPrefab: {fileID: 4279313669877795266, guid: b0229b2dc402cd445b34321ee6111672,
-      type: 3}
+    - {fileID: -762910055, guid: 7a338c3e0a164d34b97d8f17bcbc8129, type: 3}
+    - {fileID: -1623869111, guid: 7a338c3e0a164d34b97d8f17bcbc8129, type: 3}
+    - {fileID: 665664247, guid: 7a338c3e0a164d34b97d8f17bcbc8129, type: 3}
+    - {fileID: 657050404, guid: 7a338c3e0a164d34b97d8f17bcbc8129, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 6
+      amount: 4
+  - itemName: 36
+    categoryName: 5
+    subCategoryName: 14
+    itemSize: {x: 1, y: 2}
+    itemDescription: A slow Sword that can be used as a weapon against creatures
+      across the Desert
+    hotbarSprite: {fileID: -1457058179, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1612199733, guid: 7605264f0f0d78640aa1cf8092176aa0, type: 3}
+    - {fileID: 1079586164, guid: 7605264f0f0d78640aa1cf8092176aa0, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1752391438, guid: 7605264f0f0d78640aa1cf8092176aa0, type: 3}
+    - {fileID: -217130888, guid: 7605264f0f0d78640aa1cf8092176aa0, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 6
+      amount: 3
+  - itemName: 37
+    categoryName: 5
+    subCategoryName: 11
+    itemSize: {x: 1, y: 3}
+    itemDescription: A slow Hammer that can be used to build Structures, Machines
+      and Furniture
+    hotbarSprite: {fileID: 1189175579, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 2093667332, guid: e3e295ca4e76389458c109810b527e33, type: 3}
+    - {fileID: 1560493204, guid: e3e295ca4e76389458c109810b527e33, type: 3}
+    - {fileID: 1949794932, guid: e3e295ca4e76389458c109810b527e33, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1829593164, guid: e3e295ca4e76389458c109810b527e33, type: 3}
+    - {fileID: 25789499, guid: e3e295ca4e76389458c109810b527e33, type: 3}
+    - {fileID: -4801301, guid: e3e295ca4e76389458c109810b527e33, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 1693644012290509181, guid: 12d8621cfba74e24d95af7901dc50e1f,
       type: 3}
-    isActive: 1
-    isEquipable: 1
-    HP: 100000
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
     craftingRequirements:
-    - itemName: 2
-      amount: 4
-    - itemName: 3
-      amount: 2
-  - itemName: 6
-    categoryName: 3
-    subCategoryName: 10
-    itemSize: {x: 2, y: 1}
-    itemDescription: When holding a Small Chest, left click to spawn it into the
-      world. You can use it as a second storage.
-    hotbarSprite: {fileID: 21300000, guid: f19cfea4c93ca3548848c46ad9f3e844, type: 3}
-    itemSpriteList:
-    - {fileID: -1957503050, guid: 8f367c240c3818a45ad25c8ef947e1a4, type: 3}
-    - {fileID: -142297919, guid: 8f367c240c3818a45ad25c8ef947e1a4, type: 3}
-    itemSelected_SpriteList:
-    - {fileID: -47141761, guid: 8f367c240c3818a45ad25c8ef947e1a4, type: 3}
-    - {fileID: 1581607933, guid: 8f367c240c3818a45ad25c8ef947e1a4, type: 3}
-    worldObjectPrefab: {fileID: 4279313669877795266, guid: 8c70823081d6d8f438d5592c4857fbbf,
-      type: 3}
-    equippedPrefab: {fileID: 0}
-    isActive: 1
-    isEquipable: 0
-    HP: 0
-    idleAnimation: {fileID: 0}
-    actionAnimation: {fileID: 0}
-    isCrafteable: 1
-    craftingRequirements:
-    - itemName: 2
-      amount: 4
-    - itemName: 1
-      amount: 1
-    - itemName: 3
-      amount: 2
-  - itemName: 7
-    categoryName: 3
-    subCategoryName: 10
-    itemSize: {x: 3, y: 1}
-    itemDescription: When holding a Medium Chest, left click to spawn it into the
-      world. You can use it as a second storage.
-    hotbarSprite: {fileID: 21300000, guid: 8ab512eb68d8aa44895554fbaeadcce6, type: 3}
-    itemSpriteList:
-    - {fileID: 1310005785, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
-    - {fileID: 1118895527, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
-    - {fileID: -2018920849, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
-    itemSelected_SpriteList:
-    - {fileID: 1282446279, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
-    - {fileID: -1699715127, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
-    - {fileID: 1809759395, guid: 73c8231b5dbadee41bf013a430726300, type: 3}
-    worldObjectPrefab: {fileID: 4279313669877795266, guid: ee59082d7bf50da46b477b1c479ad7bd,
-      type: 3}
-    equippedPrefab: {fileID: 0}
-    isActive: 1
-    isEquipable: 0
-    HP: 0
-    idleAnimation: {fileID: 0}
-    actionAnimation: {fileID: 0}
-    isCrafteable: 1
-    craftingRequirements:
-    - itemName: 2
-      amount: 6
-    - itemName: 1
-      amount: 3
-    - itemName: 3
-      amount: 5
-  - itemName: 9
-    categoryName: 3
-    subCategoryName: 10
-    itemSize: {x: 1, y: 1}
-    itemDescription: Temp
-    hotbarSprite: {fileID: 21300000, guid: 424946d0e60d4314d8e0e42c00114bc2, type: 3}
-    itemSpriteList:
-    - {fileID: -34546620, guid: 06521b7ca3b82d74f8e75837a7cd33f5, type: 3}
-    itemSelected_SpriteList:
-    - {fileID: 2144498859, guid: 06521b7ca3b82d74f8e75837a7cd33f5, type: 3}
-    worldObjectPrefab: {fileID: 4279313669877795266, guid: f2bde7fc4196fd44a8fcde2f934623b9,
-      type: 3}
-    equippedPrefab: {fileID: 0}
-    isActive: 1
-    isEquipable: 0
-    HP: 0
-    idleAnimation: {fileID: 0}
-    actionAnimation: {fileID: 0}
-    isCrafteable: 1
-    craftingRequirements:
-    - itemName: 2
-      amount: 3
-    - itemName: 1
-      amount: 1
-    - itemName: 3
-      amount: 30
-  - itemName: 10
-    categoryName: 4
-    subCategoryName: 7
+    - itemName: 6
+      amount: 9
+  - itemName: 38
+    categoryName: 5
+    subCategoryName: 12
     itemSize: {x: 1, y: 2}
-    itemDescription: A Flashlight that may reveal hidden images
-    hotbarSprite: {fileID: 21300000, guid: 5cfdb47da2ac73f47b11bfd0e2193bd4, type: 3}
+    itemDescription: 'A faster Axe that can cut down trees and building structures '
+    hotbarSprite: {fileID: -1577609581, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
-    - {fileID: -622452534, guid: a94781366b008fb4884c07e70d9b41e2, type: 3}
-    - {fileID: -922584838, guid: a94781366b008fb4884c07e70d9b41e2, type: 3}
+    - {fileID: -1399572779, guid: e261098e37fca27499e9f21d943208d1, type: 3}
+    - {fileID: -2101342973, guid: e261098e37fca27499e9f21d943208d1, type: 3}
     itemSelected_SpriteList:
-    - {fileID: 1839007233, guid: a94781366b008fb4884c07e70d9b41e2, type: 3}
-    - {fileID: -2057881963, guid: a94781366b008fb4884c07e70d9b41e2, type: 3}
-    worldObjectPrefab: {fileID: 4279313669877795266, guid: e35908c9e58908044bb29489eedb6b30,
-      type: 3}
+    - {fileID: 106496278, guid: e261098e37fca27499e9f21d943208d1, type: 3}
+    - {fileID: 980763661, guid: e261098e37fca27499e9f21d943208d1, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 6
+      amount: 1
+    - itemName: 7
+      amount: 3
+  - itemName: 39
+    categoryName: 5
+    subCategoryName: 13
+    itemSize: {x: 2, y: 2}
+    itemDescription: A faster Pickaxe that can gather materials from the Desert
+    hotbarSprite: {fileID: 974419481, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -299381752, guid: 12dab317cb8841c439628daea6abb709, type: 3}
+    - {fileID: 2084870030, guid: 12dab317cb8841c439628daea6abb709, type: 3}
+    - {fileID: 34687270, guid: 12dab317cb8841c439628daea6abb709, type: 3}
+    - {fileID: 1442780161, guid: 12dab317cb8841c439628daea6abb709, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -2133424912, guid: 12dab317cb8841c439628daea6abb709, type: 3}
+    - {fileID: 1881877031, guid: 12dab317cb8841c439628daea6abb709, type: 3}
+    - {fileID: 368729868, guid: 12dab317cb8841c439628daea6abb709, type: 3}
+    - {fileID: -2125097424, guid: 12dab317cb8841c439628daea6abb709, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 6
+      amount: 1
+    - itemName: 7
+      amount: 3
+  - itemName: 40
+    categoryName: 5
+    subCategoryName: 14
+    itemSize: {x: 1, y: 2}
+    itemDescription: A faster Sword that can be used as a weapon against creatures
+      across the Desert
+    hotbarSprite: {fileID: 1071165918, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -220454702, guid: d6b85181c661fbd419681b2b21fb4091, type: 3}
+    - {fileID: 1941815701, guid: d6b85181c661fbd419681b2b21fb4091, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -2114556115, guid: d6b85181c661fbd419681b2b21fb4091, type: 3}
+    - {fileID: -1311446604, guid: d6b85181c661fbd419681b2b21fb4091, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 6
+      amount: 1
+    - itemName: 7
+      amount: 2
+  - itemName: 41
+    categoryName: 5
+    subCategoryName: 11
+    itemSize: {x: 1, y: 3}
+    itemDescription: A faster Hammer that can be used to build Structures, Machines
+      and Furniture
+    hotbarSprite: {fileID: -573842504, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 45592848, guid: 8fc5a272467b0c442a1fed69502258f1, type: 3}
+    - {fileID: 576036279, guid: 8fc5a272467b0c442a1fed69502258f1, type: 3}
+    - {fileID: 1928625052, guid: 8fc5a272467b0c442a1fed69502258f1, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1527144119, guid: 8fc5a272467b0c442a1fed69502258f1, type: 3}
+    - {fileID: 1685633048, guid: 8fc5a272467b0c442a1fed69502258f1, type: 3}
+    - {fileID: -564080139, guid: 8fc5a272467b0c442a1fed69502258f1, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 6
+      amount: 1
+    - itemName: 7
+      amount: 8
+  - itemName: 42
+    categoryName: 5
+    subCategoryName: 12
+    itemSize: {x: 1, y: 2}
+    itemDescription: 'A high-speed Axe that can cut down trees and building structures '
+    hotbarSprite: {fileID: -1764154583, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1218229400, guid: 82c002af59b4b2142810f95a0a8b348e, type: 3}
+    - {fileID: -1900150496, guid: 82c002af59b4b2142810f95a0a8b348e, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -802469131, guid: 82c002af59b4b2142810f95a0a8b348e, type: 3}
+    - {fileID: -2127131649, guid: 82c002af59b4b2142810f95a0a8b348e, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 6
+      amount: 1
+    - itemName: 8
+      amount: 3
+  - itemName: 43
+    categoryName: 5
+    subCategoryName: 13
+    itemSize: {x: 2, y: 2}
+    itemDescription: A high-speed Pickaxe that can gather materials from the Desert
+    hotbarSprite: {fileID: 203743095, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1740356560, guid: fb8f0962ba154444aafe6efd3437a2df, type: 3}
+    - {fileID: -1539475148, guid: fb8f0962ba154444aafe6efd3437a2df, type: 3}
+    - {fileID: -498501213, guid: fb8f0962ba154444aafe6efd3437a2df, type: 3}
+    - {fileID: 63082874, guid: fb8f0962ba154444aafe6efd3437a2df, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1781633476, guid: fb8f0962ba154444aafe6efd3437a2df, type: 3}
+    - {fileID: 1712567213, guid: fb8f0962ba154444aafe6efd3437a2df, type: 3}
+    - {fileID: 1494421705, guid: fb8f0962ba154444aafe6efd3437a2df, type: 3}
+    - {fileID: 1431786623, guid: fb8f0962ba154444aafe6efd3437a2df, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 6
+      amount: 1
+    - itemName: 8
+      amount: 3
+  - itemName: 44
+    categoryName: 5
+    subCategoryName: 14
+    itemSize: {x: 1, y: 2}
+    itemDescription: A high-speed Sword that can be used as a weapon against creatures
+      across the Desert
+    hotbarSprite: {fileID: -1299810063, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 59221808, guid: ef01b890797bf45459f12d345c8ffdf0, type: 3}
+    - {fileID: -1583206706, guid: ef01b890797bf45459f12d345c8ffdf0, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 360450110, guid: ef01b890797bf45459f12d345c8ffdf0, type: 3}
+    - {fileID: 1292849298, guid: ef01b890797bf45459f12d345c8ffdf0, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 6
+      amount: 1
+    - itemName: 8
+      amount: 2
+  - itemName: 45
+    categoryName: 5
+    subCategoryName: 11
+    itemSize: {x: 1, y: 3}
+    itemDescription: A high-speed Hammer that can be used to build Structures, Machines
+      and Furniture
+    hotbarSprite: {fileID: 422996473, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 119580254, guid: 1c303d1ce17d5e04d996906cc3181a4a, type: 3}
+    - {fileID: 14375750, guid: 1c303d1ce17d5e04d996906cc3181a4a, type: 3}
+    - {fileID: 785864010, guid: 1c303d1ce17d5e04d996906cc3181a4a, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 2066227661, guid: 1c303d1ce17d5e04d996906cc3181a4a, type: 3}
+    - {fileID: 784492258, guid: 1c303d1ce17d5e04d996906cc3181a4a, type: 3}
+    - {fileID: -72346132, guid: 1c303d1ce17d5e04d996906cc3181a4a, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 6
+      amount: 1
+    - itemName: 8
+      amount: 8
+  - itemName: 51
+    categoryName: 6
+    subCategoryName: 16
+    itemSize: {x: 2, y: 2}
+    itemDescription: A Headgear that will feed you food items from your Inventory
+      when you reach under 25% Hunger
+    hotbarSprite: {fileID: 1094537347, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1807251268, guid: 4b99b8bac3a677c4b981b92866e188c1, type: 3}
+    - {fileID: 1284975055, guid: 4b99b8bac3a677c4b981b92866e188c1, type: 3}
+    - {fileID: -2043215009, guid: 4b99b8bac3a677c4b981b92866e188c1, type: 3}
+    - {fileID: 1690965482, guid: 4b99b8bac3a677c4b981b92866e188c1, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1452789615, guid: 4b99b8bac3a677c4b981b92866e188c1, type: 3}
+    - {fileID: 2050408722, guid: 4b99b8bac3a677c4b981b92866e188c1, type: 3}
+    - {fileID: -1774852005, guid: 4b99b8bac3a677c4b981b92866e188c1, type: 3}
+    - {fileID: 2101265807, guid: 4b99b8bac3a677c4b981b92866e188c1, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 1
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 67
+      amount: 3
+    - itemName: 65
+      amount: 3
+  - itemName: 52
+    categoryName: 6
+    subCategoryName: 16
+    itemSize: {x: 2, y: 2}
+    itemDescription: "A Headgear that light your path without you holding it in your
+      hand. It is infused with an Ar\xEDdite Crystal to be able to reveal the remnant
+      of the past"
+    hotbarSprite: {fileID: -1730970421, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -543666347, guid: 5173b0e39f2b0be4da1bad11408d3068, type: 3}
+    - {fileID: 691662475, guid: 5173b0e39f2b0be4da1bad11408d3068, type: 3}
+    - {fileID: -91752575, guid: 5173b0e39f2b0be4da1bad11408d3068, type: 3}
+    - {fileID: 745697771, guid: 5173b0e39f2b0be4da1bad11408d3068, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1300299081, guid: 5173b0e39f2b0be4da1bad11408d3068, type: 3}
+    - {fileID: 1517957265, guid: 5173b0e39f2b0be4da1bad11408d3068, type: 3}
+    - {fileID: -1541563147, guid: 5173b0e39f2b0be4da1bad11408d3068, type: 3}
+    - {fileID: 377486720, guid: 5173b0e39f2b0be4da1bad11408d3068, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 1
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 67
+      amount: 3
+    - itemName: 65
+      amount: 3
+    - itemName: 5
+      amount: 1
+  - itemName: 53
+    categoryName: 6
+    subCategoryName: 16
+    itemSize: {x: 2, y: 2}
+    itemDescription: A Headgear that reduce the damage taken from creatures across
+      the Desert
+    hotbarSprite: {fileID: 14655313, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -892825876, guid: 5508b0100128b574caf460fa21738138, type: 3}
+    - {fileID: -1780233044, guid: 5508b0100128b574caf460fa21738138, type: 3}
+    - {fileID: 1337878210, guid: 5508b0100128b574caf460fa21738138, type: 3}
+    - {fileID: 241817714, guid: 5508b0100128b574caf460fa21738138, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -2143828309, guid: 5508b0100128b574caf460fa21738138, type: 3}
+    - {fileID: 306063599, guid: 5508b0100128b574caf460fa21738138, type: 3}
+    - {fileID: 1939315509, guid: 5508b0100128b574caf460fa21738138, type: 3}
+    - {fileID: -1790497311, guid: 5508b0100128b574caf460fa21738138, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 1
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 67
+      amount: 3
+    - itemName: 65
+      amount: 3
+  - itemName: 54
+    categoryName: 6
+    subCategoryName: 17
+    itemSize: {x: 2, y: 2}
+    itemDescription: Gloves that increases your Pickaxe's mining speed
+    hotbarSprite: {fileID: -753491461, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1349019007, guid: 2eabca988a778ea43a8f67139b8ba60a, type: 3}
+    - {fileID: 724494169, guid: 2eabca988a778ea43a8f67139b8ba60a, type: 3}
+    - {fileID: -854226249, guid: 2eabca988a778ea43a8f67139b8ba60a, type: 3}
+    - {fileID: 727670657, guid: 2eabca988a778ea43a8f67139b8ba60a, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -521989201, guid: 2eabca988a778ea43a8f67139b8ba60a, type: 3}
+    - {fileID: -981634620, guid: 2eabca988a778ea43a8f67139b8ba60a, type: 3}
+    - {fileID: 1630489185, guid: 2eabca988a778ea43a8f67139b8ba60a, type: 3}
+    - {fileID: 149657057, guid: 2eabca988a778ea43a8f67139b8ba60a, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 1
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 67
+      amount: 3
+    - itemName: 65
+      amount: 3
+  - itemName: 55
+    categoryName: 6
+    subCategoryName: 17
+    itemSize: {x: 2, y: 2}
+    itemDescription: Gloves that decreases the amount of picks your Pickaxe needs
+      to perform to gather the resource
+    hotbarSprite: {fileID: 513128692, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1665302478, guid: 8e7aae3a62dbb3548a33d1b0cb419e04, type: 3}
+    - {fileID: 1961258969, guid: 8e7aae3a62dbb3548a33d1b0cb419e04, type: 3}
+    - {fileID: -2061447916, guid: 8e7aae3a62dbb3548a33d1b0cb419e04, type: 3}
+    - {fileID: 1714946729, guid: 8e7aae3a62dbb3548a33d1b0cb419e04, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1427332355, guid: 8e7aae3a62dbb3548a33d1b0cb419e04, type: 3}
+    - {fileID: 730049225, guid: 8e7aae3a62dbb3548a33d1b0cb419e04, type: 3}
+    - {fileID: 80474466, guid: 8e7aae3a62dbb3548a33d1b0cb419e04, type: 3}
+    - {fileID: -604279204, guid: 8e7aae3a62dbb3548a33d1b0cb419e04, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 1
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 67
+      amount: 3
+    - itemName: 65
+      amount: 3
+  - itemName: 56
+    categoryName: 6
+    subCategoryName: 17
+    itemSize: {x: 2, y: 2}
+    itemDescription: Gloves that ables you to get back all resources used on Structures,
+      Machines and Furnitures when removing them
+    hotbarSprite: {fileID: -1815859852, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -2005826147, guid: a30586d74697c40419515eab68609d53, type: 3}
+    - {fileID: 98631957, guid: a30586d74697c40419515eab68609d53, type: 3}
+    - {fileID: -1041965583, guid: a30586d74697c40419515eab68609d53, type: 3}
+    - {fileID: -291789102, guid: a30586d74697c40419515eab68609d53, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1905918462, guid: a30586d74697c40419515eab68609d53, type: 3}
+    - {fileID: 359663656, guid: a30586d74697c40419515eab68609d53, type: 3}
+    - {fileID: -596276035, guid: a30586d74697c40419515eab68609d53, type: 3}
+    - {fileID: 713849356, guid: a30586d74697c40419515eab68609d53, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 1
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 67
+      amount: 3
+    - itemName: 65
+      amount: 3
+  - itemName: 57
+    categoryName: 6
+    subCategoryName: 18
+    itemSize: {x: 2, y: 2}
+    itemDescription: Shoes that increase your general Walking speed
+    hotbarSprite: {fileID: 77072340, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 454048411, guid: 6143d035f38f1f446b5fd225e8ffd081, type: 3}
+    - {fileID: -1420423572, guid: 6143d035f38f1f446b5fd225e8ffd081, type: 3}
+    - {fileID: 2095450701, guid: 6143d035f38f1f446b5fd225e8ffd081, type: 3}
+    - {fileID: -1400654916, guid: 6143d035f38f1f446b5fd225e8ffd081, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1792005586, guid: 6143d035f38f1f446b5fd225e8ffd081, type: 3}
+    - {fileID: -180182132, guid: 6143d035f38f1f446b5fd225e8ffd081, type: 3}
+    - {fileID: 1263260791, guid: 6143d035f38f1f446b5fd225e8ffd081, type: 3}
+    - {fileID: -1469338034, guid: 6143d035f38f1f446b5fd225e8ffd081, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 1
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 67
+      amount: 3
+    - itemName: 65
+      amount: 3
+  - itemName: 58
+    categoryName: 6
+    subCategoryName: 18
+    itemSize: {x: 2, y: 2}
+    itemDescription: Shoes that prevents your from losing more Health than normal
+      when Running
+    hotbarSprite: {fileID: 1848062516, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -576905356, guid: d1d1406ca3b71af4bb2218b99b3a3065, type: 3}
+    - {fileID: 637060555, guid: d1d1406ca3b71af4bb2218b99b3a3065, type: 3}
+    - {fileID: 1277339237, guid: d1d1406ca3b71af4bb2218b99b3a3065, type: 3}
+    - {fileID: -1857273744, guid: d1d1406ca3b71af4bb2218b99b3a3065, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -433892053, guid: d1d1406ca3b71af4bb2218b99b3a3065, type: 3}
+    - {fileID: 1780636170, guid: d1d1406ca3b71af4bb2218b99b3a3065, type: 3}
+    - {fileID: 2034273186, guid: d1d1406ca3b71af4bb2218b99b3a3065, type: 3}
+    - {fileID: -871966389, guid: d1d1406ca3b71af4bb2218b99b3a3065, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 1
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 67
+      amount: 3
+    - itemName: 65
+      amount: 3
+  - itemName: 59
+    categoryName: 6
+    subCategoryName: 18
+    itemSize: {x: 2, y: 2}
+    itemDescription: Shoes that vastly increase your Walking speed when walking on
+      built structure
+    hotbarSprite: {fileID: -33461867, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1906831484, guid: a643c80b82cf2174e9180daff70d095e, type: 3}
+    - {fileID: -1918671267, guid: a643c80b82cf2174e9180daff70d095e, type: 3}
+    - {fileID: -1601571840, guid: a643c80b82cf2174e9180daff70d095e, type: 3}
+    - {fileID: -375646632, guid: a643c80b82cf2174e9180daff70d095e, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -130763540, guid: a643c80b82cf2174e9180daff70d095e, type: 3}
+    - {fileID: -2089839046, guid: a643c80b82cf2174e9180daff70d095e, type: 3}
+    - {fileID: 975509763, guid: a643c80b82cf2174e9180daff70d095e, type: 3}
+    - {fileID: -1110066230, guid: a643c80b82cf2174e9180daff70d095e, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 1
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 67
+      amount: 3
+    - itemName: 65
+      amount: 3
+  - itemName: 65
+    categoryName: 2
+    subCategoryName: 4
+    itemSize: {x: 1, y: 2}
+    itemDescription: A base resource that is used in the crafting of Clothes and
+      Perk Cubes
+    hotbarSprite: {fileID: 1127131807, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 507960040, guid: f0dcdfa090e83784ab3a4733ef51c754, type: 3}
+    - {fileID: 565751333, guid: f0dcdfa090e83784ab3a4733ef51c754, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1568092367, guid: f0dcdfa090e83784ab3a4733ef51c754, type: 3}
+    - {fileID: -211588087, guid: f0dcdfa090e83784ab3a4733ef51c754, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 66
+    categoryName: 2
+    subCategoryName: 3
+    itemSize: {x: 1, y: 1}
+    itemDescription: A base resource that is used when building structures
+    hotbarSprite: {fileID: 974390384, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1155505584, guid: d70b356468243bf49828dba22d484284, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1366053504, guid: d70b356468243bf49828dba22d484284, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 67
+    categoryName: 2
+    subCategoryName: 4
+    itemSize: {x: 1, y: 2}
+    itemDescription: A base resource that is used in the crafting of Clothes
+    hotbarSprite: {fileID: 891956444, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 984807256, guid: f185e978e7e083f4da58f1f632bd4564, type: 3}
+    - {fileID: 434947753, guid: f185e978e7e083f4da58f1f632bd4564, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 118793739, guid: f185e978e7e083f4da58f1f632bd4564, type: 3}
+    - {fileID: -938641302, guid: f185e978e7e083f4da58f1f632bd4564, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 68
+    categoryName: 2
+    subCategoryName: 3
+    itemSize: {x: 1, y: 2}
+    itemDescription: A base resource that is used in the building of Machines
+    hotbarSprite: {fileID: -126615201, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -164557111, guid: fa0c6e0122519574683811a976e048d7, type: 3}
+    - {fileID: 1947660275, guid: fa0c6e0122519574683811a976e048d7, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1501011837, guid: fa0c6e0122519574683811a976e048d7, type: 3}
+    - {fileID: 860994570, guid: fa0c6e0122519574683811a976e048d7, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 69
+    categoryName: 2
+    subCategoryName: 5
+    itemSize: {x: 2, y: 2}
+    itemDescription: A base resource that is used in the building of Machines and
+      some Perks
+    hotbarSprite: {fileID: -991433405, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1172317886, guid: ba36842c2886a7846b60a5600eb45e8c, type: 3}
+    - {fileID: -1753959428, guid: ba36842c2886a7846b60a5600eb45e8c, type: 3}
+    - {fileID: 972781058, guid: ba36842c2886a7846b60a5600eb45e8c, type: 3}
+    - {fileID: 1175964298, guid: ba36842c2886a7846b60a5600eb45e8c, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1638915388, guid: ba36842c2886a7846b60a5600eb45e8c, type: 3}
+    - {fileID: 1321964442, guid: ba36842c2886a7846b60a5600eb45e8c, type: 3}
+    - {fileID: 746731295, guid: ba36842c2886a7846b60a5600eb45e8c, type: 3}
+    - {fileID: 954341037, guid: ba36842c2886a7846b60a5600eb45e8c, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 70
+    categoryName: 2
+    subCategoryName: 5
+    itemSize: {x: 1, y: 1}
+    itemDescription: A base resource that is used in the building of Machines
+    hotbarSprite: {fileID: -967372045, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 483177372, guid: 2439ea665dab7f74787bfa98b54a16f6, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 358159578, guid: 2439ea665dab7f74787bfa98b54a16f6, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 76
+    categoryName: 3
+    subCategoryName: 6
+    itemSize: {x: 1, y: 1}
+    itemDescription: "A Seed that can be planted in a Crop Plot to grow the Ar\xEDdis
+      Plant"
+    hotbarSprite: {fileID: 218505410, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 773368225, guid: 5a49320c8bd702343a9fe2907498ea20, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1462487408, guid: 5a49320c8bd702343a9fe2907498ea20, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 69
+      amount: 1
+  - itemName: 77
+    categoryName: 3
+    subCategoryName: 6
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Glue Plant
+    hotbarSprite: {fileID: 1780391014, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1912732036, guid: 04d08945b1e93144c8191806d9a2bdc9, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -7009385, guid: 04d08945b1e93144c8191806d9a2bdc9, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 66
+      amount: 2
+  - itemName: 78
+    categoryName: 3
+    subCategoryName: 6
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Crimson
+      Cloud Bush Plant
+    hotbarSprite: {fileID: 2116540816, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1026699277, guid: 110f7bfe6bb35af40a7232315b0d1b33, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 127928090, guid: 110f7bfe6bb35af40a7232315b0d1b33, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 67
+      amount: 1
+  - itemName: 79
+    categoryName: 3
+    subCategoryName: 6
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Red Cotton
+      Plant
+    hotbarSprite: {fileID: -820162706, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 135186905, guid: 43bbf215046a4a94f8a9dbd34774b163, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -515100637, guid: 43bbf215046a4a94f8a9dbd34774b163, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 67
+      amount: 1
+  - itemName: 80
+    categoryName: 3
+    subCategoryName: 6
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Spik Plant
+    hotbarSprite: {fileID: -1856933245, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1859238529, guid: 57d25d26e06a2a74a99a43395837019c, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1935498318, guid: 57d25d26e06a2a74a99a43395837019c, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 68
+      amount: 1
+  - itemName: 81
+    categoryName: 3
+    subCategoryName: 7
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Small
+      Cactus Plant
+    hotbarSprite: {fileID: -1864283181, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -997508531, guid: 2e9027d61c8b6014cb93df710ffba4e5, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -449835881, guid: 2e9027d61c8b6014cb93df710ffba4e5, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 95
+      amount: 1
+  - itemName: 82
+    categoryName: 3
+    subCategoryName: 7
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Lerge
+      Cactus Plant
+    hotbarSprite: {fileID: 2027024209, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 556838347, guid: c47acc2ee558fec4abc72779d855430f, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -96828278, guid: c47acc2ee558fec4abc72779d855430f, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 95
+      amount: 1
+  - itemName: 83
+    categoryName: 3
+    subCategoryName: 7
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Pudding
+      Cactus Plant
+    hotbarSprite: {fileID: -2116380738, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1246185627, guid: 87e375c18cf63c444854be3d3261b261, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 3205397, guid: 87e375c18cf63c444854be3d3261b261, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 95
+      amount: 2
+  - itemName: 84
+    categoryName: 3
+    subCategoryName: 7
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Stalk
+      Plant
+    hotbarSprite: {fileID: 1201616986, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 66115422, guid: c2dd64ba8fe3cdd4cba2fddb04881139, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1321758402, guid: c2dd64ba8fe3cdd4cba2fddb04881139, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 97
+      amount: 1
+  - itemName: 85
+    categoryName: 3
+    subCategoryName: 7
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Tripod
+      Plant
+    hotbarSprite: {fileID: -575243807, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -523813823, guid: 1d9a5cb8c69622b43acdcaffadffef36, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -610127462, guid: 1d9a5cb8c69622b43acdcaffadffef36, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 98
+      amount: 1
+  - itemName: 86
+    categoryName: 3
+    subCategoryName: 7
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Heat Fruit
+      Plant
+    hotbarSprite: {fileID: 171935607, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 443140850, guid: e280335348b95294f85876f05b54c481, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1963554966, guid: e280335348b95294f85876f05b54c481, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 99
+      amount: 1
+  - itemName: 87
+    categoryName: 3
+    subCategoryName: 7
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Freeze
+      Fruit Plant
+    hotbarSprite: {fileID: -253568757, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1279045643, guid: d3bb14a62c7f85240b12637a186ee31b, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1544405399, guid: d3bb14a62c7f85240b12637a186ee31b, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 100
+      amount: 1
+  - itemName: 88
+    categoryName: 3
+    subCategoryName: 7
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Twisted
+      Mushroom Plant
+    hotbarSprite: {fileID: -1920780250, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 483177372, guid: 2439ea665dab7f74787bfa98b54a16f6, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 358159578, guid: 2439ea665dab7f74787bfa98b54a16f6, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 89
+    categoryName: 3
+    subCategoryName: 7
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Ground
+      Twisted Mushroom Plant
+    hotbarSprite: {fileID: 1304467813, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1724916945, guid: 29c868f761f02e34880a5266dc83f1f9, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1501917553, guid: 29c868f761f02e34880a5266dc83f1f9, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 95
+    categoryName: 7
+    subCategoryName: 19
+    itemSize: {x: 1, y: 2}
+    itemDescription: Heals Hunger a lot and Thirst slightly
+    hotbarSprite: {fileID: -993071880, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -13486799, guid: c15e568b9f9442f41b3212b5c796493c, type: 3}
+    - {fileID: 1288524491, guid: c15e568b9f9442f41b3212b5c796493c, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -155867934, guid: c15e568b9f9442f41b3212b5c796493c, type: 3}
+    - {fileID: -1637924846, guid: c15e568b9f9442f41b3212b5c796493c, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 98
+    categoryName: 7
+    subCategoryName: 19
+    itemSize: {x: 1, y: 2}
+    itemDescription: Heals Hunger slightlty and Thirst a lot
+    hotbarSprite: {fileID: -630275936, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1229009089, guid: 093de5db674a6e447bf973cab539f391, type: 3}
+    - {fileID: -2129742125, guid: 093de5db674a6e447bf973cab539f391, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1854129587, guid: 093de5db674a6e447bf973cab539f391, type: 3}
+    - {fileID: 992157886, guid: 093de5db674a6e447bf973cab539f391, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 96
+    categoryName: 7
+    subCategoryName: 19
+    itemSize: {x: 1, y: 2}
+    itemDescription: Heals Hunger a lot and Thirst a lot
+    hotbarSprite: {fileID: -628637600, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 194608554, guid: b0c009d09dfb4014a92f6c2528ee5cce, type: 3}
+    - {fileID: -1788838637, guid: b0c009d09dfb4014a92f6c2528ee5cce, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1676062475, guid: b0c009d09dfb4014a92f6c2528ee5cce, type: 3}
+    - {fileID: -1068255915, guid: b0c009d09dfb4014a92f6c2528ee5cce, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 97
+    categoryName: 7
+    subCategoryName: 19
+    itemSize: {x: 2, y: 2}
+    itemDescription: Heals Hunger slightly, Thirst slightly and your Main Health
+      slightly
+    hotbarSprite: {fileID: -1797223384, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1744547793, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
+    - {fileID: 612644859, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
+    - {fileID: 941453739, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
+    - {fileID: 295944320, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1745073888, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
+    - {fileID: 233012354, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
+    - {fileID: 1438611104, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
+    - {fileID: -312934208, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 99
+    categoryName: 7
+    subCategoryName: 19
+    itemSize: {x: 1, y: 2}
+    itemDescription: "Heals Hunger slightlty and give you a temporary heat buff of
+      +5\xB0C"
+    hotbarSprite: {fileID: 504752157, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1967477266, guid: daab314390dc111479e8faa37efbe03a, type: 3}
+    - {fileID: -1887525163, guid: daab314390dc111479e8faa37efbe03a, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 784880192, guid: daab314390dc111479e8faa37efbe03a, type: 3}
+    - {fileID: -961120594, guid: daab314390dc111479e8faa37efbe03a, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 100
+    categoryName: 7
+    subCategoryName: 19
+    itemSize: {x: 1, y: 2}
+    itemDescription: "Heals Hunger slightlty and give you a temporary cold buff of
+      -5\xB0C"
+    hotbarSprite: {fileID: 764050166, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -746409982, guid: a4133fc1ff912ad4c8f08d0f8b7b0fde, type: 3}
+    - {fileID: -1926953143, guid: a4133fc1ff912ad4c8f08d0f8b7b0fde, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 2105257566, guid: a4133fc1ff912ad4c8f08d0f8b7b0fde, type: 3}
+    - {fileID: -1393256978, guid: a4133fc1ff912ad4c8f08d0f8b7b0fde, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 106
+    categoryName: 7
+    subCategoryName: 20
+    itemSize: {x: 1, y: 1}
+    itemDescription: Heals Hunger a lot and Thirst slightly
+    hotbarSprite: {fileID: 2127962865, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 2133874561, guid: 0882301a5933fe943872e850c421f63f, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -770434209, guid: 0882301a5933fe943872e850c421f63f, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 107
+    categoryName: 7
+    subCategoryName: 20
+    itemSize: {x: 1, y: 1}
+    itemDescription: Heals Hunger slightly, Thirst a lot
+    hotbarSprite: {fileID: -592244701, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 691286424, guid: 4b76ec7f1a7a95c4b81bbffa67b09844, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1736571060, guid: 4b76ec7f1a7a95c4b81bbffa67b09844, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 108
+    categoryName: 7
+    subCategoryName: 20
+    itemSize: {x: 1, y: 1}
+    itemDescription: Heals Hunger a lot and Thirst a lot
+    hotbarSprite: {fileID: -958895449, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1338124569, guid: a5f5ea0b98b32b4449efeeb6a957ae75, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1555606292, guid: a5f5ea0b98b32b4449efeeb6a957ae75, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 109
+    categoryName: 7
+    subCategoryName: 20
+    itemSize: {x: 1, y: 1}
+    itemDescription: Heals Hunger slightly, Thirst slightly and your Main Health
+      slightly
+    hotbarSprite: {fileID: 937053243, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1590256035, guid: 93d5c5b63781e2847a7e743e1659866b, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1847978001, guid: 93d5c5b63781e2847a7e743e1659866b, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 110
+    categoryName: 7
+    subCategoryName: 20
+    itemSize: {x: 1, y: 1}
+    itemDescription: "Heals Hunger slightlty and give you a temporary heat buff of
+      +5\xB0C"
+    hotbarSprite: {fileID: -711683752, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 680512803, guid: e2754ad282db39d4aa1249244a878e54, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -494857886, guid: e2754ad282db39d4aa1249244a878e54, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 111
+    categoryName: 7
+    subCategoryName: 20
+    itemSize: {x: 1, y: 1}
+    itemDescription: "Heals Hunger slightlty and give you a temporary cold buff of
+      -5\xB0C"
+    hotbarSprite: {fileID: 1046482156, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1625713962, guid: 5260f6b45ed729d4d942c02d0eb91480, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1552360176, guid: 5260f6b45ed729d4d942c02d0eb91480, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 117
+    categoryName: 7
+    subCategoryName: 21
+    itemSize: {x: 1, y: 2}
+    itemDescription: Heals Hunger grately and Thirst a lot
+    hotbarSprite: {fileID: -1927244271, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1414501730, guid: b02d366ad82d2464a962347a979591bb, type: 3}
+    - {fileID: -1333840076, guid: b02d366ad82d2464a962347a979591bb, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1754563183, guid: b02d366ad82d2464a962347a979591bb, type: 3}
+    - {fileID: -922994253, guid: b02d366ad82d2464a962347a979591bb, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 118
+    categoryName: 7
+    subCategoryName: 21
+    itemSize: {x: 1, y: 2}
+    itemDescription: Heals Hunger a lot, Thirst greatly
+    hotbarSprite: {fileID: -1003202654, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1229009089, guid: 093de5db674a6e447bf973cab539f391, type: 3}
+    - {fileID: -2129742125, guid: 093de5db674a6e447bf973cab539f391, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1854129587, guid: 093de5db674a6e447bf973cab539f391, type: 3}
+    - {fileID: 992157886, guid: 093de5db674a6e447bf973cab539f391, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 119
+    categoryName: 7
+    subCategoryName: 21
+    itemSize: {x: 1, y: 2}
+    itemDescription: Heals Hunger greatly and Thirst greatly
+    hotbarSprite: {fileID: -1874628135, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1694423545, guid: b006964d4979b5d4fac6689a85b78161, type: 3}
+    - {fileID: 1584417196, guid: b006964d4979b5d4fac6689a85b78161, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1517774052, guid: b006964d4979b5d4fac6689a85b78161, type: 3}
+    - {fileID: 286678220, guid: b006964d4979b5d4fac6689a85b78161, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 120
+    categoryName: 7
+    subCategoryName: 21
+    itemSize: {x: 2, y: 2}
+    itemDescription: Heals Hunger a lot, Thirst a lot and your Main Health a lot
+    hotbarSprite: {fileID: 1608870532, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -852196474, guid: 285ce6427f8b6ab4a9e3505faebfbcc1, type: 3}
+    - {fileID: 45691775, guid: 285ce6427f8b6ab4a9e3505faebfbcc1, type: 3}
+    - {fileID: 1205482734, guid: 285ce6427f8b6ab4a9e3505faebfbcc1, type: 3}
+    - {fileID: 1707351343, guid: 285ce6427f8b6ab4a9e3505faebfbcc1, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 962346546, guid: 285ce6427f8b6ab4a9e3505faebfbcc1, type: 3}
+    - {fileID: 1435782519, guid: 285ce6427f8b6ab4a9e3505faebfbcc1, type: 3}
+    - {fileID: 1347515140, guid: 285ce6427f8b6ab4a9e3505faebfbcc1, type: 3}
+    - {fileID: -574948415, guid: 285ce6427f8b6ab4a9e3505faebfbcc1, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 121
+    categoryName: 7
+    subCategoryName: 21
+    itemSize: {x: 1, y: 2}
+    itemDescription: "Heals Hunger a lot and give you a temporary heat buff of +10\xB0C"
+    hotbarSprite: {fileID: -1699054442, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1555959075, guid: 4a9d66948bd8b964fa66be5e860e8e15, type: 3}
+    - {fileID: 722996294, guid: 4a9d66948bd8b964fa66be5e860e8e15, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 225946303, guid: 4a9d66948bd8b964fa66be5e860e8e15, type: 3}
+    - {fileID: -977264122, guid: 4a9d66948bd8b964fa66be5e860e8e15, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 122
+    categoryName: 7
+    subCategoryName: 21
+    itemSize: {x: 1, y: 2}
+    itemDescription: "Heals Hunger a lot and give you a temporary cold buff of -10\xB0C"
+    hotbarSprite: {fileID: -1255032030, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 1537601827, guid: 39616e5fae2994f43a9e42459214e71d, type: 3}
+    - {fileID: 1384502815, guid: 39616e5fae2994f43a9e42459214e71d, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 393668540, guid: 39616e5fae2994f43a9e42459214e71d, type: 3}
+    - {fileID: -585618742, guid: 39616e5fae2994f43a9e42459214e71d, type: 3}
+    isActive: 1
+    isConsumeable: 1
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 46
+    categoryName: 5
+    subCategoryName: 48
+    itemSize: {x: 2, y: 2}
+    itemDescription: A flashlight that might reveal the remnant of the past
+    hotbarSprite: {fileID: -1864727091, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -285335766, guid: a864fdc7975a82642bc6ef2030342f74, type: 3}
+    - {fileID: -199866985, guid: a864fdc7975a82642bc6ef2030342f74, type: 3}
+    - {fileID: 243685538, guid: a864fdc7975a82642bc6ef2030342f74, type: 3}
+    - {fileID: 985975558, guid: a864fdc7975a82642bc6ef2030342f74, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 760770596, guid: a864fdc7975a82642bc6ef2030342f74, type: 3}
+    - {fileID: 1583064428, guid: a864fdc7975a82642bc6ef2030342f74, type: 3}
+    - {fileID: -1650496245, guid: a864fdc7975a82642bc6ef2030342f74, type: 3}
+    - {fileID: 1792024748, guid: a864fdc7975a82642bc6ef2030342f74, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 2602820642190348203, guid: 97ba8c2de77ab3847952c90f86079d9e,
       type: 3}
-    isActive: 1
-    isEquipable: 1
-    HP: 0
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
-    isCrafteable: 1
+    isCrafteable: 0
     craftingRequirements:
     - itemName: 1
-      amount: 2
+      amount: 4
+    - itemName: 17
+      amount: 1
+    - itemName: 5
+      amount: 1

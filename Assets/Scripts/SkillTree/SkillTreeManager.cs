@@ -156,7 +156,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     {
         perkSetup = true;
 
-        header_Text.text = skillTreeMenu_Type.ToString();
+        header_Text.text = SpaceTextConverting.Instance.SetText(skillTreeMenu_Type.ToString());
         perkName_Text.text = "";
         perkDescription_Text.text = "";
 
@@ -175,8 +175,8 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
         activePerk = perk.GetComponent<Perk>();
 
-        header_Text.text = skillTreeMenu_Type.ToString();
-        perkName_Text.text = perk.GetComponent<Perk>().perkInfo.perkName;
+        header_Text.text = SpaceTextConverting.Instance.SetText(skillTreeMenu_Type.ToString());
+        perkName_Text.text = SpaceTextConverting.Instance.SetText(perk.GetComponent<Perk>().perkInfo.perkName);
         perkDescription_Text.text = perk.GetComponent<Perk>().perkInfo.perkDescription;
 
         //Reset the perkRequirementList

@@ -30,7 +30,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
         }
 
         //Check if the selected item has the required states
-        if (MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).isEquipable
+        if (MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).isEquipableInHand
             && toolHolderParent.GetComponentInChildren<EquippedItem>() != null)
         {
             //Play animation

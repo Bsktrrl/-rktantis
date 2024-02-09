@@ -10,6 +10,7 @@ public class TabletManager : Singleton<TabletManager>
     [Header("General")]
     public TabletMenuState tabletMenuState;
     public ObjectInteractingWith objectInteractingWith;
+    public GameObject objectInteractingWith_Object;
 
     [Header("Menus")]
     int menuAmount = 4;
@@ -258,25 +259,20 @@ public class TabletManager : Singleton<TabletManager>
         switch (currentMenu)
         {
             case TabletMenuState.None:
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
 
             case TabletMenuState.ChestInventory:
                 menu_Inventory.SetActive(false);
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.Equipment:
                 equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(false);
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.Inventory:
                 menu_Inventory.SetActive(false);
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.CraftingTable:
                 menu_CraftingTable.SetActive(false);
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
             case TabletMenuState.SkillTree:
                 menu_Skilltree.SetActive(false);
@@ -287,7 +283,6 @@ public class TabletManager : Singleton<TabletManager>
                 break;
 
             default:
-                //InventoryManager.Instance.ClosePlayerInventory();
                 break;
         }
 
@@ -344,6 +339,7 @@ public class TabletManager : Singleton<TabletManager>
 
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
                 break;
+
             case TabletMenuState.CraftingTable:
                 MainManager.Instance.menuStates = MenuStates.CraftingMenu;
                 tabletMenuState = TabletMenuState.CraftingTable;
@@ -505,8 +501,28 @@ public class TabletManager : Singleton<TabletManager>
 
         tabletMenuState = TabletMenuState.None;
         objectInteractingWith = ObjectInteractingWith.None;
+
+        //Stop Animation when not used anymore
+        if (objectInteractingWith_Object)
+        {
+            if (objectInteractingWith_Object.GetComponent<Animations_Objects>())
+            {
+                objectInteractingWith_Object.GetComponent<Animations_Objects>().StopAnimation();
+            }
+        }
+        
+        objectInteractingWith_Object = null;
+
         Cursor.lockState = CursorLockMode.Locked;
         MainManager.Instance.menuStates = MenuStates.None;
+
+        //Hide all Requirement_Parents
+        BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
+
+        if (MainManager.Instance.gameStates != GameStates.Cutting)
+        {
+            BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(false);
+        }
     }
     
     void SetMenuDisplay(bool state)

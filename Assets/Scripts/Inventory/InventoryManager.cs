@@ -15,6 +15,9 @@ public class InventoryManager : Singleton<InventoryManager>
     public Vector2 inventorySize;
     public int cellsize = 70;
 
+    public Vector2 smallChest_Size = new Vector2(4, 4);
+    public Vector2 bigChest_Size = new Vector2(7, 7);
+
     [Header("Item")]
     public Items lastItemToGet;
     [SerializeField] TextMeshProUGUI player_ItemName_Display;
@@ -51,9 +54,6 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void Start()
     {
-        //PlayerButtonManager.OpenPlayerInventory_isPressedDown += OpenPlayerInventory;
-        //PlayerButtonManager.ClosePlayerInventory_isPressedDown += ClosePlayerInventory;
-
         TabletManager.Instance.playerInventory_Parent.SetActive(false);
         TabletManager.Instance.chestInventory_Parent.SetActive(false);
         playerInventory_Fake_Parent.SetActive(false);
@@ -79,6 +79,11 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         #endregion
 
+        #region Chest Sizes
+        smallChest_Size = DataManager.Instance.smallChest_Size_Store;
+        bigChest_Size = DataManager.Instance.bigChest_Size_Store;
+        #endregion
+
         #region Player Position
         //Set Player position - The "LoadData()" doesen't activate in the relevant playerMovement script
         MainManager.Instance.player.transform.SetPositionAndRotation(DataManager.Instance.playerPos_Store, DataManager.Instance.playerRot_Store);
@@ -86,11 +91,16 @@ public class InventoryManager : Singleton<InventoryManager>
     }
     public void SaveData()
     {
+        //All Inventories
         DataManager.Instance.Inventories_StoreList = inventories;
-    }
+
+        //Chest Sizes (may be upgraded in the SkillTree
+        DataManager.Instance.smallChest_Size_Store = smallChest_Size;
+        DataManager.Instance.bigChest_Size_Store = bigChest_Size;
+}
     public void SaveData(ref GameData gameData)
     {
-        DataManager.Instance.Inventories_StoreList = inventories;
+        SaveData();
 
         print("Save_Inventories");
     }
@@ -109,6 +119,15 @@ public class InventoryManager : Singleton<InventoryManager>
         //Set inventory stats
         inventories[inventories.Count - 1].inventoryIndex = inventories.Count - 1;
         inventories[inventories.Count - 1].inventorySize = size;
+
+        SaveData();
+    }
+    public void AddInventory(InteractableObject chest, Vector2 size)
+    {
+        AddInventory(size);
+
+        //Add index to the chest to connect it to the inventoriesList
+        chest.inventoryIndex = inventories.Count - 1;
 
         SaveData();
     }
@@ -250,21 +269,24 @@ public class InventoryManager : Singleton<InventoryManager>
         RemoveInventoriesUI();
         PrepareInventoryUI(inventory, false);
 
-        //Spawn item into the World
-        WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, handDropPoint.transform.position, Quaternion.identity) as GameObject);
-        WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
+        //Spawn item into the World, if the item have a WorldObject attached
+        if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
+        {
+            WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, handDropPoint.transform.position, Quaternion.identity) as GameObject);
+            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
 
-        //Set Gravity true on the worldObject
-        WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
-        WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
+            //Set Gravity true on the worldObject
+            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
+            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
 
-        //Update item in the World
-        WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName, WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]);
+            //Update item in the World
+            WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName, WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]);
+        }
 
         //If item is removed from the inventory, update the Hotbar
         if (inventory <= 0)
         {
-            CheckHotbarItemInInventory(ID);
+            CheckHotbarItemInInventory();
         }
 
         SetBuildingRequirement();
@@ -441,15 +463,14 @@ public class InventoryManager : Singleton<InventoryManager>
         PrepareInventoryUI(0, true);
         PrepareInventoryUI(chestInventoryOpen, true);
 
-        CheckHotbarItemInInventory(ID);
+        CheckHotbarItemInInventory();
 
         //Update the Hand to see if slot is empty
         HotbarManager.Instance.ChangeItemInHand();
     }
 
-    public void CheckHotbarItemInInventory(int ID)
+    public void CheckHotbarItemInInventory()
     {
-        print("1. ID: " + ID);
         for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
         {
             bool isInInventory = false;
@@ -474,7 +495,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
                 HotbarManager.Instance.hotbarList[i].itemName = Items.None;
                 HotbarManager.Instance.hotbarList[i].itemID = -1;
-                HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
+                HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
                 HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
 
                 //Update the Hand to see if slot is empty
@@ -499,7 +520,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
                     HotbarManager.Instance.hotbarList[i].itemName = Items.None;
                     HotbarManager.Instance.hotbarList[i].itemID = -1;
-                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
 
                     //Update the Hand to see if slot is empty
@@ -524,7 +545,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
                     HotbarManager.Instance.hotbarList[i].itemName = Items.None;
                     HotbarManager.Instance.hotbarList[i].itemID = -1;
-                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveHotbarSlotImage();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
 
                     //Update the Hand to see if slot is empty
@@ -562,9 +583,9 @@ public class InventoryManager : Singleton<InventoryManager>
                 player_ItemName_Display.text = "";
                 player_ItemDescription_Display.text = "";
             }
-            else
+            else 
             {
-                player_ItemName_Display.text = itemName.ToString();
+                player_ItemName_Display.text = SpaceTextConverting.Instance.SetText(itemName.ToString());
                 player_ItemDescription_Display.text = MainManager.Instance.GetItem(itemName).itemDescription;
             }
         }
@@ -579,7 +600,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
             else
             {
-                chest_ItemName_Display.text = itemName.ToString();
+                chest_ItemName_Display.text = SpaceTextConverting.Instance.SetText(itemName.ToString());
                 chest_ItemDescription_Display.text = MainManager.Instance.GetItem(itemName).itemDescription;
             }
         }
@@ -706,21 +727,70 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
-    public void SelectItemToHotbar(Items itemName, int ID)
+    public void SelectItemInfoToHotbar()
     {
-        //Get selected item
-        //itemSlotList_Player.
+        //Assign HotbarInfo to the correct ItemSlot
+        for (int i = 0; i < inventories[0].itemsInInventory.Count; i++)
+        {
+            for (int j = 0; j < itemSlotList_Player.Count; j++)
+            {
+                //Find relevant item
+                if (itemSlotList_Player[j].GetComponent<ItemSlot>().itemName == inventories[0].itemsInInventory[i].itemName
+                    && itemSlotList_Player[j].GetComponent<ItemSlot>().itemID == inventories[0].itemsInInventory[i].itemID)
+                {
+                    //If the selected item is in the Hotbar
+                    for (int k = 0; k < HotbarManager.Instance.hotbarList.Count; k++)
+                    {
+                        if (HotbarManager.Instance.hotbarList[k].itemName == itemSlotList_Player[j].GetComponent<ItemSlot>().itemName
+                            && HotbarManager.Instance.hotbarList[k].itemID == itemSlotList_Player[j].GetComponent<ItemSlot>().itemID)
+                        {
+                            itemSlotList_Player[j].GetComponent<ItemSlot>().ActivateHotbarInfoToItemSlot(k + 1);
 
-        //Mark the item as selected to the hotbar (and add its hotbarNumber on the selected hotbar)
-
+                            //Go to the next item in the inventoryList, skipping the rest of the itemSlots for this item
+                            j = itemSlotList_Player.Count;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
     }
-    public void DeselectItemToHotbar(Items itemName, int ID)
+    public void SelectItemInfoToHotbar(int hotbarSlot, Items itemName, int ID)
     {
-        //Get selected item
+        //Assign HotbarInfo to the correct ItemSlot
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemName == itemName
+                && itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == ID)
+            {
+                itemSlotList_Player[i].GetComponent<ItemSlot>().ActivateHotbarInfoToItemSlot(hotbarSlot + 1);
 
+                return;
+            }
+        }
+    }
+    public void DeselectItemInfoToHotbar()
+    {
+        //Hide HotbarInfo from the correct ItemSlot
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            itemSlotList_Player[i].GetComponent<ItemSlot>().DeactivateHotbarInfoToItemSlot();
+        }
+    }
+    public void DeselectItemInfoToHotbar(Items itemName, int ID)
+    {
+        //Hide HotbarInfo from the correct ItemSlot
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemName == itemName
+                && itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == ID)
+            {
+                itemSlotList_Player[i].GetComponent<ItemSlot>().DeactivateHotbarInfoToItemSlot();
 
-        //Remove the selected HotbarMark from this item
-
+                return;
+            }
+        }
     }
 
 
@@ -766,6 +836,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
         //Setup the grid with all items
         SetupUIGrid(inventory, isMovingItem);
+
+        //Set HotbarInfo on inventoryItems
+        SelectItemInfoToHotbar();
     }
     void SortInventory(int inventory)
     {
@@ -1021,15 +1094,8 @@ public class InventoryManager : Singleton<InventoryManager>
     #region Open/Close Inventory Menu
     public void OpenPlayerInventory()
     {
-        if (inventoryIsOpen)
+        if (!inventoryIsOpen)
         {
-            //ClosePlayerInventory();
-        }
-        else
-        {
-            //Cursor.lockState = CursorLockMode.None;
-            //MainManager.Instance.menuStates = MenuStates.InventoryMenu;
-
             PrepareInventoryUI(0, false); //Prepare PLAYER Inventory
 
             TabletManager.Instance.playerInventory_Parent.GetComponent<RectTransform>().sizeDelta = inventories[0].inventorySize * cellsize;
@@ -1054,6 +1120,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
         //Cursor.lockState = CursorLockMode.Locked;
         //MainManager.Instance.menuStates = MenuStates.None;
+
+        //Hide HotbarInfo on inventoryItems
+        DeselectItemInfoToHotbar();
 
         inventoryIsOpen = false;
     }

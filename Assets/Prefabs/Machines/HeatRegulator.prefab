@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeatRegulator
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c006c12b2f707a44b738fd8830dc41f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Machine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -180,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInRange: 0
-  itemName: 14
+  itemName: 135
   interacteableType: 8
   inventoryIndex: 0
 --- !u!114 &1146403331381439390
@@ -199,7 +204,7 @@ MonoBehaviour:
   isSelectedForMovement: 0
   enoughItemsToBuild: 0
   furnitureType: 0
-  machineType: 6
+  machineType: 8
   meshRenderer: {fileID: 5934585154121411418}
 --- !u!114 &2982894434679538766
 MonoBehaviour:
