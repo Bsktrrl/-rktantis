@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AlbedoMap:
-        m_Texture: {fileID: 2800000, guid: 3c8398dadf835c14e9148130e3e544a6, type: 3}
+        m_Texture: {fileID: 2800000, guid: a3e90b81992ea3740b354d61560d2138, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -142,6 +142,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlbedoColorMultiplier: 7
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -181,6 +182,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _Tiling: 5
+    - _TilingBlend: 0.5
     - _Transparency: 0
     - _TransparencyDither: 0
     - _TransparencyMultiplier: 0
