@@ -7232,7 +7232,7 @@ MonoBehaviour:
   temperatureDisplay_Parent: {fileID: 6040757724687480020}
   temperatureDisplay: {fileID: 8907096356024768207}
   playerTemperatureDisplay: {fileID: 4043269264687928829}
-  temperature: 0
+  currentWorldTemperature: 0
   playerTemperature: 0
   maxTemperature: 50
   minTemperature: -10
@@ -7241,9 +7241,9 @@ MonoBehaviour:
   equippment: 0
   skillTree: 0
   waterCooler: 0
-  wood_Cover: 5
-  stone_Cover: 10
-  iron_Cover: 15
+  wood_Cover: 10
+  stone_Cover: 20
+  iron_Cover: 30
 --- !u!1 &1633608648128740365
 GameObject:
   m_ObjectHideFlags: 0

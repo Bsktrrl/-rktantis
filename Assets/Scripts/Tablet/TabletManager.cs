@@ -503,10 +503,14 @@ public class TabletManager : Singleton<TabletManager>
         objectInteractingWith = ObjectInteractingWith.None;
 
         //Stop Animation when not used anymore
-        if (objectInteractingWith_Object.GetComponent<Animations_Objects>())
+        if (objectInteractingWith_Object)
         {
-            objectInteractingWith_Object.GetComponent<Animations_Objects>().StopAnimation();
+            if (objectInteractingWith_Object.GetComponent<Animations_Objects>())
+            {
+                objectInteractingWith_Object.GetComponent<Animations_Objects>().StopAnimation();
+            }
         }
+        
         objectInteractingWith_Object = null;
 
         Cursor.lockState = CursorLockMode.Locked;
