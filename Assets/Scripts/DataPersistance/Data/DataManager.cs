@@ -37,12 +37,16 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_StoreList = new List<MoveableObject_ToSave>();
     [HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Store = new MoveableObjectSelected_ToSave();
 
+    //Plants
+    [HideInInspector] public List<PlantToSave> plantTypeObjectList_Store = new List<PlantToSave>();
+
     //HealthParameter
     [HideInInspector] public HealthToSave health_Store = new HealthToSave();
 
     //Time
     [HideInInspector] public float currentTime_Store = new float();
     [HideInInspector] public int day_Store = new int();
+
 
 
     //--------------------
@@ -74,6 +78,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         this.currentTime_Store = gameData.currentTime_Save;
         this.day_Store = gameData.day_Save;
+
+        this.plantTypeObjectList_Store = gameData.plantTypeObjectList_Save;
         #endregion
 
         //Load the saved data into the project
@@ -101,6 +107,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         TimeManager.Instance.LoadData();
         print("7. TimeManager has Loaded");
+
+        PlantManager.Instance.LoadData();
+        print("8. Plants has Loaded");
         #endregion
 
         print("------------------------------");
@@ -132,6 +141,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         gameData.currentTime_Save = this.currentTime_Store;
         gameData.day_Save = this.day_Store;
+
+        gameData.plantTypeObjectList_Save = this.plantTypeObjectList_Store;
 
         print("Data has Saved");
     }

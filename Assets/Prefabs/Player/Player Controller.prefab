@@ -1390,7 +1390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e749acc5b010a4242bedf88703507f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventorySize: {x: 5, y: 7}
+  inventorySize: {x: 4, y: 4}
   cellsize: 70
   smallChest_Size: {x: 4, y: 4}
   bigChest_Size: {x: 7, y: 7}
@@ -1539,6 +1539,7 @@ MonoBehaviour:
   - {fileID: 7272671384917134698}
   - {fileID: 5717357121028685325}
   chestInventoryOpen: 0
+  gravityTime: 5
 --- !u!1 &393812021061872043
 GameObject:
   m_ObjectHideFlags: 0
@@ -4531,6 +4532,7 @@ MonoBehaviour:
     furnitureType: 0
     buildingType: 0
     buildingMaterial: 0
+  plantTypeObjectList_Store: []
   health_Store:
     hungerValue: 0
     hungerValueMultiplier_Check: 0
@@ -4836,7 +4838,8 @@ MonoBehaviour:
   iron_Removed: {fileID: 8300000, guid: 12859fd2af2a336439755a950bd9df7f, type: 3}
   buildingBlock_CannotPlaceBlock: {fileID: 8300000, guid: 136e698311287924b8242fd2cf1b33de,
     type: 3}
-  moveableObject_placed: {fileID: 0}
+  moveableObject_Placed: {fileID: 0}
+  moveableObject_Removed: {fileID: 0}
   openSmallChest: {fileID: 8300000, guid: aeec90aa82ece4846b03e294aaa90a86, type: 3}
   closeSmallChest: {fileID: 8300000, guid: 79b4e45b6009e8c47b15085a2591e9fb, type: 3}
   openBigChest: {fileID: 8300000, guid: 7511d9fe11c403444ad365b383e03005, type: 3}
@@ -4880,6 +4883,7 @@ Transform:
   - {fileID: 3746785199076586965}
   - {fileID: 7731493627771937123}
   - {fileID: 3680787842887615143}
+  - {fileID: 889239136039093569}
   - {fileID: 73521283782460119}
   - {fileID: 2879984142793569524}
   - {fileID: 535329241264645037}
@@ -13559,7 +13563,7 @@ MonoBehaviour:
   buildingType_Selected: 0
   buildingMaterial_Selected: 0
   objectToMove: {fileID: 0}
-  placedMoveableObjectsList: []
+  placedMoveableWorldObjectsList: []
   placedMoveableObjectsList_ToSave: []
   moveableObjectSelected_ToSave:
     moveableObjectType: 0
@@ -16494,6 +16498,52 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 6
+--- !u!1 &3457642379968754997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 889239136039093569}
+  - component: {fileID: 8887281145000820141}
+  m_Layer: 0
+  m_Name: PlantManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &889239136039093569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457642379968754997}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 908462092873944586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8887281145000820141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457642379968754997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec9b90daf4e7784ea7ad7e570e40723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  growthTimer: 3600
+  plantTypeObjectList: []
 --- !u!1 &3477283428738154851
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,16 +1,21 @@
-Todo before thirsday 13. - 5 days left
+Todo before thirsday 13. - 3 days left
 
-7 - Add different displays for items in the inventory/Main Screen
+8 - Add different displays for items in the inventory/Main Screen
 	- Equipeable items
 	- Consumeable items
-	- Static items
+	- Static items (resources)
 
-5 - Make functionalty with all new plants
-	- Also make cutting functionality for trees with axe
-6 - Add WorldObjects to all InventoryItems in the game
+5 - Make All new plants to prefabs
+	- Make All WorldObjects for the plants
+	- Make Different Materials options for other colors of flowers
+
+9 - Make trees to prefab with new animation
+	- Make cutting functionality for trees with any axe
+
+7 - Add WorldObjects (Pickups) to all InventoryItems in the game
 	- Assign the WorldItems to the items in the itemsList_SO
 
-8 - Look into UI Screen Resolution
+6 - Look into UI Screen Resolution
 
 --------------------
 
@@ -40,3 +45,5 @@ Todo before thirsday 13. - 5 days left
 - Make it so that the MovableObjectMenu swap selectedItem, even if BuildingHammer isn't in hand
 	- It works for BuildingBlocks, so take a closer look at the differences
 	- Move the "SetNewSelectedBlock()" from the BuildingHammer to "BuildingSystemMenu"
+
+- Make two functions to "Pause Game" and "Unpause Game" in the "MainMenu"

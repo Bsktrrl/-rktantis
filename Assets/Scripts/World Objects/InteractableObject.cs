@@ -11,11 +11,16 @@ public class InteractableObject : MonoBehaviour
 
     [Header("Stats")]
     public Items itemName;
+    public int amount;
     public InteracteableType interacteableType;
-    //public bool isMachine;
 
     [Header("If Object is an Inventory")]
     public int inventoryIndex;
+
+    [Header("If Object is a Plant")]
+    public GameObject plantParent;
+
+    bool isHittingGround;
 
 
     //--------------------
@@ -29,16 +34,22 @@ public class InteractableObject : MonoBehaviour
         Vector3 scale = gameObject.transform.lossyScale;
     }
 
+    private void Update()
+    {
+        //If Item, reduce the velocity on the ground
+        if (isHittingGround && GetComponent<Rigidbody>() && interacteableType == InteracteableType.Item)
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+            GetComponent<Rigidbody>().useGravity = false;
+        }
+    }
+
 
     //--------------------
 
 
     void ObjectInteraction()
     {
-        if (gameObject)
-        {
-
-        }
         if (gameObject.GetComponent<MoveableObject>())
         {
             if (gameObject.GetComponent<MoveableObject>().isSelectedForMovement) { return; }
@@ -51,23 +62,52 @@ public class InteractableObject : MonoBehaviour
         if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selecedObject == gameObject
             && MainManager.Instance.menuStates == MenuStates.None)
         {
-            //If Object is a Pickup
-            if (interacteableType == InteracteableType.Pickup)
+            //If Object is an item
+            #region
+            if (interacteableType == InteracteableType.Item)
             {
                 //print("Interract with a Pickup");
 
                 //Check If item can be added
-                if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
+                for (int i = 0; i < amount; i++)
                 {
-                    //Remove Object from the worldObjectList
-                    WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
+                    if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
+                    {
+                        //Remove Object from the worldObjectList
+                        WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
 
-                    //Destroy gameObject
-                    DestroyThisObject();
+                        //Destroy gameObject
+                        DestroyThisObject();
+                    }
                 }
             }
+            #endregion
+
+            //If Object is a Plant
+            #region
+            else if (interacteableType == InteracteableType.Plant)
+            {
+                print("Interract with a Plant");
+
+                //Pick the Plant
+                if (plantParent)
+                {
+                    if (plantParent.GetComponent<Plant>())
+                    {
+                        for (int i = 0; i < amount; i++)
+                        {
+                            //Check If item can be added
+                            InventoryManager.Instance.AddItemToInventory(0, itemName);
+
+                            plantParent.GetComponent<Plant>().PickPlant();
+                        }
+                    }
+                }
+            }
+            #endregion
 
             //If Object is an Inventory
+            #region
             else if (interacteableType == InteracteableType.Inventory)
             {
                 //print("Interract with an Inventory");
@@ -98,8 +138,10 @@ public class InteractableObject : MonoBehaviour
                 InventoryManager.Instance.OpenPlayerInventory();
                 TabletManager.Instance.OpenTablet(TabletMenuState.ChestInventory);
             }
+            #endregion
 
             //If Object is a Crafting Table
+            #region
             else if (interacteableType == InteracteableType.CraftingTable)
             {
                 //print("Interract with a CraftingTable");
@@ -117,8 +159,10 @@ public class InteractableObject : MonoBehaviour
 
                 TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.CraftingTable;
             }
+            #endregion
 
             //If Object is a SkillTree
+            #region
             else if (interacteableType == InteracteableType.SkillTreeTable)
             {
                 //print("Interract with a SkillTree");
@@ -136,12 +180,15 @@ public class InteractableObject : MonoBehaviour
 
                 TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.SkillTree;
             }
+            #endregion
 
             //If Object is a GhostTank
+            #region
             else if (interacteableType == InteracteableType.GhostTank)
             {
                 print("Interract with a GhostTank");
             }
+            #endregion
         }
     }
 
@@ -149,6 +196,14 @@ public class InteractableObject : MonoBehaviour
     //--------------------
 
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Spawn on the gorund, if an item
+        if (collision.gameObject.tag == "Ground" && interacteableType == InteracteableType.Item)
+        {
+            isHittingGround = true;
+        }
+    }
     private void OnTriggerEnter(Collider collision)
     {
         //If a player is entering the area
@@ -183,7 +238,7 @@ public enum InteracteableType
 {
     [Description("")][InspectorName("None")] None,
 
-    [Description("Pickup")][InspectorName("Pickup")] Pickup,
+    [Description("Item")][InspectorName("Item")] Item,
     [Description("Inventory")][InspectorName("Inventory")] Inventory,
 
     [Description("Crafting Table")][InspectorName("Crafting Table")] CraftingTable,
@@ -205,5 +260,8 @@ public enum InteracteableType
 
     [Description("Battery x1")][InspectorName("Battery x1")] Battery_x1,
     [Description("Battery x2")][InspectorName("Battery x2")] Battery_x2,
-    [Description("Battery x3")][InspectorName("Battery x3")] Battery_x3
+    [Description("Battery x3")][InspectorName("Battery x3")] Battery_x3,
+
+
+    [Description("Plant")][InspectorName("Plant")] Plant
 }

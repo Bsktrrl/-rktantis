@@ -89,7 +89,6 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         }
         #endregion
 
-        print("1. WorldObject: " + placedMoveableWorldObjectsList.Count + " | SaveObject: " + placedMoveableObjectsList_ToSave.Count);
     }
     public void SaveData()
     {
