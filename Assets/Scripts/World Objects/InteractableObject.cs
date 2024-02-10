@@ -14,11 +14,13 @@ public class InteractableObject : MonoBehaviour
     public int amount;
     public InteracteableType interacteableType;
 
+    [Header("If Object is an Inventory")]
+    public int inventoryIndex;
+
     [Header("If Object is a Plant")]
     public GameObject plantParent;
 
-    [Header("If Object is an Inventory")]
-    public int inventoryIndex;
+    bool isHittingGround;
 
 
     //--------------------
@@ -30,6 +32,16 @@ public class InteractableObject : MonoBehaviour
 
         //Add SphereCollider for the item
         Vector3 scale = gameObject.transform.lossyScale;
+    }
+
+    private void Update()
+    {
+        //If Item, reduce the velocity on the ground
+        if (isHittingGround && GetComponent<Rigidbody>() && interacteableType == InteracteableType.Item)
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+            GetComponent<Rigidbody>().useGravity = false;
+        }
     }
 
 
@@ -51,6 +63,7 @@ public class InteractableObject : MonoBehaviour
             && MainManager.Instance.menuStates == MenuStates.None)
         {
             //If Object is an item
+            #region
             if (interacteableType == InteracteableType.Item)
             {
                 //print("Interract with a Pickup");
@@ -68,8 +81,10 @@ public class InteractableObject : MonoBehaviour
                     }
                 }
             }
+            #endregion
 
             //If Object is a Plant
+            #region
             else if (interacteableType == InteracteableType.Plant)
             {
                 print("Interract with a Plant");
@@ -90,8 +105,10 @@ public class InteractableObject : MonoBehaviour
                     }
                 }
             }
+            #endregion
 
             //If Object is an Inventory
+            #region
             else if (interacteableType == InteracteableType.Inventory)
             {
                 //print("Interract with an Inventory");
@@ -122,8 +139,10 @@ public class InteractableObject : MonoBehaviour
                 InventoryManager.Instance.OpenPlayerInventory();
                 TabletManager.Instance.OpenTablet(TabletMenuState.ChestInventory);
             }
+            #endregion
 
             //If Object is a Crafting Table
+            #region
             else if (interacteableType == InteracteableType.CraftingTable)
             {
                 //print("Interract with a CraftingTable");
@@ -141,8 +160,10 @@ public class InteractableObject : MonoBehaviour
 
                 TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.CraftingTable;
             }
+            #endregion
 
             //If Object is a SkillTree
+            #region
             else if (interacteableType == InteracteableType.SkillTreeTable)
             {
                 //print("Interract with a SkillTree");
@@ -160,12 +181,15 @@ public class InteractableObject : MonoBehaviour
 
                 TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.SkillTree;
             }
+            #endregion
 
             //If Object is a GhostTank
+            #region
             else if (interacteableType == InteracteableType.GhostTank)
             {
                 print("Interract with a GhostTank");
             }
+            #endregion
         }
     }
 
@@ -173,6 +197,14 @@ public class InteractableObject : MonoBehaviour
     //--------------------
 
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Spawn on the gorund, if an item
+        if (collision.gameObject.tag == "Ground" && interacteableType == InteracteableType.Item)
+        {
+            isHittingGround = true;
+        }
+    }
     private void OnTriggerEnter(Collider collision)
     {
         //If a player is entering the area

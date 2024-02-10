@@ -1539,6 +1539,7 @@ MonoBehaviour:
   - {fileID: 7272671384917134698}
   - {fileID: 5717357121028685325}
   chestInventoryOpen: 0
+  gravityTime: 5
 --- !u!1 &393812021061872043
 GameObject:
   m_ObjectHideFlags: 0
@@ -4531,6 +4532,7 @@ MonoBehaviour:
     furnitureType: 0
     buildingType: 0
     buildingMaterial: 0
+  plantTypeObjectList_Store: []
   health_Store:
     hungerValue: 0
     hungerValueMultiplier_Check: 0
@@ -16540,7 +16542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec9b90daf4e7784ea7ad7e570e40723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growthTimer: 5
+  growthTimer: 300
 --- !u!1 &3477283428738154851
 GameObject:
   m_ObjectHideFlags: 0

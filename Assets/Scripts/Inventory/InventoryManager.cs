@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Burst.Intrinsics;
@@ -46,6 +47,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public int chestInventoryOpen;
     GameObject itemTemp;
+    public float gravityTime = 1.5f;
 
 
 
@@ -281,6 +283,12 @@ public class InventoryManager : Singleton<InventoryManager>
 
             //Update item in the World
             WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName, WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]);
+
+            //Stop gravity after gravityTime-seconds
+            if (WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>())
+            {
+                //StartCoroutine(SpawnedObjectGravityTime(WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]));
+            }
         }
 
         //If item is removed from the inventory, update the Hotbar
@@ -292,6 +300,15 @@ public class InventoryManager : Singleton<InventoryManager>
         SetBuildingRequirement();
 
         SaveData();
+    }
+    IEnumerator SpawnedObjectGravityTime(GameObject spawnedObject)
+    {
+        //Wait for gravityTime-seconds
+        yield return new WaitForSeconds(gravityTime);
+
+        //Turn off Gravity
+        spawnedObject.GetComponent<Rigidbody>().isKinematic = true;
+        spawnedObject.GetComponent<Rigidbody>().useGravity = false;
     }
     public void RemoveItemFromInventory(int inventory, Items itemName, int ID, bool itemIsMoved)
     {

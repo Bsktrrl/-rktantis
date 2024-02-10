@@ -148,9 +148,7 @@ MonoBehaviour:
   growthTimer: 0
   growthPrecentage: 0
   plantIndex: 0
-  plantID: 0
-  growthAnimationTime: 0.29
-  precentageCheck: 0000000000000000000000000000000000000000
+  precentageCheck: 0
 --- !u!1 &2256542830306934855 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 184760510569182204, guid: 6411299833cc7c04fa38ed3534c715b1,
@@ -220,7 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInRange: 0
   itemName: 66
-  amount: 4
+  amount: 1
   interacteableType: 19
-  plantParent: {fileID: 1225496809172209386}
   inventoryIndex: 0
+  plantParent: {fileID: 1225496809172209386}
