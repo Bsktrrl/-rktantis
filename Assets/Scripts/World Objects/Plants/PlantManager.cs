@@ -9,8 +9,7 @@ public class PlantManager : Singleton<PlantManager>
     public float growthTimer = 300;
 
     GameObject plantWorldObject_Parent;
-    List<PlantToSave> plantTypeObjectList = new List<PlantToSave>();
-
+    [SerializeField] List<PlantToSave> plantTypeObjectList = new List<PlantToSave>();
 
     //--------------------
 

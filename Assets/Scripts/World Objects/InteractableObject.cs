@@ -97,10 +97,9 @@ public class InteractableObject : MonoBehaviour
                         for (int i = 0; i < amount; i++)
                         {
                             //Check If item can be added
-                            if (InventoryManager.Instance.AddItemToInventory(0, itemName))
-                            {
-                                plantParent.GetComponent<Plant>().PickPlant();
-                            }
+                            InventoryManager.Instance.AddItemToInventory(0, itemName);
+
+                            plantParent.GetComponent<Plant>().PickPlant();
                         }
                     }
                 }

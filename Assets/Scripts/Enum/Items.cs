@@ -112,8 +112,8 @@ public enum Items
     [Description("Spik Oil")][InspectorName("Plant Material/Spik Oil")] SpikOil,
     [Description("Arídis Flower")][InspectorName("Plant Material/Arídis Flower")] ArídisFlower,
     [Description("Twisted Mushroom")][InspectorName("Plant Material/Twisted Mushroom")] TwistedMushroom,
+    [Description("TubePlastic")][InspectorName("Plant Material/Tube Plastic")] TubePlastic,
 
-    [Description("Other1")][InspectorName("Plant Material/Other1")] PM_Other1,
     [Description("Other2")][InspectorName("Plant Material/Other2")] PM_Other2,
     [Description("Other3")][InspectorName("Plant Material/Other3")] PM_Other3,
     [Description("Other4")][InspectorName("Plant Material/Other4")] PM_Other4,
