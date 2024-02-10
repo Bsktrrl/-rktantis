@@ -28,6 +28,9 @@ public class GameData
     [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_SaveList = new List<MoveableObject_ToSave>();
     [HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Save = new MoveableObjectSelected_ToSave();
 
+    //Plants
+    [HideInInspector] public List<PlantToSave> plantTypeObjectList_Save = new List<PlantToSave>();
+
     //HealthParameter
     [HideInInspector] public HealthToSave health_Save = new HealthToSave();
 
@@ -49,5 +52,7 @@ public class GameData
         this.Inventories_SaveList.Clear();
         this.hotbarItem_SaveList.Clear();
         this.placedMoveableObjectsList_SaveList.Clear();
+
+        this.plantTypeObjectList_Save.Clear();
     }
 }

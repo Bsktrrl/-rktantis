@@ -39,7 +39,7 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
             worldObjectList[worldObjectList.Count - 1].transform.parent = worldObjectParent.transform;
 
             //If Object is a Pickup, activate Gravity
-            if (worldObjectList[worldObjectList.Count - 1].GetComponent<InteractableObject>().interacteableType == InteracteableType.Pickup)
+            if (worldObjectList[worldObjectList.Count - 1].GetComponent<InteractableObject>().interacteableType == InteracteableType.Item)
             {
                 worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
                 worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;

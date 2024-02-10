@@ -57,7 +57,7 @@ public class SelectionManager : Singleton<SelectionManager>
                     selecedObject = newInteractableObject.gameObject;
 
                     //Change Active text
-                    if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Pickup)
+                    if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Item)
                     {
                         //Set correct UI-info for Pickup to be displayed
                         interaction_text.text = SpaceTextConverting.Instance.SetText(selecedObject.GetComponent<InteractableObject>().itemName.ToString());

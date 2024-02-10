@@ -11,8 +11,11 @@ public class InteractableObject : MonoBehaviour
 
     [Header("Stats")]
     public Items itemName;
+    public int amount;
     public InteracteableType interacteableType;
-    //public bool isMachine;
+
+    [Header("If Object is a Plant")]
+    public GameObject plantParent;
 
     [Header("If Object is an Inventory")]
     public int inventoryIndex;
@@ -35,10 +38,6 @@ public class InteractableObject : MonoBehaviour
 
     void ObjectInteraction()
     {
-        if (gameObject)
-        {
-
-        }
         if (gameObject.GetComponent<MoveableObject>())
         {
             if (gameObject.GetComponent<MoveableObject>().isSelectedForMovement) { return; }
@@ -51,19 +50,44 @@ public class InteractableObject : MonoBehaviour
         if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selecedObject == gameObject
             && MainManager.Instance.menuStates == MenuStates.None)
         {
-            //If Object is a Pickup
-            if (interacteableType == InteracteableType.Pickup)
+            //If Object is an item
+            if (interacteableType == InteracteableType.Item)
             {
                 //print("Interract with a Pickup");
 
                 //Check If item can be added
-                if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
+                for (int i = 0; i < amount; i++)
                 {
-                    //Remove Object from the worldObjectList
-                    WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
+                    if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
+                    {
+                        //Remove Object from the worldObjectList
+                        WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
 
-                    //Destroy gameObject
-                    DestroyThisObject();
+                        //Destroy gameObject
+                        DestroyThisObject();
+                    }
+                }
+            }
+
+            //If Object is a Plant
+            else if (interacteableType == InteracteableType.Plant)
+            {
+                print("Interract with a Plant");
+
+                //Pick the Plant
+                if (plantParent)
+                {
+                    if (plantParent.GetComponent<Plant>())
+                    {
+                        for (int i = 0; i < amount; i++)
+                        {
+                            //Check If item can be added
+                            if (InventoryManager.Instance.AddItemToInventory(0, itemName))
+                            {
+                                plantParent.GetComponent<Plant>().PickPlant();
+                            }
+                        }
+                    }
                 }
             }
 
@@ -183,7 +207,7 @@ public enum InteracteableType
 {
     [Description("")][InspectorName("None")] None,
 
-    [Description("Pickup")][InspectorName("Pickup")] Pickup,
+    [Description("Item")][InspectorName("Item")] Item,
     [Description("Inventory")][InspectorName("Inventory")] Inventory,
 
     [Description("Crafting Table")][InspectorName("Crafting Table")] CraftingTable,
@@ -205,5 +229,8 @@ public enum InteracteableType
 
     [Description("Battery x1")][InspectorName("Battery x1")] Battery_x1,
     [Description("Battery x2")][InspectorName("Battery x2")] Battery_x2,
-    [Description("Battery x3")][InspectorName("Battery x3")] Battery_x3
+    [Description("Battery x3")][InspectorName("Battery x3")] Battery_x3,
+
+
+    [Description("Plant")][InspectorName("Plant")] Plant
 }
