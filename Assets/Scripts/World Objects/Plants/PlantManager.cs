@@ -8,8 +8,8 @@ public class PlantManager : Singleton<PlantManager>
 {
     public float growthTimer = 300;
 
-    public GameObject plantWorldObject_Parent;
-    public List<PlantToSave> plantTypeObjectList = new List<PlantToSave>();
+    GameObject plantWorldObject_Parent;
+    List<PlantToSave> plantTypeObjectList = new List<PlantToSave>();
 
 
     //--------------------
@@ -32,8 +32,6 @@ public class PlantManager : Singleton<PlantManager>
     }
     public void SaveData()
     {
-        //UpdatePlantInfoList();
-
         DataManager.Instance.plantTypeObjectList_Store = plantTypeObjectList;
     }
     public void SaveData(ref GameData gameData)
@@ -47,34 +45,6 @@ public class PlantManager : Singleton<PlantManager>
     //--------------------
 
 
-    void SetupFirstPlantList()
-    {
-        plantTypeObjectList.Clear();
-
-        for (int i = 0; i < plantWorldObject_Parent.transform.childCount; i++)
-        {
-            if (plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>())
-            {
-                //Give all Legal Objects an index
-                plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().plantIndex = i;
-                SetPlantID(plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>());
-
-                //Make a plantTypeObjectList
-                PlantToSave tempPlant = new PlantToSave();
-
-                tempPlant.isPicked = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().isPicked;
-                tempPlant.growthTimer = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().growthTimer;
-                tempPlant.plantIndex = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().plantIndex;
-                tempPlant.plantType = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().plantType;
-                tempPlant.precentageCheck = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().precentageCheck;
-                tempPlant.plantID = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().plantID;
-
-                plantTypeObjectList.Add(tempPlant);
-            }
-        }
-
-        SaveData();
-    }
     void SetupPlantList()
     {
         List<PlantToSave> tempPlantTypeObjectList = new List<PlantToSave>();
@@ -103,9 +73,7 @@ public class PlantManager : Singleton<PlantManager>
                         tempPlant.isPicked = plantTypeObjectList[j].isPicked;
                         tempPlant.growthTimer = plantTypeObjectList[j].growthTimer;
                         tempPlant.plantIndex = j;
-                        tempPlant.plantType = plantTypeObjectList[j].plantType;
                         tempPlant.precentageCheck = plantTypeObjectList[j].precentageCheck;
-                        tempPlant.plantID = plantTypeObjectList[j].plantID;
                         tempPlant.plantPos = plantTypeObjectList[j].plantPos;
 
                         tempPlantTypeObjectList.Add(tempPlant);
@@ -113,7 +81,7 @@ public class PlantManager : Singleton<PlantManager>
                         checkedPlants[i] = true;
 
                         //Set info in Child
-                        plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().LoadPlant(plantTypeObjectList[j].isPicked, plantTypeObjectList[j].growthTimer, j, plantTypeObjectList[j].plantType, plantTypeObjectList[j].precentageCheck, plantTypeObjectList[j].plantID);
+                        plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().LoadPlant(plantTypeObjectList[j].isPicked, plantTypeObjectList[j].growthTimer, j, plantTypeObjectList[j].precentageCheck);
                         
                         break;
                     }
@@ -130,7 +98,6 @@ public class PlantManager : Singleton<PlantManager>
 
                 //Give all Legal Objects an index
                 plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().plantIndex = i;
-                SetPlantID(plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>());
 
                 //Make a plantTypeObjectList
                 PlantToSave tempPlant = new PlantToSave();
@@ -138,9 +105,7 @@ public class PlantManager : Singleton<PlantManager>
                 tempPlant.isPicked = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().isPicked;
                 tempPlant.growthTimer = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().growthTimer;
                 tempPlant.plantIndex = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().plantIndex;
-                tempPlant.plantType = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().plantType;
                 tempPlant.precentageCheck = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().precentageCheck;
-                tempPlant.plantID = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().plantID;
                 tempPlant.plantPos = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().transform.position;
 
                 tempPlantTypeObjectList.Add(tempPlant);
@@ -154,35 +119,13 @@ public class PlantManager : Singleton<PlantManager>
         SaveData();
     }
     
-    void UpdatePlantInfoList()
-    {
-        plantTypeObjectList.Clear();
-
-        for (int i = 0; i < plantWorldObject_Parent.transform.childCount; i++)
-        {
-            //Find legal object
-            if (plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>())
-            {
-                PlantToSave tempPlant = new PlantToSave();
-
-                tempPlant.isPicked = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().isPicked;
-                tempPlant.growthTimer = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().growthTimer;
-                tempPlant.plantIndex = i;
-                tempPlant.plantType = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().plantType;
-                tempPlant.precentageCheck = plantWorldObject_Parent.transform.GetChild(i).GetComponent<Plant>().precentageCheck;
-
-                plantTypeObjectList.Add(tempPlant);
-            }
-        }
-    }
-    public void ChangePlantInfo(bool _isPicked, float _growthTimer, int _plantIndex, PlantType _plantType, int _precentageCheck, Vector3 _plantPos)
+    public void ChangePlantInfo(bool _isPicked, float _growthTimer, int _plantIndex, int _precentageCheck, Vector3 _plantPos)
     {
         PlantToSave tempPlant = new PlantToSave();
 
         tempPlant.isPicked = _isPicked;
         tempPlant.growthTimer = _growthTimer;
         tempPlant.plantIndex = _plantIndex;
-        tempPlant.plantType = _plantType;
         tempPlant.precentageCheck = _precentageCheck;
         tempPlant.plantPos = _plantPos;
 
@@ -190,15 +133,19 @@ public class PlantManager : Singleton<PlantManager>
 
         SaveData();
     }
+}
 
-    void SetPlantID(Plant plant)
-    {
-        plant.plantID = UnityEngine.Random.Range(1, 1000000000);
-    }
-    void SetPlantID(PlantToSave plant)
-    {
-        plant.plantID = UnityEngine.Random.Range(1, 1000000000);
-    }
+[Serializable]
+public class PlantToSave
+{
+    public bool isPicked;
+    public float growthTimer;
+
+    public int plantIndex;
+
+    public int precentageCheck;
+
+    public Vector3 plantPos = new Vector3();
 }
 
 public enum PlantType
@@ -227,20 +174,4 @@ public enum PlantType
     [Description("ThriPod")][InspectorName("ThriPod")] ThriPod,
     [Description("TwistCap")][InspectorName("TwistCap")] TwistCap,
     [Description("WartShroom")][InspectorName("WartShroom")] WartShroom
-}
-
-[Serializable]
-public class PlantToSave
-{
-    public bool isPicked;
-    public float growthTimer;
-
-    public int plantIndex;
-    public int plantID;
-
-    public PlantType plantType = PlantType.None;
-
-    public int precentageCheck;
-
-    public Vector3 plantPos = new Vector3();
 }

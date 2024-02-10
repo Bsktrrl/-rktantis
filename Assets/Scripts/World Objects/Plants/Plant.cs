@@ -7,20 +7,19 @@ public class Plant : MonoBehaviour
 {
     public GameObject pickablePart;
 
-    public PlantType plantType;
+    [SerializeField] PlantType plantType;
 
     public bool isPicked;
     [HideInInspector] public float growthTimer;
-    public float growthPrecentage;
+    [SerializeField] float growthPrecentage;
 
-    public int plantIndex;
-    public int plantID;
+    [HideInInspector] public int plantIndex;
 
-    public float growthAnimationTime = 0.29f;
+    float growthAnimationTime = 0.29f;
 
     Animator animator;
 
-    public int precentageCheck = 0;
+    [HideInInspector] public int precentageCheck = 0;
 
 
     //--------------------
@@ -42,97 +41,97 @@ public class Plant : MonoBehaviour
             if (growthPrecentage >= 95 && precentageCheck < 19)
             {
                 precentageCheck = 19;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 90 && precentageCheck < 18)
             {
                 precentageCheck = 18;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 85 && precentageCheck < 17)
             {
                 precentageCheck = 17;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 80 && precentageCheck < 16)
             {
                 precentageCheck = 16;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 75 && precentageCheck < 15)
             {
                 precentageCheck = 15;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 70 && precentageCheck < 14)
             {
                 precentageCheck = 14;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 65 && precentageCheck < 13)
             {
                 precentageCheck = 13;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 60 && precentageCheck < 12)
             {
                 precentageCheck = 12;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 55 && precentageCheck < 11)
             {
                 precentageCheck = 11;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 50 && precentageCheck < 10)
             {
                 precentageCheck = 10;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 45 && precentageCheck < 9)
             {
                 precentageCheck = 9;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 40 && precentageCheck < 8)
             {
                 precentageCheck = 8;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 35 && precentageCheck < 7)
             {
                 precentageCheck = 7;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 30 && precentageCheck < 6)
             {
                 precentageCheck = 6;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 25 && precentageCheck < 5)
             {
                 precentageCheck = 5;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 20 && precentageCheck < 4)
             {
                 precentageCheck = 4;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 15 && precentageCheck < 3)
             {
                 precentageCheck = 3;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 10 && precentageCheck < 2)
             {
                 precentageCheck = 2;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             else if (growthPrecentage >= 5 && precentageCheck < 1)
             {
                 precentageCheck = 1;
-                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+                PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
             }
             #endregion
 
@@ -147,14 +146,12 @@ public class Plant : MonoBehaviour
     //--------------------
 
 
-    public void LoadPlant(bool _isPicked, float _growthTimer, int _plantIndex, PlantType _plantType, int _precentageCheck, int _plantID)
+    public void LoadPlant(bool _isPicked, float _growthTimer, int _plantIndex, int _precentageCheck)
     {
         //Set Parameters
         isPicked = _isPicked;
         plantIndex = _plantIndex;
-        plantType = _plantType;
         precentageCheck = _precentageCheck;
-        plantID = _plantID;
         growthTimer = _growthTimer;
 
         //Check if Animation and pickablePart should be hidden
@@ -187,7 +184,7 @@ public class Plant : MonoBehaviour
         growthTimer = 0;
         isPicked = true;
 
-        PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+        PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
     }
 
     void PlantGrown()
@@ -207,7 +204,7 @@ public class Plant : MonoBehaviour
         precentageCheck = 0;
         growthTimer = 0;
 
-        PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, plantType, precentageCheck, gameObject.transform.position);
+        PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
     }
     IEnumerator GrowBackCoroutine(float time)
     {
