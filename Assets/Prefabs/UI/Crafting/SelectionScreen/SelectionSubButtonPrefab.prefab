@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7112886648023795077}
   - component: {fileID: 7410331212061523038}
   - component: {fileID: 1864873331154301965}
+  - component: {fileID: -7058846557689028999}
   m_Layer: 5
   m_Name: SelectionSubButtonPrefab
   m_TagString: Untagged
@@ -157,17 +158,29 @@ MonoBehaviour:
     hotbarSprite: {fileID: 0}
     itemSpriteList: []
     itemSelected_SpriteList: []
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
-    Durability: 0
     isActive: 0
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
+    Durability: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 0
     craftingRequirements: []
+--- !u!114 &-7058846557689028999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035596965911570660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2751a99cdd9aba94a9b84d3a3fd150b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5756569427089054915
 GameObject:
   m_ObjectHideFlags: 0

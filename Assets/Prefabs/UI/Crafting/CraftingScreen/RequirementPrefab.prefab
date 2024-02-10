@@ -506,6 +506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4984613080548878602}
   - component: {fileID: 3641391411146242341}
+  - component: {fileID: 3091112985889937870}
   m_Layer: 5
   m_Name: RequirementPrefab
   m_TagString: Untagged
@@ -559,3 +560,15 @@ MonoBehaviour:
     amount: 0
   craftingItemSprite: {fileID: 0}
   requirementIsMet: 0
+--- !u!114 &3091112985889937870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207463512283702159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2751a99cdd9aba94a9b84d3a3fd150b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
