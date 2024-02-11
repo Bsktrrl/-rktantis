@@ -21,15 +21,6 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] Image PlantResourceImage;
     [SerializeField] TextMeshProUGUI PlantGrowthInfo;
 
-    [Header("Machine Normal")]
-    [SerializeField] GameObject Machine_Normal_Panel;
-
-    [Header("Furniture Normal")]
-    [SerializeField] GameObject Furniture_Normal_Panel;
-
-    [Header("Inventory")]
-    [SerializeField] GameObject Furniture_Inventory_Panel;
-
 
     //--------------------
 
@@ -95,49 +86,6 @@ public class LookAtManager : Singleton<LookAtManager>
 
             return;
         }
-        #endregion
-
-        //If looking at an Inventory
-        #region
-        else if (typeLookingAt == InteracteableType.Inventory)
-        {
-            //Turn off all screens
-            TurnOffScreens();
-
-
-            Furniture_Inventory_Panel.SetActive(true);
-
-            return;
-        }
-        #endregion
-
-        //If looking at a normal Furniture
-        #region
-        else if (typeLookingAt == InteracteableType.CraftingTable
-                 || typeLookingAt == InteracteableType.SkillTreeTable)
-        {
-            //Turn off all screens
-            TurnOffScreens();
-
-
-            Furniture_Normal_Panel.SetActive(true);
-
-            return;
-        }
-        #endregion
-
-        //If looking at a normal Machine
-        #region
-        //else if (typeLookingAt == InteracteableType.)
-        //{
-        //    //Turn off all screens
-        //    TurnOffScreens();
-
-
-        //    Machine_Normal_Panel.SetActive(true);
-
-        //    return;
-        //}
         #endregion
     }
 
@@ -206,8 +154,5 @@ public class LookAtManager : Singleton<LookAtManager>
     {
         Item_Panel.SetActive(false);
         Plant_Panel.SetActive(false);
-        Machine_Normal_Panel.SetActive(false);
-        Furniture_Normal_Panel.SetActive(false);
-        Furniture_Inventory_Panel.SetActive(false);
     }
 }

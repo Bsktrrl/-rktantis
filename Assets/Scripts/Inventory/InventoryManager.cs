@@ -2,16 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.Burst.Intrinsics;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-using static UnityEditor.Progress;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
+    #region Variables
     [Header("Inventory")]
     public Vector2 inventorySize;
     public int cellsize = 70;
@@ -49,6 +45,10 @@ public class InventoryManager : Singleton<InventoryManager>
     GameObject itemTemp;
     public float gravityTime = 1.5f;
 
+    [Header("Item Info")]
+    public GameObject itemInfo_Parent;
+    [HideInInspector] public InventoryItemInfo itemInfo;
+    #endregion
 
 
     //--------------------
@@ -60,12 +60,19 @@ public class InventoryManager : Singleton<InventoryManager>
         TabletManager.Instance.chestInventory_Parent.SetActive(false);
         playerInventory_Fake_Parent.SetActive(false);
         chestInventory_Fake_Parent.SetActive(false);
+
+        itemInfo = itemInfo_Parent.GetComponent<InventoryItemInfo>();
+    }
+    private void Update()
+    {
+        HideInventoryItemInfo();
     }
 
 
     //--------------------
 
 
+    #region SaveLoad
     public void LoadData()
     {
         #region Inventory
@@ -106,11 +113,13 @@ public class InventoryManager : Singleton<InventoryManager>
 
         print("Save_Inventories");
     }
+    #endregion
 
 
     //--------------------
 
 
+    #region Add/Remove Inventory
     public void AddInventory(Vector2 size)
     {
         //Add empty inventory
@@ -145,11 +154,13 @@ public class InventoryManager : Singleton<InventoryManager>
 
         RemoveInventoriesUI();
     }
+    #endregion
 
 
     //--------------------
 
 
+    #region Add/ item to Inventory
     public bool AddItemToInventory(int inventory, GameObject obj, bool itemIsMoved)
     {
         InventoryItem item = new InventoryItem();
@@ -459,6 +470,7 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         #endregion
     }
+    #endregion
 
     public void MoveItemToInventory(int inventory, GameObject obj, int ID)
     {
@@ -807,6 +819,43 @@ public class InventoryManager : Singleton<InventoryManager>
 
                 return;
             }
+        }
+    }
+
+
+    //--------------------
+
+
+    public void CahangeitemInfoBox(Items itemName)
+    {
+        if (MainManager.Instance.GetItem(itemName).isEquipableInHand)
+        {
+            itemInfo.SetInfo_EquipableHandItem();
+        }
+        else if (MainManager.Instance.GetItem(itemName).isEquipableClothes)
+        {
+            itemInfo.SetInfo_EquipableClothesItem();
+        }
+        else if (MainManager.Instance.GetItem(itemName).isConsumeable)
+        {
+            itemInfo.SetInfo_ConsumableItem();
+        }
+        else
+        {
+            itemInfo.SetInfo_StaticItem();
+        }
+
+        itemInfo_Parent.SetActive(true);
+    }
+    public void HideInventoryItemInfo()
+    {
+        if (player_ItemName_Display.text == "")
+        {
+            itemInfo_Parent.SetActive(false);
+        }
+        else
+        {
+            itemInfo_Parent.SetActive(true);
         }
     }
 

@@ -170,6 +170,11 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         }
 
         InventoryManager.Instance.SetItemSelectedHighlight_Active(inventoryIndex, itemID, itemName, true);
+
+        if (itemName != Items.None)
+        {
+            InventoryManager.Instance.CahangeitemInfoBox(itemName);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)

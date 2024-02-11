@@ -255,6 +255,8 @@ public class TabletManager : Singleton<TabletManager>
         menu_Skilltree.SetActive(false);
         menu_MoveableObjects.SetActive(false);
 
+        InventoryManager.Instance.HideInventoryItemInfo();
+
         //Exit current menu
         switch (currentMenu)
         {

@@ -64,8 +64,6 @@ public class PlantManager : Singleton<PlantManager>
                 {
                     if (plantTypeObjectList[j].plantPos == plantWorldObject_Parent.transform.GetChild(i).transform.position)
                     {
-                        print("Old Plants: " + i);
-
                         //Setup Save_List
                         PlantToSave tempPlant = new PlantToSave();
 
