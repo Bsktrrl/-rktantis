@@ -447,6 +447,9 @@ public class TabletManager : Singleton<TabletManager>
         //SetMenuDisplay(true);
         InventoryManager.Instance.OpenPlayerInventory();
 
+        //Hide InteracteableInfo
+        LookAtManager.Instance.LookAt_Parent.SetActive(false);
+
         //Rearrange the HealthParameter Displays
         healthParameters_Tablet_Parent.SetActive(true);
         healthParameters_PlayerScreen_Parent.SetActive(false);
@@ -454,9 +457,6 @@ public class TabletManager : Singleton<TabletManager>
 
         //Hide Player Hotbar
         HotbarManager.Instance.hotbar_Parent.SetActive(false);
-
-        //Hide itemName
-        SelectionManager.Instance.interaction_Info_UI.SetActive(false);
 
         //Hide Equipment_Button
         menu_Chest_Button.SetActive(false);
@@ -496,8 +496,8 @@ public class TabletManager : Singleton<TabletManager>
         //Activate Player Hotbar
         HotbarManager.Instance.hotbar_Parent.SetActive(true);
 
-        //Activate itemName
-        SelectionManager.Instance.interaction_Info_UI.SetActive(true);
+        //Set InteracteableInfo to be displayed again
+        LookAtManager.Instance.LookAt_Parent.SetActive(true);
 
         tabletMenuState = TabletMenuState.None;
         objectInteractingWith = ObjectInteractingWith.None;

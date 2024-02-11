@@ -6,7 +6,7 @@ using UnityEngine;
 public class Plant : MonoBehaviour
 {
     [Header("General")]
-    [SerializeField] PlantType plantType;
+    public PlantType plantType;
     public GameObject pickablePart;
 
     [Header("Flower Color")]
@@ -16,7 +16,7 @@ public class Plant : MonoBehaviour
     [Header("Other")]
     public bool isPicked;
     [HideInInspector] public float growthTimer;
-    [SerializeField] float growthPrecentage;
+    public float growthPrecentage;
 
     [HideInInspector] public int plantIndex;
 

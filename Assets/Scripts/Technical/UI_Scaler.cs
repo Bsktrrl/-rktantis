@@ -10,3 +10,4 @@ public class UI_Scaler : MonoBehaviour
         }
     }
 }
+

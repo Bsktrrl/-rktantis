@@ -58,6 +58,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6261384704087199823, guid: 1e8f4b9250059584fbbb51829160e912,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e8f4b9250059584fbbb51829160e912,
         type: 3}
       propertyPath: m_Name
@@ -71,6 +76,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9157501313526019183}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1e8f4b9250059584fbbb51829160e912,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7426745452806606596}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1e8f4b9250059584fbbb51829160e912,
         type: 3}
       insertIndex: -1
@@ -115,6 +124,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!64 &-7426745452806606596
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163780777818986374}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3402985531862263469, guid: 1e8f4b9250059584fbbb51829160e912, type: 3}
 --- !u!114 &2482486621467473922
 MonoBehaviour:
   m_ObjectHideFlags: 0

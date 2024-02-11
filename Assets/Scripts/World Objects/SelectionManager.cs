@@ -4,9 +4,6 @@ using UnityEngine.UI;
 
 public class SelectionManager : Singleton<SelectionManager>
 {
-    public GameObject interaction_Info_UI;
-    TextMeshProUGUI interaction_text;
-
     public bool onTarget = false;
 
     public GameObject selecedObject;
@@ -15,15 +12,12 @@ public class SelectionManager : Singleton<SelectionManager>
     public GameObject chopHolder;
 
     InteractableObject newInteractableObject;
+    Plant newPlantObject;
 
 
     //--------------------
 
 
-    private void Start()
-    {
-        interaction_text = interaction_Info_UI.GetComponent<TextMeshProUGUI>();
-    }
     void Update()
     {
         if (Time.frameCount % MainManager.Instance.updateInterval == 0 && MainManager.Instance.menuStates == MenuStates.None)
@@ -36,13 +30,16 @@ public class SelectionManager : Singleton<SelectionManager>
                 Transform selectionTransform = hit.transform;
 
                 //When raycasting something that is interactable
+                newInteractableObject = null;
+                newPlantObject = null;
+
                 if (selectionTransform.GetComponent<InteractableObject>())
                 {
                     newInteractableObject = selectionTransform.GetComponent<InteractableObject>();
                 }
-                else
+                else if(selectionTransform.GetComponent<Plant>())
                 {
-                    newInteractableObject = null;
+                    newPlantObject = selectionTransform.GetComponent<Plant>();
                 }
 
 
@@ -50,102 +47,39 @@ public class SelectionManager : Singleton<SelectionManager>
 
 
                 //If looking at an Interacteable Object, show its UI to the player
-                if (newInteractableObject)
+                if (newInteractableObject != null)
                 {
                     //Show Inventory info
                     onTarget = true;
                     selecedObject = newInteractableObject.gameObject;
 
-                    //Change Active text
-                    if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Item)
-                    {
-                        //Set correct UI-info for Pickup to be displayed
-                        interaction_text.text = SpaceTextConverting.Instance.SetText(selecedObject.GetComponent<InteractableObject>().itemName.ToString());
-                        interaction_Info_UI.SetActive(true);
-                    }
-                    else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.Inventory)
-                    {
-                        //Set correct UI-info for Inventory/Chest to be displayed
-                        interaction_text.text = SpaceTextConverting.Instance.SetText(selecedObject.GetComponent<InteractableObject>().itemName.ToString());
-                    }
-                    else if (selecedObject.GetComponent<InteractableObject>().interacteableType == InteracteableType.CraftingTable)
-                    {
-                        //Set correct UI-info for Machine to be displayed
-                        interaction_text.text = SpaceTextConverting.Instance.SetText(selecedObject.GetComponent<InteractableObject>().itemName.ToString());
-                        interaction_Info_UI.SetActive(true);
-                    }
+                    LookAtManager.Instance.typeLookingAt = newInteractableObject.GetComponent<InteractableObject>().interacteableType;
+                }
+                //If looking at a Plant, show its UI to the player
+                else if (newPlantObject != null)
+                {
+                    //Show Inventory info
+                    onTarget = true;
+                    selecedObject = newPlantObject.gameObject;
 
-                    //Set UI screen Active
-                    interaction_Info_UI.SetActive(true);
+                    LookAtManager.Instance.typeLookingAt = newPlantObject.pickablePart.GetComponent<InteractableObject>().interacteableType;
                 }
 
                 //If there is a Hit without an interacteable script
                 else
                 {
-                    interaction_Info_UI.SetActive(false);
                     onTarget = false;
+
+                    LookAtManager.Instance.typeLookingAt = InteracteableType.None;
                 }
-
-
-                //-----
-
-
-                //If looking at an Object that can have an outline
-                //if (selecedObject)
-                //{
-                //    if (selecedObject.GetComponent<Outliner>())
-                //    {
-                //        selecedObject.GetComponent<Outliner>().ShowOutliner();
-                //    }
-                //    else
-                //    {
-                //        selecedObject.GetComponent<Outliner>().HideOutliner();
-                //    }
-                //}
-
-
-                //-----
-
-
-                // || Trees || //
-                #region
-                //ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
-
-                ////If looking at a tree
-                //if (choppableTree && choppableTree.playerInRange)
-                //{
-                //    choppableTree.canBeChopped = true;
-                //    selectedTree = choppableTree.gameObject;
-                //    chopHolder.gameObject.SetActive(true);
-                //}
-                //else
-                //{
-                //    if (selectedTree != null)
-                //    {
-                //        selectedTree.gameObject.GetComponent<ChoppableTree>().canBeChopped = false;
-                //        selectedTree = null;
-                //    }
-
-                //    chopHolder.gameObject.SetActive(false);
-                //}
-                #endregion
-
             }
 
             //If there is no script attached at all
             else
             {
-                interaction_Info_UI.SetActive(false);
                 onTarget = false;
 
-                //If don't looking at an Object that can have an outline
-                //if (selecedObject)
-                //{
-                //    if (selecedObject.GetComponent<Outliner>())
-                //    {
-                //        selecedObject.GetComponent<Outliner>().HideOutliner();
-                //    }
-                //}
+                LookAtManager.Instance.typeLookingAt = InteracteableType.None;
             }
         }
     }
