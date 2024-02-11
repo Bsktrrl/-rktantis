@@ -129,13 +129,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantType: 6
   pickablePart: {fileID: 4808376135525091128}
-  ColorMeshObject: []
-  plantColors: []
+  ColorMeshObject:
+  - {fileID: 8438231547675153269}
+  - {fileID: 5889141960192912215}
+  - {fileID: 4033128041961373860}
+  plantColors:
+  - {fileID: 2100000, guid: 6a5bad5eaa05f574b8adda3a7f408e27, type: 2}
+  - {fileID: 2100000, guid: 9d60bf4f3e25faa43ab04ce79854d33b, type: 2}
+  - {fileID: 2100000, guid: 20b3e1914ebaf334c980c54fd0fba077, type: 2}
   isPicked: 0
   growthTimer: 0
   growthPrecentage: 0
   plantIndex: 0
   precentageCheck: 0
+--- !u!1 &4033128041961373860 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7996629046337779556, guid: acf4c9ccd81c16643877e544863c238c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2809904038549719096}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4808376135525091128 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7224900026324045568, guid: acf4c9ccd81c16643877e544863c238c,
@@ -209,3 +221,15 @@ MonoBehaviour:
   interacteableType: 19
   inventoryIndex: 0
   plantParent: {fileID: 3044328911723574633}
+--- !u!1 &5889141960192912215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8594178418308047727, guid: acf4c9ccd81c16643877e544863c238c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2809904038549719096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8438231547675153269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3178320640962913459, guid: acf4c9ccd81c16643877e544863c238c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2809904038549719096}
+  m_PrefabAsset: {fileID: 0}

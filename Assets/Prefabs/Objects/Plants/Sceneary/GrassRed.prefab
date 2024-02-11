@@ -58,6 +58,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -571913239672379025, guid: 06e83312b0d44c04c8270fdf6c75802a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 78cb6f911a2107242b5a8d9d886e5e7b, type: 2}
     - target: {fileID: 919132149155446097, guid: 06e83312b0d44c04c8270fdf6c75802a,
         type: 3}
       propertyPath: m_Name
@@ -107,3 +112,5 @@ MonoBehaviour:
   - {fileID: 1819879129823845736}
   plantColors:
   - {fileID: 2100000, guid: 78cb6f911a2107242b5a8d9d886e5e7b, type: 2}
+  - {fileID: 2100000, guid: ee6523554443e51458c4388476d5da01, type: 2}
+  - {fileID: 2100000, guid: 999bb7c87e14d244983268c60b9032f2, type: 2}

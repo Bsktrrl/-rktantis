@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Foliage_ColorGreenLight
+  m_Name: Mat_Foliage_ColorBlueLight
   m_Shader: {fileID: -6465566751694194690, guid: 31e3f5f25523376408f06797d2eb794a,
     type: 3}
   m_Parent: {fileID: 0}
@@ -142,8 +142,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlbedoColorMultiplicator: 2
-    - _AlbedoColorMultiplier: 1.5
+    - _AlbedoColorMultiplicator: 3
+    - _AlbedoColorMultiplier: 3.5
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -162,8 +162,8 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _MovementSpeed: 0
-    - _NormalNoiseHeight: 0.01
-    - _NormalNoiseStrength: 0.2
+    - _NormalNoiseHeight: 0.005
+    - _NormalNoiseStrength: 0.1
     - _NormalNoiseTiling: 3
     - _NormalStrength: 2
     - _OcclusionStrength: 1
@@ -188,7 +188,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0.66901964, g: 0.89411765, b: 0.57254905, a: 0}
+    - _AlbedoColor: {r: 0.5372549, g: 0.9098039, b: 0.75457513, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

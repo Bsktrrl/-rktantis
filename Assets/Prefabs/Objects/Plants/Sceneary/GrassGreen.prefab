@@ -72,12 +72,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8152930884416864205}
   m_SourcePrefab: {fileID: 100100000, guid: 06e83312b0d44c04c8270fdf6c75802a, type: 3}
---- !u!1 &1819879129823845736 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -3957292672666792398, guid: 06e83312b0d44c04c8270fdf6c75802a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5788635334484726618}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3982921517851307154 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7427406853244846024, guid: 06e83312b0d44c04c8270fdf6c75802a,
@@ -104,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ColorMeshObject:
   - {fileID: 3982921517851307154}
-  - {fileID: 1819879129823845736}
   plantColors:
   - {fileID: 2100000, guid: b31fe7714c9b3674fb9db37e03dc17fb, type: 2}
+  - {fileID: 2100000, guid: 664312152b197ef41b2c98cfc846edff, type: 2}
+  - {fileID: 2100000, guid: a8a31a5abb6b7e64e9ee724d83482686, type: 2}
