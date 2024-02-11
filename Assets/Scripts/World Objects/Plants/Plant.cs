@@ -42,11 +42,13 @@ public class Plant : MonoBehaviour
     {
         //Set Color of Flower
         #region
+        Material plantmaterial = GetRandomPlantColorMaterial();
+
         for (int i = 0; i < ColorMeshObject.Count; i++)
         {
             if (ColorMeshObject[i].GetComponent<MeshRenderer>())
             {
-                ColorMeshObject[i].GetComponent<MeshRenderer>().material = GetRandomPlantColorMaterial();
+                ColorMeshObject[i].GetComponent<MeshRenderer>().material = plantmaterial;
             }
         }
         #endregion
