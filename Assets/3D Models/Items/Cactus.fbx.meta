@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Material2
+    second: {fileID: 2100000, guid: 6cb3cd31ea0ca104699214d1c3d57303, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Stem.003
     second: {fileID: 2100000, guid: 8277604f86c82f94789495d3fc62ce53, type: 2}
   materials:
@@ -39,9 +44,7 @@ ModelImporter:
     clipAnimations: []
     isReadable: 0
   meshes:
-    lODScreenPercentages:
-    - 0.25
-    - 0.01
+    lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Foliage_ColorGreen
-  m_Shader: {fileID: -6465566751694194690, guid: 31e3f5f25523376408f06797d2eb794a,
+  m_Name: Mat_Foliage_AridisGreen
+  m_Shader: {fileID: -6465566751694194690, guid: f514aaff0155f7f4fb80c8a330310df4,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -144,6 +144,7 @@ Material:
     m_Floats:
     - _AlbedoColorMultiplicator: 2
     - _AlbedoColorMultiplier: 1
+    - _AlbedoMultiplier: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -180,6 +181,7 @@ Material:
     - _Surface: 0
     - _Tiling: 5
     - _TilingBlend: 0.5
+    - _Transparency: 0.5
     - _TransparencyDither: 0
     - _TransparencyMultiplier: 0
     - _TransparencyOnOff: 1
@@ -188,7 +190,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0.6159477, g: 0.89411765, b: 0.5722353, a: 0}
+    - _AlbedoColor: {r: 0.61960787, g: 0.89411765, b: 0.5764706, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
