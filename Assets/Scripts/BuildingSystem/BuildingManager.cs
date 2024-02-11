@@ -134,9 +134,10 @@ public class BuildingManager : Singleton<BuildingManager>
 
     private void Update()
     {
-        if ((Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer)
+        if (MainManager.Instance.menuStates == MenuStates.None
+            && ((Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer)
             || (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer)
-            || (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer))
+            || (Time.frameCount % MainManager.Instance.updateInterval == 0 && HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)))
         {
             RaycastSetup_Hammer();
 
@@ -2382,7 +2383,14 @@ public class BuildingManager : Singleton<BuildingManager>
             return;
         }
 
-        buildingRequirement_Parent.SetActive(true);
+        if (MainManager.Instance.gameStates == GameStates.Building)
+        {
+            buildingRequirement_Parent.SetActive(true);
+        }
+        else
+        {
+            buildingRequirement_Parent.SetActive(false);
+        }
 
         //Remove all childs
         for (int i = ParentObject.transform.childCount - 1; i >= 0; i--)
@@ -2510,7 +2518,12 @@ public class BuildingManager : Singleton<BuildingManager>
             return;
         }
 
-        buildingRequirement_Parent.SetActive(true);
+        if (MainManager.Instance.gameStates != GameStates.Building)
+        {
+            buildingRequirement_Parent.SetActive(false);
+
+            return;
+        }
 
         //Remove all childs
         for (int i = ParentObject.transform.childCount - 1; i >= 0; i--)

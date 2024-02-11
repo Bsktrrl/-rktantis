@@ -44,11 +44,14 @@ public class Plant : MonoBehaviour
         #region
         Material plantmaterial = GetRandomPlantColorMaterial();
 
-        for (int i = 0; i < ColorMeshObject.Count; i++)
+        if (plantmaterial != null)
         {
-            if (ColorMeshObject[i].GetComponent<MeshRenderer>())
+            for (int i = 0; i < ColorMeshObject.Count; i++)
             {
-                ColorMeshObject[i].GetComponent<MeshRenderer>().material = plantmaterial;
+                if (ColorMeshObject[i].GetComponent<MeshRenderer>())
+                {
+                    ColorMeshObject[i].GetComponent<MeshRenderer>().material = plantmaterial;
+                }
             }
         }
         #endregion
@@ -166,8 +169,14 @@ public class Plant : MonoBehaviour
 
     public Material GetRandomPlantColorMaterial()
     {
-        int index = UnityEngine.Random.Range(0, plantColors.Count);
+        int index = 0;
 
-        return plantColors[index];
+        if (plantColors.Count > 0)
+        {
+            index = UnityEngine.Random.Range(0, plantColors.Count);
+            return plantColors[index];
+        }
+
+        return null;
     }
 }
