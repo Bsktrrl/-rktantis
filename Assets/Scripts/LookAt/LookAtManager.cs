@@ -93,9 +93,59 @@ public class LookAtManager : Singleton<LookAtManager>
         }
         #endregion
 
-        //If looking at a Furniture and Machines
+        //If looking at an Inventory
         #region
         else if (typeLookingAt == InteracteableType.Inventory)
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            FurnitureMachineDisplay();
+
+            MovableObject_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
+
+        //If looking at a Furniture
+        #region
+        else if (typeLookingAt == InteracteableType.CraftingTable
+            || typeLookingAt == InteracteableType.SkillTreeTable)
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            FurnitureMachineDisplay();
+
+            MovableObject_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
+
+        //If looking at a Machine
+        #region
+        else if (typeLookingAt == InteracteableType.Battery_x1
+            || typeLookingAt == InteracteableType.Battery_x2
+            || typeLookingAt == InteracteableType.Battery_x3
+
+            || typeLookingAt == InteracteableType.CropPlot_x1
+            || typeLookingAt == InteracteableType.CropPlot_x2
+            || typeLookingAt == InteracteableType.CropPlot_x4
+
+            || typeLookingAt == InteracteableType.Grill_x1
+            || typeLookingAt == InteracteableType.Grill_x2
+            || typeLookingAt == InteracteableType.Grill_x4
+
+            || typeLookingAt == InteracteableType.GhostTank
+            || typeLookingAt == InteracteableType.GhostRepeller
+            || typeLookingAt == InteracteableType.EnergyStorageTank
+
+            || typeLookingAt == InteracteableType.ResourceConverter
+            || typeLookingAt == InteracteableType.HeatRegulator
+            || typeLookingAt == InteracteableType.Extractor
+            || typeLookingAt == InteracteableType.Blender)
         {
             //Turn off all screens
             TurnOffScreens();

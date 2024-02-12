@@ -261,6 +261,8 @@ public enum InteracteableType
     [Description("Battery x2")][InspectorName("Battery x2")] Battery_x2,
     [Description("Battery x3")][InspectorName("Battery x3")] Battery_x3,
 
+    [Description("Plant")][InspectorName("Plant")] Plant,
 
-    [Description("Plant")][InspectorName("Plant")] Plant
+    [Description("Blender")][InspectorName("Blender")] Blender,
+    [Description("Energy Storage Tank")][InspectorName("Energy Storage Tank")] EnergyStorageTank
 }
