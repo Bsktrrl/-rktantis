@@ -10,6 +10,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d9da9e6fd40a21b4aab78debfb843e86,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9da9e6fd40a21b4aab78debfb843e86,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9da9e6fd40a21b4aab78debfb843e86,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d9da9e6fd40a21b4aab78debfb843e86,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.2842298
       objectReference: {fileID: 0}
@@ -92,6 +107,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1147032134230069660}
   m_SourcePrefab: {fileID: 100100000, guid: d9da9e6fd40a21b4aab78debfb843e86, type: 3}
+--- !u!1 &799058912602979097 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4675576942497643905, guid: d9da9e6fd40a21b4aab78debfb843e86,
+    type: 3}
+  m_PrefabInstance: {fileID: 5473051863108241048}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1698950105236082834 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6658516740633187850, guid: d9da9e6fd40a21b4aab78debfb843e86,
@@ -229,10 +250,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantType: 18
   pickablePart: {fileID: 1698950105236082834}
-  ColorMeshObject: []
-  plantColors: []
+  ColorMeshObject:
+  - {fileID: 799058912602979097}
+  - {fileID: 7014197477849452852}
+  - {fileID: 8234089392788961269}
+  plantColors:
+  - {fileID: 2100000, guid: 6a5bad5eaa05f574b8adda3a7f408e27, type: 2}
+  - {fileID: 2100000, guid: 9d60bf4f3e25faa43ab04ce79854d33b, type: 2}
+  - {fileID: 2100000, guid: 20b3e1914ebaf334c980c54fd0fba077, type: 2}
   isPicked: 0
   growthTimer: 0
   growthPrecentage: 0
   plantIndex: 0
   precentageCheck: 0
+--- !u!1 &7014197477849452852 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6151001346205870164, guid: d9da9e6fd40a21b4aab78debfb843e86,
+    type: 3}
+  m_PrefabInstance: {fileID: 5473051863108241048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8234089392788961269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4157230379979518317, guid: d9da9e6fd40a21b4aab78debfb843e86,
+    type: 3}
+  m_PrefabInstance: {fileID: 5473051863108241048}
+  m_PrefabAsset: {fileID: 0}
