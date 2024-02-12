@@ -115,6 +115,7 @@ public class BuildingManager : Singleton<BuildingManager>
     [Header("RequiermentColors")]
     public Color requirementMetColor;
     public Color requirementNOTMetColor;
+    public GameObject selectedMovableObjectInMenu = null;
 
 
     //--------------------
@@ -925,12 +926,12 @@ public class BuildingManager : Singleton<BuildingManager>
     {
         if (blockLookingAt.ghostList[i].GetComponent<Building_Ghost>().buildingType != buildingType)
         {
-            print("100000. BuildingBlock return without setting a Ghost");
+            //print("100000. BuildingBlock return without setting a Ghost");
 
             return;
         }
 
-        print("100001. BuildingBlock return with a Ghost - Success");
+        //print("100001. BuildingBlock return with a Ghost - Success");
 
         //Reset all ghost before setting a new one
         if (true /*ghost_LookedAt != blockLookingAt.ghostList[i]*/)
@@ -2383,14 +2384,16 @@ public class BuildingManager : Singleton<BuildingManager>
             return;
         }
 
-        if (MainManager.Instance.gameStates == GameStates.Building)
-        {
-            buildingRequirement_Parent.SetActive(true);
-        }
-        else
-        {
-            buildingRequirement_Parent.SetActive(false);
-        }
+        buildingRequirement_Parent.SetActive(true);
+
+        //if (MainManager.Instance.gameStates == GameStates.Building)
+        //{
+        //    buildingRequirement_Parent.SetActive(true);
+        //}
+        //else
+        //{
+        //    buildingRequirement_Parent.SetActive(false);
+        //}
 
         //Remove all childs
         for (int i = ParentObject.transform.childCount - 1; i >= 0; i--)
@@ -2518,12 +2521,14 @@ public class BuildingManager : Singleton<BuildingManager>
             return;
         }
 
-        if (MainManager.Instance.gameStates != GameStates.Building)
-        {
-            buildingRequirement_Parent.SetActive(false);
+        buildingRequirement_Parent.SetActive(true);
 
-            return;
-        }
+        //if (MainManager.Instance.gameStates != GameStates.Building)
+        //{
+        //    buildingRequirement_Parent.SetActive(false);
+
+        //    return;
+        //}
 
         //Remove all childs
         for (int i = ParentObject.transform.childCount - 1; i >= 0; i--)
@@ -2636,6 +2641,104 @@ public class BuildingManager : Singleton<BuildingManager>
         }
 
         buildingRemoveRequirement_Parent.SetActive(true);
+    }
+
+
+    //--------------------
+
+
+    public void SetNewSelectedBlock()
+    {
+        if (selectedMovableObjectInMenu)
+        {
+            if (selectedMovableObjectInMenu.GetComponent<InteractableObject>())
+            {
+                selectedMovableObjectInMenu.GetComponent<InteractableObject>().DestroyThisObject();
+                selectedMovableObjectInMenu = null;
+            }
+            else
+            {
+                Destroy(selectedMovableObjectInMenu);
+                selectedMovableObjectInMenu = null;
+            }
+        }
+
+        //If selected Object is Empty
+        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+        {
+            selectedMovableObjectInMenu = null;
+        }
+
+        //If selected Object is a BuildingBlock
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
+        {
+            if (MoveableObjectManager.Instance.buildingType_Selected != BuildingType.None && MoveableObjectManager.Instance.buildingMaterial_Selected != BuildingMaterial.None)
+            {
+                //Instantiate new tempBlock as this BuildingBlock
+                BuildingBlock_Parent temp = GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected);
+
+                for (int i = 0; i < temp.ghostList.Count; i++)
+                {
+                    if (temp.ghostList[i].GetComponent<Building_Ghost>().buildingType == MoveableObjectManager.Instance.buildingType_Selected)
+                    {
+                        if (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer
+                            || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer
+                            || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
+                        {
+                            selectedMovableObjectInMenu = Instantiate(temp.ghostList[i], InventoryManager.Instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
+                            selectedMovableObjectInMenu.transform.parent = tempBlock_Parent.transform;
+
+                            //Get the correct mesh
+                            selectedMovableObjectInMenu.GetComponent<MeshFilter>().mesh = GetCorrectGhostMesh(selectedMovableObjectInMenu);
+                            selectedMovableObjectInMenu.GetComponent<MeshRenderer>().material = canPlace_Material;
+
+                            //Remove its BoxCollider
+                            if (selectedMovableObjectInMenu.GetComponent<BoxCollider>())
+                            {
+                                selectedMovableObjectInMenu.GetComponent<BoxCollider>().enabled = !selectedMovableObjectInMenu.GetComponent<BoxCollider>().enabled;
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                MoveableObjectManager.Instance.objectToMove = null;
+            }
+        }
+
+        //If selected Object is a Machine or furniture
+        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine
+            || MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
+        {
+            GameObject moveableObject = MoveableObjectManager.Instance.GetMoveableObject();
+
+            if (moveableObject)
+            {
+                MoveableObjectManager.Instance.objectToMove = moveableObject;
+
+                if (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer
+                            || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer
+                            || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
+                {
+                    selectedMovableObjectInMenu = Instantiate(moveableObject, InventoryManager.Instance.handDropPoint.transform.position, Quaternion.identity) as GameObject;
+                    selectedMovableObjectInMenu.transform.parent = tempBlock_Parent.transform;
+
+                    //Set selected For Movement
+                    selectedMovableObjectInMenu.GetComponent<MoveableObject>().isSelectedForMovement = true;
+
+                    //Get the correct material
+                    //tempObj_Selected.GetComponent<MoveableObject>().meshRenderer.material = BuildingManager.Instance.canPlace_Material;
+
+                    //Remove its BoxCollider
+                    if (selectedMovableObjectInMenu.GetComponent<BoxCollider>())
+                    {
+                        selectedMovableObjectInMenu.GetComponent<BoxCollider>().enabled = !selectedMovableObjectInMenu.GetComponent<BoxCollider>().enabled;
+                    }
+                }
+            }
+        }
+
+        buildingRequirement_Parent.SetActive(true);
     }
 
 

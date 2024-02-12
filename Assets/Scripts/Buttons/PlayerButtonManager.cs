@@ -106,11 +106,11 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
         //Hotbar
         #region
-        else if (Input.GetAxis("Mouse ScrollWheel") > 0 && MainManager.Instance.menuStates != MenuStates.MoveableObjectMenu && MainManager.Instance.menuStates != MenuStates.SkillTreeMenu)
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0 /*&& MainManager.Instance.menuStates != MenuStates.None*/)
         {
             hotbarSelectionDown_isPressed?.Invoke();
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && MainManager.Instance.menuStates != MenuStates.MoveableObjectMenu && MainManager.Instance.menuStates != MenuStates.SkillTreeMenu)
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 /*&& MainManager.Instance.menuStates != MenuStates.None*/)
         {
             hotbarSelectionUp_isPressed?.Invoke();
         }
