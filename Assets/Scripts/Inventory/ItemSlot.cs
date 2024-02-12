@@ -18,7 +18,6 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        
         //If only player inventory is used
         if (MainManager.Instance.menuStates == MenuStates.InventoryMenu
             || MainManager.Instance.menuStates == MenuStates.CraftingMenu
@@ -79,6 +78,11 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                 }
             }
             #endregion
+        }
+
+        if (itemName != Items.None)
+        {
+            InventoryManager.Instance.ChangeitemInfoBox(itemName, this);
         }
     }
     void RemoveItemFromInventory()
@@ -173,7 +177,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
         if (itemName != Items.None)
         {
-            InventoryManager.Instance.CahangeitemInfoBox(itemName);
+            InventoryManager.Instance.ChangeitemInfoBox(itemName, this);
         }
     }
 

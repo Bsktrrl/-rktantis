@@ -826,30 +826,41 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
-    public void CahangeitemInfoBox(Items itemName)
+    public void ChangeitemInfoBox(Items itemName, ItemSlot itemSlot)
     {
-        if (MainManager.Instance.GetItem(itemName).isEquipableInHand)
+        //ItemSlot from Player Inventory
+        if (itemSlot.inventoryIndex <= 0)
         {
-            itemInfo.SetInfo_EquipableHandItem();
+            if (MainManager.Instance.GetItem(itemName).isEquipableInHand)
+            {
+                itemInfo.SetInfo_EquipableHandItem(itemSlot);
+            }
+            else if (MainManager.Instance.GetItem(itemName).isEquipableClothes)
+            {
+                itemInfo.SetInfo_EquipableClothesItem();
+            }
+            else if (MainManager.Instance.GetItem(itemName).isConsumeable)
+            {
+                itemInfo.SetInfo_ConsumableItem();
+            }
+            else
+            {
+                itemInfo.SetInfo_StaticItem();
+            }
         }
-        else if (MainManager.Instance.GetItem(itemName).isEquipableClothes)
-        {
-            itemInfo.SetInfo_EquipableClothesItem();
-        }
-        else if (MainManager.Instance.GetItem(itemName).isConsumeable)
-        {
-            itemInfo.SetInfo_ConsumableItem();
-        }
+
+        //ItemSlot from Chest Inventory
         else
         {
-            itemInfo.SetInfo_StaticItem();
+            itemInfo.SetInfo_ChestItem();
         }
 
         itemInfo_Parent.SetActive(true);
     }
     public void HideInventoryItemInfo()
     {
-        if (player_ItemName_Display.text == "")
+        if (player_ItemName_Display.text == ""
+            && chest_ItemName_Display.text == "")
         {
             itemInfo_Parent.SetActive(false);
         }
