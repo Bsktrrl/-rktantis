@@ -2430,6 +2430,7 @@ public class BuildingManager : Singleton<BuildingManager>
             buildingRequirement_List.Add(Instantiate(buildingRequirement_Prefab, ParentObject.transform) as GameObject);
 
             buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(blockParent.buildingRequirementList[i].itemName).hotbarSprite;
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = SpaceTextConverting.Instance.SetText(MainManager.Instance.GetItem(blockParent.buildingRequirementList[i].itemName).itemName.ToString());
 
             int counter = 0;
 
@@ -2491,6 +2492,7 @@ public class BuildingManager : Singleton<BuildingManager>
             buildingRemoveRequirement_List.Add(Instantiate(buildingRequirement_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
 
             buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(blockParent.removeBuildingRequirementList[i].itemName).hotbarSprite;
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = SpaceTextConverting.Instance.SetText(MainManager.Instance.GetItem(blockParent.removeBuildingRequirementList[i].itemName).itemName.ToString());
 
             int counter = 0;
 
@@ -2565,6 +2567,7 @@ public class BuildingManager : Singleton<BuildingManager>
             buildingRequirement_List.Add(Instantiate(buildingRequirement_Prefab, ParentObject.transform) as GameObject);
 
             buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(moveableObject.craftingRequirements[i].itemName).hotbarSprite;
+            buildingRequirement_List[buildingRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = SpaceTextConverting.Instance.SetText(MainManager.Instance.GetItem(moveableObject.craftingRequirements[i].itemName).itemName.ToString());
 
             int counter = 0;
 
@@ -2625,6 +2628,7 @@ public class BuildingManager : Singleton<BuildingManager>
             buildingRemoveRequirement_List.Add(Instantiate(buildingRequirement_Prefab, buildingRemoveRequirement_Parent.transform) as GameObject);
 
             buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(moveableObject.RemoveCraftingRequirements[i].itemName).hotbarSprite;
+            buildingRemoveRequirement_List[buildingRemoveRequirement_List.Count - 1].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = SpaceTextConverting.Instance.SetText(MainManager.Instance.GetItem(moveableObject.RemoveCraftingRequirements[i].itemName).itemName.ToString());
 
             int counter = 0;
 
