@@ -40,6 +40,8 @@ public class Plant : MonoBehaviour
     }
     private void Start()
     {
+        PlayerButtonManager.objectInterraction_isPressedDown += ObjectInteraction;
+
         //Set Color of Flower
         #region
         Material plantmaterial = GetRandomPlantColorMaterial();
@@ -163,6 +165,27 @@ public class Plant : MonoBehaviour
         pickablePart.SetActive(true);
     }
 
+
+    void ObjectInteraction()
+    {
+        if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selecedObject == gameObject
+            && MainManager.Instance.menuStates == MenuStates.None)
+        {
+            //If Object is a Plant
+            print("Interract with a Plant");
+
+            InteractableObject tempObject = pickablePart.GetComponent<InteractableObject>();
+
+            //Pick the PlantItem from the plant
+            for (int i = 0; i < tempObject.amount; i++)
+            {
+                //Check If item can be added
+                InventoryManager.Instance.AddItemToInventory(0, tempObject.itemName);
+
+                PickPlant();
+            }
+        }
+    }
 
     //--------------------
 

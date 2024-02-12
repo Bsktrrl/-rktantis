@@ -6,18 +6,18 @@ public class BackgroundCollider : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerEnter(PointerEventData eventData)
     {
         print("10000. Entered");
-        InventoryManager.Instance.HideInventoryItemInfo();
+        InventoryManager.Instance.DisplayInventoryItemInfo();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         print("10000. Exited");
-        InventoryManager.Instance.HideInventoryItemInfo();
+        InventoryManager.Instance.DisplayInventoryItemInfo();
     }
 
     public void OnPointerMove(PointerEventData eventData)
     {
         print("10000. Moved");
-        InventoryManager.Instance.HideInventoryItemInfo();
+        InventoryManager.Instance.DisplayInventoryItemInfo();
     }
 }

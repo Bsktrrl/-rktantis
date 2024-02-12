@@ -8,6 +8,7 @@ public class BuildingRequirementSlot : MonoBehaviour
 {
     public Image requirement_image;
     public Image requirement_BGimage;
+    public TextMeshProUGUI requirement_ItemName;
     public TextMeshProUGUI requirement_amount;
 
     public void DestroyThisObject()

@@ -83,11 +83,11 @@ public class InteractableObject : MonoBehaviour
             }
             #endregion
 
-            //If Object is a Plant
+            //If Object is a PlantItem
             #region
             else if (interacteableType == InteracteableType.Plant)
             {
-                print("Interract with a Plant");
+                print("Interract with a PlantItem");
 
                 //Pick the Plant
                 if (plantParent)
@@ -105,7 +105,6 @@ public class InteractableObject : MonoBehaviour
                 }
             }
             #endregion
-
             //If Object is an Inventory
             #region
             else if (interacteableType == InteracteableType.Inventory)
@@ -262,6 +261,8 @@ public enum InteracteableType
     [Description("Battery x2")][InspectorName("Battery x2")] Battery_x2,
     [Description("Battery x3")][InspectorName("Battery x3")] Battery_x3,
 
+    [Description("Plant")][InspectorName("Plant")] Plant,
 
-    [Description("Plant")][InspectorName("Plant")] Plant
+    [Description("Blender")][InspectorName("Blender")] Blender,
+    [Description("Energy Storage Tank")][InspectorName("Energy Storage Tank")] EnergyStorageTank
 }

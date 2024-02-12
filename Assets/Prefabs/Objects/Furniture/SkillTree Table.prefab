@@ -170,8 +170,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.85, y: 1.65, z: 1.75}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &3948706605811632920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,8 +186,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInRange: 0
   itemName: 147
+  amount: 0
   interacteableType: 4
   inventoryIndex: 0
+  plantParent: {fileID: 0}
 --- !u!114 &2672097166629589600
 MonoBehaviour:
   m_ObjectHideFlags: 0

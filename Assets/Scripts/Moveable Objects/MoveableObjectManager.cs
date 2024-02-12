@@ -84,7 +84,8 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         {
             if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>())
             {
-                EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+                BuildingManager.Instance.SetNewSelectedBlock();
+                //EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
             }
         }
         #endregion

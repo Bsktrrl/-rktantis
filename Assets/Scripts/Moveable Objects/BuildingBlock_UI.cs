@@ -73,10 +73,11 @@ public class BuildingBlock_UI : MonoBehaviour
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
         {
             //Update "Free Block" if Hammer is selected
-            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
-            {
-                EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
-            }
+            BuildingManager.Instance.SetNewSelectedBlock();
+            //if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            //{
+            //    EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+            //}
         }
 
         //If selected Object is a BuildingBlock
@@ -91,38 +92,53 @@ public class BuildingBlock_UI : MonoBehaviour
             }
 
             //Update "Free Block" if Hammer is selected
-            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
-            {
-                EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
-            }
+            BuildingManager.Instance.SetNewSelectedBlock();
+            //if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            //{
+            //    EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+            //}
         }
 
         //If selected Object is a Machine
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine)
         {
-            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
-            {
-                EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+            BuildingManager.Instance.SetNewSelectedBlock();
 
-                //Set requirements for both BuildingMenu and on main screen
-                MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
-                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.Instance.buildingRequirement_Parent);
-                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
-            }
+            //Set requirements for both BuildingMenu and on main screen
+            MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
+            BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.Instance.buildingRequirement_Parent);
+            BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
+
+            //if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            //{
+            //    EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+
+            //    //Set requirements for both BuildingMenu and on main screen
+            //    MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
+            //    BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.Instance.buildingRequirement_Parent);
+            //    BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
+            //}
         }
 
         //If selected Object is a Furniture
         else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
         {
-            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
-            {
-                EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+            BuildingManager.Instance.SetNewSelectedBlock();
 
-                //Set requirements for both BuildingMenu and on main screen
-                MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
-                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.Instance.buildingRequirement_Parent);
-                BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
-            }
+            //Set requirements for both BuildingMenu and on main screen
+            MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
+            BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.Instance.buildingRequirement_Parent);
+            BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
+
+            //if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>() != null)
+            //{
+            //    EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+
+            //    //Set requirements for both BuildingMenu and on main screen
+            //    MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
+            //    BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingSystemMenu.Instance.buildingRequirement_Parent);
+            //    BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
+            //}
         }
 
         BuildingManager.Instance.SaveData();

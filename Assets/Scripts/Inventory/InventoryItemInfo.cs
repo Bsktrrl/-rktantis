@@ -16,7 +16,8 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
     public GameObject equipHandItem_Parent;
     public GameObject equipHandItem_NotHand;
     public GameObject equipHandItem_Hand;
-    public TextMeshProUGUI equipHandItem_RightMouseButton_Text;
+    public TextMeshProUGUI equipHandItem_NotHand_RightMouseButton_Text;
+    public TextMeshProUGUI equipHandItem_Hand_RightMouseButton_Text;
 
     [Header("Equip Clothes Item")]
     public GameObject equipClothesItem_Parent;
@@ -103,6 +104,17 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
     {
         HideAllParents();
 
+        if (MainManager.Instance.menuStates == MenuStates.ChestMenu)
+        {
+            equipHandItem_NotHand_RightMouseButton_Text.text = "Move";
+            equipHandItem_Hand_RightMouseButton_Text.text = "Move";
+        }
+        else
+        {
+            equipHandItem_NotHand_RightMouseButton_Text.text = "Throw";
+            equipHandItem_Hand_RightMouseButton_Text.text = "Throw";
+        }
+
         for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
         {
             if (HotbarManager.Instance.hotbarList[i].itemID == itemSlot.itemID)
@@ -114,15 +126,6 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
 
                 return;
             }
-        }
-
-        if (MainManager.Instance.menuStates == MenuStates.ChestMenu)
-        {
-            equipHandItem_RightMouseButton_Text.text = "Move";
-        }
-        else
-        {
-            equipHandItem_RightMouseButton_Text.text = "Throw";
         }
 
         equipHandItem_NotHand.SetActive(true);
