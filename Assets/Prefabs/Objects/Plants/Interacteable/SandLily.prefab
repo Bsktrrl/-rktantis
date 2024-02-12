@@ -63,6 +63,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SandLily
       objectReference: {fileID: 0}
+    - target: {fileID: 3767066294323137762, guid: 8cd3d95592fb7b149be3eb8fe6985778,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5967069819222355230, guid: 8cd3d95592fb7b149be3eb8fe6985778,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -71,6 +81,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3387374413759330358}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8cd3d95592fb7b149be3eb8fe6985778,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1074538558339973517}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8cd3d95592fb7b149be3eb8fe6985778,
         type: 3}
       insertIndex: -1
@@ -115,6 +129,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!135 &1074538558339973517
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4420635417419070253}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.05
+  m_Center: {x: 0, y: 0.03, z: 0}
 --- !u!114 &7348214552008296405
 MonoBehaviour:
   m_ObjectHideFlags: 0

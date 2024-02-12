@@ -6,7 +6,7 @@ using UnityEngine;
 public class Plant : MonoBehaviour
 {
     [Header("General")]
-    [SerializeField] PlantType plantType;
+    public PlantType plantType;
     public GameObject pickablePart;
 
     [Header("Flower Color")]
@@ -16,7 +16,7 @@ public class Plant : MonoBehaviour
     [Header("Other")]
     public bool isPicked;
     [HideInInspector] public float growthTimer;
-    [SerializeField] float growthPrecentage;
+    public float growthPrecentage;
 
     [HideInInspector] public int plantIndex;
 
@@ -42,11 +42,16 @@ public class Plant : MonoBehaviour
     {
         //Set Color of Flower
         #region
-        for (int i = 0; i < ColorMeshObject.Count; i++)
+        Material plantmaterial = GetRandomPlantColorMaterial();
+
+        if (plantmaterial != null)
         {
-            if (ColorMeshObject[i].GetComponent<MeshRenderer>())
+            for (int i = 0; i < ColorMeshObject.Count; i++)
             {
-                ColorMeshObject[i].GetComponent<MeshRenderer>().material = GetRandomPlantColorMaterial();
+                if (ColorMeshObject[i].GetComponent<MeshRenderer>())
+                {
+                    ColorMeshObject[i].GetComponent<MeshRenderer>().material = plantmaterial;
+                }
             }
         }
         #endregion
@@ -164,8 +169,14 @@ public class Plant : MonoBehaviour
 
     public Material GetRandomPlantColorMaterial()
     {
-        int index = UnityEngine.Random.Range(0, plantColors.Count);
+        int index = 0;
 
-        return plantColors[index];
+        if (plantColors.Count > 0)
+        {
+            index = UnityEngine.Random.Range(0, plantColors.Count);
+            return plantColors[index];
+        }
+
+        return null;
     }
 }

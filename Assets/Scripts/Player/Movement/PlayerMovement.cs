@@ -20,9 +20,6 @@ public class PlayerMovement : MonoBehaviour
     public SphereCollider groundCheck;
     public bool isGrounded;
 
-    //Camera
-    [SerializeField] Camera camera;
-
 
     //--------------------
 
