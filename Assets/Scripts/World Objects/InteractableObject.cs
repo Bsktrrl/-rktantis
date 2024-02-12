@@ -83,11 +83,11 @@ public class InteractableObject : MonoBehaviour
             }
             #endregion
 
-            //If Object is a Plant
+            //If Object is a PlantItem
             #region
             else if (interacteableType == InteracteableType.Plant)
             {
-                print("Interract with a Plant");
+                print("Interract with a PlantItem");
 
                 //Pick the Plant
                 if (plantParent)
@@ -105,7 +105,6 @@ public class InteractableObject : MonoBehaviour
                 }
             }
             #endregion
-
             //If Object is an Inventory
             #region
             else if (interacteableType == InteracteableType.Inventory)

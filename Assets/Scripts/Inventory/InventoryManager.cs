@@ -65,7 +65,13 @@ public class InventoryManager : Singleton<InventoryManager>
     }
     private void Update()
     {
-        HideInventoryItemInfo();
+        if (MainManager.Instance.menuStates == MenuStates.InventoryMenu
+            || MainManager.Instance.menuStates == MenuStates.ChestMenu
+            || MainManager.Instance.menuStates == MenuStates.EquipmentMenu
+            || MainManager.Instance.menuStates == MenuStates.CraftingMenu)
+        {
+            DisplayInventoryItemInfo();
+        }
     }
 
 
@@ -857,7 +863,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
         itemInfo_Parent.SetActive(true);
     }
-    public void HideInventoryItemInfo()
+    public void DisplayInventoryItemInfo()
     {
         if (player_ItemName_Display.text == ""
             && chest_ItemName_Display.text == "")
@@ -874,6 +880,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    #region InventoryUI
     public void PrepareInventoryUI(int inventory, bool isMovingItem)
     {
         int inventorySlots = (int)inventories[inventory].inventorySize.x * (int)inventories[inventory].inventorySize.y;
@@ -1163,6 +1170,7 @@ public class InventoryManager : Singleton<InventoryManager>
             itemSlotList[i].SetActive(true);
         }
     }
+    #endregion
 
 
     //--------------------

@@ -13,8 +13,9 @@ public class MainManager : Singleton<MainManager>
     public MenuStates menuStates;
     public GameStates gameStates;
 
-    [Header("Item_SO")]
+    [Header("_SO")]
     public Item_SO item_SO;
+    public MoveableObject_SO moveableObject_SO;
 
     [Header("Parents")]
     public GameObject treeParent;
@@ -86,11 +87,24 @@ public class MainManager : Singleton<MainManager>
 
         return null;
     }
+    public MoveableObjectInfo GetMovableObject(MoveableObject moveableObject)
+    {
+        for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
+        {
+            if (moveableObject_SO.moveableObjectList[i].furnitureType == moveableObject.furnitureType
+                && moveableObject_SO.moveableObjectList[i].machineType == moveableObject.machineType)
+            {
+                return moveableObject_SO.moveableObjectList[i];
+            }
+        }
+
+        return null;
+    }
 
 
     //--------------------
 
-    
+
     void SaveData()
     {
         DataPersistanceManager.instance.SaveGame();

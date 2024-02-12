@@ -21,6 +21,11 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] Image PlantResourceImage;
     [SerializeField] TextMeshProUGUI PlantGrowthInfo;
 
+    [Header("MovableObject")]
+    [SerializeField] GameObject MovableObject_Panel;
+    [SerializeField] Image MovableObjectImage;
+    [SerializeField] TextMeshProUGUI MovableObjectName;
+
 
     //--------------------
 
@@ -87,6 +92,21 @@ public class LookAtManager : Singleton<LookAtManager>
             return;
         }
         #endregion
+
+        //If looking at a Furniture and Machines
+        #region
+        else if (typeLookingAt == InteracteableType.Inventory)
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            FurnitureMachineDisplay();
+
+            MovableObject_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
     }
 
 
@@ -116,7 +136,7 @@ public class LookAtManager : Singleton<LookAtManager>
                 Plant plant = SelectionManager.Instance.selecedObject.GetComponent<Plant>();
                 InteractableObject plantResource = plant.pickablePart.GetComponent<InteractableObject>();
 
-                PlantName.text = plant.plantType.ToString();
+                PlantName.text = SpaceTextConverting.Instance.SetText(plant.plantType.ToString());
                 PlantResourceImage.sprite = MainManager.Instance.GetItem(plantResource.itemName).hotbarSprite;
 
                 if (plant.growthPrecentage >= 100 || plant.growthPrecentage <= 0)
@@ -145,6 +165,19 @@ public class LookAtManager : Singleton<LookAtManager>
 
         return 0;
     }
+    void FurnitureMachineDisplay()
+    {
+        if (SelectionManager.Instance.selecedObject && SelectionManager.Instance.onTarget)
+        {
+            if (SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>())
+            {
+                MoveableObjectInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>());
+
+                MovableObjectImage.sprite = tempObject.objectSprite;
+                MovableObjectName.text = tempObject.Name;
+            }
+        }
+    }
 
 
     //--------------------
@@ -154,5 +187,6 @@ public class LookAtManager : Singleton<LookAtManager>
     {
         Item_Panel.SetActive(false);
         Plant_Panel.SetActive(false);
+        MovableObject_Panel.SetActive(false);
     }
 }

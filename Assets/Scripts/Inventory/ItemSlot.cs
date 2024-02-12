@@ -16,6 +16,13 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     //--------------------
 
 
+    private void Start()
+    {
+        if (itemName != Items.None)
+        {
+            InventoryManager.Instance.ChangeitemInfoBox(itemName, this);
+        }
+    }
     public void OnPointerUp(PointerEventData eventData)
     {
         //If only player inventory is used
