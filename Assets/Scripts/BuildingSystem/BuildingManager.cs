@@ -2384,6 +2384,15 @@ public class BuildingManager : Singleton<BuildingManager>
             return;
         }
 
+        if (HotbarManager.Instance.selectedItem == Items.WoodAxe
+            || HotbarManager.Instance.selectedItem == Items.StoneAxe
+            || HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
+        {
+            buildingRequirement_Parent.SetActive(false);
+
+            return;
+        }
+
         buildingRequirement_Parent.SetActive(true);
 
         //if (MainManager.Instance.gameStates == GameStates.Building)
@@ -2524,6 +2533,15 @@ public class BuildingManager : Singleton<BuildingManager>
         }
 
         buildingRequirement_Parent.SetActive(true);
+
+        if (HotbarManager.Instance.selectedItem == Items.WoodAxe
+            || HotbarManager.Instance.selectedItem == Items.StoneAxe
+            || HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
+        {
+            buildingRequirement_Parent.SetActive(false);
+
+            return;
+        }
 
         //if (MainManager.Instance.gameStates != GameStates.Building)
         //{

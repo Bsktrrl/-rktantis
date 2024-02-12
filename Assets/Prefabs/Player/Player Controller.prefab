@@ -29288,10 +29288,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4657243218154054554}
   - {fileID: 7877496430075270364}
   - {fileID: 8488523046690054658}
   - {fileID: 6533367768847129476}
-  - {fileID: 4657243218154054554}
   m_Father: {fileID: 1704715879672502755}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -32669,6 +32669,7 @@ MonoBehaviour:
   - {fileID: 1577383612080852258}
   requirementMetColor: {r: 1, g: 1, b: 1, a: 0}
   requirementNOTMetColor: {r: 0.9411765, g: 0.5176471, b: 0.31764707, a: 0.74509805}
+  selectedMovableObjectInMenu: {fileID: 0}
 --- !u!1 &5852061909310452731
 GameObject:
   m_ObjectHideFlags: 0
