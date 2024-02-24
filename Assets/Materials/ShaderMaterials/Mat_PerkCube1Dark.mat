@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_BatteryChargerLight3
+  m_Name: Mat_PerkCube1Dark
   m_Shader: {fileID: -6465566751694194690, guid: 31e3f5f25523376408f06797d2eb794a,
     type: 3}
   m_Parent: {fileID: 0}
@@ -142,6 +142,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlbedoColorMultiplier: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -157,7 +158,7 @@ Material:
     - _Dither: 0.5
     - _DrawOrder: 0
     - _DstBlend: 0
-    - _EmissionStrength: 1
+    - _EmissionStrength: 0
     - _EnvironmentReflections: 1
     - _GlitterSpeed: 0
     - _GlossMapScale: 0
@@ -165,18 +166,23 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _MovementSpeed: 0
+    - _NormalNoiseHeight: 0
+    - _NormalNoiseStrength: 0
+    - _NormalNoiseTiling: 1
     - _NormalStrength: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RoughnessStrength: 1.15
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
     - _Tiling: 5
+    - _TilingBlend: 0.5
     - _Transparency: 0
     - _TransparencyDither: 0
     - _TransparencyMultiplier: 0
@@ -184,11 +190,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0.5372549, g: 0.9098039, b: 0.9098039, a: 0}
+    - _AlbedoColor: {r: 0.9607843, g: 0.8107843, b: 0.36078426, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissiveColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &8064823419854809735
