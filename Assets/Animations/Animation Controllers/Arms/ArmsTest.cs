@@ -12,7 +12,7 @@ public class ArmsTest : MonoBehaviour
 
     void Update()
     {
-        //Set the item category with the number keys (1=Nothing, 2=Tools, 3=Flashlight, 4=Crystal, 5=Cup/Bottle, 6=Bucket, 0=Tablet)
+        //Set the item category with the number keys (0=Nothing, 1=Tools, 2=Flashlight, 3=Crystal, 4=Cup/Bottle, 5=Bucket)
         if(Input.GetKey(KeyCode.LeftShift) == false && Input.GetKey(KeyCode.LeftAlt) == false)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -40,15 +40,25 @@ public class ArmsTest : MonoBehaviour
                 anim.SetInteger("ItemCategory", 5);
                 anim.SetTrigger("ItemUpdate");
             }
-            if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                anim.SetInteger("ItemCategory", 6);
-                anim.SetTrigger("ItemUpdate");
-            }
             if (Input.GetKeyDown(KeyCode.Alpha0))
             {
                 anim.SetInteger("ItemCategory", 0);
                 anim.SetTrigger("ItemUpdate");
+            }
+        }
+
+        //Tablet
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if(anim.GetBool("Tablet") == false)
+            {
+                anim.SetBool("Tablet", true);
+                print(anim.GetBool("Tablet"));
+            }
+            else if (anim.GetBool("Tablet") == true)
+            {
+                anim.SetBool("Tablet", false);
+                print(anim.GetBool("Tablet"));
             }
         }
 
@@ -107,5 +117,11 @@ public class ArmsTest : MonoBehaviour
         {
             anim.SetTrigger("Click");
         }
+    }
+
+    //Animation event
+    void InteractionFrame()
+    {
+        print("Interact");
     }
 }
