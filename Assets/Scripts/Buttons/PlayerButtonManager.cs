@@ -22,6 +22,8 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
     public static Action isPressed_BuildingSystemMenu_Exit;
     public static Action isPressed_BuildingRotate;
 
+    public static Action isPressed_FixedRotation;
+
     public static Action isPressed_MoveableRotation_Right;
     public static Action isPressed_MoveableRotation_Left;
 
@@ -130,6 +132,10 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
         //MoveableObject Rotation
         #region
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            isPressed_FixedRotation?.Invoke();
+        }
         else if (Input.GetKey(KeyCode.R) && MainManager.Instance.menuStates == MenuStates.None && MainManager.Instance.gameStates == GameStates.Building)
         {
             isPressed_MoveableRotation_Right?.Invoke();

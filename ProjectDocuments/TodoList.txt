@@ -7,8 +7,6 @@ Todo before thirsday 13. - 2 days left
 --------------------
 
 
-- Make the Crafting/SkillTree ONLY work when interacting with its object
-
 - Make/Save-Load DurabilityBar on HandEquipments in inventory and Hotbar
 	- Hotbar: A Bar at the side
 	- InventoryItem: A Sircle at the bottom left
@@ -22,7 +20,9 @@ Todo before thirsday 13. - 2 days left
 - Make item be equipped to clothing
 	- ("AssignItemToClothingSlot" in "ItemSLot.cs")
 
-- Make the Tablet Journal
+- Make the Tablet Journal Menu
+- Make the Tablet Settings Menu
+- Only include "Crafting Table Menu" and "Skill Tree Menu" when interactiong with the objects
 
 - Make LookAt_informationUI for when the player are looking at interracteableObject (Trees/Cutable, Machines, Furniture, Pickups)
 	- Make an outline around the pickup/Object looking at???
@@ -39,3 +39,41 @@ Todo before thirsday 13. - 2 days left
 
 - Make Consumable Items work
 - Make ClothesEquipable Items work
+
+- Make a function in Building that let you change material of a BuildingBlock when looking at it and having the selected resources (like changing BuildingBlock in Raft)
+
+- When mining an ore, have a change of getting more of it (1 to 3 (5 as rare drop?))
+	- Perk in SkillTree: increase chance of getting more resources per mining
+- When mining Tungston Ore, you can use you rhands, but need more hits for it to break
+
+- Add World-Display to new CraftingTable and SkillTreeTable
+
+- For Plants, add a %-Bar to indicate the growth progression
+
+- Make a function that can move/rotate placed Machines and Furniture, when BuildingHammer is in Hand
+	- Save its stats
+	- Remove the Object
+	- Make a "ghost" of the object, as when building it
+	- Insert its stats when placed
+	- Lock the mouse-wheel and disable tablet and everyting else, as long at the object isn't placed yet
+
+- Make a "Trach Can" that take all items exept Arídian items
+
+- Make so that each plant have its own growth speed (not from PlantManager)
+	- PlantManager may have a multiplier which can be upgraded in the SkillTree
+	- "Arídis Flower is the slowes growing one
+
+- Make Upgrades to be used in Machines to make them work better
+	- Power: Perform what the Machine is doing, better (ex. growth/steak time or area of effect increase)
+	- Efficiency: Reduce the amount of GhostElement used
+
+- Change Tools to become 1x3 instead of 1x2
+
+- Let a GluePlant drop 4 GlueSticks
+
+New Items (and can be crafted):
+- Arídite Crystal
+- Cloth
+
+- Arídite Crystals can be crafted from items that uses it, from the CraftingTable
+	- The correct crafting recipe will only show if the player have the item in its inventory

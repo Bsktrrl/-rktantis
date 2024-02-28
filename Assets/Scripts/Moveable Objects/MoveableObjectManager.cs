@@ -8,6 +8,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 {
     #region Variables
     [Header("moveableObject_SO")]
+    public BuildingBlockObjects_SO buildingBlockObjects_SO;
     public MoveableObject_SO moveableObject_SO;
     public GameObject moveableObject_Parent;
 
@@ -109,6 +110,47 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         DataManager.Instance.moveableObjectSelected_Store = temp;
     }
 
+
+    //--------------------
+
+
+    public void ResetInfo()
+    {
+        moveableObjectType = MoveableObjectType.None;
+        buildingType_Selected = BuildingType.None;
+        buildingMaterial_Selected = BuildingMaterial.None;
+        machineType = MachineType.None;
+        furnitureType = FurnitureType.None;
+    }
+    public void SetMachineInfo(MachineType _machineType)
+    {
+        moveableObjectType = MoveableObjectType.Machine;
+        buildingType_Selected = BuildingType.None;
+        buildingMaterial_Selected = BuildingMaterial.None;
+        machineType = _machineType;
+        furnitureType = FurnitureType.None;
+    }
+    public void SetFurnitureInfo(FurnitureType _furnitureType)
+    {
+        moveableObjectType = MoveableObjectType.Furniture;
+        buildingType_Selected = BuildingType.None;
+        buildingMaterial_Selected = BuildingMaterial.None;
+        machineType = MachineType.None;
+        furnitureType = _furnitureType;
+    }
+    public void SetBuildingBlockInfo(BuildingType _buildingType_Selected, BuildingMaterial _buildingMaterial_Selected)
+    {
+        moveableObjectType = MoveableObjectType.BuildingBlock;
+        buildingType_Selected = _buildingType_Selected;
+        buildingMaterial_Selected = _buildingMaterial_Selected;
+        machineType = MachineType.None;
+        furnitureType = FurnitureType.None;
+    }
+
+
+    //--------------------
+
+
     public GameObject GetObjectFromMoveableObject_SO(MoveableObjectType moveableObjectType, MachineType machineType, FurnitureType furnitureType)
     {
         for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
@@ -141,6 +183,22 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     //--------------------
 
 
+    public GameObject GetBuildingBlock()
+    {
+        if (moveableObjectType == MoveableObjectType.BuildingBlock)
+        {
+            for (int i = 0; i < buildingBlockObjects_SO.buildingBlockObjectList.Count; i++)
+            {
+                if (buildingBlockObjects_SO.buildingBlockObjectList[i].BuildingType == buildingType_Selected
+                    && buildingBlockObjects_SO.buildingBlockObjectList[i].buildingMaterial == buildingMaterial_Selected)
+                {
+                    return buildingBlockObjects_SO.buildingBlockObjectList[i].objectToMove;
+                }
+            }
+        }
+
+        return null;
+    }
     public GameObject GetMoveableObject()
     {
         //Machine
