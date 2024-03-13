@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 3041353511166218813}
   - component: {fileID: 7493058664295178372}
   m_Layer: 0
-  m_Name: Floor_Wood_Parent
+  m_Name: Window_Wood_Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e0cc6ef6519c1448e6871cc46229e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingType: 1
+  buildingType: 3
   buildingMaterial: 1
   model: {fileID: 8815233503749311390}
 --- !u!1 &6914302463606165046
@@ -535,7 +535,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8815233503749311390}
-  m_Mesh: {fileID: 7730133331424604108, guid: 8db4d6796ba11f14a9ecded0378d0f2f, type: 3}
+  m_Mesh: {fileID: 6413668139619916810, guid: c1b6aa6ada38877458d3085f4714ae2a, type: 3}
 --- !u!23 &2917275578563414756
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -599,4 +599,4 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -3602548332119468600, guid: 8db4d6796ba11f14a9ecded0378d0f2f, type: 3}
+  m_Mesh: {fileID: 8965994572518018863, guid: c1b6aa6ada38877458d3085f4714ae2a, type: 3}

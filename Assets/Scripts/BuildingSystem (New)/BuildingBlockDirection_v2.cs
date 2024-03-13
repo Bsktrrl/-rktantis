@@ -80,10 +80,12 @@ public class BuildingBlockDirection_v2 : MonoBehaviour
     }
     public void EnterBlockDirection_BB_Up()
     {
-
+        BuildingManager_v2.Instance.buildingBlockHit = buildingBlock_Parent;
+        BuildingManager_v2.Instance.directionHit = buildingBlockColliderDirection;
     }
     public void EnterBlockDirection_BB_Down()
     {
-
+        BuildingManager_v2.Instance.buildingBlockHit = buildingBlock_Parent;
+        BuildingManager_v2.Instance.directionHit = buildingBlockColliderDirection;
     }
 }

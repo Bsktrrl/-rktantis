@@ -13,11 +13,30 @@ MonoBehaviour:
   m_Name: BuildingBlockObject
   m_EditorClassIdentifier: 
   buildingBlockObjectList:
+  - Name: None
+    BuildingType: 0
+    buildingMaterial: 0
+    objectSprite: {fileID: 0}
+    objectToMove: {fileID: 0}
+    craftingRequirements: []
+    RemoveCraftingRequirements: []
   - Name: Floor_Wood
     BuildingType: 1
     buildingMaterial: 1
     objectSprite: {fileID: 21300000, guid: 23a03be913365904390807499be04b02, type: 3}
     objectToMove: {fileID: 6504768422917535472, guid: dc4ddd366609ff04fb42e96b09736d5f,
       type: 3}
-    craftingRequirements: []
+    craftingRequirements:
+    - itemName: 66
+      amount: 1
+    RemoveCraftingRequirements: []
+  - Name: Window_Wood
+    BuildingType: 10
+    buildingMaterial: 1
+    objectSprite: {fileID: 21300000, guid: 3c2c0c2584e591742a9bac7ff5351c45, type: 3}
+    objectToMove: {fileID: 6504768422917535472, guid: 1cd194345480d2c4581a08f2d31460cc,
+      type: 3}
+    craftingRequirements:
+    - itemName: 6
+      amount: 2
     RemoveCraftingRequirements: []

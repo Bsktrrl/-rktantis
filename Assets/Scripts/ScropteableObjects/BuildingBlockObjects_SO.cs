@@ -6,11 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BuildingBlockObject", menuName = "BuildingBlockObject", order = 1)]
 public class BuildingBlockObjects_SO : ScriptableObject
 {
-    public List<BuildingblockObject> buildingBlockObjectList = new List<BuildingblockObject>();
+    public List<BuildingBlockObject> buildingBlockObjectList = new List<BuildingBlockObject>();
 }
 
 [Serializable]
-public class BuildingblockObject
+public class BuildingBlockObject
 {
     [Header("Name")]
     public string Name;

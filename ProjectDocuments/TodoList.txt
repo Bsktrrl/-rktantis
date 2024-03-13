@@ -7,6 +7,14 @@ Todo before thirsday 13. - 2 days left
 --------------------
 
 
+BuildingBlocks:
+- Fix autoRotation on buildingBlockGhosts when appearing, to face the intuitive way
+- Fix Rotation buttons to match if the block is horizontal or vertical
+- Fix so that Blocks can be placed Vertically (Up/Down)
+- Make All Models + _SOList
+- Check if the same block is placed on target position, to disable the Ghost from overlapping
+	- Check rotation, so that several Wall-blocks can be placed in the same space
+
 - Make/Save-Load DurabilityBar on HandEquipments in inventory and Hotbar
 	- Hotbar: A Bar at the side
 	- InventoryItem: A Sircle at the bottom left

@@ -199,6 +199,22 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 
         return null;
     }
+    public BuildingBlockObject GetBuildingBlock_SO()
+    {
+        if (moveableObjectType == MoveableObjectType.BuildingBlock)
+        {
+            for (int i = 0; i < buildingBlockObjects_SO.buildingBlockObjectList.Count; i++)
+            {
+                if (buildingBlockObjects_SO.buildingBlockObjectList[i].BuildingType == buildingType_Selected
+                    && buildingBlockObjects_SO.buildingBlockObjectList[i].buildingMaterial == buildingMaterial_Selected)
+                {
+                    return buildingBlockObjects_SO.buildingBlockObjectList[i];
+                }
+            }
+        }
+
+        return null;
+    }
     public GameObject GetMoveableObject()
     {
         //Machine

@@ -22,7 +22,10 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
     public static Action isPressed_BuildingSystemMenu_Exit;
     public static Action isPressed_BuildingRotate;
 
-    public static Action isPressed_FixedRotation;
+    public static Action isPressed_FixedRotation_Clockwise;
+    public static Action isPressed_FixedRotation_CounterClockwise;
+    public static Action isPressed_FixedRotation_Intern_Clockwise;
+    public static Action isPressed_FixedRotation_Intern_CounterClockwise;
 
     public static Action isPressed_MoveableRotation_Right;
     public static Action isPressed_MoveableRotation_Left;
@@ -100,7 +103,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
         //Object Interraction
         #region
-        else if (Input.GetKeyDown(KeyCode.E) && MainManager.Instance.menuStates == MenuStates.None)
+        else if (Input.GetKeyDown(KeyCode.E) && MainManager.Instance.menuStates == MenuStates.None && BuildingManager_v2.Instance.buildingBlockGhost == null)
         {
             objectInterraction_isPressedDown?.Invoke();
         }
@@ -132,10 +135,24 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
         //MoveableObject Rotation
         #region
-        else if (Input.GetKeyDown(KeyCode.Z))
+        else if (Input.GetKeyDown(KeyCode.Z) && MainManager.Instance.gameStates == GameStates.Building && BuildingManager_v2.Instance.buildingBlockGhost != null)
         {
-            isPressed_FixedRotation?.Invoke();
+            isPressed_FixedRotation_Clockwise?.Invoke();
         }
+        else if (Input.GetKeyDown(KeyCode.X) && MainManager.Instance.gameStates == GameStates.Building && BuildingManager_v2.Instance.buildingBlockGhost != null)
+        {
+            isPressed_FixedRotation_CounterClockwise?.Invoke();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.E) && MainManager.Instance.gameStates == GameStates.Building && BuildingManager_v2.Instance.buildingBlockGhost != null)
+        {
+            isPressed_FixedRotation_Intern_Clockwise?.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.R) && MainManager.Instance.gameStates == GameStates.Building && BuildingManager_v2.Instance.buildingBlockGhost != null)
+        {
+            isPressed_FixedRotation_Intern_CounterClockwise?.Invoke();
+        }
+
         else if (Input.GetKey(KeyCode.R) && MainManager.Instance.menuStates == MenuStates.None && MainManager.Instance.gameStates == GameStates.Building)
         {
             isPressed_MoveableRotation_Right?.Invoke();
@@ -172,12 +189,12 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
         //Testing
         #region
-        else if (Input.GetKeyDown(KeyCode.T))
+        //Place BuildingBlock - Test
+        else if (Input.GetKeyDown(KeyCode.T) && MainManager.Instance.gameStates == GameStates.Building && BuildingManager_v2.Instance.buildingBlockGhost != null)
         {
             T_isPressed?.Invoke();
         }
         #endregion
-
     }
 }
 public enum ButtonClickedState
