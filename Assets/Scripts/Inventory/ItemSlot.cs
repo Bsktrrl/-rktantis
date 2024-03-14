@@ -235,7 +235,9 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
     public void ActivateDurabilityMeter()
     {
-        float tempFill = durabilityCurrent / durabilityMax;
+        float tempFill = (float)durabilityCurrent / durabilityMax;
+
+        print("2. current: " + durabilityCurrent + " | durabilityMax: " + durabilityMax + " | tempFill: " + tempFill);
         durabilityMeterImage.fillAmount = tempFill;
         durabilityMeterParent.SetActive(true);
     }

@@ -41,7 +41,10 @@ public class HotbarSlot : MonoBehaviour
                 if (MainManager.Instance.GetItem(InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName).durability_Max > 0
                 && hotbarItemsID == InventoryManager.Instance.inventories[0].itemsInInventory[i].itemID)
                 {
-                    float tempFill = InventoryManager.Instance.inventories[0].itemsInInventory[i].durability_Current / MainManager.Instance.GetItem(InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName).durability_Max;
+                    float tempFill = (float)InventoryManager.Instance.inventories[0].itemsInInventory[i].durability_Current / MainManager.Instance.GetItem(InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName).durability_Max;
+
+                    print("1. current: " + InventoryManager.Instance.inventories[0].itemsInInventory[i].durability_Current + " | durabilityMax: " + MainManager.Instance.GetItem(InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName).durability_Max + " | tempFill: " + tempFill);
+
                     durabilityMeterImage.fillAmount = tempFill;
 
                     durabilityMeterParent.SetActive(true);
