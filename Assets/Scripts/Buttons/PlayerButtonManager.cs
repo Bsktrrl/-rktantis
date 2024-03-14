@@ -101,9 +101,9 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         }  
         #endregion
 
-        //Object Interraction
+        //Object Interaction
         #region
-        else if (Input.GetKeyDown(KeyCode.E) && MainManager.Instance.menuStates == MenuStates.None && BuildingManager_v2.Instance.buildingBlockGhost == null)
+        else if (Input.GetKeyDown(KeyCode.E) && MainManager.Instance.menuStates == MenuStates.None /*&& BuildingManager_v2.Instance.buildingBlockGhost == null*/)
         {
             objectInterraction_isPressedDown?.Invoke();
         }

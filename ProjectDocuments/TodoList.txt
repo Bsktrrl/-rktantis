@@ -1,63 +1,85 @@
-Todo before thirsday 13. - 2 days left
+Todo before thirsday 19.02 - 5 days left
 
-10. - Make trees to prefab with new animation
+1. Items:
+- Make/Save-Load DurabilityBar on HandEquipments in inventory and Hotbar
+	- Hotbar: A Sircle at the bottom left
+	- InventoryItem: A Sircle at the bottom left
+	- Make the tools Having different speed on its animation cooldowns based of material-type
+- Make Consumable Items work
+- Make ClothesEquipable Items work
+	- ("AssignItemToClothingSlot" in "ItemSLot.cs")
+- Arídite Crystals can be crafted from items that have it in its crafting requirement, from the CraftingTable
+	- The correct crafting recipe will only show if the player have the item in its inventory
+
+--------------------||
+
+2. Mining:
+- Make Pickaxe-system for recieving metal-resources
+- When mining an ore, have a change of getting more of it (1 to 3 (5 as rare drop?))
+	- Perk in SkillTree: increase chance of getting more resources per mining
+- When mining Tungston Ore, you can use your hands, but need more hits for it to break
+
+--------------------||
+
+3. Tablet:
+- Make the Tablet Journal Menu
+- Make the Tablet Settings Menu
+- Only include "Crafting Table Menu" and "Skill Tree Menu" when interactiong with the objects
+
+--------------------||
+
+4. Displays:
+- Make HeatParameter-Display ala. Sarah
+- Make WeatherDisplay
+- Add World-Display to new CraftingTable and SkillTreeTable
+- For Plants, add a %-Bar to indicate the growth progression
+	- Make so that each plant have its own growth speed (not from PlantManager)
+		- PlantManager may have a multiplier which can be upgraded in the SkillTree
+		- "Arídis Flower is the slowes growing one
+
+--------------------||
+
+5. Cutting:
+- Make trees to prefab with new animation
 	- Make cutting functionality for trees with any axe
+- Make cactus to prefab with new animation
+	- Make cutting functionality for cactus with any axe
 
+--------------------||
 
---------------------
+6. Player:
+- Rebuild the playerMovement
 
+--------------------||
 
-BuildingBlocks:
+7. Ghost:
+- Make Ghost Movement
+- Make Ghost Capture Mechanic
+- Make Ghost Tank
+
+--------------------||
+
+8. MovableObjectMenu:
+- Make it so that the MovableObjectMenu swap selectedItem, even if BuildingHammer isn't in hand
+	- It works for BuildingBlocks, so take a closer look at the differences
+	- Move the "SetNewSelectedBlock()" from the BuildingHammer to "BuildingSystemMenu"
+
+--------------------||
+
+9. Flashlight:
+- Make the Flashlight reach longer (swap Sphere collider  with Capsule collider)
+
+--------------------||
+
+10. BuildingBlocks:
+- Rebuild BuildingSystem
 - Fix autoRotation on buildingBlockGhosts when appearing, to face the intuitive way
 - Fix Rotation buttons to match if the block is horizontal or vertical
 - Fix so that Blocks can be placed Vertically (Up/Down)
 - Make All Models + _SOList
 - Check if the same block is placed on target position, to disable the Ghost from overlapping
 	- Check rotation, so that several Wall-blocks can be placed in the same space
-
-- Make/Save-Load DurabilityBar on HandEquipments in inventory and Hotbar
-	- Hotbar: A Bar at the side
-	- InventoryItem: A Sircle at the bottom left
-	- Make the tools Having different speed on its animations based of material-type
-
-- Make HeatParameter-Display ala. Sarah
-- Make WeatherDisplay
-
-- Rebuild the playerMovement
-
-- Make item be equipped to clothing
-	- ("AssignItemToClothingSlot" in "ItemSLot.cs")
-
-- Make the Tablet Journal Menu
-- Make the Tablet Settings Menu
-- Only include "Crafting Table Menu" and "Skill Tree Menu" when interactiong with the objects
-
-- Make LookAt_informationUI for when the player are looking at interracteableObject (Trees/Cutable, Machines, Furniture, Pickups)
-	- Make an outline around the pickup/Object looking at???
-
-- Make the Flashlight reach longer (swap Sphere collider  with Capsule collider) 
-
-- Make it so that the MovableObjectMenu swap selectedItem, even if BuildingHammer isn't in hand
-	- It works for BuildingBlocks, so take a closer look at the differences
-	- Move the "SetNewSelectedBlock()" from the BuildingHammer to "BuildingSystemMenu"
-
-- Make two functions to "Pause Game" and "Unpause Game" in the "MainMenu"
-
-- Make Pickaxe-system for recieving metal-resources
-
-- Make Consumable Items work
-- Make ClothesEquipable Items work
-
 - Make a function in Building that let you change material of a BuildingBlock when looking at it and having the selected resources (like changing BuildingBlock in Raft)
-
-- When mining an ore, have a change of getting more of it (1 to 3 (5 as rare drop?))
-	- Perk in SkillTree: increase chance of getting more resources per mining
-- When mining Tungston Ore, you can use you rhands, but need more hits for it to break
-
-- Add World-Display to new CraftingTable and SkillTreeTable
-
-- For Plants, add a %-Bar to indicate the growth progression
-
 - Make a function that can move/rotate placed Machines and Furniture, when BuildingHammer is in Hand
 	- Save its stats
 	- Remove the Object
@@ -65,23 +87,19 @@ BuildingBlocks:
 	- Insert its stats when placed
 	- Lock the mouse-wheel and disable tablet and everyting else, as long at the object isn't placed yet
 
-- Make a "Trach Can" that take all items exept Arídian items
+--------------------||
 
-- Make so that each plant have its own growth speed (not from PlantManager)
-	- PlantManager may have a multiplier which can be upgraded in the SkillTree
-	- "Arídis Flower is the slowes growing one
+11. Pause Game:
+- Make two functions to "Pause Game" and "Unpause Game" in the "MainMenu"
 
+--------------------||
+
+12. Mashines:
 - Make Upgrades to be used in Machines to make them work better
 	- Power: Perform what the Machine is doing, better (ex. growth/steak time or area of effect increase)
 	- Efficiency: Reduce the amount of GhostElement used
 
-- Change Tools to become 1x3 instead of 1x2
+--------------------||
 
-- Let a GluePlant drop 4 GlueSticks
-
-New Items (and can be crafted):
-- Arídite Crystal
-- Cloth
-
-- Arídite Crystals can be crafted from items that uses it, from the CraftingTable
-	- The correct crafting recipe will only show if the player have the item in its inventory
+13. Trash Can:
+- Make a "Trash Can" that take all items exept Arídian items

@@ -12,6 +12,7 @@ public class InteractableObject : MonoBehaviour
     [Header("Stats")]
     public Items itemName;
     public int amount;
+    public int durability_Current;
     public InteracteableType interacteableType;
 
     [Header("If Object is an Inventory")]

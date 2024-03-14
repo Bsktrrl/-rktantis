@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
@@ -12,6 +13,12 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     public GameObject hotbarSelectorParent;
     public TextMeshProUGUI hotbarIndex_Text;
 
+    [Header("DurabilityMeter")]
+    public GameObject durabilityMeterParent;
+    public Image durabilityMeterImage;
+    public int durabilityMax;
+    public int durabilityCurrent;
+
 
     //--------------------
 
@@ -23,6 +30,12 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             InventoryManager.Instance.ChangeitemInfoBox(itemName, this);
         }
     }
+
+
+    //--------------------
+
+
+    //When Clicked
     public void OnPointerUp(PointerEventData eventData)
     {
         //If only player inventory is used
@@ -96,7 +109,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     {
         InventoryManager.Instance.RemoveItemFromInventory(inventoryIndex, itemName, itemID);
     }
-    void AssignItemToHotbar()
+    public void AssignItemToHotbar()
     {
         if (itemName != Items.None)
         {
@@ -111,6 +124,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
                     HotbarManager.Instance.hotbarList[i].itemName = Items.None;
                     HotbarManager.Instance.hotbarList[i].itemID = -1;
+                    HotbarManager.Instance.hotbarList[i].durabilityMax = 0;
+                    HotbarManager.Instance.hotbarList[i].durabilityCurrent = 0;
 
                     HotbarManager.Instance.SetSelectedItem();
 
@@ -129,10 +144,12 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                 if (HotbarManager.Instance.hotbarList[i].itemName == Items.None)
                 {
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName = itemName;
-                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotImage();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarItemID(itemID);
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotDisplay();
                     HotbarManager.Instance.hotbarList[i].itemName = itemName;
                     HotbarManager.Instance.hotbarList[i].itemID = itemID;
-                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarItemID(itemID);
+                    HotbarManager.Instance.hotbarList[i].durabilityMax = durabilityMax;
+                    HotbarManager.Instance.hotbarList[i].durabilityCurrent = durabilityCurrent;
                     HotbarManager.Instance.SetSelectedItem();
 
                     InventoryManager.Instance.SelectItemInfoToHotbar(i, itemName, itemID);
@@ -214,6 +231,17 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     public void DeactivateHotbarInfoToItemSlot()
     {
         hotbarSelectorParent.SetActive(false);
+    }
+
+    public void ActivateDurabilityMeter()
+    {
+        float tempFill = durabilityCurrent / durabilityMax;
+        durabilityMeterImage.fillAmount = tempFill;
+        durabilityMeterParent.SetActive(true);
+    }
+    public void DeactivateDurabilityMeter()
+    {
+        durabilityMeterParent.SetActive(false);
     }
 
 

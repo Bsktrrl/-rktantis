@@ -42,6 +42,7 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
     //--------------------
 
 
+    #region Old
     //public void SetNewSelectedBlock()
     //{
     //    BuildingManager.Instance.buildingRequirement_Parent.SetActive(true);
@@ -125,6 +126,7 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
     //        }
     //    }
     //}
+    #endregion
 
 
     //--------------------
@@ -369,8 +371,10 @@ public class BuildingHammer : MonoBehaviour, EquippeableItem_Interface
     //--------------------
 
 
-    public void PlaceBlock()
+    public void Hit()
     {
+        print("Hit BuildingHammer");
+
         if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
         {
             BuildingManager.Instance.PlaceBlock();

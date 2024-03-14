@@ -32,8 +32,8 @@ public class Item
     public bool isEquipableInHand;
     public bool isEquipableClothes;
 
-    [Header("Durability")]
-    public int Durability;
+    [Header("durability_Max")]
+    public int durability_Max;
 
     [Header("Prefabs")]
     public GameObject worldObjectPrefab;

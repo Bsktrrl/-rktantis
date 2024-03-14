@@ -20,6 +20,8 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip menu_RemoveItemFromInevntory_Clip;
     [SerializeField] AudioClip menu_InventoryIsFull_Clip;
 
+    [SerializeField] AudioClip itemIsBroken_Clip;
+
     //Crafting
     [Header("Crafting")]
     [SerializeField] AudioClip menu_ChangeCraftingScreen_Clip;
@@ -124,6 +126,16 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource != null)
         {
             audioSource.clip = menu_InventoryIsFull_Clip;
+            audioSource.volume = 1f;
+            audioSource.Play();
+        }
+    }
+
+    public void PlayItemIsBroken_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = itemIsBroken_Clip;
             audioSource.volume = 1f;
             audioSource.Play();
         }

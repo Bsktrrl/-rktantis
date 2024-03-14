@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TabletManager : Singleton<TabletManager>
 {
-    #region Main Tablet
+    #region Main Tablet Variables
     [Header("General")]
     public TabletMenuState tabletMenuState;
     public ObjectInteractingWith objectInteractingWith;
@@ -72,8 +72,10 @@ public class TabletManager : Singleton<TabletManager>
     [Header("Hotbar")]
     [SerializeField] List<Image> hotbarFrameImageList_Tablet = new List<Image>();
     [SerializeField] List<Image> hotbarIconImageList_Tablet = new List<Image>();
+    [SerializeField] List<GameObject> hotbarItemDurabilityListParent_Tablet = new List<GameObject>();
+    [SerializeField] List<Image> hotbarItemDurabilityList_Tablet = new List<Image>();
     #endregion
-    #region SkillTree Menu
+    #region SkillTree Menu Variables
     [Header("SkillTree Menu")]
     public GameObject skillTree_Inventory_Parent;
     public GameObject skillTree_Equipment_Parent;
@@ -117,6 +119,9 @@ public class TabletManager : Singleton<TabletManager>
 
             //Set the images of the Hotbar
             SetHotbarImages();
+
+            //Set DurabilityInfo on inventoryItems
+            InventoryManager.Instance.SelectItemDurabilityDisplay();
         }
     }
 
@@ -483,6 +488,9 @@ public class TabletManager : Singleton<TabletManager>
     
     public void CloseTablet()
     {
+        //Deselect DurabilityInfo on inventoryItems
+        InventoryManager.Instance.DeselectItemDurabilityDisplay();
+
         //Close all menus
         tablet_Parent.SetActive(false);
         //SetMenuDisplay(false);
@@ -574,6 +582,7 @@ public class TabletManager : Singleton<TabletManager>
     {
         for (int i = 0; i < 5; i++)
         {
+            //Image
             if (HotbarManager.Instance.selectedSlot == i)
             {
                 hotbarFrameImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].hotbar.transform.GetChild(1).GetComponent<Image>().sprite;
@@ -584,14 +593,20 @@ public class TabletManager : Singleton<TabletManager>
             }
             
             hotbarIconImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].hotbar.transform.GetChild(0).GetComponent<Image>().sprite;
+
+            //Durability
+            if (HotbarManager.Instance.hotbarList[i].durabilityMax > 0)
+            {
+                //float tempFill = HotbarManager.Instance.hotbarList[i].durabilityCurrent / HotbarManager.Instance.hotbarList[i].durabilityMax;
+                hotbarItemDurabilityList_Tablet[i].fillAmount = HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().durabilityMeterImage.fillAmount;
+                hotbarItemDurabilityListParent_Tablet[i].SetActive(true);
+            }
+            else
+            {
+                hotbarItemDurabilityListParent_Tablet[i].SetActive(false);
+            }
         }
-      }
-
-
-    //--------------------
-
-
-
+    }
 }
 
 public enum TabletMenuState
