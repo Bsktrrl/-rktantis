@@ -47,7 +47,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             #region
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                RemoveItemFromInventory();
+                RemoveItemFromInventory(false);
             }
             #endregion
 
@@ -59,6 +59,12 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                 if (MainManager.Instance.GetItem(itemName).isEquipableInHand)
                 {
                     AssignItemToHotbar();
+                }
+
+                //If clicked item is a Consumable
+                else if (MainManager.Instance.GetItem(itemName).isConsumeable)
+                {
+                    EatConsumable();
                 }
 
                 //If clicked item is a Clothing
@@ -90,12 +96,6 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                 {
                     AssignItemToHotbar();
                 }
-
-                //If clicked item is a Clothing
-                else if (MainManager.Instance.GetItem(itemName).isEquipableClothes)
-                {
-                    AssignItemToClothingSlot();
-                }
             }
             #endregion
         }
@@ -105,9 +105,16 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             InventoryManager.Instance.ChangeitemInfoBox(itemName, this);
         }
     }
-    void RemoveItemFromInventory()
+    void RemoveItemFromInventory(bool permanentRemove)
     {
-        InventoryManager.Instance.RemoveItemFromInventory(inventoryIndex, itemName, itemID);
+        if (permanentRemove)
+        {
+            InventoryManager.Instance.RemoveItemFromInventory(inventoryIndex, itemName, itemID, true);
+        }
+        else
+        {
+            InventoryManager.Instance.RemoveItemFromInventory(inventoryIndex, itemName, itemID);
+        }
     }
     public void AssignItemToHotbar()
     {
@@ -120,6 +127,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                     && HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName == itemName
                     && HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemsID == itemID)
                 {
+                    SoundManager.Instance.Play_Hotbar_RemoveItemFromHotbar_Clip();
+
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
 
                     HotbarManager.Instance.hotbarList[i].itemName = Items.None;
@@ -143,6 +152,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             {
                 if (HotbarManager.Instance.hotbarList[i].itemName == Items.None)
                 {
+                    SoundManager.Instance.Play_Hotbar_AssignItemToHotbar_Clip();
+
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName = itemName;
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarItemID(itemID);
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotDisplay();
@@ -177,9 +188,77 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             InventoryManager.Instance.MoveItemToInventory(inventoryIndex, gameObject, itemID);
         }
     }
+    void EatConsumable()
+    {
+        SoundManager.Instance.Play_Inventory_ConsumeItem_Clip();
+
+        //If item is healing the MainHealth
+        if (MainManager.Instance.GetItem(itemName).mainHealthHeal > 0)
+        {
+            float percentage = (float)MainManager.Instance.GetItem(itemName).mainHealthHeal / 100;
+            HealthManager.Instance.mainHealthValue += percentage;
+
+            if (HealthManager.Instance.mainHealthValue > 1)
+            {
+                HealthManager.Instance.mainHealthValue = 1;
+            }
+        }
+
+        //If item is healing the heatResistaceHealth
+        if (MainManager.Instance.GetItem(itemName).heatresistanceHealthHeal > 0)
+        {
+            float percentage = (float)MainManager.Instance.GetItem(itemName).heatresistanceHealthHeal / 100;
+            HealthManager.Instance.heatResistanceValue += percentage;
+
+            if (HealthManager.Instance.heatResistanceValue > 1)
+            {
+                HealthManager.Instance.heatResistanceValue = 1;
+            }
+        }
+
+        //If item is healing the hungerHealth
+        if (MainManager.Instance.GetItem(itemName).hungerHealthHeal > 0)
+        {
+            float percentage = (float)MainManager.Instance.GetItem(itemName).hungerHealthHeal / 100;
+            HealthManager.Instance.hungerValue += percentage;
+
+            if (HealthManager.Instance.hungerValue > 1)
+            {
+                HealthManager.Instance.hungerValue = 1;
+            }
+        }
+
+        //If item is healing the thirstHealth
+        if (MainManager.Instance.GetItem(itemName).thirstHealthHeal > 0)
+        {
+            float percentage = (float)MainManager.Instance.GetItem(itemName).thirstHealthHeal / 100;
+            HealthManager.Instance.thirstValue += percentage;
+
+            if (HealthManager.Instance.thirstValue > 1)
+            {
+                HealthManager.Instance.thirstValue = 1;
+            }
+        }
+
+        //If item is tweaking the playerTemperature
+        if (MainManager.Instance.GetItem(itemName).heatColdRegulator > 0 || MainManager.Instance.GetItem(itemName).heatColdRegulator < 0)
+        {
+            TemperatureFruit temp = new TemperatureFruit();
+            temp.value = MainManager.Instance.GetItem(itemName).heatColdRegulator;
+            temp.duration = MainManager.Instance.GetItem(itemName).heatColdRegulatorDuration;
+
+            WeatherManager.Instance.temperatureFruitList.Add(temp);
+        }
+
+        //Play Eating Sound
+        SoundManager.Instance.Play_Inventory_ConsumeItem_Clip();
+
+        //Remove the item
+        RemoveItemFromInventory(true);
+    }
     void AssignItemToClothingSlot()
     {
-
+        SoundManager.Instance.Play_Inventory_EquipItem_Clip();
     }
 
 
@@ -188,6 +267,9 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        //Play ItemEntering Sound
+        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+
         if (inventoryIndex <= 0)
         {
             InventoryManager.Instance.SetPlayerItemInfo(itemName, true);

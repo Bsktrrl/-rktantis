@@ -240,7 +240,7 @@ public enum Items
     [Description("Lamp")][InspectorName("Furniture/Lamp")] Lamp,
     [Description("Spotlight")][InspectorName("Furniture/Spotlight")] Spotlight,
 
-    [Description("Other1")][InspectorName("Furniture/Other1")] FU_Other1,
+    [Description("Medium Chest")][InspectorName("Furniture/Medium Chest")] MediumChest,
     [Description("Other2")][InspectorName("Furniture/Other2")] FU_Other2,
     [Description("Other3")][InspectorName("Furniture/Other3")] FU_Other3,
     [Description("Other4")][InspectorName("Furniture/Other4")] FU_Other4,

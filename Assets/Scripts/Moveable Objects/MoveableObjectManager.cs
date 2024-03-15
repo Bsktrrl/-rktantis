@@ -312,7 +312,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         if (moveableObject.canBePlaced && moveableObject.isSelectedForMovement && moveableObject.enoughItemsToBuild)
         {
             print("0. Place MoveableObject");
-            SoundManager.Instance.PlayMoveableObject_Placed();
+            SoundManager.Instance.Play_Building_Place_MoveableObject_Clip();
 
             objectToMove.GetComponent<MoveableObject>().isSelectedForMovement = false;
 
@@ -375,7 +375,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         else
         {
             print("1. Don't Place MoveableObject");
-            SoundManager.Instance.PlaybuildingBlock_CannotPlaceBlock();
+            SoundManager.Instance.Play_Building_CannotPlaceBlock_Clip();
         }
     }
 }

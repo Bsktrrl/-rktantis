@@ -208,6 +208,8 @@ public class HotbarManager : Singleton<HotbarManager>
 
     void HandSelection_Down()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         selectedSlot--;
 
         if (selectedSlot < 0)
@@ -228,6 +230,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void HandSelection_UP()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         selectedSlot++;
 
         if (selectedSlot > 4)
@@ -257,6 +261,8 @@ public class HotbarManager : Singleton<HotbarManager>
     #region QuickSlots
     void QuickHotbarSelect_1()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         for (int i = 0; i < hotbarList.Count; i++)
         {
             hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
@@ -271,6 +277,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void QuickHotbarSelect_2()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         for (int i = 0; i < hotbarList.Count; i++)
         {
             hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
@@ -285,6 +293,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void QuickHotbarSelect_3()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         for (int i = 0; i < hotbarList.Count; i++)
         {
             hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
@@ -299,6 +309,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void QuickHotbarSelect_4()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         for (int i = 0; i < hotbarList.Count; i++)
         {
             hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
@@ -313,6 +325,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void QuickHotbarSelect_5()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         for (int i = 0; i < hotbarList.Count; i++)
         {
             hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();

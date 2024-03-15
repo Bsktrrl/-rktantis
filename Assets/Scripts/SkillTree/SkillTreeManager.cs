@@ -197,6 +197,15 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
         perkSetup = false;
     }
+
+
+    //--------------------
+
+    
+    public void ActivationButton_isClicked()
+    {
+        SoundManager.Instance.Play_SkillTree_CompletedPerk_Clip();
+    }
 }
 
 [Serializable]

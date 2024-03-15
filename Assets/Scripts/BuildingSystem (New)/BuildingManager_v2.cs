@@ -560,15 +560,15 @@ public class BuildingManager_v2 : Singleton<BuildingManager_v2>
             #region Sound
             if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Wood)
             {
-                SoundManager.Instance.PlayWood_Placed_Clip();
+                SoundManager.Instance.Play_Building_Place_Wood_Clip();
             }
             else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Stone)
             {
-                SoundManager.Instance.PlayStone_Placed_Clip();
+                SoundManager.Instance.Play_Building_Place_Stone_Clip();
             }
             else if (MoveableObjectManager.Instance.buildingMaterial_Selected == BuildingMaterial.Iron)
             {
-                SoundManager.Instance.PlayIron_Placed_Clip();
+                SoundManager.Instance.Play_Building_Place_Cryonite_Clip();
             }
             #endregion
 

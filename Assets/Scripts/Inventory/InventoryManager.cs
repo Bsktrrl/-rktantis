@@ -166,7 +166,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
-    #region Add/ item to Inventory
+    #region Add/Remove item to Inventory
     public bool AddItemToInventory(int inventory, GameObject obj, bool itemIsMoved)
     {
         InventoryItem item = new InventoryItem();
@@ -294,6 +294,8 @@ public class InventoryManager : Singleton<InventoryManager>
         //Spawn item into the World, if the item have a WorldObject attached
         if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
         {
+            SoundManager.Instance.Play_Inventory_DropItem_Clip();
+
             WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, handDropPoint.transform.position, Quaternion.identity) as GameObject);
             WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
 
@@ -482,6 +484,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public void MoveItemToInventory(int inventory, GameObject obj, int ID)
     {
+        SoundManager.Instance.Play_Inventory_MoveItem_Clip();
+
         //Move item to Player Inventory
         if (inventory <= 0)
         {
@@ -1001,7 +1005,6 @@ public class InventoryManager : Singleton<InventoryManager>
         }
 
         //Swap places if items are not of the same itemName
-
         for (int i = 0; i < n - 1; i++)
         {
             for (int j = 0; j < n - i - 1; j++)
@@ -1171,6 +1174,8 @@ public class InventoryManager : Singleton<InventoryManager>
                     //If Item was attemptd picked up
                     else
                     {
+                        SoundManager.Instance.Play_Inventory_InventoryIsFull_Clip();
+
                         RemoveItemFromInventory(inventory, lastItemToGet, inventories[inventory].itemsInInventory[i].itemID);
                     }
 

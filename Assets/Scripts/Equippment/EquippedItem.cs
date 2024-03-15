@@ -68,7 +68,7 @@ public class EquippedItem : MonoBehaviour
                 if (InventoryManager.Instance.inventories[0].itemsInInventory[i].durability_Current <= 0)
                 {
                     //Play "Broken"-Sound
-                    SoundManager.Instance.PlayItemIsBroken_Clip();
+                    SoundManager.Instance.Play_EquippedItems_EquippedItemIsBroken_Clip();
 
                     //Remove item from Hotbar
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();

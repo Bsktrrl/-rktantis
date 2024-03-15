@@ -43,7 +43,7 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
         GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Passive;
 
 
-        SoundManager.Instance.PlayChangeCraftingScreen_Clip();
+        SoundManager.Instance.Play_Crafting_ChangeCraftingMenu_Clip();
 
         CraftingManager.Instance.activeCategory = categoryType;
         CraftingManager.Instance.SetupSelectionScreen();
@@ -53,7 +53,7 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        SoundManager.Instance.PlaySelect_Clip();
+        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
     }
 
     public void OnDestroyCategoryObject()

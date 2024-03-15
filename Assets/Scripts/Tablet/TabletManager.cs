@@ -132,6 +132,9 @@ public class TabletManager : Singleton<TabletManager>
     #region Menu Buttons
     public void MenuButton_Inventory_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         if (objectInteractingWith == ObjectInteractingWith.Chest)
         {
             MenuTransition(tabletMenuState, TabletMenuState.ChestInventory);
@@ -143,19 +146,31 @@ public class TabletManager : Singleton<TabletManager>
     }
     public void MenuButton_CraftingTable_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         MenuTransition(tabletMenuState, TabletMenuState.CraftingTable);
     }
     public void MenuButton_Skilltree_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         MenuTransition(tabletMenuState, TabletMenuState.SkillTree);
     }
     public void MenuButton_MoveableObjects_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         MenuTransition(tabletMenuState, TabletMenuState.MoveableObjects);
     }
 
     public void MenuButton_Chest_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         MenuTransition(tabletMenuState, TabletMenuState.ChestInventory);
 
         menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
@@ -163,6 +178,9 @@ public class TabletManager : Singleton<TabletManager>
     }
     public void MenuButton_Equipment_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         MenuTransition(tabletMenuState, TabletMenuState.Equipment);
 
         menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Active;
@@ -423,6 +441,8 @@ public class TabletManager : Singleton<TabletManager>
     //When Opening Tablet from hand
     public void OpenTablet()
     {
+        SoundManager.Instance.Play_Tablet_OpenTablet_Clip();
+
         InventoryManager.Instance.ClosePlayerInventory();
 
         //If BuildingHammer is in hand, open the MoveableObjectMenu
@@ -488,6 +508,8 @@ public class TabletManager : Singleton<TabletManager>
     
     public void CloseTablet()
     {
+        SoundManager.Instance.Play_Tablet_CloseTablet_Clip();
+
         //Deselect DurabilityInfo on inventoryItems
         InventoryManager.Instance.DeselectItemDurabilityDisplay();
 
