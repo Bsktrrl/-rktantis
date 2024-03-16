@@ -246,4 +246,16 @@ public enum Items
     [Description("Other4")][InspectorName("Furniture/Other4")] FU_Other4,
     [Description("Other5")][InspectorName("Furniture/Other5")] FU_Other5,
     #endregion
+    
+    //Drinking
+    #region
+    [Description("Cup")][InspectorName("Drinking/Cup")] Cup,
+    [Description("Bottle")][InspectorName("Drinking/Bottle")] Bottle,
+    [Description("Bucket")][InspectorName("Drinking/Bucket")] Bucket,
+
+    [Description("Other1")][InspectorName("Drinking/Other1")] D_Other1,
+    [Description("Other2")][InspectorName("Drinking/Other2")] D_Other2,
+    [Description("Other3")][InspectorName("Drinking/Other3")] D_Other3,
+    [Description("Other4")][InspectorName("Drinking/Other4")] D_Other4,
+    #endregion
 }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmsTest : MonoBehaviour
+public class ArmsTest : Singleton<ArmsTest>
 {
-    Animator anim;
+    public Animator anim;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -13,39 +13,40 @@ public class ArmsTest : MonoBehaviour
     void Update()
     {
         //Set the item category with the number keys (0=Nothing, 1=Tools, 2=Flashlight, 3=Crystal, 4=Cup/Bottle, 5=Bucket)
-        if(Input.GetKey(KeyCode.LeftShift) == false && Input.GetKey(KeyCode.LeftAlt) == false)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                anim.SetInteger("ItemCategory", 1);
-                anim.SetTrigger("ItemUpdate");
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                anim.SetInteger("ItemCategory", 2);
-                anim.SetTrigger("ItemUpdate");
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                anim.SetInteger("ItemCategory", 3);
-                anim.SetTrigger("ItemUpdate");
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                anim.SetInteger("ItemCategory", 4);
-                anim.SetTrigger("ItemUpdate");
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                anim.SetInteger("ItemCategory", 5);
-                anim.SetTrigger("ItemUpdate");
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha0))
-            {
-                anim.SetInteger("ItemCategory", 0);
-                anim.SetTrigger("ItemUpdate");
-            }
-        }
+        //if(Input.GetKey(KeyCode.LeftShift) == false && Input.GetKey(KeyCode.LeftAlt) == false)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Alpha0))   //Nothing
+        //    {
+        //        anim.SetInteger("ItemCategory", 0);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+
+        //    if (Input.GetKeyDown(KeyCode.Alpha1))   //Tools
+        //    {
+        //        anim.SetInteger("ItemCategory", 1);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Alpha2))   //FlashLight
+        //    {
+        //        anim.SetInteger("ItemCategory", 2);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Alpha3))   //Crystal
+        //    {
+        //        anim.SetInteger("ItemCategory", 3);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Alpha4))   //Cup/Bottle
+        //    {
+        //        anim.SetInteger("ItemCategory", 4);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Alpha5))   //Bucket
+        //    {
+        //        anim.SetInteger("ItemCategory", 5);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //}
 
         //Tablet
         if (Input.GetKeyDown(KeyCode.Tab))

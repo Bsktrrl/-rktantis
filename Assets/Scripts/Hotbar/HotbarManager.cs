@@ -152,6 +152,9 @@ public class HotbarManager : Singleton<HotbarManager>
 
     public void ChangeItemInHand()
     {
+        //Change ArmState
+        EquippmentManager.Instance.GetArmState(selectedItem);
+
         //if selected item is empty, leave the hand empty
         if (selectedItem == Items.None)
         {
@@ -185,7 +188,6 @@ public class HotbarManager : Singleton<HotbarManager>
             //Add the correct model to the Hand
             EuipmentList.Add(Instantiate(MainManager.Instance.GetItem(selectedItem).equippedPrefab, MainManager.Instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
             EuipmentList[EuipmentList.Count - 1].transform.SetLocalPositionAndRotation(MainManager.Instance.GetItem(selectedItem).equippedPrefab.transform.position, Quaternion.identity);
-
 
             SaveData();
             return;
@@ -254,6 +256,8 @@ public class HotbarManager : Singleton<HotbarManager>
     public void SetSelectedItem()
     {
         selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
+
+        EquippmentManager.Instance.GetArmState(selectedItem);
 
         SaveData();
     }
