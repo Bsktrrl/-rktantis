@@ -86,59 +86,70 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                 {
                     HeadEquipmentSlot_Image.gameObject.SetActive(false);
                     HeadEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                    HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                 }
 
                 if (itemName == Items.ConstructionGloves || itemName == Items.MiningGloves || itemName == Items.PowerGloves)
                 {
                     HandEquipmentSlot_Image.gameObject.SetActive(false);
                     HandEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                    HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                 }
 
                 if (itemName == Items.LightShoes || itemName == Items.RunningShoes || itemName == Items.Slippers)
                 {
                     FootEquipmentSlot_Image.gameObject.SetActive(false);
                     FootEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                    FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                 }
-
                 break;
 
             case Items.AutoFeeder:
                 HeadEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                 HeadEquipmentSlot_Image.gameObject.SetActive(true);
+                HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                 break;
             case Items.Headlight:
                 HeadEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                 HeadEquipmentSlot_Image.gameObject.SetActive(true);
+                HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                 break;
             case Items.Helmet:
                 HeadEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                 HeadEquipmentSlot_Image.gameObject.SetActive(true);
+                HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                 break;
 
             case Items.MiningGloves:
                 HandEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                 HandEquipmentSlot_Image.gameObject.SetActive(true);
+                HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                 break;
             case Items.PowerGloves:
                 HandEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                 HandEquipmentSlot_Image.gameObject.SetActive(true);
+                HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                 break;
             case Items.ConstructionGloves:
                 HandEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                 HandEquipmentSlot_Image.gameObject.SetActive(true);
+                HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                 break;
 
             case Items.RunningShoes:
                 FootEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                 FootEquipmentSlot_Image.gameObject.SetActive(true);
+                FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                 break;
             case Items.LightShoes:
                 FootEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                 FootEquipmentSlot_Image.gameObject.SetActive(true);
+                FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                 break;
             case Items.Slippers:
                 FootEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                 FootEquipmentSlot_Image.gameObject.SetActive(true);
+                FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                 break;
 
             default:
@@ -146,18 +157,21 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                 {
                     HeadEquipmentSlot_Image.gameObject.SetActive(false);
                     HeadEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                    HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                 }
 
                 if (itemName == Items.ConstructionGloves || itemName == Items.MiningGloves || itemName == Items.PowerGloves)
                 {
                     HandEquipmentSlot_Image.gameObject.SetActive(false);
                     HandEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                    HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                 }
 
                 if (itemName == Items.LightShoes || itemName == Items.RunningShoes || itemName == Items.Slippers)
                 {
                     FootEquipmentSlot_Image.gameObject.SetActive(false);
                     FootEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                    FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                 }
                 break;
         }
@@ -171,6 +185,8 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
     {
         if (HeadItemSelected != Items.None)
         {
+            SoundManager.Instance.Play_Inventory_EquipItem_Clip();
+
             ResetEquipmentSlot(0);
 
             SaveData();
@@ -180,6 +196,8 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
     {
         if (HandItemSelected != Items.None)
         {
+            SoundManager.Instance.Play_Inventory_EquipItem_Clip();
+
             ResetEquipmentSlot(1);
 
             SaveData();
@@ -189,6 +207,8 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
     {
         if (FootItemSelected != Items.None)
         {
+            SoundManager.Instance.Play_Inventory_EquipItem_Clip();
+
             ResetEquipmentSlot(2);
 
             SaveData();
@@ -216,18 +236,21 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                         {
                             HeadEquipmentSlot_Image.gameObject.SetActive(false);
                             HeadEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                            HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                         }
 
                         if (itemName == Items.ConstructionGloves || itemName == Items.MiningGloves || itemName == Items.PowerGloves)
                         {
                             HandEquipmentSlot_Image.gameObject.SetActive(false);
                             HandEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                            HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                         }
 
                         if (itemName == Items.LightShoes || itemName == Items.RunningShoes || itemName == Items.Slippers)
                         {
                             FootEquipmentSlot_Image.gameObject.SetActive(false);
                             FootEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                            FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                         }
 
                         break;
@@ -240,6 +263,7 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                         HeadItemSelected = itemName;
                         HeadEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                         HeadEquipmentSlot_Image.gameObject.SetActive(true);
+                        HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                         break;
                     case Items.Headlight:
                         if (HeadItemSelected != Items.None)
@@ -249,6 +273,7 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                         HeadItemSelected = itemName;
                         HeadEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                         HeadEquipmentSlot_Image.gameObject.SetActive(true);
+                        HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                         break;
                     case Items.Helmet:
                         if (HeadItemSelected != Items.None)
@@ -258,6 +283,7 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                         HeadItemSelected = itemName;
                         HeadEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                         HeadEquipmentSlot_Image.gameObject.SetActive(true);
+                        HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                         break;
 
                     case Items.MiningGloves:
@@ -268,6 +294,7 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                         HandItemSelected = itemName;
                         HandEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                         HandEquipmentSlot_Image.gameObject.SetActive(true);
+                        HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                         break;
                     case Items.PowerGloves:
                         if (HandItemSelected != Items.None)
@@ -277,6 +304,7 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                         HandItemSelected = itemName;
                         HandEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                         HandEquipmentSlot_Image.gameObject.SetActive(true);
+                        HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                         break;
                     case Items.ConstructionGloves:
                         if (HandItemSelected != Items.None)
@@ -286,6 +314,7 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                         HandItemSelected = itemName;
                         HandEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                         HandEquipmentSlot_Image.gameObject.SetActive(true);
+                        HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                         break;
 
                     case Items.RunningShoes:
@@ -296,6 +325,7 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                         FootItemSelected = itemName;
                         FootEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                         FootEquipmentSlot_Image.gameObject.SetActive(true);
+                        FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                         break;
                     case Items.LightShoes:
                         if (FootItemSelected != Items.None)
@@ -305,6 +335,7 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                         FootItemSelected = itemName;
                         FootEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                         FootEquipmentSlot_Image.gameObject.SetActive(true);
+                        FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                         break;
                     case Items.Slippers:
                         if (FootItemSelected != Items.None)
@@ -314,6 +345,7 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                         FootItemSelected = itemName;
                         FootEquipmentSlot_Image.sprite = MainManager.Instance.GetItem(itemName).hotbarSprite;
                         FootEquipmentSlot_Image.gameObject.SetActive(true);
+                        FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = itemName;
                         break;
 
                     default:
@@ -321,18 +353,21 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                         {
                             HeadEquipmentSlot_Image.gameObject.SetActive(false);
                             HeadEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                            HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                         }
 
                         if (itemName == Items.ConstructionGloves || itemName == Items.MiningGloves || itemName == Items.PowerGloves)
                         {
                             HandEquipmentSlot_Image.gameObject.SetActive(false);
                             HandEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                            HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                         }
 
                         if (itemName == Items.LightShoes || itemName == Items.RunningShoes || itemName == Items.Slippers)
                         {
                             FootEquipmentSlot_Image.gameObject.SetActive(false);
                             FootEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                            FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
                         }
                         break;
                 }
@@ -351,18 +386,24 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                 HeadItemSelected = Items.None;
                 HeadEquipmentSlot_Image.gameObject.SetActive(false);
                 HeadEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
+                HeadEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().OnPointerExit();
                 break;
             case 1:
                 InventoryManager.Instance.AddItemToInventory(0, HandItemSelected);
                 HandItemSelected = Items.None;
                 HandEquipmentSlot_Image.gameObject.SetActive(false);
                 HandEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
+                HandEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().OnPointerExit();
                 break;
             case 2:
                 InventoryManager.Instance.AddItemToInventory(0, FootItemSelected);
                 FootItemSelected = Items.None;
                 FootEquipmentSlot_Image.gameObject.SetActive(false);
                 FootEquipmentSlot_Image.GetComponent<Image>().sprite = null;
+                FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().itemName = Items.None;
+                FootEquipmentSlot_Image.gameObject.GetComponentInParent<MenuEquipmentSlot>().OnPointerExit();
                 break;
 
             default:

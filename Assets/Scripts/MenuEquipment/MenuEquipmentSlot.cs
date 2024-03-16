@@ -10,6 +10,8 @@ public class MenuEquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerEx
     [SerializeField] Sprite slotSpriteActive;
     [SerializeField] Sprite slotSpriteUnactive;
 
+    public Items itemName;
+
 
     //--------------------
 
@@ -28,10 +30,23 @@ public class MenuEquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerEx
         SoundManager.Instance.Play_Inventory_ItemHover_Clip();
 
         slotImage.sprite = slotSpriteActive;
+
+        if (itemName != Items.None)
+        {
+            InventoryManager.Instance.SetPlayerItemInfo(itemName, true);
+            InventoryManager.Instance.ChangeItemInfoBox(true);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        OnPointerExit();
+    }
+    public void OnPointerExit()
+    {
         slotImage.sprite = slotSpriteUnactive;
+
+        InventoryManager.Instance.SetPlayerItemInfo(Items.None, true);
+        InventoryManager.Instance.ChangeItemInfoBox(false);
     }
 }

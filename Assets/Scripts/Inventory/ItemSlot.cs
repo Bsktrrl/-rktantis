@@ -27,7 +27,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     {
         if (itemName != Items.None)
         {
-            InventoryManager.Instance.ChangeitemInfoBox(itemName, this);
+            InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
     }
 
@@ -102,7 +102,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
         if (itemName != Items.None)
         {
-            InventoryManager.Instance.ChangeitemInfoBox(itemName, this);
+            InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
     }
     void RemoveItemFromInventory(bool permanentRemove)
@@ -285,7 +285,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
         if (itemName != Items.None)
         {
-            InventoryManager.Instance.ChangeitemInfoBox(itemName, this);
+            InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
     }
 

@@ -875,7 +875,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
-    public void ChangeitemInfoBox(Items itemName, ItemSlot itemSlot)
+    public void ChangeItemInfoBox(Items itemName, ItemSlot itemSlot)
     {
         //ItemSlot from Player Inventory
         if (itemSlot.inventoryIndex <= 0)
@@ -904,6 +904,19 @@ public class InventoryManager : Singleton<InventoryManager>
             itemInfo.SetInfo_ChestItem();
         }
 
+        itemInfo_Parent.SetActive(true);
+    }
+    public void ChangeItemInfoBox(bool isEntering)
+    {
+        if (isEntering)
+        {
+            itemInfo.SetInfo_EquippedItem();
+        }
+        else
+        {
+            itemInfo.HideInfo_EquippedItem();
+        }
+        
         itemInfo_Parent.SetActive(true);
     }
     public void DisplayInventoryItemInfo()
