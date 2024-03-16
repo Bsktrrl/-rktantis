@@ -32,8 +32,17 @@ public class Item
     public bool isEquipableInHand;
     public bool isEquipableClothes;
 
-    [Header("Durability")]
-    public int Durability;
+    [Header("HealthStats")]
+    public int mainHealthHeal;
+    public int heatresistanceHealthHeal;
+    public int hungerHealthHeal;
+    public int thirstHealthHeal;
+
+    public int heatColdRegulator;
+    public int heatColdRegulatorDuration;
+
+    [Header("durability_Max")]
+    public int durability_Max;
 
     [Header("Prefabs")]
     public GameObject worldObjectPrefab;

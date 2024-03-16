@@ -15,6 +15,8 @@ public class HotbarManager : Singleton<HotbarManager>
     public int selectedSlot = 0;
     public Items selectedItem;
 
+    bool loadDataisFinished = false;
+
 
     //--------------------
 
@@ -31,6 +33,17 @@ public class HotbarManager : Singleton<HotbarManager>
         PlayerButtonManager.isPressed_5 += QuickHotbarSelect_5;
 
         hotbar_Parent.SetActive(true);
+    }
+    private void Update()
+    {
+        if (loadDataisFinished && hotbar_Parent.activeInHierarchy)
+        {
+            for (int i = 0; i < hotbarList.Count; i++)
+            {
+                hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarItemID(hotbarList[i].itemID);
+                hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotDisplay();
+            }
+        }
     }
 
 
@@ -63,7 +76,11 @@ public class HotbarManager : Singleton<HotbarManager>
                 hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemsID = hotbarList[i].itemID;
 
                 //Set Image
-                hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotImage();
+                hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotDisplay();
+
+                //Set Durability
+                hotbarList[i].durabilityCurrent = hotbarTemp[i].durabilityCurrent;
+                hotbarList[i].durabilityMax = hotbarTemp[i].durabilityMax;
             }
         }
 
@@ -85,6 +102,8 @@ public class HotbarManager : Singleton<HotbarManager>
             BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
         }
         #endregion
+
+        loadDataisFinished = true;
     }
     public void SaveData()
     {
@@ -98,6 +117,8 @@ public class HotbarManager : Singleton<HotbarManager>
             Hotbar hotbarTemp = new Hotbar();
             hotbarTemp.itemName = hotbarList[i].itemName;
             hotbarTemp.itemID = hotbarList[i].itemID;
+            hotbarTemp.durabilityCurrent = hotbarList[i].durabilityCurrent;
+            hotbarTemp.durabilityMax = hotbarList[i].durabilityMax;
 
             if (hotbarTemp.itemID <= 0)
             {
@@ -187,6 +208,8 @@ public class HotbarManager : Singleton<HotbarManager>
 
     void HandSelection_Down()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         selectedSlot--;
 
         if (selectedSlot < 0)
@@ -207,6 +230,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void HandSelection_UP()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         selectedSlot++;
 
         if (selectedSlot > 4)
@@ -236,6 +261,8 @@ public class HotbarManager : Singleton<HotbarManager>
     #region QuickSlots
     void QuickHotbarSelect_1()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         for (int i = 0; i < hotbarList.Count; i++)
         {
             hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
@@ -250,6 +277,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void QuickHotbarSelect_2()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         for (int i = 0; i < hotbarList.Count; i++)
         {
             hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
@@ -264,6 +293,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void QuickHotbarSelect_3()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         for (int i = 0; i < hotbarList.Count; i++)
         {
             hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
@@ -278,6 +309,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void QuickHotbarSelect_4()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         for (int i = 0; i < hotbarList.Count; i++)
         {
             hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
@@ -292,6 +325,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void QuickHotbarSelect_5()
     {
+        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
         for (int i = 0; i < hotbarList.Count; i++)
         {
             hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
@@ -323,4 +358,7 @@ public class Hotbar
     public GameObject hotbar;
     public Items itemName;
     public int itemID;
+
+    public int durabilityCurrent;
+    public int durabilityMax;
 }

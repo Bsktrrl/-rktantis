@@ -12,6 +12,7 @@ public class InteractableObject : MonoBehaviour
     [Header("Stats")]
     public Items itemName;
     public int amount;
+    public int durability_Current;
     public InteracteableType interacteableType;
 
     [Header("If Object is an Inventory")]
@@ -66,13 +67,15 @@ public class InteractableObject : MonoBehaviour
             #region
             if (interacteableType == InteracteableType.Item)
             {
-                //print("Interract with a Pickup");
+                //print("Interact with a Pickup");
 
                 //Check If item can be added
                 for (int i = 0; i < amount; i++)
                 {
                     if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
                     {
+                        SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+
                         //Remove Object from the worldObjectList
                         WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
 
@@ -96,6 +99,8 @@ public class InteractableObject : MonoBehaviour
                     {
                         for (int i = 0; i < amount; i++)
                         {
+                            SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+
                             //Check If item can be added
                             InventoryManager.Instance.AddItemToInventory(0, itemName);
 
@@ -105,6 +110,7 @@ public class InteractableObject : MonoBehaviour
                 }
             }
             #endregion
+            
             //If Object is an Inventory
             #region
             else if (interacteableType == InteracteableType.Inventory)
@@ -145,6 +151,8 @@ public class InteractableObject : MonoBehaviour
             {
                 //print("Interract with a CraftingTable");
 
+                SoundManager.Instance.Play_InteractableObjects_OpenCraftingTable_Clip();
+
                 TabletManager.Instance.objectInteractingWith_Object = gameObject;
 
                 //Set Crafting Table Animation
@@ -165,6 +173,8 @@ public class InteractableObject : MonoBehaviour
             else if (interacteableType == InteracteableType.SkillTreeTable)
             {
                 //print("Interract with a SkillTree");
+
+                SoundManager.Instance.Play_InteractableObjects_OpenSkillTreeTable_Clip();
 
                 TabletManager.Instance.objectInteractingWith_Object = gameObject;
 

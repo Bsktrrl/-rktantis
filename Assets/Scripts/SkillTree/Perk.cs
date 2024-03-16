@@ -182,6 +182,7 @@ public class Perk : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
         SkillTreeManager.Instance.SetupSkillTree_Information(gameObject);
     }
 }

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
@@ -12,6 +13,12 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     public GameObject hotbarSelectorParent;
     public TextMeshProUGUI hotbarIndex_Text;
 
+    [Header("DurabilityMeter")]
+    public GameObject durabilityMeterParent;
+    public Image durabilityMeterImage;
+    public int durabilityMax;
+    public int durabilityCurrent;
+
 
     //--------------------
 
@@ -20,9 +27,15 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     {
         if (itemName != Items.None)
         {
-            InventoryManager.Instance.ChangeitemInfoBox(itemName, this);
+            InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
     }
+
+
+    //--------------------
+
+
+    //When Clicked
     public void OnPointerUp(PointerEventData eventData)
     {
         //If only player inventory is used
@@ -34,7 +47,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             #region
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                RemoveItemFromInventory();
+                RemoveItemFromInventory(false);
             }
             #endregion
 
@@ -46,6 +59,12 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                 if (MainManager.Instance.GetItem(itemName).isEquipableInHand)
                 {
                     AssignItemToHotbar();
+                }
+
+                //If clicked item is a Consumable
+                else if (MainManager.Instance.GetItem(itemName).isConsumeable)
+                {
+                    EatConsumable();
                 }
 
                 //If clicked item is a Clothing
@@ -77,26 +96,27 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                 {
                     AssignItemToHotbar();
                 }
-
-                //If clicked item is a Clothing
-                else if (MainManager.Instance.GetItem(itemName).isEquipableClothes)
-                {
-                    AssignItemToClothingSlot();
-                }
             }
             #endregion
         }
 
         if (itemName != Items.None)
         {
-            InventoryManager.Instance.ChangeitemInfoBox(itemName, this);
+            InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
     }
-    void RemoveItemFromInventory()
+    void RemoveItemFromInventory(bool permanentRemove)
     {
-        InventoryManager.Instance.RemoveItemFromInventory(inventoryIndex, itemName, itemID);
+        if (permanentRemove)
+        {
+            InventoryManager.Instance.RemoveItemFromInventory(inventoryIndex, itemName, itemID, true);
+        }
+        else
+        {
+            InventoryManager.Instance.RemoveItemFromInventory(inventoryIndex, itemName, itemID);
+        }
     }
-    void AssignItemToHotbar()
+    public void AssignItemToHotbar()
     {
         if (itemName != Items.None)
         {
@@ -107,10 +127,14 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                     && HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName == itemName
                     && HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemsID == itemID)
                 {
+                    SoundManager.Instance.Play_Hotbar_RemoveItemFromHotbar_Clip();
+
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
 
                     HotbarManager.Instance.hotbarList[i].itemName = Items.None;
                     HotbarManager.Instance.hotbarList[i].itemID = -1;
+                    HotbarManager.Instance.hotbarList[i].durabilityMax = 0;
+                    HotbarManager.Instance.hotbarList[i].durabilityCurrent = 0;
 
                     HotbarManager.Instance.SetSelectedItem();
 
@@ -128,11 +152,15 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             {
                 if (HotbarManager.Instance.hotbarList[i].itemName == Items.None)
                 {
+                    SoundManager.Instance.Play_Hotbar_AssignItemToHotbar_Clip();
+
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName = itemName;
-                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotImage();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarItemID(itemID);
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotDisplay();
                     HotbarManager.Instance.hotbarList[i].itemName = itemName;
                     HotbarManager.Instance.hotbarList[i].itemID = itemID;
-                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarItemID(itemID);
+                    HotbarManager.Instance.hotbarList[i].durabilityMax = durabilityMax;
+                    HotbarManager.Instance.hotbarList[i].durabilityCurrent = durabilityCurrent;
                     HotbarManager.Instance.SetSelectedItem();
 
                     InventoryManager.Instance.SelectItemInfoToHotbar(i, itemName, itemID);
@@ -160,9 +188,79 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             InventoryManager.Instance.MoveItemToInventory(inventoryIndex, gameObject, itemID);
         }
     }
+    void EatConsumable()
+    {
+        SoundManager.Instance.Play_Inventory_ConsumeItem_Clip();
+
+        //If item is healing the MainHealth
+        if (MainManager.Instance.GetItem(itemName).mainHealthHeal > 0)
+        {
+            float percentage = (float)MainManager.Instance.GetItem(itemName).mainHealthHeal / 100;
+            HealthManager.Instance.mainHealthValue += percentage;
+
+            if (HealthManager.Instance.mainHealthValue > 1)
+            {
+                HealthManager.Instance.mainHealthValue = 1;
+            }
+        }
+
+        //If item is healing the heatResistaceHealth
+        if (MainManager.Instance.GetItem(itemName).heatresistanceHealthHeal > 0)
+        {
+            float percentage = (float)MainManager.Instance.GetItem(itemName).heatresistanceHealthHeal / 100;
+            HealthManager.Instance.heatResistanceValue += percentage;
+
+            if (HealthManager.Instance.heatResistanceValue > 1)
+            {
+                HealthManager.Instance.heatResistanceValue = 1;
+            }
+        }
+
+        //If item is healing the hungerHealth
+        if (MainManager.Instance.GetItem(itemName).hungerHealthHeal > 0)
+        {
+            float percentage = (float)MainManager.Instance.GetItem(itemName).hungerHealthHeal / 100;
+            HealthManager.Instance.hungerValue += percentage;
+
+            if (HealthManager.Instance.hungerValue > 1)
+            {
+                HealthManager.Instance.hungerValue = 1;
+            }
+        }
+
+        //If item is healing the thirstHealth
+        if (MainManager.Instance.GetItem(itemName).thirstHealthHeal > 0)
+        {
+            float percentage = (float)MainManager.Instance.GetItem(itemName).thirstHealthHeal / 100;
+            HealthManager.Instance.thirstValue += percentage;
+
+            if (HealthManager.Instance.thirstValue > 1)
+            {
+                HealthManager.Instance.thirstValue = 1;
+            }
+        }
+
+        //If item is tweaking the playerTemperature
+        if (MainManager.Instance.GetItem(itemName).heatColdRegulator > 0 || MainManager.Instance.GetItem(itemName).heatColdRegulator < 0)
+        {
+            TemperatureFruit temp = new TemperatureFruit();
+            temp.value = MainManager.Instance.GetItem(itemName).heatColdRegulator;
+            temp.duration = MainManager.Instance.GetItem(itemName).heatColdRegulatorDuration;
+
+            WeatherManager.Instance.temperatureFruitList.Add(temp);
+        }
+
+        //Play Eating Sound
+        SoundManager.Instance.Play_Inventory_ConsumeItem_Clip();
+
+        //Remove the item
+        RemoveItemFromInventory(true);
+    }
     void AssignItemToClothingSlot()
     {
+        SoundManager.Instance.Play_Inventory_EquipItem_Clip();
 
+        MenuEquipmentManager.Instance.AddItemToEquipmentSlot(itemName);
     }
 
 
@@ -171,6 +269,9 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        //Play ItemEntering Sound
+        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+
         if (inventoryIndex <= 0)
         {
             InventoryManager.Instance.SetPlayerItemInfo(itemName, true);
@@ -184,7 +285,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
         if (itemName != Items.None)
         {
-            InventoryManager.Instance.ChangeitemInfoBox(itemName, this);
+            InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
     }
 
@@ -214,6 +315,18 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     public void DeactivateHotbarInfoToItemSlot()
     {
         hotbarSelectorParent.SetActive(false);
+    }
+
+    public void ActivateDurabilityMeter()
+    {
+        float tempFill = (float)durabilityCurrent / durabilityMax;
+
+        durabilityMeterImage.fillAmount = tempFill;
+        durabilityMeterParent.SetActive(true);
+    }
+    public void DeactivateDurabilityMeter()
+    {
+        durabilityMeterParent.SetActive(false);
     }
 
 

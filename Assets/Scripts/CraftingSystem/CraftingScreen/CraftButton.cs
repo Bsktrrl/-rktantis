@@ -45,12 +45,12 @@ public class CraftButton : MonoBehaviour
             InventoryManager.Instance.AddItemToInventory(0, CraftingManager.Instance.itemSelected.itemName);
             //InventoryManager.Instance.CheckHotbarItemInInventory();
 
-            SoundManager.Instance.Playmenu_Crafting_Clip();
+            SoundManager.Instance.Play_Crafting_PerformCrafting_Clip();
         }
         else
         {
             //print("CraftingButton - TotalRequirementMet = false");
-            SoundManager.Instance.Playmenu_CanntoCraft_Clip();
+            SoundManager.Instance.Play_Crafting_CannotCraft_Clip();
         }
     }
 }

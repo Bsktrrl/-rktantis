@@ -96,7 +96,7 @@ public enum Items
     [Description("Light Shoes")][InspectorName("Clothing/Light Shoes")] LightShoes,
     [Description("Slippers")][InspectorName("Clothing/Slippers")] Slippers,
 
-    [Description("Other1")][InspectorName("Clothing/Other1")] CL_Other1,
+    [Description("Cloth")][InspectorName("Clothing/Cloth")] Cloth,
     [Description("Other2")][InspectorName("Clothing/Other2")] CL_Other2,
     [Description("Other3")][InspectorName("Clothing/Other3")] CL_Other3,
     [Description("Other4")][InspectorName("Clothing/Other4")] CL_Other4,
@@ -107,7 +107,7 @@ public enum Items
     //Plant Material
     #region
     [Description("Plant Fiber")][InspectorName("Plant Material/Plant Fiber")] PlantFiber,
-    [Description("Glue")][InspectorName("Plant Material/Glue")] Glue,
+    [Description("Glue Stick")][InspectorName("Plant Material/Glue Stick")] GlueStick,
     [Description("Cotton")][InspectorName("Plant Material/Cotton")] Cotton,
     [Description("Spik Oil")][InspectorName("Plant Material/Spik Oil")] SpikOil,
     [Description("Arídis Flower")][InspectorName("Plant Material/Arídis Flower")] ArídisFlower,
@@ -240,7 +240,7 @@ public enum Items
     [Description("Lamp")][InspectorName("Furniture/Lamp")] Lamp,
     [Description("Spotlight")][InspectorName("Furniture/Spotlight")] Spotlight,
 
-    [Description("Other1")][InspectorName("Furniture/Other1")] FU_Other1,
+    [Description("Medium Chest")][InspectorName("Furniture/Medium Chest")] MediumChest,
     [Description("Other2")][InspectorName("Furniture/Other2")] FU_Other2,
     [Description("Other3")][InspectorName("Furniture/Other3")] FU_Other3,
     [Description("Other4")][InspectorName("Furniture/Other4")] FU_Other4,

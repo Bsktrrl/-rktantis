@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TabletManager : Singleton<TabletManager>
 {
-    #region Main Tablet
+    #region Main Tablet Variables
     [Header("General")]
     public TabletMenuState tabletMenuState;
     public ObjectInteractingWith objectInteractingWith;
@@ -72,8 +72,10 @@ public class TabletManager : Singleton<TabletManager>
     [Header("Hotbar")]
     [SerializeField] List<Image> hotbarFrameImageList_Tablet = new List<Image>();
     [SerializeField] List<Image> hotbarIconImageList_Tablet = new List<Image>();
+    [SerializeField] List<GameObject> hotbarItemDurabilityListParent_Tablet = new List<GameObject>();
+    [SerializeField] List<Image> hotbarItemDurabilityList_Tablet = new List<Image>();
     #endregion
-    #region SkillTree Menu
+    #region SkillTree Menu Variables
     [Header("SkillTree Menu")]
     public GameObject skillTree_Inventory_Parent;
     public GameObject skillTree_Equipment_Parent;
@@ -117,6 +119,9 @@ public class TabletManager : Singleton<TabletManager>
 
             //Set the images of the Hotbar
             SetHotbarImages();
+
+            //Set DurabilityInfo on inventoryItems
+            InventoryManager.Instance.SelectItemDurabilityDisplay();
         }
     }
 
@@ -127,6 +132,9 @@ public class TabletManager : Singleton<TabletManager>
     #region Menu Buttons
     public void MenuButton_Inventory_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         if (objectInteractingWith == ObjectInteractingWith.Chest)
         {
             MenuTransition(tabletMenuState, TabletMenuState.ChestInventory);
@@ -138,19 +146,31 @@ public class TabletManager : Singleton<TabletManager>
     }
     public void MenuButton_CraftingTable_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         MenuTransition(tabletMenuState, TabletMenuState.CraftingTable);
     }
     public void MenuButton_Skilltree_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         MenuTransition(tabletMenuState, TabletMenuState.SkillTree);
     }
     public void MenuButton_MoveableObjects_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         MenuTransition(tabletMenuState, TabletMenuState.MoveableObjects);
     }
 
     public void MenuButton_Chest_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         MenuTransition(tabletMenuState, TabletMenuState.ChestInventory);
 
         menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
@@ -158,6 +178,9 @@ public class TabletManager : Singleton<TabletManager>
     }
     public void MenuButton_Equipment_onClick()
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         MenuTransition(tabletMenuState, TabletMenuState.Equipment);
 
         menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Active;
@@ -418,6 +441,8 @@ public class TabletManager : Singleton<TabletManager>
     //When Opening Tablet from hand
     public void OpenTablet()
     {
+        SoundManager.Instance.Play_Tablet_OpenTablet_Clip();
+
         InventoryManager.Instance.ClosePlayerInventory();
 
         //If BuildingHammer is in hand, open the MoveableObjectMenu
@@ -483,6 +508,11 @@ public class TabletManager : Singleton<TabletManager>
     
     public void CloseTablet()
     {
+        SoundManager.Instance.Play_Tablet_CloseTablet_Clip();
+
+        //Deselect DurabilityInfo on inventoryItems
+        InventoryManager.Instance.DeselectItemDurabilityDisplay();
+
         //Close all menus
         tablet_Parent.SetActive(false);
         //SetMenuDisplay(false);
@@ -574,6 +604,7 @@ public class TabletManager : Singleton<TabletManager>
     {
         for (int i = 0; i < 5; i++)
         {
+            //Image
             if (HotbarManager.Instance.selectedSlot == i)
             {
                 hotbarFrameImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].hotbar.transform.GetChild(1).GetComponent<Image>().sprite;
@@ -584,14 +615,20 @@ public class TabletManager : Singleton<TabletManager>
             }
             
             hotbarIconImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].hotbar.transform.GetChild(0).GetComponent<Image>().sprite;
+
+            //Durability
+            if (HotbarManager.Instance.hotbarList[i].durabilityMax > 0)
+            {
+                //float tempFill = HotbarManager.Instance.hotbarList[i].durabilityCurrent / HotbarManager.Instance.hotbarList[i].durabilityMax;
+                hotbarItemDurabilityList_Tablet[i].fillAmount = HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().durabilityMeterImage.fillAmount;
+                hotbarItemDurabilityListParent_Tablet[i].SetActive(true);
+            }
+            else
+            {
+                hotbarItemDurabilityListParent_Tablet[i].SetActive(false);
+            }
         }
-      }
-
-
-    //--------------------
-
-
-
+    }
 }
 
 public enum TabletMenuState

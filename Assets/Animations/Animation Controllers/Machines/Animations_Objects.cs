@@ -30,13 +30,38 @@ public class Animations_Objects : MonoBehaviour
         //Play Start Sound
         if (gameObject.GetComponent<InteractableObject>() && hasStarted)
         {
+            //If Chest
             if (gameObject.GetComponent<InteractableObject>().itemName == Items.SmallChest)
             {
-                SoundManager.Instance.PlayOpenSmallChest_Clip();
+                SoundManager.Instance.Play_Chests_OpenSmallChest_Clip();
+            }
+            else if (gameObject.GetComponent<InteractableObject>().itemName == Items.MediumChest)
+            {
+                SoundManager.Instance.Play_Chests_OpenMediumChest_Clip();
             }
             else if(gameObject.GetComponent<InteractableObject>().itemName == Items.BigChest)
             {
-                SoundManager.Instance.PlayOpenBigChest_Clip();
+                SoundManager.Instance.Play_Chests_OpenBigChest_Clip();
+            }
+
+            //If Crafting Table
+            else if (gameObject.GetComponent<InteractableObject>().itemName == Items.CraftingTable)
+            {
+                SoundManager.Instance.Play_InteractableObjects_OpenCraftingTable_Clip();
+            }
+
+            //If Skill Tree Table
+            else if (gameObject.GetComponent<InteractableObject>().itemName == Items.SkillTable)
+            {
+                SoundManager.Instance.Play_InteractableObjects_OpenSkillTreeTable_Clip();
+            }
+
+            //If Skill Tree Table
+            else if (gameObject.GetComponent<InteractableObject>().itemName == Items.SmallCropPlot
+                     || gameObject.GetComponent<InteractableObject>().itemName == Items.MediumCropPlot
+                     || gameObject.GetComponent<InteractableObject>().itemName == Items.LargeCropPlot)
+            {
+                SoundManager.Instance.Play_InteractableObjects_OpenCropPlot_Clip();
             }
         }
     }
@@ -47,13 +72,38 @@ public class Animations_Objects : MonoBehaviour
         //Play Start Sound
         if (gameObject.GetComponent<InteractableObject>() && hasStarted)
         {
+            //If Chest
             if (gameObject.GetComponent<InteractableObject>().itemName == Items.SmallChest)
             {
-                SoundManager.Instance.PlayCloseSmallChest_Clip();
+                SoundManager.Instance.Play_Chests_CloseSmallChest_Clip();
+            }
+            else if (gameObject.GetComponent<InteractableObject>().itemName == Items.MediumChest)
+            {
+                SoundManager.Instance.Play_Chests_CloseMediumChest_Clip();
             }
             else if (gameObject.GetComponent<InteractableObject>().itemName == Items.BigChest)
             {
-                SoundManager.Instance.PlayCloseBigChest_Clip();
+                SoundManager.Instance.Play_Chests_CloseBigChest_Clip();
+            }
+
+            //If Crafting Table
+            else if (gameObject.GetComponent<InteractableObject>().itemName == Items.CraftingTable)
+            {
+                SoundManager.Instance.Play_InteractableObjects_CloseCraftingTable_Clip();
+            }
+
+            //If Skill Tree Table
+            else if (gameObject.GetComponent<InteractableObject>().itemName == Items.SkillTable)
+            {
+                SoundManager.Instance.Play_InteractableObjects_CloseSkillTreeTable_Clip();
+            }
+
+            //If Skill Tree Table
+            else if (gameObject.GetComponent<InteractableObject>().itemName == Items.SmallCropPlot
+                     || gameObject.GetComponent<InteractableObject>().itemName == Items.MediumCropPlot
+                     || gameObject.GetComponent<InteractableObject>().itemName == Items.LargeCropPlot)
+            {
+                SoundManager.Instance.Play_InteractableObjects_CloseCropPlot_Clip();
             }
         }
     }

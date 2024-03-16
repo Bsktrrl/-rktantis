@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BuildingBlock_UI : MonoBehaviour
+public class BuildingBlock_UI : MonoBehaviour, IPointerEnterHandler
 {
     public static Action objectClicked;
 
@@ -143,5 +144,10 @@ public class BuildingBlock_UI : MonoBehaviour
 
         BuildingManager.Instance.SaveData();
         MoveableObjectManager.Instance.SaveData();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
     }
 }

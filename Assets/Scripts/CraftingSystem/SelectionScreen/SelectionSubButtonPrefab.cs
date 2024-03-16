@@ -46,6 +46,8 @@ public class SelectionSubButtonPrefab : MonoBehaviour, IPointerEnterHandler
         ////Set Frame Orange
         //GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Passive;
 
+        SoundManager.Instance.Play_Crafting_SelectCraftingItem_Clip();
+
         if (CraftingManager.Instance.activeItemToCraft != null)
         {
             CraftingManager.Instance.activeItemToCraft.GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Active;
@@ -53,7 +55,7 @@ public class SelectionSubButtonPrefab : MonoBehaviour, IPointerEnterHandler
 
         CraftingManager.Instance.activeItemToCraft = gameObject;
 
-        SoundManager.Instance.PlayChangeCraftingScreen_Clip();
+        SoundManager.Instance.Play_Crafting_ChangeCraftingMenu_Clip();
 
         CraftingManager.Instance.itemSelected = item;
         CraftingManager.Instance.SetupCraftingScreen(item);
@@ -62,7 +64,7 @@ public class SelectionSubButtonPrefab : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        SoundManager.Instance.PlaySelect_Clip();
+        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
     }
 
 

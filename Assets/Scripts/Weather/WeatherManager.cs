@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,6 +21,7 @@ public class WeatherManager : Singleton<WeatherManager>
 
     [Header("Temperature Resistances")]
     public float coverValue;
+    public float temperatureFruit;
     public float equippment;
     public float skillTree;
     public float waterCooler;
@@ -28,6 +30,9 @@ public class WeatherManager : Singleton<WeatherManager>
     public float wood_Cover = 10;
     public float stone_Cover = 20;
     public float iron_Cover = 30;
+
+    [Header("temperatureFruit")]
+    public List<TemperatureFruit> temperatureFruitList = new List<TemperatureFruit>();
 
     RaycastHit hit;
 
@@ -42,10 +47,14 @@ public class WeatherManager : Singleton<WeatherManager>
     private void Update()
     {
         SetSunRotation();
-
+        if (temperatureFruitList.Count > 0)
+        {
+            SetTemperatureFromFruit(temperatureFruitList);
+        }
+        
         CheckIfPlayerIsInTheCoverageOfBuildingBlock();
         SetTemperature();
-        SetPlayerTemperature(coverValue);
+        SetPlayerTemperature(coverValue, temperatureFruit);
         SetTemperatureDisplay(temperatureDisplay, playerTemperatureDisplay);
     }
 
@@ -91,19 +100,18 @@ public class WeatherManager : Singleton<WeatherManager>
             currentWorldTemperature = Mathf.FloorToInt(maxTemperature + calculatingTemperature);
         }
     }
-    void SetPlayerTemperature(float coverValue)
+    void SetPlayerTemperature(float coverValue, float temperatureFruit)
     {
         //Set Temperature for BuildingBlock Coverage (doesn't affect temperature under idealTemperature)
-        float temperatureResistance = coverValue;
-        float awayFromIdealtemperature = Mathf.Abs(currentWorldTemperature - idealTemperature);
+        float coverResistance = coverValue;
 
         //BuildingBlock Cover Calculation (perform this first to get the playerTemperature. Add other buffs later
         #region
         if (currentWorldTemperature >= idealTemperature)
         {
-            if ((currentWorldTemperature + temperatureResistance) >= idealTemperature)
+            if ((currentWorldTemperature + coverResistance) >= idealTemperature)
             {
-                playerTemperature = currentWorldTemperature + temperatureResistance;
+                playerTemperature = currentWorldTemperature + coverResistance;
             }
             else
             {
@@ -112,9 +120,44 @@ public class WeatherManager : Singleton<WeatherManager>
         }
         else
         {
-            if ((currentWorldTemperature + temperatureResistance) <= idealTemperature)
+            if ((currentWorldTemperature + coverResistance) <= idealTemperature)
             {
-                playerTemperature = currentWorldTemperature + temperatureResistance;
+                playerTemperature = currentWorldTemperature + coverResistance;
+            }
+            else
+            {
+                playerTemperature = idealTemperature;
+            }
+        }
+        #endregion
+
+
+        //Add Heat/Freeze Fruit influence to the playerTemperature
+        #region
+        float fruitResistance = temperatureFruit;
+
+        if (playerTemperature >= idealTemperature)
+        {
+            if ((playerTemperature + fruitResistance) >= idealTemperature)
+            {
+                if (fruitResistance <= 0)
+                {
+                    playerTemperature = currentWorldTemperature + fruitResistance;
+                }
+            }
+            else
+            {
+                playerTemperature = idealTemperature;
+            }
+        }
+        else
+        {
+            if ((playerTemperature + fruitResistance) <= idealTemperature)
+            {
+                if (fruitResistance >= 0)
+                {
+                    playerTemperature = currentWorldTemperature + fruitResistance;
+                }
             }
             else
             {
@@ -148,17 +191,17 @@ public class WeatherManager : Singleton<WeatherManager>
         if (currentWorldTemperature < idealTemperature)
         {
             //it's warm
-            RaycastCoverage(Vector3.up, maxRange, false);
+            SetCoverValue(Vector3.up, maxRange, false);
         }
 
         //Raycast the sun if temperature is over or equal to ideal
         else
         {
             //It's hot
-            RaycastCoverage(-sunDirection, maxRange, true);
+            SetCoverValue(-sunDirection, maxRange, true);
         }
     }
-    void RaycastCoverage(Vector3 raycastDirection, float maxRange, bool isWarm)
+    void SetCoverValue(Vector3 raycastDirection, float maxRange, bool isWarm)
     {
         if (Physics.Raycast(MainManager.Instance.player.transform.position, raycastDirection, out hit, maxRange))
         {
@@ -224,4 +267,51 @@ public class WeatherManager : Singleton<WeatherManager>
             coverValue = 0;
         }
     }
+    
+    void SetTemperatureFromFruit(List<TemperatureFruit> temperatureFruitList)
+    {
+        int totalTemperature = 0;
+
+        //Add All temperatures together
+        for (int i = 0; i < temperatureFruitList.Count; i++)
+        {
+            totalTemperature += temperatureFruitList[i].value;
+        }
+
+        temperatureFruit = totalTemperature;
+
+
+        //-----
+
+
+        //Update the timer of each temperature buff
+        for (int i = 0; i < temperatureFruitList.Count; i++)
+        {
+            temperatureFruitList[i].duration -= Time.deltaTime;
+        }
+
+        //Check if any Element should be removed
+        for (int i = temperatureFruitList.Count - 1; i >= 0; i--)
+        {
+            if (temperatureFruitList[i].duration <= 0)
+            {
+                temperatureFruitList.RemoveAt(i);
+
+                SoundManager.Instance.Play_Buff_Deactivated_Clip();
+            }
+        }
+
+        //Reset temperatureFruit if there isn't any active fruit buffs
+        if (temperatureFruitList.Count <= 0)
+        {
+            temperatureFruit = 0;
+        }
+    }
+}
+
+[Serializable]
+public class TemperatureFruit
+{
+    public int value;
+    public float duration;
 }

@@ -12,6 +12,10 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
     [Header("Chest Item")]
     public GameObject chest_Parent;
 
+    [Header("Equipment Item")]
+    public GameObject inventoryItemInfo_Parent;
+    public GameObject equipment_Parent;
+
     [Header("Equip Hand Item")]
     public GameObject equipHandItem_Parent;
     public GameObject equipHandItem_NotHand;
@@ -153,8 +157,6 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
 
     public void SetInfo_ChestItem()
     {
-        print("10000. Chest Item");
-
         HideAllParents();
 
         if (MainManager.Instance.menuStates == MenuStates.ChestMenu)
@@ -162,6 +164,21 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
             chest_Parent.SetActive(true);
         }
     }
+    public void SetInfo_EquippedItem()
+    {
+        HideAllParents();
+
+        inventoryItemInfo_Parent.SetActive(true);
+        equipment_Parent.SetActive(true);
+    }
+    public void HideInfo_EquippedItem()
+    {
+        HideAllParents();
+
+        inventoryItemInfo_Parent.SetActive(false);
+        equipment_Parent.SetActive(false);
+    }
+
 
     //--------------------
 
@@ -173,6 +190,7 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
         equipHandItem_Parent.SetActive(false);
         equipClothesItem_Parent.SetActive(false);
         ConsumableItem_Parent.SetActive(false);
+        equipment_Parent.SetActive(false);
     }
 
 
