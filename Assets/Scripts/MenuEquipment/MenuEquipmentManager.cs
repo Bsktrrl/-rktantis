@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 
 public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
 {
+    public static Action updateEquipment;
+
     [Header("HeadEquipment")]
     [SerializeField] Image HeadEquipmentSlot_Image;
     public Items HeadItemSelected;
@@ -53,6 +56,8 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
             HandEquipmentSlot_Image.gameObject.SetActive(false);
         if (FootItemSelected == Items.None)
             FootEquipmentSlot_Image.gameObject.SetActive(false);
+
+        updateEquipment?.Invoke();
     }
     public void SaveData()
     {
@@ -188,8 +193,6 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
             SoundManager.Instance.Play_Inventory_EquipItem_Clip();
 
             ResetEquipmentSlot(0);
-
-            SaveData();
         }
     }
     public void HandEquipmentSlot_isClicked()
@@ -199,8 +202,6 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
             SoundManager.Instance.Play_Inventory_EquipItem_Clip();
 
             ResetEquipmentSlot(1);
-
-            SaveData();
         }
     }
     public void FootEquipmentSlot_isClicked()
@@ -210,8 +211,6 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
             SoundManager.Instance.Play_Inventory_EquipItem_Clip();
 
             ResetEquipmentSlot(2);
-
-            SaveData();
         }
     }
 
@@ -376,6 +375,10 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
                 break;
             }
         }
+
+        updateEquipment?.Invoke();
+
+        SaveData();
     }
     void ResetEquipmentSlot(int index)
     {
@@ -409,6 +412,8 @@ public class MenuEquipmentManager : Singleton<MenuEquipmentManager>
             default:
                 break;
         }
+
+        updateEquipment?.Invoke();
 
         SaveData();
     }

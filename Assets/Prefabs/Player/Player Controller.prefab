@@ -44298,6 +44298,7 @@ GameObject:
   - component: {fileID: 4230422569923015765}
   - component: {fileID: 8848920295305057190}
   - component: {fileID: 7932066623679705562}
+  - component: {fileID: 5225284965359178302}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -44386,6 +44387,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 90
+--- !u!114 &5225284965359178302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7574674635115166224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58dc7606f44375347957172a49f6a517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7579585586942468639
 GameObject:
   m_ObjectHideFlags: 0
