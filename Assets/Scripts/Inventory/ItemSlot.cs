@@ -259,6 +259,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     void AssignItemToClothingSlot()
     {
         SoundManager.Instance.Play_Inventory_EquipItem_Clip();
+
+        MenuEquipmentManager.Instance.AddItemToEquipmentSlot(itemName);
     }
 
 
@@ -319,7 +321,6 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     {
         float tempFill = (float)durabilityCurrent / durabilityMax;
 
-        print("2. current: " + durabilityCurrent + " | durabilityMax: " + durabilityMax + " | tempFill: " + tempFill);
         durabilityMeterImage.fillAmount = tempFill;
         durabilityMeterParent.SetActive(true);
     }

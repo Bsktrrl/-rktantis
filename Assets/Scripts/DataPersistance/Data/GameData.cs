@@ -14,6 +14,9 @@ public class GameData
     [HideInInspector] public Vector2 smallChest_Size_Save;
     [HideInInspector] public Vector2 bigChest_Size_Save;
 
+    //MenuEquipment
+    public List<Items> menuEquipedItemList_SaveList = new List<Items>();
+
     //WorldObjects
     [HideInInspector] public List<WorldObject> worldObject_SaveList = new List<WorldObject>();
 
@@ -52,6 +55,8 @@ public class GameData
         this.Inventories_SaveList.Clear();
         this.hotbarItem_SaveList.Clear();
         this.placedMoveableObjectsList_SaveList.Clear();
+
+        this.menuEquipedItemList_SaveList.Clear();
 
         this.plantTypeObjectList_Save.Clear();
     }

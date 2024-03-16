@@ -26,6 +26,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public Vector2 smallChest_Size_Store;
     [HideInInspector] public Vector2 bigChest_Size_Store;
 
+    //MenuEquipment
+    public List<Items> menuEquipedItemList_StoreList = new List<Items>();
+
     //Hotbar
     [HideInInspector] public int selectedSlot_Store = new int();
     public List<Hotbar> hotbarItem_StoreList = new List<Hotbar>();
@@ -63,6 +66,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         this.Inventories_StoreList = gameData.Inventories_SaveList;
 
+        this.menuEquipedItemList_StoreList = gameData.menuEquipedItemList_SaveList;
+
         this.smallChest_Size_Store = gameData.smallChest_Size_Save;
         this.bigChest_Size_Store = gameData.bigChest_Size_Save;
 
@@ -90,26 +95,29 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         InventoryManager.Instance.LoadData();
         print("1. InventoryManager has Loaded");
 
+        MenuEquipmentManager.Instance.LoadData();
+        print("2. MenuEquipmentManager has Loaded");
+        
         BuildingManager.Instance.LoadData();
-        print("2. BuildingManager has Loaded");
+        print("3. BuildingManager has Loaded");
 
         HotbarManager.Instance.LoadData();
-        print("3. HotbarManager has Loaded");
+        print("4. HotbarManager has Loaded");
 
         WorldObjectManager.Instance.LoadData();
-        print("4. WorldObjectManager has Loaded");
+        print("5. WorldObjectManager has Loaded");
 
         MoveableObjectManager.Instance.LoadData();
-        print("5. MoveableObjectManager has Loaded");
+        print("6. MoveableObjectManager has Loaded");
 
         HealthManager.Instance.LoadData();
-        print("6. HealthManager has Loaded");
+        print("7. HealthManager has Loaded");
 
         TimeManager.Instance.LoadData();
-        print("7. TimeManager has Loaded");
+        print("8. TimeManager has Loaded");
 
         PlantManager.Instance.LoadData();
-        print("8. Plants has Loaded");
+        print("9. Plants has Loaded");
         #endregion
 
         print("------------------------------");
@@ -128,6 +136,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.Inventories_SaveList = this.Inventories_StoreList;
         gameData.smallChest_Size_Save = this.smallChest_Size_Store;
         gameData.bigChest_Size_Save = this.bigChest_Size_Store;
+
+        gameData.menuEquipedItemList_SaveList = this.menuEquipedItemList_StoreList;
 
         gameData.hotbarItem_SaveList = this.hotbarItem_StoreList;
         gameData.selectedSlot_Save = this.selectedSlot_Store;

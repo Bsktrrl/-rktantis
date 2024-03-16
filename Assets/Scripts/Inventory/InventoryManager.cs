@@ -332,7 +332,7 @@ public class InventoryManager : Singleton<InventoryManager>
         spawnedObject.GetComponent<Rigidbody>().isKinematic = true;
         spawnedObject.GetComponent<Rigidbody>().useGravity = false;
     }
-    public void RemoveItemFromInventory(int inventory, Items itemName, int ID, bool itemIsMoved)
+    public void RemoveItemFromInventory(int inventory, Items itemName, int ID, bool itemIsMovedOrRemoved)
     {
         //From inventory to another Inventory, or crafting
 
