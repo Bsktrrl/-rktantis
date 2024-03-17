@@ -12,7 +12,7 @@ public class ArmsTest : Singleton<ArmsTest>
 
     void Update()
     {
-        //Set the item category with the number keys (0=Nothing, 1=Tools, 2=Flashlight, 3=Crystal, 4=Cup/Bottle, 5=Bucket)
+        ////Set the item category with the number keys (0=Nothing, 1=Tools, 2=Flashlight, 3=Crystal, 4=Cup/Bottle, 5=Bucket)
         //if(Input.GetKey(KeyCode.LeftShift) == false && Input.GetKey(KeyCode.LeftAlt) == false)
         //{
         //    if (Input.GetKeyDown(KeyCode.Alpha0))   //Nothing
@@ -63,66 +63,66 @@ public class ArmsTest : Singleton<ArmsTest>
             //}
         }
 
-        //Set the tool category with shift + number keys (1=Axe, 2=Pickaxe, 3=Hammer, 4=Sword, 0=GhostCapturer)
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                anim.SetInteger("ToolCategory", 1);
-                anim.SetTrigger("ItemUpdate");
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                anim.SetInteger("ToolCategory", 2);
-                anim.SetTrigger("ItemUpdate");
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                anim.SetInteger("ToolCategory", 3);
-                anim.SetTrigger("ItemUpdate");
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                anim.SetInteger("ToolCategory", 4);
-                anim.SetTrigger("ItemUpdate");
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha0))
-            {
-                anim.SetInteger("ToolCategory", 0);
-                anim.SetTrigger("ItemUpdate");
-            }
-        }
+        ////Set the tool category with shift + number keys (1=Axe, 2=Pickaxe, 3=Hammer, 4=Sword, 0=GhostCapturer)
+        //if (Input.GetKey(KeyCode.LeftShift))
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Alpha1))
+        //    {
+        //        anim.SetInteger("ToolCategory", 1);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Alpha2))
+        //    {
+        //        anim.SetInteger("ToolCategory", 2);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Alpha3))
+        //    {
+        //        anim.SetInteger("ToolCategory", 3);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Alpha4))
+        //    {
+        //        anim.SetInteger("ToolCategory", 4);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Alpha0))
+        //    {
+        //        anim.SetInteger("ToolCategory", 0);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //}
 
-        //Set the tool rank with alt + number keys (1=Wood, 2=Stone, 3=Cryonite)
-        if (Input.GetKey(KeyCode.LeftAlt))
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                anim.SetInteger("ToolRank", 1);
-                anim.SetTrigger("ItemUpdate");
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                anim.SetInteger("ToolRank", 2);
-                anim.SetTrigger("ItemUpdate");
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                anim.SetInteger("ToolRank", 3);
-                anim.SetTrigger("ItemUpdate");
-            }
-        }
+        ////Set the tool rank with alt + number keys (1=Wood, 2=Stone, 3=Cryonite)
+        //if (Input.GetKey(KeyCode.LeftAlt))
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Alpha1))
+        //    {
+        //        anim.SetInteger("ToolRank", 1);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Alpha2))
+        //    {
+        //        anim.SetInteger("ToolRank", 2);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Alpha3))
+        //    {
+        //        anim.SetInteger("ToolRank", 3);
+        //        anim.SetTrigger("ItemUpdate");
+        //    }
+        //}
 
-        //Click input
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            anim.SetTrigger("Click");
-        }
+        ////Click input
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+        //    anim.SetTrigger("Click");
+        //}
     }
 
-    //Animation event
-    public void InteractionFrame()
-    {
-        print("1000. Interact");
-    }
+    ////Animation event
+    //public void InteractionFrame()
+    //{
+    //    print("1000. Interact");
+    //}
 }

@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class PlayerButtonManager : Singleton<PlayerButtonManager>
 {
+    //Tablet
     public static Action OpenPlayerInventory_isPressedDown;
     public static Action ClosePlayerInventory_isPressedDown;
+
+    //ObjectInteraction
     public static Action objectInterraction_isPressedDown;
 
-    //HandSelected
+    //Hotbar
     public static Action hotbarSelectionDown_isPressed;
     public static Action hotbarSelectionUp_isPressed;
 
@@ -39,10 +42,10 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
     //Drink
     public static Action drink_isPressed;
 
+
+
     //Testing Buttons
     public static Action T_isPressed;
-
-
 
 
     //--------------------

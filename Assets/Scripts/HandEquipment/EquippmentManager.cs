@@ -12,20 +12,19 @@ public class EquippmentManager : Singleton<EquippmentManager>
 
     [Header("States")]
     public ArmState armState;
+    public ToolState toolState;
+    public ToolRank toolRank;
 
 
     //--------------------
 
 
-    private void Start()
+    public void GetEquipmentStates(Items selectedItem)
     {
-        PlayerButtonManager.isPressed_EquipmentActivate += ActivateEquippedItem;
+        GetArmState(selectedItem);
+        GetToolState(selectedItem);
+        GetToolRank(selectedItem);
     }
-
-
-    //--------------------
-
-
     public void GetArmState(Items selectedItem)
     {
         if (selectedItem == Items.WoodBuildingHammer || selectedItem == Items.StoneBuildingHammer || selectedItem == Items.CryoniteBuildingHammer
@@ -67,28 +66,84 @@ public class EquippmentManager : Singleton<EquippmentManager>
             arms.GetComponent<Arms>().anim.SetInteger("ItemCategory", 0);
             arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
         }
+
+        else
+        {
+            armState = ArmState.None;
+        }
     }
-
-
-    //--------------------
-
-
-    void ActivateEquippedItem()
+    public void GetToolState(Items selectedItem)
     {
-        //print("EquippedItem has been pressed");
+        if (selectedItem == Items.WoodAxe || selectedItem == Items.StoneAxe || selectedItem == Items.CryoniteAxe)
+        {
+            toolState = ToolState.Axe;
 
-        //if (toolHolderParent.transform.childCount <= 0)
-        //{
-        //    return;
-        //}
+            arms.GetComponent<Arms>().anim.SetInteger("ToolCategory", 1);
+            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
+        }
+        else if (selectedItem == Items.WoodPickaxe || selectedItem == Items.StonePickaxe || selectedItem == Items.CryonitePickaxe)
+        {
+            toolState = ToolState.Pickaxe;
 
-        ////Check if the selected item has the required states
-        //if (MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).isEquipableInHand
-        //    && toolHolderParent.GetComponentInChildren<EquippedItem>() != null)
-        //{
-        //    //Play animation
-        //    toolHolderParent.GetComponentInChildren<EquippedItem>().HitAnimation();
-        //}
+            arms.GetComponent<Arms>().anim.SetInteger("ToolCategory", 2);
+            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
+        }
+        else if (selectedItem == Items.WoodBuildingHammer || selectedItem == Items.StoneBuildingHammer || selectedItem == Items.CryoniteBuildingHammer)
+        {
+            toolState = ToolState.BuildingHammer;
+
+            arms.GetComponent<Arms>().anim.SetInteger("ToolCategory", 3);
+            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
+        }
+        else if (selectedItem == Items.WoodSword || selectedItem == Items.StoneSword || selectedItem == Items.CryoniteSword)
+        {
+            toolState = ToolState.Sword;
+
+            arms.GetComponent<Arms>().anim.SetInteger("ToolCategory", 4);
+            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
+        }
+
+        else if (selectedItem == Items.GhostCapturer)
+        {
+            toolState = ToolState.GhostCapturer;
+
+            arms.GetComponent<Arms>().anim.SetInteger("ToolCategory", 0);
+            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
+        }
+
+        else
+        {
+            toolState = ToolState.None;
+        }
+    }
+    public void GetToolRank(Items selectedItem)
+    {
+        if (selectedItem == Items.WoodAxe || selectedItem == Items.WoodPickaxe || selectedItem == Items.WoodBuildingHammer || selectedItem == Items.WoodSword)
+        {
+            toolRank = ToolRank.Wood;
+
+            arms.GetComponent<Arms>().anim.SetInteger("ToolRank", 1);
+            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
+        }
+        else if (selectedItem == Items.StoneAxe || selectedItem == Items.StonePickaxe || selectedItem == Items.StoneBuildingHammer || selectedItem == Items.StoneSword)
+        {
+            toolRank = ToolRank.Stone;
+
+            arms.GetComponent<Arms>().anim.SetInteger("ToolRank", 2);
+            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
+        }
+        else if (selectedItem == Items.CryoniteAxe || selectedItem == Items.CryonitePickaxe || selectedItem == Items.CryoniteBuildingHammer || selectedItem == Items.CryoniteSword)
+        {
+            toolRank = ToolRank.Cryonite;
+
+            arms.GetComponent<Arms>().anim.SetInteger("ToolRank", 3);
+            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
+        }
+
+        else
+        {
+            toolRank = ToolRank.None;
+        }
     }
 }
 
@@ -101,4 +156,25 @@ public enum ArmState
     Crystal,
     Cup,
     Bucket
+}
+
+public enum ToolState
+{
+    None,
+
+    Axe,
+    Pickaxe,
+    BuildingHammer,
+    Sword,
+
+    GhostCapturer
+}
+
+public enum ToolRank
+{
+    None,
+
+    Wood,
+    Stone,
+    Cryonite
 }

@@ -75,7 +75,8 @@ public enum Items
 
     [Description("Flashlight")][InspectorName("Tools/Flashlight")] Flashlight,
 
-    [Description("Other2")][InspectorName("Tools/Other2")] T_Other2,
+    [Description("Ghost Capturer")][InspectorName("Tools/Ghost Capturer")] GhostCapturer,
+
     [Description("Other3")][InspectorName("Tools/Other3")] T_Other3,
     [Description("Other4")][InspectorName("Tools/Other4")] T_Other4,
     [Description("Other5")][InspectorName("Tools/Other5")] T_Other5,

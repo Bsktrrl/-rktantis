@@ -152,8 +152,8 @@ public class HotbarManager : Singleton<HotbarManager>
 
     public void ChangeItemInHand()
     {
-        //Change ArmState
-        EquippmentManager.Instance.GetArmState(selectedItem);
+        //Change ArmStates
+        EquippmentManager.Instance.GetEquipmentStates(selectedItem);
 
         //if selected item is empty, leave the hand empty
         if (selectedItem == Items.None)
