@@ -12,6 +12,9 @@ public class Arms : Singleton<Arms>
 
     void Start()
     {
+
+        PlayerButtonManager.drink_isPressed += FillWater;
+
         anim = GetComponent<Animator>();
     }
     private void Update()
@@ -20,21 +23,6 @@ public class Arms : Singleton<Arms>
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetTrigger("Click");
-        }
-
-        //Right Click input
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            if (EquippmentManager.Instance.toolHolderParent.transform.childCount > 1)
-            {
-                if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1))
-                {
-                    if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>())
-                    {
-                        EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().FillDrink();
-                    }
-                }
-            }
         }
     }
 
@@ -52,6 +40,24 @@ public class Arms : Singleton<Arms>
                 if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>())
                 {
                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                }
+            }
+        }
+    }
+
+
+    //--------------------
+
+
+    void FillWater()
+    {
+        if (EquippmentManager.Instance.toolHolderParent.transform.childCount > 1)
+        {
+            if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1))
+            {
+                if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>())
+                {
+                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().FillDrink();
                 }
             }
         }

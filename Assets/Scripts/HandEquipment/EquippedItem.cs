@@ -75,7 +75,10 @@ public class EquippedItem : MonoBehaviour
 
         RemoveDurability();
 
-        BucketWaterlevel(gameObject.GetComponent<WaterContainer>().waterMesh);
+        if (HotbarManager.Instance.selectedItem == Items.Bucket || HotbarManager.Instance.selectedItem == Items.Cup)
+        {
+            BucketWaterlevel(gameObject.GetComponent<WaterContainer>().waterMesh);
+        }
     }
 
     public void BucketWaterlevel(GameObject waterMesh)

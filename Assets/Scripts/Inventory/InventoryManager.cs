@@ -17,6 +17,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     [Header("Item")]
     public Items lastItemToGet;
+    public int lastIDToGet;
     [SerializeField] TextMeshProUGUI player_ItemName_Display;
     [SerializeField] TextMeshProUGUI player_ItemDescription_Display;
     [SerializeField] TextMeshProUGUI chest_ItemName_Display;
@@ -181,6 +182,7 @@ public class InventoryManager : Singleton<InventoryManager>
             item.itemID = obj.GetComponent<ItemSlot>().itemID;
 
             lastItemToGet = obj.GetComponent<ItemSlot>().itemName;
+            lastIDToGet = obj.GetComponent<ItemSlot>().itemID;
             itemTemp = obj;
         }
 
@@ -218,6 +220,8 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
             #endregion
+
+            lastIDToGet = item.itemID;
         }
 
         inventories[inventory].itemsInInventory.Add(item);
@@ -265,6 +269,8 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         #endregion
 
+        lastIDToGet = item.itemID;
+
         inventories[inventory].itemsInInventory.Add(item);
 
         RemoveInventoriesUI();
@@ -277,16 +283,48 @@ public class InventoryManager : Singleton<InventoryManager>
     public void RemoveItemFromInventory(int inventory, Items itemName, int ID)
     {
         //From inventory to World
-        for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
-        {
-            if (inventories[inventory].itemsInInventory[i].itemName == itemName
-                && inventories[inventory].itemsInInventory[i].itemID == ID)
-            {
-                inventories[inventory].itemsInInventory.RemoveAt(i);
+        #region
+        int index = -1;
 
-                break;
+        for (int i = inventories[inventory].itemsInInventory.Count - 1; i >= 0 ; i--)
+        {
+            for (int j = 0; j < HotbarManager.Instance.hotbarList.Count; j++)
+            {
+                if (inventories[inventory].itemsInInventory[i].itemName == itemName
+                && inventories[inventory].itemsInInventory[i].itemID == ID)
+                {
+                    if (HotbarManager.Instance.hotbarList[j].itemName == itemName
+                        && HotbarManager.Instance.hotbarList[j].itemID != ID)
+                    {
+                        index = i;
+
+                        i = 0;
+                        j = HotbarManager.Instance.hotbarList.Count;
+                    }
+                }
             }
         }
+
+        if (index >= 0)
+        {
+            print("index >= 0");
+            inventories[inventory].itemsInInventory.RemoveAt(index);
+        }
+        else
+        {
+            print("index < 0");
+            for (int i = inventories[inventory].itemsInInventory.Count - 1; i >= 0; i--)
+            {
+                if (inventories[inventory].itemsInInventory[i].itemName == itemName
+                    && inventories[inventory].itemsInInventory[i].itemID == ID)
+                {
+                    inventories[inventory].itemsInInventory.RemoveAt(i);
+
+                    break;
+                }
+            }
+        }
+        #endregion
 
         RemoveInventoriesUI();
         PrepareInventoryUI(inventory, false);
@@ -1169,7 +1207,8 @@ public class InventoryManager : Singleton<InventoryManager>
             //Remove the last picked up item from the inventory and spawn it into the world
             for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
             {
-                if (inventories[inventory].itemsInInventory[i].itemName == lastItemToGet)
+                if (inventories[inventory].itemsInInventory[i].itemName == lastItemToGet
+                    && inventories[inventory].itemsInInventory[i].itemID == lastIDToGet)
                 {
                     //If Item was attempted moved into another inventory
                     if (isMovingItem)
@@ -1191,6 +1230,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     {
                         SoundManager.Instance.Play_Inventory_InventoryIsFull_Clip();
 
+                        print("attemptd picked up");
                         RemoveItemFromInventory(inventory, lastItemToGet, inventories[inventory].itemsInInventory[i].itemID);
                     }
 

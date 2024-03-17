@@ -36,8 +36,12 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
     //Crafting
     public static Action isPressed_CloseCraftingMenu;
 
+    //Drink
+    public static Action drink_isPressed;
+
     //Testing Buttons
     public static Action T_isPressed;
+
 
 
 
@@ -51,6 +55,16 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         {
             Application.Quit();
         }
+        
+        //Drink
+        #region
+        else if (Input.GetKeyDown(KeyCode.E)
+            && (HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
+            && SelectionManager.Instance.tag == "Water")
+        {
+            drink_isPressed?.Invoke();
+        }
+        #endregion
 
         //BuildingSystem
         #region
@@ -162,6 +176,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
             isPressed_MoveableRotation_Left?.Invoke();
         }
         #endregion
+
 
         //Left Mouse
         #region

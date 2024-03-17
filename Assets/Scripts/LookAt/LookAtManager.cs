@@ -10,6 +10,9 @@ public class LookAtManager : Singleton<LookAtManager>
 
     public InteracteableType typeLookingAt;
 
+    [Header("CenterImage")]
+    [SerializeField] GameObject centerImage;
+
     [Header("Item")]
     [SerializeField] GameObject Item_Panel;
     [SerializeField] Image ItemImage;
@@ -26,6 +29,12 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] Image MovableObjectImage;
     [SerializeField] TextMeshProUGUI MovableObjectName;
 
+    [Header("Water")]
+    [SerializeField] GameObject WaterDisplay_Panel;
+    [SerializeField] Image WaterDisplay_Image;
+    [SerializeField] TextMeshProUGUI WaterDisplay_Text;
+
+
 
     //--------------------
 
@@ -41,6 +50,31 @@ public class LookAtManager : Singleton<LookAtManager>
         {
             return;
         }
+
+
+        //-------------------- Other than InteracteableType
+
+
+        //If looking at water
+        #region
+        else if ((HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
+            && SelectionManager.Instance.tag == "Water")
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            centerImage.SetActive(false);
+
+            WaterDisplay();
+
+            WaterDisplay_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
+
+
+        //-------------------- InteracteableType
 
 
         //If looking at nothing
@@ -157,6 +191,8 @@ public class LookAtManager : Singleton<LookAtManager>
             return;
         }
         #endregion
+
+        
     }
 
 
@@ -229,6 +265,12 @@ public class LookAtManager : Singleton<LookAtManager>
         }
     }
 
+    void WaterDisplay()
+    {
+        WaterDisplay_Image.sprite = MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).hotbarSprite;
+        WaterDisplay_Text.text = "Press E to refill your " + HotbarManager.Instance.selectedItem.ToString();
+    }
+
 
     //--------------------
 
@@ -238,5 +280,8 @@ public class LookAtManager : Singleton<LookAtManager>
         Item_Panel.SetActive(false);
         Plant_Panel.SetActive(false);
         MovableObject_Panel.SetActive(false);
+        WaterDisplay_Panel.SetActive(false);
+
+        centerImage.SetActive(true);
     }
 }
