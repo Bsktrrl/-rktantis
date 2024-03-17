@@ -5667,6 +5667,9 @@ MonoBehaviour:
     type: 3}
   inventory_MoveItem_Clip: {fileID: 0}
   inventory_ConsumeItem_Clip: {fileID: 0}
+  inventory_DrinkItem_Clip: {fileID: 0}
+  inventory_DrinkEmptyItem_Clip: {fileID: 0}
+  inventory_RefillDrink_Clip: {fileID: 0}
   inventory_EquipItem_Clip: {fileID: 0}
   inventory_InventoryIsFull_Clip: {fileID: 0}
   hotbar_ChangeSelectedItem_Clip: {fileID: 0}
@@ -32703,7 +32706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hotbar_Parent: {fileID: 4086106669865218726}
-  EquipmentHolder: {fileID: 7870015454244096300}
+  EquipmentHolder: {fileID: 5086172068542780338}
   EuipmentList: []
   hotbarList:
   - hotbar: {fileID: 4333830540031913263}
@@ -37140,7 +37143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412296588bfdc3b42adbfc3fa8459171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolHolderParent: {fileID: 4643917569375808978}
+  toolHolderParent: {fileID: 5086172068542780338}
   arms: {fileID: 4968681901937292246}
   armState: 0
 --- !u!1 &6212682398223053703
@@ -53914,6 +53917,7 @@ MonoBehaviour:
   selecedObject: {fileID: 0}
   selectedTree: {fileID: 0}
   chopHolder: {fileID: 8146286147402625604}
+  tag: 
 --- !u!1001 &104637301438487665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56994,17 +56998,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8734582791017545516, guid: 230d607f0fcd67b40959bd023bbbdfdb,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3930706227569006581}
+      addedObject: {fileID: 8455590753670350474}
   m_SourcePrefab: {fileID: 100100000, guid: 230d607f0fcd67b40959bd023bbbdfdb, type: 3}
 --- !u!95 &4029617518632183312 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 733847941696350954, guid: 230d607f0fcd67b40959bd023bbbdfdb,
-    type: 3}
-  m_PrefabInstance: {fileID: 4450459234256375034}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4643917569375808978 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9057222037984141608, guid: 230d607f0fcd67b40959bd023bbbdfdb,
     type: 3}
   m_PrefabInstance: {fileID: 4450459234256375034}
   m_PrefabAsset: {fileID: 0}
@@ -57014,7 +57012,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4450459234256375034}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3930706227569006581
+--- !u!114 &8455590753670350474
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57023,10 +57021,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4968681901937292246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07ffad94acec2624e8bc244f4142bd24, type: 3}
+  m_Script: {fileID: 11500000, guid: 91cd751e188cdfa478508c7f9a447077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4029617518632183312}
+--- !u!1 &5086172068542780338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8887435588038614856, guid: 230d607f0fcd67b40959bd023bbbdfdb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4450459234256375034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5746484761632844140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8249653790075479446, guid: 230d607f0fcd67b40959bd023bbbdfdb,

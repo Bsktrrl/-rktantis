@@ -24,7 +24,7 @@ public class MainManager : Singleton<MainManager>
     public int updateInterval = 10;
 
     //Interactable Distance - Distace between player and raycast interactable
-    public float InteractableDistance = 2.5f;
+    public float InteractableDistance = 3.5f;
 
     //CenterImage
     public GameObject centerImage;

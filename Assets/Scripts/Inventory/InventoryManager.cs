@@ -568,6 +568,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     HotbarManager.Instance.hotbarList[i].itemID = -1;
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().durabilityMeterParent.SetActive(false);
 
                     //Update the Hand to see if slot is empty
                     HotbarManager.Instance.ChangeItemInHand();
@@ -593,6 +594,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     HotbarManager.Instance.hotbarList[i].itemID = -1;
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().durabilityMeterParent.SetActive(false);
 
                     //Update the Hand to see if slot is empty
                     HotbarManager.Instance.ChangeItemInHand();

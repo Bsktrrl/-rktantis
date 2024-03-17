@@ -617,11 +617,18 @@ public class TabletManager : Singleton<TabletManager>
             hotbarIconImageList_Tablet[i].sprite = HotbarManager.Instance.hotbarList[i].hotbar.transform.GetChild(0).GetComponent<Image>().sprite;
 
             //Durability
-            if (HotbarManager.Instance.hotbarList[i].durabilityMax > 0)
+            if (HotbarManager.Instance.hotbarList[i].itemName != Items.None)
             {
-                //float tempFill = HotbarManager.Instance.hotbarList[i].durabilityCurrent / HotbarManager.Instance.hotbarList[i].durabilityMax;
-                hotbarItemDurabilityList_Tablet[i].fillAmount = HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().durabilityMeterImage.fillAmount;
-                hotbarItemDurabilityListParent_Tablet[i].SetActive(true);
+                if (HotbarManager.Instance.hotbarList[i].durabilityMax > 0)
+                {
+                    //float tempFill = HotbarManager.Instance.hotbarList[i].durabilityCurrent / HotbarManager.Instance.hotbarList[i].durabilityMax;
+                    hotbarItemDurabilityList_Tablet[i].fillAmount = HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().durabilityMeterImage.fillAmount;
+                    hotbarItemDurabilityListParent_Tablet[i].SetActive(true);
+                }
+                else
+                {
+                    hotbarItemDurabilityListParent_Tablet[i].SetActive(false);
+                }
             }
             else
             {

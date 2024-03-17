@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SelectionManager : Singleton<SelectionManager>
 {
@@ -10,6 +11,8 @@ public class SelectionManager : Singleton<SelectionManager>
     public GameObject selectedTree;
 
     public GameObject chopHolder;
+
+    public string tag;
 
     InteractableObject newInteractableObject;
     Plant newPlantObject;
@@ -28,6 +31,9 @@ public class SelectionManager : Singleton<SelectionManager>
             if (Physics.Raycast(ray, out hit, MainManager.Instance.InteractableDistance))
             {
                 Transform selectionTransform = hit.transform;
+
+                //Get the layer looking at
+                tag = selectionTransform.gameObject.tag;
 
                 //When raycasting something that is interactable
                 newInteractableObject = null;
@@ -78,6 +84,9 @@ public class SelectionManager : Singleton<SelectionManager>
             else
             {
                 onTarget = false;
+
+                //Get the layer looking at
+                tag = "";
 
                 LookAtManager.Instance.typeLookingAt = InteracteableType.None;
             }

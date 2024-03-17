@@ -38,6 +38,9 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip inventory_DropItem_Clip;
     [SerializeField] AudioClip inventory_MoveItem_Clip; //
     [SerializeField] AudioClip inventory_ConsumeItem_Clip; //
+    [SerializeField] AudioClip inventory_DrinkItem_Clip; //
+    [SerializeField] AudioClip inventory_DrinkEmptyItem_Clip; //
+    [SerializeField] AudioClip inventory_RefillDrink_Clip; //
     [SerializeField] AudioClip inventory_EquipItem_Clip; //
 
     [SerializeField] AudioClip inventory_InventoryIsFull_Clip; //
@@ -332,6 +335,33 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource != null)
         {
             audioSource.clip = inventory_ConsumeItem_Clip;
+            audioSource.volume = 1f;
+            audioSource.Play();
+        }
+    }
+    public void Play_Inventory_DrinkItem_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = inventory_DrinkItem_Clip;
+            audioSource.volume = 1f;
+            audioSource.Play();
+        }
+    }
+    public void Play_Inventory_DrinkEmptyItem_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = inventory_DrinkEmptyItem_Clip;
+            audioSource.volume = 1f;
+            audioSource.Play();
+        }
+    }
+    public void Play_Inventory_RefillDrink_Clip()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = inventory_RefillDrink_Clip;
             audioSource.volume = 1f;
             audioSource.Play();
         }

@@ -121,10 +121,14 @@ public enum ItemSubCategories
 
     [Description("Fence")][InspectorName("BuildingBlock/Fence")] Fence,
 
+    //Tools
+    [Description("Light")][InspectorName("Tools/Light")] Light,
 
+    //Drinking
+    [Description("Drinking")][InspectorName("Tools/Drinking")] Drinking,
 
-    [Description("Light")][InspectorName("Tools/Light")] Light
-
+    //Tablet
+    [Description("Tablet")][InspectorName("Tools/Tablet")] Tablet
 
 
     //--------------------
