@@ -34,6 +34,11 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] Image WaterDisplay_Image;
     [SerializeField] TextMeshProUGUI WaterDisplay_Text;
 
+    [Header("Ore Mine")]
+    [SerializeField] GameObject oreDisplay_Panel;
+    [SerializeField] Image oreDisplay_Image;
+    [SerializeField] TextMeshProUGUI oreDisplay_Text;
+
 
 
     //--------------------
@@ -68,6 +73,24 @@ public class LookAtManager : Singleton<LookAtManager>
             WaterDisplay();
 
             WaterDisplay_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
+
+        //If looking at an Ore
+        #region
+        else if ((HotbarManager.Instance.selectedItem == Items.WoodPickaxe || HotbarManager.Instance.selectedItem == Items.StonePickaxe || HotbarManager.Instance.selectedItem == Items.CryonitePickaxe)
+            && SelectionManager.Instance.tag == "Ore")
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            centerImage.SetActive(false);
+
+            OreDisplay();
+
+            oreDisplay_Panel.SetActive(true);
 
             return;
         }
@@ -270,6 +293,11 @@ public class LookAtManager : Singleton<LookAtManager>
         WaterDisplay_Image.sprite = MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).hotbarSprite;
         WaterDisplay_Text.text = "Press E to refill your " + HotbarManager.Instance.selectedItem.ToString();
     }
+    void OreDisplay()
+    {
+        WaterDisplay_Image.sprite = MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).hotbarSprite;
+        WaterDisplay_Text.text = "Press E to refill your " + HotbarManager.Instance.selectedItem.ToString();
+    }
 
 
     //--------------------
@@ -280,7 +308,9 @@ public class LookAtManager : Singleton<LookAtManager>
         Item_Panel.SetActive(false);
         Plant_Panel.SetActive(false);
         MovableObject_Panel.SetActive(false);
+
         WaterDisplay_Panel.SetActive(false);
+        oreDisplay_Panel.SetActive(false);
 
         centerImage.SetActive(true);
     }

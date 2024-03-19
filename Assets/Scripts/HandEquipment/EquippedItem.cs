@@ -27,20 +27,41 @@ public class EquippedItem : MonoBehaviour
 
     public void Hit()
     {
-        print("Hit EquippedItem - " + subCategories + " [" + itemName.ToString() + "]");
+        //print("Hit EquippedItem - " + subCategories + " [" + itemName.ToString() + "]");
 
         //The point in the animation where equipped item hits
         #region
+
+        //If Pickaxe is equipped
+        #region
+        if (subCategories == ItemSubCategories.Pickaxe)
+        {
+            if (itemName == Items.WoodPickaxe || itemName == Items.StonePickaxe || itemName == Items.CryonitePickaxe)
+            {
+                if (SelectionManager.Instance.selecedObject)
+                {
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+                    {
+                        SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().OreInteraction(itemName);
+                    }
+                }
+            }
+        }
+        #endregion
+
         //If Axe is equipped
+        #region
         if (subCategories == ItemSubCategories.Axe)
         {
             if (itemName == Items.WoodAxe || itemName == Items.StoneAxe || itemName == Items.CryoniteAxe)
             {
-
+                // - To be filled out
             }
         }
+        #endregion
 
         //If WaterContainer is equipped
+        #region
         else if (subCategories == ItemSubCategories.Drinking)
         {
             //Heal thirst parameter
@@ -63,6 +84,8 @@ public class EquippedItem : MonoBehaviour
                 SoundManager.Instance.Play_Inventory_DrinkEmptyItem_Clip();
             }
         }
+        #endregion
+
         #endregion
 
         RemoveDurability();

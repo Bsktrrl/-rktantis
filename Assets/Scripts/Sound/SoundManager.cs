@@ -74,12 +74,12 @@ public class SoundManager : Singleton<SoundManager>
     #endregion
     #region Pickaxe Usage
     [Header("Pickaxe Useage")]
-    [SerializeField] AudioClip pickaxeUsage_Tungsten_Clip; //
-    [SerializeField] AudioClip pickaxeUsage_Stone_Clip; //
-    [SerializeField] AudioClip pickaxeUsage_Cryonite_Clip; //
-    [SerializeField] AudioClip pickaxeUsage_Gold_Clip; //
-    [SerializeField] AudioClip pickaxeUsage_Magnetite_Clip; //
-    [SerializeField] AudioClip pickaxeUsage_Viridian_Clip; //
+    [SerializeField] AudioClip pickaxeUsage_WoodPickaxe_Clip; //
+    [SerializeField] AudioClip pickaxeUsage_StonePickaxe_Clip; //
+    [SerializeField] AudioClip pickaxeUsage_CryonitePickaxe_Clip; //
+
+    [SerializeField] AudioClip pickaxeUsage_OreIsDestroid_Clip; //
+    [SerializeField] AudioClip pickaxeUsage_CannotHit_Clip; //
     #endregion
     #region Sword Usage
     [Header("Sword Usage")]
@@ -157,6 +157,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Walking_Sand_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -166,6 +167,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Walking_Grass_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -175,6 +177,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Walking_Water_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -184,6 +187,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Walking_Stone_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -193,6 +197,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Walking_Wood_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -202,6 +207,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Walking_Cryonite_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -212,6 +218,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Sprinting_Sand_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -221,6 +228,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Sprinting_Grass_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -230,6 +238,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Sprinting_Water_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -239,6 +248,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Sprinting_Stone_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -248,6 +258,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Sprinting_Wood_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -257,6 +268,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = player_Sprinting_Cryonite_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -269,6 +281,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = tablet_OpenTablet_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -278,6 +291,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = tablet_CloseTablet_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -287,6 +301,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = tablet_ChangeMenu_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -309,6 +324,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = inventory_PickupItem_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -318,6 +334,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = inventory_DropItem_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -327,6 +344,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = inventory_MoveItem_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -336,6 +354,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = inventory_ConsumeItem_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -345,6 +364,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = inventory_DrinkItem_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -354,6 +374,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = inventory_DrinkEmptyItem_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -363,6 +384,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = inventory_RefillDrink_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -372,6 +394,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = inventory_EquipItem_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -382,6 +405,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = inventory_InventoryIsFull_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -394,6 +418,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = hotbar_ChangeSelectedItem_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -403,6 +428,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = hotbar_AssignItemToHotbar_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -412,6 +438,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = hotbar_RemoveItemFromHotbar_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -424,6 +451,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = crafting_ChangeCraftingMenu_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -433,6 +461,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = crafting_SelectCraftingItem_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -442,6 +471,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = crafting_PerformCrafting_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -451,6 +481,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = crafting_CannotCraft_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -463,6 +494,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = skillTree_HoverPerk_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -472,6 +504,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = skillTree_CompletedPerk_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -484,6 +517,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = equippedItems_EquippedItemIsBroken_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -496,6 +530,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = axeUsage_Tree_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -505,63 +540,61 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = axeUsage_Cactus_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
     #endregion
 
-    #region Pickaxe Useage //Have yet to be implemented
-    public void Play_PickaxeUsage_Tungsten_Clip()
+    #region Pickaxe Useage
+    public void Play_PickaxeUsage_WoodPickaxe_Clip(float pitch)
     {
         if (audioSource != null)
         {
-            audioSource.clip = pickaxeUsage_Tungsten_Clip;
+            audioSource.clip = pickaxeUsage_WoodPickaxe_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = pitch;
             audioSource.Play();
         }
     }
-    public void Play_PickaxeUsage_Stone_Clip()
+    public void Play_PickaxeUsage_StonePickaxe_Clip(float pitch)
     {
         if (audioSource != null)
         {
-            audioSource.clip = pickaxeUsage_Stone_Clip;
+            audioSource.clip = pickaxeUsage_StonePickaxe_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = pitch;
             audioSource.Play();
         }
     }
-    public void Play_PickaxeUsage_Cryonite_Clip()
+    public void Play_PickaxeUsage_CryonitePickaxe_Clip(float pitch)
     {
         if (audioSource != null)
         {
-            audioSource.clip = pickaxeUsage_Cryonite_Clip;
+            audioSource.clip = pickaxeUsage_CryonitePickaxe_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = pitch;
             audioSource.Play();
         }
     }
-    public void Play_PickaxeUsage_Gold_Clip()
+
+    public void Play_PickaxeUsage_OreIsDestroid_Clip()
     {
         if (audioSource != null)
         {
-            audioSource.clip = pickaxeUsage_Gold_Clip;
+            audioSource.clip = pickaxeUsage_OreIsDestroid_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
-    public void Play_PickaxeUsage_Magnetite_Clip()
+    public void Play_PickaxeUsage_CannotHit_Clip()
     {
         if (audioSource != null)
         {
-            audioSource.clip = pickaxeUsage_Magnetite_Clip;
+            audioSource.clip = pickaxeUsage_CannotHit_Clip;
             audioSource.volume = 1f;
-            audioSource.Play();
-        }
-    }
-    public void Play_PickaxeUsage_Viridian_Clip()
-    {
-        if (audioSource != null)
-        {
-            audioSource.clip = pickaxeUsage_Viridian_Clip;
-            audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -574,6 +607,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = swordUsage_Slashing_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -586,6 +620,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = building_Place_Wood;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -594,8 +629,8 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource != null)
         {
             audioSource.clip = building_Place_Stone;
-            audioSource.pitch = 0.7f;
             audioSource.volume = 1f;
+            audioSource.pitch = 0.7f;
             audioSource.Play();
         }
     }
@@ -605,6 +640,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = building_Place_Cryonite;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -615,6 +651,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = building_Remove_Wood;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -623,8 +660,8 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource != null)
         {
             audioSource.clip = building_Remove_Stone;
-            audioSource.pitch = 0.7f;
             audioSource.volume = 1f;
+            audioSource.pitch = 0.7f;
             audioSource.Play();
         }
     }
@@ -634,6 +671,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = building_Remove_Cryonite;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -643,8 +681,8 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource != null)
         {
             audioSource.clip = building_CannotPlaceBlock;
-            audioSource.pitch = 0.5f;
             audioSource.volume = 1f;
+            audioSource.pitch = 0.5f;
             audioSource.Play();
         }
     }
@@ -653,8 +691,8 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource != null)
         {
             audioSource.clip = building_Place_MoveableObject;
-            audioSource.pitch = 1f;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -663,8 +701,8 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource != null)
         {
             audioSource.clip = building_Remove_MoveableObject;
-            audioSource.pitch = 1f;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -677,6 +715,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = chests_OpenSmallChest_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -686,6 +725,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = chests_CloseSmallChest_Clip;
             audioSource.volume = 0.7f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -696,6 +736,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = chests_OpenMediumChest_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -705,6 +746,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = chests_CloseMediumChest_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -715,6 +757,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = chests_OpenBigChest_Clip;
             audioSource.volume = 0.5f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -724,6 +767,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = chests_CloseBigChest_Clip;
             audioSource.volume = 0.5f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -736,6 +780,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_OpenCraftingTable_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -745,6 +790,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_UngoingCraftingTable_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -754,6 +800,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_CloseCraftingTable_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -764,6 +811,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_OpenSkillTreeTable_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -773,6 +821,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_UngoingSkillTreeTable_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -782,6 +831,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_CloseSkillTreeTable_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -792,6 +842,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_OpenCropPlot_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -801,6 +852,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_UngoingCropPlot_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -810,6 +862,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_CloseCropPlot_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -820,6 +873,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_UngoingGhostTank_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -830,6 +884,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_UngoingExtractor_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -840,6 +895,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_UngoingLamp_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -850,6 +906,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = InteractableObjects_UngoingSpotlight_Clip;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }
@@ -862,6 +919,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = buff_Deactivated;
             audioSource.volume = 1f;
+            audioSource.pitch = 1f;
             audioSource.Play();
         }
     }

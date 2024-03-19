@@ -197,8 +197,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInRange: 0
   itemName: 152
-  interacteableType: 2
+  amount: 0
+  durability_Current: 0
+  interactableType: 2
+  oreHealth: 0
   inventoryIndex: 0
+  plantParent: {fileID: 0}
 --- !u!114 &2582286417484250869
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,9 +8,6 @@ public class SelectionManager : Singleton<SelectionManager>
     public bool onTarget = false;
 
     public GameObject selecedObject;
-    public GameObject selectedTree;
-
-    public GameObject chopHolder;
 
     public string tag;
 
@@ -59,7 +56,7 @@ public class SelectionManager : Singleton<SelectionManager>
                     onTarget = true;
                     selecedObject = newInteractableObject.gameObject;
 
-                    LookAtManager.Instance.typeLookingAt = newInteractableObject.GetComponent<InteractableObject>().interacteableType;
+                    LookAtManager.Instance.typeLookingAt = newInteractableObject.GetComponent<InteractableObject>().interactableType;
                 }
                 //If looking at a Plant, show its UI to the player
                 else if (newPlantObject != null)
@@ -68,7 +65,7 @@ public class SelectionManager : Singleton<SelectionManager>
                     onTarget = true;
                     selecedObject = newPlantObject.gameObject;
 
-                    LookAtManager.Instance.typeLookingAt = newPlantObject.pickablePart.GetComponent<InteractableObject>().interacteableType;
+                    LookAtManager.Instance.typeLookingAt = newPlantObject.pickablePart.GetComponent<InteractableObject>().interactableType;
                 }
 
                 //If there is a Hit without an interacteable script
