@@ -161,7 +161,6 @@ public class EquippmentManager : Singleton<EquippmentManager>
 
     public void Hit(EquippedItem equippedItem)
     {
-        print("2. Hand Hit");
         //print("Hit EquippedItem - " + subCategories + " [" + itemName.ToString() + "]");
 
         //The point in the animation where equipped item hits
@@ -184,7 +183,6 @@ public class EquippmentManager : Singleton<EquippmentManager>
         }
         else if (equippedItem.itemName == Items.Flashlight || equippedItem.itemName == Items.AríditeCrystal || equippedItem.itemName == Items.None)
         {
-            print("3. Hand Hit");
             if (SelectionManager.Instance.selecedObject)
             {
                 if (SelectionManager.Instance.selecedObject.GetComponent<Ore>())
@@ -247,7 +245,10 @@ public class EquippmentManager : Singleton<EquippmentManager>
 
         if (HotbarManager.Instance.selectedItem == Items.Bucket || HotbarManager.Instance.selectedItem == Items.Cup)
         {
-            equippedItem.BucketWaterlevel(gameObject.GetComponent<WaterContainer>().waterMesh);
+            if (equippedItem.gameObject.GetComponent<WaterContainer>())
+            {
+                equippedItem.BucketWaterlevel(equippedItem.gameObject.GetComponent<WaterContainer>().waterMesh);
+            }
         }
     }
 }

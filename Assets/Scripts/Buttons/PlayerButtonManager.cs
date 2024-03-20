@@ -59,7 +59,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
             Application.Quit();
         }
         
-        //Drink
+        //Refill WaterConsumable
         #region
         else if (Input.GetKeyDown(KeyCode.E)
             && (HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
@@ -83,11 +83,13 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         }
         #endregion
 
-        //Equipment
+        //Equipment Usage
         #region
         else if (Input.GetKeyDown(KeyCode.Mouse0) && MainManager.Instance.menuStates == MenuStates.None 
-            && EquippmentManager.Instance.armState != ArmState.None && EquippmentManager.Instance.toolState != ToolState.None
-            && SelectionManager.Instance.tag == "Ore")
+            && (HotbarManager.Instance.selectedItem == Items.WoodPickaxe || HotbarManager.Instance.selectedItem == Items.StonePickaxe || HotbarManager.Instance.selectedItem == Items.CryonitePickaxe
+            || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.AríditeCrystal || HotbarManager.Instance.selectedItem == Items.None
+            || HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
+            )
         {
             isPressed_EquipmentActivate?.Invoke();
         }
@@ -178,29 +180,8 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         #endregion
 
 
-        //Left Mouse
-        #region
-        //else if (Input.GetKeyDown(KeyCode.Mouse0))
-        //{
-        //    leftMouse_isPressedDown?.Invoke();
-        //}
-        //else if (Input.GetKeyUp(KeyCode.Mouse0))
-        //{
-        //    leftMouse_isPressedUp?.Invoke();
-        //}
-        #endregion
+        //--------------------
 
-        //Right Mouse
-        #region
-        //else if (Input.GetKeyDown(KeyCode.Mouse1))
-        //{
-        //    rightMouse_isPressedDown?.Invoke();
-        //}
-        //else if (Input.GetKeyUp(KeyCode.Mouse1))
-        //{
-        //    rightMouse_isPressedUp?.Invoke();
-        //}
-        #endregion
 
         //Testing
         #region

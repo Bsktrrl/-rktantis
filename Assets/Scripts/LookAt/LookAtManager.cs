@@ -344,13 +344,13 @@ public class LookAtManager : Singleton<LookAtManager>
                                 break;
 
                             case InteracteableType.Tungsten_Ore:
-                                oreDisplay_Text.text = "Left Click to hatch the Tungsten Ore vein with your hand (You may take some damage)";
+                                oreDisplay_Text.text = "Left Click to hatch the Tungsten Ore vein with your hands (You may take some damage)";
                                 break;
                             case InteracteableType.Gold_Ore:
                                 oreDisplay_Text.text = "You need a \"Stone Pickaxe\" or \"Cryonite Pickaxe\" to hatch a Gold Ore Vein";
                                 break;
                             case InteracteableType.Stone_Ore:
-                                oreDisplay_Text.text = "Left Click to hatch the Stone Ore vein with your hand (You may take some damage)";
+                                oreDisplay_Text.text = "Left Click to hatch the Stone Ore vein with your hands (You may take some damage)";
                                 break;
                             case InteracteableType.Cryonite_Ore:
                                 oreDisplay_Text.text = "You need a \"Stone Pickaxe\" or \"Cryonite Pickaxe\" to hatch a Stone Cryonite Vein";

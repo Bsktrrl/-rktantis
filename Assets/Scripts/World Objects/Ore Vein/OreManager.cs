@@ -11,16 +11,16 @@ public class OreManager : Singleton<OreManager>
     [SerializeField] List<OreToSave> oreTypeObjectList = new List<OreToSave>();
 
     [Header("Pickaxe Stats")]
-    public float woodPickaxe_Droprate = 50;
+    public float woodPickaxe_Droprate = 55;
     public float stonePickaxe_Droprate = 65;
-    public float cryonitePickaxe_Droprate = 80;
+    public float cryonitePickaxe_Droprate =  75;
 
     [Header("Hand Damage Stats")]
     public float handDamage = 0.5f;
 
     [Header("SkillTree Stats")]
     [HideInInspector] public int oreHealthReducer = 0;
-    public int oreDropRateReducer = 10;
+    public int oreDropRateReducer = 15;
 
 
     //--------------------

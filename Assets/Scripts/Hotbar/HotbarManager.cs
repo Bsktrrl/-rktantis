@@ -189,8 +189,8 @@ public class HotbarManager : Singleton<HotbarManager>
             EquipmentList.Add(Instantiate(MainManager.Instance.GetItem(selectedItem).equippedPrefab, MainManager.Instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
             EquipmentList[EquipmentList.Count - 1].transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
-            //If the model is a Bucket
-            if (selectedItem == Items.Bucket)
+            //If the model is a Cup or a Bucket
+            if (selectedItem == Items.Cup || selectedItem == Items.Bucket)
             {
                 if (EquipmentList[EquipmentList.Count - 1].GetComponent<WaterContainer>())
                 {

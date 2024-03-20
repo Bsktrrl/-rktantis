@@ -55,11 +55,11 @@ public class EquippedItem : MonoBehaviour
                         SoundManager.Instance.Play_EquippedItems_EquippedItemIsBroken_Clip();
 
                         //Remove item from Hotbar
-                        HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
-                        HotbarManager.Instance.hotbarList[i].itemName = Items.None;
-                        HotbarManager.Instance.hotbarList[i].itemID = -1;
-                        HotbarManager.Instance.hotbarList[i].durabilityMax = 0;
-                        HotbarManager.Instance.hotbarList[i].durabilityCurrent = 0;
+                        HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
+                        HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].itemName = Items.None;
+                        HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].itemID = -1;
+                        HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].durabilityMax = 0;
+                        HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].durabilityCurrent = 0;
                         HotbarManager.Instance.SetSelectedItem();
                         InventoryManager.Instance.DeselectItemInfoToHotbar(HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].itemName, HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].itemID);
 
