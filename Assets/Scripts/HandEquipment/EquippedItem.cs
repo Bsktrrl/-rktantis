@@ -40,9 +40,9 @@ public class EquippedItem : MonoBehaviour
             {
                 if (SelectionManager.Instance.selecedObject)
                 {
-                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+                    if (SelectionManager.Instance.selecedObject.GetComponent<Ore>())
                     {
-                        SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().OreInteraction(itemName);
+                        SelectionManager.Instance.selecedObject.GetComponent<Ore>().OreInteraction(itemName);
                     }
                 }
             }
