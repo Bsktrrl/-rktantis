@@ -80,7 +80,8 @@ public class LookAtManager : Singleton<LookAtManager>
 
         //If looking at an Ore Vein
         #region
-        else if ((HotbarManager.Instance.selectedItem == Items.WoodPickaxe || HotbarManager.Instance.selectedItem == Items.StonePickaxe || HotbarManager.Instance.selectedItem == Items.CryonitePickaxe)
+        else if ((HotbarManager.Instance.selectedItem == Items.WoodPickaxe || HotbarManager.Instance.selectedItem == Items.StonePickaxe || HotbarManager.Instance.selectedItem == Items.CryonitePickaxe
+                  || HotbarManager.Instance.selectedItem == Items.AríditeCrystal || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.None)
             && SelectionManager.Instance.tag == "Ore")
         {
             //Turn off all screens

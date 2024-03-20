@@ -15,6 +15,9 @@ public class OreManager : Singleton<OreManager>
     public float stonePickaxe_Droprate = 65;
     public float cryonitePickaxe_Droprate = 80;
 
+    [Header("Hand Damage Stats")]
+    public float handDamage = 0.5f;
+
     [Header("SkillTree Stats")]
     [HideInInspector] public int oreHealthReducer = 0;
     public int oreDropRateReducer = 10;

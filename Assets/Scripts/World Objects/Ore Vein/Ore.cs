@@ -193,8 +193,15 @@ public class Ore : MonoBehaviour
             }
 
             //Reduce the Ore's health
-            tempOreHealth -= MainManager.Instance.GetItem(itemName).orePower;
-
+            if (itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal)
+            {
+                tempOreHealth -= 0.5f;
+            }
+            else
+            {
+                tempOreHealth -= MainManager.Instance.GetItem(itemName).orePower;
+            }
+            
             //Check if the OreHealth is 0
             if ((tempOreHealth - OreManager.Instance.oreHealthReducer) <= 0)
             {

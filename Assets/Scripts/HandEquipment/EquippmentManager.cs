@@ -27,7 +27,14 @@ public class EquippmentManager : Singleton<EquippmentManager>
     }
     public void GetArmState(Items selectedItem)
     {
-        if (selectedItem == Items.WoodBuildingHammer || selectedItem == Items.StoneBuildingHammer || selectedItem == Items.CryoniteBuildingHammer
+        if (selectedItem == Items.None)
+        {
+            armState = ArmState.Hand;
+            arms.GetComponent<Arms>().anim.SetInteger("ItemCategory", 0);
+            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
+        }
+
+        else if (selectedItem == Items.WoodBuildingHammer || selectedItem == Items.StoneBuildingHammer || selectedItem == Items.CryoniteBuildingHammer
             || selectedItem == Items.WoodAxe || selectedItem == Items.StoneAxe || selectedItem == Items.CryoniteAxe
             || selectedItem == Items.WoodPickaxe || selectedItem == Items.StonePickaxe || selectedItem == Items.CryonitePickaxe
             || selectedItem == Items.WoodSword || selectedItem == Items.StoneSword || selectedItem == Items.CryoniteSword)
@@ -48,7 +55,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
             arms.GetComponent<Arms>().anim.SetInteger("ItemCategory", 3);
             arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
         }
-        else if (selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle)
+        else if (selectedItem == Items.Cup || selectedItem == Items.Bottle)
         {
             armState = ArmState.Cup;
             arms.GetComponent<Arms>().anim.SetInteger("ItemCategory", 4);
@@ -60,12 +67,6 @@ public class EquippmentManager : Singleton<EquippmentManager>
             arms.GetComponent<Arms>().anim.SetInteger("ItemCategory", 5);
             arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
         }
-        else if (selectedItem == Items.None)
-        {
-            armState = ArmState.None;
-            arms.GetComponent<Arms>().anim.SetInteger("ItemCategory", 0);
-            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
-        }
 
         else
         {
@@ -74,7 +75,15 @@ public class EquippmentManager : Singleton<EquippmentManager>
     }
     public void GetToolState(Items selectedItem)
     {
-        if (selectedItem == Items.WoodAxe || selectedItem == Items.StoneAxe || selectedItem == Items.CryoniteAxe)
+        if (selectedItem == Items.Flashlight || selectedItem == Items.AríditeCrystal || selectedItem == Items.None)
+        {
+            toolState = ToolState.Hand;
+
+            arms.GetComponent<Arms>().anim.SetInteger("ToolCategory", 0);
+            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
+        }
+
+        else if (selectedItem == Items.WoodAxe || selectedItem == Items.StoneAxe || selectedItem == Items.CryoniteAxe)
         {
             toolState = ToolState.Axe;
 
@@ -145,11 +154,109 @@ public class EquippmentManager : Singleton<EquippmentManager>
             toolRank = ToolRank.None;
         }
     }
+
+
+    //--------------------
+
+
+    public void Hit(EquippedItem equippedItem)
+    {
+        print("2. Hand Hit");
+        //print("Hit EquippedItem - " + subCategories + " [" + itemName.ToString() + "]");
+
+        //The point in the animation where equipped item hits
+        #region
+
+        //If Pickaxe is equipped - For Mining
+        #region
+        if (equippedItem.subCategories == ItemSubCategories.Pickaxe)
+        {
+            if (equippedItem.itemName == Items.WoodPickaxe || equippedItem.itemName == Items.StonePickaxe || equippedItem.itemName == Items.CryonitePickaxe)
+            {
+                if (SelectionManager.Instance.selecedObject)
+                {
+                    if (SelectionManager.Instance.selecedObject.GetComponent<Ore>())
+                    {
+                        SelectionManager.Instance.selecedObject.GetComponent<Ore>().OreInteraction(equippedItem.itemName);
+                    }
+                }
+            }
+        }
+        else if (equippedItem.itemName == Items.Flashlight || equippedItem.itemName == Items.AríditeCrystal || equippedItem.itemName == Items.None)
+        {
+            print("3. Hand Hit");
+            if (SelectionManager.Instance.selecedObject)
+            {
+                if (SelectionManager.Instance.selecedObject.GetComponent<Ore>())
+                {
+                    SelectionManager.Instance.selecedObject.GetComponent<Ore>().OreInteraction(equippedItem.itemName);
+                }
+            }
+        }
+        #endregion
+
+        //If Axe is equipped
+        #region
+        if (equippedItem.subCategories == ItemSubCategories.Axe)
+        {
+            if (equippedItem.itemName == Items.WoodAxe || equippedItem.itemName == Items.StoneAxe || equippedItem.itemName == Items.CryoniteAxe)
+            {
+                // - To be filled out
+            }
+        }
+        #endregion
+
+        //If WaterContainer is equipped
+        #region
+        else if (equippedItem.subCategories == ItemSubCategories.Drinking)
+        {
+            //Heal thirst parameter
+            if (MainManager.Instance.GetItem(equippedItem.itemName).thirstHealthHeal > 0 && HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].durabilityCurrent > 0)
+            {
+                //Play Drinking Sound
+                SoundManager.Instance.Play_Inventory_DrinkItem_Clip();
+
+                float percentage = (float)MainManager.Instance.GetItem(equippedItem.itemName).thirstHealthHeal / 100;
+                HealthManager.Instance.thirstValue += percentage;
+
+                if (HealthManager.Instance.thirstValue > 1)
+                {
+                    HealthManager.Instance.thirstValue = 1;
+                }
+            }
+            else
+            {
+                //Play Drinking Empty Sound
+                SoundManager.Instance.Play_Inventory_DrinkEmptyItem_Clip();
+            }
+        }
+        #endregion
+
+        #endregion
+
+        if (equippedItem.itemName == Items.Flashlight || equippedItem.itemName == Items.AríditeCrystal || equippedItem.itemName == Items.None)
+        {
+            //Damage the player when hitting ore vein with the Hand
+            float percentage = OreManager.Instance.handDamage / 100;
+            HealthManager.Instance.mainHealthValue -= percentage;
+        }
+        else
+        {
+            equippedItem.RemoveDurability();
+        }
+
+        if (HotbarManager.Instance.selectedItem == Items.Bucket || HotbarManager.Instance.selectedItem == Items.Cup)
+        {
+            equippedItem.BucketWaterlevel(gameObject.GetComponent<WaterContainer>().waterMesh);
+        }
+    }
 }
 
 public enum ArmState
 {
     None,
+
+    Hand,
 
     Tools,
     Flashlight,
@@ -161,6 +268,8 @@ public enum ArmState
 public enum ToolState
 {
     None,
+
+    Hand,
 
     Axe,
     Pickaxe,

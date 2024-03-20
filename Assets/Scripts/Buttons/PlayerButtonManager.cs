@@ -40,7 +40,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
     public static Action isPressed_CloseCraftingMenu;
 
     //Drink
-    public static Action drink_isPressed;
+    public static Action refillBottle_isPressed;
 
 
 
@@ -65,7 +65,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
             && (HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
             && SelectionManager.Instance.tag == "Water")
         {
-            drink_isPressed?.Invoke();
+            refillBottle_isPressed?.Invoke();
         }
         #endregion
 
@@ -86,13 +86,10 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         //Equipment
         #region
         else if (Input.GetKeyDown(KeyCode.Mouse0) && MainManager.Instance.menuStates == MenuStates.None 
-            && EquippmentManager.Instance.toolHolderParent.transform.childCount > 0
-            && HotbarManager.Instance.selectedItem != Items.None)
+            && EquippmentManager.Instance.armState != ArmState.None && EquippmentManager.Instance.toolState != ToolState.None
+            && SelectionManager.Instance.tag == "Ore")
         {
-            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<EquippedItem>() != null)
-            {
-                isPressed_EquipmentActivate?.Invoke();
-            }
+            isPressed_EquipmentActivate?.Invoke();
         }
         #endregion
 

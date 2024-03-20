@@ -27,73 +27,7 @@ public class EquippedItem : MonoBehaviour
 
     public void Hit()
     {
-        //print("Hit EquippedItem - " + subCategories + " [" + itemName.ToString() + "]");
-
-        //The point in the animation where equipped item hits
-        #region
-
-        //If Pickaxe is equipped
-        #region
-        if (subCategories == ItemSubCategories.Pickaxe)
-        {
-            if (itemName == Items.WoodPickaxe || itemName == Items.StonePickaxe || itemName == Items.CryonitePickaxe)
-            {
-                if (SelectionManager.Instance.selecedObject)
-                {
-                    if (SelectionManager.Instance.selecedObject.GetComponent<Ore>())
-                    {
-                        SelectionManager.Instance.selecedObject.GetComponent<Ore>().OreInteraction(itemName);
-                    }
-                }
-            }
-        }
-        #endregion
-
-        //If Axe is equipped
-        #region
-        if (subCategories == ItemSubCategories.Axe)
-        {
-            if (itemName == Items.WoodAxe || itemName == Items.StoneAxe || itemName == Items.CryoniteAxe)
-            {
-                // - To be filled out
-            }
-        }
-        #endregion
-
-        //If WaterContainer is equipped
-        #region
-        else if (subCategories == ItemSubCategories.Drinking)
-        {
-            //Heal thirst parameter
-            if (MainManager.Instance.GetItem(itemName).thirstHealthHeal > 0 && HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].durabilityCurrent > 0)
-            {
-                //Play Drinking Sound
-                SoundManager.Instance.Play_Inventory_DrinkItem_Clip();
-
-                float percentage = (float)MainManager.Instance.GetItem(itemName).thirstHealthHeal / 100;
-                HealthManager.Instance.thirstValue += percentage;
-
-                if (HealthManager.Instance.thirstValue > 1)
-                {
-                    HealthManager.Instance.thirstValue = 1;
-                }
-            }
-            else
-            {
-                //Play Drinking Empty Sound
-                SoundManager.Instance.Play_Inventory_DrinkEmptyItem_Clip();
-            }
-        }
-        #endregion
-
-        #endregion
-
-        RemoveDurability();
-
-        if (HotbarManager.Instance.selectedItem == Items.Bucket || HotbarManager.Instance.selectedItem == Items.Cup)
-        {
-            BucketWaterlevel(gameObject.GetComponent<WaterContainer>().waterMesh);
-        }
+        EquippmentManager.Instance.Hit(this);
     }
 
 
