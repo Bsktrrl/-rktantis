@@ -10,6 +10,7 @@ public class PlantManager : Singleton<PlantManager>
 
     GameObject plantWorldObject_Parent;
     [SerializeField] List<PlantToSave> plantTypeObjectList = new List<PlantToSave>();
+    
 
     //--------------------
 

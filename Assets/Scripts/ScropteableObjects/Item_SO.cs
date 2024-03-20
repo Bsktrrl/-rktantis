@@ -44,6 +44,9 @@ public class Item
     [Header("durability_Max")]
     public int durability_Max;
 
+    [Header("OrePower")]
+    public int orePower;
+
     [Header("Prefabs")]
     public GameObject worldObjectPrefab;
     public GameObject equippedPrefab;

@@ -43,6 +43,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //Plants
     [HideInInspector] public List<PlantToSave> plantTypeObjectList_Store = new List<PlantToSave>();
 
+    //Ores
+    [HideInInspector] public List<OreToSave> oreTypeObjectList_Store = new List<OreToSave>();
+
     //HealthParameter
     [HideInInspector] public HealthToSave health_Store = new HealthToSave();
 
@@ -85,6 +88,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.day_Store = gameData.day_Save;
 
         this.plantTypeObjectList_Store = gameData.plantTypeObjectList_Save;
+        this.oreTypeObjectList_Store = gameData.oreTypeObjectList_Save;
         #endregion
 
         //Load the saved data into the project
@@ -118,6 +122,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         PlantManager.Instance.LoadData();
         print("9. Plants has Loaded");
+
+        OreManager.Instance.LoadData();
+        print("10. Ores has Loaded");
         #endregion
 
         print("------------------------------");
@@ -153,6 +160,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.day_Save = this.day_Store;
 
         gameData.plantTypeObjectList_Save = this.plantTypeObjectList_Store;
+        gameData.oreTypeObjectList_Save = this.oreTypeObjectList_Store;
 
         print("Data has Saved");
     }

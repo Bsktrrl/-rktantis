@@ -26,7 +26,6 @@ public class TreeParent : MonoBehaviour
     public void ObjectInteraction()
     {
         if (Healthytree.GetComponent<ChoppableTree>().playerInRange && Healthytree.GetComponent<ChoppableTree>().canBeChopped
-            && SelectionManager.Instance.selectedTree == gameObject.GetComponentInChildren<ChoppableTree>().gameObject
             && MainManager.Instance.menuStates == MenuStates.None)
         {
             print("ObjectInteraction");

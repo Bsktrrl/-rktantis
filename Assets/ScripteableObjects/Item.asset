@@ -35,6 +35,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -63,6 +64,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 9154823834292984189, guid: 9bb5afd9bb4934640a131628dc071a2c,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -92,6 +94,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 2059141651146438766, guid: 6e446e42744861b408ea624691a43488,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -121,6 +124,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 4778707306582511513, guid: 769e6eaf22145f145b9745ba8a640433,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -150,6 +154,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 3998869373097655351, guid: 36639c1d62daa5f46b1e011a15575851,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -184,9 +189,11 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 3994159277824107152, guid: d568e8be0a3e1c04ca4fcf66b18d322f,
       type: 3}
-    equippedPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 2027518484237026213, guid: c2dde6a92636bbb4384752f7c4dc677c,
+      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
@@ -215,6 +222,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 4750337230919826237, guid: a9826923d09c037448425c6efe97e884,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -244,6 +252,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 149353346477130184, guid: 6f34dc0eb4490814f9532e8411171a96,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -273,6 +282,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 1545961459860630358, guid: 2b7c021b603edd94ea83748d98bc66df,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -308,6 +318,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -350,6 +361,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -392,6 +404,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -433,6 +446,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 8304985152739549739, guid: aa63b124521404a49a0b9098b6b9e100,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -467,6 +481,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 368946190395319720, guid: 6add69ae8268d464f99e27731f7ec7e1,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -502,9 +517,10 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 0
+    durability_Max: 20
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 2553926483823156083, guid: da39f2b4d3c87d44cbefd48ae6bd425f,
+    equippedPrefab: {fileID: 3740131063225789348, guid: 1f7757978dc54374cb9b915b9fecbc6e,
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
@@ -536,9 +552,11 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 0
+    durability_Max: 20
+    orePower: 1
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 5654400252719517320, guid: e8aabaa9c00a2c846802c8d343075e6b,
+      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
@@ -570,9 +588,11 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 10
+    durability_Max: 20
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 7535996872031319195, guid: 97318f5df5efd264c82e55d7627cfadb,
+      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
@@ -604,9 +624,10 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 10
+    durability_Max: 20
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 1693644012290509181, guid: 12d8621cfba74e24d95af7901dc50e1f,
+    equippedPrefab: {fileID: 610790753315421977, guid: 6a9be7faffb83a646a68dcb78cbe9adb,
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
@@ -638,9 +659,11 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 0
+    durability_Max: 100
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 6029739926404462652, guid: 8bfb044d0671ff749a492cb4ccd4c727,
+      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
@@ -673,9 +696,11 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 0
+    durability_Max: 100
+    orePower: 2
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 434736963171876714, guid: 033202c8807919049a09265db9e21513,
+      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
@@ -709,9 +734,11 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 0
+    durability_Max: 100
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 1430489478524335158, guid: 9ef0e97319c980243859e5148d621a34,
+      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
@@ -745,9 +772,11 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 0
+    durability_Max: 100
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 2383225863483182673, guid: e2ff56243dc021b4d8987ae93beeffc0,
+      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
@@ -780,9 +809,11 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 0
+    durability_Max: 200
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 8971755898630984601, guid: c9efa3ae2eaf15b468ae7bed81ba6644,
+      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
@@ -815,9 +846,11 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 0
+    durability_Max: 200
+    orePower: 4
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 6222287741510366711, guid: e2d6c98dea2879643b1e233c2b05bd5e,
+      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
@@ -851,9 +884,11 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 0
+    durability_Max: 200
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 199626688575356975, guid: f463f4e834c7f66408f3eb5bc4043cd9,
+      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
@@ -887,9 +922,11 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 0
+    durability_Max: 200
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 2587112584172054734, guid: bd12b692ecc9eb24e8ea833683375907,
+      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isCrafteable: 1
@@ -921,6 +958,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -959,6 +997,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -998,6 +1037,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1038,6 +1078,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1075,6 +1116,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1113,6 +1155,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1151,6 +1194,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1188,6 +1232,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1226,6 +1271,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1264,6 +1310,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1298,6 +1345,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 5309292601367801835, guid: de11b8d2b6e28b846b0e4f7fc28d9155,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -1326,6 +1374,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 6496479173327333623, guid: caaf8238de043dc499af052c0596b691,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -1356,6 +1405,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 1743933868757232438, guid: ff5aec27515579e479c0e277c412edc9,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -1386,6 +1436,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 5249736885591442001, guid: 70a637eca13cb7d4d9213fb51c7fd752,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -1421,6 +1472,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 6733907896066425463, guid: c7aa02904c2f4d74d9fd66c52d497705,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -1449,6 +1501,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1478,6 +1531,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 320030197387143633, guid: f4c29f6428408ed4fbffcedc238dc1ac,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -1507,6 +1561,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1536,6 +1591,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1566,6 +1622,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1596,6 +1653,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1625,6 +1683,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1655,6 +1714,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1685,6 +1745,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1715,6 +1776,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1745,6 +1807,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1775,6 +1838,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1805,6 +1869,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1835,6 +1900,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1865,6 +1931,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1893,6 +1960,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -1922,6 +1990,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 2447436741725595447, guid: c06486dac1fe8a642a4ad82fab80fe80,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -1952,6 +2021,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 52203542677531810, guid: 3317b352177cf494a9fdbc77f83003ee,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -1982,6 +2052,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 885988641236619049, guid: 71703d1644543664aaac04dcc27dca21,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -2017,6 +2088,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 5736703017609124289, guid: 663dd5f30ea327e48a3847c3803f09b2,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -2048,6 +2120,7 @@ MonoBehaviour:
     heatColdRegulator: 5
     heatColdRegulatorDuration: 120
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 6463989445906025499, guid: e33aa5956fbfd664bb2c67bac3efa279,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -2079,6 +2152,7 @@ MonoBehaviour:
     heatColdRegulator: -5
     heatColdRegulatorDuration: 120
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 329387942110904326, guid: 4cf985a7885f8fa4a874aab3b4bd22ed,
       type: 3}
     equippedPrefab: {fileID: 0}
@@ -2107,6 +2181,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2134,6 +2209,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2161,6 +2237,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2189,6 +2266,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2217,6 +2295,7 @@ MonoBehaviour:
     heatColdRegulator: 5
     heatColdRegulatorDuration: 120
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2245,6 +2324,7 @@ MonoBehaviour:
     heatColdRegulator: -5
     heatColdRegulatorDuration: 120
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2274,6 +2354,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2303,6 +2384,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2332,6 +2414,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2365,6 +2448,7 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2395,6 +2479,7 @@ MonoBehaviour:
     heatColdRegulator: 10
     heatColdRegulatorDuration: 240
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2425,6 +2510,7 @@ MonoBehaviour:
     heatColdRegulator: -10
     heatColdRegulatorDuration: 240
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
@@ -2458,8 +2544,9 @@ MonoBehaviour:
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
+    orePower: 0
     worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 2602820642190348203, guid: 97ba8c2de77ab3847952c90f86079d9e,
+    equippedPrefab: {fileID: 5994904331811257363, guid: ce23f25e2a8cbea4aa26576c2dee0f50,
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
@@ -2471,3 +2558,106 @@ MonoBehaviour:
       amount: 1
     - itemName: 5
       amount: 1
+  - itemName: 160
+    categoryName: 5
+    subCategoryName: 49
+    itemSize: {x: 1, y: 2}
+    itemDescription: A Cup that can take in 1 portion of water.
+    hotbarSprite: {fileID: -1156776268, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 85402532, guid: ae32718f4b2cf514da87ad79f0d50ee5, type: 3}
+    - {fileID: -955052887, guid: ae32718f4b2cf514da87ad79f0d50ee5, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -609575645, guid: ae32718f4b2cf514da87ad79f0d50ee5, type: 3}
+    - {fileID: -1348670468, guid: ae32718f4b2cf514da87ad79f0d50ee5, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    mainHealthHeal: 0
+    heatresistanceHealthHeal: 0
+    hungerHealthHeal: 0
+    thirstHealthHeal: 25
+    heatColdRegulator: 0
+    heatColdRegulatorDuration: 0
+    durability_Max: 1
+    orePower: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 583844602863912719, guid: 7d22cb1a14f57374990c958474f0ae6c,
+      type: 3}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements:
+    - itemName: 71
+      amount: 2
+  - itemName: 161
+    categoryName: 5
+    subCategoryName: 49
+    itemSize: {x: 1, y: 2}
+    itemDescription: A Bottle that can take in 5 portions of water.
+    hotbarSprite: {fileID: 278510085, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: 503414960, guid: d7f7f0479e3cb484190589474291c3e2, type: 3}
+    - {fileID: -320619656, guid: d7f7f0479e3cb484190589474291c3e2, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1910981531, guid: d7f7f0479e3cb484190589474291c3e2, type: 3}
+    - {fileID: -1852819575, guid: d7f7f0479e3cb484190589474291c3e2, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    mainHealthHeal: 0
+    heatresistanceHealthHeal: 0
+    hungerHealthHeal: 0
+    thirstHealthHeal: 25
+    heatColdRegulator: 0
+    heatColdRegulatorDuration: 0
+    durability_Max: 5
+    orePower: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 1884002324475986137, guid: 98089548e96e14a4c8dd1ec392b83d93,
+      type: 3}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements:
+    - itemName: 1
+      amount: 1
+    - itemName: 71
+      amount: 4
+  - itemName: 162
+    categoryName: 5
+    subCategoryName: 49
+    itemSize: {x: 1, y: 2}
+    itemDescription: A Bottle that can take in 10 portions of water.
+    hotbarSprite: {fileID: 1473586408, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1951511914, guid: fac724635efbc284ebf3e2b43081015f, type: 3}
+    - {fileID: 1452471845, guid: fac724635efbc284ebf3e2b43081015f, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 533975881, guid: fac724635efbc284ebf3e2b43081015f, type: 3}
+    - {fileID: 878876106, guid: fac724635efbc284ebf3e2b43081015f, type: 3}
+    isActive: 1
+    isConsumeable: 0
+    isEquipableInHand: 1
+    isEquipableClothes: 0
+    mainHealthHeal: 0
+    heatresistanceHealthHeal: 0
+    hungerHealthHeal: 0
+    thirstHealthHeal: 25
+    heatColdRegulator: 0
+    heatColdRegulatorDuration: 0
+    durability_Max: 10
+    orePower: 0
+    worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 4785710050809358832, guid: 8e1c4834f4b28914f8869214dcf68bd7,
+      type: 3}
+    idleAnimation: {fileID: 0}
+    actionAnimation: {fileID: 0}
+    isCrafteable: 0
+    craftingRequirements:
+    - itemName: 1
+      amount: 2
+    - itemName: 71
+      amount: 6

@@ -75,7 +75,8 @@ public enum Items
 
     [Description("Flashlight")][InspectorName("Tools/Flashlight")] Flashlight,
 
-    [Description("Other2")][InspectorName("Tools/Other2")] T_Other2,
+    [Description("Ghost Capturer")][InspectorName("Tools/Ghost Capturer")] GhostCapturer,
+
     [Description("Other3")][InspectorName("Tools/Other3")] T_Other3,
     [Description("Other4")][InspectorName("Tools/Other4")] T_Other4,
     [Description("Other5")][InspectorName("Tools/Other5")] T_Other5,
@@ -245,5 +246,17 @@ public enum Items
     [Description("Other3")][InspectorName("Furniture/Other3")] FU_Other3,
     [Description("Other4")][InspectorName("Furniture/Other4")] FU_Other4,
     [Description("Other5")][InspectorName("Furniture/Other5")] FU_Other5,
+    #endregion
+    
+    //Drinking
+    #region
+    [Description("Cup")][InspectorName("Drinking/Cup")] Cup,
+    [Description("Bottle")][InspectorName("Drinking/Bottle")] Bottle,
+    [Description("Bucket")][InspectorName("Drinking/Bucket")] Bucket,
+
+    [Description("Other1")][InspectorName("Drinking/Other1")] D_Other1,
+    [Description("Other2")][InspectorName("Drinking/Other2")] D_Other2,
+    [Description("Other3")][InspectorName("Drinking/Other3")] D_Other3,
+    [Description("Other4")][InspectorName("Drinking/Other4")] D_Other4,
     #endregion
 }

@@ -10,6 +10,9 @@ public class LookAtManager : Singleton<LookAtManager>
 
     public InteracteableType typeLookingAt;
 
+    [Header("CenterImage")]
+    [SerializeField] GameObject centerImage;
+
     [Header("Item")]
     [SerializeField] GameObject Item_Panel;
     [SerializeField] Image ItemImage;
@@ -26,6 +29,17 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] Image MovableObjectImage;
     [SerializeField] TextMeshProUGUI MovableObjectName;
 
+    [Header("Water")]
+    [SerializeField] GameObject WaterDisplay_Panel;
+    [SerializeField] Image WaterDisplay_Image;
+    [SerializeField] TextMeshProUGUI WaterDisplay_Text;
+
+    [Header("Ore Mine")]
+    [SerializeField] GameObject oreDisplay_Panel;
+    [SerializeField] Image oreDisplay_Image;
+    [SerializeField] TextMeshProUGUI oreDisplay_Text;
+
+
 
     //--------------------
 
@@ -41,6 +55,50 @@ public class LookAtManager : Singleton<LookAtManager>
         {
             return;
         }
+
+
+        //-------------------- Other than InteracteableType
+
+
+        //If looking at water
+        #region
+        else if ((HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
+            && SelectionManager.Instance.tag == "Water")
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            centerImage.SetActive(false);
+
+            WaterDisplay();
+
+            WaterDisplay_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
+
+        //If looking at an Ore Vein
+        #region
+        else if ((HotbarManager.Instance.selectedItem == Items.WoodPickaxe || HotbarManager.Instance.selectedItem == Items.StonePickaxe || HotbarManager.Instance.selectedItem == Items.CryonitePickaxe
+                  || HotbarManager.Instance.selectedItem == Items.AríditeCrystal || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.None)
+            && SelectionManager.Instance.tag == "Ore")
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            centerImage.SetActive(false);
+
+            OreDisplay();
+
+            oreDisplay_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
+
+
+        //-------------------- InteracteableType
 
 
         //If looking at nothing
@@ -156,7 +214,7 @@ public class LookAtManager : Singleton<LookAtManager>
 
             return;
         }
-        #endregion
+        #endregion 
     }
 
 
@@ -229,14 +287,212 @@ public class LookAtManager : Singleton<LookAtManager>
         }
     }
 
+    void WaterDisplay()
+    {
+        WaterDisplay_Image.sprite = MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).hotbarSprite;
+        WaterDisplay_Text.text = "Press E to refill your " + HotbarManager.Instance.selectedItem.ToString();
+    }
+    void OreDisplay()
+    {
+        if (SelectionManager.Instance.tag == "Ore")
+        {
+            if (SelectionManager.Instance.selecedObject)
+            {
+                if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+                {
+                    //Set OreVein Image
+                    switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                    {
+                        case InteracteableType.None:
+                            oreDisplay_Image.sprite = null;
+                            break;
+
+                        case InteracteableType.Tungsten_Ore:
+                            oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Tungsten).hotbarSprite;
+                            break;
+                        case InteracteableType.Gold_Ore:
+                            oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Gold).hotbarSprite;
+                            break;
+                        case InteracteableType.Stone_Ore:
+                            oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Stone).hotbarSprite;
+                            break;
+                        case InteracteableType.Cryonite_Ore:
+                            oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Cryonite).hotbarSprite;
+                            break;
+                        case InteracteableType.Magnetite_Ore:
+                            oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Magnetite).hotbarSprite;
+                            break;
+                        case InteracteableType.Viridian_Ore:
+                            oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Viridian).hotbarSprite;
+                            break;
+                        case InteracteableType.AríditeCrystal_Ore:
+                            oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.AríditeCrystal).hotbarSprite;
+                            break;
+
+                        default:
+                            oreDisplay_Image.sprite = null;
+                            break;
+                    }
+
+                    //Set text
+                    if (HotbarManager.Instance.selectedItem == Items.None)
+                    {
+                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        {
+                            case InteracteableType.None:
+                                oreDisplay_Text.text = "";
+                                break;
+
+                            case InteracteableType.Tungsten_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch the Tungsten Ore vein with your hands (You may take some damage)";
+                                break;
+                            case InteracteableType.Gold_Ore:
+                                oreDisplay_Text.text = "You need a \"Stone Pickaxe\" or \"Cryonite Pickaxe\" to hatch a Gold Ore Vein";
+                                break;
+                            case InteracteableType.Stone_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch the Stone Ore vein with your hands (You may take some damage)";
+                                break;
+                            case InteracteableType.Cryonite_Ore:
+                                oreDisplay_Text.text = "You need a \"Stone Pickaxe\" or \"Cryonite Pickaxe\" to hatch a Stone Cryonite Vein";
+                                break;
+                            case InteracteableType.Magnetite_Ore:
+                                oreDisplay_Text.text = "You need a \"Stone Pickaxe\" or \"Cryonite Pickaxe\" to hatch a Stone Magnetite Vein";
+                                break;
+                            case InteracteableType.Viridian_Ore:
+                                oreDisplay_Text.text = "You need a \"Cryonite Pickaxe\" to hatch a Viridian Ore Vein";
+                                break;
+                            case InteracteableType.AríditeCrystal_Ore:
+                                oreDisplay_Text.text = "You need a \"Cryonite Pickaxe\" to hatch a Viridian Ore Vein";
+                                break;
+
+                            default:
+                                oreDisplay_Text.text = "";
+                                break;
+                        }
+                    }
+                    else if (HotbarManager.Instance.selectedItem == Items.WoodPickaxe)
+                    {
+                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        {
+                            case InteracteableType.None:
+                                oreDisplay_Text.text = "";
+                                break;
+
+                            case InteracteableType.Tungsten_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Tungsten Ore Vein";
+                                break;
+                            case InteracteableType.Gold_Ore:
+                                oreDisplay_Text.text = "You need a \"Stone Pickaxe\" or \"Cryonite Pickaxe\" to hatch a Gold Ore Vein";
+                                break;
+                            case InteracteableType.Stone_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Stone Ore Vein";
+                                break;
+                            case InteracteableType.Cryonite_Ore:
+                                oreDisplay_Text.text = "You need a \"Stone Pickaxe\" or \"Cryonite Pickaxe\" to hatch a Stone Cryonite Vein";
+                                break;
+                            case InteracteableType.Magnetite_Ore:
+                                oreDisplay_Text.text = "You need a \"Stone Pickaxe\" or \"Cryonite Pickaxe\" to hatch a Stone Magnetite Vein";
+                                break;
+                            case InteracteableType.Viridian_Ore:
+                                oreDisplay_Text.text = "You need a \"Cryonite Pickaxe\" to hatch a Viridian Ore Vein";
+                                break;
+                            case InteracteableType.AríditeCrystal_Ore:
+                                oreDisplay_Text.text = "You need a \"Cryonite Pickaxe\" to hatch a Viridian Ore Vein";
+                                break;
+
+                            default:
+                                oreDisplay_Text.text = "";
+                                break;
+                        }
+                    }
+                    else if(HotbarManager.Instance.selectedItem == Items.StonePickaxe)
+                    {
+                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        {
+                            case InteracteableType.None:
+                                oreDisplay_Text.text = "";
+                                break;
+
+                            case InteracteableType.Tungsten_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Tungsten Ore Vein";
+                                break;
+                            case InteracteableType.Gold_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Gold Ore Vein";
+                                break;
+                            case InteracteableType.Stone_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Stone Ore Vein";
+                                break;
+                            case InteracteableType.Cryonite_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Cryonite Ore Vein";
+                                break;
+                            case InteracteableType.Magnetite_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Magnetite Ore Vein";
+                                break;
+                            case InteracteableType.Viridian_Ore:
+                                oreDisplay_Text.text = "You need a \"Cryonite Pickaxe\" to hatch a Viridian Ore Vein";
+                                break;
+                            case InteracteableType.AríditeCrystal_Ore:
+                                oreDisplay_Text.text = "You need a \"Cryonite Pickaxe\" to hatch a Viridian Ore Vein";
+                                break;
+
+                            default:
+                                oreDisplay_Text.text = "";
+                                break;
+                        }
+                    }
+                    else if(HotbarManager.Instance.selectedItem == Items.CryonitePickaxe)
+                    {
+                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        {
+                            case InteracteableType.None:
+                                oreDisplay_Text.text = "";
+                                break;
+
+                            case InteracteableType.Tungsten_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Tungsten Ore Vein";
+                                break;
+                            case InteracteableType.Gold_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Gold Ore Vein";
+                                break;
+                            case InteracteableType.Stone_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Stone Ore Vein";
+                                break;
+                            case InteracteableType.Cryonite_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Cryonite Ore Vein";
+                                break;
+                            case InteracteableType.Magnetite_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Magnetite Ore Vein";
+                                break;
+                            case InteracteableType.Viridian_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Viridian Ore Vein";
+                                break;
+                            case InteracteableType.AríditeCrystal_Ore:
+                                oreDisplay_Text.text = "Left Click to hatch this Arídite Crystal Ore Vein";
+                                break;
+
+                            default:
+                                oreDisplay_Text.text = "";
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     //--------------------
 
 
     public void TurnOffScreens()
     {
+        WaterDisplay_Panel.SetActive(false);
+        oreDisplay_Panel.SetActive(false);
+
         Item_Panel.SetActive(false);
         Plant_Panel.SetActive(false);
         MovableObject_Panel.SetActive(false);
+
+        centerImage.SetActive(true);
     }
 }

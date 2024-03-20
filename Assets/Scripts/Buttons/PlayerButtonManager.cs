@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class PlayerButtonManager : Singleton<PlayerButtonManager>
 {
+    //Tablet
     public static Action OpenPlayerInventory_isPressedDown;
     public static Action ClosePlayerInventory_isPressedDown;
+
+    //ObjectInteraction
     public static Action objectInterraction_isPressedDown;
 
-    //HandSelected
+    //Hotbar
     public static Action hotbarSelectionDown_isPressed;
     public static Action hotbarSelectionUp_isPressed;
 
@@ -36,9 +39,13 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
     //Crafting
     public static Action isPressed_CloseCraftingMenu;
 
+    //Drink
+    public static Action refillBottle_isPressed;
+
+
+
     //Testing Buttons
     public static Action T_isPressed;
-
 
 
     //--------------------
@@ -51,6 +58,16 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         {
             Application.Quit();
         }
+        
+        //Refill WaterConsumable
+        #region
+        else if (Input.GetKeyDown(KeyCode.E)
+            && (HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
+            && SelectionManager.Instance.tag == "Water")
+        {
+            refillBottle_isPressed?.Invoke();
+        }
+        #endregion
 
         //BuildingSystem
         #region
@@ -66,16 +83,15 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         }
         #endregion
 
-        //Equipment
+        //Equipment Usage
         #region
         else if (Input.GetKeyDown(KeyCode.Mouse0) && MainManager.Instance.menuStates == MenuStates.None 
-            && EquippmentManager.Instance.toolHolderParent.transform.childCount > 0
-            && HotbarManager.Instance.selectedItem != Items.None)
+            && (HotbarManager.Instance.selectedItem == Items.WoodPickaxe || HotbarManager.Instance.selectedItem == Items.StonePickaxe || HotbarManager.Instance.selectedItem == Items.CryonitePickaxe
+            || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.AríditeCrystal || HotbarManager.Instance.selectedItem == Items.None
+            || HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
+            )
         {
-            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<EquippedItem>() != null)
-            {
-                isPressed_EquipmentActivate?.Invoke();
-            }
+            isPressed_EquipmentActivate?.Invoke();
         }
         #endregion
 
@@ -163,29 +179,9 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         }
         #endregion
 
-        //Left Mouse
-        #region
-        //else if (Input.GetKeyDown(KeyCode.Mouse0))
-        //{
-        //    leftMouse_isPressedDown?.Invoke();
-        //}
-        //else if (Input.GetKeyUp(KeyCode.Mouse0))
-        //{
-        //    leftMouse_isPressedUp?.Invoke();
-        //}
-        #endregion
 
-        //Right Mouse
-        #region
-        //else if (Input.GetKeyDown(KeyCode.Mouse1))
-        //{
-        //    rightMouse_isPressedDown?.Invoke();
-        //}
-        //else if (Input.GetKeyUp(KeyCode.Mouse1))
-        //{
-        //    rightMouse_isPressedUp?.Invoke();
-        //}
-        #endregion
+        //--------------------
+
 
         //Testing
         #region

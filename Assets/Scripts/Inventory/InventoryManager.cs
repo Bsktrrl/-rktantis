@@ -17,6 +17,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     [Header("Item")]
     public Items lastItemToGet;
+    public int lastIDToGet;
     [SerializeField] TextMeshProUGUI player_ItemName_Display;
     [SerializeField] TextMeshProUGUI player_ItemDescription_Display;
     [SerializeField] TextMeshProUGUI chest_ItemName_Display;
@@ -181,6 +182,7 @@ public class InventoryManager : Singleton<InventoryManager>
             item.itemID = obj.GetComponent<ItemSlot>().itemID;
 
             lastItemToGet = obj.GetComponent<ItemSlot>().itemName;
+            lastIDToGet = obj.GetComponent<ItemSlot>().itemID;
             itemTemp = obj;
         }
 
@@ -218,6 +220,8 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
             #endregion
+
+            lastIDToGet = item.itemID;
         }
 
         inventories[inventory].itemsInInventory.Add(item);
@@ -265,6 +269,8 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         #endregion
 
+        lastIDToGet = item.itemID;
+
         inventories[inventory].itemsInInventory.Add(item);
 
         RemoveInventoriesUI();
@@ -277,41 +283,54 @@ public class InventoryManager : Singleton<InventoryManager>
     public void RemoveItemFromInventory(int inventory, Items itemName, int ID)
     {
         //From inventory to World
-        for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
-        {
-            if (inventories[inventory].itemsInInventory[i].itemName == itemName
-                && inventories[inventory].itemsInInventory[i].itemID == ID)
-            {
-                inventories[inventory].itemsInInventory.RemoveAt(i);
+        #region
+        int index = -1;
 
-                break;
+        for (int i = inventories[inventory].itemsInInventory.Count - 1; i >= 0 ; i--)
+        {
+            for (int j = 0; j < HotbarManager.Instance.hotbarList.Count; j++)
+            {
+                if (inventories[inventory].itemsInInventory[i].itemName == itemName
+                && inventories[inventory].itemsInInventory[i].itemID == ID)
+                {
+                    if (HotbarManager.Instance.hotbarList[j].itemName == itemName
+                        && HotbarManager.Instance.hotbarList[j].itemID != ID)
+                    {
+                        index = i;
+
+                        i = 0;
+                        j = HotbarManager.Instance.hotbarList.Count;
+                    }
+                }
             }
         }
+
+        if (index >= 0)
+        {
+            print("index >= 0");
+            inventories[inventory].itemsInInventory.RemoveAt(index);
+        }
+        else
+        {
+            print("index < 0");
+            for (int i = inventories[inventory].itemsInInventory.Count - 1; i >= 0; i--)
+            {
+                if (inventories[inventory].itemsInInventory[i].itemName == itemName
+                    && inventories[inventory].itemsInInventory[i].itemID == ID)
+                {
+                    inventories[inventory].itemsInInventory.RemoveAt(i);
+
+                    break;
+                }
+            }
+        }
+        #endregion
 
         RemoveInventoriesUI();
         PrepareInventoryUI(inventory, false);
 
-        //Spawn item into the World, if the item have a WorldObject attached
-        if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
-        {
-            SoundManager.Instance.Play_Inventory_DropItem_Clip();
-
-            WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, handDropPoint.transform.position, Quaternion.identity) as GameObject);
-            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
-
-            //Set Gravity true on the worldObject
-            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
-            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
-
-            //Update item in the World
-            WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName, WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]);
-
-            //Stop gravity after gravityTime-seconds
-            if (WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>())
-            {
-                //StartCoroutine(SpawnedObjectGravityTime(WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]));
-            }
-        }
+        //Spawn item into the World, if the item has a WorldObject attached
+        SpawnItemToWorld(itemName, handDropPoint);
 
         //If item is removed from the inventory, update the Hotbar
         if (inventory <= 0)
@@ -509,6 +528,61 @@ public class InventoryManager : Singleton<InventoryManager>
         //Update the Hand to see if slot is empty
         HotbarManager.Instance.ChangeItemInHand();
     }
+    
+    public void SpawnItemToWorld(Items itemName, GameObject dropPos)
+    {
+        if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
+        {
+            //Play Drop-Sound
+            SoundManager.Instance.Play_Inventory_DropItem_Clip();
+
+            
+            if (dropPos == handDropPoint)
+            {
+                //If dropped from hand, hav ethe same dropspot each time
+                WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, dropPos.transform.position, Quaternion.identity) as GameObject);
+            }
+            else
+            {
+                //When dropping from other places, change the pos slightly
+                float x = UnityEngine.Random.value / 2;
+                float y = 0;
+                float z = UnityEngine.Random.value / 2;
+
+                if (UnityEngine.Random.Range(0, 1) == 1)
+                {
+                    x = -x;
+                }
+                if (UnityEngine.Random.Range(0, 1) == 1)
+                {
+                    y = -y;
+                }
+                if (UnityEngine.Random.Range(0, 1) == 1)
+                {
+                    z = -z;
+                }
+
+                Vector3 newSpawnPos = new Vector3(dropPos.transform.position.x + x, dropPos.transform.position.y + y, dropPos.transform.position.z + z);
+
+                WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, newSpawnPos, Quaternion.identity) as GameObject);
+            }
+
+            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
+
+            //Set Gravity true on the worldObject
+            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
+            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
+
+            //Update item in the World
+            WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName);
+
+            //Stop gravity after gravityTime-seconds
+            if (WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>())
+            {
+                //StartCoroutine(SpawnedObjectGravityTime(WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]));
+            }
+        }
+    }
     #endregion
 
 
@@ -568,6 +642,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     HotbarManager.Instance.hotbarList[i].itemID = -1;
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().durabilityMeterParent.SetActive(false);
 
                     //Update the Hand to see if slot is empty
                     HotbarManager.Instance.ChangeItemInHand();
@@ -593,6 +668,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     HotbarManager.Instance.hotbarList[i].itemID = -1;
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
                     HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().ResetHotbarItem();
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().durabilityMeterParent.SetActive(false);
 
                     //Update the Hand to see if slot is empty
                     HotbarManager.Instance.ChangeItemInHand();
@@ -1167,7 +1243,8 @@ public class InventoryManager : Singleton<InventoryManager>
             //Remove the last picked up item from the inventory and spawn it into the world
             for (int i = 0; i < inventories[inventory].itemsInInventory.Count; i++)
             {
-                if (inventories[inventory].itemsInInventory[i].itemName == lastItemToGet)
+                if (inventories[inventory].itemsInInventory[i].itemName == lastItemToGet
+                    && inventories[inventory].itemsInInventory[i].itemID == lastIDToGet)
                 {
                     //If Item was attempted moved into another inventory
                     if (isMovingItem)
@@ -1189,6 +1266,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     {
                         SoundManager.Instance.Play_Inventory_InventoryIsFull_Clip();
 
+                        print("attemptd picked up");
                         RemoveItemFromInventory(inventory, lastItemToGet, inventories[inventory].itemsInInventory[i].itemID);
                     }
 

@@ -7,7 +7,7 @@ public class HotbarManager : Singleton<HotbarManager>
 {
     public GameObject hotbar_Parent;
     public GameObject EquipmentHolder;
-    public List<GameObject> EuipmentList = new List<GameObject>();
+    public List<GameObject> EquipmentList = new List<GameObject>();
 
     public HotbarSave hotbarSave = new HotbarSave();
 
@@ -152,12 +152,15 @@ public class HotbarManager : Singleton<HotbarManager>
 
     public void ChangeItemInHand()
     {
+        //Change ArmStates
+        EquippmentManager.Instance.GetEquipmentStates(selectedItem);
+
         //if selected item is empty, leave the hand empty
         if (selectedItem == Items.None)
         {
             //Remove all equipped models
             RemoveAllEquipedModels();
-            EuipmentList.Clear();
+            EquipmentList.Clear();
 
             SaveData();
             return;
@@ -169,23 +172,31 @@ public class HotbarManager : Singleton<HotbarManager>
         {
             //Remove all equipped models
             RemoveAllEquipedModels();
-            EuipmentList.Clear();
+            EquipmentList.Clear();
 
             SaveData();
             return;
         }
 
-        //if selected Item have an "equipped model" AND are suited for equipment to Hand, spawn it in Hand
+        //if selected Item has an "equipped model" AND are suited for equipment to Hand, spawn it in Hand
         else
         {
             //Remove all equipped models
             RemoveAllEquipedModels();
-            EuipmentList.Clear();
+            EquipmentList.Clear();
 
             //Add the correct model to the Hand
-            EuipmentList.Add(Instantiate(MainManager.Instance.GetItem(selectedItem).equippedPrefab, MainManager.Instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
-            EuipmentList[EuipmentList.Count - 1].transform.SetLocalPositionAndRotation(MainManager.Instance.GetItem(selectedItem).equippedPrefab.transform.position, Quaternion.identity);
+            EquipmentList.Add(Instantiate(MainManager.Instance.GetItem(selectedItem).equippedPrefab, MainManager.Instance.GetItem(selectedItem).equippedPrefab.gameObject.transform.position, EquipmentHolder.transform.rotation, EquipmentHolder.transform));
+            EquipmentList[EquipmentList.Count - 1].transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
+            //If the model is a Cup or a Bucket
+            if (selectedItem == Items.Cup || selectedItem == Items.Bucket)
+            {
+                if (EquipmentList[EquipmentList.Count - 1].GetComponent<WaterContainer>())
+                {
+                    EquipmentList[EquipmentList.Count - 1].GetComponent<WaterContainer>().SetupWaterContainer();
+                }
+            }
 
             SaveData();
             return;
@@ -193,11 +204,11 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void RemoveAllEquipedModels()
     {
-        for (int i = 0; i < EuipmentList.Count; i++)
+        for (int i = 0; i < EquipmentList.Count; i++)
         {
-            if (EuipmentList[i].GetComponent<EquippedItem>())
+            if (EquipmentList[i].GetComponent<EquippedItem>())
             {
-                EuipmentList[i].GetComponent<EquippedItem>().DestroyObject();
+                EquipmentList[i].GetComponent<EquippedItem>().DestroyObject();
             }
         }
     }
@@ -254,6 +265,8 @@ public class HotbarManager : Singleton<HotbarManager>
     public void SetSelectedItem()
     {
         selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
+
+        EquippmentManager.Instance.GetArmState(selectedItem);
 
         SaveData();
     }
