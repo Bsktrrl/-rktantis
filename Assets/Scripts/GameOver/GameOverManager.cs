@@ -28,7 +28,10 @@ public class GameOverManager : MonoBehaviour
         //Remove all items from the world
         for (int i = WorldObjectManager.Instance.worldObjectList.Count - 1; i >= 0; i--)
         {
-            Destroy(WorldObjectManager.Instance.worldObjectList[i]);
+            if (WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>())
+            {
+                WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().DestroyThisObject();
+            }
         }
 
         //Clear the lists
