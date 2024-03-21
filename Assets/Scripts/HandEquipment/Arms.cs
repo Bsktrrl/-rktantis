@@ -6,6 +6,8 @@ public class Arms : Singleton<Arms>
 {
     public Animator anim;
 
+    public bool cannotHit;
+
 
     //--------------------
 
@@ -77,9 +79,9 @@ public class Arms : Singleton<Arms>
                                 //Tungsten
                                 if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tungsten_Ore)
                                 {
-                                    
                                     //Hit the Ore
                                     EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
                                 }
 
                                 //Gold
@@ -93,6 +95,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
                                 }
 
                                 //Cryonite
@@ -134,6 +137,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Gold
@@ -147,6 +151,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Cryonite
@@ -188,6 +193,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Gold
@@ -195,6 +201,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Stone
@@ -202,6 +209,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Cryonite
@@ -209,6 +217,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Viridian
@@ -222,6 +231,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Arídite Crystal
@@ -245,6 +255,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Gold
@@ -252,6 +263,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Stone
@@ -259,6 +271,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Cryonite
@@ -266,6 +279,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Viridian
@@ -273,6 +287,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Magnetite
@@ -280,6 +295,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
 
                                 //Arídite Crystal
@@ -287,6 +303,7 @@ public class Arms : Singleton<Arms>
                                 {
                                     //Hit the Ore
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
                             }
                         }
@@ -298,6 +315,7 @@ public class Arms : Singleton<Arms>
                         || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Bucket)
                     {
                         EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                        CanHit();
                     }
                 }
             }
@@ -322,6 +340,7 @@ public class Arms : Singleton<Arms>
 
                         //Hit the Ore
                         EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
                     }
 
                     //Gold
@@ -335,6 +354,7 @@ public class Arms : Singleton<Arms>
                     {
                         //Hit the Ore
                         EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
                     }
 
                     //Cryonite
@@ -365,8 +385,18 @@ public class Arms : Singleton<Arms>
         }
     }
 
+    void CanHit()
+    {
+        cannotHit = false;
+
+        print("cannotHit = false");
+    }
     void CannotHit()
     {
         SoundManager.Instance.Play_PickaxeUsage_CannotHit_Clip();
+
+        cannotHit = true;
+
+        print("cannotHit = true");
     }
 }

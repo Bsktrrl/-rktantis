@@ -44,7 +44,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<PlantToSave> plantTypeObjectList_Store = new List<PlantToSave>();
 
     //Ores
-    [HideInInspector] public List<OreToSave> oreTypeObjectList_Store = new List<OreToSave>();
+    [HideInInspector] public List<ListOfOreToSave> oreTypeObjectList_Store = new List<ListOfOreToSave>();
 
     //HealthParameter
     [HideInInspector] public HealthToSave health_Store = new HealthToSave();

@@ -13,12 +13,13 @@ public class Ore : MonoBehaviour
     [SerializeField] float tempOreHealth;
 
     [Header("Dormant")]
-    [HideInInspector] public bool isHacked;
-    [HideInInspector] public float dormantTimer;
-    [HideInInspector] public float dormantPercentage;
+    public bool isHacked;
+    public float dormantTimer;
+    public float dormantPercentage;
 
-    [HideInInspector] public int oreIndex;
-    [HideInInspector] public int percentageCheck = 0;
+    public int oreIndex_x;
+    public int oreIndex_y;
+    public int percentageCheck = 0;
 
     //--------------------
 
@@ -40,7 +41,7 @@ public class Ore : MonoBehaviour
                 if (dormantPercentage >= i && percentageCheck < i)
                 {
                     percentageCheck = i;
-                    OreManager.Instance.ChangeOreInfo(isHacked, dormantTimer, oreIndex, percentageCheck, tempOreHealth, gameObject.transform.position);
+                    OreManager.Instance.ChangeOreInfo(isHacked, dormantTimer, oreIndex_x, oreIndex_y, percentageCheck, tempOreHealth, gameObject.transform.position);
 
                     break;
                 }
@@ -245,7 +246,7 @@ public class Ore : MonoBehaviour
             }
         }
 
-        OreManager.Instance.ChangeOreInfo(isHacked, dormantTimer, oreIndex, percentageCheck, tempOreHealth, gameObject.transform.position);
+        OreManager.Instance.ChangeOreInfo(isHacked, dormantTimer, oreIndex_x, oreIndex_y, percentageCheck, tempOreHealth, gameObject.transform.position);
     }
     void SpawnOreItems(InteracteableType interactableType)
     {
@@ -296,17 +297,18 @@ public class Ore : MonoBehaviour
 
         tempOreHealth = oreHealth;
 
-        OreManager.Instance.ChangeOreInfo(isHacked, dormantTimer, oreIndex, percentageCheck, tempOreHealth, gameObject.transform.position);
+        OreManager.Instance.ChangeOreInfo(isHacked, dormantTimer, oreIndex_x, oreIndex_y, percentageCheck, tempOreHealth, gameObject.transform.position);
 
         //Show Mesh
         oreVein.SetActive(true);
     }
 
-    public void LoadOre(bool _isHacked, float _dormantTimer, int _oreIndex, int _precentageCheck, float _oreHealth)
+    public void LoadOre(bool _isHacked, float _dormantTimer, int _oreIndex_j, int _oreIndex_l, int _precentageCheck, float _oreHealth)
     {
         //Set Parameters
         isHacked = _isHacked;
-        oreIndex = _oreIndex;
+        oreIndex_x = _oreIndex_j;
+        oreIndex_y = _oreIndex_l;
         percentageCheck = _precentageCheck;
         dormantTimer = _dormantTimer;
         tempOreHealth = _oreHealth;

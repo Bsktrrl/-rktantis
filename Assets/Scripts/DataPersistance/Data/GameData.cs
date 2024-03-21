@@ -35,7 +35,7 @@ public class GameData
     [HideInInspector] public List<PlantToSave> plantTypeObjectList_Save = new List<PlantToSave>();
 
     //Ore
-    [HideInInspector] public List<OreToSave> oreTypeObjectList_Save = new List<OreToSave>();
+    [HideInInspector] public List<ListOfOreToSave> oreTypeObjectList_Save = new List<ListOfOreToSave>();
 
     //HealthParameter
     [HideInInspector] public HealthToSave health_Save = new HealthToSave();
