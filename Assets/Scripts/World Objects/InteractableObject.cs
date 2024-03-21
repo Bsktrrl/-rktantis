@@ -96,7 +96,7 @@ public class InteractableObject : MonoBehaviour
                 //Pick the Plant
                 if (plantParent)
                 {
-                    if (plantParent.GetComponent<Plant>())
+                    if (plantParent.GetComponent<Plant>() && !plantParent.GetComponent<Plant>().isPicked)
                     {
                         for (int i = 0; i < amount; i++)
                         {

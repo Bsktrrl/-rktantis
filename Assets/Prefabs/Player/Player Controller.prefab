@@ -16382,6 +16382,7 @@ MonoBehaviour:
   WaterDisplay_Text: {fileID: 6051055046756668946}
   oreDisplay_Panel: {fileID: 5062597211803358712}
   oreDisplay_Image: {fileID: 7536942872657854470}
+  oreDisplay_LineObject: {fileID: 8715227418358591446}
   oreDisplay_Text: {fileID: 9021877970575929493}
 --- !u!1 &2794659642528003132
 GameObject:
@@ -43846,12 +43847,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dormantTimer: 20
-  oreTypeObjectList: []
   woodPickaxe_Droprate: 50
   stonePickaxe_Droprate: 65
-  cryonitePickaxe_Droprate: 80
+  cryonitePickaxe_Droprate: 75
+  handDamage: 0.5
   oreHealthReducer: 0
-  oreDropRateReducer: 10
+  oreDropRateReducer: 15
 --- !u!1 &7389465832323647349
 GameObject:
   m_ObjectHideFlags: 0
@@ -58334,6 +58335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4029617518632183312}
+  cannotHit: 0
 --- !u!1 &5086172068542780338 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8887435588038614856, guid: 230d607f0fcd67b40959bd023bbbdfdb,

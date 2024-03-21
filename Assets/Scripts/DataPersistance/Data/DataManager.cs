@@ -41,10 +41,10 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Store = new MoveableObjectSelected_ToSave();
 
     //Plants
-    [HideInInspector] public List<PlantToSave> plantTypeObjectList_Store = new List<PlantToSave>();
+    [HideInInspector] public List<ListOfPlantToSave> plantTypeObjectList_Store = new List<ListOfPlantToSave>();
 
     //Ores
-    [HideInInspector] public List<OreToSave> oreTypeObjectList_Store = new List<OreToSave>();
+    [HideInInspector] public List<ListOfOreToSave> oreTypeObjectList_Store = new List<ListOfOreToSave>();
 
     //HealthParameter
     [HideInInspector] public HealthToSave health_Store = new HealthToSave();
