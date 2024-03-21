@@ -32,7 +32,7 @@ public class GameData
     [HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Save = new MoveableObjectSelected_ToSave();
 
     //Plants
-    [HideInInspector] public List<PlantToSave> plantTypeObjectList_Save = new List<PlantToSave>();
+    [HideInInspector] public List<ListOfPlantToSave> plantTypeObjectList_Save = new List<ListOfPlantToSave>();
 
     //Ore
     [HideInInspector] public List<ListOfOreToSave> oreTypeObjectList_Save = new List<ListOfOreToSave>();

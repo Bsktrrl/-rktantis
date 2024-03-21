@@ -324,8 +324,6 @@ public class Arms : Singleton<Arms>
         //If nothing is in the Hand - Punch with the Hand
         else if (EquippmentManager.Instance.toolHolderParent.transform.childCount == 1)
         {
-            print("1. Hand Hit");
-
             if (SelectionManager.Instance.selecedObject)
             {
                 if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
@@ -388,15 +386,11 @@ public class Arms : Singleton<Arms>
     void CanHit()
     {
         cannotHit = false;
-
-        print("cannotHit = false");
     }
     void CannotHit()
     {
         SoundManager.Instance.Play_PickaxeUsage_CannotHit_Clip();
 
         cannotHit = true;
-
-        print("cannotHit = true");
     }
 }

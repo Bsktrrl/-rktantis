@@ -181,7 +181,7 @@ public class OreManager : Singleton<OreManager>
         SaveData();
     }
 
-    public void ChangeOreInfo(bool _isHacked, float _dormantTimer, int _oreIndex_j, int _oreIndex_l, int _percentageCheck, float _oreHelath, Vector3 _orePos)
+    public void ChangeOreInfo(bool _isHacked, float _dormantTimer, int _oreIndex_j, int _oreIndex_l, int _percentageCheck, float _oreHealth, Vector3 _orePos)
     {
         OreToSave tempOre = new OreToSave();
 
@@ -190,7 +190,7 @@ public class OreManager : Singleton<OreManager>
         tempOre.oreIndex_x = _oreIndex_j;
         tempOre.oreIndex_y = _oreIndex_l;
         tempOre.percentageCheck = _percentageCheck;
-        tempOre.oreHealth = _oreHelath;
+        tempOre.oreHealth = _oreHealth;
         tempOre.orePos = _orePos;
 
         oreTypeObjectList[_oreIndex_j][_oreIndex_l] = tempOre;

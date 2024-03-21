@@ -18,13 +18,14 @@ public class Plant : MonoBehaviour
     [HideInInspector] public float growthTimer;
     public float growthPrecentage;
 
-    [HideInInspector] public int plantIndex;
+    [HideInInspector] public int plantIndex_x;
+    [HideInInspector] public int plantIndex_y;
 
     float growthAnimationTime = 0.29f;
 
     Animator animator;
 
-    [HideInInspector] public int precentageCheck = 0;
+    [HideInInspector] public int percentageCheck = 0;
 
 
 
@@ -69,10 +70,10 @@ public class Plant : MonoBehaviour
 
             for (int i = 0; i < 100; i++)
             {
-                if (growthPrecentage >= i && precentageCheck < i)
+                if (growthPrecentage >= i && percentageCheck < i)
                 {
-                    precentageCheck = i;
-                    PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
+                    percentageCheck = i;
+                    PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex_x, plantIndex_y, percentageCheck, gameObject.transform.position);
 
                     break;
                 }
@@ -90,12 +91,13 @@ public class Plant : MonoBehaviour
     //--------------------
 
 
-    public void LoadPlant(bool _isPicked, float _growthTimer, int _plantIndex, int _precentageCheck)
+    public void LoadPlant(bool _isPicked, float _growthTimer, int _plantIndex_j, int _plantIndex_l, int _precentageCheck)
     {
         //Set Parameters
         isPicked = _isPicked;
-        plantIndex = _plantIndex;
-        precentageCheck = _precentageCheck;
+        plantIndex_x = _plantIndex_j;
+        plantIndex_y = _plantIndex_l;
+        percentageCheck = _precentageCheck;
         growthTimer = _growthTimer;
 
         //Check if Animation and pickablePart should be hidden
@@ -131,7 +133,7 @@ public class Plant : MonoBehaviour
         growthTimer = 0;
         isPicked = true;
 
-        PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
+        PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex_x, plantIndex_y, percentageCheck, gameObject.transform.position);
     }
 
     void PlantGrown()
@@ -151,10 +153,10 @@ public class Plant : MonoBehaviour
         //Show Mesh after a set amount of time 
         StartCoroutine(GrowBackCoroutine(growthAnimationTime));
 
-        precentageCheck = 0;
+        percentageCheck = 0;
         growthTimer = 0;
 
-        PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex, precentageCheck, gameObject.transform.position);
+        PlantManager.Instance.ChangePlantInfo(isPicked, growthTimer, plantIndex_x, plantIndex_y, percentageCheck, gameObject.transform.position);
     }
     IEnumerator GrowBackCoroutine(float time)
     {
@@ -168,6 +170,8 @@ public class Plant : MonoBehaviour
 
     void ObjectInteraction()
     {
+        if (isPicked) { return; }
+
         if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selecedObject == gameObject
             && MainManager.Instance.menuStates == MenuStates.None)
         {
