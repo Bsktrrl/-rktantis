@@ -90,16 +90,19 @@ public class JournalPage : MonoBehaviour, IPointerEnterHandler
 
     public void JournalPageButton_isClicked()
     {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        JournalManager.Instance.journalPageIsSelected = true;
         JournalManager.Instance.SetupInfoPage(this);
     }
     public void MessageClipButton_isClicked()
     {
-        if (message_Clip && SoundManager.Instance.audioSource5 != null)
+        if (message_Clip && SoundManager.Instance.audioSource_VoiceMessages != null)
         {
-            SoundManager.Instance.audioSource5.clip = message_Clip;
-            SoundManager.Instance.audioSource5.volume = 1f;
-            SoundManager.Instance.audioSource5.pitch = 1f;
-            SoundManager.Instance.audioSource5.Play();
+            SoundManager.Instance.audioSource_VoiceMessages.clip = message_Clip;
+            SoundManager.Instance.audioSource_VoiceMessages.volume = 1f;
+            SoundManager.Instance.audioSource_VoiceMessages.pitch = 1f;
+            SoundManager.Instance.audioSource_VoiceMessages.Play();
 
             print("2. Play Message");
         }
@@ -112,5 +115,10 @@ public class JournalPage : MonoBehaviour, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+
+        if (!JournalManager.Instance.journalPageIsSelected)
+        {
+            JournalManager.Instance.SetupInfoPage(this);
+        }
     }
 }

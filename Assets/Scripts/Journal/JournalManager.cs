@@ -50,6 +50,8 @@ public class JournalManager : Singleton<JournalManager>
     [SerializeField] List<int> playerStoryJournalPageIndexList = new List<int>();
     [SerializeField] List<int> personalStoryJournalPageIndexList = new List<int>();
 
+    public bool journalPageIsSelected;
+
 
     //--------------------
 
@@ -57,6 +59,7 @@ public class JournalManager : Singleton<JournalManager>
     private void Start()
     {
         journalMenuState = JournalMenuState.MentorJournal;
+        journalPageIsSelected = false;
     }
 
 
@@ -397,14 +400,14 @@ public class JournalManager : Singleton<JournalManager>
 
     public void MessageClipButton_isPressed()
     {
-        if (message_Clip && SoundManager.Instance.audioSource5 != null)
+        if (message_Clip && SoundManager.Instance.audioSource_VoiceMessages != null)
         {
-            SoundManager.Instance.audioSource5.clip = message_Clip;
+            SoundManager.Instance.audioSource_VoiceMessages.clip = message_Clip;
 
-            SoundManager.Instance.audioSource5.volume = 1f;
-            SoundManager.Instance.audioSource5.pitch = 1f;
+            SoundManager.Instance.audioSource_VoiceMessages.volume = 1f;
+            SoundManager.Instance.audioSource_VoiceMessages.pitch = 1f;
 
-            SoundManager.Instance.audioSource5.Play();
+            SoundManager.Instance.audioSource_VoiceMessages.Play();
 
             print("1. Play Message");
         }
@@ -417,6 +420,7 @@ public class JournalManager : Singleton<JournalManager>
     public void MentorJournalButton_isPressed()
     {
         journalMenuState = JournalMenuState.MentorJournal;
+        journalPageIsSelected = false;
 
         ResetInfoPage();
 
@@ -435,6 +439,7 @@ public class JournalManager : Singleton<JournalManager>
     public void PlayerJournalButton_isPressed()
     {
         journalMenuState = JournalMenuState.PlayerJournal;
+        journalPageIsSelected = false;
 
         ResetInfoPage();
 
@@ -453,6 +458,7 @@ public class JournalManager : Singleton<JournalManager>
     public void PersonalJournalButton_isPressed()
     {
         journalMenuState = JournalMenuState.PersonalJournal;
+        journalPageIsSelected = false;
 
         ResetInfoPage();
 

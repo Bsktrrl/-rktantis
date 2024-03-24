@@ -8,7 +8,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource audioSource2;
     public AudioSource audioSource3;
     public AudioSource audioSource4;
-    public AudioSource audioSource5;
+    public AudioSource audioSource_VoiceMessages;
 
     #region Clips
 
@@ -151,6 +151,7 @@ public class SoundManager : Singleton<SoundManager>
     #region Journal Pages
     [Header("Journal Pages")]
     [SerializeField] AudioClip journalPage_GetNewJournalPage; //
+    [SerializeField] AudioClip journalPage_SelectingJournalPage; //
     #endregion
 
     #endregion
@@ -950,6 +951,16 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource1 != null)
         {
             audioSource1.clip = journalPage_GetNewJournalPage;
+            audioSource1.volume = 1f;
+            audioSource1.pitch = 1f;
+            audioSource1.Play();
+        }
+    }
+    public void Play_JournalPage_SelectingJournalPage_Clip()
+    {
+        if (audioSource1 != null)
+        {
+            audioSource1.clip = journalPage_SelectingJournalPage;
             audioSource1.volume = 1f;
             audioSource1.pitch = 1f;
             audioSource1.Play();
