@@ -49,6 +49,9 @@ public class GameData
     [HideInInspector] public List<int> playerStoryJournalPageIndexList_Save = new List<int>();
     [HideInInspector] public List<int> personalStoryJournalPageIndexList_Save = new List<int>();
 
+    //Settings
+    [HideInInspector] public SettingsValues settingsValues_Save = new SettingsValues();
+
 
     //--------------------
 

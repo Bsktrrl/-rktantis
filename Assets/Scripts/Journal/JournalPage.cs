@@ -99,10 +99,7 @@ public class JournalPage : MonoBehaviour, IPointerEnterHandler
     {
         if (message_Clip && SoundManager.Instance.audioSource_VoiceMessages != null)
         {
-            SoundManager.Instance.audioSource_VoiceMessages.clip = message_Clip;
-            SoundManager.Instance.audioSource_VoiceMessages.volume = 1f;
-            SoundManager.Instance.audioSource_VoiceMessages.pitch = 1f;
-            SoundManager.Instance.audioSource_VoiceMessages.Play();
+            SoundManager.Instance.Play_JournalPage_VoiceMessage_Clip(message_Clip);
 
             print("2. Play Message");
         }
