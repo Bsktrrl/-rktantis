@@ -14,6 +14,8 @@ public class TabletManager : Singleton<TabletManager>
 
     [Header("Menus")]
     public int menuAmount = 6;
+    int tempMenuAmount;
+    bool menuObjectIsOpened;
 
     [SerializeField] GameObject menu_Inventory;
     public GameObject playerInventory_MainParent;
@@ -508,6 +510,11 @@ public class TabletManager : Singleton<TabletManager>
     //When Opening Tablet from hand
     public void OpenTablet()
     {
+        if (!menuObjectIsOpened)
+        {
+            tempMenuAmount = menuAmount;
+        }
+
         SoundManager.Instance.Play_Tablet_OpenTablet_Clip();
 
         InventoryManager.Instance.ClosePlayerInventory();
@@ -519,7 +526,7 @@ public class TabletManager : Singleton<TabletManager>
         }
 
         //Set the MenuButtonBackround size
-        menuButton_Background.GetComponent<RectTransform>().sizeDelta = new Vector2((150 * menuAmount) + 35, menuButton_Background.GetComponent<RectTransform>().sizeDelta.y) ;
+        menuButton_Background.GetComponent<RectTransform>().sizeDelta = new Vector2((150 * tempMenuAmount) + 35, menuButton_Background.GetComponent<RectTransform>().sizeDelta.y) ;
 
         //Set ItemTextInfo for both player and chest
         InventoryManager.Instance.SetPlayerItemInfo(Items.None, true);
@@ -563,7 +570,21 @@ public class TabletManager : Singleton<TabletManager>
     //When Opening Tablet from an InteracteableObject
     public void OpenTablet(TabletMenuState menuToOpen)
     {
+        menuObjectIsOpened = true;
+        tempMenuAmount = menuAmount + 1;
+
         OpenTablet();
+
+        menuObjectIsOpened = false;
+
+        if (menuToOpen == TabletMenuState.CraftingTable)
+        {
+            menu_CraftingTable_Button.SetActive(true);
+        }
+        else if (menuToOpen == TabletMenuState.SkillTree)
+        {
+            menu_Skilltree_Button.SetActive(true);
+        }
 
         MenuTransition(TabletMenuState.None, menuToOpen);
 
@@ -622,6 +643,10 @@ public class TabletManager : Singleton<TabletManager>
         {
             BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(false);
         }
+
+        //Hide Buttons
+        menu_CraftingTable_Button.SetActive(false);
+        menu_Skilltree_Button.SetActive(false);
     }
     
     void SetMenuDisplay(bool state)
