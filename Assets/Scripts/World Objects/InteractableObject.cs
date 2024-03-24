@@ -19,6 +19,10 @@ public class InteractableObject : MonoBehaviour
     [Header("If Object is a Plant")]
     public GameObject plantParent;
 
+    [Header("If Object is a Journal Page")]
+    public JournalMenuState journalType;
+    public int journalPageIndex;
+
     bool isHittingGround;
 
 
@@ -199,6 +203,19 @@ public class InteractableObject : MonoBehaviour
                 print("Interract with a GhostTank");
             }
             #endregion
+
+            //If Object is a JournalPage
+            #region
+            else if (interactableType == InteracteableType.JournalPage)
+            {
+                print("Interact with a Journal Page");
+
+                JournalManager.Instance.AddJournalPageToList(journalType, journalPageIndex);
+
+                //Destroy gameObject
+                DestroyThisObject();
+            }
+            #endregion
         }
     }
 
@@ -284,5 +301,8 @@ public enum InteracteableType
     [Description("Cryonite Ore")][InspectorName("Ore/Cryonite Ore")] Cryonite_Ore,
     [Description("Magnetite Ore")][InspectorName("Ore/Magnetite Ore")] Magnetite_Ore,
     [Description("Viridian Ore")][InspectorName("Ore/Viridian Ore")] Viridian_Ore,
-    [Description("Arídite Crystal Ore")][InspectorName("Ore/Arídite Crystal Ore")] AríditeCrystal_Ore
+    [Description("Arídite Crystal Ore")][InspectorName("Ore/Arídite Crystal Ore")] AríditeCrystal_Ore,
+
+    //Journal Pages
+    [Description("Journal Page")][InspectorName("Journal Page/Journal Page")] JournalPage
 }

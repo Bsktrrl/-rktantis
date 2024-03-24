@@ -8,14 +8,14 @@ public class GameData
     //Player Pos and Rotation
     [HideInInspector] public Vector3 playerPos_Save = new Vector3();
     [HideInInspector] public Quaternion playerRot_Save = new Quaternion();
-    
+
     //Inventories
-    public List<Inventory> Inventories_SaveList = new List<Inventory>();
+    [HideInInspector] public List<Inventory> Inventories_SaveList = new List<Inventory>();
     [HideInInspector] public Vector2 smallChest_Size_Save;
     [HideInInspector] public Vector2 bigChest_Size_Save;
 
     //MenuEquipment
-    public List<Items> menuEquipedItemList_SaveList = new List<Items>();
+    [HideInInspector] public List<Items> menuEquipedItemList_SaveList = new List<Items>();
 
     //WorldObjects
     [HideInInspector] public List<WorldObject> worldObject_SaveList = new List<WorldObject>();
@@ -25,7 +25,7 @@ public class GameData
 
     //Hotbar
     [HideInInspector] public int selectedSlot_Save = new int();
-    public List<Hotbar> hotbarItem_SaveList = new List<Hotbar>();
+    [HideInInspector] public List<Hotbar> hotbarItem_SaveList = new List<Hotbar>();
 
     //MoveableObjects
     [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_SaveList = new List<MoveableObject_ToSave>();
@@ -43,6 +43,11 @@ public class GameData
     //Time
     [HideInInspector] public float currentTime_Save = new float();
     [HideInInspector] public int day_Save = new int();
+
+    //Journals
+    [HideInInspector] public List<int> mentorStoryJournalPageIndexList_Save = new List<int>();
+    [HideInInspector] public List<int> playerStoryJournalPageIndexList_Save = new List<int>();
+    [HideInInspector] public List<int> personalStoryJournalPageIndexList_Save = new List<int>();
 
 
     //--------------------
@@ -63,5 +68,9 @@ public class GameData
 
         this.plantTypeObjectList_Save.Clear();
         this.oreTypeObjectList_Save.Clear();
+
+        this.mentorStoryJournalPageIndexList_Save.Clear();
+        this.playerStoryJournalPageIndexList_Save.Clear();
+        this.personalStoryJournalPageIndexList_Save.Clear();
     }
 }

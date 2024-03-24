@@ -13,13 +13,16 @@ public class TabletManager : Singleton<TabletManager>
     public GameObject objectInteractingWith_Object;
 
     [Header("Menus")]
-    int menuAmount = 4;
+    public int menuAmount = 6;
+
     [SerializeField] GameObject menu_Inventory;
     public GameObject playerInventory_MainParent;
     public GameObject chestInventory_MainParent;
     public GameObject equipInventory_MainParent;
     public GameObject playerInventory_Parent;
     public GameObject chestInventory_Parent;
+    public GameObject journal_Parent;
+    public GameObject settings_Parent;
 
     [SerializeField] GameObject menu_CraftingTable;
     [SerializeField] GameObject menu_Skilltree;
@@ -30,6 +33,8 @@ public class TabletManager : Singleton<TabletManager>
     [SerializeField] GameObject menu_CraftingTable_Button;
     [SerializeField] GameObject menu_Skilltree_Button;
     [SerializeField] GameObject menu_MoveableObjects_Button;
+    [SerializeField] GameObject menu_Journal_Button;
+    [SerializeField] GameObject menu_Settings_Button;
 
     [SerializeField] GameObject menu_Equipment_Button;
     [SerializeField] GameObject menu_Chest_Button;
@@ -144,6 +149,13 @@ public class TabletManager : Singleton<TabletManager>
             MenuTransition(tabletMenuState, TabletMenuState.Inventory);
         }
     }
+    public void MenuButton_Journal_onClick()
+    {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
+        MenuTransition(tabletMenuState, TabletMenuState.Journal);
+    }
     public void MenuButton_CraftingTable_onClick()
     {
         //Play Change Menu Sound
@@ -164,6 +176,13 @@ public class TabletManager : Singleton<TabletManager>
         SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
 
         MenuTransition(tabletMenuState, TabletMenuState.MoveableObjects);
+    }
+    public void MenuButton_Settings_onClick()
+    {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
+        MenuTransition(tabletMenuState, TabletMenuState.Settings);
     }
 
     public void MenuButton_Chest_onClick()
@@ -269,6 +288,8 @@ public class TabletManager : Singleton<TabletManager>
         menu_CraftingTable_Button.GetComponent<Image>().sprite = menuButton_Passive;
         menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Passive;
         menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        menu_Journal_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        menu_Settings_Button.GetComponent<Image>().sprite = menuButton_Passive;
 
         playerInventory_MainParent.SetActive(false);
         chestInventory_MainParent.SetActive(false);
@@ -277,6 +298,8 @@ public class TabletManager : Singleton<TabletManager>
         menu_CraftingTable.SetActive(false);
         menu_Skilltree.SetActive(false);
         menu_MoveableObjects.SetActive(false);
+        journal_Parent.SetActive(false);
+        settings_Parent.SetActive(false);
 
         InventoryManager.Instance.DisplayInventoryItemInfo();
 
@@ -305,6 +328,12 @@ public class TabletManager : Singleton<TabletManager>
             case TabletMenuState.MoveableObjects:
                 menu_MoveableObjects.SetActive(false);
                 BuildingSystemMenu.Instance.BuildingBlockSelecter_Exit();
+                break;
+            case TabletMenuState.Journal:
+                journal_Parent.SetActive(false);
+                break;
+            case TabletMenuState.Settings:
+                settings_Parent.SetActive(false);
                 break;
 
             default:
@@ -419,6 +448,44 @@ public class TabletManager : Singleton<TabletManager>
 
                 BuildingSystemMenu.Instance.BuildingBlockSelecter_Enter();
                 break;
+            case TabletMenuState.Journal:
+                MainManager.Instance.menuStates = MenuStates.JournalMenu;
+                tabletMenuState = TabletMenuState.Journal;
+
+                JournalManager.Instance.ResetInfoPage();
+
+                journal_Parent.SetActive(true);
+
+                menu_Equipment_Button.SetActive(false);
+                menu_Chest_Button.SetActive(false);
+
+                playerInventory_MainParent.SetActive(false);
+                chestInventory_MainParent.SetActive(false);
+                equipInventory_MainParent.SetActive(false);
+                menu_Inventory.SetActive(false);
+
+                JournalManager.Instance.MentorJournalButton_isPressed();
+
+                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                menu_Journal_Button.GetComponent<Image>().sprite = menuButton_Active;
+                break;
+            case TabletMenuState.Settings:
+                MainManager.Instance.menuStates = MenuStates.SettingsMenu;
+                tabletMenuState = TabletMenuState.Settings;
+
+                settings_Parent.SetActive(true);
+
+                menu_Equipment_Button.SetActive(false);
+                menu_Chest_Button.SetActive(false);
+
+                playerInventory_MainParent.SetActive(false);
+                chestInventory_MainParent.SetActive(false);
+                equipInventory_MainParent.SetActive(false);
+                menu_Inventory.SetActive(false);
+
+                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                menu_Settings_Button.GetComponent<Image>().sprite = menuButton_Active;
+                break;
 
             default: //Inventory
                 MainManager.Instance.menuStates = MenuStates.InventoryMenu;
@@ -446,7 +513,7 @@ public class TabletManager : Singleton<TabletManager>
         InventoryManager.Instance.ClosePlayerInventory();
 
         //If BuildingHammer is in hand, open the MoveableObjectMenu
-        if (MainManager.Instance.gameStates == GameStates.Building)
+        if (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
         {
             MenuTransition(tabletMenuState, TabletMenuState.MoveableObjects);
         }
@@ -647,7 +714,9 @@ public enum TabletMenuState
     SkillTree,
     MoveableObjects,
     ChestInventory,
-    Equipment
+    Equipment,
+    Journal,
+    Settings
 }
 public enum ObjectInteractingWith
 {

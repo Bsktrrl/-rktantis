@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1caf86580294440b3628f169c21666, type: 3}
+  m_Name: 3. PersonalJournal
+  m_EditorClassIdentifier: 
+  journalPageList:
+  - journalMenuState: 0
+    title: Personal Journal - Test 1
+    autor: Me 1
+    destination: Away 1
+    date: {x: 1, y: 1, z: 2001}
+    time: {x: 0, y: 0, z: 0}
+    pageHeight: 530
+    message: Personal Journal - Test 1
+    message_Clip: {fileID: 0}
+  - journalMenuState: 0
+    title: Personal Journal - Test 2
+    autor: Me 2
+    destination: Away 2
+    date: {x: 2, y: 2, z: 2002}
+    time: {x: 1, y: 1, z: 1}
+    pageHeight: 530
+    message: Personal Journal - Test 2
+    message_Clip: {fileID: 0}
+  - journalMenuState: 0
+    title: Personal Journal - Test 3
+    autor: Me 3
+    destination: Away 3
+    date: {x: 3, y: 3, z: 2003}
+    time: {x: 22, y: 22, z: 22}
+    pageHeight: 530
+    message: Personal Journal - Test 3
+    message_Clip: {fileID: 8300000, guid: e5b9e91a47cc80f438004c4e414aee2f, type: 3}

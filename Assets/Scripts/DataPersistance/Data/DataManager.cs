@@ -27,11 +27,11 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public Vector2 bigChest_Size_Store;
 
     //MenuEquipment
-    public List<Items> menuEquipedItemList_StoreList = new List<Items>();
+    [HideInInspector] public List<Items> menuEquipedItemList_StoreList = new List<Items>();
 
     //Hotbar
     [HideInInspector] public int selectedSlot_Store = new int();
-    public List<Hotbar> hotbarItem_StoreList = new List<Hotbar>();
+    [HideInInspector] public List<Hotbar> hotbarItem_StoreList = new List<Hotbar>();
 
     //BuidingSystem
     [HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_StoreList = new List<BuildingBlockSaveList>();
@@ -53,6 +53,10 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public float currentTime_Store = new float();
     [HideInInspector] public int day_Store = new int();
 
+    //Journals
+    [HideInInspector] public List<int> mentorStoryJournalPageIndexList_Store = new List<int>();
+    [HideInInspector] public List<int> playerStoryJournalPageIndexList_Store = new List<int>();
+    [HideInInspector] public List<int> personalStoryJournalPageIndexList_Store = new List<int>();
 
 
     //--------------------
@@ -89,6 +93,10 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         this.plantTypeObjectList_Store = gameData.plantTypeObjectList_Save;
         this.oreTypeObjectList_Store = gameData.oreTypeObjectList_Save;
+
+        this.mentorStoryJournalPageIndexList_Store = gameData.mentorStoryJournalPageIndexList_Save;
+        this.playerStoryJournalPageIndexList_Store = gameData.playerStoryJournalPageIndexList_Save;
+        this.personalStoryJournalPageIndexList_Store = gameData.personalStoryJournalPageIndexList_Save;
         #endregion
 
         //Load the saved data into the project
@@ -125,6 +133,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         OreManager.Instance.LoadData();
         print("10. Ores has Loaded");
+
+        JournalManager.Instance.LoadData();
+        print("11. Journals has Loaded");
         #endregion
 
         print("------------------------------");
@@ -161,6 +172,10 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         gameData.plantTypeObjectList_Save = this.plantTypeObjectList_Store;
         gameData.oreTypeObjectList_Save = this.oreTypeObjectList_Store;
+
+        gameData.mentorStoryJournalPageIndexList_Save = this.mentorStoryJournalPageIndexList_Store;
+        gameData.playerStoryJournalPageIndexList_Save = this.playerStoryJournalPageIndexList_Store;
+        gameData.personalStoryJournalPageIndexList_Save = this.personalStoryJournalPageIndexList_Store;
 
         print("Data has Saved");
     }

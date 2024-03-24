@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1caf86580294440b3628f169c21666, type: 3}
+  m_Name: 2. PlayerJournal
+  m_EditorClassIdentifier: 
+  journalPageList:
+  - journalMenuState: 0
+    title: Player Journal - Test 1
+    autor: Him 1
+    destination: Desert 1
+    date: {x: 10, y: 10, z: 10}
+    time: {x: 10, y: 10, z: 10}
+    pageHeight: 530
+    message: Player Journal - Test 1
+    message_Clip: {fileID: 0}
+  - journalMenuState: 0
+    title: Player Journal - Test 2
+    autor: Him 2
+    destination: Desert 2
+    date: {x: 20, y: 20, z: 20}
+    time: {x: 20, y: 20, z: 20}
+    pageHeight: 530
+    message: Player Journal - Test 2
+    message_Clip: {fileID: 0}
+  - journalMenuState: 0
+    title: Player Journal - Test 3
+    autor: Him 3
+    destination: Desert 3
+    date: {x: 30, y: 30, z: 30}
+    time: {x: 30, y: 30, z: 30}
+    pageHeight: 530
+    message: Player Journal - Test 3
+    message_Clip: {fileID: 0}

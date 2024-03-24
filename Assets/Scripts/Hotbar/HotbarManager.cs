@@ -219,6 +219,8 @@ public class HotbarManager : Singleton<HotbarManager>
 
     void HandSelection_Down()
     {
+        if (MainManager.Instance.menuStates == MenuStates.JournalMenu) { return; }
+
         SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
 
         selectedSlot--;
@@ -241,6 +243,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void HandSelection_UP()
     {
+        if (MainManager.Instance.menuStates == MenuStates.JournalMenu) { return; }
+
         SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
 
         selectedSlot++;

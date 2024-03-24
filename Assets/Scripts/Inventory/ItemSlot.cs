@@ -161,13 +161,6 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             InventoryManager.Instance.DeselectItemInfoToHotbar(HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName, HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemsID);
 
             HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
-
-            //HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].itemName = Items.None;
-            //HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].itemID = -1;
-            //HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].durabilityMax = 0;
-            //HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].durabilityCurrent = 0;
-
-            //HotbarManager.Instance.SetSelectedItem();
             #endregion
 
             //Add item to the Hotbar if item isn't already on the Hotbar
@@ -191,6 +184,75 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             #endregion
         }
     }
+    public void AssignItemToHotbar(int slotNumber)
+    {
+        if (itemName != Items.None)
+        {
+            //Check if item is already on the Hotbar, to remove it
+            #region
+            for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
+            {
+                if (HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName != Items.None
+                    && HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemName == itemName
+                    && HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().hotbarItemsID == itemID)
+                {
+                    SoundManager.Instance.Play_Hotbar_RemoveItemFromHotbar_Clip();
+
+                    HotbarManager.Instance.hotbarList[i].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
+
+                    HotbarManager.Instance.hotbarList[i].itemName = Items.None;
+                    HotbarManager.Instance.hotbarList[i].itemID = -1;
+                    HotbarManager.Instance.hotbarList[i].durabilityMax = 0;
+                    HotbarManager.Instance.hotbarList[i].durabilityCurrent = 0;
+
+                    HotbarManager.Instance.SetSelectedItem();
+
+                    InventoryManager.Instance.DeselectItemInfoToHotbar(itemName, itemID);
+
+                    //Update the Hand to see if slot is empty
+                    HotbarManager.Instance.ChangeItemInHand();
+
+                    if (i == slotNumber)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            #endregion
+
+            //Remove the item currently in the taken HotbarSlot
+            #region
+            InventoryManager.Instance.DeselectItemInfoToHotbar(HotbarManager.Instance.hotbarList[slotNumber].hotbar.GetComponent<HotbarSlot>().hotbarItemName, HotbarManager.Instance.hotbarList[slotNumber].hotbar.GetComponent<HotbarSlot>().hotbarItemsID);
+
+            HotbarManager.Instance.hotbarList[slotNumber].hotbar.GetComponent<HotbarSlot>().RemoveItemFromHotbar();
+            #endregion
+
+            //Add item to the Hotbar if item isn't already on the Hotbar
+            #region
+            //Add the new item to the now empty HotbarSlot
+            SoundManager.Instance.Play_Hotbar_AssignItemToHotbar_Clip();
+
+            HotbarManager.Instance.hotbarList[slotNumber].hotbar.GetComponent<HotbarSlot>().hotbarItemName = itemName;
+            HotbarManager.Instance.hotbarList[slotNumber].hotbar.GetComponent<HotbarSlot>().SetHotbarItemID(itemID);
+            HotbarManager.Instance.hotbarList[slotNumber].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotDisplay();
+            HotbarManager.Instance.hotbarList[slotNumber].itemName = itemName;
+            HotbarManager.Instance.hotbarList[slotNumber].itemID = itemID;
+            HotbarManager.Instance.hotbarList[slotNumber].durabilityMax = durabilityMax;
+            HotbarManager.Instance.hotbarList[slotNumber].durabilityCurrent = durabilityCurrent;
+
+            HotbarManager.Instance.SetSelectedItem();
+            InventoryManager.Instance.SelectItemInfoToHotbar(slotNumber, itemName, itemID);
+
+            //Update the Hand to see if slot is empty
+            HotbarManager.Instance.ChangeItemInHand();
+            #endregion
+        }
+    }
+
     void MoveItemBetweenChests()
     {
         //print("ChestInventory - Right");
@@ -305,6 +367,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         {
             InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
+
+        InventoryManager.Instance.lastIDToGet = itemID;
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -319,6 +383,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         }
 
         InventoryManager.Instance.SetItemSelectedHighlight_Active(inventoryIndex, itemID, itemName, false);
+
+        InventoryManager.Instance.lastIDToGet = -1;
     }
 
 

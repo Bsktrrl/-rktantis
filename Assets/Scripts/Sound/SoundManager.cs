@@ -148,6 +148,10 @@ public class SoundManager : Singleton<SoundManager>
     [Header("Buffs")]
     [SerializeField] AudioClip buff_Deactivated; //
     #endregion
+    #region Journal Pages
+    [Header("Journal Pages")]
+    [SerializeField] AudioClip journalPage_GetNewJournalPage; //
+    #endregion
 
     #endregion
 
@@ -933,6 +937,19 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource1 != null)
         {
             audioSource1.clip = buff_Deactivated;
+            audioSource1.volume = 1f;
+            audioSource1.pitch = 1f;
+            audioSource1.Play();
+        }
+    }
+    #endregion
+
+    #region Journal Pages
+    public void Play_JournalPage_GetNewJournalPage_Clip()
+    {
+        if (audioSource1 != null)
+        {
+            audioSource1.clip = journalPage_GetNewJournalPage;
             audioSource1.volume = 1f;
             audioSource1.pitch = 1f;
             audioSource1.Play();

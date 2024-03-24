@@ -40,6 +40,11 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] Image oreDisplay_Image;
     [SerializeField] GameObject oreDisplay_LineObject;
     [SerializeField] TextMeshProUGUI oreDisplay_Text;
+
+    [Header("Journal Page")]
+    [SerializeField] GameObject journalDisplay_Panel;
+    [SerializeField] TextMeshProUGUI journalCategory_Text;
+    [SerializeField] TextMeshProUGUI journalEntryNumber_Text;
     #endregion
 
 
@@ -57,7 +62,6 @@ public class LookAtManager : Singleton<LookAtManager>
         {
             return;
         }
-
 
 
         //-------------------- Other than InteracteableType
@@ -221,6 +225,23 @@ public class LookAtManager : Singleton<LookAtManager>
         }
         #endregion
 
+
+        //If looking at a Journal Page
+        #region
+        else if (typeLookingAt == InteracteableType.JournalPage)
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            JourneyDisplay();
+
+            journalDisplay_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
+
+
         //-------------------- Other
 
 
@@ -237,6 +258,7 @@ public class LookAtManager : Singleton<LookAtManager>
     //--------------------
 
 
+    #region Displays
     void ItemDisplay()
     {
         if (SelectionManager.Instance.selecedObject && SelectionManager.Instance.onTarget)
@@ -498,6 +520,31 @@ public class LookAtManager : Singleton<LookAtManager>
         }
     }
 
+    void JourneyDisplay()
+    {
+        if (SelectionManager.Instance.selecedObject)
+        {
+            if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+            {
+                if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().journalType == JournalMenuState.MentorJournal)
+                {
+                    journalCategory_Text.text = "Mentor Journal Page";
+                }
+                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().journalType == JournalMenuState.PlayerJournal)
+                {
+                    journalCategory_Text.text = "Player Journal Page";
+                }
+                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().journalType == JournalMenuState.PersonalJournal)
+                {
+                    journalCategory_Text.text = "Personal Journal Page";
+                }
+
+                journalEntryNumber_Text.text = "Entry no. " + (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().journalPageIndex + 1);
+            }
+        }
+    }
+    #endregion
+
 
     //--------------------
 
@@ -510,6 +557,8 @@ public class LookAtManager : Singleton<LookAtManager>
         Item_Panel.SetActive(false);
         Plant_Panel.SetActive(false);
         MovableObject_Panel.SetActive(false);
+
+        journalDisplay_Panel.SetActive(false);
 
         centerImage.SetActive(true);
     }
