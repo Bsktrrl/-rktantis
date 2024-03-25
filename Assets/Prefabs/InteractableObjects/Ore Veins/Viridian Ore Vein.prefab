@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544f14798540afe48a62c72edaec7ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderer: {fileID: 2247543073647463448}
   oreVein: {fileID: 2634380381468127747}
   oreHealth: 10
   tempOreHealth: 0
@@ -201,6 +202,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4967512415966346075}
   m_SourcePrefab: {fileID: 100100000, guid: 2ed33bed15d85f74fb3d8867113f2654, type: 3}
+--- !u!23 &2247543073647463448 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -5224532177701387446, guid: 2ed33bed15d85f74fb3d8867113f2654,
+    type: 3}
+  m_PrefabInstance: {fileID: 2904359063844769618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2634380381468127747 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2ed33bed15d85f74fb3d8867113f2654,

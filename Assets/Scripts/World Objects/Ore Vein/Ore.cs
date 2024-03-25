@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Ore : MonoBehaviour
 {
+    [SerializeField] MeshRenderer renderer;
+
     [Header("Prefabs")]
     public GameObject oreVein;
 
@@ -27,6 +29,8 @@ public class Ore : MonoBehaviour
     private void Start()
     {
         tempOreHealth = oreHealth;
+
+        //SetOreCracks();
     }
     private void Update()
     {
@@ -202,7 +206,10 @@ public class Ore : MonoBehaviour
             {
                 tempOreHealth -= MainManager.Instance.GetItem(itemName).orePower;
             }
-            
+
+            //Update Cracks
+            SetOreCracks();
+
             //Check if the OreHealth is 0
             if ((tempOreHealth - OreManager.Instance.oreHealthReducer) <= 0)
             {
@@ -284,6 +291,15 @@ public class Ore : MonoBehaviour
     //--------------------
 
 
+    public void SetOreCracks()
+    {
+        renderer.sharedMaterial.SetFloat("_Cracks", 1 - (tempOreHealth / oreHealth));
+    }
+
+
+    //--------------------
+
+
     void OreRespawn()
     {
         //Stop dormant process
@@ -298,6 +314,8 @@ public class Ore : MonoBehaviour
         tempOreHealth = oreHealth;
 
         OreManager.Instance.ChangeOreInfo(isHacked, dormantTimer, oreIndex_x, oreIndex_y, percentageCheck, tempOreHealth, gameObject.transform.position);
+
+        SetOreCracks();
 
         //Show Mesh
         oreVein.SetActive(true);
