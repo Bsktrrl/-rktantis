@@ -400,6 +400,8 @@ public class TabletManager : Singleton<TabletManager>
                 MainManager.Instance.menuStates = MenuStates.CraftingMenu;
                 tabletMenuState = TabletMenuState.CraftingTable;
 
+                CraftingManager.Instance.SetupSelectionScreen();
+
                 CraftingManager.Instance.OpenCraftingScreen();
                 menu_CraftingTable.SetActive(true);
 
@@ -515,6 +517,8 @@ public class TabletManager : Singleton<TabletManager>
             tempMenuAmount = menuAmount;
         }
 
+        Arms.Instance.OpenTabletAnimation();
+
         SoundManager.Instance.Play_Tablet_OpenTablet_Clip();
 
         InventoryManager.Instance.ClosePlayerInventory();
@@ -571,8 +575,16 @@ public class TabletManager : Singleton<TabletManager>
     public void OpenTablet(TabletMenuState menuToOpen)
     {
         menuObjectIsOpened = true;
-        tempMenuAmount = menuAmount + 1;
 
+        if (menuToOpen != TabletMenuState.ChestInventory)
+        {
+            tempMenuAmount = menuAmount + 1;
+        }
+        else
+        {
+            tempMenuAmount = menuAmount;
+        }
+        
         OpenTablet();
 
         menuObjectIsOpened = false;
@@ -596,13 +608,25 @@ public class TabletManager : Singleton<TabletManager>
     
     public void CloseTablet()
     {
+        Arms.Instance.CloseTabletAnimation();
         SoundManager.Instance.Play_Tablet_CloseTablet_Clip();
+
+        //Turn everyting off after animation is finished
+        StartCoroutine(CloseTabletCoroutine(0.2f));
+    }
+    IEnumerator CloseTabletCoroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
 
         //Deselect DurabilityInfo on inventoryItems
         InventoryManager.Instance.DeselectItemDurabilityDisplay();
 
         //Close all menus
         tablet_Parent.SetActive(false);
+
+        //Remove all Items from the SelectedSubList
+        //CraftingManager.Instance.ResetSelectedList();
+
         //SetMenuDisplay(false);
 
         InventoryManager.Instance.ClosePlayerInventory();
@@ -630,7 +654,7 @@ public class TabletManager : Singleton<TabletManager>
                 objectInteractingWith_Object.GetComponent<Animations_Objects>().StopAnimation();
             }
         }
-        
+
         objectInteractingWith_Object = null;
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -648,7 +672,7 @@ public class TabletManager : Singleton<TabletManager>
         menu_CraftingTable_Button.SetActive(false);
         menu_Skilltree_Button.SetActive(false);
     }
-    
+
     void SetMenuDisplay(bool state)
     {
         //Reset all Menu Displays

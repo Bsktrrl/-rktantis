@@ -17,6 +17,9 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
     {
         categoryButton_isClicked += OtherButtonClicked;
 
+        //Change Pos/Rot
+        gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0f, 0f, 0f));
+
         //Set Frame Blue
         GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Active;
     }

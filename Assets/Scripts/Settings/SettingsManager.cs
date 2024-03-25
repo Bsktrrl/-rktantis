@@ -64,7 +64,7 @@ public class SettingsManager : Singleton<SettingsManager>
             settingsValues.sound_Voice = 1f;
             settingsValues.sound_Weather = 1f;
 
-            settingsValues.camera_FOV = 0.3f;
+            settingsValues.camera_FOV = 0.25f;
             settingsValues.camera_MouseSensitivity = 0.2f;
 
             //Setup all Slider
@@ -75,7 +75,7 @@ public class SettingsManager : Singleton<SettingsManager>
             UI_Sound_Voice.value = 1f;
             UI_Sound_Weather.value = 1f;
 
-            UI_Camera_FOV.value = 0.3f;
+            UI_Camera_FOV.value = 0.25f;
             UI_Camera_MouseSensitivity.value = 0.2f;
 
             firstSetup = true;
@@ -83,6 +83,8 @@ public class SettingsManager : Singleton<SettingsManager>
 
             SaveData();
         }
+
+        MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
     }
 
 
@@ -217,7 +219,7 @@ public class SettingsManager : Singleton<SettingsManager>
     }
     void ChangeComponents()
     {
-        MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 50) + 50;
+        MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
         MouseMovement.Instance.mouseSensitivity = (settingsValues.camera_MouseSensitivity * 200) + 50;
     }
     void ChangeTextDisplay_Percent()
@@ -230,7 +232,7 @@ public class SettingsManager : Singleton<SettingsManager>
         UI_Sound_Voice_Text.text = (settingsValues.sound_Voice * 100).ToString("F0") + "%";
         UI_Sound_Weather_Text.text = (settingsValues.sound_Weather * 100).ToString("F0") + "%";
 
-        UI_Camera_FOV_Text.text = ((settingsValues.camera_FOV * 50) + 50).ToString("F0");
+        UI_Camera_FOV_Text.text = ((settingsValues.camera_FOV * 20) + 60).ToString("F0");
         UI_Camera_MouseSensitivity_Text.text = ((settingsValues.camera_MouseSensitivity * 200) + 50).ToString("F0");
     }
 }

@@ -17,6 +17,9 @@ public class SelectionSubButtonPrefab : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
+        //Change Pos/Rot
+        gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0f, 0f, 0f));
+
         //categorySubButton_isClicked += OtherButtonClicked;
     }
 

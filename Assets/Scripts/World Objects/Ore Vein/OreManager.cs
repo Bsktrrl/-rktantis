@@ -141,6 +141,9 @@ public class OreManager : Singleton<OreManager>
                             }
                         }
                     }
+
+                    //Set Cracks
+                    oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(k).GetComponent<Ore>().SetOreCracks();
                 }
             }
         }
@@ -154,22 +157,28 @@ public class OreManager : Singleton<OreManager>
                 {
                     print("New Ores: [" + i + "][" + j + "]");
 
-                    //Give all Legal Objects an index
-                    oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().oreIndex_x = i;
-                    oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().oreIndex_y = j;
+                    if (oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j))
+                    {
+                        //Give all Legal Objects an index
+                        oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().oreIndex_x = i;
+                        oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().oreIndex_y = j;
 
-                    //Make a OreTypeObjectList
-                    OreToSave tempOre = new OreToSave();
+                        //Set Cracks
+                        oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().SetOreCracks();
 
-                    tempOre.isHacked = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().isHacked;
-                    tempOre.dormantTimer = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().dormantTimer;
-                    tempOre.oreIndex_x = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().oreIndex_x;
-                    tempOre.oreIndex_y = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().oreIndex_y;
-                    tempOre.percentageCheck = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().percentageCheck;
-                    tempOre.oreHealth = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().oreHealth;
-                    tempOre.orePos = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().transform.position;
+                        //Make a OreTypeObjectList
+                        OreToSave tempOre = new OreToSave();
 
-                    tempOreTypeObjectList[i].Add(tempOre);
+                        tempOre.isHacked = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().isHacked;
+                        tempOre.dormantTimer = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().dormantTimer;
+                        tempOre.oreIndex_x = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().oreIndex_x;
+                        tempOre.oreIndex_y = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().oreIndex_y;
+                        tempOre.percentageCheck = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().percentageCheck;
+                        tempOre.oreHealth = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().oreHealth;
+                        tempOre.orePos = oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Ore>().transform.position;
+
+                        tempOreTypeObjectList[i].Add(tempOre);
+                    }
                 }
             }
         }

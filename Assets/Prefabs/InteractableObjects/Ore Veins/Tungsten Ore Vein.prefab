@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544f14798540afe48a62c72edaec7ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderer: {fileID: 5356508521300553959}
   oreVein: {fileID: 240532401378305070}
   oreHealth: 4
   tempOreHealth: 0
@@ -232,6 +233,12 @@ MeshCollider:
 --- !u!4 &584722883441360532 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9adccb09aa188c348a58a9c1d3999321,
+    type: 3}
+  m_PrefabInstance: {fileID: 1123616359455725951}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5356508521300553959 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4196854304581752424, guid: 9adccb09aa188c348a58a9c1d3999321,
     type: 3}
   m_PrefabInstance: {fileID: 1123616359455725951}
   m_PrefabAsset: {fileID: 0}

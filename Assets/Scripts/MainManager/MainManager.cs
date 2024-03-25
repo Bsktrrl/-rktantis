@@ -8,6 +8,7 @@ public class MainManager : Singleton<MainManager>
     public GameObject player;
     public Camera mainCamera;
     public Canvas mainCanvas;
+    public Canvas mainTabletCanvas;
 
     [Header("Game States")]
     public MenuStates menuStates;
