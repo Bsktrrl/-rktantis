@@ -1716,10 +1716,10 @@ MonoBehaviour:
   UI_Sound_Voice_Text: {fileID: 4239299994274009007}
   UI_Sound_Weather: {fileID: 2099859161413494752}
   UI_Sound_Weather_Text: {fileID: 2993916514521785806}
-  UI_Camera_FOV: {fileID: 8856128062789783344}
-  UI_Camera_FOV_Text: {fileID: 5643006416599747870}
-  UI_Camera_MouseSensitivity: {fileID: 2660956142692928060}
-  UI_Camera_MouseSensitivity_Text: {fileID: 1172387800927078418}
+  UI_Camera_FOV: {fileID: 2660956142692928060}
+  UI_Camera_FOV_Text: {fileID: 1172387800927078418}
+  UI_Camera_MouseSensitivity: {fileID: 8856128062789783344}
+  UI_Camera_MouseSensitivity_Text: {fileID: 5643006416599747870}
 --- !u!1 &314057770822017081
 GameObject:
   m_ObjectHideFlags: 0
@@ -63505,6 +63505,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FOV_Sound
       objectReference: {fileID: 0}
+    - target: {fileID: 2644569048905674882, guid: 1d79137186e13b94a922b57fb1435017,
+        type: 3}
+      propertyPath: m_text
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4550736962814095720, guid: 1d79137186e13b94a922b57fb1435017,
         type: 3}
       propertyPath: m_Name
@@ -67100,6 +67105,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mouse Sensitivity_Sound
+      objectReference: {fileID: 0}
+    - target: {fileID: 2644569048905674882, guid: 1d79137186e13b94a922b57fb1435017,
+        type: 3}
+      propertyPath: m_text
+      value: '100
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 4550736962814095720, guid: 1d79137186e13b94a922b57fb1435017,
         type: 3}

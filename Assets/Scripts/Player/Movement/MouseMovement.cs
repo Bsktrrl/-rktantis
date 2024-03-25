@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class MouseMovement : MonoBehaviour
+public class MouseMovement : Singleton<MouseMovement>
 {
-    [SerializeField] float mouseSensitivity = 300f;
+    public float mouseSensitivity = 90f;
 
     float xRotation = 0f;
     float YRotation = 0f;
