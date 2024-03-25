@@ -123,7 +123,8 @@ public enum MenuStates
     EquipmentMenu,
     MoveableObjectMenu,
     CraftingMenu,
-    SkillTreeMenu
+    SkillTreeMenu,
+    JournalMenu,
 }
 
 public enum GameStates

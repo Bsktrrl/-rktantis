@@ -62,6 +62,12 @@ public class InventoryManager : Singleton<InventoryManager>
         playerInventory_Fake_Parent.SetActive(false);
         chestInventory_Fake_Parent.SetActive(false);
 
+        PlayerButtonManager.isPressed_1 += QuickHotbarSelect_1;
+        PlayerButtonManager.isPressed_2 += QuickHotbarSelect_2;
+        PlayerButtonManager.isPressed_3 += QuickHotbarSelect_3;
+        PlayerButtonManager.isPressed_4 += QuickHotbarSelect_4;
+        PlayerButtonManager.isPressed_5 += QuickHotbarSelect_5;
+
         itemInfo = itemInfo_Parent.GetComponent<InventoryItemInfo>();
     }
     private void Update()
@@ -589,6 +595,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    #region
     public void CheckHotbarItemInInventory()
     {
         for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
@@ -812,11 +819,13 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
     }
+    #endregion
 
 
     //--------------------
 
 
+    #region
     public int GetAmountOfItemInInventory(int inventory, Items itemName)
     {
         int counter = 0;
@@ -844,11 +853,13 @@ public class InventoryManager : Singleton<InventoryManager>
 
         return true;
     }
+    #endregion
 
 
     //--------------------
 
 
+    #region
     public void SelectItemInfoToHotbar()
     {
         //Assign HotbarInfo to the correct ItemSlot
@@ -914,11 +925,13 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
     }
+    #endregion
 
 
     //--------------------
 
 
+    #region
     public void SelectItemDurabilityDisplay()
     {
         //Assign HotbarInfo to the correct ItemSlot
@@ -947,10 +960,13 @@ public class InventoryManager : Singleton<InventoryManager>
             itemSlotList_Player[i].GetComponent<ItemSlot>().DeactivateDurabilityMeter();
         }
     }
+    #endregion
+
 
     //--------------------
 
 
+    #region
     public void ChangeItemInfoBox(Items itemName, ItemSlot itemSlot)
     {
         //ItemSlot from Player Inventory
@@ -1005,6 +1021,87 @@ public class InventoryManager : Singleton<InventoryManager>
         else
         {
             itemInfo_Parent.SetActive(true);
+        }
+    }
+    #endregion
+
+
+    //--------------------
+
+
+    void QuickHotbarSelect_1()
+    {
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            if (itemSlotList_Player[i].GetComponent<ItemSlot>())
+            {
+                if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == lastIDToGet)
+                {
+                    itemSlotList_Player[i].GetComponent<ItemSlot>().AssignItemToHotbar(0);
+
+                    break;
+                }
+            }
+        }
+    }
+    void QuickHotbarSelect_2()
+    {
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            if (itemSlotList_Player[i].GetComponent<ItemSlot>())
+            {
+                if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == lastIDToGet)
+                {
+                    itemSlotList_Player[i].GetComponent<ItemSlot>().AssignItemToHotbar(1);
+
+                    break;
+                }
+            }
+        }
+    }
+    void QuickHotbarSelect_3()
+    {
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            if (itemSlotList_Player[i].GetComponent<ItemSlot>())
+            {
+                if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == lastIDToGet)
+                {
+                    itemSlotList_Player[i].GetComponent<ItemSlot>().AssignItemToHotbar(2);
+
+                    break;
+                }
+            }
+        }
+    }
+    void QuickHotbarSelect_4()
+    {
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            if (itemSlotList_Player[i].GetComponent<ItemSlot>())
+            {
+                if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == lastIDToGet)
+                {
+                    itemSlotList_Player[i].GetComponent<ItemSlot>().AssignItemToHotbar(3);
+
+                    break;
+                }
+            }
+        }
+    }
+    void QuickHotbarSelect_5()
+    {
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            if (itemSlotList_Player[i].GetComponent<ItemSlot>())
+            {
+                if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == lastIDToGet)
+                {
+                    itemSlotList_Player[i].GetComponent<ItemSlot>().AssignItemToHotbar(4);
+
+                    break;
+                }
+            }
         }
     }
 

@@ -33,13 +33,9 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
         worldObjectList_ToSave.Clear();
         worldObjectList_ToSave = DataManager.Instance.worldObject_StoreList;
 
-        print("1. worldObjectList_ToSave.Count: " + worldObjectList_ToSave.Count);
-
         //Instantiate Objects into the world
         for (int i = 0; i < worldObjectList_ToSave.Count; i++)
         {
-            print("2. worldObjectList_ToSave.Count: " + worldObjectList_ToSave.Count);
-
             worldObjectList.Add(Instantiate(GetSavedObject(worldObjectList_ToSave[i]), worldObjectList_ToSave[i].objectPosition, worldObjectList_ToSave[i].objectRotation) as GameObject);
             worldObjectList[worldObjectList.Count - 1].transform.parent = worldObjectParent.transform;
 
@@ -50,8 +46,6 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
                 worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
             }
         }
-
-        print("3. worldObjectList.Count: " + worldObjectList.Count);
         #endregion
 
         //Load all MoveableObjects
