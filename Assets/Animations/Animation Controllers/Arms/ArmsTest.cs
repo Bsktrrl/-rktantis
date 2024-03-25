@@ -49,19 +49,19 @@ public class ArmsTest : Singleton<ArmsTest>
         //}
 
         //Tablet
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            //if(anim.GetBool("Tablet") == false)
-            //{
-            //    anim.SetBool("Tablet", true);
-            //    print(anim.GetBool("Tablet"));
-            //}
-            //else if (anim.GetBool("Tablet") == true)
-            //{
-            //    anim.SetBool("Tablet", false);
-            //    print(anim.GetBool("Tablet"));
-            //}
-        }
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    if (anim.GetBool("Tablet") == false)
+        //    {
+        //        anim.SetBool("Tablet", true);
+        //        print(anim.GetBool("Tablet"));
+        //    }
+        //    else if (anim.GetBool("Tablet") == true)
+        //    {
+        //        anim.SetBool("Tablet", false);
+        //        print(anim.GetBool("Tablet"));
+        //    }
+        //}
 
         ////Set the tool category with shift + number keys (1=Axe, 2=Pickaxe, 3=Hammer, 4=Sword, 0=GhostCapturer)
         //if (Input.GetKey(KeyCode.LeftShift))

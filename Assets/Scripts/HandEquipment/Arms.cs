@@ -383,6 +383,23 @@ public class Arms : Singleton<Arms>
         }
     }
 
+
+    //--------------------
+
+
+    public void OpenTabletAnimation()
+    {
+        anim.SetBool("Tablet", true);
+    }
+    public void CloseTabletAnimation()
+    {
+        anim.SetBool("Tablet", false);
+    }
+
+
+    //--------------------
+
+
     void CanHit()
     {
         cannotHit = false;

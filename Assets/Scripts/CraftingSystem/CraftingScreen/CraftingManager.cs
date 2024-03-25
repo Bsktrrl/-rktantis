@@ -133,7 +133,7 @@ public class CraftingManager : Singleton<CraftingManager>
         categorySelectedName.text = SpaceTextConverting.Instance.SetText(FindActiveCategoryType().categoryName.ToString());
 
         //Reset Panel Size
-        selectionScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(380, 110);
+        selectionScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(380, 130);
 
         //Instantitate InstantiateSubGridLayoutGroup
         UpdateSelectionSubActiveList();
@@ -178,14 +178,18 @@ public class CraftingManager : Singleton<CraftingManager>
             }
         }
     }
-    public void InstantiateSubGridLayoutGroup()
+    public void ResetSelectedList()
     {
-        //Prepare for reset
         selectionSubGridLayoutGroupList.Clear();
         while (selectionSubGridLayoutGroup_Parent.transform.childCount > 0)
         {
             DestroyImmediate(selectionSubGridLayoutGroup_Parent.transform.GetChild(0).gameObject);
         }
+    }
+    public void InstantiateSubGridLayoutGroup()
+    {
+        //Prepare for reset
+        ResetSelectedList();
 
         //instantiate selectionSubGridLayoutGroup
         for (int i = 0; i < selectionSubActiveList.Count; i++)
@@ -300,7 +304,7 @@ public class CraftingManager : Singleton<CraftingManager>
         }
 
         //Reset Panel Size
-        craftingScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(270, 220);
+        craftingScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(270, 240);
 
         categoryCraftingImage.sprite = item.hotbarSprite;
         categoryCraftingName.text = SpaceTextConverting.Instance.SetText(item.itemName.ToString());

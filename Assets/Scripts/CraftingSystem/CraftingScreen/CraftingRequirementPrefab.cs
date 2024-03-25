@@ -25,6 +25,9 @@ public class CraftingRequirementPrefab : MonoBehaviour
 
     private void Start()
     {
+        //Change Pos/Rot
+        gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0f, 0f, 0f));
+
         requirementIsMet = false;
         //craftingItemImageOverlay.color = new Color(overlayColor_Inactive.r, overlayColor_Inactive.g, overlayColor_Inactive.b, overlayColor_Inactive.a);
         //craftingItemName.color = new Color(0.80f, 0.69f, 0.48f, 0.5f);

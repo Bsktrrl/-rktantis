@@ -29,8 +29,6 @@ public class Ore : MonoBehaviour
     private void Start()
     {
         tempOreHealth = oreHealth;
-
-        //SetOreCracks();
     }
     private void Update()
     {

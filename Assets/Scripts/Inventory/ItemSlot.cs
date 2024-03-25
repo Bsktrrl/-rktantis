@@ -25,6 +25,9 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
     private void Start()
     {
+        //Change Pos/Rot
+        gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0f, -180f, 0f));
+
         if (itemName != Items.None)
         {
             InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
