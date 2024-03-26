@@ -52,6 +52,9 @@ public class GameData
     //Settings
     [HideInInspector] public SettingsValues settingsValues_Save = new SettingsValues();
 
+    //Weather
+    [HideInInspector] public List<WeatherType> weatherTypeDayList_Save = new List<WeatherType>();
+
 
     //--------------------
 
@@ -75,5 +78,7 @@ public class GameData
         this.mentorStoryJournalPageIndexList_Save.Clear();
         this.playerStoryJournalPageIndexList_Save.Clear();
         this.personalStoryJournalPageIndexList_Save.Clear();
+
+        this.weatherTypeDayList_Save.Clear();
     }
 }

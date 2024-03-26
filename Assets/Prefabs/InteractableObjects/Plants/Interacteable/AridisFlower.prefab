@@ -225,13 +225,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantType: 1
   pickablePart: {fileID: 4546230405579593289}
+  thisGrowthTime: 600
   ColorMeshObject: []
   plantColors: []
   isPicked: 0
   growthTimer: 0
   growthPrecentage: 0
-  plantIndex: 0
-  precentageCheck: 0
+  growthBar: {fileID: 0}
+  plantIndex_x: 0
+  plantIndex_y: 0
+  percentageCheck: 0
 --- !u!1 &4546230405579593289 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4605038046812576271, guid: b951a7c13d2e60f4e83a1d9be64448d0,
@@ -304,6 +307,7 @@ MonoBehaviour:
   amount: 1
   durability_Current: 0
   interactableType: 19
-  oreHealth: 0
   inventoryIndex: 0
   plantParent: {fileID: 882278994278871319}
+  journalType: 0
+  journalPageIndex: 0

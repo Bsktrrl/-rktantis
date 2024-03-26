@@ -12,12 +12,26 @@ public class HealthManager : Singleton<HealthManager>
     public HealthToSave health_ToSave;
 
     public float hunger_Speed = 0.00001f;
+    public float hunger_SpeedMultiplier_ByWeather = 1f;
+
     public float heatResistance_Speed = 0.00001f;
+    public float heatResistance_SpeedMultiplier_ByWeather = 1f;
+
     public float thirst_Speed = 0.00001f;
+    public float thirst_SpeedMultiplier_ByWeather = 1f;
+
     public float mainHealth_Speed = 0.000025f;
+    public float mainHealth_SpeedMultiplier_ByWeather = 1f;
+
+
+    [Header("Colors")]
+    [SerializeField] Color fullColor;
+    [SerializeField] Color progressColor;
+    [SerializeField] Color emptyColor;
 
     [Header("Hunger Parameter")]
     [SerializeField] Image hunger_Image;
+    public Image hungerIcon_Image;
     public float hungerValue = 1;
     [SerializeField] List<GameObject> hungerValueMultiplier_Image = new List<GameObject>();
     public HealthValueMultiplier hungerValueMultiplier_Check = HealthValueMultiplier.None;
@@ -25,6 +39,7 @@ public class HealthManager : Singleton<HealthManager>
 
     [Header("HeatResistance Parameter")]
     [SerializeField] Image heatResistance_Image;
+    public Image heatResistanceIcon_Image;
     public float heatResistanceValue = 1;
     [SerializeField] List<GameObject> heatResistanceValueMultiplier_Image = new List<GameObject>();
     public HealthValueMultiplier heatResistanceValueMultiplier_Check = HealthValueMultiplier.None;
@@ -32,6 +47,7 @@ public class HealthManager : Singleton<HealthManager>
 
     [Header("Thirst Parameter")]
     [SerializeField] Image thirst_Image;
+    public Image thirstIcon_Image;
     public float thirstValue = 1;
     [SerializeField] List<GameObject> thirstValueMultiplier_Image = new List<GameObject>();
     public HealthValueMultiplier thirstValueMultiplier_Check = HealthValueMultiplier.None;
@@ -39,6 +55,7 @@ public class HealthManager : Singleton<HealthManager>
 
     [Header("MainHealth Parameter")]
     [SerializeField] Image mainHealth_Image;
+    public Image mainHealthIcon_Image;
     public float mainHealthValue = 1;
     [SerializeField] List<GameObject> mainHealthValueMultiplier_Image = new List<GameObject>();
     public HealthValueMultiplier mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
@@ -154,23 +171,59 @@ public class HealthManager : Singleton<HealthManager>
 
         //Speed Check
         #region
-        hungerValue += (hunger_Speed * healthValueMultiplier);
+        hungerValue += (hunger_Speed * hunger_SpeedMultiplier_ByWeather * healthValueMultiplier);
         if (hungerValue <= 0)
+        {
             hungerValue = 0;
+
+            hungerIcon_Image.color = emptyColor;
+        }
         else if (hungerValue >= 1)
+        {
             hungerValue = 1;
 
-        heatResistanceValue += (heatResistance_Speed * heatResistanceValueMultiplier);
+            hungerIcon_Image.color = fullColor;
+        }
+        else
+        {
+            hungerIcon_Image.color = progressColor;
+        }
+
+        heatResistanceValue += (heatResistance_Speed * heatResistance_SpeedMultiplier_ByWeather * heatResistanceValueMultiplier);
         if (heatResistanceValue <= 0)
+        {
             heatResistanceValue = 0;
+
+            heatResistanceIcon_Image.color = emptyColor;
+        }
         else if (heatResistanceValue >= 1)
+        {
             heatResistanceValue = 1;
 
-        thirstValue += (thirst_Speed * thirstValueMultiplier);
+            heatResistanceIcon_Image.color = fullColor;
+        }
+        else
+        {
+            heatResistanceIcon_Image.color = progressColor;
+        }
+
+        thirstValue += (thirst_Speed * thirst_SpeedMultiplier_ByWeather * thirstValueMultiplier);
         if (thirstValue <= 0)
+        {
             thirstValue = 0;
+
+            thirstIcon_Image.color = emptyColor;
+        }
         else if (thirstValue >= 1)
+        {
             thirstValue = 1;
+
+            thirstIcon_Image.color = fullColor;
+        }
+        else
+        {
+            thirstIcon_Image.color = progressColor;
+        }
         #endregion
 
         //Set Main Health Parameter
@@ -192,13 +245,25 @@ public class HealthManager : Singleton<HealthManager>
         }
         else
         {
-            mainHealthValue += -Mathf.Abs(mainHealth_Speed * mainHealthCounter);
+            mainHealthValue += -Mathf.Abs(mainHealth_Speed * mainHealth_SpeedMultiplier_ByWeather * mainHealthCounter);
         }
        
         if (mainHealthValue <= 0)
+        {
             mainHealthValue = 0;
+
+            mainHealthIcon_Image.color = emptyColor;
+        }
         else if (mainHealthValue >= 1)
+        {
             mainHealthValue = 1;
+
+            mainHealthIcon_Image.color = fullColor;
+        }
+        else
+        {
+            mainHealthIcon_Image.color = emptyColor;
+        }
         #endregion
 
         //Set Arrow Display
@@ -279,6 +344,7 @@ public class HealthManager : Singleton<HealthManager>
                                  Image thirst_Image, List<GameObject> thirstValueMultiplier_Image,
                                  Image mainHealth_Image)
     {
+        //Set Values
         hunger_Image.fillAmount = hungerValue;
         heatResistance_Image.fillAmount = heatResistanceValue;
         thirst_Image.fillAmount = thirstValue;

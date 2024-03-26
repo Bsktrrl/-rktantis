@@ -57,15 +57,19 @@ public class TabletManager : Singleton<TabletManager>
     [SerializeField] GameObject healthParameters_PlayerScreen_Parent;
 
     [SerializeField] Image hunger_Image;
+    [SerializeField] Image hungerIcon_Image;
     [SerializeField] List<GameObject> hungerValueMultiplier_Image = new List<GameObject>();
 
     [SerializeField] Image heatResistance_Image;
+    [SerializeField] Image heatResistanceIcon_Image;
     [SerializeField] List<GameObject> heatResistanceValueMultiplier_Image = new List<GameObject>();
 
     [SerializeField] Image thirst_Image;
+    [SerializeField] Image thirstIcon_Image;
     [SerializeField] List<GameObject> thirstValueMultiplier_Image = new List<GameObject>();
 
     [SerializeField] Image mainHealth_Image;
+    [SerializeField] Image mainHealthIcon_Image;
     [SerializeField] List<GameObject> mainHealthValueMultiplier_Image = new List<GameObject>();
 
     [Header("Timer")]
@@ -76,11 +80,24 @@ public class TabletManager : Singleton<TabletManager>
     [SerializeField] TextMeshProUGUI temperatureDisplay;
     [SerializeField] TextMeshProUGUI playerTemperatureDisplay;
 
+    [Header("TemperatureDisplay")]
+    public GameObject termostatDisplay_Parent;
+    [SerializeField] Image termostat_Image;
+    [SerializeField] Image pointer_Image;
+
+    [Header("WeatherDisplay")]
+    public GameObject weatherDisplay_Parent;
+    public GameObject weatherImageDisplay_Day1_Parent;
+    [SerializeField] Image weatherImage_Day1;
+
     [Header("Hotbar")]
     [SerializeField] List<Image> hotbarFrameImageList_Tablet = new List<Image>();
     [SerializeField] List<Image> hotbarIconImageList_Tablet = new List<Image>();
     [SerializeField] List<GameObject> hotbarItemDurabilityListParent_Tablet = new List<GameObject>();
     [SerializeField] List<Image> hotbarItemDurabilityList_Tablet = new List<Image>();
+
+    [Header("TabletObject")]
+    public GameObject tabletObject;
     #endregion
     #region SkillTree Menu Variables
     [Header("SkillTree Menu")]
@@ -105,6 +122,7 @@ public class TabletManager : Singleton<TabletManager>
         PlayerButtonManager.ClosePlayerInventory_isPressedDown += CloseTablet;
 
         tablet_Parent.SetActive(false);
+        tabletObject.SetActive(false);
         healthParameters_PlayerScreen_Parent.SetActive(true);
     }
     private void Update()
@@ -116,13 +134,23 @@ public class TabletManager : Singleton<TabletManager>
                                  heatResistance_Image, heatResistanceValueMultiplier_Image,
                                  thirst_Image, thirstValueMultiplier_Image,
                                  mainHealth_Image);
+
+            //Set Health Parameter Arrows
             HealthManager.Instance.SetHealthArrowDisplay(mainHealthValueMultiplier_Image);
 
-            //Set Timer Diplay
+            //Set Health Icon colors
+            hungerIcon_Image.color = HealthManager.Instance.hungerIcon_Image.color;
+            heatResistanceIcon_Image.color = HealthManager.Instance.heatResistanceIcon_Image.color;
+            thirstIcon_Image.color = HealthManager.Instance.thirstIcon_Image.color;
+            mainHealthIcon_Image.color = HealthManager.Instance.mainHealthIcon_Image.color;
+
+            //Set Timer Display
             TimeManager.Instance.SetTimerDisplay(clockText, dayText);
 
             //Set Temperature Display
-            WeatherManager.Instance.SetTemperatureDisplay(temperatureDisplay, playerTemperatureDisplay);
+            //WeatherManager.Instance.SetTemperatureDisplay(temperatureDisplay, playerTemperatureDisplay);
+            SetTemperatureDisplay();
+            SetWeatherDisplay();
 
             //Set the images of the Hotbar
             SetHotbarImages();
@@ -512,6 +540,8 @@ public class TabletManager : Singleton<TabletManager>
     //When Opening Tablet from hand
     public void OpenTablet()
     {
+        tabletObject.SetActive(true);
+
         if (!menuObjectIsOpened)
         {
             tempMenuAmount = menuAmount;
@@ -671,6 +701,7 @@ public class TabletManager : Singleton<TabletManager>
         //Hide Buttons
         menu_CraftingTable_Button.SetActive(false);
         menu_Skilltree_Button.SetActive(false);
+        tabletObject.SetActive(false);
     }
 
     void SetMenuDisplay(bool state)
@@ -715,6 +746,50 @@ public class TabletManager : Singleton<TabletManager>
             }
         }
     }
+
+
+    //--------------------
+
+
+    void SetTemperatureDisplay()
+    {
+        if (WeatherManager.Instance.termostatDisplay_isUpgraded)
+        {
+            termostatDisplay_Parent.SetActive(true);
+
+            termostat_Image.color = WeatherManager.Instance.termostat_Image.color;
+            pointer_Image.transform.SetLocalPositionAndRotation(WeatherManager.Instance.pointer_Image.transform.localPosition, WeatherManager.Instance.pointer_Image.transform.localRotation);
+        }
+        else
+        {
+            if (termostatDisplay_Parent.activeInHierarchy)
+            {
+                termostatDisplay_Parent.SetActive(false);
+            }
+        }
+    }
+    void SetWeatherDisplay()
+    {
+        if (WeatherManager.Instance.weatherImageDisplay_Day1_isUpgraded)
+        {
+            weatherImageDisplay_Day1_Parent.SetActive(true);
+            weatherDisplay_Parent.SetActive(true);
+
+            weatherImage_Day1.sprite = WeatherManager.Instance.weatherImage_Day1.sprite;
+        }
+        else
+        {
+            if (weatherDisplay_Parent.activeInHierarchy)
+            {
+                weatherDisplay_Parent.SetActive(false);
+                weatherImageDisplay_Day1_Parent.SetActive(false);
+            }
+        }
+    }
+
+
+    //--------------------
+
 
     void SetHotbarImages()
     {

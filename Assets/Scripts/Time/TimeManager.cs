@@ -17,6 +17,7 @@ public class TimeManager : Singleton<TimeManager>
     public int day;
     int loops;
     bool timestamp;
+    public bool newDay_Weather;
 
 
     //--------------------
@@ -47,6 +48,12 @@ public class TimeManager : Singleton<TimeManager>
     {
         DataManager.Instance.currentTime_Store = currentTime;
         DataManager.Instance.day_Store = day;
+    }
+    public void SaveData(ref GameData gameData)
+    {
+        SaveData();
+
+        print("Save_Time");
     }
 
 
@@ -85,6 +92,18 @@ public class TimeManager : Singleton<TimeManager>
         //Calculate hours and minutes
         int hours = Mathf.FloorToInt(currentTime / secondsPerMinute / 60f) % 12;
         int minutes = Mathf.FloorToInt(currentTime / secondsPerMinute) % 60;
+
+        //Set New Weather
+        if (hours <= 0 && minutes <= 0 && !newDay_Weather)
+        {
+            newDay_Weather = true;
+
+            WeatherManager.Instance.SetWeather();
+        }
+        else if (hours <= 0 && minutes >= 1 && !newDay_Weather)
+        {
+            newDay_Weather = false;
+        }
 
         //Calculate days
         day = Mathf.FloorToInt(currentTime / 86400) + loops;
