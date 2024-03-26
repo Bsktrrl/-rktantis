@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlantManager : Singleton<PlantManager>
 {
-    public float growthTimer = 300;
+    public float growthGlobalTimerMultiplier = 1f;
 
     GameObject plantWorldObject_Parent;
     [SerializeField] List<List<PlantToSave>> plantTypeObjectList = new List<List<PlantToSave>>();

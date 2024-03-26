@@ -23,6 +23,7 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] GameObject Plant_Panel;
     [SerializeField] TextMeshProUGUI PlantName;
     [SerializeField] Image PlantResourceImage;
+    [SerializeField] Image plantGrowthBar;
     [SerializeField] TextMeshProUGUI PlantGrowthInfo;
 
     [Header("MovableObject")]
@@ -285,6 +286,16 @@ public class LookAtManager : Singleton<LookAtManager>
                 PlantName.text = SpaceTextConverting.Instance.SetText(plant.plantType.ToString());
                 PlantResourceImage.sprite = MainManager.Instance.GetItem(plantResource.itemName).hotbarSprite;
 
+                //Set GrowthBar
+                if (plant.isPicked)
+                {
+                    plantGrowthBar.fillAmount = plant.growthPrecentage / 100;
+                }
+                else
+                {
+                    plantGrowthBar.fillAmount = 1f;
+                }
+                
                 if (plant.growthPrecentage >= 100 || plant.growthPrecentage <= 0)
                 {
                     PlantGrowthInfo.text = "Growth: Ready";

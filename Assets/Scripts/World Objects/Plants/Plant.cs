@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Plant : MonoBehaviour
 {
     [Header("General")]
     public PlantType plantType;
     public GameObject pickablePart;
+    public float thisGrowthTime = 300;
 
     [Header("Flower Color")]
     [SerializeField] List<GameObject> ColorMeshObject = new List<GameObject>();
@@ -66,7 +68,7 @@ public class Plant : MonoBehaviour
         {
             growthTimer += Time.deltaTime;
 
-            growthPrecentage = growthTimer / PlantManager.Instance.growthTimer * 100;
+            growthPrecentage = growthTimer / (thisGrowthTime * PlantManager.Instance.growthGlobalTimerMultiplier) * 100;
 
             for (int i = 0; i < 100; i++)
             {
@@ -79,7 +81,7 @@ public class Plant : MonoBehaviour
                 }
             }
 
-            if (growthTimer >= PlantManager.Instance.growthTimer)
+            if (growthTimer >= (thisGrowthTime * PlantManager.Instance.growthGlobalTimerMultiplier))
             {
                 PlantGrown();
             }

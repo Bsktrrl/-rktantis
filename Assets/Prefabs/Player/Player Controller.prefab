@@ -17542,7 +17542,7 @@ GameObject:
   - component: {fileID: 6469746578638379594}
   - component: {fileID: 7200680791194650433}
   m_Layer: 0
-  m_Name: PlantName Line
+  m_Name: PlantGrowthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17555,16 +17555,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637477707176353090}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.000000029802319}
-  m_LocalPosition: {x: 0, y: 0, z: 31.00997}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4141327735726354466}
+  m_Father: {fileID: 6289724125932637315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -209}
+  m_AnchoredPosition: {x: 0, y: 0.000015258789}
   m_SizeDelta: {x: 225, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6469746578638379594
@@ -17596,13 +17596,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: da99ab8672ba8f34a835da715ff30af3, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 8
 --- !u!1 &1643791079708756336
@@ -30462,6 +30462,7 @@ MonoBehaviour:
   Plant_Panel: {fileID: 4586416252727719179}
   PlantName: {fileID: 7363579937244399970}
   PlantResourceImage: {fileID: 5528441999254077580}
+  plantGrowthBar: {fileID: 7200680791194650433}
   PlantGrowthInfo: {fileID: 4329058264043540969}
   MovableObject_Panel: {fileID: 8980581360752689880}
   MovableObjectImage: {fileID: 7614726378737420993}
@@ -39604,7 +39605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec9b90daf4e7784ea7ad7e570e40723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growthTimer: 2
+  growthGlobalTimerMultiplier: 1
 --- !u!1 &3477283428738154851
 GameObject:
   m_ObjectHideFlags: 0
@@ -54004,7 +54005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4141327735726354466
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54019,7 +54020,7 @@ RectTransform:
   m_Children:
   - {fileID: 5400154693591954592}
   - {fileID: 7056133189253386438}
-  - {fileID: 875985707112818421}
+  - {fileID: 6289724125932637315}
   - {fileID: 3453614256734179418}
   - {fileID: 3755480155680310971}
   m_Father: {fileID: 2664006033372870162}
@@ -85636,6 +85637,82 @@ MonoBehaviour:
   handDamage: 0.5
   oreHealthReducer: 0
   oreDropRateReducer: 15
+--- !u!1 &7387305341775177335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6289724125932637315}
+  - component: {fileID: 7275133416975092987}
+  - component: {fileID: 4556377294692404530}
+  m_Layer: 0
+  m_Name: PlantGrowthBar BG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6289724125932637315
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387305341775177335}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.000000029802319}
+  m_LocalPosition: {x: 0, y: 0, z: 31.00997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 875985707112818421}
+  m_Father: {fileID: 4141327735726354466}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -208.99998}
+  m_SizeDelta: {x: 225, y: 4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7275133416975092987
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387305341775177335}
+  m_CullTransparentMesh: 1
+--- !u!114 &4556377294692404530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387305341775177335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7bffbe32399101b4a881354a20e4f8af, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 1
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 8
 --- !u!1 &7389465832323647349
 GameObject:
   m_ObjectHideFlags: 0
