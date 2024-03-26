@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Singleton<PlayerMovement>
 {
     public GameObject playerObject;
     public CharacterController controller;
 
     public float speed = 12f;
+    public float speedMultiplier = 1f;
     public float gravity = -9.81f * 2;
     public float jumpHeight = 3f;
 
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         //right is the red Axis, foward is the blue axis
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move(move * speed * speedMultiplier * Time.deltaTime);
 
         //check if the player is on the ground so he can jump
         if (Input.GetButtonDown("Jump") && isGrounded)

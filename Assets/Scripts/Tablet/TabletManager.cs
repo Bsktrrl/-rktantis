@@ -95,6 +95,9 @@ public class TabletManager : Singleton<TabletManager>
     [SerializeField] List<Image> hotbarIconImageList_Tablet = new List<Image>();
     [SerializeField] List<GameObject> hotbarItemDurabilityListParent_Tablet = new List<GameObject>();
     [SerializeField] List<Image> hotbarItemDurabilityList_Tablet = new List<Image>();
+
+    [Header("TabletObject")]
+    public GameObject tabletObject;
     #endregion
     #region SkillTree Menu Variables
     [Header("SkillTree Menu")]
@@ -119,6 +122,7 @@ public class TabletManager : Singleton<TabletManager>
         PlayerButtonManager.ClosePlayerInventory_isPressedDown += CloseTablet;
 
         tablet_Parent.SetActive(false);
+        tabletObject.SetActive(false);
         healthParameters_PlayerScreen_Parent.SetActive(true);
     }
     private void Update()
@@ -536,6 +540,8 @@ public class TabletManager : Singleton<TabletManager>
     //When Opening Tablet from hand
     public void OpenTablet()
     {
+        tabletObject.SetActive(true);
+
         if (!menuObjectIsOpened)
         {
             tempMenuAmount = menuAmount;
@@ -695,6 +701,7 @@ public class TabletManager : Singleton<TabletManager>
         //Hide Buttons
         menu_CraftingTable_Button.SetActive(false);
         menu_Skilltree_Button.SetActive(false);
+        tabletObject.SetActive(false);
     }
 
     void SetMenuDisplay(bool state)

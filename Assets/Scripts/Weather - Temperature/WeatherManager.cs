@@ -90,10 +90,7 @@ public class WeatherManager : Singleton<WeatherManager>
         SetPlayerTemperature(coverValue, temperatureFruit);
         SetTemperatureDisplay(temperatureDisplay, playerTemperatureDisplay);
 
-        if (termostatDisplay_isUpgraded)
-        {
-            SetTermostatDisplay();
-        }
+        SetTermostatDisplay();
     }
 
 
@@ -260,32 +257,35 @@ public class WeatherManager : Singleton<WeatherManager>
 
     void SetTermostatDisplay()
     {
-        //Set Pointer
-        if (playerTemperature < 20)
+        if (termostatDisplay_isUpgraded)
         {
-            pointer_Image.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, ((20 - playerTemperature) * 3)));
-        }
-        else if (playerTemperature > 20)
-        {
-            pointer_Image.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, ((20 - playerTemperature) * 3)));
-        }
-        else
-        {
-            pointer_Image.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, ((20 - 20) * 3)));
-        }
+            //Set Pointer
+            if (playerTemperature < 20)
+            {
+                pointer_Image.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, ((20 - playerTemperature) * 3)));
+            }
+            else if (playerTemperature > 20)
+            {
+                pointer_Image.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, ((20 - playerTemperature) * 3)));
+            }
+            else
+            {
+                pointer_Image.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, ((20 - 20) * 3)));
+            }
 
-        //Set Termostat Color
-        if (playerTemperature < 15)
-        {
-            termostat_Image.color = coldColor;
-        }
-        else if (playerTemperature <= 25)
-        {
-            termostat_Image.color = idealColor;
-        }
-        else
-        {
-            termostat_Image.color = hotColor;
+            //Set Termostat Color
+            if (playerTemperature < 15)
+            {
+                termostat_Image.color = coldColor;
+            }
+            else if (playerTemperature <= 25)
+            {
+                termostat_Image.color = idealColor;
+            }
+            else
+            {
+                termostat_Image.color = hotColor;
+            }
         }
     }
 
@@ -326,6 +326,13 @@ public class WeatherManager : Singleton<WeatherManager>
     }
     void SetWeatherStats_Today()
     {
+        PlayerMovement.Instance.speedMultiplier = 1f;
+
+        HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1f;
+        HealthManager.Instance.heatResistance_SpeedMultiplier_ByWeather = 1f;
+        HealthManager.Instance.thirst_SpeedMultiplier_ByWeather = 1f;
+        HealthManager.Instance.mainHealth_SpeedMultiplier_ByWeather = 1f;
+
         //Sunny
         if (weatherTypeDayList[0] == WeatherType.Sunny)
         {
@@ -337,7 +344,7 @@ public class WeatherManager : Singleton<WeatherManager>
             maxTemperature = 50;
 
             //Set Thirsty faster
-
+            HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1.25f;
         }
 
         //Cloudy
@@ -364,7 +371,7 @@ public class WeatherManager : Singleton<WeatherManager>
             maxTemperature = 40;
 
             //Walking slower
-
+            PlayerMovement.Instance.speedMultiplier = 0.75f;
         }
 
         //Cold
@@ -378,7 +385,7 @@ public class WeatherManager : Singleton<WeatherManager>
             maxTemperature = 10;
 
             //Hungry faster
-
+            HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1.25f;
         }
     }
     void SetWeatherDisplay()

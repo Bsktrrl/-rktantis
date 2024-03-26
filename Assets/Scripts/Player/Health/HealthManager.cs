@@ -12,9 +12,16 @@ public class HealthManager : Singleton<HealthManager>
     public HealthToSave health_ToSave;
 
     public float hunger_Speed = 0.00001f;
+    public float hunger_SpeedMultiplier_ByWeather = 1f;
+
     public float heatResistance_Speed = 0.00001f;
+    public float heatResistance_SpeedMultiplier_ByWeather = 1f;
+
     public float thirst_Speed = 0.00001f;
+    public float thirst_SpeedMultiplier_ByWeather = 1f;
+
     public float mainHealth_Speed = 0.000025f;
+    public float mainHealth_SpeedMultiplier_ByWeather = 1f;
 
 
     [Header("Colors")]
@@ -164,7 +171,7 @@ public class HealthManager : Singleton<HealthManager>
 
         //Speed Check
         #region
-        hungerValue += (hunger_Speed * healthValueMultiplier);
+        hungerValue += (hunger_Speed * hunger_SpeedMultiplier_ByWeather * healthValueMultiplier);
         if (hungerValue <= 0)
         {
             hungerValue = 0;
@@ -182,7 +189,7 @@ public class HealthManager : Singleton<HealthManager>
             hungerIcon_Image.color = progressColor;
         }
 
-        heatResistanceValue += (heatResistance_Speed * heatResistanceValueMultiplier);
+        heatResistanceValue += (heatResistance_Speed * heatResistance_SpeedMultiplier_ByWeather * heatResistanceValueMultiplier);
         if (heatResistanceValue <= 0)
         {
             heatResistanceValue = 0;
@@ -200,7 +207,7 @@ public class HealthManager : Singleton<HealthManager>
             heatResistanceIcon_Image.color = progressColor;
         }
 
-        thirstValue += (thirst_Speed * thirstValueMultiplier);
+        thirstValue += (thirst_Speed * thirst_SpeedMultiplier_ByWeather * thirstValueMultiplier);
         if (thirstValue <= 0)
         {
             thirstValue = 0;
@@ -238,7 +245,7 @@ public class HealthManager : Singleton<HealthManager>
         }
         else
         {
-            mainHealthValue += -Mathf.Abs(mainHealth_Speed * mainHealthCounter);
+            mainHealthValue += -Mathf.Abs(mainHealth_Speed * mainHealth_SpeedMultiplier_ByWeather * mainHealthCounter);
         }
        
         if (mainHealthValue <= 0)
