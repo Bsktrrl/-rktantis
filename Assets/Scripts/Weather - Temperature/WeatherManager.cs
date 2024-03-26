@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.LightAnchor;
+using UnityEngine.UI;
 
 public class WeatherManager : Singleton<WeatherManager>
 {
@@ -31,6 +30,40 @@ public class WeatherManager : Singleton<WeatherManager>
     public float stone_Cover = 20;
     public float iron_Cover = 30;
 
+    [Header("TemperatureDisplay")]
+    public bool termostatDisplay_isUpgraded = true;
+    public GameObject termostatDisplay_Parent;
+    public Image termostat_Image;
+    public Image pointer_Image;
+    [SerializeField] Color idealColor;
+    [SerializeField] Color hotColor;
+    [SerializeField] Color coldColor;
+
+    [Header("WeatherDisplay")]
+    public List<WeatherType> weatherTypeDayList = new List<WeatherType>();
+
+    public WeatherType weatherType = WeatherType.Sunny;
+    public GameObject weatherDisplay_Parent;
+    public bool weatherImageDisplay_Day1_isUpgraded = true;
+    public bool weatherImageDisplay_Day2_isUpgraded = true;
+    public bool weatherImageDisplay_Day3_isUpgraded = true;
+    public bool weatherImageDisplay_Day4_isUpgraded = true;
+    public bool weatherImageDisplay_Day5_isUpgraded = true;
+    public GameObject weatherImageDisplay_Day1_Parent;
+    public GameObject weatherImageDisplay_Day2_Parent;
+    public GameObject weatherImageDisplay_Day3_Parent;
+    public GameObject weatherImageDisplay_Day4_Parent;
+    public GameObject weatherImageDisplay_Day5_Parent;
+    public Image weatherImage_Day1;
+    public Image weatherImage_Day2;
+    public Image weatherImage_Day3;
+    public Image weatherImage_Day4;
+    public Image weatherImage_Day5;
+    [SerializeField] Sprite weatherImage_Sunny;
+    [SerializeField] Sprite weatherImage_Cloudy;
+    [SerializeField] Sprite weatherImage_Windy;
+    [SerializeField] Sprite weatherImage_Cold;
+
     [Header("temperatureFruit")]
     public List<TemperatureFruit> temperatureFruitList = new List<TemperatureFruit>();
 
@@ -56,6 +89,50 @@ public class WeatherManager : Singleton<WeatherManager>
         SetTemperature();
         SetPlayerTemperature(coverValue, temperatureFruit);
         SetTemperatureDisplay(temperatureDisplay, playerTemperatureDisplay);
+
+        if (termostatDisplay_isUpgraded)
+        {
+            SetTermostatDisplay();
+        }
+    }
+
+
+    //--------------------
+
+
+    public void LoadData()
+    {
+        weatherTypeDayList = DataManager.Instance.weatherTypeDayList_Store;
+
+        //At NewGame, make a list of 20 WeatherTypes, to prevent the list of getting emptied
+        if (weatherTypeDayList.Count <= 0)
+        {
+            CalculateLastWeather(20);
+
+            SetWeather();
+        }
+
+        //If not NewGame, set the parameters given by the list
+        else
+        {
+            //Set the stats for today's weather
+            SetWeatherStats_Today();
+
+            //Display the weather for today and the next 4 days
+            SetWeatherDisplay();
+
+            SaveData();
+        }
+    }
+    public void SaveData()
+    {
+        DataManager.Instance.weatherTypeDayList_Store = weatherTypeDayList;
+    }
+    public void SaveData(ref GameData gameData)
+    {
+        SaveData();
+
+        print("Save_Weather");
     }
 
 
@@ -175,6 +252,204 @@ public class WeatherManager : Singleton<WeatherManager>
     {
         temperatureDisplay.text = currentWorldTemperature + "°C";
         playerTemperatureDisplay.text = playerTemperature + "°C";
+    }
+
+
+    //--------------------
+
+
+    void SetTermostatDisplay()
+    {
+        //Set Pointer
+        if (playerTemperature < 20)
+        {
+            pointer_Image.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, ((20 - playerTemperature) * 3)));
+        }
+        else if (playerTemperature > 20)
+        {
+            pointer_Image.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, ((20 - playerTemperature) * 3)));
+        }
+        else
+        {
+            pointer_Image.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0, 0, ((20 - 20) * 3)));
+        }
+
+        //Set Termostat Color
+        if (playerTemperature < 15)
+        {
+            termostat_Image.color = coldColor;
+        }
+        else if (playerTemperature <= 25)
+        {
+            termostat_Image.color = idealColor;
+        }
+        else
+        {
+            termostat_Image.color = hotColor;
+        }
+    }
+
+    public void SetWeather()
+    {
+        if (TimeManager.Instance.newDay_Weather)
+        {
+            if (termostatDisplay_Parent.activeInHierarchy)
+            {
+                //Add new Weather Type
+                CalculateLastWeather(1);
+
+                //Remove yesterday's Weather Type
+                weatherTypeDayList.RemoveAt(0);
+
+
+                //-----
+
+
+                //Set the stats for today's weather
+                SetWeatherStats_Today();
+
+                //Display the weather for today and the next 4 days
+                SetWeatherDisplay();
+
+                SaveData();
+            }
+        }
+    }
+    public void CalculateLastWeather(int daysForward)
+    {
+        int enumSize = Enum.GetValues(typeof(WeatherType)).Length;
+
+        for (int i = 0; i < daysForward; i++)
+        {
+            weatherTypeDayList.Add((WeatherType)UnityEngine.Random.Range(0, enumSize));
+        }
+    }
+    void SetWeatherStats_Today()
+    {
+        //Sunny
+        if (weatherTypeDayList[0] == WeatherType.Sunny)
+        {
+            //Set Weather Type
+            weatherType = WeatherType.Sunny;
+
+            //Set Min/Max temperatures
+            minTemperature = 10;
+            maxTemperature = 50;
+
+            //Set Thirsty faster
+
+        }
+
+        //Cloudy
+        else if (weatherTypeDayList[0] == WeatherType.Cloudy)
+        {
+            //Set Weather Type
+            weatherType = WeatherType.Cloudy;
+
+            //Set Min/Max temperatures
+            minTemperature = 0;
+            maxTemperature = 30;
+
+            //Nothing
+        }
+
+        //Windy
+        else if (weatherTypeDayList[0] == WeatherType.Windy)
+        {
+            //Set Weather Type
+            weatherType = WeatherType.Windy;
+
+            //Set Min/Max temperatures
+            minTemperature = -10;
+            maxTemperature = 40;
+
+            //Walking slower
+
+        }
+
+        //Cold
+        else if (weatherTypeDayList[0] == WeatherType.Cold)
+        {
+            //Set Weather Type
+            weatherType = WeatherType.Cold;
+
+            //Set Min/Max temperatures
+            minTemperature = -10;
+            maxTemperature = 10;
+
+            //Hungry faster
+
+        }
+    }
+    void SetWeatherDisplay()
+    {
+        if (weatherTypeDayList.Count > 0 && weatherImageDisplay_Day1_isUpgraded)
+        {
+            weatherImage_Day1.sprite = GetWeatherImage(weatherTypeDayList[0]);
+            weatherImageDisplay_Day1_Parent.SetActive(true);
+        }
+        else
+        {
+            weatherImageDisplay_Day1_Parent.SetActive(false);
+        }
+
+        if (weatherTypeDayList.Count > 1 && weatherImageDisplay_Day2_isUpgraded)
+        {
+            weatherImage_Day2.sprite = GetWeatherImage(weatherTypeDayList[1]);
+            weatherImageDisplay_Day2_Parent.SetActive(true);
+        }
+        else
+        {
+            weatherImageDisplay_Day2_Parent.SetActive(false);
+        }
+
+        if (weatherTypeDayList.Count > 2 && weatherImageDisplay_Day3_isUpgraded)
+        {
+            weatherImage_Day3.sprite = GetWeatherImage(weatherTypeDayList[2]);
+            weatherImageDisplay_Day3_Parent.SetActive(true);
+        }
+        else
+        {
+            weatherImageDisplay_Day3_Parent.SetActive(false);
+        }
+
+        if (weatherTypeDayList.Count > 3 && weatherImageDisplay_Day4_isUpgraded)
+        {
+            weatherImage_Day4.sprite = GetWeatherImage(weatherTypeDayList[3]);
+            weatherImageDisplay_Day4_Parent.SetActive(true);
+        }
+        else
+        {
+            weatherImageDisplay_Day4_Parent.SetActive(false);
+        }
+
+        if (weatherTypeDayList.Count > 4 && weatherImageDisplay_Day5_isUpgraded)
+        {
+            weatherImage_Day5.sprite = GetWeatherImage(weatherTypeDayList[4]);
+            weatherImageDisplay_Day5_Parent.SetActive(true);
+        }
+        else
+        {
+            weatherImageDisplay_Day5_Parent.SetActive(false);
+        }
+    }
+    Sprite GetWeatherImage(WeatherType weatherType)
+    {
+        print("weatherType: " + weatherType);
+
+        if (weatherType == WeatherType.Sunny)
+            return weatherImage_Sunny;
+
+        else if (weatherType == WeatherType.Cloudy)
+            return weatherImage_Cloudy;
+
+        else if (weatherType == WeatherType.Windy)
+            return weatherImage_Windy;
+
+        else if (weatherType == WeatherType.Cold)
+            return weatherImage_Cold;
+
+        return null;
     }
 
 
@@ -314,4 +589,12 @@ public class TemperatureFruit
 {
     public int value;
     public float duration;
+}
+
+public enum WeatherType
+{
+    Sunny,
+    Cloudy,
+    Windy,
+    Cold
 }

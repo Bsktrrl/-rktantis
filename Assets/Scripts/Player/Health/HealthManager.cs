@@ -16,8 +16,15 @@ public class HealthManager : Singleton<HealthManager>
     public float thirst_Speed = 0.00001f;
     public float mainHealth_Speed = 0.000025f;
 
+
+    [Header("Colors")]
+    [SerializeField] Color fullColor;
+    [SerializeField] Color progressColor;
+    [SerializeField] Color emptyColor;
+
     [Header("Hunger Parameter")]
     [SerializeField] Image hunger_Image;
+    public Image hungerIcon_Image;
     public float hungerValue = 1;
     [SerializeField] List<GameObject> hungerValueMultiplier_Image = new List<GameObject>();
     public HealthValueMultiplier hungerValueMultiplier_Check = HealthValueMultiplier.None;
@@ -25,6 +32,7 @@ public class HealthManager : Singleton<HealthManager>
 
     [Header("HeatResistance Parameter")]
     [SerializeField] Image heatResistance_Image;
+    public Image heatResistanceIcon_Image;
     public float heatResistanceValue = 1;
     [SerializeField] List<GameObject> heatResistanceValueMultiplier_Image = new List<GameObject>();
     public HealthValueMultiplier heatResistanceValueMultiplier_Check = HealthValueMultiplier.None;
@@ -32,6 +40,7 @@ public class HealthManager : Singleton<HealthManager>
 
     [Header("Thirst Parameter")]
     [SerializeField] Image thirst_Image;
+    public Image thirstIcon_Image;
     public float thirstValue = 1;
     [SerializeField] List<GameObject> thirstValueMultiplier_Image = new List<GameObject>();
     public HealthValueMultiplier thirstValueMultiplier_Check = HealthValueMultiplier.None;
@@ -39,6 +48,7 @@ public class HealthManager : Singleton<HealthManager>
 
     [Header("MainHealth Parameter")]
     [SerializeField] Image mainHealth_Image;
+    public Image mainHealthIcon_Image;
     public float mainHealthValue = 1;
     [SerializeField] List<GameObject> mainHealthValueMultiplier_Image = new List<GameObject>();
     public HealthValueMultiplier mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
@@ -156,21 +166,57 @@ public class HealthManager : Singleton<HealthManager>
         #region
         hungerValue += (hunger_Speed * healthValueMultiplier);
         if (hungerValue <= 0)
+        {
             hungerValue = 0;
+
+            hungerIcon_Image.color = emptyColor;
+        }
         else if (hungerValue >= 1)
+        {
             hungerValue = 1;
+
+            hungerIcon_Image.color = fullColor;
+        }
+        else
+        {
+            hungerIcon_Image.color = progressColor;
+        }
 
         heatResistanceValue += (heatResistance_Speed * heatResistanceValueMultiplier);
         if (heatResistanceValue <= 0)
+        {
             heatResistanceValue = 0;
+
+            heatResistanceIcon_Image.color = emptyColor;
+        }
         else if (heatResistanceValue >= 1)
+        {
             heatResistanceValue = 1;
+
+            heatResistanceIcon_Image.color = fullColor;
+        }
+        else
+        {
+            heatResistanceIcon_Image.color = progressColor;
+        }
 
         thirstValue += (thirst_Speed * thirstValueMultiplier);
         if (thirstValue <= 0)
+        {
             thirstValue = 0;
+
+            thirstIcon_Image.color = emptyColor;
+        }
         else if (thirstValue >= 1)
+        {
             thirstValue = 1;
+
+            thirstIcon_Image.color = fullColor;
+        }
+        else
+        {
+            thirstIcon_Image.color = progressColor;
+        }
         #endregion
 
         //Set Main Health Parameter
@@ -196,9 +242,21 @@ public class HealthManager : Singleton<HealthManager>
         }
        
         if (mainHealthValue <= 0)
+        {
             mainHealthValue = 0;
+
+            mainHealthIcon_Image.color = emptyColor;
+        }
         else if (mainHealthValue >= 1)
+        {
             mainHealthValue = 1;
+
+            mainHealthIcon_Image.color = fullColor;
+        }
+        else
+        {
+            mainHealthIcon_Image.color = emptyColor;
+        }
         #endregion
 
         //Set Arrow Display
@@ -279,6 +337,7 @@ public class HealthManager : Singleton<HealthManager>
                                  Image thirst_Image, List<GameObject> thirstValueMultiplier_Image,
                                  Image mainHealth_Image)
     {
+        //Set Values
         hunger_Image.fillAmount = hungerValue;
         heatResistance_Image.fillAmount = heatResistanceValue;
         thirst_Image.fillAmount = thirstValue;

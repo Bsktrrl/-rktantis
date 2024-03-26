@@ -61,6 +61,10 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //Settings
     [HideInInspector] public SettingsValues settingsValues_Store = new SettingsValues();
 
+    //Weather
+    [HideInInspector] public List<WeatherType> weatherTypeDayList_Store = new List<WeatherType>();
+
+
     //--------------------
 
 
@@ -101,6 +105,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.personalStoryJournalPageIndexList_Store = gameData.personalStoryJournalPageIndexList_Save;
 
         this.settingsValues_Store = gameData.settingsValues_Save;
+
+        this.weatherTypeDayList_Store = gameData.weatherTypeDayList_Save;
         #endregion
 
         //Load the saved data into the project
@@ -143,6 +149,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         JournalManager.Instance.LoadData();
         print("12. Journals has Loaded");
+
+        WeatherManager.Instance.LoadData();
+        print("13. Weather has Loaded");
         #endregion
 
         print("------------------------------");
@@ -185,6 +194,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.personalStoryJournalPageIndexList_Save = this.personalStoryJournalPageIndexList_Store;
 
         gameData.settingsValues_Save = this.settingsValues_Store;
+
+        gameData.weatherTypeDayList_Save = this.weatherTypeDayList_Store;
 
         print("Data has Saved");
     }
