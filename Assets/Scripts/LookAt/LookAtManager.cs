@@ -179,7 +179,8 @@ public class LookAtManager : Singleton<LookAtManager>
         //If looking at a Furniture
         #region
         else if (typeLookingAt == InteracteableType.CraftingTable
-            || typeLookingAt == InteracteableType.SkillTreeTable)
+            || typeLookingAt == InteracteableType.SkillTreeTable
+            || typeLookingAt == InteracteableType.ResearchTable)
         {
             //Turn off all screens
             TurnOffScreens();

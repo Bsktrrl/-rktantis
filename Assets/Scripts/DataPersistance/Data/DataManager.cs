@@ -64,6 +64,10 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //Weather
     [HideInInspector] public List<WeatherType> weatherTypeDayList_Store = new List<WeatherType>();
 
+    //Research
+    [HideInInspector] public List<Items> researchedItemsListNames_Store = new List<Items>();
+    [HideInInspector] public List<bool> researched_SOItem_Store = new List<bool>();
+
 
     //--------------------
 
@@ -107,6 +111,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.settingsValues_Store = gameData.settingsValues_Save;
 
         this.weatherTypeDayList_Store = gameData.weatherTypeDayList_Save;
+
+        this.researchedItemsListNames_Store = gameData.researchedItemsListNames_Save;
+        this.researched_SOItem_Store = gameData.researched_SOItem_Save;
         #endregion
 
         //Load the saved data into the project
@@ -152,6 +159,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         WeatherManager.Instance.LoadData();
         print("13. Weather has Loaded");
+
+        ResearchManager.Instance.LoadData(this.researched_SOItem_Store);
+        print("14. Research has Loaded");
         #endregion
 
         print("------------------------------");
@@ -196,6 +206,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.settingsValues_Save = this.settingsValues_Store;
 
         gameData.weatherTypeDayList_Save = this.weatherTypeDayList_Store;
+
+        gameData.researchedItemsListNames_Save = this.researchedItemsListNames_Store;
+        gameData.researched_SOItem_Save = this.researched_SOItem_Store;
 
         print("Data has Saved");
     }

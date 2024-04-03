@@ -126,6 +126,7 @@ public enum MenuStates
     CraftingMenu,
     SkillTreeMenu,
     JournalMenu,
+    ResearchMenu
 }
 
 public enum GameStates

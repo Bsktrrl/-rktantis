@@ -170,8 +170,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.85, y: 1.65, z: 1.75}
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Size: {x: 1.8, y: 0.9, z: 1}
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!114 &3948706605811632920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,13 +185,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInRange: 0
-  itemName: 147
+  itemName: 150
   amount: 0
   durability_Current: 0
   interactableType: 4
-  oreHealth: 0
   inventoryIndex: 0
   plantParent: {fileID: 0}
+  journalType: 0
+  journalPageIndex: 0
 --- !u!114 &2672097166629589600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +210,7 @@ MonoBehaviour:
   enoughItemsToBuild: 0
   furnitureType: 2
   machineType: 0
-  meshRenderer: {fileID: 4807516247769125409}
+  meshRenderer: {fileID: 0}
 --- !u!114 &312060254620164218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,9 +223,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b72052c85ec9746aa2880f936bee62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!137 &4807516247769125409 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5735366206337238145, guid: b3b5e8a3bb81be9499799a67ed87d6b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 950162365753611936}
-  m_PrefabAsset: {fileID: 0}

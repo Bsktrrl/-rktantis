@@ -24,7 +24,6 @@ MonoBehaviour:
     - {fileID: -680981526, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSelected_SpriteList:
     - {fileID: -680981526, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -40,6 +39,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 0
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 1
@@ -53,7 +55,6 @@ MonoBehaviour:
     - {fileID: -1420553561, guid: 24a0c511ea97b8949a2431518b5f9a0d, type: 3}
     itemSelected_SpriteList:
     - {fileID: 1281791656, guid: 24a0c511ea97b8949a2431518b5f9a0d, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -70,6 +71,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 2
@@ -83,7 +87,6 @@ MonoBehaviour:
     - {fileID: 1252519662, guid: 89da9632d866f4a41af4a19d4d81bd2a, type: 3}
     itemSelected_SpriteList:
     - {fileID: 533259706, guid: 89da9632d866f4a41af4a19d4d81bd2a, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -100,6 +103,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 3
@@ -113,7 +119,6 @@ MonoBehaviour:
     - {fileID: 1678025238, guid: 47c0e9e3988d078449367c00ac7bcb00, type: 3}
     itemSelected_SpriteList:
     - {fileID: -346856270, guid: 47c0e9e3988d078449367c00ac7bcb00, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -130,6 +135,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 4
@@ -143,7 +151,6 @@ MonoBehaviour:
     - {fileID: -1684565607, guid: eca11ef929b378b43aa865538ca71870, type: 3}
     itemSelected_SpriteList:
     - {fileID: 2098494842, guid: eca11ef929b378b43aa865538ca71870, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -160,6 +167,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 5
@@ -178,7 +188,6 @@ MonoBehaviour:
     - {fileID: 1073176788, guid: dcfcf097d8ee1c34b915edce10b531c2, type: 3}
     - {fileID: -1220479051, guid: dcfcf097d8ee1c34b915edce10b531c2, type: 3}
     - {fileID: -14484076, guid: dcfcf097d8ee1c34b915edce10b531c2, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -196,6 +205,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 69
@@ -211,7 +223,6 @@ MonoBehaviour:
     - {fileID: -324388394, guid: 2935337b6ebf6094185069e8bdf9d061, type: 3}
     itemSelected_SpriteList:
     - {fileID: 576400157, guid: 2935337b6ebf6094185069e8bdf9d061, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -228,6 +239,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements: []
   - itemName: 7
@@ -241,7 +255,6 @@ MonoBehaviour:
     - {fileID: 685043060, guid: 882eefa2a52cfd3488e78e1125067a65, type: 3}
     itemSelected_SpriteList:
     - {fileID: 609018281, guid: 882eefa2a52cfd3488e78e1125067a65, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -258,6 +271,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements: []
   - itemName: 8
@@ -271,7 +287,6 @@ MonoBehaviour:
     - {fileID: -430788035, guid: 5907fae0428b33046bff4cba9687ff5c, type: 3}
     itemSelected_SpriteList:
     - {fileID: -1421282536, guid: 5907fae0428b33046bff4cba9687ff5c, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -288,6 +303,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements: []
   - itemName: 14
@@ -307,7 +325,6 @@ MonoBehaviour:
     - {fileID: 778576971, guid: b72f45c6a0256174c842f701808d6b5a, type: 3}
     - {fileID: -1855411354, guid: b72f45c6a0256174c842f701808d6b5a, type: 3}
     - {fileID: 1592750805, guid: b72f45c6a0256174c842f701808d6b5a, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -323,6 +340,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 1
@@ -350,7 +370,6 @@ MonoBehaviour:
     - {fileID: 199388393, guid: b113a315d81c3fb48a7713d4bf9e24f4, type: 3}
     - {fileID: -1943705483, guid: b113a315d81c3fb48a7713d4bf9e24f4, type: 3}
     - {fileID: -747084233, guid: b113a315d81c3fb48a7713d4bf9e24f4, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -366,6 +385,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 14
@@ -393,7 +415,6 @@ MonoBehaviour:
     - {fileID: 2105929776, guid: 13112c1f818fe7d49a7bc82aeb5b1239, type: 3}
     - {fileID: 2119349438, guid: 13112c1f818fe7d49a7bc82aeb5b1239, type: 3}
     - {fileID: 1110890751, guid: 13112c1f818fe7d49a7bc82aeb5b1239, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -409,6 +430,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 15
@@ -435,7 +459,6 @@ MonoBehaviour:
     - {fileID: 1190146338, guid: f1b2d7c3f795f7947a6379141681a792, type: 3}
     - {fileID: -115358352, guid: f1b2d7c3f795f7947a6379141681a792, type: 3}
     - {fileID: -1676233999, guid: f1b2d7c3f795f7947a6379141681a792, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -452,6 +475,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 1
@@ -470,7 +496,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 1477072057, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
     - {fileID: 619935025, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -487,6 +512,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 1
@@ -507,7 +535,6 @@ MonoBehaviour:
     - {fileID: 1281044256, guid: fe40aef879773374d97af7c65272559d, type: 3}
     - {fileID: -1299548977, guid: fe40aef879773374d97af7c65272559d, type: 3}
     - {fileID: -698737158, guid: fe40aef879773374d97af7c65272559d, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -524,6 +551,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -542,7 +572,6 @@ MonoBehaviour:
     - {fileID: 73136677, guid: 727468c7b33a5b042bed68b1b514f638, type: 3}
     - {fileID: -2142022701, guid: 727468c7b33a5b042bed68b1b514f638, type: 3}
     - {fileID: 557888992, guid: 727468c7b33a5b042bed68b1b514f638, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -559,6 +588,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -578,7 +610,6 @@ MonoBehaviour:
     - {fileID: -135949883, guid: 4e9dc08f548e9a147a630a562a10da66, type: 3}
     - {fileID: 1149178953, guid: 4e9dc08f548e9a147a630a562a10da66, type: 3}
     - {fileID: -1197766552, guid: 4e9dc08f548e9a147a630a562a10da66, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -595,6 +626,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -614,7 +648,6 @@ MonoBehaviour:
     - {fileID: -1829593164, guid: e3e295ca4e76389458c109810b527e33, type: 3}
     - {fileID: 25789499, guid: e3e295ca4e76389458c109810b527e33, type: 3}
     - {fileID: -4801301, guid: e3e295ca4e76389458c109810b527e33, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -631,6 +664,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -649,7 +685,6 @@ MonoBehaviour:
     - {fileID: 492614286, guid: cebbe0c82bc7367448b44e90785a9854, type: 3}
     - {fileID: 311016892, guid: cebbe0c82bc7367448b44e90785a9854, type: 3}
     - {fileID: 1802385054, guid: cebbe0c82bc7367448b44e90785a9854, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -666,6 +701,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -686,7 +724,6 @@ MonoBehaviour:
     - {fileID: 2003233915, guid: 07410d09e0e16ac41b6e1b9661a013af, type: 3}
     - {fileID: 1595971720, guid: 07410d09e0e16ac41b6e1b9661a013af, type: 3}
     - {fileID: 557573158, guid: 07410d09e0e16ac41b6e1b9661a013af, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -703,6 +740,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -724,7 +764,6 @@ MonoBehaviour:
     - {fileID: 180209963, guid: 22e9128ede2ee0a4ea0f7d3e954f3d22, type: 3}
     - {fileID: -379587810, guid: 22e9128ede2ee0a4ea0f7d3e954f3d22, type: 3}
     - {fileID: -720720717, guid: 22e9128ede2ee0a4ea0f7d3e954f3d22, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -741,6 +780,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -762,7 +804,6 @@ MonoBehaviour:
     - {fileID: 1527144119, guid: 8fc5a272467b0c442a1fed69502258f1, type: 3}
     - {fileID: 1685633048, guid: 8fc5a272467b0c442a1fed69502258f1, type: 3}
     - {fileID: -564080139, guid: 8fc5a272467b0c442a1fed69502258f1, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -779,6 +820,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -799,7 +843,6 @@ MonoBehaviour:
     - {fileID: -681334922, guid: d1faaf29e8c9e464499b18b4b10bc685, type: 3}
     - {fileID: 1621696247, guid: d1faaf29e8c9e464499b18b4b10bc685, type: 3}
     - {fileID: 1955985171, guid: d1faaf29e8c9e464499b18b4b10bc685, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -816,6 +859,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -836,7 +882,6 @@ MonoBehaviour:
     - {fileID: -2125096293, guid: 42604b8767771f448aee0d28d025ce04, type: 3}
     - {fileID: -1251764392, guid: 42604b8767771f448aee0d28d025ce04, type: 3}
     - {fileID: 1075629706, guid: 42604b8767771f448aee0d28d025ce04, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -853,6 +898,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -874,7 +922,6 @@ MonoBehaviour:
     - {fileID: 1002477970, guid: b29cb2abeac956e43b0ecc5dd85736d1, type: 3}
     - {fileID: -1039056336, guid: b29cb2abeac956e43b0ecc5dd85736d1, type: 3}
     - {fileID: -1933347159, guid: b29cb2abeac956e43b0ecc5dd85736d1, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -891,6 +938,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -912,7 +962,6 @@ MonoBehaviour:
     - {fileID: 2066227661, guid: 1c303d1ce17d5e04d996906cc3181a4a, type: 3}
     - {fileID: 784492258, guid: 1c303d1ce17d5e04d996906cc3181a4a, type: 3}
     - {fileID: -72346132, guid: 1c303d1ce17d5e04d996906cc3181a4a, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -929,6 +978,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 6
@@ -947,7 +999,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: -36696667, guid: 8597372fd4106c341a0333a802e2b10a, type: 3}
     - {fileID: -1792274890, guid: 8597372fd4106c341a0333a802e2b10a, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -963,6 +1014,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements:
     - itemName: 65
@@ -986,7 +1040,6 @@ MonoBehaviour:
     - {fileID: 2050408722, guid: 4b99b8bac3a677c4b981b92866e188c1, type: 3}
     - {fileID: -1774852005, guid: 4b99b8bac3a677c4b981b92866e188c1, type: 3}
     - {fileID: 2101265807, guid: 4b99b8bac3a677c4b981b92866e188c1, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 1
@@ -1002,6 +1055,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 67
@@ -1026,7 +1082,6 @@ MonoBehaviour:
     - {fileID: 1517957265, guid: 5173b0e39f2b0be4da1bad11408d3068, type: 3}
     - {fileID: -1541563147, guid: 5173b0e39f2b0be4da1bad11408d3068, type: 3}
     - {fileID: 377486720, guid: 5173b0e39f2b0be4da1bad11408d3068, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 1
@@ -1042,6 +1097,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 67
@@ -1067,7 +1125,6 @@ MonoBehaviour:
     - {fileID: 306063599, guid: 5508b0100128b574caf460fa21738138, type: 3}
     - {fileID: 1939315509, guid: 5508b0100128b574caf460fa21738138, type: 3}
     - {fileID: -1790497311, guid: 5508b0100128b574caf460fa21738138, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 1
@@ -1083,6 +1140,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 67
@@ -1105,7 +1165,6 @@ MonoBehaviour:
     - {fileID: -981634620, guid: 2eabca988a778ea43a8f67139b8ba60a, type: 3}
     - {fileID: 1630489185, guid: 2eabca988a778ea43a8f67139b8ba60a, type: 3}
     - {fileID: 149657057, guid: 2eabca988a778ea43a8f67139b8ba60a, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 1
@@ -1121,6 +1180,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 67
@@ -1144,7 +1206,6 @@ MonoBehaviour:
     - {fileID: 730049225, guid: 8e7aae3a62dbb3548a33d1b0cb419e04, type: 3}
     - {fileID: 80474466, guid: 8e7aae3a62dbb3548a33d1b0cb419e04, type: 3}
     - {fileID: -604279204, guid: 8e7aae3a62dbb3548a33d1b0cb419e04, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 1
@@ -1160,6 +1221,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 67
@@ -1183,7 +1247,6 @@ MonoBehaviour:
     - {fileID: 359663656, guid: a30586d74697c40419515eab68609d53, type: 3}
     - {fileID: -596276035, guid: a30586d74697c40419515eab68609d53, type: 3}
     - {fileID: 713849356, guid: a30586d74697c40419515eab68609d53, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 1
@@ -1199,6 +1262,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 67
@@ -1221,7 +1287,6 @@ MonoBehaviour:
     - {fileID: -180182132, guid: 6143d035f38f1f446b5fd225e8ffd081, type: 3}
     - {fileID: 1263260791, guid: 6143d035f38f1f446b5fd225e8ffd081, type: 3}
     - {fileID: -1469338034, guid: 6143d035f38f1f446b5fd225e8ffd081, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 1
@@ -1237,6 +1302,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 67
@@ -1260,7 +1328,6 @@ MonoBehaviour:
     - {fileID: 1780636170, guid: d1d1406ca3b71af4bb2218b99b3a3065, type: 3}
     - {fileID: 2034273186, guid: d1d1406ca3b71af4bb2218b99b3a3065, type: 3}
     - {fileID: -871966389, guid: d1d1406ca3b71af4bb2218b99b3a3065, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 1
@@ -1276,6 +1343,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 67
@@ -1299,7 +1369,6 @@ MonoBehaviour:
     - {fileID: -2089839046, guid: a643c80b82cf2174e9180daff70d095e, type: 3}
     - {fileID: 975509763, guid: a643c80b82cf2174e9180daff70d095e, type: 3}
     - {fileID: -1110066230, guid: a643c80b82cf2174e9180daff70d095e, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 1
@@ -1315,6 +1384,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 67
@@ -1334,7 +1406,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 1568092367, guid: f0dcdfa090e83784ab3a4733ef51c754, type: 3}
     - {fileID: -211588087, guid: f0dcdfa090e83784ab3a4733ef51c754, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1351,6 +1422,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 66
@@ -1363,7 +1437,6 @@ MonoBehaviour:
     - {fileID: 1155505584, guid: d70b356468243bf49828dba22d484284, type: 3}
     itemSelected_SpriteList:
     - {fileID: 1366053504, guid: d70b356468243bf49828dba22d484284, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1380,6 +1453,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 67
@@ -1394,7 +1470,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 118793739, guid: f185e978e7e083f4da58f1f632bd4564, type: 3}
     - {fileID: -938641302, guid: f185e978e7e083f4da58f1f632bd4564, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1411,6 +1486,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 68
@@ -1425,7 +1503,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: -1501011837, guid: fa0c6e0122519574683811a976e048d7, type: 3}
     - {fileID: 860994570, guid: fa0c6e0122519574683811a976e048d7, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1442,6 +1519,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 69
@@ -1461,7 +1541,6 @@ MonoBehaviour:
     - {fileID: 1321964442, guid: ba36842c2886a7846b60a5600eb45e8c, type: 3}
     - {fileID: 746731295, guid: ba36842c2886a7846b60a5600eb45e8c, type: 3}
     - {fileID: 954341037, guid: ba36842c2886a7846b60a5600eb45e8c, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1478,6 +1557,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 70
@@ -1490,7 +1572,6 @@ MonoBehaviour:
     - {fileID: 483177372, guid: 2439ea665dab7f74787bfa98b54a16f6, type: 3}
     itemSelected_SpriteList:
     - {fileID: 358159578, guid: 2439ea665dab7f74787bfa98b54a16f6, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1506,6 +1587,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 71
@@ -1520,7 +1604,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 2118115517, guid: 90e20455227a1a5429dbbb97374d484b, type: 3}
     - {fileID: 1554247816, guid: 90e20455227a1a5429dbbb97374d484b, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1537,6 +1620,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 76
@@ -1550,7 +1636,6 @@ MonoBehaviour:
     - {fileID: 773368225, guid: 5a49320c8bd702343a9fe2907498ea20, type: 3}
     itemSelected_SpriteList:
     - {fileID: 1462487408, guid: 5a49320c8bd702343a9fe2907498ea20, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1566,6 +1651,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 69
@@ -1580,7 +1668,6 @@ MonoBehaviour:
     - {fileID: 1912732036, guid: 04d08945b1e93144c8191806d9a2bdc9, type: 3}
     itemSelected_SpriteList:
     - {fileID: -7009385, guid: 04d08945b1e93144c8191806d9a2bdc9, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1596,6 +1683,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 66
@@ -1611,7 +1701,6 @@ MonoBehaviour:
     - {fileID: 1026699277, guid: 110f7bfe6bb35af40a7232315b0d1b33, type: 3}
     itemSelected_SpriteList:
     - {fileID: 127928090, guid: 110f7bfe6bb35af40a7232315b0d1b33, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1627,6 +1716,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 67
@@ -1642,7 +1734,6 @@ MonoBehaviour:
     - {fileID: 135186905, guid: 43bbf215046a4a94f8a9dbd34774b163, type: 3}
     itemSelected_SpriteList:
     - {fileID: -515100637, guid: 43bbf215046a4a94f8a9dbd34774b163, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1658,6 +1749,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 67
@@ -1672,7 +1766,6 @@ MonoBehaviour:
     - {fileID: -1859238529, guid: 57d25d26e06a2a74a99a43395837019c, type: 3}
     itemSelected_SpriteList:
     - {fileID: 1935498318, guid: 57d25d26e06a2a74a99a43395837019c, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1688,6 +1781,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 68
@@ -1703,7 +1799,6 @@ MonoBehaviour:
     - {fileID: -997508531, guid: 2e9027d61c8b6014cb93df710ffba4e5, type: 3}
     itemSelected_SpriteList:
     - {fileID: -449835881, guid: 2e9027d61c8b6014cb93df710ffba4e5, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1719,6 +1814,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 95
@@ -1734,7 +1832,6 @@ MonoBehaviour:
     - {fileID: 556838347, guid: c47acc2ee558fec4abc72779d855430f, type: 3}
     itemSelected_SpriteList:
     - {fileID: -96828278, guid: c47acc2ee558fec4abc72779d855430f, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1750,6 +1847,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 95
@@ -1765,7 +1865,6 @@ MonoBehaviour:
     - {fileID: 1246185627, guid: 87e375c18cf63c444854be3d3261b261, type: 3}
     itemSelected_SpriteList:
     - {fileID: 3205397, guid: 87e375c18cf63c444854be3d3261b261, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1781,6 +1880,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 95
@@ -1796,7 +1898,6 @@ MonoBehaviour:
     - {fileID: 66115422, guid: c2dd64ba8fe3cdd4cba2fddb04881139, type: 3}
     itemSelected_SpriteList:
     - {fileID: -1321758402, guid: c2dd64ba8fe3cdd4cba2fddb04881139, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1812,6 +1913,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 97
@@ -1827,7 +1931,6 @@ MonoBehaviour:
     - {fileID: -523813823, guid: 1d9a5cb8c69622b43acdcaffadffef36, type: 3}
     itemSelected_SpriteList:
     - {fileID: -610127462, guid: 1d9a5cb8c69622b43acdcaffadffef36, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1843,6 +1946,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 98
@@ -1858,7 +1964,6 @@ MonoBehaviour:
     - {fileID: 443140850, guid: e280335348b95294f85876f05b54c481, type: 3}
     itemSelected_SpriteList:
     - {fileID: 1963554966, guid: e280335348b95294f85876f05b54c481, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1874,6 +1979,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 99
@@ -1889,7 +1997,6 @@ MonoBehaviour:
     - {fileID: -1279045643, guid: d3bb14a62c7f85240b12637a186ee31b, type: 3}
     itemSelected_SpriteList:
     - {fileID: 1544405399, guid: d3bb14a62c7f85240b12637a186ee31b, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1905,6 +2012,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements:
     - itemName: 100
@@ -1920,7 +2030,6 @@ MonoBehaviour:
     - {fileID: 483177372, guid: 2439ea665dab7f74787bfa98b54a16f6, type: 3}
     itemSelected_SpriteList:
     - {fileID: 358159578, guid: 2439ea665dab7f74787bfa98b54a16f6, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1936,6 +2045,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 89
@@ -1949,7 +2061,6 @@ MonoBehaviour:
     - {fileID: -1724916945, guid: 29c868f761f02e34880a5266dc83f1f9, type: 3}
     itemSelected_SpriteList:
     - {fileID: -1501917553, guid: 29c868f761f02e34880a5266dc83f1f9, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1965,6 +2076,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 95
@@ -1979,7 +2093,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: -155867934, guid: c15e568b9f9442f41b3212b5c796493c, type: 3}
     - {fileID: -1637924846, guid: c15e568b9f9442f41b3212b5c796493c, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -1996,6 +2109,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 98
@@ -2010,7 +2126,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 1854129587, guid: 093de5db674a6e447bf973cab539f391, type: 3}
     - {fileID: 992157886, guid: 093de5db674a6e447bf973cab539f391, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2027,6 +2142,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 96
@@ -2041,7 +2159,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: -1676062475, guid: b0c009d09dfb4014a92f6c2528ee5cce, type: 3}
     - {fileID: -1068255915, guid: b0c009d09dfb4014a92f6c2528ee5cce, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2058,6 +2175,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 97
@@ -2077,7 +2197,6 @@ MonoBehaviour:
     - {fileID: 233012354, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
     - {fileID: 1438611104, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
     - {fileID: -312934208, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2094,6 +2213,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 99
@@ -2109,7 +2231,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 784880192, guid: daab314390dc111479e8faa37efbe03a, type: 3}
     - {fileID: -961120594, guid: daab314390dc111479e8faa37efbe03a, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2126,6 +2247,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 100
@@ -2141,7 +2265,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 2105257566, guid: a4133fc1ff912ad4c8f08d0f8b7b0fde, type: 3}
     - {fileID: -1393256978, guid: a4133fc1ff912ad4c8f08d0f8b7b0fde, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2158,6 +2281,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 106
@@ -2170,7 +2296,6 @@ MonoBehaviour:
     - {fileID: 2133874561, guid: 0882301a5933fe943872e850c421f63f, type: 3}
     itemSelected_SpriteList:
     - {fileID: -770434209, guid: 0882301a5933fe943872e850c421f63f, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2186,6 +2311,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 107
@@ -2198,7 +2326,6 @@ MonoBehaviour:
     - {fileID: 691286424, guid: 4b76ec7f1a7a95c4b81bbffa67b09844, type: 3}
     itemSelected_SpriteList:
     - {fileID: -1736571060, guid: 4b76ec7f1a7a95c4b81bbffa67b09844, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2214,6 +2341,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 108
@@ -2226,7 +2356,6 @@ MonoBehaviour:
     - {fileID: 1338124569, guid: a5f5ea0b98b32b4449efeeb6a957ae75, type: 3}
     itemSelected_SpriteList:
     - {fileID: 1555606292, guid: a5f5ea0b98b32b4449efeeb6a957ae75, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2242,6 +2371,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 109
@@ -2255,7 +2387,6 @@ MonoBehaviour:
     - {fileID: 1590256035, guid: 93d5c5b63781e2847a7e743e1659866b, type: 3}
     itemSelected_SpriteList:
     - {fileID: -1847978001, guid: 93d5c5b63781e2847a7e743e1659866b, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2271,6 +2402,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 110
@@ -2284,7 +2418,6 @@ MonoBehaviour:
     - {fileID: 680512803, guid: e2754ad282db39d4aa1249244a878e54, type: 3}
     itemSelected_SpriteList:
     - {fileID: -494857886, guid: e2754ad282db39d4aa1249244a878e54, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2300,6 +2433,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 111
@@ -2313,7 +2449,6 @@ MonoBehaviour:
     - {fileID: 1625713962, guid: 5260f6b45ed729d4d942c02d0eb91480, type: 3}
     itemSelected_SpriteList:
     - {fileID: -1552360176, guid: 5260f6b45ed729d4d942c02d0eb91480, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2329,6 +2464,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 117
@@ -2343,7 +2481,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: -1754563183, guid: b02d366ad82d2464a962347a979591bb, type: 3}
     - {fileID: -922994253, guid: b02d366ad82d2464a962347a979591bb, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2359,6 +2496,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 118
@@ -2373,7 +2513,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 1854129587, guid: 093de5db674a6e447bf973cab539f391, type: 3}
     - {fileID: 992157886, guid: 093de5db674a6e447bf973cab539f391, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2389,6 +2528,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 119
@@ -2403,7 +2545,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: -1517774052, guid: b006964d4979b5d4fac6689a85b78161, type: 3}
     - {fileID: 286678220, guid: b006964d4979b5d4fac6689a85b78161, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2419,6 +2560,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 120
@@ -2437,7 +2581,6 @@ MonoBehaviour:
     - {fileID: 1435782519, guid: 285ce6427f8b6ab4a9e3505faebfbcc1, type: 3}
     - {fileID: 1347515140, guid: 285ce6427f8b6ab4a9e3505faebfbcc1, type: 3}
     - {fileID: -574948415, guid: 285ce6427f8b6ab4a9e3505faebfbcc1, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2453,6 +2596,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 121
@@ -2468,7 +2614,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 225946303, guid: 4a9d66948bd8b964fa66be5e860e8e15, type: 3}
     - {fileID: -977264122, guid: 4a9d66948bd8b964fa66be5e860e8e15, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2484,6 +2629,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 122
@@ -2499,7 +2647,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 393668540, guid: 39616e5fae2994f43a9e42459214e71d, type: 3}
     - {fileID: -585618742, guid: 39616e5fae2994f43a9e42459214e71d, type: 3}
-    isActive: 1
     isConsumeable: 1
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -2515,6 +2662,9 @@ MonoBehaviour:
     equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   - itemName: 46
@@ -2533,7 +2683,6 @@ MonoBehaviour:
     - {fileID: 1583064428, guid: a864fdc7975a82642bc6ef2030342f74, type: 3}
     - {fileID: -1650496245, guid: a864fdc7975a82642bc6ef2030342f74, type: 3}
     - {fileID: 1792024748, guid: a864fdc7975a82642bc6ef2030342f74, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -2550,6 +2699,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements:
     - itemName: 1
@@ -2570,7 +2722,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: -609575645, guid: ae32718f4b2cf514da87ad79f0d50ee5, type: 3}
     - {fileID: -1348670468, guid: ae32718f4b2cf514da87ad79f0d50ee5, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -2587,6 +2738,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements:
     - itemName: 71
@@ -2603,7 +2757,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 1910981531, guid: d7f7f0479e3cb484190589474291c3e2, type: 3}
     - {fileID: -1852819575, guid: d7f7f0479e3cb484190589474291c3e2, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -2620,6 +2773,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 0
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements:
     - itemName: 1
@@ -2638,7 +2794,6 @@ MonoBehaviour:
     itemSelected_SpriteList:
     - {fileID: 533975881, guid: fac724635efbc284ebf3e2b43081015f, type: 3}
     - {fileID: 878876106, guid: fac724635efbc284ebf3e2b43081015f, type: 3}
-    isActive: 1
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
@@ -2655,6 +2810,9 @@ MonoBehaviour:
       type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements:
     - itemName: 1

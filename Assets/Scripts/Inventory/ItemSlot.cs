@@ -41,8 +41,15 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     //When Clicked
     public void OnPointerUp(PointerEventData eventData)
     {
+        //If player is in a "Research Table"
+        if (eventData.button == PointerEventData.InputButton.Left && MainManager.Instance.menuStates == MenuStates.ResearchMenu
+            && !ResearchManager.Instance.isResearching)
+        {
+            ResearchManager.Instance.SetResearchItemInfo(itemName);
+        }
+
         //If only player inventory is used
-        if (MainManager.Instance.menuStates == MenuStates.InventoryMenu
+        else if (MainManager.Instance.menuStates == MenuStates.InventoryMenu
             || MainManager.Instance.menuStates == MenuStates.CraftingMenu
             || MainManager.Instance.menuStates == MenuStates.EquipmentMenu)
         {
@@ -353,7 +360,27 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     public void OnPointerEnter(PointerEventData eventData)
     {
         //Play ItemEntering Sound
-        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+        if (itemName != Items.None)
+        {
+            if (InventoryManager.Instance.lastIDToHover != itemID)
+            {
+                SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+            }
+            else
+            {
+                if (InventoryManager.Instance.lastIDToGet == itemID && InventoryManager.Instance.lastIDToHover == itemID)
+                {
+
+                }
+                else if (InventoryManager.Instance.lastIDToGet != itemID && InventoryManager.Instance.lastIDToHover != itemID)
+                {
+                    SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+                }
+            }
+        }
+
+        InventoryManager.Instance.lastItemToHover = itemName;
+        InventoryManager.Instance.lastIDToHover = itemID;
 
         if (inventoryIndex <= 0)
         {
@@ -385,6 +412,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             InventoryManager.Instance.SetPlayerItemInfo(Items.None, false);
         }
 
+        InventoryManager.Instance.ChangeItemInfoBox(false);
+
         InventoryManager.Instance.SetItemSelectedHighlight_Active(inventoryIndex, itemID, itemName, false);
 
         InventoryManager.Instance.lastIDToGet = -1;
@@ -414,6 +443,18 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     public void DeactivateDurabilityMeter()
     {
         durabilityMeterParent.SetActive(false);
+    }
+
+
+    //--------------------
+
+
+    public void ChangeImageColor(Color color)
+    {
+        if (gameObject.GetComponent<Image>())
+        {
+            gameObject.GetComponent<Image>().color = color;
+        }
     }
 
 

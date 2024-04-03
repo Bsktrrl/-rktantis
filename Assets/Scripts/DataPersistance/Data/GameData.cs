@@ -55,6 +55,10 @@ public class GameData
     //Weather
     [HideInInspector] public List<WeatherType> weatherTypeDayList_Save = new List<WeatherType>();
 
+    //Research
+    [HideInInspector] public List<Items> researchedItemsListNames_Save = new List<Items>();
+    [HideInInspector] public List<bool> researched_SOItem_Save = new List<bool>();
+
 
     //--------------------
 
@@ -80,5 +84,8 @@ public class GameData
         this.personalStoryJournalPageIndexList_Save.Clear();
 
         this.weatherTypeDayList_Save.Clear();
+
+        this.researchedItemsListNames_Save.Clear();
+        this.researched_SOItem_Save.Clear();
     }
 }

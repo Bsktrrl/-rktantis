@@ -18,6 +18,10 @@ public class InventoryManager : Singleton<InventoryManager>
     [Header("Item")]
     public Items lastItemToGet;
     public int lastIDToGet;
+
+    public Items lastItemToHover;
+    public int lastIDToHover;
+
     [SerializeField] TextMeshProUGUI player_ItemName_Display;
     [SerializeField] TextMeshProUGUI player_ItemDescription_Display;
     [SerializeField] TextMeshProUGUI chest_ItemName_Display;
@@ -313,12 +317,10 @@ public class InventoryManager : Singleton<InventoryManager>
 
         if (index >= 0)
         {
-            print("index >= 0");
             inventories[inventory].itemsInInventory.RemoveAt(index);
         }
         else
         {
-            print("index < 0");
             for (int i = inventories[inventory].itemsInInventory.Count - 1; i >= 0; i--)
             {
                 if (inventories[inventory].itemsInInventory[i].itemName == itemName
@@ -972,21 +974,36 @@ public class InventoryManager : Singleton<InventoryManager>
         //ItemSlot from Player Inventory
         if (itemSlot.inventoryIndex <= 0)
         {
-            if (MainManager.Instance.GetItem(itemName).isEquipableInHand)
+            if (MainManager.Instance.menuStates == MenuStates.ResearchMenu)
             {
-                itemInfo.SetInfo_EquipableHandItem(itemSlot);
+                if (MainManager.Instance.GetItem(itemName).isResearched)
+                {
+                    itemInfo.SetInfo_ResearchableItem(true);
+                }
+                else
+                {
+                    itemInfo.SetInfo_ResearchableItem(false);
+                }
             }
-            else if (MainManager.Instance.GetItem(itemName).isEquipableClothes)
-            {
-                itemInfo.SetInfo_EquipableClothesItem();
-            }
-            else if (MainManager.Instance.GetItem(itemName).isConsumeable)
-            {
-                itemInfo.SetInfo_ConsumableItem();
-            }
+
             else
             {
-                itemInfo.SetInfo_StaticItem();
+                if (MainManager.Instance.GetItem(itemName).isEquipableInHand)
+                {
+                    itemInfo.SetInfo_EquipableHandItem(itemSlot);
+                }
+                else if (MainManager.Instance.GetItem(itemName).isEquipableClothes)
+                {
+                    itemInfo.SetInfo_EquipableClothesItem();
+                }
+                else if (MainManager.Instance.GetItem(itemName).isConsumeable)
+                {
+                    itemInfo.SetInfo_ConsumableItem();
+                }
+                else
+                {
+                    itemInfo.SetInfo_StaticItem();
+                }
             }
         }
 

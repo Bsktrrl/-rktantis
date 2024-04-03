@@ -173,6 +173,29 @@ public class InteractableObject : MonoBehaviour
             }
             #endregion
 
+            //If Object is a Research Table
+            #region
+            else if (interactableType == InteracteableType.ResearchTable)
+            {
+                //print("Interact with a Research Table");
+
+                SoundManager.Instance.Play_InteractableObjects_OpenResearchTable_Clip();
+
+                TabletManager.Instance.objectInteractingWith_Object = gameObject;
+
+                //Set Research Table Animation
+                if (gameObject.GetComponent<Animations_Objects>())
+                {
+                    gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                }
+
+                //Open the Research menu
+                TabletManager.Instance.OpenTablet(TabletMenuState.ResearchTable);
+
+                TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.ResearchTable;
+            }
+            #endregion
+
             //If Object is a SkillTree
             #region
             else if (interactableType == InteracteableType.SkillTreeTable)
@@ -304,5 +327,8 @@ public enum InteracteableType
     [Description("Arídite Crystal Ore")][InspectorName("Ore/Arídite Crystal Ore")] AríditeCrystal_Ore,
 
     //Journal Pages
-    [Description("Journal Page")][InspectorName("Journal Page/Journal Page")] JournalPage
+    [Description("Journal Page")][InspectorName("Journal Page/Journal Page")] JournalPage,
+
+
+    [Description("Research Table")][InspectorName("Furniture/Research Table")] ResearchTable
 }

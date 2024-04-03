@@ -16,6 +16,9 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
     public GameObject inventoryItemInfo_Parent;
     public GameObject equipment_Parent;
 
+    [Header("Research Item")]
+    public GameObject research_Parent;
+
     [Header("Equip Hand Item")]
     public GameObject equipHandItem_Parent;
     public GameObject equipHandItem_NotHand;
@@ -104,6 +107,19 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
 
         ConsumableItem_Parent.SetActive(true);
     }
+    public void SetInfo_ResearchableItem(bool isResearched)
+    {
+        HideAllParents();
+
+        if (isResearched)
+        {
+            research_Parent.SetActive(false);
+        }
+        else
+        {
+            research_Parent.SetActive(true);
+        }
+    }
     public void SetInfo_EquipableHandItem(ItemSlot itemSlot)
     {
         HideAllParents();
@@ -191,6 +207,7 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
         equipClothesItem_Parent.SetActive(false);
         ConsumableItem_Parent.SetActive(false);
         equipment_Parent.SetActive(false);
+        research_Parent.SetActive(false);
     }
 
 

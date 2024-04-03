@@ -82,6 +82,7 @@ public class CraftingManager : Singleton<CraftingManager>
 
 
     //Overview Screen
+    #region
     void SetupItemCategoryList()
     {
         //Reset overviewScreen
@@ -123,9 +124,11 @@ public class CraftingManager : Singleton<CraftingManager>
             }
         }
     }
+    #endregion
 
 
     //Selection Screen
+    #region
     public void SetupSelectionScreen()
     {
         //CategoryDisplay
@@ -245,17 +248,35 @@ public class CraftingManager : Singleton<CraftingManager>
             //Find amount of items
             for (int j = 0; j < MainManager.Instance.item_SO.itemList.Count; j++)
             {
-                if (MainManager.Instance.item_SO.itemList[j].isActive
-                    && MainManager.Instance.item_SO.itemList[j].isCrafteable
+                bool isReady = true;
+
+                if (/*MainManager.Instance.item_SO.itemList[j].isResearched
+                    &&*/ MainManager.Instance.item_SO.itemList[j].isCrafteable
                     && MainManager.Instance.item_SO.itemList[j].craftingRequirements.Count > 0
                     && MainManager.Instance.item_SO.itemList[j].categoryName == activeCategory
                     && MainManager.Instance.item_SO.itemList[j].subCategoryName == selectionSubGridLayoutGroupList[i].GetComponent<SelectionSubPanel>().panelName)
                 {
-                    selectionButtonPrefabList.Add(Instantiate(selectionButton_Prefab) as GameObject);
-                    selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].transform.SetParent(selectionSubGridLayoutGroupList[i].transform);
+                    //Check if all Required items have been researched
+                    for (int k = 0; k < MainManager.Instance.item_SO.itemList[j].craftingRequirements.Count; k++)
+                    {
+                        if (!MainManager.Instance.GetItem(MainManager.Instance.item_SO.itemList[j].craftingRequirements[k].itemName).isResearched)
+                        {
+                            isReady = false;
 
-                    selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().item = MainManager.Instance.item_SO.itemList[j];
-                    selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().SetDisplay();
+                            //j = MainManager.Instance.item_SO.itemList.Count;
+
+                            break;
+                        }
+                    }
+
+                    if (isReady)
+                    {
+                        selectionButtonPrefabList.Add(Instantiate(selectionButton_Prefab) as GameObject);
+                        selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].transform.SetParent(selectionSubGridLayoutGroupList[i].transform);
+
+                        selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().item = MainManager.Instance.item_SO.itemList[j];
+                        selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().SetDisplay();
+                    }
                 }
             }
         }
@@ -291,9 +312,11 @@ public class CraftingManager : Singleton<CraftingManager>
             }
         }
     }
+    #endregion
 
 
     //Crafting Screen
+    #region
     public void SetupCraftingScreen(Item item)
     {
         //Prepare for reset
@@ -361,6 +384,7 @@ public class CraftingManager : Singleton<CraftingManager>
             totalRequirementMet = false;
         }
     }
+    #endregion
 
 
     //--------------------
@@ -384,11 +408,11 @@ public class CraftingManager : Singleton<CraftingManager>
 
     void ActivateItemInScripteableObject(Items itemName)
     {
-        MainManager.Instance.GetItem(itemName).isActive = true;
+        MainManager.Instance.GetItem(itemName).isResearched = true;
     }
     bool IsItemActivatedInScripteableObject(Items itemName)
     {
-        if (MainManager.Instance.GetItem(itemName).isActive)
+        if (MainManager.Instance.GetItem(itemName).isResearched)
         {
             return true;
         }

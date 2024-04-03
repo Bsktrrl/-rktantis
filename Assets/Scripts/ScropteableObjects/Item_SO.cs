@@ -24,7 +24,6 @@ public class Item
     public List<Sprite> itemSelected_SpriteList = new List<Sprite>();
 
     [Header("Stats")]
-    public bool isActive = true;
     public bool isConsumeable;
     public bool isEquipableInHand;
     public bool isEquipableClothes;
@@ -51,6 +50,11 @@ public class Item
     [Header("Animations")]
     public Animation idleAnimation;
     public Animation actionAnimation;
+
+    [Header("Research")]
+    public bool isResearched = true;
+    public int researchTime;
+    [TextArea(5, 10)] public string research_ItemDescription;
 
     [Header("Crafting")]
     public bool isCrafteable;

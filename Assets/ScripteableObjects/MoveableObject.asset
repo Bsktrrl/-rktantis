@@ -30,6 +30,19 @@ MonoBehaviour:
     RemoveCraftingRequirements:
     - itemName: 1
       amount: 3
+  - Name: Research Table
+    moveableObjectType: 2
+    furnitureType: 7
+    machineType: 0
+    objectSprite: {fileID: 1000895864, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    objectToMove: {fileID: 6873032877668145129, guid: e41f91dbdd2061641846cb08c75a14fa,
+      type: 3}
+    craftingRequirements:
+    - itemName: 1
+      amount: 4
+    RemoveCraftingRequirements:
+    - itemName: 1
+      amount: 3
   - Name: SkillTree Table
     moveableObjectType: 2
     furnitureType: 2

@@ -219,7 +219,8 @@ public class HotbarManager : Singleton<HotbarManager>
 
     void HandSelection_Down()
     {
-        if (MainManager.Instance.menuStates == MenuStates.JournalMenu) { return; }
+        if (MainManager.Instance.menuStates == MenuStates.JournalMenu
+            || MainManager.Instance.menuStates == MenuStates.ResearchMenu) { return; }
 
         SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
 
@@ -243,7 +244,8 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     void HandSelection_UP()
     {
-        if (MainManager.Instance.menuStates == MenuStates.JournalMenu) { return; }
+        if (MainManager.Instance.menuStates == MenuStates.JournalMenu
+            || MainManager.Instance.menuStates == MenuStates.ResearchMenu) { return; }
 
         SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
 
