@@ -6,6 +6,7 @@ public class SoundManager : Singleton<SoundManager>
 {
     public AudioSource audioSource_WorldSound; //World Sound Source
     public AudioSource audioSource_MenuSound; //Menu Sound Source
+    public AudioSource audioSource_MenuSound2; //Menu Sound Source
     public AudioSource audioSourceWeatherSound; //Weather Sound Source
 
     public AudioSource audioSource_Music; //Music Source
@@ -1100,22 +1101,22 @@ public class SoundManager : Singleton<SoundManager>
     #region Research
     public void Play_Research_Ongoing_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_MenuSound2 != null)
         {
-            audioSource_MenuSound.clip = research_Ongoing;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_MenuSound2.clip = research_Ongoing;
+            audioSource_MenuSound2.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
+            audioSource_MenuSound2.pitch = 1f;
+            audioSource_MenuSound2.Play();
         }
     }
     public void Play_Research_Complete_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_MenuSound2 != null)
         {
-            audioSource_MenuSound.clip = research_Complete;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_MenuSound2.clip = research_Complete;
+            audioSource_MenuSound2.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
+            audioSource_MenuSound2.pitch = 1f;
+            audioSource_MenuSound2.Play();
         }
     }
     #endregion

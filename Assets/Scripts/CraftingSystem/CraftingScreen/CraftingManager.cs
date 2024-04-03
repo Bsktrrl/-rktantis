@@ -82,7 +82,7 @@ public class CraftingManager : Singleton<CraftingManager>
 
 
     //Overview Screen
-    #region|
+    #region
     void SetupItemCategoryList()
     {
         //Reset overviewScreen
@@ -245,11 +245,11 @@ public class CraftingManager : Singleton<CraftingManager>
         //Instantiate SelectionButton_Prefab
         for (int i = 0; i < selectionSubGridLayoutGroupList.Count; i++)
         {
-            bool isReady = true;
-
             //Find amount of items
             for (int j = 0; j < MainManager.Instance.item_SO.itemList.Count; j++)
             {
+                bool isReady = true;
+
                 if (/*MainManager.Instance.item_SO.itemList[j].isResearched
                     &&*/ MainManager.Instance.item_SO.itemList[j].isCrafteable
                     && MainManager.Instance.item_SO.itemList[j].craftingRequirements.Count > 0
@@ -263,7 +263,7 @@ public class CraftingManager : Singleton<CraftingManager>
                         {
                             isReady = false;
 
-                            j = MainManager.Instance.item_SO.itemList.Count;
+                            //j = MainManager.Instance.item_SO.itemList.Count;
 
                             break;
                         }
