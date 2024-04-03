@@ -11,6 +11,8 @@ public class SelectionSubButtonPrefab : MonoBehaviour, IPointerEnterHandler
 
     public Item item = new Item();
 
+    public GameObject newItemObject;
+
 
     //--------------------
 
@@ -44,6 +46,8 @@ public class SelectionSubButtonPrefab : MonoBehaviour, IPointerEnterHandler
 
     public void Button_OnClick()
     {
+        print("1000000. Pressed SubCategoryButton");
+
         //categorySubButton_isClicked?.Invoke();
 
         ////Set Frame Orange
@@ -63,11 +67,38 @@ public class SelectionSubButtonPrefab : MonoBehaviour, IPointerEnterHandler
         CraftingManager.Instance.itemSelected = item;
         CraftingManager.Instance.SetupCraftingScreen(item);
         CraftingManager.Instance.craftingScreen.SetActive(true);
+
+        UpdateStates(true);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+    }
+
+
+    //--------------------
+
+
+    public void UpdateStates(bool changeStates)
+    {
+        CraftingManager.Instance.UpdateItemStates(this, changeStates);
+        CraftingManager.Instance.UpdateCategoryButtonDisplay();
+    }
+    public void SetNewSubButtonItemDisplay(CraftingItem craftingItem)
+    {
+        if (craftingItem.itemState == CraftingItemState.Unactive)
+        {
+            newItemObject.SetActive(false);
+        }
+        else if (craftingItem.itemState == CraftingItemState.New)
+        {
+            newItemObject.SetActive(true);
+        }
+        else if (craftingItem.itemState == CraftingItemState.Active)
+        {
+            newItemObject.SetActive(false);
+        }
     }
 
 

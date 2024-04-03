@@ -479,6 +479,13 @@ public class TabletManager : Singleton<TabletManager>
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 menu_CraftingTable_Button.GetComponent<Image>().sprite = menuButton_Active;
 
+                //Set "New" Crafting items Display
+                for (int i = 0; i < CraftingManager.Instance.itemStateList.Count; i++)
+                {
+                    CraftingManager.Instance.UpdateItemState(i, false);
+                }
+                CraftingManager.Instance.UpdateCategoryButtonDisplay();
+
                 playerInventory_MainParent.SetActive(true);
                 chestInventory_MainParent.SetActive(false);
                 equipInventory_MainParent.SetActive(false);

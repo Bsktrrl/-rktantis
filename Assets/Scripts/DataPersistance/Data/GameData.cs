@@ -59,6 +59,9 @@ public class GameData
     [HideInInspector] public List<Items> researchedItemsListNames_Save = new List<Items>();
     [HideInInspector] public List<bool> researched_SOItem_Save = new List<bool>();
 
+    //Crafting
+    [HideInInspector] public List<CraftingItem> itemStates_Save = new List<CraftingItem>();
+
 
     //--------------------
 
@@ -87,5 +90,7 @@ public class GameData
 
         this.researchedItemsListNames_Save.Clear();
         this.researched_SOItem_Save.Clear();
+
+        this.itemStates_Save.Clear();
     }
 }

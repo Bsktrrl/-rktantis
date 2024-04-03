@@ -9,6 +9,8 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
 
     public ItemCategories categoryType;
 
+    public GameObject newItemObject;
+
 
     //--------------------
 
@@ -40,11 +42,12 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
 
     public void CategoryButton_OnClick()
     {
+        print("2000000. Pressed CategoryButton");
+
         categoryButton_isClicked?.Invoke();
 
         //Set Frame Orange
         GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Passive;
-
 
         SoundManager.Instance.Play_Crafting_ChangeCraftingMenu_Clip();
 
@@ -64,5 +67,24 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
         categoryButton_isClicked -= OtherButtonClicked;
 
         DestroyImmediate(gameObject);
+    }
+
+
+    //--------------------
+
+    public void SetNewCategoryButtonItemDisplay()
+    {
+        newItemObject.SetActive(false);
+
+        for (int i = 0; i < CraftingManager.Instance.itemStateList.Count; i++)
+        {
+            if (CraftingManager.Instance.itemStateList[i].itemCategory == categoryType
+                && CraftingManager.Instance.itemStateList[i].itemState == CraftingItemState.New)
+            {
+                newItemObject.SetActive(true);
+
+                break;
+            }
+        }
     }
 }

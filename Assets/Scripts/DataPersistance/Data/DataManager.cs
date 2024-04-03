@@ -68,6 +68,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<Items> researchedItemsListNames_Store = new List<Items>();
     [HideInInspector] public List<bool> researched_SOItem_Store = new List<bool>();
 
+    //Crafting
+    [HideInInspector] public List<CraftingItem> itemStates_Store = new List<CraftingItem>();
+
 
     //--------------------
 
@@ -114,6 +117,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         this.researchedItemsListNames_Store = gameData.researchedItemsListNames_Save;
         this.researched_SOItem_Store = gameData.researched_SOItem_Save;
+
+        this.itemStates_Store = gameData.itemStates_Save;
         #endregion
 
         //Load the saved data into the project
@@ -162,6 +167,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         ResearchManager.Instance.LoadData(this.researched_SOItem_Store);
         print("14. Research has Loaded");
+
+        CraftingManager.Instance.LoadData();
+        print("15. Crafting has Loaded");
         #endregion
 
         print("------------------------------");
@@ -209,6 +217,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         gameData.researchedItemsListNames_Save = this.researchedItemsListNames_Store;
         gameData.researched_SOItem_Save = this.researched_SOItem_Store;
+
+        gameData.itemStates_Save = this.itemStates_Store;
 
         print("Data has Saved");
     }

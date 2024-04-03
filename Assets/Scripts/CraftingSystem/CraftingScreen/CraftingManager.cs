@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,6 +50,8 @@ public class CraftingManager : Singleton<CraftingManager>
     public ItemCategories activeCategory;
     public Item itemSelected;
     public GameObject activeItemToCraft;
+
+    public List<CraftingItem> itemStateList = new List<CraftingItem>();
     #endregion
 
 
@@ -75,6 +79,37 @@ public class CraftingManager : Singleton<CraftingManager>
         {
             CheckForRequiermentsMet();
         }
+    }
+
+
+    //--------------------
+
+
+    public void LoadData()
+    {
+        //Load itemStates
+        itemStateList = DataManager.Instance.itemStates_Store;
+
+        if (itemStateList.Count <= 0) //New Game
+        {
+            print("itemStateList.Count = " + itemStateList.Count);
+
+            for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)
+            {
+                CraftingItem tempItem = new CraftingItem();
+                tempItem.itemName = MainManager.Instance.item_SO.itemList[i].itemName;
+                tempItem.itemCategory = MainManager.Instance.item_SO.itemList[i].categoryName;
+                tempItem.itemState = CraftingItemState.Unactive;
+
+                itemStateList.Add(tempItem);
+            }
+        }
+
+        SaveData();
+    }
+    public void SaveData()
+    {
+        DataManager.Instance.itemStates_Store = itemStateList;
     }
 
 
@@ -123,6 +158,8 @@ public class CraftingManager : Singleton<CraftingManager>
                 break;
             }
         }
+
+        UpdateCategoryButtonDisplay();
     }
     #endregion
 
@@ -276,6 +313,8 @@ public class CraftingManager : Singleton<CraftingManager>
 
                         selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().item = MainManager.Instance.item_SO.itemList[j];
                         selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().SetDisplay();
+
+                        selectionButtonPrefabList[selectionButtonPrefabList.Count - 1].GetComponent<SelectionSubButtonPrefab>().UpdateStates(false);
                     }
                 }
             }
@@ -426,6 +465,82 @@ public class CraftingManager : Singleton<CraftingManager>
     //--------------------
 
 
+    public void UpdateCategoryButtonDisplay()
+    {
+        for (int i = 0; i < categoryButtonPrefabList.Count; i++)
+        {
+            if (categoryButtonPrefabList[i].GetComponent<CategoryButton>())
+            {
+                categoryButtonPrefabList[i].GetComponent<CategoryButton>().SetNewCategoryButtonItemDisplay();
+            }
+        }
+    }
+
+    public void UpdateItemState(int index, bool changeState)
+    {
+        print("1. UpdateItemState: " + itemStateList[index].itemName);
+
+        //Show "New"-Display
+        if (changeState)
+        {
+            print("2. UpdateItemState: " + itemStateList[index].itemName);
+
+            if (itemStateList[index].itemState == CraftingItemState.Unactive)
+            {
+                print("3. UpdateItemState: " + itemStateList[index].itemName);
+
+                itemStateList[index].itemState = CraftingItemState.New;
+            }
+        }
+        
+        //Update the selectionButtonPrefabList-Dispaly
+        for (int i = 0; i < selectionButtonPrefabList.Count; i++)
+        {
+            if (selectionButtonPrefabList[i].GetComponent<SelectionSubButtonPrefab>())
+            {
+                if (selectionButtonPrefabList[i].GetComponent<SelectionSubButtonPrefab>().item.itemName == itemStateList[index].itemName)
+                {
+                    UpdateItemStates(selectionButtonPrefabList[i].GetComponent<SelectionSubButtonPrefab>(), true);
+
+                    break;
+                }
+            }
+        }
+
+        SaveData();
+    }
+    public void UpdateItemStates(SelectionSubButtonPrefab selectionSubButtonPrefab, bool changeState)
+    {
+        //When a "New" button is pressed, hide its "New"-Display
+        for (int i = 0; i < itemStateList.Count; i++)
+        {
+            if (itemStateList[i].itemName == selectionSubButtonPrefab.item.itemName)
+            {
+                if (changeState)
+                {
+                    if (itemStateList[i].itemState == CraftingItemState.Unactive)
+                    {
+                        itemStateList[i].itemState = CraftingItemState.New;
+                    }
+                    else if (itemStateList[i].itemState == CraftingItemState.New)
+                    {
+                        itemStateList[i].itemState = CraftingItemState.Active;
+                    }
+                }
+                
+                selectionSubButtonPrefab.SetNewSubButtonItemDisplay(itemStateList[i]);
+
+                break;
+            }
+        }
+
+        SaveData();
+    }
+
+
+    //--------------------
+
+
     public void OpenCraftingScreen()
     {
         SetupItemCategoryList();
@@ -459,4 +574,19 @@ public class CraftingManager : Singleton<CraftingManager>
         Cursor.lockState = CursorLockMode.Locked;
         MainManager.Instance.menuStates = MenuStates.None;
     }
+}
+
+[Serializable]
+public class CraftingItem
+{
+    public Items itemName;
+    public CraftingItemState itemState;
+    public ItemCategories itemCategory;
+}
+
+public enum CraftingItemState
+{
+    Unactive,
+    New,
+    Active
 }

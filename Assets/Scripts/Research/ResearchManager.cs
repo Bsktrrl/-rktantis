@@ -320,9 +320,10 @@ public class ResearchManager : Singleton<ResearchManager>
     }
     void CompleteResearch()
     {
-        print("CompleteResearch");
+        print("1. CompleteResearch");
         SoundManager.Instance.Play_Research_Complete_Clip();
 
+        //Change isResearched stats
         for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)
         {
             if (MainManager.Instance.item_SO.itemList[i].itemName == activeItem)
@@ -334,12 +335,50 @@ public class ResearchManager : Singleton<ResearchManager>
                 Update_SOItemList();
                 UpdateResearchItemColor();
 
-                SetResearchItemInfo(Items.None);
-
-                SaveData();
-
                 break;
             }
         }
+
+        //Update the itemStateList with the new stats
+        for (int j = 0; j < MainManager.Instance.item_SO.itemList.Count; j++)
+        {
+            print("2. CompleteResearch");
+
+            bool ready = true;
+
+            for (int k = 0; k < MainManager.Instance.item_SO.itemList[j].craftingRequirements.Count; k++)
+            {
+                if (!MainManager.Instance.GetItem(MainManager.Instance.item_SO.itemList[j].craftingRequirements[k].itemName).isResearched)
+                {
+                    print("2.5 CompleteResearch");
+
+                    ready = false;
+
+                    break;
+                }
+            }
+
+            if (ready)
+            {
+                print("3. CompleteResearch");
+
+                for (int k = 0; k < MainManager.Instance.item_SO.itemList[j].craftingRequirements.Count; k++)
+                {
+                    if (MainManager.Instance.item_SO.itemList[j].craftingRequirements[k].itemName == activeItem)
+                    {
+                        print("4. CompleteResearch");
+
+                        //CraftingManager.Instance.itemStateList[j].itemState = CraftingItemState.New;
+
+                        CraftingManager.Instance.UpdateItemState(j, true);
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        SetResearchItemInfo(Items.None);
+        SaveData();
     }
 }
