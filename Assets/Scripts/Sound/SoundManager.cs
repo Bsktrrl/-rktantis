@@ -128,6 +128,12 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip InteractableObjects_UngoingCraftingTable_Clip; //
     [SerializeField] AudioClip InteractableObjects_CloseCraftingTable_Clip; //
 
+    //Research Table
+    [SerializeField] AudioClip InteractableObjects_OpenResearchTable_Clip; //
+    [SerializeField] AudioClip InteractableObjects_UngoingResearchTable_Clip; //
+    [SerializeField] AudioClip InteractableObjects_CloseResearchTable_Clip; //
+    [SerializeField] AudioClip InteractableObjects_ResearchTable_Researching_Clip; //
+
     //Skill Tree Table
     [SerializeField] AudioClip InteractableObjects_OpenSkillTreeTable_Clip; //
     [SerializeField] AudioClip InteractableObjects_UngoingSkillTreeTable_Clip; //
@@ -816,6 +822,7 @@ public class SoundManager : Singleton<SoundManager>
     #endregion
 
     #region InteractableObjects //"Ungoing" have yet to be implemented
+    #region Crafting Table
     public void Play_InteractableObjects_OpenCraftingTable_Clip()
     {
         if (audioSource_WorldSound != null)
@@ -846,7 +853,52 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_WorldSound.Play();
         }
     }
+    #endregion
 
+    #region Research Table
+    public void Play_InteractableObjects_OpenResearchTable_Clip()
+    {
+        if (audioSource_WorldSound != null)
+        {
+            audioSource_WorldSound.clip = InteractableObjects_OpenResearchTable_Clip;
+            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
+            audioSource_WorldSound.pitch = 1f;
+            audioSource_WorldSound.Play();
+        }
+    }
+    public void Play_InteractableObjects_UngoingResearchTable_Clip()
+    {
+        if (audioSource_WorldSound != null)
+        {
+            audioSource_WorldSound.clip = InteractableObjects_UngoingResearchTable_Clip;
+            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
+            audioSource_WorldSound.pitch = 1f;
+            audioSource_WorldSound.Play();
+        }
+    }
+    public void Play_InteractableObjects_CloseResearchTable_Clip()
+    {
+        if (audioSource_WorldSound != null)
+        {
+            audioSource_WorldSound.clip = InteractableObjects_CloseResearchTable_Clip;
+            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
+            audioSource_WorldSound.pitch = 1f;
+            audioSource_WorldSound.Play();
+        }
+    }
+    public void Play_ResearchTable_Researching_Clip()
+    {
+        if (audioSource_WorldSound != null)
+        {
+            audioSource_WorldSound.clip = InteractableObjects_ResearchTable_Researching_Clip;
+            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
+            audioSource_WorldSound.pitch = 1f;
+            audioSource_WorldSound.Play();
+        }
+    }
+    #endregion
+
+    #region Skill Tree Table
     public void Play_InteractableObjects_OpenSkillTreeTable_Clip()
     {
         if (audioSource_WorldSound != null)
@@ -877,7 +929,9 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_WorldSound.Play();
         }
     }
+    #endregion
 
+    #region Crop Plot
     public void Play_InteractableObjects_OpenCropPlot_Clip()
     {
         if (audioSource_WorldSound != null)
@@ -908,7 +962,9 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_WorldSound.Play();
         }
     }
+    #endregion
 
+    #region Ghost Tank
     public void Play_InteractableObjects_UngoingGhostTank_Clip()
     {
         if (audioSource_WorldSound != null)
@@ -919,7 +975,9 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_WorldSound.Play();
         }
     }
+    #endregion
 
+    #region Extractor
     public void Play_InteractableObjects_UngoingExtractor_Clip()
     {
         if (audioSource_WorldSound != null)
@@ -930,7 +988,9 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_WorldSound.Play();
         }
     }
+    #endregion
 
+    #region Lamp
     public void Play_InteractableObjects_UngoingLamp_Clip()
     {
         if (audioSource_WorldSound != null)
@@ -941,7 +1001,9 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_WorldSound.Play();
         }
     }
+    #endregion
 
+    #region Spotlight
     public void Play_InteractableObjects_UngoingSpotlight_Clip()
     {
         if (audioSource_WorldSound != null)
@@ -952,6 +1014,7 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_WorldSound.Play();
         }
     }
+    #endregion|
     #endregion
 
     #region Buffs

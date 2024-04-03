@@ -245,7 +245,7 @@ public class CraftingManager : Singleton<CraftingManager>
             //Find amount of items
             for (int j = 0; j < MainManager.Instance.item_SO.itemList.Count; j++)
             {
-                if (MainManager.Instance.item_SO.itemList[j].isActive
+                if (MainManager.Instance.item_SO.itemList[j].isResearched
                     && MainManager.Instance.item_SO.itemList[j].isCrafteable
                     && MainManager.Instance.item_SO.itemList[j].craftingRequirements.Count > 0
                     && MainManager.Instance.item_SO.itemList[j].categoryName == activeCategory
@@ -384,11 +384,11 @@ public class CraftingManager : Singleton<CraftingManager>
 
     void ActivateItemInScripteableObject(Items itemName)
     {
-        MainManager.Instance.GetItem(itemName).isActive = true;
+        MainManager.Instance.GetItem(itemName).isResearched = true;
     }
     bool IsItemActivatedInScripteableObject(Items itemName)
     {
-        if (MainManager.Instance.GetItem(itemName).isActive)
+        if (MainManager.Instance.GetItem(itemName).isResearched)
         {
             return true;
         }

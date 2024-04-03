@@ -24,7 +24,7 @@ public class Item
     public List<Sprite> itemSelected_SpriteList = new List<Sprite>();
 
     [Header("Stats")]
-    public bool isActive = true;
+    public bool isResearched = true;
     public bool isConsumeable;
     public bool isEquipableInHand;
     public bool isEquipableClothes;

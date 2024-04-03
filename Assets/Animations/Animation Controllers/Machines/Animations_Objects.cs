@@ -25,7 +25,7 @@ public class Animations_Objects : MonoBehaviour
 
     public void StartAnimation()
     {
-        anim.SetBool("isActive", true);
+        anim.SetBool("isResearched", true);
 
         //Play Start Sound
         if (gameObject.GetComponent<InteractableObject>() && hasStarted)
@@ -67,7 +67,7 @@ public class Animations_Objects : MonoBehaviour
     }
     public void StopAnimation()
     {
-        anim.SetBool("isActive", false);
+        anim.SetBool("isResearched", false);
 
         //Play Start Sound
         if (gameObject.GetComponent<InteractableObject>() && hasStarted)

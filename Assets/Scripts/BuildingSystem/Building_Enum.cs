@@ -63,7 +63,8 @@ public enum FurnitureType
     [Description("Lamp")][InspectorName("Lamp")] Lamp,
     [Description("Spotlight")][InspectorName("Spotlight")] Spotlight,
 
-    [Description("Other1")][InspectorName("Other1")] FU_Other1,
+    [Description("Research Table")][InspectorName("Research Table")] ResearchTable,
+
     [Description("Other2")][InspectorName("Other2")] FU_Other2,
     [Description("Other3")][InspectorName("Other3")] FU_Other3,
     [Description("Other4")][InspectorName("Other4")] FU_Other4,

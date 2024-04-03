@@ -353,7 +353,27 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     public void OnPointerEnter(PointerEventData eventData)
     {
         //Play ItemEntering Sound
-        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+        if (itemName != Items.None)
+        {
+            if (InventoryManager.Instance.lastIDToHover != itemID)
+            {
+                SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+            }
+            else
+            {
+                if (InventoryManager.Instance.lastIDToGet == itemID && InventoryManager.Instance.lastIDToHover == itemID)
+                {
+
+                }
+                else if (InventoryManager.Instance.lastIDToGet != itemID && InventoryManager.Instance.lastIDToHover != itemID)
+                {
+                    SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+                }
+            }
+        }
+
+        InventoryManager.Instance.lastItemToHover = itemName;
+        InventoryManager.Instance.lastIDToHover = itemID;
 
         if (inventoryIndex <= 0)
         {
@@ -414,6 +434,18 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     public void DeactivateDurabilityMeter()
     {
         durabilityMeterParent.SetActive(false);
+    }
+
+
+    //--------------------
+
+
+    public void ChangeImageColor(Color color)
+    {
+        if (gameObject.GetComponent<Image>())
+        {
+            gameObject.GetComponent<Image>().color = color;
+        }
     }
 
 

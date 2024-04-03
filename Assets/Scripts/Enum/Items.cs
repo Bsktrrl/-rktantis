@@ -242,7 +242,8 @@ public enum Items
     [Description("Spotlight")][InspectorName("Furniture/Spotlight")] Spotlight,
 
     [Description("Medium Chest")][InspectorName("Furniture/Medium Chest")] MediumChest,
-    [Description("Other2")][InspectorName("Furniture/Other2")] FU_Other2,
+    [Description("Research Table")][InspectorName("Furniture/Research Table")] ResearchTable,
+
     [Description("Other3")][InspectorName("Furniture/Other3")] FU_Other3,
     [Description("Other4")][InspectorName("Furniture/Other4")] FU_Other4,
     [Description("Other5")][InspectorName("Furniture/Other5")] FU_Other5,
