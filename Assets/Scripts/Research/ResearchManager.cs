@@ -21,6 +21,7 @@ public class ResearchManager : Singleton<ResearchManager>
     //Active Item
     [SerializeField] Items activeItem;
     public bool isResearching;
+    public float researchTime_Multiplier = 2;
     float researchTime_Max;
     float researchTime_Current;
 
@@ -43,6 +44,13 @@ public class ResearchManager : Singleton<ResearchManager>
     //--------------------
 
 
+    private void Start()
+    {
+        //for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)
+        //{
+        //    MainManager.Instance.item_SO.itemList[i].researchTime = 5;
+        //}
+    }
     private void Update()
     {
         //Run when something is researched
@@ -50,9 +58,9 @@ public class ResearchManager : Singleton<ResearchManager>
         {
             researchTime_Current += Time.deltaTime;
 
-            researchProgressBar.GetComponent<Image>().fillAmount = (researchTime_Current / researchTime_Max);
+            researchProgressBar.GetComponent<Image>().fillAmount = (researchTime_Current / (researchTime_Max * researchTime_Multiplier));
 
-            if (researchTime_Current >= researchTime_Max)
+            if (researchTime_Current >= (researchTime_Max * researchTime_Multiplier))
             {
                 CompleteResearch();
 
@@ -261,15 +269,7 @@ public class ResearchManager : Singleton<ResearchManager>
     {
         if (_itemName == Items.None)
         {
-            activeItem = Items.None;
-
-            itemName.text = "";
-            itemImage.sprite = MainManager.Instance.GetItem(0).hotbarSprite;
-            itemDescription.text = "";
-
-            researchButton.SetActive(false);
-            researchProgressBar.SetActive(false);
-            researchProgressBar_Parent.SetActive(false);
+            ResetResearchInfo();
         }
 
         else if (!MainManager.Instance.GetItem(_itemName).isResearched)
@@ -289,16 +289,26 @@ public class ResearchManager : Singleton<ResearchManager>
 
         else
         {
-            activeItem = Items.None;
-
-            itemName.text = "";
-            itemImage.sprite = MainManager.Instance.GetItem(0).hotbarSprite;
-            itemDescription.text = "";
-
-            researchButton.SetActive(false);
-            researchProgressBar.SetActive(false);
-            researchProgressBar_Parent.SetActive(false);
+            ResetResearchInfo();
         }
+    }
+    void ResetResearchInfo()
+    {
+        SoundManager.Instance.Stop_MenuSound();
+
+        activeItem = Items.None;
+
+        itemName.text = "";
+        itemImage.sprite = MainManager.Instance.GetItem(0).hotbarSprite;
+        itemDescription.text = "";
+
+        isResearching = false;
+        researchTime_Current = 0;
+        researchTime_Max = 0;
+
+        researchButton.SetActive(false);
+        researchProgressBar.SetActive(false);
+        researchProgressBar_Parent.SetActive(false);
     }
     
     public void ResearchButton_isPressed()

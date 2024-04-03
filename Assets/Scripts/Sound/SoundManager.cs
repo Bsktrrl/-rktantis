@@ -192,6 +192,28 @@ public class SoundManager : Singleton<SoundManager>
 
     //--------------------
 
+    #region Stop Clip from playing
+    public void Stop_WorldSound()
+    {
+        audioSource_WorldSound.Stop();
+    }
+    public void Stop_MenuSound()
+    {
+        audioSource_MenuSound.Stop();
+    }
+    public void Stop_WeatherSound()
+    {
+        audioSourceWeatherSound.Stop();
+    }
+    public void Stop_Music()
+    {
+        audioSource_Music.Stop();
+    }
+    public void Stop_Voice()
+    {
+        audioSource_VoiceMessages.Stop();
+    }
+    #endregion
 
     #region Player //Have yet to be implemented
     public void Play_Player_Walking_Sand_Clip()

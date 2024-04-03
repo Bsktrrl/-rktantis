@@ -412,6 +412,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             InventoryManager.Instance.SetPlayerItemInfo(Items.None, false);
         }
 
+        InventoryManager.Instance.ChangeItemInfoBox(false);
+
         InventoryManager.Instance.SetItemSelectedHighlight_Active(inventoryIndex, itemID, itemName, false);
 
         InventoryManager.Instance.lastIDToGet = -1;
