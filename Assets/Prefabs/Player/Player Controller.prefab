@@ -11264,7 +11264,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12332,6 +12332,8 @@ MonoBehaviour:
   buff_Deactivated: {fileID: 0}
   journalPage_GetNewJournalPage: {fileID: 0}
   journalPage_SelectingJournalPage: {fileID: 0}
+  research_Ongoing: {fileID: 8300000, guid: 11abed732b8bb77479151ed4c87d8298, type: 3}
+  research_Complete: {fileID: 8300000, guid: 5fed85277dfcba443a51061b7059aa10, type: 3}
 --- !u!1 &1124252078268214199
 GameObject:
   m_ObjectHideFlags: 0
@@ -14184,7 +14186,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -14749,7 +14751,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -20013,6 +20015,8 @@ MonoBehaviour:
   researchProgressBar_Parent: {fileID: 4710146482378865150}
   researchProgressBar: {fileID: 8272103548333169895}
   activeItem: 0
+  isResearching: 0
+  researchTime_Multiplier: 2
   researchedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   notResearchedColor: {r: 1, g: 1, b: 1, a: 1}
   visibleColor: {r: 1, g: 1, b: 1, a: 1}
@@ -37828,7 +37832,7 @@ RectTransform:
   m_GameObject: {fileID: 3323531104962615702}
   m_LocalRotation: {x: -0.00000005960463, y: -0.000000092569216, z: -0.000000020787878,
     w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -16.507141}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -62529,7 +62533,7 @@ RectTransform:
   m_GameObject: {fileID: 5172170299168801589}
   m_LocalRotation: {x: -0.00000005960463, y: -0.000000092569216, z: -0.000000020787878,
     w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0002593994}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66721,7 +66725,7 @@ RectTransform:
   m_GameObject: {fileID: 5534125098729748262}
   m_LocalRotation: {x: -0.00000011920926, y: -0.00000005018057, z: -0.00000010418121,
     w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10.995949}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78343,7 +78347,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0064811707}
+  m_AnchoredPosition: {x: 0, y: 0.008270264}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763
@@ -91420,7 +91424,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7777658220186385503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.58621216}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -94758,7 +94762,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -99984,7 +99988,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8344209066425819664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 38.353333}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -107853,7 +107857,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -117748,7 +117752,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d2a40ea27db68ef489d3d07c5084ad5e,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d2a40ea27db68ef489d3d07c5084ad5e,
         type: 3}
@@ -118247,7 +118251,7 @@ PrefabInstance:
     - target: {fileID: 9057222037984141608, guid: 230d607f0fcd67b40959bd023bbbdfdb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

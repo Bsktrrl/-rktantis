@@ -192,6 +192,7 @@ public class SoundManager : Singleton<SoundManager>
 
     //--------------------
 
+
     #region Stop Clip from playing
     public void Stop_WorldSound()
     {
@@ -214,6 +215,10 @@ public class SoundManager : Singleton<SoundManager>
         audioSource_VoiceMessages.Stop();
     }
     #endregion
+
+
+    //--------------------
+
 
     #region Player //Have yet to be implemented
     public void Play_Player_Walking_Sand_Clip()
@@ -368,6 +373,8 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
             audioSource_MenuSound.pitch = 1f;
             audioSource_MenuSound.Play();
+
+            print("Play_Tablet_ChangeMenu_Clip");
         }
     }
     #endregion

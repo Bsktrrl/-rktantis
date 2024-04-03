@@ -150,13 +150,13 @@ public class TabletManager : Singleton<TabletManager>
             {
                 //Set DurabilityInfo on inventoryItems
                 InventoryManager.Instance.SelectItemDurabilityDisplay();
-                //ResearchManager.Instance.UpdateResearchItemColor();
+                InventoryManager.Instance.SelectItemInfoToHotbar();
             }
             else
             {
                 //Hide DurabilityInfo on inventoryItems
                 InventoryManager.Instance.DeselectItemDurabilityDisplay();
-                //ResearchManager.Instance.ResetResearchItemColor();
+                InventoryManager.Instance.DeselectItemInfoToHotbar();
             }
 
             //Set Timer Display
@@ -215,7 +215,7 @@ public class TabletManager : Singleton<TabletManager>
     public void MenuButton_Skilltree_onClick()
     {
         //Play Change Menu Sound
-        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+        //SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
 
         MenuTransition(tabletMenuState, TabletMenuState.SkillTree);
     }

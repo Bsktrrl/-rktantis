@@ -317,12 +317,10 @@ public class InventoryManager : Singleton<InventoryManager>
 
         if (index >= 0)
         {
-            print("index >= 0");
             inventories[inventory].itemsInInventory.RemoveAt(index);
         }
         else
         {
-            print("index < 0");
             for (int i = inventories[inventory].itemsInInventory.Count - 1; i >= 0; i--)
             {
                 if (inventories[inventory].itemsInInventory[i].itemName == itemName

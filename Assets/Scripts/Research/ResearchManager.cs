@@ -113,8 +113,6 @@ public class ResearchManager : Singleton<ResearchManager>
         {
             if (InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>())
             {
-                Item tempItem = MainManager.Instance.GetItem(InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().itemName);
-
                 //Hide Hotbar Marker
                 if (InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().hotbarSelectorParent.activeInHierarchy)
                 {
@@ -133,6 +131,8 @@ public class ResearchManager : Singleton<ResearchManager>
                 }
             }
         }
+
+        //print("hotbarMarkerInt: " + hotbarMarkerInt.Count + " | durabilityMarkerInt: " + durabilityMarkerInt.Count);
     }
     public void UpdateResearchItemColor()
     {
@@ -294,8 +294,6 @@ public class ResearchManager : Singleton<ResearchManager>
     }
     void ResetResearchInfo()
     {
-        SoundManager.Instance.Stop_MenuSound();
-
         activeItem = Items.None;
 
         itemName.text = "";
@@ -322,6 +320,9 @@ public class ResearchManager : Singleton<ResearchManager>
     }
     void CompleteResearch()
     {
+        print("CompleteResearch");
+        SoundManager.Instance.Play_Research_Complete_Clip();
+
         for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)
         {
             if (MainManager.Instance.item_SO.itemList[i].itemName == activeItem)

@@ -14,6 +14,6 @@ public class ResearchItemSlot : MonoBehaviour
     public void SetItemInfo(Sprite sprite, Items name)
     {
         itemImage.sprite = sprite;
-        itemName.text = name.ToString();
+        itemName.text = SpaceTextConverting.Instance.SetText(name.ToString());
     }
 }
