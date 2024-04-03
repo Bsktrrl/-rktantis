@@ -41,8 +41,15 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     //When Clicked
     public void OnPointerUp(PointerEventData eventData)
     {
+        //If player is in a "Research Table"
+        if (eventData.button == PointerEventData.InputButton.Left && MainManager.Instance.menuStates == MenuStates.ResearchMenu
+            && !ResearchManager.Instance.isResearching)
+        {
+            ResearchManager.Instance.SetResearchItemInfo(itemName);
+        }
+
         //If only player inventory is used
-        if (MainManager.Instance.menuStates == MenuStates.InventoryMenu
+        else if (MainManager.Instance.menuStates == MenuStates.InventoryMenu
             || MainManager.Instance.menuStates == MenuStates.CraftingMenu
             || MainManager.Instance.menuStates == MenuStates.EquipmentMenu)
         {

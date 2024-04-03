@@ -165,6 +165,11 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip journalPage_GetNewJournalPage; //
     [SerializeField] AudioClip journalPage_SelectingJournalPage; //
     #endregion
+    #region Research
+    [Header("Research")]
+    [SerializeField] AudioClip research_Ongoing; //
+    [SerializeField] AudioClip research_Complete; //
+    #endregion
 
     #endregion
 
@@ -1059,6 +1064,29 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_VoiceMessages.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_Voice();
             audioSource_VoiceMessages.pitch = 1f;
             audioSource_VoiceMessages.Play();
+        }
+    }
+    #endregion
+
+    #region Research
+    public void Play_Research_Ongoing_Clip()
+    {
+        if (audioSource_MenuSound != null)
+        {
+            audioSource_MenuSound.clip = research_Ongoing;
+            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
+            audioSource_MenuSound.pitch = 1f;
+            audioSource_MenuSound.Play();
+        }
+    }
+    public void Play_Research_Complete_Clip()
+    {
+        if (audioSource_MenuSound != null)
+        {
+            audioSource_MenuSound.clip = research_Complete;
+            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
+            audioSource_MenuSound.pitch = 1f;
+            audioSource_MenuSound.Play();
         }
     }
     #endregion

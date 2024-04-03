@@ -1,16 +1,96 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ResearchManager : Singleton<ResearchManager>
 {
+    [Header("Research Panel")]
+    [SerializeField] GameObject researchedItemList_Parent;
+    [SerializeField] GameObject researchedItem_Prefab;
+
+    [SerializeField] TextMeshProUGUI itemName;
+    [SerializeField] Image itemImage;
+    [SerializeField] TextMeshProUGUI itemDescription;
+
+    [SerializeField] GameObject researchButton;
+    [SerializeField] GameObject researchProgressBar_Parent;
+    [SerializeField] GameObject researchProgressBar;
+
+    //Active Item
+    [SerializeField] Items activeItem;
+    public bool isResearching;
+    float researchTime_Max;
+    float researchTime_Current;
+
+    //Lists
+    List<GameObject> researchedItemsList = new List<GameObject>();
+    List<Items> researchedItemsListNames = new List<Items>();
+    List<bool> researched_SOItem = new List<bool>();
+
+    //Markers
     List<int> hotbarMarkerInt = new List<int>();
     List<int> durabilityMarkerInt = new List<int>();
 
+    [Header("Colors")]
     [SerializeField] Color researchedColor;
     [SerializeField] Color notResearchedColor;
     [SerializeField] Color visibleColor;
     [SerializeField] Color unvisibleColor;
+
+
+    //--------------------
+
+
+    private void Update()
+    {
+        //Run when something is researched
+        if (isResearching)
+        {
+            researchTime_Current += Time.deltaTime;
+
+            researchProgressBar.GetComponent<Image>().fillAmount = (researchTime_Current / researchTime_Max);
+
+            if (researchTime_Current >= researchTime_Max)
+            {
+                CompleteResearch();
+
+                isResearching = false;
+            }
+        }
+    }
+
+
+    //--------------------
+
+
+    public void LoadData(List<bool> itemBoolList)
+    {
+        //Load researchedItemsList
+        researchedItemsListNames = DataManager.Instance.researchedItemsListNames_Store;
+        SetResearchedItemList();
+
+        //Load _SOItems
+        researched_SOItem = itemBoolList;
+
+        if (researched_SOItem.Count <= 0) //New Game
+        {
+            for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)
+            {
+                researched_SOItem.Add(false);
+            }
+        }
+
+        Update_SOItemList();
+
+        SaveData();
+    }
+    public void SaveData()
+    {
+        DataManager.Instance.researchedItemsListNames_Store = researchedItemsListNames;
+        DataManager.Instance.researched_SOItem_Store = researched_SOItem;
+    }
 
 
     //--------------------
@@ -128,6 +208,126 @@ public class ResearchManager : Singleton<ResearchManager>
                 {
                     InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().ChangeImageColor(visibleColor /*new Color(255, 255, 255, 255)*/);
                 }
+            }
+        }
+    }
+
+
+    //--------------------
+
+
+    public void SetResearchedItemList()
+    {
+        researchedItemList_Parent.GetComponent<RectTransform>().sizeDelta = new Vector2(225, 0);
+
+        for (int i = 0; i < researchedItemsListNames.Count; i++)
+        {
+            researchedItemsList.Insert(0, Instantiate(researchedItem_Prefab, researchedItemList_Parent.transform));
+            researchedItemsList[0].GetComponent<ResearchItemSlot>().SetItemInfo(MainManager.Instance.GetItem(researchedItemsListNames[i]).hotbarSprite, researchedItemsListNames[i]);
+            researchedItemsList[0].transform.SetAsFirstSibling();
+
+            researchedItemList_Parent.GetComponent<RectTransform>().sizeDelta += new Vector2 (0, 55);
+        }
+
+        SaveData();
+    }
+    public void AddToResearchedItemList(Items name)
+    {
+        //Add to NamesList
+        researchedItemsListNames.Add(name);
+
+        //Add to GameObjectList
+        researchedItemsList.Insert(0, Instantiate(researchedItem_Prefab, researchedItemList_Parent.transform));
+        researchedItemsList[0].GetComponent<ResearchItemSlot>().SetItemInfo(MainManager.Instance.GetItem(name).hotbarSprite, name);
+        researchedItemsList[0].transform.SetAsFirstSibling();
+
+        researchedItemList_Parent.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 55);
+
+        SaveData();
+    }
+    public void Update_SOItemList()
+    {
+        for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)
+        {
+            MainManager.Instance.item_SO.itemList[i].isResearched = researched_SOItem[i];
+        }
+    }
+
+
+    //--------------------
+
+
+    public void SetResearchItemInfo(Items _itemName)
+    {
+        if (_itemName == Items.None)
+        {
+            activeItem = Items.None;
+
+            itemName.text = "";
+            itemImage.sprite = MainManager.Instance.GetItem(0).hotbarSprite;
+            itemDescription.text = "";
+
+            researchButton.SetActive(false);
+            researchProgressBar.SetActive(false);
+            researchProgressBar_Parent.SetActive(false);
+        }
+
+        else if (!MainManager.Instance.GetItem(_itemName).isResearched)
+        {
+            activeItem = _itemName;
+
+            itemName.text = _itemName.ToString();
+            itemImage.sprite = MainManager.Instance.GetItem(_itemName).hotbarSprite;
+            itemDescription.text = MainManager.Instance.GetItem(_itemName).research_ItemDescription;
+
+            researchButton.SetActive(true);
+
+            researchProgressBar.GetComponent<Image>().fillAmount = 0;
+            researchProgressBar.SetActive(true);
+            researchProgressBar_Parent.SetActive(true);
+        }
+
+        else
+        {
+            activeItem = Items.None;
+
+            itemName.text = "";
+            itemImage.sprite = MainManager.Instance.GetItem(0).hotbarSprite;
+            itemDescription.text = "";
+
+            researchButton.SetActive(false);
+            researchProgressBar.SetActive(false);
+            researchProgressBar_Parent.SetActive(false);
+        }
+    }
+    
+    public void ResearchButton_isPressed()
+    {
+        SoundManager.Instance.Play_Research_Ongoing_Clip();
+
+        researchTime_Max = MainManager.Instance.GetItem(activeItem).researchTime;
+        researchTime_Current = 0;
+
+        isResearching = true;
+    }
+    void CompleteResearch()
+    {
+        for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)
+        {
+            if (MainManager.Instance.item_SO.itemList[i].itemName == activeItem)
+            {
+                MainManager.Instance.item_SO.itemList[i].isResearched = true;
+                researched_SOItem[i] = true;
+
+                AddToResearchedItemList(activeItem);
+                Update_SOItemList();
+                UpdateResearchItemColor();
+
+                SetResearchItemInfo(Items.None);
+
+                SaveData();
+
+                break;
             }
         }
     }

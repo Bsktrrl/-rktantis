@@ -442,8 +442,6 @@ public class WeatherManager : Singleton<WeatherManager>
     }
     Sprite GetWeatherImage(WeatherType weatherType)
     {
-        print("weatherType: " + weatherType);
-
         if (weatherType == WeatherType.Sunny)
             return weatherImage_Sunny;
 

@@ -496,15 +496,14 @@ public class TabletManager : Singleton<TabletManager>
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 menu_ResearchTable_Button.GetComponent<Image>().sprite = menuButton_Active;
 
-
                 ResearchManager.Instance.UpdateResearchItemColor();
+                ResearchManager.Instance.UpdateResearchMarkers();
+                ResearchManager.Instance.SetResearchItemInfo(Items.None);
 
                 playerInventory_MainParent.SetActive(true);
                 chestInventory_MainParent.SetActive(false);
                 equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(true);
-
-                ResearchManager.Instance.UpdateResearchMarkers();
                 break;
             case TabletMenuState.SkillTree:
                 MainManager.Instance.menuStates = MenuStates.SkillTreeMenu;
