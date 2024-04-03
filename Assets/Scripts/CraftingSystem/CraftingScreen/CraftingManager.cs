@@ -52,6 +52,7 @@ public class CraftingManager : Singleton<CraftingManager>
     public GameObject activeItemToCraft;
 
     public List<CraftingItem> itemStateList = new List<CraftingItem>();
+    public bool startup = false;
     #endregion
 
 
@@ -71,7 +72,17 @@ public class CraftingManager : Singleton<CraftingManager>
 
         //Set the first useable Category in the itemCategory_SO.ItemCategoryList to be active by default
         activeCategory = itemCategory_SO.ItemCategoryList[0].categoryName;
-        SetupSelectionScreen();
+
+        //activeCategory = ItemCategories.None;
+
+        if (categoryButtonPrefabList.Count > 0)
+        {
+            activeCategory = categoryButtonPrefabList[0].GetComponent<CategoryButton>().categoryType;
+
+            selectionScreen.SetActive(true);
+
+            SetupSelectionScreen();
+        }
     }
     private void Update()
     {
@@ -92,8 +103,6 @@ public class CraftingManager : Singleton<CraftingManager>
 
         if (itemStateList.Count <= 0) //New Game
         {
-            print("itemStateList.Count = " + itemStateList.Count);
-
             for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)
             {
                 CraftingItem tempItem = new CraftingItem();
@@ -141,12 +150,42 @@ public class CraftingManager : Singleton<CraftingManager>
 
             categoryButtonPrefabList[categoryButtonPrefabList.Count - 1].GetComponent<CategoryButton>().categoryType = itemCategory_SO.ItemCategoryList[i].categoryName;
 
-            //Adjust Frame
-            overviewScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(70 + 5, 0);
+            //Check if there is any Researched item of this category, to show this button
+            bool ready = false;
+
+            for (int j = 0; j < itemStateList.Count; j++)
+            {
+                if (itemStateList[j].itemCategory == itemCategory_SO.ItemCategoryList[i].categoryName
+                    && itemStateList[j].itemState != CraftingItemState.Unactive)
+                {
+                    ready = true;
+
+                    break;
+                }
+            }
+
+            if (ready)
+            {
+                //Adjust Frame
+                overviewScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(70 + 5, 0);
+            }
+            else
+            {
+                //categoryButtonPrefabList[categoryButtonPrefabList.Count - 1].SetActive(false);
+                categoryButtonPrefabList[categoryButtonPrefabList.Count - 1].GetComponent<CategoryButton>().OnDestroyCategoryObject();
+                categoryButtonPrefabList.RemoveAt(categoryButtonPrefabList.Count - 1);
+            }
         }
 
-        overviewScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(5, 0);
-
+        if (categoryButtonPrefabList.Count <= 0)
+        {
+            overviewScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+        }
+        else
+        {
+            overviewScreen.GetComponent<RectTransform>().sizeDelta += new Vector2(5, 0);
+        }
+        
         //Change frame on the selected Category
         for (int i = 0; i < categoryButtonPrefabList.Count; i++)
         {
@@ -168,10 +207,6 @@ public class CraftingManager : Singleton<CraftingManager>
     #region
     public void SetupSelectionScreen()
     {
-        //CategoryDisplay
-        categorySelectedImage.sprite = FindActiveCategoryType().categorySprite;
-        categorySelectedName.text = SpaceTextConverting.Instance.SetText(FindActiveCategoryType().categoryName.ToString());
-
         //Reset Panel Size
         selectionScreen.GetComponent<RectTransform>().sizeDelta = new Vector2(380, 130);
 
@@ -179,6 +214,10 @@ public class CraftingManager : Singleton<CraftingManager>
         UpdateSelectionSubActiveList();
         InstantiateSubGridLayoutGroup();
         InstantiateSelectionButton_Prefab();
+
+        //CategoryDisplay
+        categorySelectedImage.sprite = FindActiveCategoryType().categorySprite;
+        categorySelectedName.text = SpaceTextConverting.Instance.SetText(FindActiveCategoryType().categoryName.ToString());
     }
     void UpdateSelectionSubActiveList()
     {
@@ -287,8 +326,7 @@ public class CraftingManager : Singleton<CraftingManager>
             {
                 bool isReady = true;
 
-                if (/*MainManager.Instance.item_SO.itemList[j].isResearched
-                    &&*/ MainManager.Instance.item_SO.itemList[j].isCrafteable
+                if (MainManager.Instance.item_SO.itemList[j].isCrafteable
                     && MainManager.Instance.item_SO.itemList[j].craftingRequirements.Count > 0
                     && MainManager.Instance.item_SO.itemList[j].categoryName == activeCategory
                     && MainManager.Instance.item_SO.itemList[j].subCategoryName == selectionSubGridLayoutGroupList[i].GetComponent<SelectionSubPanel>().panelName)
@@ -299,8 +337,6 @@ public class CraftingManager : Singleton<CraftingManager>
                         if (!MainManager.Instance.GetItem(MainManager.Instance.item_SO.itemList[j].craftingRequirements[k].itemName).isResearched)
                         {
                             isReady = false;
-
-                            //j = MainManager.Instance.item_SO.itemList.Count;
 
                             break;
                         }
@@ -478,17 +514,11 @@ public class CraftingManager : Singleton<CraftingManager>
 
     public void UpdateItemState(int index, bool changeState)
     {
-        print("1. UpdateItemState: " + itemStateList[index].itemName);
-
         //Show "New"-Display
         if (changeState)
         {
-            print("2. UpdateItemState: " + itemStateList[index].itemName);
-
             if (itemStateList[index].itemState == CraftingItemState.Unactive)
             {
-                print("3. UpdateItemState: " + itemStateList[index].itemName);
-
                 itemStateList[index].itemState = CraftingItemState.New;
             }
         }
@@ -516,7 +546,7 @@ public class CraftingManager : Singleton<CraftingManager>
         {
             if (itemStateList[i].itemName == selectionSubButtonPrefab.item.itemName)
             {
-                if (changeState)
+                if (changeState && !startup)
                 {
                     if (itemStateList[i].itemState == CraftingItemState.Unactive)
                     {
@@ -546,12 +576,21 @@ public class CraftingManager : Singleton<CraftingManager>
         SetupItemCategoryList();
         UpdateSelectionSubActiveList();
 
+        if (categoryButtonPrefabList.Count > 0)
+        {
+            activeCategory = categoryButtonPrefabList[0].GetComponent<CategoryButton>().categoryType;
+
+            selectionScreen.SetActive(true);
+
+            SetupSelectionScreen();
+        }
+
         Cursor.lockState = CursorLockMode.None;
         MainManager.Instance.menuStates = MenuStates.CraftingMenu;
 
         craftingMenu.SetActive(true);
         overviewScreen.SetActive(true);
-        selectionScreen.SetActive(true);
+        //selectionScreen.SetActive(true);
 
         //Reset Frame Rotation
         for (int i = 0; i < selectionSubGridLayoutGroupList.Count; i++)
@@ -564,6 +603,7 @@ public class CraftingManager : Singleton<CraftingManager>
         {
             activeItemToCraft.GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Passive;
         }
+
     }
     public void CloseCraftingScreen()
     {

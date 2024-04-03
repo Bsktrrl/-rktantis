@@ -462,6 +462,8 @@ public class TabletManager : Singleton<TabletManager>
                 break;
 
             case TabletMenuState.CraftingTable:
+                CraftingManager.Instance.startup = true;
+
                 MainManager.Instance.menuStates = MenuStates.CraftingMenu;
                 tabletMenuState = TabletMenuState.CraftingTable;
 
@@ -490,6 +492,8 @@ public class TabletManager : Singleton<TabletManager>
                 chestInventory_MainParent.SetActive(false);
                 equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(true);
+
+                CraftingManager.Instance.startup = false;
                 break;
             case TabletMenuState.ResearchTable:
                 MainManager.Instance.menuStates = MenuStates.ResearchMenu;

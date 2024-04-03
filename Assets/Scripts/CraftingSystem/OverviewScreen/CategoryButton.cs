@@ -42,8 +42,6 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
 
     public void CategoryButton_OnClick()
     {
-        print("2000000. Pressed CategoryButton");
-
         categoryButton_isClicked?.Invoke();
 
         //Set Frame Orange

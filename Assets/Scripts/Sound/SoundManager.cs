@@ -380,8 +380,6 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
             audioSource_MenuSound.pitch = 1f;
             audioSource_MenuSound.Play();
-
-            print("Play_Tablet_ChangeMenu_Clip");
         }
     }
     #endregion

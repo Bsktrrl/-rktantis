@@ -12,7 +12,6 @@ public class ResearchManager : Singleton<ResearchManager>
 
     [SerializeField] TextMeshProUGUI itemName;
     [SerializeField] Image itemImage;
-    [SerializeField] TextMeshProUGUI itemDescription;
 
     [SerializeField] GameObject researchButton;
     [SerializeField] GameObject researchProgressBar_Parent;
@@ -278,7 +277,6 @@ public class ResearchManager : Singleton<ResearchManager>
 
             itemName.text = _itemName.ToString();
             itemImage.sprite = MainManager.Instance.GetItem(_itemName).hotbarSprite;
-            itemDescription.text = MainManager.Instance.GetItem(_itemName).research_ItemDescription;
 
             researchButton.SetActive(true);
 
@@ -298,7 +296,6 @@ public class ResearchManager : Singleton<ResearchManager>
 
         itemName.text = "";
         itemImage.sprite = MainManager.Instance.GetItem(0).hotbarSprite;
-        itemDescription.text = "";
 
         isResearching = false;
         researchTime_Current = 0;
@@ -320,7 +317,6 @@ public class ResearchManager : Singleton<ResearchManager>
     }
     void CompleteResearch()
     {
-        print("1. CompleteResearch");
         SoundManager.Instance.Play_Research_Complete_Clip();
 
         //Change isResearched stats
@@ -342,16 +338,12 @@ public class ResearchManager : Singleton<ResearchManager>
         //Update the itemStateList with the new stats
         for (int j = 0; j < MainManager.Instance.item_SO.itemList.Count; j++)
         {
-            print("2. CompleteResearch");
-
             bool ready = true;
 
             for (int k = 0; k < MainManager.Instance.item_SO.itemList[j].craftingRequirements.Count; k++)
             {
                 if (!MainManager.Instance.GetItem(MainManager.Instance.item_SO.itemList[j].craftingRequirements[k].itemName).isResearched)
                 {
-                    print("2.5 CompleteResearch");
-
                     ready = false;
 
                     break;
@@ -360,14 +352,10 @@ public class ResearchManager : Singleton<ResearchManager>
 
             if (ready)
             {
-                print("3. CompleteResearch");
-
                 for (int k = 0; k < MainManager.Instance.item_SO.itemList[j].craftingRequirements.Count; k++)
                 {
                     if (MainManager.Instance.item_SO.itemList[j].craftingRequirements[k].itemName == activeItem)
                     {
-                        print("4. CompleteResearch");
-
                         //CraftingManager.Instance.itemStateList[j].itemState = CraftingItemState.New;
 
                         CraftingManager.Instance.UpdateItemState(j, true);

@@ -46,8 +46,6 @@ public class SelectionSubButtonPrefab : MonoBehaviour, IPointerEnterHandler
 
     public void Button_OnClick()
     {
-        print("1000000. Pressed SubCategoryButton");
-
         //categorySubButton_isClicked?.Invoke();
 
         ////Set Frame Orange
