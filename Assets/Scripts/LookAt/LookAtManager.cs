@@ -379,7 +379,7 @@ public class LookAtManager : Singleton<LookAtManager>
                 {
                     oreDisplay_Image.sprite = MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).hotbarSprite;
                 }
-                else if (HotbarManager.Instance.selectedItem == Items.None)
+                else if (HotbarManager.Instance.selectedItem == Items.None || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
                 {
                     oreDisplay_Image.sprite = handSprite;
                 }
@@ -391,7 +391,7 @@ public class LookAtManager : Singleton<LookAtManager>
                 //Set text
                 if (Arms.Instance.cannotHit)
                 {
-                    if (HotbarManager.Instance.selectedItem == Items.None)
+                    if (HotbarManager.Instance.selectedItem == Items.None || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
                     {
                         switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
                         {
@@ -534,7 +534,7 @@ public class LookAtManager : Singleton<LookAtManager>
                 {
                     treeDisplay_Image.sprite = MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).hotbarSprite;
                 }
-                else if (HotbarManager.Instance.selectedItem == Items.None)
+                else if (HotbarManager.Instance.selectedItem == Items.None || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
                 {
                     treeDisplay_Image.sprite = handSprite;
                 }
@@ -546,7 +546,8 @@ public class LookAtManager : Singleton<LookAtManager>
                 //Set text
                 if (Arms.Instance.cannotHit)
                 {
-                    if (HotbarManager.Instance.selectedItem == Items.None)
+                    //Hands
+                    if (HotbarManager.Instance.selectedItem == Items.None || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
                     {
                         switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
                         {
@@ -555,9 +556,13 @@ public class LookAtManager : Singleton<LookAtManager>
 
                             case InteracteableType.Palm_Tree:
                                 break;
-                            case InteracteableType.Tree_2:
+                            case InteracteableType.BloodTree:
+                                treeDisplay_Text.text = "Requires a \"Stone Pickaxe\" or \"Cryonite Pickaxe\"";
+                                treeDisplay_LineObject.SetActive(true);
                                 break;
-                            case InteracteableType.Tree_3:
+                            case InteracteableType.BloodTreeBush:
+                                treeDisplay_Text.text = "Requires a \"Wood Pickaxe\", \"Stone Pickaxe\" or \"Cryonite Pickaxe\"";
+                                treeDisplay_LineObject.SetActive(true);
                                 break;
                             case InteracteableType.Tree_4:
                                 break;
@@ -579,6 +584,8 @@ public class LookAtManager : Singleton<LookAtManager>
                                 break;
                         }
                     }
+
+                    //Wood Axe
                     else if (HotbarManager.Instance.selectedItem == Items.WoodAxe)
                     {
                         switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
@@ -588,9 +595,11 @@ public class LookAtManager : Singleton<LookAtManager>
 
                             case InteracteableType.Palm_Tree:
                                 break;
-                            case InteracteableType.Tree_2:
+                            case InteracteableType.BloodTree:
+                                treeDisplay_Text.text = "Requires a \"Stone Pickaxe\" or \"Cryonite Pickaxe\"";
+                                treeDisplay_LineObject.SetActive(true);
                                 break;
-                            case InteracteableType.Tree_3:
+                            case InteracteableType.BloodTreeBush:
                                 break;
                             case InteracteableType.Tree_4:
                                 break;
@@ -612,6 +621,8 @@ public class LookAtManager : Singleton<LookAtManager>
                                 break;
                         }
                     }
+
+                    //Stone Axe
                     else if (HotbarManager.Instance.selectedItem == Items.StoneAxe)
                     {
                         switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
@@ -621,9 +632,9 @@ public class LookAtManager : Singleton<LookAtManager>
 
                             case InteracteableType.Palm_Tree:
                                 break;
-                            case InteracteableType.Tree_2:
+                            case InteracteableType.BloodTree:
                                 break;
-                            case InteracteableType.Tree_3:
+                            case InteracteableType.BloodTreeBush:
                                 break;
                             case InteracteableType.Tree_4:
                                 break;
@@ -645,6 +656,8 @@ public class LookAtManager : Singleton<LookAtManager>
                                 break;
                         }
                     }
+
+                    //Cryonite Axe
                     else if (HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
                     {
                         switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
@@ -654,9 +667,9 @@ public class LookAtManager : Singleton<LookAtManager>
 
                             case InteracteableType.Palm_Tree:
                                 break;
-                            case InteracteableType.Tree_2:
+                            case InteracteableType.BloodTree:
                                 break;
-                            case InteracteableType.Tree_3:
+                            case InteracteableType.BloodTreeBush:
                                 break;
                             case InteracteableType.Tree_4:
                                 break;
