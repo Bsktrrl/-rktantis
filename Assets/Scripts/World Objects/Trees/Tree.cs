@@ -5,7 +5,9 @@ using UnityEngine;
 public class Tree : MonoBehaviour
 {
     [Header("Prefabs")]
-    public GameObject treeObject;
+    public GameObject mesh;
+    public GameObject treeObject_LOD0;
+    public GameObject treeObject_LOD1;
 
     [Header("Stats")]
     public float treeHealth;
@@ -79,9 +81,10 @@ public class Tree : MonoBehaviour
             || interactableType == InteracteableType.Tree_7 || interactableType == InteracteableType.Tree_8 || interactableType == InteracteableType.Tree_9
             || interactableType == InteracteableType.Cactus)
         {
-            print("Interact with an Tree - " + itemName);
+            print("Interact with a Tree - " + itemName);
 
             //Play HackingSound
+            #region
             float tempPitchCount = (float)(treeHealth / 5);
 
             if (itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal)
@@ -192,6 +195,7 @@ public class Tree : MonoBehaviour
                     SoundManager.Instance.Play_AxeUsage_CryoniteAxe_Clip(1);
                 }
             }
+            #endregion
 
             //Reduce the Tree's health
             if (itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal)
@@ -218,16 +222,20 @@ public class Tree : MonoBehaviour
                 while (isSpawningItems)
                 {
                     float rand = Random.Range(0, 100);
-
-                    if (itemName == Items.WoodAxe && rand <= (TreeManager.Instance.woodAaxe_Droprate - modifier))
+                    
+                    if ((itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal) && rand <= (TreeManager.Instance.woodAxe_Droprate - modifier))
                     {
                         SpawnTreeItems(interactableType);
                     }
-                    else if (itemName == Items.StonePickaxe && rand <= (TreeManager.Instance.stoneAxe_Droprate - modifier))
+                    else if (itemName == Items.WoodAxe && rand <= (TreeManager.Instance.woodAxe_Droprate - modifier))
                     {
                         SpawnTreeItems(interactableType);
                     }
-                    else if (itemName == Items.CryonitePickaxe && rand <= (TreeManager.Instance.cryoniteAxe_Droprate - modifier))
+                    else if (itemName == Items.StoneAxe && rand <= (TreeManager.Instance.stoneAxe_Droprate - modifier))
+                    {
+                        SpawnTreeItems(interactableType);
+                    }
+                    else if (itemName == Items.CryoniteAxe && rand <= (TreeManager.Instance.cryoniteAxe_Droprate - modifier))
                     {
                         SpawnTreeItems(interactableType);
                     }
@@ -240,7 +248,9 @@ public class Tree : MonoBehaviour
                 }
 
                 //Hide Tree Object for a time
-                treeObject.SetActive(false);
+                mesh.SetActive(false);
+                treeObject_LOD0.SetActive(false);
+                treeObject_LOD1.SetActive(false);
 
                 isCut = true;
             }
@@ -274,7 +284,7 @@ public class Tree : MonoBehaviour
         //Stop dormant process
         isCut = false;
 
-        //Set Precentage to 100%
+        //Set Percentage to 100%
         dormantPercentage = 100;
 
         percentageCheck = 0;
@@ -285,7 +295,9 @@ public class Tree : MonoBehaviour
         TreeManager.Instance.ChangeTreeInfo(isCut, dormantTimer, treeIndex_x, treeIndex_y, percentageCheck, tempTreeHealth, gameObject.transform.position);
 
         //Show Mesh
-        treeObject.SetActive(true);
+        mesh.SetActive(true);
+        treeObject_LOD0.SetActive(true);
+        treeObject_LOD1.SetActive(true);
     }
 
     public void LoadTree(bool _isCut, float _dormantTimer, int _treeIndex_j, int _treeIndex_l, int _precentageCheck, float _treeHealth)
@@ -302,7 +314,7 @@ public class Tree : MonoBehaviour
         if (isCut)
         {
             //Hide Mesh
-            treeObject.SetActive(false);
+            treeObject_LOD0.SetActive(false);
         }
     }
 }

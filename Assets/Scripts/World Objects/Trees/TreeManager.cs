@@ -10,7 +10,7 @@ public class TreeManager : Singleton<TreeManager>
     [SerializeField] List<List<TreeToSave>> treeTypeObjectList = new List<List<TreeToSave>>();
 
     [Header("Pickaxe Stats")]
-    public float woodAaxe_Droprate = 55;
+    public float woodAxe_Droprate = 55;
     public float stoneAxe_Droprate = 65;
     public float cryoniteAxe_Droprate = 75;
 
@@ -178,6 +178,20 @@ public class TreeManager : Singleton<TreeManager>
         //Set New TreeTypeObjectList
         treeTypeObjectList.Clear();
         treeTypeObjectList = tempTreeTypeObjectList;
+
+        //Set Mesh visibility
+        for (int i = 0; i < checkedTrees.Count; i++)
+        {
+            for (int j = 0; j < checkedTrees[i].Count; j++)
+            {
+                if (treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().isCut)
+                {
+                    treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().mesh.SetActive(false);
+                    treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeObject_LOD0.SetActive(false);
+                    treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeObject_LOD1.SetActive(false);
+                }
+            }
+        }
 
         SaveData();
     }

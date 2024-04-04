@@ -225,7 +225,11 @@ public class Ore : MonoBehaviour
                 {
                     float rand = Random.Range(0, 100);
 
-                    if (itemName == Items.WoodPickaxe && rand <= (OreManager.Instance.woodPickaxe_Droprate - modifier))
+                    if ((itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal) && rand <= (OreManager.Instance.woodPickaxe_Droprate - modifier))
+                    {
+                        SpawnOreItems(interactableType);
+                    }
+                    else if (itemName == Items.WoodPickaxe && rand <= (OreManager.Instance.woodPickaxe_Droprate - modifier))
                     {
                         SpawnOreItems(interactableType);
                     }

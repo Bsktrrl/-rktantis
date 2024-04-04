@@ -12428,14 +12428,19 @@ MonoBehaviour:
   skillTree_CompletedPerk_Clip: {fileID: 8300000, guid: aa63d02da31503d4d811ac3829bda525,
     type: 3}
   equippedItems_EquippedItemIsBroken_Clip: {fileID: 0}
-  axeUsage_Hand_Clip: {fileID: 0}
-  axeUsage_WoodAxe_Clip: {fileID: 0}
-  axeUsage_StoneAxe_Clip: {fileID: 0}
-  axeUsage_CryoniteAxe_Clip: {fileID: 0}
-  axeUsage_TreeFalling_Clip: {fileID: 0}
+  axeUsage_Hand_Clip: {fileID: 8300000, guid: 5fed85277dfcba443a51061b7059aa10, type: 3}
+  axeUsage_WoodAxe_Clip: {fileID: 8300000, guid: 513025a82e16c8b49950ba312bb92365,
+    type: 3}
+  axeUsage_StoneAxe_Clip: {fileID: 8300000, guid: 87e24b80f7b2b744c9e4f73402f21c81,
+    type: 3}
+  axeUsage_CryoniteAxe_Clip: {fileID: 8300000, guid: 06db9728d3f610147b1a1abab6496ffa,
+    type: 3}
+  axeUsage_TreeFalling_Clip: {fileID: 8300000, guid: 97d9546ad26f0b54ca4bb243157de476,
+    type: 3}
   axeUsage_CactusFalling_Clip: {fileID: 0}
   axeUsage_CannotHit_Clip: {fileID: 0}
-  pickaxeUsage_Hand_Clip: {fileID: 0}
+  pickaxeUsage_Hand_Clip: {fileID: 8300000, guid: 5fed85277dfcba443a51061b7059aa10,
+    type: 3}
   pickaxeUsage_WoodPickaxe_Clip: {fileID: 8300000, guid: 513025a82e16c8b49950ba312bb92365,
     type: 3}
   pickaxeUsage_StonePickaxe_Clip: {fileID: 8300000, guid: 87e24b80f7b2b744c9e4f73402f21c81,
@@ -12538,6 +12543,7 @@ Transform:
   - {fileID: 3680787842887615143}
   - {fileID: 889239136039093569}
   - {fileID: 1480545414068037764}
+  - {fileID: 1119409501743598801}
   - {fileID: 73521283782460119}
   - {fileID: 1276538514832090882}
   - {fileID: 2879984142793569524}
@@ -25956,6 +25962,57 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &2318371001492161939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1119409501743598801}
+  - component: {fileID: 8058882743877856477}
+  m_Layer: 0
+  m_Name: TreeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1119409501743598801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318371001492161939}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 908462092873944586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8058882743877856477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318371001492161939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c821e90581a40148b9648013dd7093e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dormantTimer: 2
+  woodAxe_Droprate: 80
+  stoneAxe_Droprate: 90
+  cryoniteAxe_Droprate: 100
+  handDamage: 0.5
+  treeHealthReducer: 0
+  treeDropRateReducer: 8
 --- !u!1 &2319199272849154038
 GameObject:
   m_ObjectHideFlags: 0
@@ -31049,6 +31106,7 @@ MonoBehaviour:
   LookAt_Parent: {fileID: 9168250939243696274}
   typeLookingAt: 0
   centerImage: {fileID: 4509758410674643361}
+  handSprite: {fileID: 1800286178, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
   Item_Panel: {fileID: 604548273705360348}
   ItemImage: {fileID: 5572684727910161565}
   ItemName: {fileID: 8457684472827528930}
@@ -78812,7 +78870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.006134033}
+  m_AnchoredPosition: {x: 0, y: 0.0039367676}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763

@@ -161,6 +161,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
 
     public void Hit(EquippedItem equippedItem)
     {
+        print("0. Interact with a Tree");
         //print("Hit EquippedItem - " + subCategories + " [" + itemName.ToString() + "]");
 
         //The point in the animation where equipped item hits
@@ -195,6 +196,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
 
         //If Axe is equipped
         #region
+        print("1. Interact with a Tree");
         if (equippedItem.subCategories == ItemSubCategories.Axe)
         {
             if (equippedItem.itemName == Items.WoodAxe || equippedItem.itemName == Items.StoneAxe || equippedItem.itemName == Items.CryoniteAxe)
@@ -210,10 +212,13 @@ public class EquippmentManager : Singleton<EquippmentManager>
         }
         else if (equippedItem.itemName == Items.Flashlight || equippedItem.itemName == Items.AríditeCrystal || equippedItem.itemName == Items.None)
         {
+            print("2. Interact with a Tree");
             if (SelectionManager.Instance.selecedObject)
             {
+                print("3. Interact with a Tree");
                 if (SelectionManager.Instance.selecedObject.GetComponent<Tree>())
                 {
+                    print("4. Interact with a Tree");
                     SelectionManager.Instance.selecedObject.GetComponent<Tree>().TreeInteraction(equippedItem.itemName);
                 }
             }

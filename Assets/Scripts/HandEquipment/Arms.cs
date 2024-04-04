@@ -60,7 +60,8 @@ public class Arms : Singleton<Arms>
                     #region Pickaxe
                     //Hand
                     if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Flashlight
-                        || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.AríditeCrystal)
+                        || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.AríditeCrystal
+                        || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.None)
                     {
                         if (SelectionManager.Instance.selecedObject)
                         {
@@ -75,6 +76,10 @@ public class Arms : Singleton<Arms>
                                 else if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.AríditeCrystal)
                                 {
                                     equippedItem.itemName = Items.AríditeCrystal;
+                                }
+                                else if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.None)
+                                {
+                                    equippedItem.itemName = Items.None;
                                 }
 
                                 //Tungsten
@@ -314,7 +319,8 @@ public class Arms : Singleton<Arms>
                     #region Axe
                     //Hand
                     if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Flashlight
-                        || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.AríditeCrystal)
+                        || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.AríditeCrystal
+                        || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.None)
                     {
                         if (SelectionManager.Instance.selecedObject)
                         {
@@ -329,6 +335,10 @@ public class Arms : Singleton<Arms>
                                 else if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.AríditeCrystal)
                                 {
                                     equippedItem.itemName = Items.AríditeCrystal;
+                                }
+                                else if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.None)
+                                {
+                                    equippedItem.itemName = Items.None;
                                 }
 
                                 //Palm Tree
@@ -706,10 +716,10 @@ public class Arms : Singleton<Arms>
 
                     equippedItem.itemName = Items.None;
 
+                    #region OreVeins
                     //Tungsten
                     if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tungsten_Ore)
                     {
-
                         //Hit the Ore
                         EquippmentManager.Instance.Hit(equippedItem);
                         CanHit();
@@ -752,6 +762,80 @@ public class Arms : Singleton<Arms>
                     {
                         CannotHit();
                     }
+                    #endregion
+
+                    #region Trees
+                    //Palm Tree
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Palm_Tree)
+                    {
+                        //Hit the Ore
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
+                    }
+                    //Tree_2
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_2)
+                    {
+                        //Hit the Ore
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
+                    }
+                    //Tree_3
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_3)
+                    {
+                        //Hit the Ore
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
+                    }
+                    //Tree_4
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_4)
+                    {
+                        //Hit the Ore
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
+                    }
+                    //Tree_5
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_5)
+                    {
+                        //Hit the Ore
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
+                    }
+                    //Tree_6
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_6)
+                    {
+                        //Hit the Ore
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
+                    }
+                    //Tree_7
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_7)
+                    {
+                        //Hit the Ore
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
+                    }
+                    //Tree_8
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_8)
+                    {
+                        //Hit the Ore
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
+                    }
+                    //Tree_9
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_9)
+                    {
+                        //Hit the Ore
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
+                    }
+                    //Cactus
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Cactus)
+                    {
+                        //Hit the Ore
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
+                    }
+                    #endregion
                 }
             }
         }

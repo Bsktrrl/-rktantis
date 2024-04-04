@@ -13,6 +13,7 @@ public class LookAtManager : Singleton<LookAtManager>
 
     [Header("CenterImage")]
     [SerializeField] GameObject centerImage;
+    [SerializeField] Sprite handSprite;
 
     [Header("Item")]
     [SerializeField] GameObject Item_Panel;
@@ -380,7 +381,7 @@ public class LookAtManager : Singleton<LookAtManager>
                 }
                 else if (HotbarManager.Instance.selectedItem == Items.None)
                 {
-                    oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.WoodPickaxe).hotbarSprite;
+                    oreDisplay_Image.sprite = handSprite;
                 }
 
                 //Hide text
@@ -535,7 +536,7 @@ public class LookAtManager : Singleton<LookAtManager>
                 }
                 else if (HotbarManager.Instance.selectedItem == Items.None)
                 {
-                    treeDisplay_Image.sprite = MainManager.Instance.GetItem(Items.WoodAxe).hotbarSprite;
+                    treeDisplay_Image.sprite = handSprite;
                 }
 
                 //Hide text

@@ -240,6 +240,8 @@ public class HotbarManager : Singleton<HotbarManager>
         selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
 
         ChangeItemInHand();
+        LookAtManager.Instance.TurnOffScreens();
+
         SaveData();
     }
     void HandSelection_UP()
@@ -265,6 +267,8 @@ public class HotbarManager : Singleton<HotbarManager>
         selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
 
         ChangeItemInHand();
+        LookAtManager.Instance.TurnOffScreens();
+
         SaveData();
     }
 
