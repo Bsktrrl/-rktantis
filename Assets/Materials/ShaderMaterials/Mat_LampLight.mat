@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_LampLight
-  m_Shader: {fileID: -6465566751694194690, guid: 31e3f5f25523376408f06797d2eb794a,
+  m_Shader: {fileID: -6465566751694194690, guid: 8bf2762299f1d544596dbb20d4fed498,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -142,7 +142,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlbedoColorMultiplier: 7
+    - _AlbedoColorMultiplier: 10
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -176,6 +176,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RoughnessStrength: 1.15
+    - _SandStrength: 0.05
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
