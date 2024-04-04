@@ -199,7 +199,23 @@ public class EquippmentManager : Singleton<EquippmentManager>
         {
             if (equippedItem.itemName == Items.WoodAxe || equippedItem.itemName == Items.StoneAxe || equippedItem.itemName == Items.CryoniteAxe)
             {
-                // - To be filled out
+                if (SelectionManager.Instance.selecedObject)
+                {
+                    if (SelectionManager.Instance.selecedObject.GetComponent<Tree>())
+                    {
+                        SelectionManager.Instance.selecedObject.GetComponent<Tree>().TreeInteraction(equippedItem.itemName);
+                    }
+                }
+            }
+        }
+        else if (equippedItem.itemName == Items.Flashlight || equippedItem.itemName == Items.AríditeCrystal || equippedItem.itemName == Items.None)
+        {
+            if (SelectionManager.Instance.selecedObject)
+            {
+                if (SelectionManager.Instance.selecedObject.GetComponent<Tree>())
+                {
+                    SelectionManager.Instance.selecedObject.GetComponent<Tree>().TreeInteraction(equippedItem.itemName);
+                }
             }
         }
         #endregion

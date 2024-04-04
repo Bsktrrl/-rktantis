@@ -139,9 +139,6 @@ public class TreeManager : Singleton<TreeManager>
                             }
                         }
                     }
-
-                    //Set Cracks
-                    treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(k).GetComponent<Tree>().SetTreeCracks();
                 }
             }
         }
@@ -160,9 +157,6 @@ public class TreeManager : Singleton<TreeManager>
                         //Give all Legal Objects an index
                         treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeIndex_x = i;
                         treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeIndex_y = j;
-
-                        //Set Cracks
-                        treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().SetTreeCracks();
 
                         //Make a TreeTypeObjectList
                         TreeToSave tempTree = new TreeToSave();

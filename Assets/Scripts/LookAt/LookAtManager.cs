@@ -42,6 +42,12 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] GameObject oreDisplay_LineObject;
     [SerializeField] TextMeshProUGUI oreDisplay_Text;
 
+    [Header("Trees")]
+    [SerializeField] GameObject treeDisplay_Panel;
+    [SerializeField] Image treeDisplay_Image;
+    [SerializeField] GameObject treeDisplay_LineObject;
+    [SerializeField] TextMeshProUGUI treeDisplay_Text;
+
     [Header("Journal Page")]
     [SerializeField] GameObject journalDisplay_Panel;
     [SerializeField] TextMeshProUGUI journalCategory_Text;
@@ -100,6 +106,25 @@ public class LookAtManager : Singleton<LookAtManager>
             OreDisplay();
 
             oreDisplay_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
+        
+        //If looking at a Tree
+        #region
+        else if ((HotbarManager.Instance.selectedItem == Items.WoodAxe || HotbarManager.Instance.selectedItem == Items.StoneAxe || HotbarManager.Instance.selectedItem == Items.CryoniteAxe
+                  || HotbarManager.Instance.selectedItem == Items.AríditeCrystal || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.None)
+            && SelectionManager.Instance.tag == "Tree")
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            centerImage.SetActive(false);
+
+            TreeDisplay();
+
+            treeDisplay_Panel.SetActive(true);
 
             return;
         }
@@ -235,7 +260,7 @@ public class LookAtManager : Singleton<LookAtManager>
             //Turn off all screens
             TurnOffScreens();
 
-            JourneyDisplay();
+            JournalDisplay();
 
             journalDisplay_Panel.SetActive(true);
 
@@ -357,40 +382,6 @@ public class LookAtManager : Singleton<LookAtManager>
                 {
                     oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.WoodPickaxe).hotbarSprite;
                 }
-
-                //Set OreVein Image
-                //switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
-                //{
-                //    case InteracteableType.None:
-                //        oreDisplay_Image.sprite = null;
-                //        break;
-
-                //    case InteracteableType.Tungsten_Ore:
-                //        oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Tungsten).hotbarSprite;
-                //        break;
-                //    case InteracteableType.Gold_Ore:
-                //        oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Gold).hotbarSprite;
-                //        break;
-                //    case InteracteableType.Stone_Ore:
-                //        oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Stone).hotbarSprite;
-                //        break;
-                //    case InteracteableType.Cryonite_Ore:
-                //        oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Cryonite).hotbarSprite;
-                //        break;
-                //    case InteracteableType.Magnetite_Ore:
-                //        oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Magnetite).hotbarSprite;
-                //        break;
-                //    case InteracteableType.Viridian_Ore:
-                //        oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.Viridian).hotbarSprite;
-                //        break;
-                //    case InteracteableType.AríditeCrystal_Ore:
-                //        oreDisplay_Image.sprite = MainManager.Instance.GetItem(Items.AríditeCrystal).hotbarSprite;
-                //        break;
-
-                //    default:
-                //        oreDisplay_Image.sprite = null;
-                //        break;
-                //}
 
                 //Hide text
                 oreDisplay_LineObject.SetActive(false);
@@ -531,8 +522,171 @@ public class LookAtManager : Singleton<LookAtManager>
             }
         }
     }
+    void TreeDisplay()
+    {
+        if (SelectionManager.Instance.selecedObject)
+        {
+            if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+            {
+                //Set Axe Image
+                if (HotbarManager.Instance.selectedItem == Items.WoodAxe || HotbarManager.Instance.selectedItem == Items.StoneAxe || HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
+                {
+                    treeDisplay_Image.sprite = MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).hotbarSprite;
+                }
+                else if (HotbarManager.Instance.selectedItem == Items.None)
+                {
+                    treeDisplay_Image.sprite = MainManager.Instance.GetItem(Items.WoodAxe).hotbarSprite;
+                }
 
-    void JourneyDisplay()
+                //Hide text
+                treeDisplay_LineObject.SetActive(false);
+                treeDisplay_Text.text = "";
+
+                //Set text
+                if (Arms.Instance.cannotHit)
+                {
+                    if (HotbarManager.Instance.selectedItem == Items.None)
+                    {
+                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        {
+                            case InteracteableType.None:
+                                break;
+
+                            case InteracteableType.Palm_Tree:
+                                break;
+                            case InteracteableType.Tree_2:
+                                break;
+                            case InteracteableType.Tree_3:
+                                break;
+                            case InteracteableType.Tree_4:
+                                break;
+                            case InteracteableType.Tree_5:
+                                break;
+                            case InteracteableType.Tree_6:
+                                break;
+                            case InteracteableType.Tree_7:
+                                break;
+                            case InteracteableType.Tree_8:
+                                break;
+                            case InteracteableType.Tree_9:
+                                break;
+
+                            case InteracteableType.Cactus:
+                                treeDisplay_Text.text = "Requires a \"Stone Axe\" or \"Cryonite Axe\"";
+                                treeDisplay_LineObject.SetActive(true);
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                    else if (HotbarManager.Instance.selectedItem == Items.WoodAxe)
+                    {
+                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        {
+                            case InteracteableType.None:
+                                break;
+
+                            case InteracteableType.Palm_Tree:
+                                break;
+                            case InteracteableType.Tree_2:
+                                break;
+                            case InteracteableType.Tree_3:
+                                break;
+                            case InteracteableType.Tree_4:
+                                break;
+                            case InteracteableType.Tree_5:
+                                break;
+                            case InteracteableType.Tree_6:
+                                break;
+                            case InteracteableType.Tree_7:
+                                break;
+                            case InteracteableType.Tree_8:
+                                break;
+                            case InteracteableType.Tree_9:
+                                break;
+
+                            case InteracteableType.Cactus:
+                                treeDisplay_Text.text = "Requires a \"Stone Axe\" or \"Cryonite Axe\"";
+                                treeDisplay_LineObject.SetActive(true);
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                    else if (HotbarManager.Instance.selectedItem == Items.StoneAxe)
+                    {
+                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        {
+                            case InteracteableType.None:
+                                break;
+
+                            case InteracteableType.Palm_Tree:
+                                break;
+                            case InteracteableType.Tree_2:
+                                break;
+                            case InteracteableType.Tree_3:
+                                break;
+                            case InteracteableType.Tree_4:
+                                break;
+                            case InteracteableType.Tree_5:
+                                break;
+                            case InteracteableType.Tree_6:
+                                break;
+                            case InteracteableType.Tree_7:
+                                break;
+                            case InteracteableType.Tree_8:
+                                break;
+                            case InteracteableType.Tree_9:
+                                break;
+
+                            case InteracteableType.Cactus:
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                    else if (HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
+                    {
+                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        {
+                            case InteracteableType.None:
+                                break;
+
+                            case InteracteableType.Palm_Tree:
+                                break;
+                            case InteracteableType.Tree_2:
+                                break;
+                            case InteracteableType.Tree_3:
+                                break;
+                            case InteracteableType.Tree_4:
+                                break;
+                            case InteracteableType.Tree_5:
+                                break;
+                            case InteracteableType.Tree_6:
+                                break;
+                            case InteracteableType.Tree_7:
+                                break;
+                            case InteracteableType.Tree_8:
+                                break;
+                            case InteracteableType.Tree_9:
+                                break;
+
+                            case InteracteableType.Cactus:
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    void JournalDisplay()
     {
         if (SelectionManager.Instance.selecedObject)
         {
@@ -565,6 +719,7 @@ public class LookAtManager : Singleton<LookAtManager>
     {
         WaterDisplay_Panel.SetActive(false);
         oreDisplay_Panel.SetActive(false);
+        treeDisplay_Panel.SetActive(false);
 
         Item_Panel.SetActive(false);
         Plant_Panel.SetActive(false);

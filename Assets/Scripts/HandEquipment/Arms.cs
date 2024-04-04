@@ -57,7 +57,8 @@ public class Arms : Singleton<Arms>
             {
                 if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>())
                 {
-                    //Cryonite Pickaxe
+                    #region Pickaxe
+                    //Hand
                     if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Flashlight
                         || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.AríditeCrystal)
                     {
@@ -308,7 +309,379 @@ public class Arms : Singleton<Arms>
                             }
                         }
                     }
+                    #endregion
 
+                    #region Axe
+                    //Hand
+                    if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Flashlight
+                        || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.AríditeCrystal)
+                    {
+                        if (SelectionManager.Instance.selecedObject)
+                        {
+                            if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+                            {
+                                EquippedItem equippedItem = new EquippedItem();
+
+                                if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Flashlight)
+                                {
+                                    equippedItem.itemName = Items.Flashlight;
+                                }
+                                else if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.AríditeCrystal)
+                                {
+                                    equippedItem.itemName = Items.AríditeCrystal;
+                                }
+
+                                //Palm Tree
+                                if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Palm_Tree)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
+                                }
+
+                                //Tree 2
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_2)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
+                                }
+
+                                //Tree 3
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_3)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
+                                }
+
+                                //Tree 4
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_4)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
+                                }
+
+                                //Tree 5
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_5)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
+                                }
+
+                                //Tree 6
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_6)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
+                                }
+
+                                //Tree 7
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_7)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
+                                }
+
+                                //Tree 8
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_8)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
+                                }
+
+                                //Tree 9
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_9)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
+                                }
+
+                                //Cactus
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Cactus)
+                                {
+                                    CannotHit();
+                                }
+                            }
+                        }
+                    }
+
+                    //Wood Axe
+                    else if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.WoodAxe)
+                    {
+                        if (SelectionManager.Instance.selecedObject)
+                        {
+                            if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+                            {
+                                //Palm Tree
+                                if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Palm_Tree)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 2
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_2)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 3
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_3)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 4
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_4)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 5
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_5)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 6
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_6)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 7
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_7)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 8
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_8)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 9
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_9)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Cactus
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Cactus)
+                                {
+                                    CannotHit();
+                                }
+                            }
+                        }
+                    }
+
+                    //Stone Axe
+                    else if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.StoneAxe)
+                    {
+                        if (SelectionManager.Instance.selecedObject)
+                        {
+                            if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+                            {
+                                //Palm Tree
+                                if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Palm_Tree)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 2
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_2)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 3
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_3)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 4
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_4)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 5
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_5)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 6
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_6)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 7
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_7)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 8
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_8)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 9
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_9)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Cactus
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Cactus)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+                            }
+                        }
+                    }
+
+                    //Cryonite Axe
+                    else if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.CryoniteAxe)
+                    {
+                        if (SelectionManager.Instance.selecedObject)
+                        {
+                            if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+                            {
+                                //Palm Tree
+                                if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Palm_Tree)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 2
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_2)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 3
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_3)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 4
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_4)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 5
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_5)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 6
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_6)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 7
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_7)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 8
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_8)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Tree 9
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_9)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+
+                                //Cactus
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Cactus)
+                                {
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+
+                    #region Water Container
                     //WaterContainer
                     else if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Cup
                         || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Bottle
@@ -317,6 +690,7 @@ public class Arms : Singleton<Arms>
                         EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
                         CanHit();
                     }
+                    #endregion
                 }
             }
         }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Tree : MonoBehaviour
 {
-    [SerializeField] MeshRenderer renderer;
-
     [Header("Prefabs")]
     public GameObject treeObject;
 
@@ -205,9 +203,6 @@ public class Tree : MonoBehaviour
                 tempTreeHealth -= MainManager.Instance.GetItem(itemName).treePower;
             }
 
-            //Update Cracks
-            SetTreeCracks();
-
             //Check if the TreeHealth is 0
             if ((tempTreeHealth - TreeManager.Instance.treeHealthReducer) <= 0)
             {
@@ -274,15 +269,6 @@ public class Tree : MonoBehaviour
     //--------------------
 
 
-    public void SetTreeCracks()
-    {
-        renderer.sharedMaterial.SetFloat("_Cracks", 1 - (tempTreeHealth / treeHealth));
-    }
-
-
-    //--------------------
-
-
     void TreeRespawn()
     {
         //Stop dormant process
@@ -297,8 +283,6 @@ public class Tree : MonoBehaviour
         tempTreeHealth = treeHealth;
 
         TreeManager.Instance.ChangeTreeInfo(isCut, dormantTimer, treeIndex_x, treeIndex_y, percentageCheck, tempTreeHealth, gameObject.transform.position);
-
-        SetTreeCracks();
 
         //Show Mesh
         treeObject.SetActive(true);
