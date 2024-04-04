@@ -416,9 +416,7 @@ public class Arms : Singleton<Arms>
                                 //Cactus
                                 else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Cactus)
                                 {
-                                    //Hit the Tree
-                                    EquippmentManager.Instance.Hit(equippedItem);
-                                    CanHit();
+                                    CannotHit();
                                 }
                             }
                         }
@@ -506,9 +504,7 @@ public class Arms : Singleton<Arms>
                                 //Cactus
                                 else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Cactus)
                                 {
-                                    //Hit the Tree
-                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
-                                    CanHit();
+                                    CannotHit();
                                 }
                             }
                         }

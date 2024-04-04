@@ -116,7 +116,7 @@ public class LookAtManager : Singleton<LookAtManager>
         #region
         else if ((HotbarManager.Instance.selectedItem == Items.WoodAxe || HotbarManager.Instance.selectedItem == Items.StoneAxe || HotbarManager.Instance.selectedItem == Items.CryoniteAxe
                   || HotbarManager.Instance.selectedItem == Items.AríditeCrystal || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.None)
-                  && SelectionManager.Instance.tag == "Tree")
+            && SelectionManager.Instance.tag == "Tree")
         {
             //Turn off all screens
             TurnOffScreens();

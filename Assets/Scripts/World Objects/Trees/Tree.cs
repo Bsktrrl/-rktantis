@@ -11,7 +11,6 @@ public class Tree : MonoBehaviour
     public GameObject mesh;
     public GameObject treeObject_LOD0;
     public GameObject treeObject_LOD1;
-    public GameObject treeObject_LOD2;
 
     [Header("Stats")]
     public float treeHealth;
@@ -60,7 +59,6 @@ public class Tree : MonoBehaviour
 
             if (dormantTimer >= TreeManager.Instance.dormantTimer)
             {
-                print("1. Show Cactus");
                 TreeRespawn();
             }
         }
@@ -304,21 +302,13 @@ public class Tree : MonoBehaviour
 
         //Hide Tree Object for a time
         mesh.SetActive(false);
-        if (treeObject_LOD0 != null)
-            treeObject_LOD0.SetActive(false);
-        if (treeObject_LOD1 != null)
-            treeObject_LOD1.SetActive(false);
-        if (treeObject_LOD2 != null)
-            treeObject_LOD2.SetActive(false);
+        treeObject_LOD0.SetActive(false);
+        treeObject_LOD1.SetActive(false);
 
         //Reset the tree's rotation 
         mesh.transform.SetLocalPositionAndRotation(mesh.transform.position, Quaternion.identity);
-        if (treeObject_LOD0 != null)
-            treeObject_LOD0.transform.SetLocalPositionAndRotation(treeObject_LOD0.transform.position, Quaternion.identity);
-        if (treeObject_LOD1 != null)
-            treeObject_LOD1.transform.SetLocalPositionAndRotation(treeObject_LOD1.transform.position, Quaternion.identity);
-        if (treeObject_LOD2 != null)
-            treeObject_LOD2.transform.SetLocalPositionAndRotation(treeObject_LOD2.transform.position, Quaternion.identity);
+        treeObject_LOD0.transform.SetLocalPositionAndRotation(treeObject_LOD0.transform.position, Quaternion.identity);
+        treeObject_LOD1.transform.SetLocalPositionAndRotation(treeObject_LOD1.transform.position, Quaternion.identity);
 
         isCut = true;
     }
@@ -359,30 +349,15 @@ public class Tree : MonoBehaviour
         TreeManager.Instance.ChangeTreeInfo(isCut, dormantTimer, treeIndex_x, treeIndex_y, percentageCheck, tempTreeHealth, gameObject.transform.position);
 
         //Rotate Mesh to Start Rotation
-        //anim.SetTrigger("GotHit");
+        anim.SetTrigger("GotHit");
         //mesh.transform.rotation = Quaternion.identity;
         //treeObject_LOD0.transform.rotation = Quaternion.identity;
         //treeObject_LOD1.transform.rotation = Quaternion.identity;
 
         //Show Mesh
         mesh.SetActive(true);
-        if (treeObject_LOD0 != null)
-        {
-            treeObject_LOD0.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-            treeObject_LOD0.SetActive(true);
-        }
-        if (treeObject_LOD1 != null)
-        {
-            treeObject_LOD1.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-            treeObject_LOD1.SetActive(true);
-        }
-        if (treeObject_LOD2 != null)
-        {
-            treeObject_LOD2.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-            treeObject_LOD2.SetActive(true);
-        }
-
-        print("2. Show Cactus");
+        treeObject_LOD0.SetActive(true);
+        treeObject_LOD1.SetActive(true);
     }
 
     public void LoadTree(bool _isCut, float _dormantTimer, int _treeIndex_j, int _treeIndex_l, int _precentageCheck, float _treeHealth)
@@ -399,13 +374,7 @@ public class Tree : MonoBehaviour
         if (isCut)
         {
             //Hide Mesh
-            mesh.SetActive(false);
-            if (treeObject_LOD0 != null)
-                treeObject_LOD0.SetActive(false);
-            if (treeObject_LOD1 != null)
-                treeObject_LOD1.SetActive(false);
-            if (treeObject_LOD2 != null)
-                treeObject_LOD2.SetActive(false);
+            treeObject_LOD0.SetActive(false);
         }
     }
 }
