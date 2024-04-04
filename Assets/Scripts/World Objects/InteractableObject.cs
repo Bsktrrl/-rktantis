@@ -334,8 +334,8 @@ public enum InteracteableType
 
     //Tree Types
     [Description("Palm Tree")][InspectorName("Trees/Palm Tree")] Palm_Tree,
-    [Description("Tree 2")][InspectorName("Trees/Tree 2")] Tree_2,
-    [Description("Tree 3")][InspectorName("Trees/Tree 3")] Tree_3,
+    [Description("Blood Tree")][InspectorName("Trees/Blood Tree")] BloodTree,
+    [Description("Blood Tree Bush")][InspectorName("Trees/Blood Tree Bush")] BloodTreeBush,
     [Description("Tree 4")][InspectorName("Trees/Tree 4")] Tree_4,
     [Description("Tree 5")][InspectorName("Trees/Tree 5")] Tree_5,
     [Description("Tree 6")][InspectorName("Trees/Tree 6")] Tree_6,

@@ -350,19 +350,15 @@ public class Arms : Singleton<Arms>
                                 }
 
                                 //Tree 2
-                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_2)
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTree)
                                 {
-                                    //Hit the Tree
-                                    EquippmentManager.Instance.Hit(equippedItem);
-                                    CanHit();
+                                    CannotHit();
                                 }
 
                                 //Tree 3
-                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_3)
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTreeBush)
                                 {
-                                    //Hit the Tree
-                                    EquippmentManager.Instance.Hit(equippedItem);
-                                    CanHit();
+                                    CannotHit();
                                 }
 
                                 //Tree 4
@@ -416,7 +412,9 @@ public class Arms : Singleton<Arms>
                                 //Cactus
                                 else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Cactus)
                                 {
-                                    CannotHit();
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
                             }
                         }
@@ -438,15 +436,13 @@ public class Arms : Singleton<Arms>
                                 }
 
                                 //Tree 2
-                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_2)
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTree)
                                 {
-                                    //Hit the Tree
-                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
-                                    CanHit();
+                                    CannotHit();
                                 }
 
                                 //Tree 3
-                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_3)
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTreeBush)
                                 {
                                     //Hit the Tree
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
@@ -504,7 +500,9 @@ public class Arms : Singleton<Arms>
                                 //Cactus
                                 else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Cactus)
                                 {
-                                    CannotHit();
+                                    //Hit the Tree
+                                    EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
+                                    CanHit();
                                 }
                             }
                         }
@@ -526,7 +524,7 @@ public class Arms : Singleton<Arms>
                                 }
 
                                 //Tree 2
-                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_2)
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTree)
                                 {
                                     //Hit the Tree
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
@@ -534,7 +532,7 @@ public class Arms : Singleton<Arms>
                                 }
 
                                 //Tree 3
-                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_3)
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTreeBush)
                                 {
                                     //Hit the Tree
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
@@ -616,7 +614,7 @@ public class Arms : Singleton<Arms>
                                 }
 
                                 //Tree 2
-                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_2)
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTree)
                                 {
                                     //Hit the Tree
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
@@ -624,7 +622,7 @@ public class Arms : Singleton<Arms>
                                 }
 
                                 //Tree 3
-                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_3)
+                                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTreeBush)
                                 {
                                     //Hit the Tree
                                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().Hit();
@@ -773,18 +771,14 @@ public class Arms : Singleton<Arms>
                         CanHit();
                     }
                     //Tree_2
-                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_2)
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTree)
                     {
-                        //Hit the Ore
-                        EquippmentManager.Instance.Hit(equippedItem);
-                        CanHit();
+                        CannotHit();
                     }
                     //Tree_3
-                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_3)
+                    if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTreeBush)
                     {
-                        //Hit the Ore
-                        EquippmentManager.Instance.Hit(equippedItem);
-                        CanHit();
+                        CannotHit();
                     }
                     //Tree_4
                     if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_4)
@@ -864,6 +858,8 @@ public class Arms : Singleton<Arms>
     }
     void CannotHit()
     {
+        print("44444. Cannot Hit");
+
         SoundManager.Instance.Play_PickaxeUsage_CannotHit_Clip();
 
         cannotHit = true;

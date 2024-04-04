@@ -30,6 +30,9 @@ public class Tree : MonoBehaviour
     InteracteableType interactableType = InteracteableType.None;
     bool isFalling;
 
+    Vector3 meshStartPos;
+    Quaternion meshStartRot;
+
 
     //--------------------
 
@@ -38,6 +41,9 @@ public class Tree : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         tempTreeHealth = treeHealth;
+
+        meshStartPos = mesh.transform.position;
+        meshStartRot = mesh.transform.rotation;
     }
     private void Update()
     {
@@ -85,7 +91,7 @@ public class Tree : MonoBehaviour
         }
 
         //If Object is a Tree
-        if (interactableType == InteracteableType.Palm_Tree || interactableType == InteracteableType.Tree_2 || interactableType == InteracteableType.Tree_3
+        if (interactableType == InteracteableType.Palm_Tree || interactableType == InteracteableType.BloodTree || interactableType == InteracteableType.BloodTreeBush
             || interactableType == InteracteableType.Tree_4 || interactableType == InteracteableType.Tree_5 || interactableType == InteracteableType.Tree_6
             || interactableType == InteracteableType.Tree_7 || interactableType == InteracteableType.Tree_8 || interactableType == InteracteableType.Tree_9
             || interactableType == InteracteableType.Cactus)
@@ -311,20 +317,20 @@ public class Tree : MonoBehaviour
             treeObject_LOD2.SetActive(false);
 
         //Reset the tree's rotation 
-        mesh.transform.SetLocalPositionAndRotation(mesh.transform.position, Quaternion.identity);
+        mesh.transform.SetLocalPositionAndRotation(Vector3.zero, meshStartRot);
         if (treeObject_LOD0)
-            treeObject_LOD0.transform.SetLocalPositionAndRotation(treeObject_LOD0.transform.position, Quaternion.identity);
+            treeObject_LOD0.transform.SetLocalPositionAndRotation(treeObject_LOD0.transform.position, treeObject_LOD0.transform.rotation);
         if (treeObject_LOD1)
-            treeObject_LOD1.transform.SetLocalPositionAndRotation(treeObject_LOD1.transform.position, Quaternion.identity);
+            treeObject_LOD1.transform.SetLocalPositionAndRotation(treeObject_LOD1.transform.position, treeObject_LOD1.transform.rotation);
         if (treeObject_LOD2)
-            treeObject_LOD2.transform.SetLocalPositionAndRotation(treeObject_LOD2.transform.position, Quaternion.identity);
+            treeObject_LOD2.transform.SetLocalPositionAndRotation(treeObject_LOD2.transform.position, treeObject_LOD2.transform.rotation);
 
         isCut = true;
     }
     void SpawnTreeItemsToWorld(InteracteableType interactableType)
     {
         //Spawn Wood
-        if (interactableType == InteracteableType.Palm_Tree || interactableType == InteracteableType.Tree_2 || interactableType == InteracteableType.Tree_3
+        if (interactableType == InteracteableType.Palm_Tree || interactableType == InteracteableType.BloodTree || interactableType == InteracteableType.BloodTreeBush
             || interactableType == InteracteableType.Tree_4 || interactableType == InteracteableType.Tree_5 || interactableType == InteracteableType.Tree_6
             || interactableType == InteracteableType.Tree_7 || interactableType == InteracteableType.Tree_8 || interactableType == InteracteableType.Tree_9)
         {
@@ -361,7 +367,9 @@ public class Tree : MonoBehaviour
         anim.SetTrigger("Reset");
 
         //Show Mesh
+        mesh.transform.SetLocalPositionAndRotation(Vector3.zero, meshStartRot);
         mesh.SetActive(true);
+
         if (treeObject_LOD0)
         {
             treeObject_LOD0.transform.SetLocalPositionAndRotation(Vector3.zero, treeObject_LOD0.transform.rotation);
