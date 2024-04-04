@@ -342,5 +342,5 @@ public enum InteracteableType
     [Description("Tree 7")][InspectorName("Trees/Tree 7")] Tree_7,
     [Description("Tree 8")][InspectorName("Trees/Tree 8")] Tree_8,
     [Description("Tree 9")][InspectorName("Trees/Tree 9")] Tree_9,
-    [Description("Tree 10")][InspectorName("Trees/Tree 10")] Cactus
+    [Description("Cactus")][InspectorName("Trees/Cactus")] Cactus
 }
