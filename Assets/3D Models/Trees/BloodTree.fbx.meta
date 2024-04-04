@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fda9a4854ca4be54786a1ff2ee161ae7
+guid: 0b7660d7f2b9e834d8b249d7aa89f5d3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Stem.001
-    second: {fileID: 2100000, guid: 8277604f86c82f94789495d3fc62ce53, type: 2}
+      name: Wood
+    second: {fileID: 2100000, guid: 8b9a6c135fcfcdb448562f08679ba9eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tex_woodbark_albedo.003
+    second: {fileID: 2100000, guid: f94a665b2e8e75a449908b4bad71750c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -41,7 +46,6 @@ ModelImporter:
   meshes:
     lODScreenPercentages:
     - 0.25
-    - 0.125
     - 0.01
     globalScale: 1
     meshCompression: 0
