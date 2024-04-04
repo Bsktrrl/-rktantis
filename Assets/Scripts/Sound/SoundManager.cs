@@ -86,7 +86,7 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip axeUsage_CryoniteAxe_Clip; //
 
     [SerializeField] AudioClip axeUsage_TreeFalling_Clip; //
-    [SerializeField] AudioClip axeUsage_CactusFalling_Clip; //
+    [SerializeField] AudioClip axeUsage_TreeHitGround_Clip; //
     [SerializeField] AudioClip axeUsage_CannotHit_Clip; //
     #endregion
     #region Pickaxe Usage
@@ -187,7 +187,9 @@ public class SoundManager : Singleton<SoundManager>
     private void Update()
     {
         audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
+        
         audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
+        audioSource_MenuSound2.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
 
         audioSource_Music.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_Music();
 
@@ -652,11 +654,11 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_WorldSound.Play();
         }
     }
-    public void Play_AxeUsage_CactusFalling_Clip()
+    public void Play_AxeUsage_TreeHitGround_Clip()
     {
         if (audioSource_WorldSound != null)
         {
-            audioSource_WorldSound.clip = axeUsage_CactusFalling_Clip;
+            audioSource_WorldSound.clip = axeUsage_TreeHitGround_Clip;
             audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
             audioSource_WorldSound.pitch = 1f;
             audioSource_WorldSound.Play();

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Tree : MonoBehaviour
 {
+    Animator anim;
+    Vector3 fallDirection;
+
     [Header("Prefabs")]
     public GameObject mesh;
     public GameObject treeObject_LOD0;
@@ -22,12 +25,17 @@ public class Tree : MonoBehaviour
     public int treeIndex_y;
     public int percentageCheck = 0;
 
+    Items itemName = Items.None;
+    InteracteableType interactableType = InteracteableType.None;
+    bool isFalling;
+
 
     //--------------------
 
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         tempTreeHealth = treeHealth;
     }
     private void Update()
@@ -60,11 +68,11 @@ public class Tree : MonoBehaviour
     //--------------------
 
 
-    public void TreeInteraction(Items itemName)
+    public void TreeInteraction(Items _itemName)
     {
-        if (isCut) { return; }
+        if (isCut || isFalling) { return; }
 
-        InteracteableType interactableType = InteracteableType.None;
+        itemName = _itemName;
 
         if (gameObject.GetComponent<InteractableObject>())
         {
@@ -81,13 +89,16 @@ public class Tree : MonoBehaviour
             || interactableType == InteracteableType.Tree_7 || interactableType == InteracteableType.Tree_8 || interactableType == InteracteableType.Tree_9
             || interactableType == InteracteableType.Cactus)
         {
-            print("Interact with a Tree - " + itemName);
+            print("Interact with a Tree - " + _itemName);
+
+            //Play hit animation when tree is hit
+            anim.SetTrigger("GotHit");
 
             //Play HackingSound
             #region
             float tempPitchCount = (float)(treeHealth / 5);
 
-            if (itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal)
+            if (_itemName == Items.None || _itemName == Items.Flashlight || _itemName == Items.AríditeCrystal)
             {
                 if ((tempTreeHealth - TreeManager.Instance.treeHealthReducer) >= tempPitchCount * 5)
                 {
@@ -114,7 +125,7 @@ public class Tree : MonoBehaviour
                     SoundManager.Instance.Play_AxeUsage_Hand_Clip(1);
                 }
             }
-            else if (itemName == Items.WoodAxe)
+            else if (_itemName == Items.WoodAxe)
             {
                 if ((tempTreeHealth - TreeManager.Instance.treeHealthReducer) >= tempPitchCount * 5)
                 {
@@ -141,7 +152,7 @@ public class Tree : MonoBehaviour
                     SoundManager.Instance.Play_AxeUsage_WoodAxe_Clip(1);
                 }
             }
-            else if (itemName == Items.StoneAxe)
+            else if (_itemName == Items.StoneAxe)
             {
                 if ((tempTreeHealth - TreeManager.Instance.treeHealthReducer) >= tempPitchCount * 5)
                 {
@@ -168,7 +179,7 @@ public class Tree : MonoBehaviour
                     SoundManager.Instance.Play_AxeUsage_StoneAxe_Clip(1);
                 }
             }
-            else if (itemName == Items.CryoniteAxe)
+            else if (_itemName == Items.CryoniteAxe)
             {
                 if ((tempTreeHealth - TreeManager.Instance.treeHealthReducer) >= tempPitchCount * 5)
                 {
@@ -198,80 +209,123 @@ public class Tree : MonoBehaviour
             #endregion
 
             //Reduce the Tree's health
-            if (itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal)
+            if (_itemName == Items.None || _itemName == Items.Flashlight || _itemName == Items.AríditeCrystal)
             {
                 tempTreeHealth -= 0.5f;
             }
             else
             {
-                tempTreeHealth -= MainManager.Instance.GetItem(itemName).treePower;
+                tempTreeHealth -= MainManager.Instance.GetItem(_itemName).treePower;
             }
 
             //Check if the TreeHealth is 0
             if ((tempTreeHealth - TreeManager.Instance.treeHealthReducer) <= 0)
             {
+                isFalling = true;
+
                 //Play TreeDestroy sound
                 SoundManager.Instance.Play_AxeUsage_TreeFalling_Clip();
 
-                //Spawn at least 1 item into the World
-                SpawnTreeItems(interactableType);
+                //Get direction of camera
+                fallDirection = new Vector3(-Camera.main.transform.forward.x, 0, -Camera.main.transform.forward.z);
+                fallDirection = fallDirection.normalized;
+                fallDirection = transform.InverseTransformDirection(fallDirection);
 
-                //Spawn additional items into the World based on the Axe used
-                bool isSpawningItems = true;
-                float modifier = 0;
-                while (isSpawningItems)
-                {
-                    float rand = Random.Range(0, 100);
-                    
-                    if ((itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal) && rand <= (TreeManager.Instance.woodAxe_Droprate - modifier))
-                    {
-                        SpawnTreeItems(interactableType);
-                    }
-                    else if (itemName == Items.WoodAxe && rand <= (TreeManager.Instance.woodAxe_Droprate - modifier))
-                    {
-                        SpawnTreeItems(interactableType);
-                    }
-                    else if (itemName == Items.StoneAxe && rand <= (TreeManager.Instance.stoneAxe_Droprate - modifier))
-                    {
-                        SpawnTreeItems(interactableType);
-                    }
-                    else if (itemName == Items.CryoniteAxe && rand <= (TreeManager.Instance.cryoniteAxe_Droprate - modifier))
-                    {
-                        SpawnTreeItems(interactableType);
-                    }
-                    else
-                    {
-                        isSpawningItems = false;
-                    }
-
-                    modifier += TreeManager.Instance.treeDropRateReducer;
-                }
-
-                //Hide Tree Object for a time
-                mesh.SetActive(false);
-                treeObject_LOD0.SetActive(false);
-                treeObject_LOD1.SetActive(false);
-
-                isCut = true;
+                //Player fall animation when tree is falling
+                anim.SetFloat("FallDirectionX", fallDirection.x);
+                anim.SetFloat("FallDirectionY", fallDirection.z);
+                anim.SetTrigger("Fall");
             }
         }
 
         TreeManager.Instance.ChangeTreeInfo(isCut, dormantTimer, treeIndex_x, treeIndex_y, percentageCheck, tempTreeHealth, gameObject.transform.position);
     }
-    void SpawnTreeItems(InteracteableType interactableType)
+
+
+    //--------------------
+
+
+    //Animation event at end of fall animation
+    void Fallen(AnimationEvent evt)
+    {
+        SoundManager.Instance.Play_AxeUsage_TreeHitGround_Clip();
+
+        if (evt.animatorClipInfo.weight >= 0.5f)
+        {
+            StartCoroutine(FallingTreeCouroutine(0.25f));
+        }
+    }
+
+    IEnumerator FallingTreeCouroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        SpawnItemsAfterFalling(interactableType, itemName);
+
+        isFalling = false;
+    }
+    void SpawnItemsAfterFalling(InteracteableType interactableType, Items itemName)
+    {
+        //Spawn at least 1 item into the World
+        SpawnTreeItemsToWorld(interactableType);
+
+        //Spawn additional items into the World based on the Axe used
+        bool isSpawningItems = true;
+        float modifier = 0;
+        while (isSpawningItems)
+        {
+            float rand = Random.Range(0, 100);
+
+            if ((itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal) && rand <= (TreeManager.Instance.woodAxe_Droprate - modifier))
+            {
+                SpawnTreeItemsToWorld(interactableType);
+            }
+            else if (itemName == Items.WoodAxe && rand <= (TreeManager.Instance.woodAxe_Droprate - modifier))
+            {
+                SpawnTreeItemsToWorld(interactableType);
+            }
+            else if (itemName == Items.StoneAxe && rand <= (TreeManager.Instance.stoneAxe_Droprate - modifier))
+            {
+                SpawnTreeItemsToWorld(interactableType);
+            }
+            else if (itemName == Items.CryoniteAxe && rand <= (TreeManager.Instance.cryoniteAxe_Droprate - modifier))
+            {
+                SpawnTreeItemsToWorld(interactableType);
+            }
+            else
+            {
+                isSpawningItems = false;
+            }
+
+            modifier += TreeManager.Instance.treeDropRateReducer;
+        }
+
+        //Hide Tree Object for a time
+        mesh.SetActive(false);
+        treeObject_LOD0.SetActive(false);
+        treeObject_LOD1.SetActive(false);
+
+        //Reset the tree's rotation 
+        mesh.transform.SetLocalPositionAndRotation(mesh.transform.position, Quaternion.identity);
+        treeObject_LOD0.transform.SetLocalPositionAndRotation(treeObject_LOD0.transform.position, Quaternion.identity);
+        treeObject_LOD1.transform.SetLocalPositionAndRotation(treeObject_LOD1.transform.position, Quaternion.identity);
+
+        isCut = true;
+    }
+    void SpawnTreeItemsToWorld(InteracteableType interactableType)
     {
         //Spawn Wood
         if (interactableType == InteracteableType.Palm_Tree || interactableType == InteracteableType.Tree_2 || interactableType == InteracteableType.Tree_3
             || interactableType == InteracteableType.Tree_4 || interactableType == InteracteableType.Tree_5 || interactableType == InteracteableType.Tree_6
             || interactableType == InteracteableType.Tree_7 || interactableType == InteracteableType.Tree_8 || interactableType == InteracteableType.Tree_9)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Wood, gameObject);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Wood, gameObject, false);
         }
 
         //Spawn Cactus
         else if (interactableType == InteracteableType.Cactus)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Cactus, gameObject);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Cactus, gameObject, false);
         }
     }
 
@@ -293,6 +347,12 @@ public class Tree : MonoBehaviour
         tempTreeHealth = treeHealth;
 
         TreeManager.Instance.ChangeTreeInfo(isCut, dormantTimer, treeIndex_x, treeIndex_y, percentageCheck, tempTreeHealth, gameObject.transform.position);
+
+        //Rotate Mesh to Start Rotation
+        anim.SetTrigger("GotHit");
+        //mesh.transform.rotation = Quaternion.identity;
+        //treeObject_LOD0.transform.rotation = Quaternion.identity;
+        //treeObject_LOD1.transform.rotation = Quaternion.identity;
 
         //Show Mesh
         mesh.SetActive(true);
