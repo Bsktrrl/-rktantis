@@ -187,8 +187,12 @@ public class TreeManager : Singleton<TreeManager>
                 if (treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().isCut)
                 {
                     treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().mesh.SetActive(false);
-                    treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeObject_LOD0.SetActive(false);
-                    treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeObject_LOD1.SetActive(false);
+                    if (treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeObject_LOD0)
+                        treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeObject_LOD0.SetActive(false);
+                    if (treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeObject_LOD1)
+                        treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeObject_LOD1.SetActive(false);
+                    if (treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeObject_LOD2)
+                        treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Tree>().treeObject_LOD2.SetActive(false);
                 }
             }
         }

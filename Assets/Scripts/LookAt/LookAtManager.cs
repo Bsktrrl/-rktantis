@@ -573,8 +573,6 @@ public class LookAtManager : Singleton<LookAtManager>
                                 break;
 
                             case InteracteableType.Cactus:
-                                treeDisplay_Text.text = "Requires a \"Stone Axe\" or \"Cryonite Axe\"";
-                                treeDisplay_LineObject.SetActive(true);
                                 break;
 
                             default:
@@ -608,8 +606,6 @@ public class LookAtManager : Singleton<LookAtManager>
                                 break;
 
                             case InteracteableType.Cactus:
-                                treeDisplay_Text.text = "Requires a \"Stone Axe\" or \"Cryonite Axe\"";
-                                treeDisplay_LineObject.SetActive(true);
                                 break;
 
                             default:
