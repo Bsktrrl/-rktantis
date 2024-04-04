@@ -46,6 +46,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //Ores
     [HideInInspector] public List<ListOfOreToSave> oreTypeObjectList_Store = new List<ListOfOreToSave>();
 
+    //Trees
+    [HideInInspector] public List<ListOfTreeToSave> treeTypeObjectList_Store = new List<ListOfTreeToSave>();
+
     //HealthParameter
     [HideInInspector] public HealthToSave health_Store = new HealthToSave();
 
@@ -106,6 +109,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         this.plantTypeObjectList_Store = gameData.plantTypeObjectList_Save;
         this.oreTypeObjectList_Store = gameData.oreTypeObjectList_Save;
+        this.treeTypeObjectList_Store = gameData.treeTypeObjectList_Save;
 
         this.mentorStoryJournalPageIndexList_Store = gameData.mentorStoryJournalPageIndexList_Save;
         this.playerStoryJournalPageIndexList_Store = gameData.playerStoryJournalPageIndexList_Save;
@@ -159,17 +163,20 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         OreManager.Instance.LoadData();
         print("11. Ores has Loaded");
 
+        TreeManager.Instance.LoadData();
+        print("12. Trees has Loaded");
+
         JournalManager.Instance.LoadData();
-        print("12. Journals has Loaded");
+        print("13. Journals has Loaded");
 
         WeatherManager.Instance.LoadData();
-        print("13. Weather has Loaded");
+        print("14. Weather has Loaded");
 
         ResearchManager.Instance.LoadData(this.researched_SOItem_Store);
-        print("14. Research has Loaded");
+        print("15. Research has Loaded");
 
         CraftingManager.Instance.LoadData();
-        print("15. Crafting has Loaded");
+        print("16. Crafting has Loaded");
         #endregion
 
         print("------------------------------");
@@ -206,6 +213,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         gameData.plantTypeObjectList_Save = this.plantTypeObjectList_Store;
         gameData.oreTypeObjectList_Save = this.oreTypeObjectList_Store;
+        gameData.treeTypeObjectList_Save = this.treeTypeObjectList_Store;
 
         gameData.mentorStoryJournalPageIndexList_Save = this.mentorStoryJournalPageIndexList_Store;
         gameData.playerStoryJournalPageIndexList_Save = this.playerStoryJournalPageIndexList_Store;

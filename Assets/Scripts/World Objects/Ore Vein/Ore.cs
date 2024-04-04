@@ -23,6 +23,7 @@ public class Ore : MonoBehaviour
     public int oreIndex_y;
     public int percentageCheck = 0;
 
+
     //--------------------
 
 

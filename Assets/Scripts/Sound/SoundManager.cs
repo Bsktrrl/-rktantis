@@ -81,9 +81,9 @@ public class SoundManager : Singleton<SoundManager>
     #region Axe Usage
     [Header("Axe Useage")]
     [SerializeField] AudioClip axeUsage_Hand_Clip; //
-    [SerializeField] AudioClip axeUsage_WoodPickaxe_Clip; //
-    [SerializeField] AudioClip axeUsage_StonePickaxe_Clip; //
-    [SerializeField] AudioClip axeUsage_CryonitePickaxe_Clip; //
+    [SerializeField] AudioClip axeUsage_WoodAxe_Clip; //
+    [SerializeField] AudioClip axeUsage_StoneAxe_Clip; //
+    [SerializeField] AudioClip axeUsage_CryoniteAxe_Clip; //
 
     [SerializeField] AudioClip axeUsage_TreeFalling_Clip; //
     [SerializeField] AudioClip axeUsage_CactusFalling_Clip; //
@@ -601,43 +601,43 @@ public class SoundManager : Singleton<SoundManager>
     #endregion
 
     #region Axe Useage //Have yet to be implemented
-    public void Play_AxeUsage_Hand_Clip()
+    public void Play_AxeUsage_Hand_Clip(float pitch)
     {
         if (audioSource_WorldSound != null)
         {
             audioSource_WorldSound.clip = axeUsage_Hand_Clip;
             audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
+            audioSource_WorldSound.pitch = pitch;
             audioSource_WorldSound.Play();
         }
     }
-    public void Play_AxeUsage_WoodPickaxe_Clip()
+    public void Play_AxeUsage_WoodAxe_Clip(float pitch)
     {
         if (audioSource_WorldSound != null)
         {
-            audioSource_WorldSound.clip = axeUsage_WoodPickaxe_Clip;
+            audioSource_WorldSound.clip = axeUsage_WoodAxe_Clip;
             audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
+            audioSource_WorldSound.pitch = pitch;
             audioSource_WorldSound.Play();
         }
     }
-    public void Play_AxeUsage_StonePickaxe_Clip()
+    public void Play_AxeUsage_StoneAxe_Clip(float pitch)
     {
         if (audioSource_WorldSound != null)
         {
-            audioSource_WorldSound.clip = axeUsage_StonePickaxe_Clip;
+            audioSource_WorldSound.clip = axeUsage_StoneAxe_Clip;
             audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
+            audioSource_WorldSound.pitch = pitch;
             audioSource_WorldSound.Play();
         }
     }
-    public void Play_AxeUsage_CryonitePickaxe_Clip()
+    public void Play_AxeUsage_CryoniteAxe_Clip(float pitch)
     {
         if (audioSource_WorldSound != null)
         {
-            audioSource_WorldSound.clip = axeUsage_CryonitePickaxe_Clip;
+            audioSource_WorldSound.clip = axeUsage_CryoniteAxe_Clip;
             audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
+            audioSource_WorldSound.pitch = pitch;
             audioSource_WorldSound.Play();
         }
     }

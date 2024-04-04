@@ -330,5 +330,17 @@ public enum InteracteableType
     [Description("Journal Page")][InspectorName("Journal Page/Journal Page")] JournalPage,
 
 
-    [Description("Research Table")][InspectorName("Furniture/Research Table")] ResearchTable
+    [Description("Research Table")][InspectorName("Furniture/Research Table")] ResearchTable,
+
+    //Tree Types
+    [Description("Palm Tree")][InspectorName("Trees/Palm Tree")] Palm_Tree,
+    [Description("Tree 2")][InspectorName("Trees/Tree 2")] Tree_2,
+    [Description("Tree 3")][InspectorName("Trees/Tree 3")] Tree_3,
+    [Description("Tree 4")][InspectorName("Trees/Tree 4")] Tree_4,
+    [Description("Tree 5")][InspectorName("Trees/Tree 5")] Tree_5,
+    [Description("Tree 6")][InspectorName("Trees/Tree 6")] Tree_6,
+    [Description("Tree 7")][InspectorName("Trees/Tree 7")] Tree_7,
+    [Description("Tree 8")][InspectorName("Trees/Tree 8")] Tree_8,
+    [Description("Tree 9")][InspectorName("Trees/Tree 9")] Tree_9,
+    [Description("Tree 10")][InspectorName("Trees/Tree 10")] Cactus
 }
