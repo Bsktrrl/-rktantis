@@ -43,6 +43,9 @@ public class Item
     [Header("OrePower")]
     public int orePower;
 
+    [Header("TreePower")]
+    public int treePower;
+
     [Header("Prefabs")]
     public GameObject worldObjectPrefab;
     public GameObject equippedPrefab;

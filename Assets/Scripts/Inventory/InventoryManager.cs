@@ -338,7 +338,7 @@ public class InventoryManager : Singleton<InventoryManager>
         PrepareInventoryUI(inventory, false);
 
         //Spawn item into the World, if the item has a WorldObject attached
-        SpawnItemToWorld(itemName, handDropPoint);
+        SpawnItemToWorld(itemName, handDropPoint, true);
 
         //If item is removed from the inventory, update the Hotbar
         if (inventory <= 0)
@@ -537,17 +537,19 @@ public class InventoryManager : Singleton<InventoryManager>
         HotbarManager.Instance.ChangeItemInHand();
     }
     
-    public void SpawnItemToWorld(Items itemName, GameObject dropPos)
+    public void SpawnItemToWorld(Items itemName, GameObject dropPos, bool dropSound)
     {
         if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
         {
             //Play Drop-Sound
-            SoundManager.Instance.Play_Inventory_DropItem_Clip();
-
+            if (dropSound)
+            {
+                SoundManager.Instance.Play_Inventory_DropItem_Clip();
+            }
             
             if (dropPos == handDropPoint)
             {
-                //If dropped from hand, hav ethe same dropspot each time
+                //If dropped from hand, have the same dropspot each time
                 WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, dropPos.transform.position, Quaternion.identity) as GameObject);
             }
             else

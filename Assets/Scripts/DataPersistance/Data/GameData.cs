@@ -34,8 +34,11 @@ public class GameData
     //Plants
     [HideInInspector] public List<ListOfPlantToSave> plantTypeObjectList_Save = new List<ListOfPlantToSave>();
 
-    //Ore
+    //Ores
     [HideInInspector] public List<ListOfOreToSave> oreTypeObjectList_Save = new List<ListOfOreToSave>();
+
+    //Trees
+    [HideInInspector] public List<ListOfTreeToSave> treeTypeObjectList_Save = new List<ListOfTreeToSave>();
 
     //HealthParameter
     [HideInInspector] public HealthToSave health_Save = new HealthToSave();
@@ -81,6 +84,7 @@ public class GameData
 
         this.plantTypeObjectList_Save.Clear();
         this.oreTypeObjectList_Save.Clear();
+        this.treeTypeObjectList_Save.Clear();
 
         this.mentorStoryJournalPageIndexList_Save.Clear();
         this.playerStoryJournalPageIndexList_Save.Clear();
