@@ -6,7 +6,9 @@ public class MainManager : Singleton<MainManager>
 {
     [Header("Player")]
     public GameObject player;
+    public GameObject playerBody;
     public Camera mainCamera;
+
     public Canvas mainCanvas;
     public Canvas mainTabletCanvas;
 
