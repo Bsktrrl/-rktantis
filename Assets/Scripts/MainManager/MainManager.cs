@@ -20,14 +20,8 @@ public class MainManager : Singleton<MainManager>
     public Item_SO item_SO;
     public MoveableObject_SO moveableObject_SO;
 
-    [Header("Parents")]
-    public GameObject treeParent;
-
     //Update Delayer
     public int updateInterval = 10;
-
-    //Interactable Distance - Distace between player and raycast interactable
-    public float InteractableDistance = 3.5f;
 
     //CenterImage
     public GameObject centerImage;

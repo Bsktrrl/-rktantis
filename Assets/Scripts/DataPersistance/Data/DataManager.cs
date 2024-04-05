@@ -74,6 +74,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //Crafting
     [HideInInspector] public List<CraftingItem> itemStates_Store = new List<CraftingItem>();
 
+    //Player Movement
+
 
     //--------------------
 

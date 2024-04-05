@@ -7,19 +7,15 @@ public class PlayerMovement : Singleton<PlayerMovement>
 {
     public CharacterController controller;
 
-    public float speed = 12f;
-    public float speedMultiplier = 1f;
+    public float movementSpeed = 4f;
+    public float movementSpeedMultiplier = 1f;
 
-    public float jumpHeight = 3f;
-    public float gravity = -9.81f;
-
-    public float groundDistance = 0.4f;
-    public LayerMask groundMask;
+    public float jumpHeight = 2f;
+    public float gravity = -30f;
 
     Vector3 velocity;
 
-    public SphereCollider groundCheck;
-    public bool isGrounded;
+    PlayerMovementStats playerMovementStats_ToSave;
 
 
     //--------------------
@@ -29,6 +25,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
     {
         //Set Player to the height it's supposed to be
         MainManager.Instance.playerBody.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), transform.rotation);
+
+        gravity = -30f;
+        jumpHeight = 2f;
     }
     void Update()
     {
@@ -39,16 +38,21 @@ public class PlayerMovement : Singleton<PlayerMovement>
     //--------------------
 
 
+    public void LoadData()
+    {
+
+    }
+    public void SaveData()
+    {
+
+    }
+
+
+    //--------------------
+
+
     void Movement()
     {
-        //checking if we hit the ground to reset our falling velocity, otherwise we will fall faster the next time
-        isGrounded = Physics.CheckSphere(groundCheck.center, 0.5f, groundMask);
-
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
-
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
@@ -65,7 +69,14 @@ public class PlayerMovement : Singleton<PlayerMovement>
         //right is the red Axis, forward is the blue axis
         Vector3 move = MainManager.Instance.playerBody.transform.right * x + MainManager.Instance.playerBody.transform.forward * z;
 
-        controller.Move(move * speed * speedMultiplier * Time.deltaTime);
+        controller.Move(move * movementSpeed * movementSpeedMultiplier * Time.deltaTime);
+
+        //check if the player is on the ground so he can jump
+        if (Input.GetKeyDown(KeyCode.Space) && GetComponent<DistanceAboveGround>().isGrounded)
+        {
+            //the equation for jumping
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
 
         if (x == 0 && z == 0)
         {
@@ -76,8 +87,14 @@ public class PlayerMovement : Singleton<PlayerMovement>
         else
         {
             velocity.y += gravity * Time.deltaTime;
-
-            controller.Move(velocity * Time.deltaTime);
         }
+
+        controller.Move(velocity * Time.deltaTime);
     }
+}
+
+public class PlayerMovementStats
+{
+    public float movementSpeed;
+    public float movementSpeedMultiplier;
 }
