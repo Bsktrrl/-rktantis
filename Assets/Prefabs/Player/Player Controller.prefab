@@ -79226,7 +79226,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.010284424}
+  m_AnchoredPosition: {x: 0, y: 0.002380371}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763
@@ -90378,7 +90378,7 @@ Transform:
   m_GameObject: {fileID: 7573938918095559531}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.4}
+  m_LocalPosition: {x: 0, y: 0.45, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -90553,7 +90553,7 @@ CharacterController:
   m_StepOffset: 0.7
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.8, z: 0}
+  m_Center: {x: 0, y: -0.85, z: 0}
 --- !u!114 &8848920295305057190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90566,19 +90566,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da41405c2fadacf498a4d95f81a3f236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 7574674635115166224}
   controller: {fileID: 4230422569923015765}
   speed: 5.75
   speedMultiplier: 1
-  gravity: -45
   jumpHeight: 3.5
+  gravity: -45
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 0
   groundCheck: {fileID: 1548181404869553778}
   isGrounded: 0
-  mouseSensitivity: 90
 --- !u!114 &7932066623679705562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90591,21 +90589,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca1b5f2eb910d0d41a90eb8bcbee6b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
   mouseSensitivity: 90
   clampInDegrees: {x: 360, y: 180}
-  sensitivity: {x: 2, y: 2}
-  smoothing: {x: 3, y: 3}
-  targetDirection: {x: 0, y: 0}
-  targetCharacterDirection: {x: 0, y: 0}
-  gravity: -19.62
-  characterBody: {fileID: 7531097707624923619}
-  speed: 5
-  speedMultiplier: 1
-  fwdKey: 119
-  leftKey: 97
-  backKey: 115
-  rightKey: 100
 --- !u!114 &5225284965359178302
 MonoBehaviour:
   m_ObjectHideFlags: 0

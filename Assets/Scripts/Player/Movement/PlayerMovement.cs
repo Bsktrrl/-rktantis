@@ -13,7 +13,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public float jumpHeight = 3f;
     public float gravity = -9.81f;
 
-    public float groundDistance = -1.4f;
+    public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
     Vector3 velocity;
@@ -42,30 +42,42 @@ public class PlayerMovement : Singleton<PlayerMovement>
     void Movement()
     {
         //checking if we hit the ground to reset our falling velocity, otherwise we will fall faster the next time
-        //isGrounded = Physics.CheckSphere(groundCheck.center, 0.5f, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.center, 0.5f, groundMask);
 
-        //if (isGrounded && velocity.y < 0)
-        //{
-        //    velocity.y = -2f;
-        //}
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+
+        //Check if button is not pressed
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
+        {
+            x = 0;
+        }
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+        {
+            z = 0;
+        }
 
         //right is the red Axis, forward is the blue axis
         Vector3 move = MainManager.Instance.playerBody.transform.right * x + MainManager.Instance.playerBody.transform.forward * z;
 
         controller.Move(move * speed * speedMultiplier * Time.deltaTime);
 
-        //check if the player is on the ground so he can jump
-        //if (Input.GetButtonDown("Jump") && isGrounded)
-        //{
-        //    //the equation for jumping
-        //    velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        //}
+        if (x == 0 && z == 0)
+        {
+            velocity.x = 0;
+            velocity.y += gravity * Time.deltaTime;
+            velocity.z = 0;
+        }
+        else
+        {
+            velocity.y += gravity * Time.deltaTime;
 
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity * Time.deltaTime);
+            controller.Move(velocity * Time.deltaTime);
+        }
     }
 }
