@@ -165,7 +165,7 @@ public class HealthManager : Singleton<HealthManager>
         //Multiplier Check
         #region
         healthValueMultiplier = MultiplierCheck((int)hungerValueMultiplier_Check + PlayerManager.Instance.hungerTemp);
-        heatResistanceValueMultiplier = MultiplierCheck((int)heatResistanceValueMultiplier_Check);
+        heatResistanceValueMultiplier = MultiplierCheck((int)heatResistanceValueMultiplier_Check + PlayerManager.Instance.heatresistanceTemp);
         thirstValueMultiplier = MultiplierCheck((int)thirstValueMultiplier_Check + PlayerManager.Instance.thirstTemp);
         #endregion
 

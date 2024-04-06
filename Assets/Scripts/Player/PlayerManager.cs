@@ -26,6 +26,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     [Header("HealthParameterMovementVariables")]
     public int hungerTemp = 0;
+    public int heatresistanceTemp = 0;
     public int thirstTemp = 0;
 
     public bool isHittingHeadRaycast = true;

@@ -342,8 +342,10 @@ public class WeatherManager : Singleton<WeatherManager>
             minTemperature = 10;
             maxTemperature = 50;
 
-            //Set Thirsty faster
-            HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1.25f;
+            //Set HealthParameters
+            HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
+            HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.Down_2;
+            //HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1.25f;
         }
 
         //Cloudy
@@ -356,7 +358,9 @@ public class WeatherManager : Singleton<WeatherManager>
             minTemperature = 0;
             maxTemperature = 30;
 
-            //Nothing
+            //Set HealthParameters
+            HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.Up_1; 
+            HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.Up_1;
         }
 
         //Windy
@@ -368,6 +372,10 @@ public class WeatherManager : Singleton<WeatherManager>
             //Set Min/Max temperatures
             minTemperature = -10;
             maxTemperature = 40;
+
+            //Set HealthParameters
+            HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.None;
+            HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.None;
 
             //Walking slower
             PlayerMovement.Instance.movementSpeedVarianceByWeather = 0.75f;
@@ -382,6 +390,10 @@ public class WeatherManager : Singleton<WeatherManager>
             //Set Min/Max temperatures
             minTemperature = -10;
             maxTemperature = 10;
+
+            //Set HealthParameters
+            HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.Down_2;
+            HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.Down_1;
 
             //Hungry faster
             HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1.25f;

@@ -362,22 +362,27 @@ public class PlayerMovement : Singleton<PlayerMovement>
             case MovementStates.Standing:
                 PlayerManager.Instance.hungerTemp = 0;
                 PlayerManager.Instance.thirstTemp = 0;
+                PlayerManager.Instance.heatresistanceTemp = 0;
                 break;
             case MovementStates.Walking:
                 PlayerManager.Instance.hungerTemp = -1;
                 PlayerManager.Instance.thirstTemp = -1;
+                PlayerManager.Instance.heatresistanceTemp = 0;
                 break;
             case MovementStates.Running:
                 PlayerManager.Instance.hungerTemp = -3;
                 PlayerManager.Instance.thirstTemp = -2;
+                PlayerManager.Instance.heatresistanceTemp = -2;
                 break;
             case MovementStates.Crouching:
                 PlayerManager.Instance.hungerTemp = 1;
                 PlayerManager.Instance.thirstTemp = 1;
+                PlayerManager.Instance.heatresistanceTemp = 0;
                 break;
             case MovementStates.Jumping:
                 PlayerManager.Instance.hungerTemp = -6;
                 PlayerManager.Instance.thirstTemp = -3;
+                PlayerManager.Instance.heatresistanceTemp = -1;
                 break;
 
             default:
