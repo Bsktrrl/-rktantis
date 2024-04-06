@@ -138,7 +138,7 @@ public class TabletManager : Singleton<TabletManager>
                                  mainHealth_Image);
 
             //Set Health Parameter Arrows
-            HealthManager.Instance.SetHealthArrowDisplay(mainHealthValueMultiplier_Image);
+            HealthManager.Instance.SetMainHealthArrowDisplay(mainHealthValueMultiplier_Image);
 
             //Set Health Icon colors
             hungerIcon_Image.color = HealthManager.Instance.hungerIcon_Image.color;

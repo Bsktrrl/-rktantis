@@ -113,7 +113,6 @@ public class WeatherManager : Singleton<WeatherManager>
         else
         {
             //Set the stats for today's weather
-            SetWeatherStats_Today();
 
             //Display the weather for today and the next 4 days
             SetWeatherDisplay();
@@ -326,7 +325,7 @@ public class WeatherManager : Singleton<WeatherManager>
     }
     void SetWeatherStats_Today()
     {
-        PlayerMovement.Instance.movementSpeedMultiplier = 1f;
+        PlayerMovement.Instance.movementSpeedVarianceByWeather = 1f;
 
         HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1f;
         HealthManager.Instance.heatResistance_SpeedMultiplier_ByWeather = 1f;
@@ -371,7 +370,7 @@ public class WeatherManager : Singleton<WeatherManager>
             maxTemperature = 40;
 
             //Walking slower
-            PlayerMovement.Instance.movementSpeedMultiplier = 0.75f;
+            PlayerMovement.Instance.movementSpeedVarianceByWeather = 0.75f;
         }
 
         //Cold

@@ -188,7 +188,8 @@ public class SettingsManager : Singleton<SettingsManager>
 
         ChangeValues();
 
-        ChangeComponents();
+        ChangeFOV();
+        ChangeMouseSensitivity();
 
         ChangeTextDisplay_Percent();
     }
@@ -212,14 +213,29 @@ public class SettingsManager : Singleton<SettingsManager>
         settingsValues.sound_Weather = UI_Sound_Weather.value;
 
         //Camera
-        settingsValues.camera_FOV = UI_Camera_FOV.value;
+        settingsValues.camera_FOV = (UI_Camera_FOV.value);
         settingsValues.camera_MouseSensitivity = UI_Camera_MouseSensitivity.value;
 
         SaveData();
     }
-    void ChangeComponents()
+    public void ChangeFOV(float timer)
+    {
+        if (MainManager.Instance.menuStates == MenuStates.None)
+        {
+            MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60 + timer;
+        }
+        else
+        {
+            MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
+        }
+        
+    }
+    public void ChangeFOV()
     {
         MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
+    }
+    void ChangeMouseSensitivity()
+    {
         MouseMovement.Instance.mouseSensitivity = (settingsValues.camera_MouseSensitivity * 200) + 50;
     }
     void ChangeTextDisplay_Percent()
