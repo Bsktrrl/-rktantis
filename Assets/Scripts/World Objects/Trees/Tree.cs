@@ -334,13 +334,13 @@ public class Tree : MonoBehaviour
             || interactableType == InteracteableType.Tree_4 || interactableType == InteracteableType.Tree_5 || interactableType == InteracteableType.Tree_6
             || interactableType == InteracteableType.Tree_7 || interactableType == InteracteableType.Tree_8 || interactableType == InteracteableType.Tree_9)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Wood, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Wood, gameObject, false, null);
         }
 
         //Spawn Cactus
         else if (interactableType == InteracteableType.Cactus)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Cactus, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Cactus, gameObject, false, null);
         }
     }
 

@@ -262,31 +262,31 @@ public class Ore : MonoBehaviour
     {
         if (interactableType == InteracteableType.Tungsten_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Tungsten, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Tungsten, gameObject, false, null);
         }
         else if (interactableType == InteracteableType.Stone_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Stone, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Stone, gameObject, false, null);
         }
         else if (interactableType == InteracteableType.Cryonite_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Cryonite, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Cryonite, gameObject, false, null);
         }
         else if (interactableType == InteracteableType.Magnetite_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Magnetite, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Magnetite, gameObject, false, null);
         }
         else if (interactableType == InteracteableType.Viridian_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Viridian, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Viridian, gameObject, false, null);
         }
         else if (interactableType == InteracteableType.Gold_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Gold, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Gold, gameObject, false, null);
         }
         else if (interactableType == InteracteableType.AríditeCrystal_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.AríditeCrystal, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.AríditeCrystal, gameObject, false, null);
         }
     }
 

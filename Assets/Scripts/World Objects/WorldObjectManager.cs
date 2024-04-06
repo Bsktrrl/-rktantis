@@ -39,11 +39,15 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
             worldObjectList.Add(Instantiate(GetSavedObject(worldObjectList_ToSave[i]), worldObjectList_ToSave[i].objectPosition, worldObjectList_ToSave[i].objectRotation) as GameObject);
             worldObjectList[worldObjectList.Count - 1].transform.parent = worldObjectParent.transform;
 
-            //If Object is a Pickup, activate Gravity
+            //If Object is a Pickup
             if (worldObjectList[worldObjectList.Count - 1].GetComponent<InteractableObject>().interactableType == InteracteableType.Item)
             {
+                //Activate Gravity
                 worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
                 worldObjectList[worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
+
+                //Set Durability
+                worldObjectList[worldObjectList.Count - 1].GetComponent<InteractableObject>().durability_Current = worldObjectList_ToSave[i].durability;
             }
         }
         #endregion
@@ -197,4 +201,7 @@ public struct WorldObject
     [Header("Position")]
     public Vector3 objectPosition;
     public Quaternion objectRotation;
+
+    [Header("Durability")]
+    public int durability;
 }

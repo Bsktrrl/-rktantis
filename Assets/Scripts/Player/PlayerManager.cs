@@ -46,16 +46,27 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void LoadData()
     {
-        //Get loaded data
-        playerStats = DataManager.Instance.playerStats_Store;
+        if (DataManager.Instance.playerStats_Store.playerPos != Vector3.zero && DataManager.Instance.playerStats_Store.playerRot != Quaternion.identity
+            && DataManager.Instance.playerStats_Store.InteractableDistance != 0
+            && DataManager.Instance.playerStats_Store.movementSpeedMultiplier_SkillTree != 0
+            && DataManager.Instance.playerStats_Store.jumpHeight != 0)
+        {
+            //Get loaded data
+            playerStats = DataManager.Instance.playerStats_Store;
 
-        //Set Player Position
-        MainManager.Instance.player.transform.SetPositionAndRotation(playerStats.playerPos, playerStats.playerRot);
+            //Set Player Position
+            MainManager.Instance.player.transform.SetPositionAndRotation(playerStats.playerPos, playerStats.playerRot);
 
-        InteractableDistance = playerStats.InteractableDistance;
-        movementSpeedMultiplier_SkillTree = playerStats.movementSpeedMultiplier_SkillTree;
+            InteractableDistance = playerStats.InteractableDistance;
+            movementSpeedMultiplier_SkillTree = playerStats.movementSpeedMultiplier_SkillTree;
 
-        jumpHeight = playerStats.jumpHeight;
+            jumpHeight = playerStats.jumpHeight;
+        }
+        else
+        {
+            //Set Player Start Position
+            MainManager.Instance.player.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        }
     }
     public void SaveData()
     {

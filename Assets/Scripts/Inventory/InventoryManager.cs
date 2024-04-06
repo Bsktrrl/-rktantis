@@ -197,8 +197,15 @@ public class InventoryManager : Singleton<InventoryManager>
             item.inventoryIndex = inventory;
             item.itemName = obj.GetComponent<InteractableObject>().itemName;
             item.itemSize = MainManager.Instance.GetItem(obj.GetComponent<InteractableObject>().itemName).itemSize;
-            item.durability_Current = MainManager.Instance.GetItem(obj.GetComponent<InteractableObject>().itemName).durability_Max;
-
+            if (obj.GetComponent<InteractableObject>().durability_Current <= 0)
+            {
+                item.durability_Current = MainManager.Instance.GetItem(obj.GetComponent<InteractableObject>().itemName).durability_Max;
+            }
+            else
+            {
+                item.durability_Current = obj.GetComponent<InteractableObject>().durability_Current;
+            }
+            
             lastItemToGet = obj.GetComponent<InteractableObject>().itemName;
 
             //Give the item an ID to be unique
@@ -291,6 +298,7 @@ public class InventoryManager : Singleton<InventoryManager>
         #region
         int index = -1;
 
+        //Remove from Hotbar
         for (int i = inventories[inventory].itemsInInventory.Count - 1; i >= 0 ; i--)
         {
             for (int j = 0; j < HotbarManager.Instance.hotbarList.Count; j++)
@@ -323,6 +331,8 @@ public class InventoryManager : Singleton<InventoryManager>
                 {
                     inventories[inventory].itemsInInventory.RemoveAt(i);
 
+                    index = i;
+
                     break;
                 }
             }
@@ -333,7 +343,7 @@ public class InventoryManager : Singleton<InventoryManager>
         PrepareInventoryUI(inventory, false);
 
         //Spawn item into the World, if the item has a WorldObject attached
-        SpawnItemToWorld(itemName, handDropPoint, true);
+        SpawnItemToWorld(itemName, handDropPoint, true, inventories[inventory].itemsInInventory[index]);
 
         //If item is removed from the inventory, update the Hotbar
         if (inventory <= 0)
@@ -532,7 +542,7 @@ public class InventoryManager : Singleton<InventoryManager>
         HotbarManager.Instance.ChangeItemInHand();
     }
     
-    public void SpawnItemToWorld(Items itemName, GameObject dropPos, bool dropSound)
+    public void SpawnItemToWorld(Items itemName, GameObject dropPos, bool dropSound, InventoryItem itemm)
     {
         if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
         {
@@ -577,6 +587,16 @@ public class InventoryManager : Singleton<InventoryManager>
             //Set Gravity true on the worldObject
             WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
             WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
+
+            //Set Durability
+            if (itemm == null)
+            {
+                WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<InteractableObject>().durability_Current = MainManager.Instance.GetItem(itemName).durability_Max;
+            }
+            else
+            {
+                WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<InteractableObject>().durability_Current = itemm.durability_Current;
+            }
 
             //Update item in the World
             WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName);
