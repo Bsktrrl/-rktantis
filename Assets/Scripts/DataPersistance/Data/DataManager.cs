@@ -14,9 +14,12 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //--------------------
 
 
+    //Player Stats
+    [HideInInspector] public PlayerStats playerStats_Store = new PlayerStats();
+
     //Player Pos and Rotation
-    [HideInInspector] public Vector3 playerPos_Store = new Vector3();
-    [HideInInspector] public Quaternion playerRot_Store = new Quaternion();
+    //[HideInInspector] public Vector3 playerPos_Store = new Vector3();
+    //[HideInInspector] public Quaternion playerRot_Store = new Quaternion();
 
     //WorldObjects
     [HideInInspector] public List<WorldObject> worldObject_StoreList = new List<WorldObject>();
@@ -74,6 +77,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //Crafting
     [HideInInspector] public List<CraftingItem> itemStates_Store = new List<CraftingItem>();
 
+    //Player Movement
+
 
     //--------------------
 
@@ -82,8 +87,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     {
         //Get saved data from file to be loaded into the project
         #region
-        this.playerPos_Store = gameData.playerPos_Save;
-        this.playerRot_Store = gameData.playerRot_Save;
+        this.playerStats_Store = gameData.playerStats_Save;
 
         this.worldObject_StoreList = gameData.worldObject_SaveList;
 
@@ -133,50 +137,53 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         SettingsManager.Instance.LoadData();
         print("1. SettingsManager has Loaded");
 
+        PlayerManager.Instance.LoadData();
+        print("2. PlayerManager has Loaded");
+
         InventoryManager.Instance.LoadData();
-        print("2. InventoryManager has Loaded");
+        print("3. InventoryManager has Loaded");
 
         MenuEquipmentManager.Instance.LoadData();
-        print("3. MenuEquipmentManager has Loaded");
+        print("4. MenuEquipmentManager has Loaded");
         
         BuildingManager.Instance.LoadData();
-        print("4. BuildingManager has Loaded");
+        print("5. BuildingManager has Loaded");
 
         HotbarManager.Instance.LoadData();
-        print("5. HotbarManager has Loaded");
+        print("6. HotbarManager has Loaded");
 
         WorldObjectManager.Instance.LoadData();
-        print("6. WorldObjectManager has Loaded");
+        print("7. WorldObjectManager has Loaded");
 
         MoveableObjectManager.Instance.LoadData();
-        print("7. MoveableObjectManager has Loaded");
+        print("8. MoveableObjectManager has Loaded");
 
         HealthManager.Instance.LoadData();
-        print("8. HealthManager has Loaded");
+        print("9. HealthManager has Loaded");
 
         TimeManager.Instance.LoadData();
-        print("9. TimeManager has Loaded");
+        print("10. TimeManager has Loaded");
 
         PlantManager.Instance.LoadData();
-        print("10. Plants has Loaded");
+        print("11. Plants has Loaded");
 
         OreManager.Instance.LoadData();
-        print("11. Ores has Loaded");
+        print("12. Ores has Loaded");
 
         TreeManager.Instance.LoadData();
-        print("12. Trees has Loaded");
+        print("13. Trees has Loaded");
 
         JournalManager.Instance.LoadData();
-        print("13. Journals has Loaded");
+        print("14. Journals has Loaded");
 
         WeatherManager.Instance.LoadData();
-        print("14. Weather has Loaded");
+        print("15. Weather has Loaded");
 
         ResearchManager.Instance.LoadData(this.researched_SOItem_Store);
-        print("15. Research has Loaded");
+        print("16. Research has Loaded");
 
         CraftingManager.Instance.LoadData();
-        print("16. Crafting has Loaded");
+        print("17. Crafting has Loaded");
         #endregion
 
         print("------------------------------");
@@ -187,8 +194,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         dataIsSaving?.Invoke();
 
         //Input what to save
-        gameData.playerPos_Save = MainManager.Instance.player.transform.position;
-        gameData.playerRot_Save = MainManager.Instance.player.transform.rotation;
+        gameData.playerStats_Save = this.playerStats_Store;
 
         gameData.worldObject_SaveList = this.worldObject_StoreList;
 

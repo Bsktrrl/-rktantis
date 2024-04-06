@@ -11,13 +11,13 @@ public class HealthManager : Singleton<HealthManager>
 
     public HealthToSave health_ToSave;
 
-    public float hunger_Speed = 0.00001f;
+    public float hunger_Speed = 0.000001f;
     public float hunger_SpeedMultiplier_ByWeather = 1f;
 
-    public float heatResistance_Speed = 0.00001f;
+    public float heatResistance_Speed = 0.000001f;
     public float heatResistance_SpeedMultiplier_ByWeather = 1f;
 
-    public float thirst_Speed = 0.00001f;
+    public float thirst_Speed = 0.000001f;
     public float thirst_SpeedMultiplier_ByWeather = 1f;
 
     public float mainHealth_Speed = 0.000025f;
@@ -118,7 +118,7 @@ public class HealthManager : Singleton<HealthManager>
         HealthToSave tempHealth = DataManager.Instance.health_Store;
 
         hungerValue = tempHealth.hungerValue;
-        hungerValueMultiplier_Check = tempHealth.hungerValueMultiplier_Check;
+        hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
         healthValueMultiplier = tempHealth.healthValueMultiplier;
 
         heatResistanceValue = tempHealth.heatResistanceValue;
@@ -126,11 +126,11 @@ public class HealthManager : Singleton<HealthManager>
         heatResistanceValueMultiplier = tempHealth.heatResistanceValueMultiplier;
 
         thirstValue = tempHealth.thirstValue;
-        thirstValueMultiplier_Check = tempHealth.thirstValueMultiplier_Check;
+        thirstValueMultiplier_Check = HealthValueMultiplier.Down_1;
         thirstValueMultiplier = tempHealth.thirstValueMultiplier;
 
         mainHealthValue = tempHealth.mainHealthValue;
-        mainHealthValueMultiplier_Check = tempHealth.mainHealthValueMultiplier_Check;
+        mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
         mainHealthValueMultiplier = tempHealth.mainHealthValueMultiplier;
 
         dataHasLoaded = true;
@@ -164,9 +164,9 @@ public class HealthManager : Singleton<HealthManager>
     {
         //Multiplier Check
         #region
-        healthValueMultiplier = MultiplierCheck(hungerValueMultiplier_Check);
-        heatResistanceValueMultiplier = MultiplierCheck(heatResistanceValueMultiplier_Check);
-        thirstValueMultiplier = MultiplierCheck(thirstValueMultiplier_Check);
+        healthValueMultiplier = MultiplierCheck((int)hungerValueMultiplier_Check + PlayerManager.Instance.hungerTemp);
+        heatResistanceValueMultiplier = MultiplierCheck((int)heatResistanceValueMultiplier_Check);
+        thirstValueMultiplier = MultiplierCheck((int)thirstValueMultiplier_Check + PlayerManager.Instance.thirstTemp);
         #endregion
 
         //Speed Check
@@ -245,7 +245,7 @@ public class HealthManager : Singleton<HealthManager>
         }
         else
         {
-            mainHealthValue += -Mathf.Abs(mainHealth_Speed * mainHealth_SpeedMultiplier_ByWeather * mainHealthCounter);
+            mainHealthValue += -Mathf.Abs(mainHealth_Speed * mainHealth_SpeedMultiplier_ByWeather * mainHealthValueMultiplier * mainHealthCounter);
         }
        
         if (mainHealthValue <= 0)
@@ -266,48 +266,165 @@ public class HealthManager : Singleton<HealthManager>
         }
         #endregion
 
-        //Set Arrow Display
-        SetHealthArrowDisplay(mainHealthValueMultiplier_Image);
+        //Set Main Health Arrow Display
+        SetMainHealthArrowDisplay(mainHealthValueMultiplier_Image);
     }
 
-    int MultiplierCheck(HealthValueMultiplier multiplier_Check)
+    int MultiplierCheck(int multiplier_Check)
     {
-        switch (multiplier_Check)
+        if (multiplier_Check <= 0)
         {
-            case HealthValueMultiplier.Down_6:
-                return -6;
-            case HealthValueMultiplier.Down_5:
-                return -5;
-            case HealthValueMultiplier.Down_4:
-                return -4;
-            case HealthValueMultiplier.Down_3:
-                return -3;
-            case HealthValueMultiplier.Down_2:
-                return -2;
-            case HealthValueMultiplier.Down_1:
-                return -1;
-            case HealthValueMultiplier.None:
-                return 0;
-            case HealthValueMultiplier.Up_1:
-                return 1;
-            case HealthValueMultiplier.Up_2:
-                return 2;
-            case HealthValueMultiplier.Up_3:
-                return 3;
-            case HealthValueMultiplier.Up_4:
-                return 4;
-            case HealthValueMultiplier.Up_5:
-                return 5;
-            case HealthValueMultiplier.Up_6:
-                return 6;
+            return -6;
+        }
+        else if (multiplier_Check == 1)
+        {
+            return -5;
+        }
+        else if (multiplier_Check == 2)
+        {
+            return -4;
+        }
+        else if (multiplier_Check == 3)
+        {
+            return -3;
+        }
+        else if (multiplier_Check == 4)
+        {
+            return -2;
+        }
+        else if (multiplier_Check == 5)
+        {
+            return -1;
+        }
+        else if (multiplier_Check == 6)
+        {
+            return 0;
+        }
+        else if (multiplier_Check == 7)
+        {
+            return 1;
+        }
+        else if (multiplier_Check == 8)
+        {
+            return 2;
+        }
+        else if (multiplier_Check == 9)
+        {
+            return 3;
+        }
+        else if (multiplier_Check == 10)
+        {
+            return 4;
+        }
+        else if (multiplier_Check == 11)
+        {
+            return 5;
+        }
+        else if (multiplier_Check >= 12)
+        {
+            return 6;
+        }
+        else
+        {
+            return 0;
+        }
 
-            default:
-                return 0;
+        //switch (multiplier_Check)
+        //{
+        //    case HealthValueMultiplier.Down_6:
+                
+        //    case HealthValueMultiplier.Down_5:
+        //        return -5;
+        //    case HealthValueMultiplier.Down_4:
+        //        return -4;
+        //    case HealthValueMultiplier.Down_3:
+        //        return -3;
+        //    case HealthValueMultiplier.Down_2:
+        //        return -2;
+        //    case HealthValueMultiplier.Down_1:
+        //        return -1;
+        //    case HealthValueMultiplier.None:
+        //        return 0;
+        //    case HealthValueMultiplier.Up_1:
+        //        return 1;
+        //    case HealthValueMultiplier.Up_2:
+        //        return 2;
+        //    case HealthValueMultiplier.Up_3:
+        //        return 3;
+        //    case HealthValueMultiplier.Up_4:
+        //        return 4;
+        //    case HealthValueMultiplier.Up_5:
+        //        return 5;
+        //    case HealthValueMultiplier.Up_6:
+        //        return 6;
+
+        //    default:
+        //        return 0;
+        //}
+    }
+    HealthValueMultiplier SetCheckValue(int value)
+    {
+        if (value <= -6)
+        {
+            return HealthValueMultiplier.Down_6;
+        }
+        else if (value == -5)
+        {
+            return HealthValueMultiplier.Down_5;
+        }
+        else if (value == -4)
+        {
+            return HealthValueMultiplier.Down_4;
+        }
+        else if (value == -3)
+        {
+            return HealthValueMultiplier.Down_3;
+        }
+        else if (value == -2)
+        {
+            return HealthValueMultiplier.Down_2;
+        }
+        else if (value == -1)
+        {
+            return HealthValueMultiplier.Down_1;
+        }
+        else if (value == 0)
+        {
+            return HealthValueMultiplier.None;
+        }
+        else if (value == 1)
+        {
+            return HealthValueMultiplier.Up_1;
+        }
+        else if (value == 2)
+        {
+            return HealthValueMultiplier.Up_2;
+        }
+        else if (value == 3)
+        {
+            return HealthValueMultiplier.Up_3;
+        }
+        else if (value == 4)
+        {
+            return HealthValueMultiplier.Up_4;
+        }
+        else if (value == 5)
+        {
+            return HealthValueMultiplier.Up_5;
+        }
+        else if (value >= 6)
+        {
+            return HealthValueMultiplier.Up_6;
+        }
+        else
+        {
+            return HealthValueMultiplier.None;
         }
     }
-    public void SetHealthArrowDisplay(List<GameObject> mainHealthValueMultiplier_Image)
+
+    public void SetMainHealthArrowDisplay(List<GameObject> mainHealthValueMultiplier_Image)
     {
-        #region
+        #region Main Health Parameter
         for (int i = 0; i < mainHealthValueMultiplier_Image.Count; i++)
         {
             mainHealthValueMultiplier_Image[i].SetActive(false);
@@ -351,11 +468,11 @@ public class HealthManager : Singleton<HealthManager>
         mainHealth_Image.fillAmount = mainHealthValue;
 
         //Set active arrows
-        ArrowSetActive(hungerValueMultiplier_Check, hungerValueMultiplier_Image, hungerValue);
-        ArrowSetActive(heatResistanceValueMultiplier_Check, heatResistanceValueMultiplier_Image, heatResistanceValue);
-        ArrowSetActive(thirstValueMultiplier_Check, thirstValueMultiplier_Image, thirstValue);
+        ArrowSetActive(healthValueMultiplier, hungerValueMultiplier_Image, hungerValue);
+        ArrowSetActive(heatResistanceValueMultiplier, heatResistanceValueMultiplier_Image, heatResistanceValue);
+        ArrowSetActive(thirstValueMultiplier, thirstValueMultiplier_Image, thirstValue);
     }
-    void ArrowSetActive(HealthValueMultiplier multiplier, List<GameObject> imagesList, float value)
+    void ArrowSetActive(int multiplier, List<GameObject> imagesList, float value)
     {
         //Unactivate all arrows
         for (int i = 0; i < imagesList.Count; i++)
@@ -369,62 +486,103 @@ public class HealthManager : Singleton<HealthManager>
         }
         else
         {
-            switch (multiplier)
+            if (multiplier <= -6)
             {
-                case HealthValueMultiplier.Down_6:
-                    imagesList[0].SetActive(true);
-                    imagesList[1].SetActive(true);
-                    imagesList[2].SetActive(true);
-                    break;
-                case HealthValueMultiplier.Down_5:
-                    imagesList[0].SetActive(true);
-                    imagesList[1].SetActive(true);
-                    imagesList[2].SetActive(true);
-                    break;
-                case HealthValueMultiplier.Down_4:
-                    imagesList[1].SetActive(true);
-                    imagesList[2].SetActive(true);
-                    break;
-                case HealthValueMultiplier.Down_3:
-                    imagesList[1].SetActive(true);
-                    imagesList[2].SetActive(true);
-                    break;
-                case HealthValueMultiplier.Down_2:
-                    imagesList[2].SetActive(true);
-                    break;
-                case HealthValueMultiplier.Down_1:
-                    imagesList[2].SetActive(true);
-                    break;
-                case HealthValueMultiplier.None:
-                    break;
-                case HealthValueMultiplier.Up_1:
-                    imagesList[4].SetActive(true);
-                    break;
-                case HealthValueMultiplier.Up_2:
-                    imagesList[4].SetActive(true);
-                    break;
-                case HealthValueMultiplier.Up_3:
-                    imagesList[4].SetActive(true);
-                    imagesList[5].SetActive(true);
-                    break;
-                case HealthValueMultiplier.Up_4:
-                    imagesList[4].SetActive(true);
-                    imagesList[5].SetActive(true);
-                    break;
-                case HealthValueMultiplier.Up_5:
-                    imagesList[4].SetActive(true);
-                    imagesList[5].SetActive(true);
-                    imagesList[6].SetActive(true);
-                    break;
-                case HealthValueMultiplier.Up_6:
-                    imagesList[4].SetActive(true);
-                    imagesList[5].SetActive(true);
-                    imagesList[6].SetActive(true);
-                    break;
-
-                default:
-                    break;
+                imagesList[0].SetActive(true);
+                imagesList[1].SetActive(true);
+                imagesList[2].SetActive(true);
             }
+            else if (multiplier == -5)
+            {
+                imagesList[0].SetActive(true);
+                imagesList[1].SetActive(true);
+                imagesList[2].SetActive(true);
+            }
+            else if (multiplier == -4)
+            {
+                imagesList[1].SetActive(true);
+                imagesList[2].SetActive(true);
+            }
+            else if (multiplier == -3)
+            {
+                imagesList[1].SetActive(true);
+                imagesList[2].SetActive(true);
+            }
+            else if (multiplier == -2)
+            {
+                imagesList[2].SetActive(true);
+            }
+            else if (multiplier == -1)
+            {
+                imagesList[2].SetActive(true);
+            }
+            else if (multiplier == 0)
+            {
+            }
+            else if (multiplier == 1)
+            {
+                imagesList[4].SetActive(true);
+            }
+            else if (multiplier == 2)
+            {
+                imagesList[4].SetActive(true);
+            }
+            else if (multiplier == 3)
+            {
+                imagesList[4].SetActive(true);
+                imagesList[5].SetActive(true);
+            }
+            else if (multiplier == 4)
+            {
+                imagesList[4].SetActive(true);
+                imagesList[5].SetActive(true);
+            }
+            else if (multiplier == 5)
+            {
+                imagesList[4].SetActive(true);
+                imagesList[5].SetActive(true);
+                imagesList[6].SetActive(true);
+            }
+            else if (multiplier >= 6)
+            {
+                imagesList[4].SetActive(true);
+                imagesList[5].SetActive(true);
+                imagesList[6].SetActive(true);
+            }
+
+
+            //switch (multiplier)
+            //{
+            //    case -6:
+            //        break;
+            //    case -5:
+            //        break;
+            //    case HealthValueMultiplier.Down_4:
+            //        break;
+            //    case HealthValueMultiplier.Down_3:
+            //        break;
+            //    case HealthValueMultiplier.Down_2:
+            //        break;
+            //    case HealthValueMultiplier.Down_1:
+            //        break;
+            //    case HealthValueMultiplier.None:
+            //        break;
+            //    case HealthValueMultiplier.Up_1:
+            //        break;
+            //    case HealthValueMultiplier.Up_2:
+            //        break;
+            //    case HealthValueMultiplier.Up_3:
+            //        break;
+            //    case HealthValueMultiplier.Up_4:
+            //        break;
+            //    case HealthValueMultiplier.Up_5:
+            //        break;
+            //    case HealthValueMultiplier.Up_6:
+            //        break;
+
+            //    default:
+            //        break;
+            //}
         }
     }
 

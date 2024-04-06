@@ -207,7 +207,7 @@ public class ListOfPlantToSave
 
 public enum PlantType
 {
-    [Description("")][InspectorName("None")] None,
+    [Description("")][InspectorName("Standing")] None,
 
     [Description("Adrídis Flower")][InspectorName("Adrídis Flower")] AdrídisFlower,
     [Description("Cactus 1")][InspectorName("Cactus 1")] Cactus1,

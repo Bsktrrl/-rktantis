@@ -5,9 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    //Player Pos and Rotation
-    [HideInInspector] public Vector3 playerPos_Save = new Vector3();
-    [HideInInspector] public Quaternion playerRot_Save = new Quaternion();
+    //Player Stats
+    [HideInInspector] public PlayerStats playerStats_Save = new PlayerStats();
 
     //Inventories
     [HideInInspector] public List<Inventory> Inventories_SaveList = new List<Inventory>();

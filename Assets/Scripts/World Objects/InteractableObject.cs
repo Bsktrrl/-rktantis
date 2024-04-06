@@ -286,7 +286,7 @@ public class InteractableObject : MonoBehaviour
 
 public enum InteracteableType
 {
-    [Description("")][InspectorName("None")] None,
+    [Description("")][InspectorName("Standing")] None,
 
     [Description("Item")][InspectorName("Item/Item")] Item,
     [Description("Inventory")][InspectorName("Inventory/Inventory")] Inventory,

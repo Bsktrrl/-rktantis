@@ -52,7 +52,7 @@ public enum MoveableObjectType
 
 public enum FurnitureType
 {
-    [Description("")][InspectorName("None")] None,
+    [Description("")][InspectorName("Standing")] None,
 
     [Description("Crafting Table")][InspectorName("Crafting Table")] CraftingTable,
     [Description("Skill Table")][InspectorName("Skill Table")] SkillTreeTable,
@@ -81,7 +81,7 @@ public enum FurnitureType
 
 public enum MachineType
 {
-    [Description("")][InspectorName("None")] None,
+    [Description("")][InspectorName("Standing")] None,
 
     [Description("Crop Plot x1")][InspectorName("Crop Plot x1")] CropPlot_x1,
     [Description("Crop Plot x2")][InspectorName("Crop Plot x2")] CropPlot_x2,

@@ -34,6 +34,8 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip player_Sprinting_Stone_Clip; //
     [SerializeField] AudioClip player_Sprinting_Wood_Clip; //
     [SerializeField] AudioClip player_Sprinting_Cryonite_Clip; //
+
+    [SerializeField] AudioClip player_FallDamage_Clip; //
     #endregion
     #region Tablet
     [Header("Tablet")]
@@ -346,6 +348,16 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_WorldSound != null)
         {
             audioSource_WorldSound.clip = player_Sprinting_Cryonite_Clip;
+            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
+            audioSource_WorldSound.pitch = 1f;
+            audioSource_WorldSound.Play();
+        }
+    }
+    public void Play_Player_FallDamage_Clip()
+    {
+        if (audioSource_WorldSound != null)
+        {
+            audioSource_WorldSound.clip = player_FallDamage_Clip;
             audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
             audioSource_WorldSound.pitch = 1f;
             audioSource_WorldSound.Play();

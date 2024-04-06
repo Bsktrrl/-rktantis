@@ -109,18 +109,13 @@ public class InventoryManager : Singleton<InventoryManager>
         smallChest_Size = DataManager.Instance.smallChest_Size_Store;
         bigChest_Size = DataManager.Instance.bigChest_Size_Store;
         #endregion
-
-        #region Player Position
-        //Set Player position - The "LoadData()" doesen't activate in the relevant playerMovement script
-        MainManager.Instance.player.transform.SetPositionAndRotation(DataManager.Instance.playerPos_Store, DataManager.Instance.playerRot_Store);
-        #endregion
     }
     public void SaveData()
     {
         //All Inventories
         DataManager.Instance.Inventories_StoreList = inventories;
 
-        //Chest Sizes (may be upgraded in the SkillTree
+        //Chest Sizes (may be upgraded in the SkillTree)
         DataManager.Instance.smallChest_Size_Store = smallChest_Size;
         DataManager.Instance.bigChest_Size_Store = bigChest_Size;
 }

@@ -7,30 +7,47 @@ public class MouseMovement : Singleton<MouseMovement>
     float xRotation = 0f;
     float YRotation = 0f;
 
+    public Vector2 clampInDegrees = new Vector2(360, 160);
+
+
+    //--------------------
+
+
     void Start()
     {
-        //Locking the cursor to the middle of the screen and making it invisible
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
+        clampInDegrees = new Vector2(360, 160);
     }
 
     void Update()
     {
+        Movement();
+    }
+
+
+    //--------------------
+
+
+    void Movement()
+    {
         if (MainManager.Instance.menuStates == MenuStates.None)
         {
+            //Get Mouse Axis
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.smoothDeltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.smoothDeltaTime;
 
-            //control rotation around x axis (Look up and down)
+            //Control rotation around x axis
             xRotation -= mouseY;
 
-            //we clamp the rotation so we cant Over-rotate (like in real life)
-            xRotation = Mathf.Clamp(xRotation, -75f, 75f);
+            //Clamp the rotation
+            xRotation = Mathf.Clamp(xRotation, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
 
-            //control rotation around y axis (Look up and down)
+            //control rotation around y axis
             YRotation += mouseX;
 
             //applying both rotations
-            transform.localRotation = Quaternion.Euler(xRotation, YRotation, 0f);
+            MainManager.Instance.playerBody.transform.localRotation = Quaternion.Euler(0f, YRotation, 0f);
+            MainManager.Instance.mainCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         }
     }
 }
