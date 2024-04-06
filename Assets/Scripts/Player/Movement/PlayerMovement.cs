@@ -5,6 +5,7 @@ using Unity.Burst.CompilerServices;
 using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
 
 public class PlayerMovement : Singleton<PlayerMovement>
@@ -43,6 +44,14 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField] float damageCounter = 0;
     [SerializeField] bool takeDamageWhenLanding = false;
 
+    [Header("Fall Damage2")]
+    [SerializeField] bool jumping;
+    [SerializeField] Vector3 jumpDistance_Start;
+    [SerializeField] Vector3 jumpDistance_End;
+    [SerializeField] float totalJumpDistance = 0;
+    [SerializeField] float safeJumpDistance = 10f;
+    [SerializeField] float fallDamage = 0;
+
 
     //--------------------
 
@@ -54,6 +63,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
         gravity = -30f;
         damageCounter = Time.deltaTime;
+
+        jumpDistance_Start = Vector3.zero;
+        jumpDistance_End = Vector3.zero;
     }
     void Update()
     {
@@ -163,6 +175,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
 
                     movementAppearance_isHappening = true;
+                    jumpDistance_Start = MainManager.Instance.playerBody.transform.position;
+                    jumping = true;
                 }
 
                 PlayerManager.Instance.movementStates = MovementStates.Jumping;
@@ -195,6 +209,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
 
                     movementAppearance_isHappening = true;
+                    jumping = false;
+
+                    //Check if a jump is landed
+                    jumpDistance_End = MainManager.Instance.playerBody.transform.position;
                 }
 
                 PlayerManager.Instance.movementStates = MovementStates.Running;
@@ -224,6 +242,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.5f, 0f);
 
                     movementAppearance_isHappening = true;
+                    jumping = false;
+
+                    //Check if a jump is landed
+                    jumpDistance_End = MainManager.Instance.playerBody.transform.position;
                 }
 
                 PlayerManager.Instance.movementStates = MovementStates.Crouching;
@@ -244,19 +266,23 @@ public class PlayerMovement : Singleton<PlayerMovement>
                                                                                      MainManager.Instance.playerBody.transform.localPosition.z);
                     }
 
+                    MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
+
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, -1, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, -1, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, -1, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0, -1, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(0, -1, 0);
+
+                    MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
+                    MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
+
                     movementAppearance_isHappening = true;
+                    jumping = false;
+
+                    //Check if a jump is landed
+                    jumpDistance_End = MainManager.Instance.playerBody.transform.position;
                 }
-
-                MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
-
-                MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, -1, 0);
-                MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, -1, 0);
-                MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, -1, 0);
-                MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0, -1, 0);
-                MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(0, -1, 0);
-
-                MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
-                MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
 
                 PlayerManager.Instance.movementStates = MovementStates.Walking;
             }
@@ -288,6 +314,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
 
                     movementAppearance_isHappening = true;
+                    jumping = false;
+
+                    //Check if a jump is landed
+                    jumpDistance_End = MainManager.Instance.playerBody.transform.position;
                 }
 
                 PlayerManager.Instance.movementStates = MovementStates.Standing;
@@ -316,6 +346,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
             MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
 
             movementAppearance_isHappening = true;
+            jumping = false;
+
+            //Check if a jump is landed
+            jumpDistance_End = MainManager.Instance.playerBody.transform.position;
 
             PlayerManager.Instance.movementStates = MovementStates.Standing;
         }
@@ -529,36 +563,29 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     void CheckJumpTimer()
     {
-        if (PlayerManager.Instance.movementStates == MovementStates.Jumping)
+        if (!jumping)
         {
-            jumpTimer += Time.deltaTime;
+            jumpDistance_End = MainManager.Instance.playerBody.transform.position;
 
-            if (jumpTimer >= safeJumpTime)
+            if (jumpDistance_Start != Vector3.zero && jumpDistance_End != Vector3.zero)
             {
-                takeDamageWhenLanding = true;
-                damageCounter += Time.deltaTime;
-            }
-            else
-            {
-                takeDamageWhenLanding = false;
-            }
-        }
-        else
-        {
-            if (takeDamageWhenLanding)
-            {
-                SoundManager.Instance.Play_Player_FallDamage_Clip();
+                totalJumpDistance = Vector3.Distance(jumpDistance_Start, jumpDistance_End);
 
-                float damageTaken = damageCounter;
+                if (totalJumpDistance >= safeJumpDistance)
+                {
+                    SoundManager.Instance.Play_Player_FallDamage_Clip();
 
-                HealthManager.Instance.mainHealthValue -= damageTaken;
+                    fallDamage = totalJumpDistance - safeJumpDistance;
 
-                takeDamageWhenLanding = false;
+                    float damageTaken = fallDamage / 20;
+                    HealthManager.Instance.mainHealthValue -= damageTaken;
 
-                print("Damage: " + damageTaken);
+                    print("1. Height: " + totalJumpDistance + " | Damage: " + damageTaken);
+                }
 
-                jumpTimer = 0;
-                damageCounter = Time.deltaTime;
+                //Reset jumpDistance
+                jumpDistance_Start = Vector3.zero;
+                jumpDistance_End = Vector3.zero;
             }
         }
     }
