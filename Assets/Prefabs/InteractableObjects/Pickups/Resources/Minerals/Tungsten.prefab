@@ -74,7 +74,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9adccb09aa188c348a58a9c1d3999321,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8248228401262334829}
+      addedObject: {fileID: 7110026863246728811}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9adccb09aa188c348a58a9c1d3999321,
         type: 3}
       insertIndex: -1
@@ -113,8 +113,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &8248228401262334829
-BoxCollider:
+--- !u!64 &7110026863246728811
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131,9 +131,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.24, y: 0.13, z: 0.24}
-  m_Center: {x: 0, y: 0.015, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!114 &6821317934258964001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +152,7 @@ MonoBehaviour:
   amount: 1
   durability_Current: 0
   interactableType: 1
-  oreHealth: 0
   inventoryIndex: 0
   plantParent: {fileID: 0}
+  journalType: 0
+  journalPageIndex: 0

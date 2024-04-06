@@ -11,6 +11,10 @@ public class Item_SO : ScriptableObject
 [Serializable]
 public class Item
 {
+    [Header("Prefabs")]
+    public GameObject worldObjectPrefab;
+    public GameObject equippedPrefab;
+
     [Header("General")]
     public Items itemName;
     public ItemCategories categoryName;
@@ -46,9 +50,7 @@ public class Item
     [Header("TreePower")]
     public int treePower;
 
-    [Header("Prefabs")]
-    public GameObject worldObjectPrefab;
-    public GameObject equippedPrefab;
+
 
     [Header("Animations")]
     public Animation idleAnimation;

@@ -343,7 +343,7 @@ public class InventoryManager : Singleton<InventoryManager>
         PrepareInventoryUI(inventory, false);
 
         //Spawn item into the World, if the item has a WorldObject attached
-        SpawnItemToWorld(itemName, handDropPoint, true, inventories[inventory].itemsInInventory[index]);
+        SpawnItemToWorld(itemName, handDropPoint, true, inventories[inventory].itemsInInventory[index], 0);
 
         //If item is removed from the inventory, update the Hotbar
         if (inventory <= 0)
@@ -542,7 +542,7 @@ public class InventoryManager : Singleton<InventoryManager>
         HotbarManager.Instance.ChangeItemInHand();
     }
     
-    public void SpawnItemToWorld(Items itemName, GameObject dropPos, bool dropSound, InventoryItem itemm)
+    public void SpawnItemToWorld(Items itemName, GameObject dropPos, bool dropSound, InventoryItem itemm, float spawnPos_Offset)
     {
         if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
         {
@@ -578,6 +578,8 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
 
                 Vector3 newSpawnPos = new Vector3(dropPos.transform.position.x + x, dropPos.transform.position.y + y, dropPos.transform.position.z + z);
+
+                newSpawnPos += new Vector3(0, spawnPos_Offset, 0);
 
                 WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, newSpawnPos, Quaternion.identity) as GameObject);
             }
