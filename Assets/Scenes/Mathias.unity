@@ -6275,6 +6275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  playerBody: {fileID: 0}
   mainCamera: {fileID: 0}
   mainCanvas: {fileID: 0}
   mainTabletCanvas: {fileID: 0}
@@ -6282,9 +6283,7 @@ MonoBehaviour:
   gameStates: 0
   item_SO: {fileID: 0}
   moveableObject_SO: {fileID: 0}
-  treeParent: {fileID: 0}
   updateInterval: 10
-  InteractableDistance: 2.5
   centerImage: {fileID: 0}
 --- !u!1 &1231636599
 GameObject:
@@ -8871,7 +8870,7 @@ PrefabInstance:
     - target: {fileID: 9017406334772827575, guid: cd9a8f07b5d2fc747916340b223af79f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.010772705
+      value: 0.0039367676
       objectReference: {fileID: 0}
     - target: {fileID: 9097359614611706257, guid: cd9a8f07b5d2fc747916340b223af79f,
         type: 3}
@@ -10344,7 +10343,7 @@ Terrain:
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
+  m_DetailObjectDistance: 150
   m_DetailObjectDensity: 1
   m_HeightmapPixelError: 1
   m_SplatMapDistance: 1000

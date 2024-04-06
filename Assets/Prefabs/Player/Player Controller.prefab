@@ -79360,7 +79360,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.010284424}
+  m_AnchoredPosition: {x: 0, y: 0.0066223145}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763
@@ -90547,7 +90547,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.11
+  near clip plane: 0.1
   far clip plane: 2000
   field of view: 60
   orthographic: 0
@@ -90708,10 +90708,6 @@ MonoBehaviour:
   pointUp_3: {fileID: 5490803585807481716}
   pointUp_4: {fileID: 8451964132249733151}
   raycastDistance: 1.35
-  safeJumpTime: 1.5
-  jumpTimer: 0
-  damageCounter: 0
-  takeDamageWhenLanding: 0
   jumping: 0
   jumpDistance_Start: {x: 0, y: 0, z: 0}
   jumpDistance_End: {x: 0, y: 0, z: 0}
