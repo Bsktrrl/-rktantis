@@ -73442,6 +73442,7 @@ MonoBehaviour:
   FOV_Running: 6
   FOV_Crouching: -2
   hungerTemp: 0
+  heatresistanceTemp: 0
   thirstTemp: 0
   isHittingHeadRaycast: 1
 --- !u!1 &6074667321385364452
@@ -79359,7 +79360,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0047912598}
+  m_AnchoredPosition: {x: 0, y: 0.010284424}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763
@@ -89736,7 +89737,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7531097707624923619}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -90707,10 +90708,16 @@ MonoBehaviour:
   pointUp_3: {fileID: 5490803585807481716}
   pointUp_4: {fileID: 8451964132249733151}
   raycastDistance: 1.35
+  safeJumpTime: 1.5
   jumpTimer: 0
-  saftJumpTime: 1.5
   damageCounter: 0
   takeDamageWhenLanding: 0
+  jumping: 0
+  jumpDistance_Start: {x: 0, y: 0, z: 0}
+  jumpDistance_End: {x: 0, y: 0, z: 0}
+  totalJumpDistance: 0
+  safeJumpDistance: 10
+  fallDamage: 0
 --- !u!114 &7932066623679705562
 MonoBehaviour:
   m_ObjectHideFlags: 0

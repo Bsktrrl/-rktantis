@@ -38,12 +38,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField] float raycastDistance = 0.2f;
     RaycastHit hit;
 
-    [Header("Fall Damage")]
-    [SerializeField] float safeJumpTime = 1.5f;
-    public float jumpTimer = 0;
-    [SerializeField] float damageCounter = 0;
-    [SerializeField] bool takeDamageWhenLanding = false;
-
     [Header("Fall Damage2")]
     [SerializeField] bool jumping;
     [SerializeField] Vector3 jumpDistance_Start;
@@ -62,7 +56,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
         MainManager.Instance.playerBody.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), transform.rotation);
 
         gravity = -30f;
-        damageCounter = Time.deltaTime;
 
         jumpDistance_Start = Vector3.zero;
         jumpDistance_End = Vector3.zero;
@@ -151,9 +144,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 if (PlayerManager.Instance.movementStates != MovementStates.Jumping)
                 {
                     PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
-
-                    jumpTimer = 0;
-                    damageCounter = 0;
 
                     if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
                     {
@@ -403,11 +393,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
             case MovementStates.Standing:
                 PlayerManager.Instance.FOV_Addon = PlayerManager.Instance.FOV_Standing;
 
-                if (FOV_Smoother >= PlayerManager.Instance.FOV_Standing + 0.2f)
+                if (FOV_Smoother >= PlayerManager.Instance.FOV_Standing + 0.5f)
                 {
                     FOV_Smoother -= Time.deltaTime * timeMultiplier_Reset;
                 }
-                else if(FOV_Smoother <= PlayerManager.Instance.FOV_Standing - 0.2f)
+                else if(FOV_Smoother <= PlayerManager.Instance.FOV_Standing - 0.5f)
                 {
                     FOV_Smoother += Time.deltaTime * timeMultiplier_Reset;
                 }
@@ -429,11 +419,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
             case MovementStates.Walking:
                 PlayerManager.Instance.FOV_Addon = PlayerManager.Instance.FOV_Walking;
 
-                if (FOV_Smoother >= PlayerManager.Instance.FOV_Walking + 0.2f)
+                if (FOV_Smoother >= PlayerManager.Instance.FOV_Walking + 0.5f)
                 {
                     FOV_Smoother -= Time.deltaTime * timeMultiplier_Reset;
                 }
-                else if (FOV_Smoother <= PlayerManager.Instance.FOV_Walking - 0.2f)
+                else if (FOV_Smoother <= PlayerManager.Instance.FOV_Walking - 0.5f)
                 {
                     FOV_Smoother += Time.deltaTime * timeMultiplier_Reset;
                 }
@@ -455,11 +445,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
             case MovementStates.Running:
                 PlayerManager.Instance.FOV_Addon = PlayerManager.Instance.FOV_Running;
 
-                if (FOV_Smoother >= PlayerManager.Instance.FOV_Running + 0.2f)
+                if (FOV_Smoother >= PlayerManager.Instance.FOV_Running + 0.5f)
                 {
                     FOV_Smoother -= Time.deltaTime * timeMultiplier_Running;
                 }
-                else if (FOV_Smoother <= PlayerManager.Instance.FOV_Running - 0.2f)
+                else if (FOV_Smoother <= PlayerManager.Instance.FOV_Running - 0.5f)
                 {
                     FOV_Smoother += Time.deltaTime * timeMultiplier_Running;
                 }
@@ -481,11 +471,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
             case MovementStates.Crouching:
                 PlayerManager.Instance.FOV_Addon = PlayerManager.Instance.FOV_Crouching;
 
-                if (FOV_Smoother >= PlayerManager.Instance.FOV_Crouching + 0.2f)
+                if (FOV_Smoother >= PlayerManager.Instance.FOV_Crouching + 0.5f)
                 {
                     FOV_Smoother -= Time.deltaTime * timeMultiplier_Crouching;
                 }
-                else if (FOV_Smoother <= PlayerManager.Instance.FOV_Crouching - 0.2f)
+                else if (FOV_Smoother <= PlayerManager.Instance.FOV_Crouching - 0.5f)
                 {
                     FOV_Smoother += Time.deltaTime * timeMultiplier_Crouching;
                 }
