@@ -12538,6 +12538,8 @@ MonoBehaviour:
   player_Sprinting_Stone_Clip: {fileID: 0}
   player_Sprinting_Wood_Clip: {fileID: 0}
   player_Sprinting_Cryonite_Clip: {fileID: 0}
+  player_FallDamage_Clip: {fileID: 8300000, guid: 913c77981449a2d4eaebd60b9889862a,
+    type: 3}
   tablet_OpenTablet_Clip: {fileID: 0}
   tablet_CloseTablet_Clip: {fileID: 0}
   tablet_ChangeMenu_Clip: {fileID: 8300000, guid: 944b931a2c137f74f9d6665125242725,
@@ -79357,7 +79359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.006011963}
+  m_AnchoredPosition: {x: 0, y: 0.0047912598}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763
@@ -90705,6 +90707,10 @@ MonoBehaviour:
   pointUp_3: {fileID: 5490803585807481716}
   pointUp_4: {fileID: 8451964132249733151}
   raycastDistance: 1.35
+  jumpTimer: 0
+  saftJumpTime: 1.5
+  damageCounter: 0
+  takeDamageWhenLanding: 0
 --- !u!114 &7932066623679705562
 MonoBehaviour:
   m_ObjectHideFlags: 0

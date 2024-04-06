@@ -37,6 +37,12 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField] float raycastDistance = 0.2f;
     RaycastHit hit;
 
+    [Header("Fall Damage")]
+    [SerializeField] float safeJumpTime = 1.5f;
+    public float jumpTimer = 0;
+    [SerializeField] float damageCounter = 0;
+    [SerializeField] bool takeDamageWhenLanding = false;
+
 
     //--------------------
 
@@ -47,6 +53,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         MainManager.Instance.playerBody.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), transform.rotation);
 
         gravity = -30f;
+        damageCounter = Time.deltaTime;
     }
     void Update()
     {
@@ -72,6 +79,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             PlayerManager.Instance.movementStates = MovementStates.Crouching;
         }
+
+        CheckJumpTimer();
     }
 
 
@@ -129,8 +138,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
             {
                 if (PlayerManager.Instance.movementStates != MovementStates.Jumping)
                 {
-                    print("Jumping");
                     PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
+
+                    jumpTimer = 0;
+                    damageCounter = 0;
 
                     if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
                     {
@@ -162,7 +173,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
             {
                 if (PlayerManager.Instance.movementStates != MovementStates.Running)
                 {
-                    print("Running");
                     PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
 
                     if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
@@ -195,7 +205,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
             {
                 if (PlayerManager.Instance.movementStates != MovementStates.Crouching)
                 {
-                    print("Crouching");
                     PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
 
                     MainManager.Instance.playerBody.transform.localPosition = new Vector3(
@@ -225,7 +234,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
             {
                 if (PlayerManager.Instance.movementStates != MovementStates.Walking)
                 {
-                    print("Walking");
                     PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
 
                     if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
@@ -258,7 +266,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
             {
                 if (PlayerManager.Instance.movementStates != MovementStates.Standing)
                 {
-                    print("Standing");
                     PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
 
                     if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
@@ -290,7 +297,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
         //If a menu is open
         else
         {
-            print("Tablet");
             PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
 
             MainManager.Instance.playerBody.transform.localPosition = new Vector3(
@@ -518,6 +524,42 @@ public class PlayerMovement : Singleton<PlayerMovement>
         else
         {
             return false;
+        }
+    }
+
+    void CheckJumpTimer()
+    {
+        if (PlayerManager.Instance.movementStates == MovementStates.Jumping)
+        {
+            jumpTimer += Time.deltaTime;
+
+            if (jumpTimer >= safeJumpTime)
+            {
+                takeDamageWhenLanding = true;
+                damageCounter += Time.deltaTime;
+            }
+            else
+            {
+                takeDamageWhenLanding = false;
+            }
+        }
+        else
+        {
+            if (takeDamageWhenLanding)
+            {
+                SoundManager.Instance.Play_Player_FallDamage_Clip();
+
+                float damageTaken = damageCounter;
+
+                HealthManager.Instance.mainHealthValue -= damageTaken;
+
+                takeDamageWhenLanding = false;
+
+                print("Damage: " + damageTaken);
+
+                jumpTimer = 0;
+                damageCounter = Time.deltaTime;
+            }
         }
     }
 }
