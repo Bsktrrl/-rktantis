@@ -1,7 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
+using Unity.Burst.Intrinsics;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerMovement : Singleton<PlayerMovement>
 {
@@ -17,8 +21,21 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     bool movementAppearance_isHappening;
     float FOV_Smoother = 0;
-    float crouch_Kneel = -0.8f;
+    float crouch_Kneel = -0.75f;
     float crouch_Up = -0.5f;
+
+    float movement_X;
+    float movement_Z;
+
+
+    [Header("Raycast Distance")]
+    [SerializeField] GameObject pointUp_0;
+    [SerializeField] GameObject pointUp_1;
+    [SerializeField] GameObject pointUp_2;
+    [SerializeField] GameObject pointUp_3;
+    [SerializeField] GameObject pointUp_4;
+    [SerializeField] float raycastDistance = 0.2f;
+    RaycastHit hit;
 
 
     //--------------------
@@ -33,12 +50,27 @@ public class PlayerMovement : Singleton<PlayerMovement>
     }
     void Update()
     {
+        //Perform the movement
         Movement();
-        UpdateHealthValues();
 
-        if (movementAppearance_isHappening)
+        //Check if not crouching while stuck under something
+        if (!HeadIsHittingSomethingWhileCrouching())
         {
-            MovementAppearance();
+            //Set States
+            SetMovementStates(movement_X, movement_Z);
+
+            //Update Health Parameters
+            UpdateHealthValues();
+
+            //FOV smoothness
+            if (movementAppearance_isHappening)
+            {
+                MovementAppearance();
+            }
+        }
+        else
+        {
+            PlayerManager.Instance.movementStates = MovementStates.Crouching;
         }
     }
 
@@ -48,22 +80,21 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     void Movement()
     {
-        #region Movement
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        movement_X = Input.GetAxis("Horizontal");
+        movement_Z = Input.GetAxis("Vertical");
 
         //Check if button is not pressed
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
         {
-            x = 0;
+            movement_X = 0;
         }
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
-            z = 0;
+            movement_Z = 0;
         }
 
         //right is the red Axis, forward is the blue axis
-        Vector3 move = MainManager.Instance.playerBody.transform.right * x + MainManager.Instance.playerBody.transform.forward * z;
+        Vector3 move = MainManager.Instance.playerBody.transform.right * movement_X + MainManager.Instance.playerBody.transform.forward * movement_Z;
 
         controller.Move(move * movementSpeed * movementSpeedVarianceByWeather * movementSpeedVarianceByMovement * PlayerManager.Instance.movementSpeedMultiplier_SkillTree * Time.deltaTime);
 
@@ -74,7 +105,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             velocity.y = Mathf.Sqrt(PlayerManager.Instance.jumpHeight * -2f * gravity);
         }
 
-        if (x == 0 && z == 0)
+        if (movement_X == 0 && movement_Z == 0)
         {
             velocity.x = 0;
             velocity.y += gravity * Time.deltaTime;
@@ -86,10 +117,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
         }
 
         controller.Move(velocity * Time.deltaTime);
-        #endregion
+    }
 
-        #region Set different MovementStates
-        //If no menus are open
+    void SetMovementStates(float x, float z)
+    {
+        // If no menus are open
         if (MainManager.Instance.menuStates == MenuStates.None)
         {
             //Jumping
@@ -136,7 +168,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
                     {
                         MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                                                                                     MainManager.Instance.playerBody.transform.localPosition.x, 
+                                                                                     MainManager.Instance.playerBody.transform.localPosition.x,
                                                                                      crouch_Up,
                                                                                      MainManager.Instance.playerBody.transform.localPosition.z);
                     }
@@ -281,8 +313,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
             PlayerManager.Instance.movementStates = MovementStates.Standing;
         }
-        
-        #endregion
     }
 
     void UpdateHealthValues()
@@ -434,6 +464,60 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
             default:
                 break;
+        }
+    }
+
+    bool HeadIsHittingSomethingWhileCrouching()
+    {
+        if (PlayerManager.Instance.movementStates != MovementStates.Crouching)
+        {
+            PlayerManager.Instance.isHittingHeadRaycast = false;
+
+            return false;
+        }
+        else
+        {
+            if (Raycast(pointUp_0.transform.position))
+            {
+                PlayerManager.Instance.isHittingHeadRaycast = true;
+                return true;
+            }
+            else if (Raycast(pointUp_1.transform.position))
+            {
+                PlayerManager.Instance.isHittingHeadRaycast = true;
+                return true;
+            }
+            else if (Raycast(pointUp_2.transform.position))
+            {
+                PlayerManager.Instance.isHittingHeadRaycast = true;
+                return true;
+            }
+            else if (Raycast(pointUp_3.transform.position))
+            {
+                PlayerManager.Instance.isHittingHeadRaycast = true;
+                return true;
+            }
+            else if (Raycast(pointUp_4.transform.position))
+            {
+                PlayerManager.Instance.isHittingHeadRaycast = true;
+                return true;
+            }
+            else
+            {
+                PlayerManager.Instance.isHittingHeadRaycast = false;
+                return false;
+            }
+        }
+    }
+    bool Raycast(Vector3 pos)
+    {
+        if (Physics.Raycast(pos, Vector3.up, out hit, raycastDistance))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

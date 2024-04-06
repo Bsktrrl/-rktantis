@@ -28,6 +28,8 @@ public class PlayerManager : Singleton<PlayerManager>
     public int hungerTemp = 0;
     public int thirstTemp = 0;
 
+    public bool isHittingHeadRaycast = true;
+
 
     //--------------------
 
