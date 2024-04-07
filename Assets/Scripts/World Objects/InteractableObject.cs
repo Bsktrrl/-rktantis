@@ -42,8 +42,10 @@ public class InteractableObject : MonoBehaviour
         //If Item, reduce the velocity on the ground
         if (isHittingGround && GetComponent<Rigidbody>() && interactableType == InteracteableType.Item)
         {
-            GetComponent<Rigidbody>().isKinematic = true;
-            GetComponent<Rigidbody>().useGravity = false;
+            InventoryManager.Instance.StartGravityCoroutine(gameObject);
+
+            //GetComponent<Rigidbody>().isKinematic = true;
+            //GetComponent<Rigidbody>().useGravity = false;
         }
     }
 

@@ -48,7 +48,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public int chestInventoryOpen;
     GameObject itemTemp;
-    public float gravityTime = 1.5f;
+    public float gravityTime = 2.5f;
 
     [Header("Item Info")]
     public GameObject itemInfo_Parent;
@@ -320,6 +320,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
         if (index >= 0)
         {
+            //Spawn item into the World, if the item has a WorldObject attached
+            SpawnItemToWorld(itemName, handDropPoint, true, inventories[inventory].itemsInInventory[index], 0);
+
             inventories[inventory].itemsInInventory.RemoveAt(index);
         }
         else
@@ -329,9 +332,10 @@ public class InventoryManager : Singleton<InventoryManager>
                 if (inventories[inventory].itemsInInventory[i].itemName == itemName
                     && inventories[inventory].itemsInInventory[i].itemID == ID)
                 {
-                    inventories[inventory].itemsInInventory.RemoveAt(i);
+                    //Spawn item into the World, if the item has a WorldObject attached
+                    SpawnItemToWorld(itemName, handDropPoint, true, inventories[inventory].itemsInInventory[i], 0);
 
-                    index = i;
+                    inventories[inventory].itemsInInventory.RemoveAt(i);
 
                     break;
                 }
@@ -341,9 +345,6 @@ public class InventoryManager : Singleton<InventoryManager>
 
         RemoveInventoriesUI();
         PrepareInventoryUI(inventory, false);
-
-        //Spawn item into the World, if the item has a WorldObject attached
-        SpawnItemToWorld(itemName, handDropPoint, true, inventories[inventory].itemsInInventory[index], 0);
 
         //If item is removed from the inventory, update the Hotbar
         if (inventory <= 0)
@@ -361,8 +362,8 @@ public class InventoryManager : Singleton<InventoryManager>
         yield return new WaitForSeconds(gravityTime);
 
         //Turn off Gravity
-        spawnedObject.GetComponent<Rigidbody>().isKinematic = true;
-        spawnedObject.GetComponent<Rigidbody>().useGravity = false;
+        //spawnedObject.GetComponent<Rigidbody>().isKinematic = true;
+        //spawnedObject.GetComponent<Rigidbody>().useGravity = false;
     }
     public void RemoveItemFromInventory(int inventory, Items itemName, int ID, bool itemIsMovedOrRemoved)
     {
@@ -603,11 +604,15 @@ public class InventoryManager : Singleton<InventoryManager>
             //Update item in the World
             WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName);
 
-            //Stop gravity after gravityTime-seconds
-            if (WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>())
-            {
-                //StartCoroutine(SpawnedObjectGravityTime(WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]));
-            }
+            StartGravityCoroutine(WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]);
+        }
+    }
+    public void StartGravityCoroutine(GameObject obj)
+    {
+        //Stop gravity after gravityTime-seconds
+        if (obj.GetComponent<Rigidbody>())
+        {
+            StartCoroutine(SpawnedObjectGravityTime(WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]));
         }
     }
     #endregion

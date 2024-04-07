@@ -213,7 +213,7 @@ public class Ore : MonoBehaviour
             if ((tempOreHealth - OreManager.Instance.oreHealthReducer) <= 0)
             {
                 //Play OreDestroy sound
-                SoundManager.Instance.Play_PickaxeUsage_OreIsDestroid_Clip();
+                SoundManager.Instance.Play_PickaxeUsage_OreIsDestroyd_Clip();
 
                 //Spawn at least 1 item into the World
                 SpawnOreItems(interactableType);
