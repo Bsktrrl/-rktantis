@@ -557,11 +557,11 @@ public class LookAtManager : Singleton<LookAtManager>
                             case InteracteableType.Palm_Tree:
                                 break;
                             case InteracteableType.BloodTree:
-                                treeDisplay_Text.text = "Requires a \"Stone Pickaxe\" or \"Cryonite Pickaxe\"";
+                                treeDisplay_Text.text = "Requires a \"Stone Axe\" or \"Cryonite Axe\"";
                                 treeDisplay_LineObject.SetActive(true);
                                 break;
                             case InteracteableType.BloodTreeBush:
-                                treeDisplay_Text.text = "Requires a \"Wood Pickaxe\", \"Stone Pickaxe\" or \"Cryonite Pickaxe\"";
+                                treeDisplay_Text.text = "Requires a \"Wood Axe\", \"Stone Axe\" or \"Cryonite Axe\"";
                                 treeDisplay_LineObject.SetActive(true);
                                 break;
                             case InteracteableType.Tree_4:
@@ -596,7 +596,7 @@ public class LookAtManager : Singleton<LookAtManager>
                             case InteracteableType.Palm_Tree:
                                 break;
                             case InteracteableType.BloodTree:
-                                treeDisplay_Text.text = "Requires a \"Stone Pickaxe\" or \"Cryonite Pickaxe\"";
+                                treeDisplay_Text.text = "Requires a \"Stone Axe\" or \"Cryonite Axe\"";
                                 treeDisplay_LineObject.SetActive(true);
                                 break;
                             case InteracteableType.BloodTreeBush:
