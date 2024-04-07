@@ -147,6 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2377caf940a2892419a95a491612e5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transparencyValue: 1
+  distance: 0
   objectCollider: {fileID: 577419752677904512}
-  objectPartsList: []
-  materialList: []
+  objectPartsList:
+  - {fileID: 6678250130615039855}
+  materialList:
+  - {fileID: 2100000, guid: afd1ed0325661ec4db18bc220a49daf7, type: 2}
