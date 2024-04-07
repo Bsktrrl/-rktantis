@@ -214,7 +214,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5615370702485192589, guid: 0b9b841d389aacf46b89c2b21af82175, type: 3}
 --- !u!114 &1855824000231925609
@@ -231,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantType: 19
   pickablePart: {fileID: 5106027264915972012}
+  thisGrowthTime: 300
   ColorMeshObject:
   - {fileID: 1106561203523302402}
   - {fileID: 2550104531668100636}
@@ -242,8 +243,9 @@ MonoBehaviour:
   isPicked: 0
   growthTimer: 0
   growthPrecentage: 0
-  plantIndex: 0
-  precentageCheck: 0
+  plantIndex_x: 0
+  plantIndex_y: 0
+  percentageCheck: 0
 --- !u!1 &2550104531668100636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5182119977740884598, guid: 0b9b841d389aacf46b89c2b21af82175,
@@ -322,9 +324,10 @@ MonoBehaviour:
   amount: 1
   durability_Current: 0
   interactableType: 19
-  oreHealth: 0
   inventoryIndex: 0
   plantParent: {fileID: 1709056721691967175}
+  journalType: 0
+  journalPageIndex: 0
 --- !u!1 &8896386436236685079 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6917796815848991873, guid: 0b9b841d389aacf46b89c2b21af82175,
