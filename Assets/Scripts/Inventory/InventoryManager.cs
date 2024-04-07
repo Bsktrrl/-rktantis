@@ -31,6 +31,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public GameObject itemSlot_Prefab;
 
     public GameObject handDropPoint;
+    public float currentHandDropPoint_Y;
     public GameObject worldObject_Parent;
 
     [Header("Lists")]
@@ -49,6 +50,8 @@ public class InventoryManager : Singleton<InventoryManager>
     public int chestInventoryOpen;
     GameObject itemTemp;
     public float gravityTime = 2.5f;
+
+    public bool itemDropped;
 
     [Header("Item Info")]
     public GameObject itemInfo_Parent;
@@ -543,10 +546,16 @@ public class InventoryManager : Singleton<InventoryManager>
         HotbarManager.Instance.ChangeItemInHand();
     }
     
-    public void SpawnItemToWorld(Items itemName, GameObject dropPos, bool dropSound, InventoryItem itemm, float spawnPos_Offset)
+    public void SpawnItemToWorld(Items itemName, GameObject dropPos, bool dropSound, InventoryItem item, float spawnPos_Offset)
     {
         if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
         {
+            if (item != null)
+            {
+                print("item: " + item.durability_Current);
+            }
+            
+
             //Play Drop-Sound
             if (dropSound)
             {
@@ -592,19 +601,24 @@ public class InventoryManager : Singleton<InventoryManager>
             WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
 
             //Set Durability
-            if (itemm == null)
+            if (item == null)
             {
                 WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<InteractableObject>().durability_Current = MainManager.Instance.GetItem(itemName).durability_Max;
             }
             else
             {
-                WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<InteractableObject>().durability_Current = itemm.durability_Current;
+                WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<InteractableObject>().durability_Current = item.durability_Current;
             }
 
             //Update item in the World
             WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName);
 
             StartGravityCoroutine(WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]);
+
+            WorldObjectManager.Instance.SaveWorldObjectPositions();
+
+            currentHandDropPoint_Y = handDropPoint.transform.position.y;
+            itemDropped = true;
         }
     }
     public void StartGravityCoroutine(GameObject obj)
@@ -1070,6 +1084,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    #region HotbarSlots_Quick
     void QuickHotbarSelect_1()
     {
         for (int i = 0; i < itemSlotList_Player.Count; i++)
@@ -1145,6 +1160,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
     }
+    #endregion
 
 
     //--------------------

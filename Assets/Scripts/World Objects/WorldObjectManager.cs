@@ -14,6 +14,19 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
     [Header("WorldObjects to be placed into the world")]
     [SerializeField] GameObject chestPrefab;
 
+    float itemUpdateTimer;
+    float itemPos_Y;
+    float underTerrainPos_Y;
+
+
+    //--------------------
+
+
+    private void Update()
+    {
+        UpdateItemUnderTerrain();
+    }
+
 
     //--------------------
 
@@ -71,7 +84,11 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
         tempObject.objectName = itemName;
         tempObject.objectPosition = worldObjectList[worldObjectList.Count - 1].gameObject.transform.position;
         tempObject.objectRotation = worldObjectList[worldObjectList.Count - 1].gameObject.transform.rotation;
-
+        if (worldObjectList[worldObjectList.Count - 1].GetComponent<InteractableObject>())
+        {
+            tempObject.durability = worldObjectList[worldObjectList.Count - 1].GetComponent<InteractableObject>().durability_Current;
+        }
+       
         worldObjectList_ToSave.Add(tempObject);
 
         SaveData();
@@ -86,6 +103,26 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
                 worldObjectList_ToSave.RemoveAt(i);
 
                 break;
+            }
+        }
+
+        SaveData();
+    }
+
+
+    //--------------------
+
+
+    public void SaveWorldObjectPositions()
+    {
+        print("worldObjectList_ToSave: " + worldObjectList_ToSave.Count + " | worldObjectList.Count: " + worldObjectList.Count);
+
+        if (worldObjectList_ToSave.Count == worldObjectList.Count)
+        {
+            for(int i = 0; i < worldObjectList.Count; i++)
+            {
+                worldObjectList_ToSave[i].objectPosition = worldObjectList[i].transform.position;
+                worldObjectList_ToSave[i].objectRotation = worldObjectList[i].transform.rotation;
             }
         }
 
@@ -116,30 +153,30 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
     }
     //public void DeleteObjectFromTheWorld(ObjectType obj, int worldObjectIndex, int inventoryIndex)
     //{
-    //    //Remove selected object from both lists
-    //    worldObjectsList.RemoveAt(worldObjectIndex);
-    //    worldObjectsInfoList.RemoveAt(worldObjectIndex);
+    //    ////Remove selected object from both lists
+    //    //worldObjectsList.RemoveAt(worldObjectIndex);
+    //    //worldObjectsInfoList.RemoveAt(worldObjectIndex);
 
-    //    //If object is an Inventory also execute this
-    //    if (obj == ObjectType.Inventory && inventoryIndex > 1) //>1 because of Main inventory (0) and SelectPanel (1)
-    //    {
-    //        InventoryManager.instance.RemoveInventory(inventoryIndex);
+    //    ////If object is an Inventory also execute this
+    //    //if (obj == ObjectType.Inventory && inventoryIndex > 1) //>1 because of Main inventory (0) and SelectPanel (1)
+    //    //{
+    //    //    InventoryManager.instance.RemoveInventory(inventoryIndex);
 
-    //        for (int i = worldObjectIndex; i < worldObjectsList.Count; i++)
-    //        {
-    //            worldObjectsList[i].GetComponent<InventoryObject>().inventoryIndex -= 1;
-    //            worldObjectsInfoList[i].inventoryIndex -= 1;
-    //        }
-    //    }
+    //    //    for (int i = worldObjectIndex; i < worldObjectsList.Count; i++)
+    //    //    {
+    //    //        worldObjectsList[i].GetComponent<InventoryObject>().inventoryIndex -= 1;
+    //    //        worldObjectsInfoList[i].inventoryIndex -= 1;
+    //    //    }
+    //    //}
 
-    //    //Shift the index of all GameObjects -1 to match the new list
-    //    for (int i = worldObjectIndex; i < worldObjectsList.Count; i++)
-    //    {
-    //        worldObjectsList[i].GetComponent<InventoryObject>().objectIndex -= 1;
-    //        worldObjectsInfoList[i].worldObjectIndex -= 1;
-    //    }
+    //    ////Shift the index of all GameObjects -1 to match the new list
+    //    //for (int i = worldObjectIndex; i < worldObjectsList.Count; i++)
+    //    //{
+    //    //    worldObjectsList[i].GetComponent<InventoryObject>().objectIndex -= 1;
+    //    //    worldObjectsInfoList[i].worldObjectIndex -= 1;
+    //    //}
 
-    //    Save();
+    //    //Save();
     //}
 
 
@@ -179,6 +216,34 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
     //--------------------
 
 
+    void UpdateItemUnderTerrain()
+    {
+        //Only trigger if item is dropped
+        if (InventoryManager.Instance.itemDropped)
+        {
+            itemUpdateTimer += Time.deltaTime;
+
+            if (itemUpdateTimer > 5)
+            {
+                InventoryManager.Instance.itemDropped = false;
+                itemUpdateTimer = 0;
+
+                //Transform ItemPos
+                for (int i = 0; i < worldObjectList.Count; i++)
+                {
+                    if (worldObjectList[i].transform.position.y < -100)
+                    {
+                        worldObjectList[i].transform.SetPositionAndRotation(new Vector3(worldObjectList[i].transform.position.x, InventoryManager.Instance.currentHandDropPoint_Y, worldObjectList[i].transform.position.z), worldObjectList[i].transform.rotation);
+                    }
+                }
+            }
+        }
+    }
+
+
+    //--------------------
+
+
     GameObject GetSavedObject(WorldObject worldObj)
     {
         if (worldObj.objectName != Items.None)
@@ -193,7 +258,7 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
 }
 
 [Serializable]
-public struct WorldObject
+public class WorldObject
 {
     [Header("General")]
     public Items objectName;
