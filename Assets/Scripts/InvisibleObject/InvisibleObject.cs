@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InvisibleObject : MonoBehaviour
@@ -9,6 +7,7 @@ public class InvisibleObject : MonoBehaviour
     [SerializeField] float transparencyValue = new float();
 
     [SerializeField] Vector3 distancePos = new Vector3();
+    [SerializeField] float distance;
 
     [SerializeField] float ratio = new float();
 
@@ -18,11 +17,12 @@ public class InvisibleObject : MonoBehaviour
 
     private void Start()
     {
-        transparencyValue = 100;
+        distance = 0;
+        transparencyValue = 1;
     }
     private void Update()
     {
-        renderer.sharedMaterial.SetFloat("_Transparency", transparencyValue);
+        renderer.material.SetFloat("_Transparency", transparencyValue);
     }
 
 
@@ -33,11 +33,11 @@ public class InvisibleObject : MonoBehaviour
     {
         if (other.gameObject.CompareTag("InvisibleLight"))
         {
-            distancePos = transform.position - other.gameObject.GetComponent<InvisibleLight>().spherePos;
-
-            ratio = (other.transform.position - other.gameObject.GetComponent<InvisibleLight>().spherePos).magnitude;
-
-            transparencyValue = distancePos.magnitude / ratio;
+            distance = Vector3.Distance(transform.position, other.gameObject.transform.position);
+            if (other.gameObject.GetComponent<CapsuleCollider>())
+            {
+                transparencyValue = (distance / other.gameObject.GetComponent<CapsuleCollider>().height) - 0.1f;
+            }
         }
     }
 
@@ -45,9 +45,11 @@ public class InvisibleObject : MonoBehaviour
     {
         if (other.gameObject.CompareTag("InvisibleLight"))
         {
-            distancePos = transform.position - other.gameObject.GetComponent<InvisibleLight>().spherePos;
-
-            transparencyValue = distancePos.magnitude / ratio;
+            distance = Vector3.Distance(transform.position, other.gameObject.transform.position);
+            if (other.gameObject.GetComponent<CapsuleCollider>())
+            {
+                transparencyValue = (distance / other.gameObject.GetComponent<CapsuleCollider>().height) -0.1f;
+            }
         }
     }
 
@@ -55,7 +57,10 @@ public class InvisibleObject : MonoBehaviour
     {
         if (other.gameObject.CompareTag("InvisibleLight"))
         {
-            transparencyValue = 100;
+            distance = 0;
+            distancePos = Vector3.zero;
+            transparencyValue = 1;
+            ratio = 0;
         }
     }
 }
