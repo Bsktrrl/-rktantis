@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Foliage_ThriPod
+  m_Name: Mat_Seeds_Red
   m_Shader: {fileID: -6465566751694194690, guid: 31e3f5f25523376408f06797d2eb794a,
     type: 3}
   m_Parent: {fileID: 0}
@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AlbedoMap:
-        m_Texture: {fileID: 2800000, guid: 748818f937985214da6599ceb91dcce5, type: 3}
+        m_Texture: {fileID: 2800000, guid: c45105cc8127fc94c8f9da8189479133, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Albedo_Map:
@@ -65,7 +65,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 65ada3a5ec294c142a205fccbbe540be, type: 3}
+        m_Texture: {fileID: 2800000, guid: 79e7f8fa8f426b44f8c092e590261720, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Map:
@@ -85,7 +85,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RoughnessMap:
-        m_Texture: {fileID: 2800000, guid: cfb1e9ec01fdb1d40bc37f00ad8ea6d2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 94e1089857a2425449d036090f428c54, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2DLOD_2ef41d3d7c8944b9a92c797e327ffd40_Texture_1_Texture2D:
@@ -143,7 +143,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlbedoColorMultiplicator: 2
-    - _AlbedoColorMultiplier: 7
+    - _AlbedoColorMultiplier: 3
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -162,16 +162,16 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _MovementSpeed: 0
-    - _NormalNoiseHeight: 0.005
-    - _NormalNoiseStrength: 0.1
-    - _NormalNoiseTiling: 3
-    - _NormalStrength: 3
+    - _NormalNoiseHeight: 0
+    - _NormalNoiseStrength: 0
+    - _NormalNoiseTiling: 1
+    - _NormalStrength: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RoughnessStrength: 1.15
+    - _RoughnessStrength: 1
     - _SandStrength: 0.05
     - _SimpleOcclusionStrength: 0
     - _Smoothness: 0.5
@@ -179,8 +179,8 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _Tiling: 1
-    - _TilingBlend: 1
+    - _Tiling: 3
+    - _TilingBlend: 0.5
     - _TransparencyDither: 0
     - _TransparencyMultiplier: 0
     - _TransparencyOnOff: 1
@@ -189,7 +189,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0.34901962, g: 0.23137255, b: 0.53333336, a: 0}
+    - _AlbedoColor: {r: 1, g: 0.36862746, b: 0.39607844, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
