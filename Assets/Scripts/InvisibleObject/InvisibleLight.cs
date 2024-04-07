@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class InvisibleLight : MonoBehaviour, EquippeableItem_Interface
 {
-    public GameObject lightObject;
-    public float maxCollissionDistance;
+    public GameObject invisibleCalculationPoint;
+
+
+    //--------------------
+
+
+    private void Start()
+    {
+        invisibleCalculationPoint.transform.SetLocalPositionAndRotation(HotbarManager.Instance.EquipmentHolder.transform.localPosition, Quaternion.identity);
+        //invisibleCalculationPoint.transform.SetLocalPositionAndRotation((Vector3.forward * maxCollissionDistance), Quaternion.identity);
+    }
 
 
     //--------------------

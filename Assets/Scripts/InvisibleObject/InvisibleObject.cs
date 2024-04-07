@@ -3,13 +3,11 @@ using UnityEngine;
 public class InvisibleObject : MonoBehaviour
 {
     [SerializeField] MeshRenderer renderer;
+    //[SerializeField] SphereCollider sphereCollider;
 
     [SerializeField] float transparencyValue = new float();
-
-    [SerializeField] Vector3 distancePos = new Vector3();
     [SerializeField] float distance;
-
-    [SerializeField] float ratio = new float();
+    SphereCollider sphereCollider;
 
 
     //--------------------
@@ -17,6 +15,11 @@ public class InvisibleObject : MonoBehaviour
 
     private void Start()
     {
+        //Add a SphereCollider to thismeObject
+        sphereCollider = gameObject.AddComponent<SphereCollider>();
+        sphereCollider.radius = 5f;
+        sphereCollider.isTrigger = true;
+
         distance = 0;
         transparencyValue = 1;
     }
@@ -25,42 +28,39 @@ public class InvisibleObject : MonoBehaviour
         renderer.material.SetFloat("_Transparency", transparencyValue);
     }
 
-
     //--------------------
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("InvisibleLight"))
+        if (other.gameObject.CompareTag("InvisibleTriggerPoint"))
         {
+            print("OnTriggerEnter");
+
             distance = Vector3.Distance(transform.position, other.gameObject.transform.position);
-            if (other.gameObject.GetComponent<CapsuleCollider>())
-            {
-                transparencyValue = (distance / other.gameObject.GetComponent<CapsuleCollider>().height) - 0.1f;
-            }
+
+            transparencyValue = (distance / sphereCollider.radius);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("InvisibleLight"))
+        if (other.gameObject.CompareTag("InvisibleTriggerPoint"))
         {
+            print("OnTriggerStay");
             distance = Vector3.Distance(transform.position, other.gameObject.transform.position);
-            if (other.gameObject.GetComponent<CapsuleCollider>())
-            {
-                transparencyValue = (distance / other.gameObject.GetComponent<CapsuleCollider>().height) -0.1f;
-            }
+
+            transparencyValue = (distance / sphereCollider.radius);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("InvisibleLight"))
+        if (other.gameObject.CompareTag("InvisibleTriggerPoint"))
         {
+            print("OnTriggerExit");
             distance = 0;
-            distancePos = Vector3.zero;
             transparencyValue = 1;
-            ratio = 0;
         }
     }
 }
