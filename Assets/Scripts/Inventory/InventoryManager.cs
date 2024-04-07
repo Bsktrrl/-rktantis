@@ -555,7 +555,6 @@ public class InventoryManager : Singleton<InventoryManager>
                 print("item: " + item.durability_Current);
             }
             
-
             //Play Drop-Sound
             if (dropSound)
             {
@@ -975,22 +974,40 @@ public class InventoryManager : Singleton<InventoryManager>
     public void SelectItemDurabilityDisplay()
     {
         //Assign HotbarInfo to the correct ItemSlot
-        for (int i = inventories[0].itemsInInventory.Count - 1; i >= 0; i--)
+        for (int k = 0; k < inventories.Count; k++)
         {
-            for (int j = itemSlotList_Player.Count - 1; j >= 0; j--)
+            for (int i = inventories[k].itemsInInventory.Count - 1; i >= 0; i--)
             {
-                //Find relevant item
-                if (itemSlotList_Player[j].GetComponent<ItemSlot>().itemName == inventories[0].itemsInInventory[i].itemName
-                    && itemSlotList_Player[j].GetComponent<ItemSlot>().itemID == inventories[0].itemsInInventory[i].itemID
-                    && MainManager.Instance.GetItem(itemSlotList_Player[j].GetComponent<ItemSlot>().itemName).durability_Max > 0)
+                for (int j = itemSlotList_Player.Count - 1; j >= 0; j--)
                 {
-                    //If the selected item has a durability
-                    itemSlotList_Player[j].GetComponent<ItemSlot>().ActivateDurabilityMeter();
+                    //Find relevant item
+                    if (itemSlotList_Player[j].GetComponent<ItemSlot>().itemName == inventories[k].itemsInInventory[i].itemName
+                        && itemSlotList_Player[j].GetComponent<ItemSlot>().itemID == inventories[k].itemsInInventory[i].itemID
+                        && MainManager.Instance.GetItem(itemSlotList_Player[j].GetComponent<ItemSlot>().itemName).durability_Max > 0)
+                    {
+                        //If the selected item has a durability
+                        itemSlotList_Player[j].GetComponent<ItemSlot>().ActivateDurabilityMeter();
 
-                    j = 0;
+                        j = 0;
+                    }
+                }
+
+                for (int j = itemSlotList_Chest.Count - 1; j >= 0; j--)
+                {
+                    //Find relevant item
+                    if (itemSlotList_Chest[j].GetComponent<ItemSlot>().itemName == inventories[k].itemsInInventory[i].itemName
+                        && itemSlotList_Chest[j].GetComponent<ItemSlot>().itemID == inventories[k].itemsInInventory[i].itemID
+                        && MainManager.Instance.GetItem(itemSlotList_Chest[j].GetComponent<ItemSlot>().itemName).durability_Max > 0)
+                    {
+                        //If the selected item has a durability
+                        itemSlotList_Chest[j].GetComponent<ItemSlot>().ActivateDurabilityMeter();
+
+                        j = 0;
+                    }
                 }
             }
         }
+        
     }
     public void DeselectItemDurabilityDisplay()
     {
@@ -998,6 +1015,11 @@ public class InventoryManager : Singleton<InventoryManager>
         for (int i = 0; i < itemSlotList_Player.Count; i++)
         {
             itemSlotList_Player[i].GetComponent<ItemSlot>().DeactivateDurabilityMeter();
+        }
+
+        for (int i = 0; i < itemSlotList_Chest.Count; i++)
+        {
+            itemSlotList_Chest[i].GetComponent<ItemSlot>().DeactivateDurabilityMeter();
         }
     }
     #endregion
