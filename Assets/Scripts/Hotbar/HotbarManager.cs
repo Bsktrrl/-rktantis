@@ -289,7 +289,8 @@ public class HotbarManager : Singleton<HotbarManager>
 
     void UpdateVisibilityObjects()
     {
-        if (hotbarList[selectedSlot].itemName == Items.Flashlight)
+        if (hotbarList[selectedSlot].itemName == Items.Flashlight
+            || hotbarList[selectedSlot].itemName == Items.AríditeCrystal)
         {
             return;
         }

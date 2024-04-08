@@ -55,7 +55,8 @@ public class InvisibleObject : MonoBehaviour
 
     public void UpdateVisibility()
     {
-        if (HotbarManager.Instance.selectedItem == Items.Flashlight)
+        if (HotbarManager.Instance.selectedItem == Items.Flashlight
+            || HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
         {
             for (int i = 0; i < rendererList.Count; i++)
             {
