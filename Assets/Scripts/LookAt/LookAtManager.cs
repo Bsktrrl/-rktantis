@@ -191,12 +191,6 @@ public class LookAtManager : Singleton<LookAtManager>
                 Item_Panel.SetActive(true);
             }
 
-            else if (temp == 0)
-            {
-                Plant_Panel.SetActive(false);
-                Item_Panel.SetActive(false);
-            }
-
             return;
         }
         #endregion
@@ -320,43 +314,6 @@ public class LookAtManager : Singleton<LookAtManager>
 
         if (SelectionManager.Instance.selecedObject && SelectionManager.Instance.onTarget)
         {
-            //print("1. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.name);
-
-            //Check if the plant is invisible
-            if (SelectionManager.Instance.selecedObject.gameObject.transform.parent.transform.parent.GetComponent<InvisibleObject>())
-            {
-                //print("2. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.transform.parent.name);
-
-                if (!SelectionManager.Instance.selecedObject.gameObject.transform.parent.transform.parent.GetComponent<InvisibleObject>().isVisible)
-                {
-                    //print("3. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.transform.parent.name);
-
-                    return 0;
-                }
-            }
-            else if (SelectionManager.Instance.selecedObject.gameObject.transform.parent.GetComponent<InvisibleObject>())
-            {
-                //print("2. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.name);
-
-                if (!SelectionManager.Instance.selecedObject.gameObject.transform.parent.GetComponent<InvisibleObject>().isVisible)
-                {
-                    //print("3. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.name);
-
-                    return 0;
-                }
-            }
-            else if (SelectionManager.Instance.selecedObject.GetComponent<InvisibleObject>())
-            {
-                //print("4. Plant is Invisible: " + SelectionManager.Instance.selecedObject.name);
-
-                if (!SelectionManager.Instance.selecedObject.GetComponent<InvisibleObject>().isVisible)
-                {
-                    //print("5. Plant is Invisible: " + SelectionManager.Instance.selecedObject.name);
-
-                    return 0;
-                }
-            }
-
             //If looking at the Plant
             if (SelectionManager.Instance.selecedObject.GetComponent<Plant>())
             {

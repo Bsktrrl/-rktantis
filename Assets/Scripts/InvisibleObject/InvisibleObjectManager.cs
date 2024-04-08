@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class InvisibleObjectManager : Singleton<InvisibleObjectManager>
 {
+    public GameObject sphereObject_Prefab;
+
     public LayerMask invisibleObjectLayerMask;
 }

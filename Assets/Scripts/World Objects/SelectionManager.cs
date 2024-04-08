@@ -35,7 +35,7 @@ public class SelectionManager : Singleton<SelectionManager>
                         return;
                     }
                 }
-                
+
                 Transform selectionTransform = hit.transform;
 
                 //Get the layer looking at

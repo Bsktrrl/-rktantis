@@ -5552,7 +5552,6 @@ MonoBehaviour:
   worldObjectList_ToSave: []
   chestPrefab: {fileID: 1475861760331519805, guid: d53b9396a6b954d40b17f085e68a90db,
     type: 3}
-  worldInvisibleObjectList: []
 --- !u!1 &446988944922692508
 GameObject:
   m_ObjectHideFlags: 0
@@ -84641,7 +84640,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00881958}
+  m_AnchoredPosition: {x: 0, y: 0.010284424}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763
@@ -94765,6 +94764,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1bc697066ff97d4aa32edbe1b8444f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sphereObject_Prefab: {fileID: 6972576179358037534, guid: 6829a34b9c640e34cb2fe9c385b7f212,
+    type: 3}
   invisibleObjectLayerMask:
     serializedVersion: 2
     m_Bits: 512

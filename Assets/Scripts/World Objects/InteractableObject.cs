@@ -39,14 +39,14 @@ public class InteractableObject : MonoBehaviour
 
     private void Update()
     {
-        //If Item, reduce the velocity on the ground
-        if (isHittingGround && GetComponent<Rigidbody>() && interactableType == InteracteableType.Item)
-        {
-            InventoryManager.Instance.StartGravityCoroutine(gameObject);
+        ////If Item, reduce the velocity on the ground
+        //if (isHittingGround && GetComponent<Rigidbody>() && interactableType == InteracteableType.Item)
+        //{
+        //    InventoryManager.Instance.StartGravityCoroutine(gameObject);
 
-            //GetComponent<Rigidbody>().isKinematic = true;
-            //GetComponent<Rigidbody>().useGravity = false;
-        }
+        //    //GetComponent<Rigidbody>().isKinematic = true;
+        //    //GetComponent<Rigidbody>().useGravity = false;
+        //}
     }
 
 

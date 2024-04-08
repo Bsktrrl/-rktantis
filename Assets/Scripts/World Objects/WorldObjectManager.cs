@@ -19,8 +19,8 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
     float underTerrainPos_Y;
 
 
-    [Header("InvisibleObjects")]
-    public List<GameObject> worldInvisibleObjectList = new List<GameObject>();
+    //[Header("InvisibleObjects")]
+    //public List<GameObject> worldInvisibleObjectList = new List<GameObject>();
 
 
     //--------------------
@@ -28,12 +28,12 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
 
     private void Start()
     {
-        InvisibleObject[] invisibleObjects = FindObjectsOfType<InvisibleObject>();
+        //InvisibleObject[] invisibleObjects = FindObjectsOfType<InvisibleObject>();
 
-        foreach (InvisibleObject invisibleObject in invisibleObjects)
-        {
-            worldInvisibleObjectList.Add(invisibleObject.gameObject);
-        }
+        //foreach (InvisibleObject invisibleObject in invisibleObjects)
+        //{
+        //    worldInvisibleObjectList.Add(invisibleObject.gameObject);
+        //}
     }
     private void Update()
     {

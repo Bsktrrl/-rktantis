@@ -8,25 +8,25 @@ using UnityEngine;
 public class InvisibleObject : MonoBehaviour
 {
     [SerializeField] float transparencyValue = 1;
-    float distance;
 
     [SerializeField] Collider objectCollider;
+
     [SerializeField] List<GameObject> objectPartsList_Base = new List<GameObject>();
     [SerializeField] List<GameObject> objectPartsList_Pickable = new List<GameObject>();
+
     public List<Material> materialList = new List<Material>();
-
-    SphereCollider sphereCollider;
-
     public List<Renderer> rendererList = new List<Renderer>();
 
-    string TransparencyName = "_Transparency";
-    string InvisibleTriggerPointTagnName = "InvisibleTriggerPoint";
+    [SerializeField] List<GameObject> collidingObjectList;
 
+    //SphereCollider sphereCollider;
+    GameObject sphereCollider;
     MaterialPropertyBlock propertyBlock;
 
+    string TransparencyName = "_Transparency";
     public bool isVisible;
+    float distance;
 
-    [SerializeField] List<GameObject> collidingObjectList;
 
 
     //--------------------
@@ -35,9 +35,11 @@ public class InvisibleObject : MonoBehaviour
     private void Start()
     {
         //Add a SphereCollider to this GameObject
-        sphereCollider = gameObject.AddComponent<SphereCollider>();
-        sphereCollider.radius = 4f;
-        sphereCollider.isTrigger = true;
+        sphereCollider = Instantiate(InvisibleObjectManager.Instance.sphereObject_Prefab);
+
+        //sphereCollider = gameObject.AddComponent<SphereCollider>();
+        sphereCollider.GetComponent<SphereCollider>().radius = 4f;
+        sphereCollider.GetComponent<SphereCollider>().isTrigger = true;
 
         distance = 0;
         transparencyValue = 1;
@@ -49,6 +51,8 @@ public class InvisibleObject : MonoBehaviour
         }
 
         propertyBlock = new MaterialPropertyBlock();
+
+        collidingObjectList.Clear();
     }
 
     private void Update()
@@ -65,10 +69,10 @@ public class InvisibleObject : MonoBehaviour
         if (sphereCollider != null)
         {
             //Check if any invisibleObject is inside the Sphere
-            if (Physics.CheckSphere(transform.position + sphereCollider.center, sphereCollider.radius, InvisibleObjectManager.Instance.invisibleObjectLayerMask))
+            if (Physics.CheckSphere(transform.position + sphereCollider.GetComponent<SphereCollider>().center, sphereCollider.GetComponent<SphereCollider>().radius, InvisibleObjectManager.Instance.invisibleObjectLayerMask))
             {
                 //Find all colliders inside sphereCollider
-                Collider[] collidersInsideSphere = Physics.OverlapSphere(transform.position + sphereCollider.center, sphereCollider.radius, InvisibleObjectManager.Instance.invisibleObjectLayerMask);
+                Collider[] collidersInsideSphere = Physics.OverlapSphere(transform.position + sphereCollider.GetComponent<SphereCollider>().center, sphereCollider.GetComponent<SphereCollider>().radius, InvisibleObjectManager.Instance.invisibleObjectLayerMask);
 
                 //If there are missing objects from the list, remove them
                 #region
@@ -111,23 +115,22 @@ public class InvisibleObject : MonoBehaviour
                 #endregion
 
 
-                //Check if this gameObject is Hidden
+                //Check if this gameObject will be invisible
                 if (collidingObjectList.Count <= 0)
                 {
-
                     distance = 0;
                     transparencyValue = 1;
 
                     UpdateVisibilityNew();
                 }
 
-                //Check if this gameObject is Visible
+                //Check if this gameObject will be Visible
                 else
                 {
                     if (collidingObjectList.Count == 1)
                     {
                         distance = Vector3.Distance(transform.position, collidingObjectList[0].transform.position);
-                        transparencyValue = (distance / sphereCollider.radius);
+                        transparencyValue = (distance / sphereCollider.GetComponent<SphereCollider>().radius);
                     }
                     else
                     {
@@ -151,7 +154,7 @@ public class InvisibleObject : MonoBehaviour
                         }
 
                         distance = Vector3.Distance(transform.position, collidingObjectList[lowestElement].transform.position);
-                        transparencyValue = (distance / sphereCollider.radius);
+                        transparencyValue = (distance / sphereCollider.GetComponent<SphereCollider>().radius);
                     }
 
                     UpdateVisibilityNew();
@@ -224,7 +227,7 @@ public class InvisibleObject : MonoBehaviour
                         objectPartsList_Base[i].SetActive(true);
                     }
 
-                    for (int i = 0; i < objectPartsList_Base.Count; i++)
+                    for (int i = 0; i < objectPartsList_Pickable.Count; i++)
                     {
                         objectPartsList_Pickable[i].SetActive(true);
                     }
@@ -237,7 +240,7 @@ public class InvisibleObject : MonoBehaviour
                     objectPartsList_Base[i].SetActive(true);
                 }
 
-                for (int i = 0; i < objectPartsList_Base.Count; i++)
+                for (int i = 0; i < objectPartsList_Pickable.Count; i++)
                 {
                     objectPartsList_Pickable[i].SetActive(true);
                 }
