@@ -289,6 +289,11 @@ public class HotbarManager : Singleton<HotbarManager>
 
     void UpdateVisibilityObjects()
     {
+        if (hotbarList[selectedSlot].itemName == Items.Flashlight)
+        {
+            return;
+        }
+
         for (int i = 0; i < WorldObjectManager.Instance.worldInvisibleObjectList.Count; i++)
         {
             if (WorldObjectManager.Instance.worldInvisibleObjectList[i] == null)
