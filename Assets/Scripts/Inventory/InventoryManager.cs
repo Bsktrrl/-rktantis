@@ -550,11 +550,6 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
         {
-            if (item != null)
-            {
-                print("item: " + item.durability_Current);
-            }
-            
             //Play Drop-Sound
             if (dropSound)
             {

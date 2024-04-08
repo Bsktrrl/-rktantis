@@ -197,7 +197,7 @@ public class HotbarManager : Singleton<HotbarManager>
                     EquipmentList[EquipmentList.Count - 1].GetComponent<WaterContainer>().SetupWaterContainer();
                 }
             }
-
+             
             SaveData();
             return;
         }
@@ -242,6 +242,9 @@ public class HotbarManager : Singleton<HotbarManager>
         ChangeItemInHand();
         LookAtManager.Instance.TurnOffScreens();
 
+        //Check Visibility Objects
+        UpdateVisibilityObjects();
+
         SaveData();
     }
     void HandSelection_UP()
@@ -269,6 +272,9 @@ public class HotbarManager : Singleton<HotbarManager>
         ChangeItemInHand();
         LookAtManager.Instance.TurnOffScreens();
 
+        //Check Visibility Objects
+        UpdateVisibilityObjects();
+
         SaveData();
     }
 
@@ -278,7 +284,18 @@ public class HotbarManager : Singleton<HotbarManager>
 
         EquippmentManager.Instance.GetArmState(selectedItem);
 
+        //Check Visibility Objects
+        UpdateVisibilityObjects();
+
         SaveData();
+    }
+
+    void UpdateVisibilityObjects()
+    {
+        for (int i = 0; i < WorldObjectManager.Instance.worldInvisibleObjectList.Count; i++)
+        {
+            WorldObjectManager.Instance.worldInvisibleObjectList[i].GetComponent<InvisibleObject>().UpdateVisibility();
+        }
     }
 
     #region QuickSlots

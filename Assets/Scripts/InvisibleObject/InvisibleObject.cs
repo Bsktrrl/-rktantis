@@ -6,14 +6,23 @@ using UnityEngine;
 public class InvisibleObject : MonoBehaviour
 {
     [SerializeField] float transparencyValue = 1;
-    [SerializeField] float distance;
+    float distance;
 
     [SerializeField] Collider objectCollider;
-    [SerializeField] List<GameObject> objectPartsList = new List<GameObject>();
-    [SerializeField] List<Material> materialList = new List<Material>();
+    [SerializeField] List<GameObject> objectPartsList_Base = new List<GameObject>();
+    [SerializeField] List<GameObject> objectPartsList_Pickable = new List<GameObject>();
+    public List<Material> materialList = new List<Material>();
 
     SphereCollider sphereCollider;
-    GameObject tempCollider;
+
+    public List<Renderer> rendererList = new List<Renderer>();
+
+    string TransparencyName = "_Transparency";
+    string InvisibleTriggerPointTagnName = "InvisibleTriggerPoint";
+
+    MaterialPropertyBlock propertyBlock;
+
+    public bool isVisible;
 
 
     //--------------------
@@ -23,28 +32,47 @@ public class InvisibleObject : MonoBehaviour
     {
         //Add a SphereCollider to this GameObject
         sphereCollider = gameObject.AddComponent<SphereCollider>();
-        sphereCollider.radius = 5f;
+        sphereCollider.radius = 4f;
         sphereCollider.isTrigger = true;
 
         distance = 0;
         transparencyValue = 1;
+
+        //Setup TempMaterials
+        for (int i = 0; i < materialList.Count; i++)
+        {
+            materialList[i] = Instantiate(materialList[i]);
+        }
+
+        propertyBlock = new MaterialPropertyBlock();
+
+        UpdateVisibility();
     }
-    private void Update()
+
+
+    //--------------------
+
+
+    public void UpdateVisibility()
     {
         if (HotbarManager.Instance.selectedItem == Items.Flashlight)
         {
-            for (int i = 0; i < materialList.Count; i++)
+            for (int i = 0; i < rendererList.Count; i++)
             {
-                materialList[i].SetFloat("_Transparency", transparencyValue);
+                propertyBlock.SetFloat(TransparencyName, transparencyValue);
+
+                rendererList[i].SetPropertyBlock(propertyBlock);
             }
         }
         else
         {
             transparencyValue = 1;
-
-            for (int i = 0; i < materialList.Count; i++)
+            
+            for (int i = 0; i < rendererList.Count; i++)
             {
-                materialList[i].SetFloat("_Transparency", transparencyValue);
+                propertyBlock.SetFloat(TransparencyName, transparencyValue);
+
+                rendererList[i].SetPropertyBlock(propertyBlock);
             }
         }
 
@@ -52,19 +80,51 @@ public class InvisibleObject : MonoBehaviour
         {
             objectCollider.enabled = false;
 
-            for (int i = 0; i < objectPartsList.Count; i++)
+            for (int i = 0; i < objectPartsList_Base.Count; i++)
             {
-                objectPartsList[i].SetActive(false);
+                objectPartsList_Base[i].SetActive(false);
             }
+
+            for (int i = 0; i < objectPartsList_Pickable.Count; i++)
+            {
+                objectPartsList_Pickable[i].SetActive(false);
+            }
+
+            isVisible = false;
         }
         else
         {
             objectCollider.enabled = true;
 
-            for (int i = 0; i < objectPartsList.Count; i++)
+            if (gameObject.GetComponent<Plant>())
             {
-                objectPartsList[i].SetActive(true);
+                if (gameObject.GetComponent<Plant>().isPicked)
+                {
+                    for (int i = 0; i < objectPartsList_Base.Count; i++)
+                    {
+                        objectPartsList_Base[i].SetActive(true);
+                    }
+
+                    for (int i = 0; i < objectPartsList_Base.Count; i++)
+                    {
+                        objectPartsList_Pickable[i].SetActive(false);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < objectPartsList_Base.Count; i++)
+                    {
+                        objectPartsList_Base[i].SetActive(true);
+                    }
+
+                    for (int i = 0; i < objectPartsList_Base.Count; i++)
+                    {
+                        objectPartsList_Pickable[i].SetActive(true);
+                    }
+                }
             }
+
+            isVisible = true;
         }
     }
 
@@ -74,36 +134,36 @@ public class InvisibleObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("InvisibleTriggerPoint"))
+        if (other.gameObject.CompareTag(InvisibleTriggerPointTagnName))
         {
-            tempCollider = other.gameObject;
-
             distance = Vector3.Distance(transform.position, other.gameObject.transform.position);
 
             transparencyValue = (distance / sphereCollider.radius);
+
+            UpdateVisibility();
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("InvisibleTriggerPoint"))
+        if (other.gameObject.CompareTag(InvisibleTriggerPointTagnName))
         {
-            tempCollider = other.gameObject;
-
             distance = Vector3.Distance(transform.position, other.gameObject.transform.position);
 
             transparencyValue = (distance / sphereCollider.radius);
+
+            UpdateVisibility();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("InvisibleTriggerPoint"))
+        if (other.gameObject.CompareTag(InvisibleTriggerPointTagnName))
         {
-            tempCollider = null;
-
             distance = 0;
             transparencyValue = 1;
+
+            UpdateVisibility();
         }
     }
 }

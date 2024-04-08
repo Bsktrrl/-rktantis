@@ -148,9 +148,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transparencyValue: 1
-  distance: 0
   objectCollider: {fileID: 3627397487568138283}
-  objectPartsList:
+  objectPartsList_Base:
   - {fileID: 6678250130615039855}
+  objectPartsList_Pickable: []
   materialList:
   - {fileID: 2100000, guid: afd1ed0325661ec4db18bc220a49daf7, type: 2}
+  rendererList:
+  - {fileID: 5416022677637240580}
+  isVisible: 0

@@ -66,6 +66,14 @@ public class LookAtManager : Singleton<LookAtManager>
     }
     private void Update()
     {
+        LookAt();
+    }
+
+    //--------------------
+
+
+    public void LookAt()
+    {
         if (!LookAt_Parent.activeInHierarchy)
         {
             return;
@@ -111,7 +119,7 @@ public class LookAtManager : Singleton<LookAtManager>
             return;
         }
         #endregion
-        
+
         //If looking at a Tree
         #region
         else if ((HotbarManager.Instance.selectedItem == Items.WoodAxe || HotbarManager.Instance.selectedItem == Items.StoneAxe || HotbarManager.Instance.selectedItem == Items.CryoniteAxe
@@ -181,6 +189,12 @@ public class LookAtManager : Singleton<LookAtManager>
             {
                 Plant_Panel.SetActive(false);
                 Item_Panel.SetActive(true);
+            }
+
+            else if (temp == 0)
+            {
+                Plant_Panel.SetActive(false);
+                Item_Panel.SetActive(false);
             }
 
             return;
@@ -302,11 +316,40 @@ public class LookAtManager : Singleton<LookAtManager>
     }
     int PlantDisplay()
     {
+        print("0. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.name);
+
         if (SelectionManager.Instance.selecedObject && SelectionManager.Instance.onTarget)
         {
+            print("1. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.name);
+
+            //Check if the plant is invisible
+            if (SelectionManager.Instance.selecedObject.gameObject.transform.parent.GetComponent<InvisibleObject>())
+            {
+                print("2. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.name);
+
+                if (!SelectionManager.Instance.selecedObject.gameObject.transform.parent.GetComponent<InvisibleObject>().isVisible)
+                {
+                    print("3. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.name);
+
+                    return 0;
+                }
+            }
+            else if (SelectionManager.Instance.selecedObject.GetComponent<InvisibleObject>())
+            {
+                print("4. Plant is Invisible: " + SelectionManager.Instance.selecedObject.name);
+
+                if (!SelectionManager.Instance.selecedObject.GetComponent<InvisibleObject>().isVisible)
+                {
+                    print("5. Plant is Invisible: " + SelectionManager.Instance.selecedObject.name);
+
+                    return 0;
+                }
+            }
+
             //If looking at the Plant
             if (SelectionManager.Instance.selecedObject.GetComponent<Plant>())
             {
+
                 Plant plant = SelectionManager.Instance.selecedObject.GetComponent<Plant>();
                 InteractableObject plantResource = plant.pickablePart.GetComponent<InteractableObject>();
 

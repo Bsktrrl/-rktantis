@@ -19,9 +19,22 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
     float underTerrainPos_Y;
 
 
+    [Header("InvisibleObjects")]
+    public List<GameObject> worldInvisibleObjectList = new List<GameObject>();
+
+
     //--------------------
 
 
+    private void Start()
+    {
+        InvisibleObject[] invisibleObjects = FindObjectsOfType<InvisibleObject>();
+
+        foreach (InvisibleObject invisibleObject in invisibleObjects)
+        {
+            worldInvisibleObjectList.Add(invisibleObject.gameObject);
+        }
+    }
     private void Update()
     {
         UpdateItemUnderTerrain();
