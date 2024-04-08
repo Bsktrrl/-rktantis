@@ -327,6 +327,8 @@ public class InventoryManager : Singleton<InventoryManager>
             SpawnItemToWorld(itemName, handDropPoint, true, inventories[inventory].itemsInInventory[index], 0);
 
             inventories[inventory].itemsInInventory.RemoveAt(index);
+
+            print("4. SelectedItem: " + HotbarManager.Instance.selectedItem.ToString());
         }
         else
         {
@@ -340,6 +342,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
                     inventories[inventory].itemsInInventory.RemoveAt(i);
 
+                    print("5. SelectedItem: " + HotbarManager.Instance.selectedItem.ToString());
                     break;
                 }
             }
@@ -356,6 +359,12 @@ public class InventoryManager : Singleton<InventoryManager>
         }
 
         SetBuildingRequirement();
+
+        //Update Item In Hand (to prevent it from disappearing)
+        HotbarManager.Instance.SetSelectedItem();
+        HotbarManager.Instance.ChangeItemInHand();
+
+        print("6. SelectedItem: " + HotbarManager.Instance.selectedItem.ToString());
 
         SaveData();
     }
@@ -558,7 +567,7 @@ public class InventoryManager : Singleton<InventoryManager>
             
             if (dropPos == handDropPoint)
             {
-                //If dropped from hand, have the same dropspot each time
+                //If dropped from hand, have the same DropSpot each time
                 WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, dropPos.transform.position, Quaternion.identity) as GameObject);
             }
             else

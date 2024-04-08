@@ -197,7 +197,10 @@ public class HotbarManager : Singleton<HotbarManager>
                     EquipmentList[EquipmentList.Count - 1].GetComponent<WaterContainer>().SetupWaterContainer();
                 }
             }
-             
+
+            //Check Visibility Objects
+            UpdateVisibilityObjects();
+
             SaveData();
             return;
         }
@@ -242,9 +245,6 @@ public class HotbarManager : Singleton<HotbarManager>
         ChangeItemInHand();
         LookAtManager.Instance.TurnOffScreens();
 
-        //Check Visibility Objects
-        UpdateVisibilityObjects();
-
         SaveData();
     }
     void HandSelection_UP()
@@ -271,9 +271,6 @@ public class HotbarManager : Singleton<HotbarManager>
 
         ChangeItemInHand();
         LookAtManager.Instance.TurnOffScreens();
-
-        //Check Visibility Objects
-        UpdateVisibilityObjects();
 
         SaveData();
     }
