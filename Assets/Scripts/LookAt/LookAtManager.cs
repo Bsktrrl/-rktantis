@@ -323,7 +323,18 @@ public class LookAtManager : Singleton<LookAtManager>
             print("1. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.name);
 
             //Check if the plant is invisible
-            if (SelectionManager.Instance.selecedObject.gameObject.transform.parent.GetComponent<InvisibleObject>())
+            if (SelectionManager.Instance.selecedObject.gameObject.transform.parent.transform.parent.GetComponent<InvisibleObject>())
+            {
+                print("2. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.transform.parent.name);
+
+                if (!SelectionManager.Instance.selecedObject.gameObject.transform.parent.transform.parent.GetComponent<InvisibleObject>().isVisible)
+                {
+                    print("3. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.transform.parent.name);
+
+                    return 0;
+                }
+            }
+            else if (SelectionManager.Instance.selecedObject.gameObject.transform.parent.GetComponent<InvisibleObject>())
             {
                 print("2. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.name);
 

@@ -152,6 +152,9 @@ public class HotbarManager : Singleton<HotbarManager>
 
     public void ChangeItemInHand()
     {
+        //Check Visibility Objects
+        UpdateVisibilityObjects();
+
         //Change ArmStates
         EquippmentManager.Instance.GetEquipmentStates(selectedItem);
 
@@ -197,9 +200,6 @@ public class HotbarManager : Singleton<HotbarManager>
                     EquipmentList[EquipmentList.Count - 1].GetComponent<WaterContainer>().SetupWaterContainer();
                 }
             }
-
-            //Check Visibility Objects
-            UpdateVisibilityObjects();
 
             SaveData();
             return;

@@ -27,6 +27,15 @@ public class SelectionManager : Singleton<SelectionManager>
 
             if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance))
             {
+                //If Hitting the SphereCollider to an InvisibleObject, ignore the hit
+                if (hit.transform.gameObject.GetComponent<InvisibleObject>())
+                {
+                    if (hit.transform.gameObject.GetComponent<SphereCollider>())
+                    {
+                        return;
+                    }
+                }
+                
                 Transform selectionTransform = hit.transform;
 
                 //Get the layer looking at
