@@ -128,7 +128,7 @@ public class WorldObjectManager : Singleton<WorldObjectManager>
 
     public void SaveWorldObjectPositions()
     {
-        print("worldObjectList_ToSave: " + worldObjectList_ToSave.Count + " | worldObjectList.Count: " + worldObjectList.Count);
+        //print("worldObjectList_ToSave: " + worldObjectList_ToSave.Count + " | worldObjectList.Count: " + worldObjectList.Count);
 
         if (worldObjectList_ToSave.Count == worldObjectList.Count)
         {

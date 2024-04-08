@@ -360,6 +360,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
         SetBuildingRequirement();
 
+        print("5.5. SelectedItem: " + HotbarManager.Instance.selectedItem.ToString());
+
         //Update Item In Hand (to prevent it from disappearing)
         HotbarManager.Instance.SetSelectedItem();
         HotbarManager.Instance.ChangeItemInHand();
@@ -1446,7 +1448,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     {
                         SoundManager.Instance.Play_Inventory_InventoryIsFull_Clip();
 
-                        print("attemptd picked up");
+                        //print("attemptd picked up");
                         RemoveItemFromInventory(inventory, lastItemToGet, inventories[inventory].itemsInInventory[i].itemID);
                     }
 

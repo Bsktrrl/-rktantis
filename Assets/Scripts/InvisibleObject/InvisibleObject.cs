@@ -59,9 +59,12 @@ public class InvisibleObject : MonoBehaviour
         {
             for (int i = 0; i < rendererList.Count; i++)
             {
-                propertyBlock.SetFloat(TransparencyName, transparencyValue);
+                if (propertyBlock != null)
+                {
+                    propertyBlock.SetFloat(TransparencyName, transparencyValue);
 
-                rendererList[i].SetPropertyBlock(propertyBlock);
+                    rendererList[i].SetPropertyBlock(propertyBlock);
+                }
             }
         }
         else

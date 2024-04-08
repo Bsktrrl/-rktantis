@@ -291,7 +291,25 @@ public class HotbarManager : Singleton<HotbarManager>
     {
         for (int i = 0; i < WorldObjectManager.Instance.worldInvisibleObjectList.Count; i++)
         {
-            WorldObjectManager.Instance.worldInvisibleObjectList[i].GetComponent<InvisibleObject>().UpdateVisibility();
+            if (WorldObjectManager.Instance.worldInvisibleObjectList[i] == null)
+            {
+                WorldObjectManager.Instance.worldInvisibleObjectList.RemoveAt(i);
+
+                continue;
+            }
+
+            if (WorldObjectManager.Instance.worldInvisibleObjectList[i].GetComponent<InvisibleObject>())
+            {
+                WorldObjectManager.Instance.worldInvisibleObjectList[i].GetComponent<InvisibleObject>().UpdateVisibility();
+            }
+        }
+
+        for (int i = 0; i < WorldObjectManager.Instance.worldObjectList.Count; i++)
+        {
+            if (WorldObjectManager.Instance.worldObjectList[i].GetComponent<InvisibleObject>())
+            {
+                WorldObjectManager.Instance.worldObjectList[i].GetComponent<InvisibleObject>().UpdateVisibility();
+            }
         }
     }
 
