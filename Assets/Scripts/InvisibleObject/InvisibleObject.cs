@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InvisibleObject : MonoBehaviour
@@ -24,6 +26,8 @@ public class InvisibleObject : MonoBehaviour
 
     public bool isVisible;
 
+    [SerializeField] List<GameObject> collidingObjectList;
+
 
     //--------------------
 
@@ -45,43 +49,137 @@ public class InvisibleObject : MonoBehaviour
         }
 
         propertyBlock = new MaterialPropertyBlock();
+    }
 
-        UpdateVisibility();
+    private void Update()
+    {
+        GetAllObjectsInSphere();
     }
 
 
     //--------------------
 
 
-    public void UpdateVisibility()
+    public void GetAllObjectsInSphere()
     {
-        if (HotbarManager.Instance.selectedItem == Items.Flashlight
-            || HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
+        if (sphereCollider != null)
         {
-            for (int i = 0; i < rendererList.Count; i++)
+            //Check if any invisibleObject is inside the Sphere
+            if (Physics.CheckSphere(transform.position + sphereCollider.center, sphereCollider.radius, InvisibleObjectManager.Instance.invisibleObjectLayerMask))
             {
-                if (propertyBlock != null)
-                {
-                    propertyBlock.SetFloat(TransparencyName, transparencyValue);
+                //Find all colliders inside sphereCollider
+                Collider[] collidersInsideSphere = Physics.OverlapSphere(transform.position + sphereCollider.center, sphereCollider.radius, InvisibleObjectManager.Instance.invisibleObjectLayerMask);
 
-                    rendererList[i].SetPropertyBlock(propertyBlock);
+                //If there are missing objects from the list, remove them
+                #region
+                for (int i = collidingObjectList.Count - 1; i >= 0; i--)
+                {
+                    bool isColliderFound = false;
+
+                    foreach (Collider collider in collidersInsideSphere)
+                    {
+                        if (collidingObjectList[i] == null)
+                        {
+                            isColliderFound = false;
+                            break;
+                        }
+                        else if (collidingObjectList[i].GetComponent<Collider>() == collider)
+                        {
+                            isColliderFound = true;
+                            break;
+                        }
+                    }
+
+                    //If the collider is not found, remove the gameObject from the list
+                    if (!isColliderFound)
+                    {
+                        collidingObjectList.RemoveAt(i);
+                    }
+                }
+                #endregion
+
+
+                //If object is not in the list, add it
+                #region
+                foreach (Collider collider in collidersInsideSphere)
+                {
+                    if (!collidingObjectList.Contains(collider.transform.gameObject))
+                    {
+                        collidingObjectList.Add(collider.transform.gameObject);
+                    }
+                }
+                #endregion
+
+
+                //Check if this gameObject is Hidden
+                if (collidingObjectList.Count <= 0)
+                {
+
+                    distance = 0;
+                    transparencyValue = 1;
+
+                    UpdateVisibilityNew();
+                }
+
+                //Check if this gameObject is Visible
+                else
+                {
+                    if (collidingObjectList.Count == 1)
+                    {
+                        distance = Vector3.Distance(transform.position, collidingObjectList[0].transform.position);
+                        transparencyValue = (distance / sphereCollider.radius);
+                    }
+                    else
+                    {
+                        //Find the gameObject closes to this gameObject in distance
+                        List<float> tempIndex = new List<float>();
+                        int lowestElement = 0;
+
+                        for (int i = 0; i < collidingObjectList.Count; i++)
+                        {
+                            tempIndex.Add(Vector3.Distance(gameObject.transform.position, collidingObjectList[i].transform.position));
+                        }
+
+                        for (int i = 0; i < collidingObjectList.Count; i++)
+                        {
+                            if (tempIndex[i] == tempIndex.Min())
+                            {
+                                lowestElement = i;
+
+                                break;
+                            }
+                        }
+
+                        distance = Vector3.Distance(transform.position, collidingObjectList[lowestElement].transform.position);
+                        transparencyValue = (distance / sphereCollider.radius);
+                    }
+
+                    UpdateVisibilityNew();
                 }
             }
-        }
-        else
-        {
-            transparencyValue = 1;
-            
-            for (int i = 0; i < rendererList.Count; i++)
+            else
             {
-                propertyBlock.SetFloat(TransparencyName, transparencyValue);
+                if (collidingObjectList.Count > 0)
+                {
+                    collidingObjectList.Clear();
 
-                rendererList[i].SetPropertyBlock(propertyBlock);
+                }
+
+                transparencyValue = 1;
+
+                UpdateVisibilityNew();
             }
         }
+    }
 
+    public void UpdateVisibilityNew()
+    {
+        //Hide Object
         if (transparencyValue >= 1)
         {
+            //Update rendererList
+            UpdateRenderList();
+
             objectCollider.enabled = false;
 
             for (int i = 0; i < objectPartsList_Base.Count; i++)
@@ -96,8 +194,13 @@ public class InvisibleObject : MonoBehaviour
 
             isVisible = false;
         }
+
+        //Show Object
         else
         {
+            //Update rendererList
+            UpdateRenderList();
+
             objectCollider.enabled = true;
 
             if (gameObject.GetComponent<Plant>())
@@ -127,47 +230,32 @@ public class InvisibleObject : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                for (int i = 0; i < objectPartsList_Base.Count; i++)
+                {
+                    objectPartsList_Base[i].SetActive(true);
+                }
+
+                for (int i = 0; i < objectPartsList_Base.Count; i++)
+                {
+                    objectPartsList_Pickable[i].SetActive(true);
+                }
+            }
 
             isVisible = true;
         }
     }
-
-
-    //--------------------
-
-
-    private void OnTriggerEnter(Collider other)
+    void UpdateRenderList()
     {
-        if (other.gameObject.CompareTag(InvisibleTriggerPointTagnName))
+        for (int i = 0; i < rendererList.Count; i++)
         {
-            distance = Vector3.Distance(transform.position, other.gameObject.transform.position);
+            if (propertyBlock != null)
+            {
+                propertyBlock.SetFloat(TransparencyName, transparencyValue);
 
-            transparencyValue = (distance / sphereCollider.radius);
-
-            UpdateVisibility();
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag(InvisibleTriggerPointTagnName))
-        {
-            distance = Vector3.Distance(transform.position, other.gameObject.transform.position);
-
-            transparencyValue = (distance / sphereCollider.radius);
-
-            UpdateVisibility();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag(InvisibleTriggerPointTagnName))
-        {
-            distance = 0;
-            transparencyValue = 1;
-
-            UpdateVisibility();
+                rendererList[i].SetPropertyBlock(propertyBlock);
+            }
         }
     }
 }

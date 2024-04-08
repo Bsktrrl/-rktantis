@@ -7,6 +7,7 @@ public class HotbarManager : Singleton<HotbarManager>
 {
     public GameObject hotbar_Parent;
     public GameObject EquipmentHolder;
+    public GameObject equippedItem;
     public List<GameObject> EquipmentList = new List<GameObject>();
 
     public HotbarSave hotbarSave = new HotbarSave();
@@ -152,9 +153,6 @@ public class HotbarManager : Singleton<HotbarManager>
 
     public void ChangeItemInHand()
     {
-        //Check Visibility Objects
-        UpdateVisibilityObjects();
-
         //Change ArmStates
         EquippmentManager.Instance.GetEquipmentStates(selectedItem);
 
@@ -201,6 +199,11 @@ public class HotbarManager : Singleton<HotbarManager>
                 }
             }
 
+            equippedItem = EquipmentList[EquipmentList.Count - 1];
+
+            //Change ArmStates
+            EquippmentManager.Instance.GetEquipmentStates(selectedItem);
+
             SaveData();
             return;
         }
@@ -214,6 +217,8 @@ public class HotbarManager : Singleton<HotbarManager>
                 EquipmentList[i].GetComponent<EquippedItem>().DestroyObject();
             }
         }
+
+        equippedItem = null;
     }
 
 
@@ -281,42 +286,7 @@ public class HotbarManager : Singleton<HotbarManager>
 
         EquippmentManager.Instance.GetArmState(selectedItem);
 
-        //Check Visibility Objects
-        UpdateVisibilityObjects();
-
         SaveData();
-    }
-
-    void UpdateVisibilityObjects()
-    {
-        if (hotbarList[selectedSlot].itemName == Items.Flashlight
-            || hotbarList[selectedSlot].itemName == Items.AríditeCrystal)
-        {
-            return;
-        }
-
-        for (int i = 0; i < WorldObjectManager.Instance.worldInvisibleObjectList.Count; i++)
-        {
-            if (WorldObjectManager.Instance.worldInvisibleObjectList[i] == null)
-            {
-                WorldObjectManager.Instance.worldInvisibleObjectList.RemoveAt(i);
-
-                continue;
-            }
-
-            if (WorldObjectManager.Instance.worldInvisibleObjectList[i].GetComponent<InvisibleObject>())
-            {
-                WorldObjectManager.Instance.worldInvisibleObjectList[i].GetComponent<InvisibleObject>().UpdateVisibility();
-            }
-        }
-
-        for (int i = 0; i < WorldObjectManager.Instance.worldObjectList.Count; i++)
-        {
-            if (WorldObjectManager.Instance.worldObjectList[i].GetComponent<InvisibleObject>())
-            {
-                WorldObjectManager.Instance.worldObjectList[i].GetComponent<InvisibleObject>().UpdateVisibility();
-            }
-        }
     }
 
     #region QuickSlots
