@@ -27,6 +27,9 @@ public class InvisibleObject : MonoBehaviour
     public bool isVisible;
     float distance;
 
+    [SerializeField] bool isPicture;
+    [SerializeField] Texture pictureSprite;
+
 
 
     //--------------------
@@ -53,6 +56,16 @@ public class InvisibleObject : MonoBehaviour
         propertyBlock = new MaterialPropertyBlock();
 
         collidingObjectList.Clear();
+
+        //If Object is a Picture, change the Texture
+        if (isPicture)
+        {
+            propertyBlock.SetTexture("_AlbedoMap", pictureSprite);
+            propertyBlock.SetTexture("_NormalMap", pictureSprite);
+            propertyBlock.SetTexture("_RoughnessMap", pictureSprite);
+
+            rendererList[0].SetPropertyBlock(propertyBlock);
+        }
     }
 
     private void Update()
@@ -272,7 +285,7 @@ public class InvisibleObject : MonoBehaviour
     {
         if (HotbarManager.Instance.selectedItem == Items.Flashlight)
         {
-            sphereCollider.GetComponent<SphereCollider>().radius = 7f;
+            sphereCollider.GetComponent<SphereCollider>().radius = 6f;
         }
         else if (HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
         {
