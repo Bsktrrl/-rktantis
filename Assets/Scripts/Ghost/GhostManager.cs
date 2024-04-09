@@ -73,7 +73,10 @@ public class GhostManager : Singleton<GhostManager>
             if (!obj.activeInHierarchy)
             {
                 obj.transform.position = GetSpawnPosition();
+                obj.GetComponent<InvisibleObject>().transparencyValue = 1;
+                obj.GetComponent<InvisibleObject>().UpdateRenderList();
                 obj.SetActive(true);
+
                 break;
             }
         }
@@ -83,8 +86,11 @@ public class GhostManager : Singleton<GhostManager>
         GameObject newObj = Instantiate(ghostPrefab, GetSpawnPosition(), Quaternion.identity);
         newObj.transform.parent = ghostPoolParent.transform;
 
-        newObj.SetActive(true);
+        //newObj.SetActive(true);
         ghostPool.Add(newObj);
+        ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().transparencyValue = 1;
+        ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().UpdateRenderList();
+        ghostPool[ghostPool.Count - 1].SetActive(true);
         #endregion
     }
     Vector3 GetSpawnPosition()
@@ -93,16 +99,19 @@ public class GhostManager : Singleton<GhostManager>
         Vector3 randomDirection = UnityEngine.Random.insideUnitSphere.normalized;
 
         //Get a random distance within a range
-        float randomDistance = UnityEngine.Random.Range(this.spawnPosition.x, this.spawnPosition.y);
+        float randomDistanceAwayFromPlayer = UnityEngine.Random.Range(spawnPosition.x, spawnPosition.y);
+        float randomDistance_Y = UnityEngine.Random.Range(MainManager.Instance.playerBody.transform.position.y - 0.5f, MainManager.Instance.playerBody.transform.position.y + 1);
 
-        Vector3 tempSpawnPosition = MainManager.Instance.playerBody.transform.position + randomDirection * randomDistance;
-        tempSpawnPosition.y = MainManager.Instance.playerBody.transform.position.y + 0f;
+        Vector3 tempSpawnPosition = MainManager.Instance.playerBody.transform.position + randomDirection * randomDistanceAwayFromPlayer;
+        tempSpawnPosition.y = MainManager.Instance.playerBody.transform.position.y + randomDistance_Y;
 
-        return spawnPosition;
+        return tempSpawnPosition;
     }
 
     public void ReturnGhostToPool(GameObject obj)
     {
+        obj.GetComponent<InvisibleObject>().transparencyValue = 1;
+        obj.GetComponent<InvisibleObject>().UpdateRenderList();
         obj.SetActive(false);
     }
 }

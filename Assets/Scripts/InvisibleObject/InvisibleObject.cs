@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class InvisibleObject : MonoBehaviour
 {
-    [SerializeField] float transparencyValue = 1;
+    public float transparencyValue = 1;
 
     [SerializeField] Collider objectCollider;
 
@@ -21,7 +21,7 @@ public class InvisibleObject : MonoBehaviour
 
     //SphereCollider sphereCollider;
     GameObject sphereCollider;
-    MaterialPropertyBlock propertyBlock;
+    public MaterialPropertyBlock propertyBlock;
 
     string TransparencyName = "_Transparency";
     public bool isVisible;
@@ -44,16 +44,17 @@ public class InvisibleObject : MonoBehaviour
         sphereCollider.GetComponent<SphereCollider>().radius = 4f;
         sphereCollider.GetComponent<SphereCollider>().isTrigger = true;
 
+        propertyBlock = new MaterialPropertyBlock();
+
         distance = 0;
         transparencyValue = 1;
+        UpdateRenderList();
 
         //Setup TempMaterials
         for (int i = 0; i < materialList.Count; i++)
         {
             materialList[i] = Instantiate(materialList[i]);
         }
-
-        propertyBlock = new MaterialPropertyBlock();
 
         collidingObjectList.Clear();
 
@@ -264,7 +265,7 @@ public class InvisibleObject : MonoBehaviour
             isVisible = true;
         }
     }
-    void UpdateRenderList()
+    public void UpdateRenderList()
     {
         for (int i = 0; i < rendererList.Count; i++)
         {
