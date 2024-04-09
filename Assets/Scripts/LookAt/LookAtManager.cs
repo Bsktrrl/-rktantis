@@ -303,7 +303,11 @@ public class LookAtManager : Singleton<LookAtManager>
             {
                 Item item = MainManager.Instance.GetItem(SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().itemName);
 
-                ItemImage.sprite = item.hotbarSprite;
+                if (item.hotbarSprite)
+                {
+                    ItemImage.sprite = item.hotbarSprite;
+                }
+                
                 ItemName.text = SpaceTextConverting.Instance.SetText(item.itemName.ToString());
             }
         }

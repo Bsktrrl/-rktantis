@@ -318,6 +318,7 @@ public class ResearchManager : Singleton<ResearchManager>
     void CompleteResearch()
     {
         SoundManager.Instance.Play_Research_Complete_Clip();
+        SoundManager.Instance.Stop_ResearchTable_Researching_Clip();
 
         //Change isResearched stats
         for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)

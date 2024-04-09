@@ -14134,8 +14134,10 @@ MonoBehaviour:
   InteractableObjects_OpenResearchTable_Clip: {fileID: 0}
   InteractableObjects_UngoingResearchTable_Clip: {fileID: 0}
   InteractableObjects_CloseResearchTable_Clip: {fileID: 0}
-  InteractableObjects_ResearchTable_Researching_Clip: {fileID: 0}
-  InteractableObjects_ResearchTable_ResearchComplete_Clip: {fileID: 0}
+  InteractableObjects_ResearchTable_Researching_Clip: {fileID: 8300000, guid: 11abed732b8bb77479151ed4c87d8298,
+    type: 3}
+  InteractableObjects_ResearchTable_ResearchComplete_Clip: {fileID: 8300000, guid: 5fed85277dfcba443a51061b7059aa10,
+    type: 3}
   InteractableObjects_ResearchTable_NewItemAvailable_Clip: {fileID: 0}
   InteractableObjects_OpenSkillTreeTable_Clip: {fileID: 0}
   InteractableObjects_UngoingSkillTreeTable_Clip: {fileID: 0}
@@ -22291,7 +22293,7 @@ MonoBehaviour:
   researchProgressBar: {fileID: 8272103548333169895}
   activeItem: 0
   isResearching: 0
-  researchTime_Multiplier: 2
+  researchTime_Multiplier: 1
   researchedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   notResearchedColor: {r: 1, g: 1, b: 1, a: 1}
   visibleColor: {r: 1, g: 1, b: 1, a: 1}
@@ -84640,7 +84642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.010284424}
+  m_AnchoredPosition: {x: 0, y: 0.010040283}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763

@@ -1194,6 +1194,13 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_ResearchTable_Research.Play();
         }
     }
+    public void Stop_ResearchTable_Researching_Clip()
+    {
+        if (audioSource_ResearchTable_Research != null)
+        {
+            audioSource_ResearchTable_Research.Stop();
+        }
+    }
     public void Play_Research_Complete_Clip()
     {
         if (audioSource_ResearchTable_ResearchComplete != null)
