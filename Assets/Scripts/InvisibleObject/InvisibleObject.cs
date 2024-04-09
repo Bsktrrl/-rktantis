@@ -58,6 +58,8 @@ public class InvisibleObject : MonoBehaviour
     private void Update()
     {
         GetAllObjectsInSphere();
+
+        SetSphereRange();
     }
 
 
@@ -259,6 +261,22 @@ public class InvisibleObject : MonoBehaviour
 
                 rendererList[i].SetPropertyBlock(propertyBlock);
             }
+        }
+    }
+
+
+    //--------------------
+
+
+    public void SetSphereRange()
+    {
+        if (HotbarManager.Instance.selectedItem == Items.Flashlight)
+        {
+            sphereCollider.GetComponent<SphereCollider>().radius = 7f;
+        }
+        else if (HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
+        {
+            sphereCollider.GetComponent<SphereCollider>().radius = 4f;
         }
     }
 }
