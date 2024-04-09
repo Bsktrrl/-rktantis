@@ -4,20 +4,125 @@ using UnityEngine;
 
 public class SoundManager : Singleton<SoundManager>
 {
-    public AudioSource audioSource_WorldSound; //World Sound Source
-    public AudioSource audioSource_MenuSound; //Menu Sound Source
-    public AudioSource audioSource_MenuSound2; //Menu Sound Source
-    public AudioSource audioSourceWeatherSound; //Weather Sound Source
+    #region Variables
+    float sound_Master;
 
-    public AudioSource audioSource_Music; //Music Source
+    float sound_World;
+    float sound_Menu;
+    float sound_Music;
+    float sound_Weather;
+    float sound_Voice;
+    #endregion
 
-    public AudioSource audioSource_VoiceMessages; //Voice Source
+    #region Sound Categories
+    [Header("Everywhere")]
+    public AudioSource audioSource_Everywhere_Music1; //Music Source
+    public AudioSource audioSource_Everywhere_Music2; //Music Source
+    public AudioSource audioSource_Everywhere_Music3; //Music Source
+
+    public AudioSource audioSource_Everywhere_WeatherSound1; //Weather Sound Source
+    public AudioSource audioSource_Everywhere_WeatherSound2; //Weather Sound Source
+    public AudioSource audioSource_Everywhere_WeatherSound3; //Weather Sound Source
+    public AudioSource audioSource_Everywhere_WeatherSound4; //Weather Sound Source
+    public AudioSource audioSource_Everywhere_WeatherSound5; //Weather Sound Source
+
+    [Header("Player Movement")]
+    public AudioSource audioSource_PlayerMovement_WalkingRunning; //
+    public AudioSource audioSource_PlayerMovement_FallDamage; //
+
+    [Header("Tablet")]
+    public AudioSource audioSource_Tablet_OpenCloseTablet; //
+    public AudioSource audioSource_Tablet_ChangeTabetMenu; //
+
+    [Header("Inventory")]
+    public AudioSource audioSource_Inventory_ItemHover; //
+    public AudioSource audioSource_Inventory_ItemManouver; //
+
+    [Header("Hotbar")]
+    public AudioSource audioSource_Hotbar_ChangeHotbarSlot; //
+    public AudioSource audioSource_Hotbar_AddToHotbar; //
+    public AudioSource audioSource_Hotbar_RemoveFromHotbar; //
+
+    [Header("Crafting")]
+    public AudioSource audioSource_Crafting_ChangeCraftingMenu; //
+    public AudioSource audioSource_Crafting_SelectCraftingItem; //
+    public AudioSource audioSource_Crafting_PerformCrafting; //
+    public AudioSource audioSource_Crafting_CannotCraftError; //
+
+    [Header("SkillTree")]
+    public AudioSource audioSource_SkillTree_PerkHover; //
+    public AudioSource audioSource_SkillTree_ChangeSkillTreeMenu; //
+    public AudioSource audioSource_CompletePerk; //
+
+    [Header("Equipped Items")]
+    public AudioSource audioSource_EquippedItems_BreakEquipment; //
+
+    [Header("Axe Usage")]
+    public AudioSource audioSource_AxeUsage_Cutting; //
+    public AudioSource audioSource_AxeUsage_TreeFall; //
+    public AudioSource audioSource_AxeUsage_TreeHitGround; //
+    public AudioSource audioSource_CannotHitCuttable; //
+
+    [Header("Pickaxe Usage")]
+    public AudioSource audioSource_PickaxeUsage_Mining; //
+    public AudioSource audioSource_PickaxeUsage_OreDestroyd; //
+    public AudioSource audioSource_PickaxeUsage_CannotHitMineable; //
+
+    [Header("Sword Usage")]
+    public AudioSource audioSource_SwordUsage_Slash; //
+    public AudioSource audioSource_EnemyHit; //
+
+    [Header("Building")]
+    public AudioSource audioSource_Building_Placement; //
+    public AudioSource audioSource_Building_Remove; //
+    public AudioSource audioSource_CannotPlace; //
+
+    [Header("Chest")]
+    public AudioSource audioSource_Chest_Open; //
+    public AudioSource audioSource_Chest_Close; //
+
+    [Header("InteractableObjects")]
+    public AudioSource audioSource_InteractableObjects_Open; //
+    public AudioSource audioSource_InteractableObjects_Ongoing; //
+    public AudioSource audioSource_InteractableObjects_Close; //
+
+    [Header("ResearchTable")]
+    public AudioSource audioSource_ResearchTable_Research; //
+    public AudioSource audioSource_ResearchTable_ResearchComplete; //
+    public AudioSource audioSource_ResearchTable_NewItemAvailable; //
+
+    [Header("Buffs")]
+    public AudioSource audioSource_Buffs_AddBuffEffect; //
+    public AudioSource audioSource_Buffs_RemoveBuffEffect; //
+
+    [Header("Journal")]
+    public AudioSource audioSource_Journal_GetNewJournalPage; //
+    public AudioSource audioSource_Journal_SelectingJournalPage; //
+    public AudioSource audioSource_Journal_VoiceMessage; //Voice Source
+    #endregion
 
 
     //--------------------
 
 
     #region Clips
+
+    [Space(50)]
+
+    #region Music
+    [Header("Music")]
+    [SerializeField] AudioClip music_mainMusic1_Clip; //
+    [SerializeField] AudioClip music_mainMusic2_Clip; //
+    [SerializeField] AudioClip music_mainMusic3_Clip; //
+    #endregion
+    #region Weather
+    [Header("Weather")]
+    [SerializeField] AudioClip weather_sound1_Clip; //
+    [SerializeField] AudioClip weather_sound2_Clip; //
+    [SerializeField] AudioClip weather_sound3_Clip; //
+    [SerializeField] AudioClip weather_sound4_Clip; //
+    [SerializeField] AudioClip weather_sound5_Clip; //
+    #endregion
 
     #region Player
     [Header("Player")]
@@ -74,6 +179,7 @@ public class SoundManager : Singleton<SoundManager>
     #region Skill Tree
     [Header("Skill Tree")]
     [SerializeField] AudioClip skillTree_HoverPerk_Clip;
+    [SerializeField] AudioClip skillTree_ChangeMenu_Clip;
     [SerializeField] AudioClip skillTree_CompletedPerk_Clip;
     #endregion
     #region EquippedItems
@@ -104,20 +210,21 @@ public class SoundManager : Singleton<SoundManager>
     #region Sword Usage
     [Header("Sword Usage")]
     [SerializeField] AudioClip swordUsage_Slashing_Clip; //
+    [SerializeField] AudioClip swordUsage_EnemyHit_Clip; //
     #endregion
     #region Building
     [Header("Building")]
-    [SerializeField] AudioClip building_Place_Wood;
-    [SerializeField] AudioClip building_Place_Stone;
+    [SerializeField] AudioClip building_Place_Wood_Clip;
+    [SerializeField] AudioClip building_Place_Stone_Clip;
     [SerializeField] AudioClip building_Place_Cryonite;
 
-    [SerializeField] AudioClip building_Remove_Wood;
-    [SerializeField] AudioClip building_Remove_Stone;
-    [SerializeField] AudioClip building_Remove_Cryonite;
+    [SerializeField] AudioClip building_Remove_Wood_Clip;
+    [SerializeField] AudioClip building_Remove_Stone_Clip;
+    [SerializeField] AudioClip building_Remove_Cryonite_Clip;
 
-    [SerializeField] AudioClip building_CannotPlaceBlock;
-    [SerializeField] AudioClip building_Place_MoveableObject; //
-    [SerializeField] AudioClip building_Remove_MoveableObject; //
+    [SerializeField] AudioClip building_CannotPlaceBlock_Clip;
+    [SerializeField] AudioClip building_Place_MoveableObject_Clip; //
+    [SerializeField] AudioClip building_Remove_MoveableObject_Clip; //
     #endregion
     #region Chests
     [Header("Chests")]
@@ -142,6 +249,8 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip InteractableObjects_UngoingResearchTable_Clip; //
     [SerializeField] AudioClip InteractableObjects_CloseResearchTable_Clip; //
     [SerializeField] AudioClip InteractableObjects_ResearchTable_Researching_Clip; //
+    [SerializeField] AudioClip InteractableObjects_ResearchTable_ResearchComplete_Clip; //
+    [SerializeField] AudioClip InteractableObjects_ResearchTable_NewItemAvailable_Clip; //
 
     //Skill Tree Table
     [SerializeField] AudioClip InteractableObjects_OpenSkillTreeTable_Clip; //
@@ -167,17 +276,15 @@ public class SoundManager : Singleton<SoundManager>
     #endregion
     #region Buffs
     [Header("Buffs")]
-    [SerializeField] AudioClip buff_Deactivated; //
+    [SerializeField] AudioClip buff_Activated_Clip; //
+    [SerializeField] AudioClip buff_Deactivated_Clip; //
     #endregion
     #region Journal Pages
     [Header("Journal Pages")]
-    [SerializeField] AudioClip journalPage_GetNewJournalPage; //
-    [SerializeField] AudioClip journalPage_SelectingJournalPage; //
+    [SerializeField] AudioClip journalPage_GetNewJournalPage_Clip; //
+    [SerializeField] AudioClip journalPage_SelectingJournalPage_Clip; //
     #endregion
     #region Research
-    [Header("Research")]
-    [SerializeField] AudioClip research_Ongoing; //
-    [SerializeField] AudioClip research_Complete; //
     #endregion
 
     #endregion
@@ -186,181 +293,308 @@ public class SoundManager : Singleton<SoundManager>
     //--------------------
 
 
-    private void Update()
+    public void UpdateSounds()
     {
-        audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-        
-        audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-        audioSource_MenuSound2.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
+        //Get Volumes
+        #region
+        sound_Master = SettingsManager.Instance.Get_Sound_Master();
 
-        audioSource_Music.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_Music();
+        sound_World = SettingsManager.Instance.Get_Sound_WorldSFX() * sound_Master;
+        sound_Menu = SettingsManager.Instance.Get_Sound_MenuSFX() * sound_Master;
+        sound_Music = SettingsManager.Instance.Get_Sound_Music() * sound_Master;
+        sound_Weather = SettingsManager.Instance.Get_Sound_WeatherSFX() * sound_Master;
+        sound_Voice = SettingsManager.Instance.Get_Sound_Voice() * sound_Master;
+        #endregion
 
-        audioSourceWeatherSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WeatherSFX();
+        //Add Volume to the audioSources
+        #region 
+        //Everywhere
+        audioSource_Everywhere_Music1.volume = sound_Music;
+        audioSource_Everywhere_Music2.volume = sound_Music;
+        audioSource_Everywhere_Music3.volume = sound_Music;
+        audioSource_Everywhere_WeatherSound1.volume = sound_Weather;
+        audioSource_Everywhere_WeatherSound2.volume = sound_Weather;
+        audioSource_Everywhere_WeatherSound3.volume = sound_Weather;
+        audioSource_Everywhere_WeatherSound4.volume = sound_Weather;
+        audioSource_Everywhere_WeatherSound5.volume = sound_Weather;
 
-        audioSource_VoiceMessages.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_Voice();
+        //Player Movement
+        audioSource_PlayerMovement_WalkingRunning.volume = sound_World;
+        audioSource_PlayerMovement_FallDamage.volume = sound_World;
+
+        //Tablet
+        audioSource_Tablet_OpenCloseTablet.volume = sound_Menu;
+        audioSource_Tablet_ChangeTabetMenu.volume = sound_Menu;
+
+        //Inventory
+        audioSource_Inventory_ItemHover.volume = sound_Menu;
+        audioSource_Inventory_ItemManouver.volume = sound_Menu;
+
+        //Hotbar
+        audioSource_Hotbar_ChangeHotbarSlot.volume = sound_Menu;
+        audioSource_Hotbar_AddToHotbar.volume = sound_Menu;
+        audioSource_Hotbar_RemoveFromHotbar.volume = sound_Menu;
+
+        //Crafting
+        audioSource_Crafting_ChangeCraftingMenu.volume = sound_Menu;
+        audioSource_Crafting_SelectCraftingItem.volume = sound_Menu;
+        audioSource_Crafting_PerformCrafting.volume = sound_Menu;
+        audioSource_Crafting_CannotCraftError.volume = sound_Menu;
+
+        //SkillTree
+        audioSource_SkillTree_PerkHover.volume = sound_Menu;
+        audioSource_SkillTree_ChangeSkillTreeMenu.volume = sound_Menu;
+        audioSource_CompletePerk.volume = sound_Menu;
+
+        //Equipped Item
+        audioSource_EquippedItems_BreakEquipment.volume = sound_World;
+
+        //Axe Usage
+        audioSource_AxeUsage_Cutting.volume = sound_World;
+        audioSource_AxeUsage_TreeFall.volume = sound_World;
+        audioSource_AxeUsage_TreeHitGround.volume = sound_World;
+        audioSource_CannotHitCuttable.volume = sound_World;
+
+        //Pickxe Usage
+        audioSource_PickaxeUsage_Mining.volume = sound_World;
+        audioSource_PickaxeUsage_OreDestroyd.volume = sound_World;
+        audioSource_PickaxeUsage_CannotHitMineable.volume = sound_World;
+
+        //SwordUsage
+        audioSource_SwordUsage_Slash.volume = sound_World;
+        audioSource_EnemyHit.volume = sound_World;
+
+        //Building
+        audioSource_Building_Placement.volume = sound_World;
+        audioSource_Building_Remove.volume = sound_World;
+        audioSource_CannotPlace.volume = sound_World;
+
+        //Chest
+        audioSource_Chest_Open.volume = sound_World;
+        audioSource_Chest_Close.volume = sound_World;
+
+        //InteractableObjects
+        audioSource_InteractableObjects_Open.volume = sound_World;
+        audioSource_InteractableObjects_Ongoing.volume = sound_World;
+        audioSource_InteractableObjects_Close.volume = sound_World;
+
+        //Research
+        audioSource_ResearchTable_Research.volume = sound_Menu;
+        audioSource_ResearchTable_ResearchComplete.volume = sound_Menu;
+        audioSource_ResearchTable_NewItemAvailable.volume = sound_Menu;
+
+        //Buff
+        audioSource_Buffs_AddBuffEffect.volume = sound_World;
+        audioSource_Buffs_RemoveBuffEffect.volume = sound_World;
+
+        //Journal
+        audioSource_Journal_GetNewJournalPage.volume = sound_Menu;
+        audioSource_Journal_SelectingJournalPage.volume = sound_Menu;
+        audioSource_Journal_VoiceMessage.volume = sound_Voice;
+        #endregion
     }
 
 
     //--------------------
 
 
-    #region Stop Clip from playing
-    public void Stop_WorldSound()
+    #region Music
+    public void Play_Music_Music1_Clip()
     {
-        audioSource_WorldSound.Stop();
+        if (audioSource_Everywhere_Music1 != null)
+        {
+            audioSource_Everywhere_Music1.clip = music_mainMusic1_Clip;
+            audioSource_Everywhere_Music1.pitch = 1f;
+            audioSource_Everywhere_Music1.Play();
+        }
     }
-    public void Stop_MenuSound()
+    public void Play_Music_Music2_Clip()
     {
-        audioSource_MenuSound.Stop();
+        if (audioSource_Everywhere_Music2 != null)
+        {
+            audioSource_Everywhere_Music2.clip = music_mainMusic2_Clip;
+            audioSource_Everywhere_Music2.pitch = 1f;
+            audioSource_Everywhere_Music2.Play();
+        }
     }
-    public void Stop_WeatherSound()
+    public void Play_Music_Music3_Clip()
     {
-        audioSourceWeatherSound.Stop();
+        if (audioSource_Everywhere_Music3 != null)
+        {
+            audioSource_Everywhere_Music3.clip = music_mainMusic3_Clip;
+            audioSource_Everywhere_Music3.pitch = 1f;
+            audioSource_Everywhere_Music3.Play();
+        }
     }
-    public void Stop_Music()
+
+
+    public void Play_Music_WeatherSound1_Clip()
     {
-        audioSource_Music.Stop();
+        if (audioSource_Everywhere_WeatherSound1 != null)
+        {
+            audioSource_Everywhere_WeatherSound1.clip = weather_sound1_Clip;
+            audioSource_Everywhere_WeatherSound1.pitch = 1f;
+            audioSource_Everywhere_WeatherSound1.Play();
+        }
     }
-    public void Stop_Voice()
+    public void Play_Music_WeatherSound2_Clip()
     {
-        audioSource_VoiceMessages.Stop();
+        if (audioSource_Everywhere_WeatherSound2 != null)
+        {
+            audioSource_Everywhere_WeatherSound2.clip = weather_sound2_Clip;
+            audioSource_Everywhere_WeatherSound2.pitch = 1f;
+            audioSource_Everywhere_WeatherSound2.Play();
+        }
+    }
+    public void Play_Music_WeatherSound3_Clip()
+    {
+        if (audioSource_Everywhere_WeatherSound3 != null)
+        {
+            audioSource_Everywhere_WeatherSound3.clip = weather_sound3_Clip;
+            audioSource_Everywhere_WeatherSound3.pitch = 1f;
+            audioSource_Everywhere_WeatherSound3.Play();
+        }
+    }
+    public void Play_Music_WeatherSound4_Clip()
+    {
+        if (audioSource_Everywhere_WeatherSound4 != null)
+        {
+            audioSource_Everywhere_WeatherSound4.clip = weather_sound4_Clip;
+            audioSource_Everywhere_WeatherSound4.pitch = 1f;
+            audioSource_Everywhere_WeatherSound4.Play();
+        }
+    }
+    public void Play_Music_WeatherSound5_Clip()
+    {
+        if (audioSource_Everywhere_WeatherSound5 != null)
+        {
+            audioSource_Everywhere_WeatherSound5.clip = weather_sound5_Clip;
+            audioSource_Everywhere_WeatherSound5.pitch = 1f;
+            audioSource_Everywhere_WeatherSound5.Play();
+        }
     }
     #endregion
 
-
-    //--------------------
-
+    #region Weather
+    #endregion
 
     #region Player //Have yet to be implemented
     public void Play_Player_Walking_Sand_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Walking_Sand_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Sand_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
     public void Play_Player_Walking_Grass_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Walking_Grass_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Grass_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
     public void Play_Player_Walking_Water_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Walking_Water_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Water_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
     public void Play_Player_Walking_Stone_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Walking_Stone_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Stone_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
     public void Play_Player_Walking_Wood_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Walking_Wood_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Wood_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
     public void Play_Player_Walking_Cryonite_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Walking_Cryonite_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Cryonite_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
 
     public void Play_Player_Sprinting_Sand_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Sprinting_Sand_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Sand_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
     public void Play_Player_Sprinting_Grass_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Sprinting_Grass_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Grass_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
     public void Play_Player_Sprinting_Water_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Sprinting_Water_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Water_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
     public void Play_Player_Sprinting_Stone_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Sprinting_Stone_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Stone_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
     public void Play_Player_Sprinting_Wood_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Sprinting_Wood_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Wood_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
     public void Play_Player_Sprinting_Cryonite_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_WorldSound.clip = player_Sprinting_Cryonite_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Cryonite_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
     public void Play_Player_FallDamage_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PlayerMovement_FallDamage != null)
         {
-            audioSource_WorldSound.clip = player_FallDamage_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PlayerMovement_FallDamage.clip = player_FallDamage_Clip;
+            audioSource_PlayerMovement_FallDamage.pitch = 1f;
+            audioSource_PlayerMovement_FallDamage.Play();
         }
     }
     #endregion
@@ -368,32 +602,29 @@ public class SoundManager : Singleton<SoundManager>
     #region Tablet
     public void Play_Tablet_OpenTablet_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Tablet_OpenCloseTablet != null)
         {
-            audioSource_MenuSound.clip = tablet_OpenTablet_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Tablet_OpenCloseTablet.clip = tablet_OpenTablet_Clip;
+            audioSource_Tablet_OpenCloseTablet.pitch = 1f;
+            audioSource_Tablet_OpenCloseTablet.Play();
         }
     }
     public void Play_Tablet_CloseTablet_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Tablet_OpenCloseTablet != null)
         {
-            audioSource_MenuSound.clip = tablet_CloseTablet_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Tablet_OpenCloseTablet.clip = tablet_CloseTablet_Clip;
+            audioSource_Tablet_OpenCloseTablet.pitch = 1f;
+            audioSource_Tablet_OpenCloseTablet.Play();
         }
     }
     public void Play_Tablet_ChangeMenu_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Tablet_ChangeTabetMenu != null)
         {
-            audioSource_MenuSound.clip = tablet_ChangeMenu_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Tablet_ChangeTabetMenu.clip = tablet_ChangeMenu_Clip;
+            audioSource_Tablet_ChangeTabetMenu.pitch = 1f;
+            audioSource_Tablet_ChangeTabetMenu.Play();
         }
     }
     #endregion
@@ -401,103 +632,93 @@ public class SoundManager : Singleton<SoundManager>
     #region Inventory
     public void Play_Inventory_ItemHover_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Inventory_ItemHover != null)
         {
-            audioSource_MenuSound.clip = inventory_ItemHover_Clip;
-            audioSource_MenuSound.volume = 0.25f * SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX(); ;
-            audioSource_MenuSound.pitch = 20f;
-            audioSource_MenuSound.Play();
+            audioSource_Inventory_ItemHover.clip = inventory_ItemHover_Clip;
+            audioSource_Inventory_ItemHover.pitch = 20f;
+            audioSource_Inventory_ItemHover.Play();
         }
     }
     public void Play_Inventory_PickupItem_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Inventory_ItemManouver != null)
         {
-            audioSource_MenuSound.clip = inventory_PickupItem_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Inventory_ItemManouver.clip = inventory_PickupItem_Clip;
+            audioSource_Inventory_ItemManouver.pitch = 1f;
+            audioSource_Inventory_ItemManouver.Play();
         }
     }
     public void Play_Inventory_DropItem_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Inventory_ItemManouver != null)
         {
-            audioSource_MenuSound.clip = inventory_DropItem_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Inventory_ItemManouver.clip = inventory_DropItem_Clip;
+            audioSource_Inventory_ItemManouver.pitch = 1f;
+            audioSource_Inventory_ItemManouver.Play();
         }
     }
     public void Play_Inventory_MoveItem_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Inventory_ItemManouver != null)
         {
-            audioSource_MenuSound.clip = inventory_MoveItem_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Inventory_ItemManouver.clip = inventory_MoveItem_Clip;
+            audioSource_Inventory_ItemManouver.pitch = 1f;
+            audioSource_Inventory_ItemManouver.Play();
         }
     }
     public void Play_Inventory_ConsumeItem_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Inventory_ItemManouver != null)
         {
-            audioSource_MenuSound.clip = inventory_ConsumeItem_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Inventory_ItemManouver.clip = inventory_ConsumeItem_Clip;
+            audioSource_Inventory_ItemManouver.pitch = 1f;
+            audioSource_Inventory_ItemManouver.Play();
         }
     }
     public void Play_Inventory_DrinkItem_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Inventory_ItemManouver != null)
         {
-            audioSource_MenuSound.clip = inventory_DrinkItem_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Inventory_ItemManouver.clip = inventory_DrinkItem_Clip;
+            audioSource_Inventory_ItemManouver.pitch = 1f;
+            audioSource_Inventory_ItemManouver.Play();
         }
     }
     public void Play_Inventory_DrinkEmptyItem_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Inventory_ItemManouver != null)
         {
-            audioSource_MenuSound.clip = inventory_DrinkEmptyItem_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Inventory_ItemManouver.clip = inventory_DrinkEmptyItem_Clip;
+            audioSource_Inventory_ItemManouver.pitch = 1f;
+            audioSource_Inventory_ItemManouver.Play();
         }
     }
     public void Play_Inventory_RefillDrink_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Inventory_ItemManouver != null)
         {
-            audioSource_MenuSound.clip = inventory_RefillDrink_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Inventory_ItemManouver.clip = inventory_RefillDrink_Clip;
+            audioSource_Inventory_ItemManouver.pitch = 1f;
+            audioSource_Inventory_ItemManouver.Play();
         }
     }
     public void Play_Inventory_EquipItem_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Inventory_ItemManouver != null)
         {
-            audioSource_MenuSound.clip = inventory_EquipItem_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Inventory_ItemManouver.clip = inventory_EquipItem_Clip;
+            audioSource_Inventory_ItemManouver.pitch = 1f;
+            audioSource_Inventory_ItemManouver.Play();
         }
     }
 
     public void Play_Inventory_InventoryIsFull_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Inventory_ItemManouver != null)
         {
-            audioSource_MenuSound.clip = inventory_InventoryIsFull_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Inventory_ItemManouver.clip = inventory_InventoryIsFull_Clip;
+            audioSource_Inventory_ItemManouver.pitch = 1f;
+            audioSource_Inventory_ItemManouver.Play();
         }
     }
     #endregion
@@ -505,75 +726,68 @@ public class SoundManager : Singleton<SoundManager>
     #region Hotbar
     public void Play_Hotbar_ChangeSelectedItem_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Hotbar_ChangeHotbarSlot != null)
         {
-            audioSource_MenuSound.clip = hotbar_ChangeSelectedItem_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Hotbar_ChangeHotbarSlot.clip = hotbar_ChangeSelectedItem_Clip;
+            audioSource_Hotbar_ChangeHotbarSlot.pitch = 1f;
+            audioSource_Hotbar_ChangeHotbarSlot.Play();
         }
     }
     public void Play_Hotbar_AssignItemToHotbar_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Hotbar_AddToHotbar != null)
         {
-            audioSource_MenuSound.clip = hotbar_AssignItemToHotbar_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Hotbar_AddToHotbar.clip = hotbar_AssignItemToHotbar_Clip;
+            audioSource_Hotbar_AddToHotbar.pitch = 1f;
+            audioSource_Hotbar_AddToHotbar.Play();
         }
     }
     public void Play_Hotbar_RemoveItemFromHotbar_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Hotbar_RemoveFromHotbar != null)
         {
-            audioSource_MenuSound.clip = hotbar_RemoveItemFromHotbar_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Hotbar_RemoveFromHotbar.clip = hotbar_RemoveItemFromHotbar_Clip;
+            audioSource_Hotbar_RemoveFromHotbar.pitch = 1f;
+            audioSource_Hotbar_RemoveFromHotbar.Play();
         }
     }
     #endregion
 
     #region Crafting
-    public void Play_Crafting_SelectCraftingItem_Clip()
-    {
-        if (audioSource_MenuSound != null)
-        {
-            audioSource_MenuSound.clip = crafting_ChangeCraftingMenu_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
-        }
-    }
     public void Play_Crafting_ChangeCraftingMenu_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Crafting_ChangeCraftingMenu != null)
         {
-            audioSource_MenuSound.clip = crafting_SelectCraftingItem_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Crafting_ChangeCraftingMenu.clip = crafting_SelectCraftingItem_Clip;
+            audioSource_Crafting_ChangeCraftingMenu.pitch = 1f;
+            audioSource_Crafting_ChangeCraftingMenu.Play();
+        }
+    }
+    public void Play_Crafting_SelectCraftingItem_Clip()
+    {
+        if (audioSource_Crafting_SelectCraftingItem != null)
+        {
+            audioSource_Crafting_SelectCraftingItem.clip = crafting_ChangeCraftingMenu_Clip;
+            audioSource_Crafting_SelectCraftingItem.pitch = 1f;
+            audioSource_Crafting_SelectCraftingItem.Play();
         }
     }
     public void Play_Crafting_PerformCrafting_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Crafting_PerformCrafting != null)
         {
-            audioSource_MenuSound.clip = crafting_PerformCrafting_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Crafting_PerformCrafting.clip = crafting_PerformCrafting_Clip;
+            audioSource_Crafting_PerformCrafting.pitch = 1f;
+            audioSource_Crafting_PerformCrafting.Play();
         }
     }
     public void Play_Crafting_CannotCraft_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Crafting_CannotCraftError != null)
         {
-            audioSource_MenuSound.clip = crafting_CannotCraft_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Crafting_CannotCraftError.clip = crafting_CannotCraft_Clip;
+            audioSource_Crafting_CannotCraftError.pitch = 1f;
+            audioSource_Crafting_CannotCraftError.Play();
         }
     }
     #endregion
@@ -581,22 +795,29 @@ public class SoundManager : Singleton<SoundManager>
     #region Skill Tree
     public void Play_SkillTree_HoverPerk_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_SkillTree_PerkHover != null)
         {
-            audioSource_MenuSound.clip = skillTree_HoverPerk_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_SkillTree_PerkHover.clip = skillTree_HoverPerk_Clip;
+            audioSource_SkillTree_PerkHover.pitch = 1f;
+            audioSource_SkillTree_PerkHover.Play();
+        }
+    }
+    public void Play_SkillTree_ChangeMenu_Clip()
+    {
+        if (audioSource_SkillTree_ChangeSkillTreeMenu != null)
+        {
+            audioSource_SkillTree_ChangeSkillTreeMenu.clip = skillTree_ChangeMenu_Clip;
+            audioSource_SkillTree_ChangeSkillTreeMenu.pitch = 1f;
+            audioSource_SkillTree_ChangeSkillTreeMenu.Play();
         }
     }
     public void Play_SkillTree_CompletedPerk_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_CompletePerk != null)
         {
-            audioSource_MenuSound.clip = skillTree_CompletedPerk_Clip;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_CompletePerk.clip = skillTree_CompletedPerk_Clip;
+            audioSource_CompletePerk.pitch = 1f;
+            audioSource_CompletePerk.Play();
         }
     }
     #endregion
@@ -604,86 +825,78 @@ public class SoundManager : Singleton<SoundManager>
     #region Equipped Item
     public void Play_EquippedItems_EquippedItemIsBroken_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_EquippedItems_BreakEquipment != null)
         {
-            audioSource_WorldSound.clip = equippedItems_EquippedItemIsBroken_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_EquippedItems_BreakEquipment.clip = equippedItems_EquippedItemIsBroken_Clip;
+            audioSource_EquippedItems_BreakEquipment.pitch = 1f;
+            audioSource_EquippedItems_BreakEquipment.Play();
         }
     }
     #endregion
 
-    #region Axe Useage //Have yet to be implemented
+    #region Axe Useage
     public void Play_AxeUsage_Hand_Clip(float pitch)
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_AxeUsage_Cutting != null)
         {
-            audioSource_WorldSound.clip = axeUsage_Hand_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = pitch;
-            audioSource_WorldSound.Play();
+            audioSource_AxeUsage_Cutting.clip = axeUsage_Hand_Clip;
+            audioSource_AxeUsage_Cutting.pitch = pitch;
+            audioSource_AxeUsage_Cutting.Play();
         }
     }
     public void Play_AxeUsage_WoodAxe_Clip(float pitch)
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_AxeUsage_Cutting != null)
         {
-            audioSource_WorldSound.clip = axeUsage_WoodAxe_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = pitch;
-            audioSource_WorldSound.Play();
+            audioSource_AxeUsage_Cutting.clip = axeUsage_WoodAxe_Clip;
+            audioSource_AxeUsage_Cutting.pitch = pitch;
+            audioSource_AxeUsage_Cutting.Play();
         }
     }
     public void Play_AxeUsage_StoneAxe_Clip(float pitch)
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_AxeUsage_Cutting != null)
         {
-            audioSource_WorldSound.clip = axeUsage_StoneAxe_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = pitch;
-            audioSource_WorldSound.Play();
+            audioSource_AxeUsage_Cutting.clip = axeUsage_StoneAxe_Clip;
+            audioSource_AxeUsage_Cutting.pitch = pitch;
+            audioSource_AxeUsage_Cutting.Play();
         }
     }
     public void Play_AxeUsage_CryoniteAxe_Clip(float pitch)
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_AxeUsage_Cutting != null)
         {
-            audioSource_WorldSound.clip = axeUsage_CryoniteAxe_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = pitch;
-            audioSource_WorldSound.Play();
+            audioSource_AxeUsage_Cutting.clip = axeUsage_CryoniteAxe_Clip;
+            audioSource_AxeUsage_Cutting.pitch = pitch;
+            audioSource_AxeUsage_Cutting.Play();
         }
     }
 
     public void Play_AxeUsage_TreeFalling_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_AxeUsage_TreeFall != null)
         {
-            audioSource_WorldSound.clip = axeUsage_TreeFalling_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_AxeUsage_TreeFall.clip = axeUsage_TreeFalling_Clip;
+            audioSource_AxeUsage_TreeFall.pitch = 1f;
+            audioSource_AxeUsage_TreeFall.Play();
         }
     }
     public void Play_AxeUsage_TreeHitGround_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_AxeUsage_TreeHitGround != null)
         {
-            audioSource_WorldSound.clip = axeUsage_TreeHitGround_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_AxeUsage_TreeHitGround.clip = axeUsage_TreeHitGround_Clip;
+            audioSource_AxeUsage_TreeHitGround.pitch = 1f;
+            audioSource_AxeUsage_TreeHitGround.Play();
         }
     }
     public void Play_AxeUsage_CannotHit_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_CannotHitCuttable != null)
         {
-            audioSource_WorldSound.clip = axeUsage_CannotHit_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_CannotHitCuttable.clip = axeUsage_CannotHit_Clip;
+            audioSource_CannotHitCuttable.pitch = 1f;
+            audioSource_CannotHitCuttable.Play();
         }
     }
     #endregion
@@ -691,63 +904,57 @@ public class SoundManager : Singleton<SoundManager>
     #region Pickaxe Useage
     public void Play_PickaxeUsage_Hand_Clip(float pitch)
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PickaxeUsage_Mining != null)
         {
-            audioSource_WorldSound.clip = pickaxeUsage_Hand_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = pitch;
-            audioSource_WorldSound.Play();
+            audioSource_PickaxeUsage_Mining.clip = pickaxeUsage_Hand_Clip;
+            audioSource_PickaxeUsage_Mining.pitch = pitch;
+            audioSource_PickaxeUsage_Mining.Play();
         }
     }
     public void Play_PickaxeUsage_WoodPickaxe_Clip(float pitch)
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PickaxeUsage_Mining != null)
         {
-            audioSource_WorldSound.clip = pickaxeUsage_WoodPickaxe_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = pitch;
-            audioSource_WorldSound.Play();
+            audioSource_PickaxeUsage_Mining.clip = pickaxeUsage_WoodPickaxe_Clip;
+            audioSource_PickaxeUsage_Mining.pitch = pitch;
+            audioSource_PickaxeUsage_Mining.Play();
         }
     }
     public void Play_PickaxeUsage_StonePickaxe_Clip(float pitch)
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PickaxeUsage_Mining != null)
         {
-            audioSource_WorldSound.clip = pickaxeUsage_StonePickaxe_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = pitch;
-            audioSource_WorldSound.Play();
+            audioSource_PickaxeUsage_Mining.clip = pickaxeUsage_StonePickaxe_Clip;
+            audioSource_PickaxeUsage_Mining.pitch = pitch;
+            audioSource_PickaxeUsage_Mining.Play();
         }
     }
     public void Play_PickaxeUsage_CryonitePickaxe_Clip(float pitch)
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PickaxeUsage_Mining != null)
         {
-            audioSource_WorldSound.clip = pickaxeUsage_CryonitePickaxe_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = pitch;
-            audioSource_WorldSound.Play();
+            audioSource_PickaxeUsage_Mining.clip = pickaxeUsage_CryonitePickaxe_Clip;
+            audioSource_PickaxeUsage_Mining.pitch = pitch;
+            audioSource_PickaxeUsage_Mining.Play();
         }
     }
 
-    public void Play_PickaxeUsage_OreIsDestroid_Clip()
+    public void Play_PickaxeUsage_OreIsDestroyd_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PickaxeUsage_OreDestroyd != null)
         {
-            audioSource_WorldSound.clip = pickaxeUsage_OreIsDestroid_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PickaxeUsage_OreDestroyd.clip = pickaxeUsage_OreIsDestroid_Clip;
+            audioSource_PickaxeUsage_OreDestroyd.pitch = 1f;
+            audioSource_PickaxeUsage_OreDestroyd.Play();
         }
     }
     public void Play_PickaxeUsage_CannotHit_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_PickaxeUsage_CannotHitMineable != null)
         {
-            audioSource_WorldSound.clip = pickaxeUsage_CannotHit_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_PickaxeUsage_CannotHitMineable.clip = pickaxeUsage_CannotHit_Clip;
+            audioSource_PickaxeUsage_CannotHitMineable.pitch = 1f;
+            audioSource_PickaxeUsage_CannotHitMineable.Play();
         }
     }
     #endregion
@@ -755,12 +962,20 @@ public class SoundManager : Singleton<SoundManager>
     #region Sword Usage //Have yet to be implemented
     public void Play_SwordUsage_Slashing_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_SwordUsage_Slash != null)
         {
-            audioSource_WorldSound.clip = swordUsage_Slashing_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_SwordUsage_Slash.clip = swordUsage_Slashing_Clip;
+            audioSource_SwordUsage_Slash.pitch = 1f;
+            audioSource_SwordUsage_Slash.Play();
+        }
+    }
+    public void Play_SwordUsage_EnemyHit_Clip()
+    {
+        if (audioSource_EnemyHit != null)
+        {
+            audioSource_EnemyHit.clip = swordUsage_EnemyHit_Clip;
+            audioSource_EnemyHit.pitch = 1f;
+            audioSource_EnemyHit.Play();
         }
     }
     #endregion
@@ -768,94 +983,85 @@ public class SoundManager : Singleton<SoundManager>
     #region Building
     public void Play_Building_Place_Wood_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Building_Placement != null)
         {
-            audioSource_WorldSound.clip = building_Place_Wood;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Building_Placement.clip = building_Place_Wood_Clip;
+            audioSource_Building_Placement.pitch = 1f;
+            audioSource_Building_Placement.Play();
         }
     }
     public void Play_Building_Place_Stone_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Building_Placement != null)
         {
-            audioSource_WorldSound.clip = building_Place_Stone;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 0.7f;
-            audioSource_WorldSound.Play();
+            audioSource_Building_Placement.clip = building_Place_Stone_Clip;
+            audioSource_Building_Placement.pitch = 0.7f;
+            audioSource_Building_Placement.Play();
         }
     }
     public void Play_Building_Place_Cryonite_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Building_Placement != null)
         {
-            audioSource_WorldSound.clip = building_Place_Cryonite;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Building_Placement.clip = building_Place_Cryonite;
+            audioSource_Building_Placement.pitch = 1f;
+            audioSource_Building_Placement.Play();
         }
     }
     
     public void Play_Building_Remove_Wood_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Building_Remove != null)
         {
-            audioSource_WorldSound.clip = building_Remove_Wood;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Building_Remove.clip = building_Remove_Wood_Clip;
+            audioSource_Building_Remove.pitch = 1f;
+            audioSource_Building_Remove.Play();
         }
     }
     public void Play_Building_Remove_Stone_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Building_Remove != null)
         {
-            audioSource_WorldSound.clip = building_Remove_Stone;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 0.7f;
-            audioSource_WorldSound.Play();
+            audioSource_Building_Remove.clip = building_Remove_Stone_Clip;
+            audioSource_Building_Remove.pitch = 0.7f;
+            audioSource_Building_Remove.Play();
         }
     }
     public void Play_Building_Remove_Cryonite_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Building_Remove != null)
         {
-            audioSource_WorldSound.clip = building_Remove_Cryonite;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Building_Remove.clip = building_Remove_Cryonite_Clip;
+            audioSource_Building_Remove.pitch = 1f;
+            audioSource_Building_Remove.Play();
         }
     }
 
     public void Play_Building_CannotPlaceBlock_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_CannotPlace != null)
         {
-            audioSource_WorldSound.clip = building_CannotPlaceBlock;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 0.5f;
-            audioSource_WorldSound.Play();
+            audioSource_CannotPlace.clip = building_CannotPlaceBlock_Clip;
+            audioSource_CannotPlace.pitch = 0.5f;
+            audioSource_CannotPlace.Play();
         }
     }
     public void Play_Building_Place_MoveableObject_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Building_Placement != null)
         {
-            audioSource_WorldSound.clip = building_Place_MoveableObject;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Building_Placement.clip = building_Place_MoveableObject_Clip;
+            audioSource_Building_Placement.pitch = 1f;
+            audioSource_Building_Placement.Play();
         }
     }
     public void Play_Building_Remove_MoveableObject_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Building_Remove != null)
         {
-            audioSource_WorldSound.clip = building_Remove_MoveableObject;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Building_Remove.clip = building_Remove_MoveableObject_Clip;
+            audioSource_Building_Remove.pitch = 1f;
+            audioSource_Building_Remove.Play();
         }
     }
     #endregion
@@ -863,98 +1069,90 @@ public class SoundManager : Singleton<SoundManager>
     #region Chests
     public void Play_Chests_OpenSmallChest_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Chest_Open != null)
         {
-            audioSource_WorldSound.clip = chests_OpenSmallChest_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Chest_Open.clip = chests_OpenSmallChest_Clip;
+            audioSource_Chest_Open.pitch = 1f;
+            audioSource_Chest_Open.Play();
         }
     }
     public void Play_Chests_CloseSmallChest_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Chest_Close != null)
         {
-            audioSource_WorldSound.clip = chests_CloseSmallChest_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX(); ;
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Chest_Close.clip = chests_CloseSmallChest_Clip;
+            audioSource_Chest_Close.pitch = 1f;
+            audioSource_Chest_Close.Play();
         }
     }
 
     public void Play_Chests_OpenMediumChest_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Chest_Open != null)
         {
-            audioSource_WorldSound.clip = chests_OpenMediumChest_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Chest_Open.clip = chests_OpenMediumChest_Clip;
+            audioSource_Chest_Open.pitch = 1f;
+            audioSource_Chest_Open.Play();
         }
     }
     public void Play_Chests_CloseMediumChest_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Chest_Close != null)
         {
-            audioSource_WorldSound.clip = chests_CloseMediumChest_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Chest_Close.clip = chests_CloseMediumChest_Clip;
+            audioSource_Chest_Close.pitch = 1f;
+            audioSource_Chest_Close.Play();
         }
     }
 
     public void Play_Chests_OpenBigChest_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Chest_Open != null)
         {
-            audioSource_WorldSound.clip = chests_OpenBigChest_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Chest_Open.clip = chests_OpenBigChest_Clip;
+            audioSource_Chest_Open.pitch = 1f;
+            audioSource_Chest_Open.Play();
         }
     }
     public void Play_Chests_CloseBigChest_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Chest_Close != null)
         {
-            audioSource_WorldSound.clip = chests_CloseBigChest_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Chest_Close.clip = chests_CloseBigChest_Clip;
+            audioSource_Chest_Close.pitch = 1f;
+            audioSource_Chest_Close.Play();
         }
     }
     #endregion
+
 
     #region InteractableObjects //"Ungoing" have yet to be implemented
     #region Crafting Table
     public void Play_InteractableObjects_OpenCraftingTable_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Open != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_OpenCraftingTable_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Open.clip = InteractableObjects_OpenCraftingTable_Clip;
+            audioSource_InteractableObjects_Open.pitch = 1f;
+            audioSource_InteractableObjects_Open.Play();
         }
     }
     public void Play_InteractableObjects_UngoingCraftingTable_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Ongoing != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_UngoingCraftingTable_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Ongoing.clip = InteractableObjects_UngoingCraftingTable_Clip;
+            audioSource_InteractableObjects_Ongoing.pitch = 1f;
+            audioSource_InteractableObjects_Ongoing.Play();
         }
     }
     public void Play_InteractableObjects_CloseCraftingTable_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Close != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_CloseCraftingTable_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Close.clip = InteractableObjects_CloseCraftingTable_Clip;
+            audioSource_InteractableObjects_Close.pitch = 1f;
+            audioSource_InteractableObjects_Close.Play();
         }
     }
     #endregion
@@ -962,42 +1160,63 @@ public class SoundManager : Singleton<SoundManager>
     #region Research Table
     public void Play_InteractableObjects_OpenResearchTable_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Open != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_OpenResearchTable_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Open.clip = InteractableObjects_OpenResearchTable_Clip;
+            audioSource_InteractableObjects_Open.pitch = 1f;
+            audioSource_InteractableObjects_Open.Play();
         }
     }
     public void Play_InteractableObjects_UngoingResearchTable_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Ongoing != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_UngoingResearchTable_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Ongoing.clip = InteractableObjects_UngoingResearchTable_Clip;
+            audioSource_InteractableObjects_Ongoing.pitch = 1f;
+            audioSource_InteractableObjects_Ongoing.Play();
         }
     }
     public void Play_InteractableObjects_CloseResearchTable_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Close != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_CloseResearchTable_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Close.clip = InteractableObjects_CloseResearchTable_Clip;
+            audioSource_InteractableObjects_Close.pitch = 1f;
+            audioSource_InteractableObjects_Close.Play();
         }
     }
     public void Play_ResearchTable_Researching_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_ResearchTable_Research != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_ResearchTable_Researching_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_ResearchTable_Research.clip = InteractableObjects_ResearchTable_Researching_Clip;
+            audioSource_ResearchTable_Research.pitch = 1f;
+            audioSource_ResearchTable_Research.Play();
+        }
+    }
+    public void Stop_ResearchTable_Researching_Clip()
+    {
+        if (audioSource_ResearchTable_Research != null)
+        {
+            audioSource_ResearchTable_Research.Stop();
+        }
+    }
+    public void Play_Research_Complete_Clip()
+    {
+        if (audioSource_ResearchTable_ResearchComplete != null)
+        {
+            audioSource_ResearchTable_ResearchComplete.clip = InteractableObjects_ResearchTable_ResearchComplete_Clip;
+            audioSource_ResearchTable_ResearchComplete.pitch = 1f;
+            audioSource_ResearchTable_ResearchComplete.Play();
+        }
+    }
+    public void Play_Research_NewItemAvailable_Clip()
+    {
+        if (audioSource_ResearchTable_NewItemAvailable != null)
+        {
+            audioSource_ResearchTable_NewItemAvailable.clip = InteractableObjects_ResearchTable_NewItemAvailable_Clip;
+            audioSource_ResearchTable_NewItemAvailable.pitch = 1f;
+            audioSource_ResearchTable_NewItemAvailable.Play();
         }
     }
     #endregion
@@ -1005,32 +1224,29 @@ public class SoundManager : Singleton<SoundManager>
     #region Skill Tree Table
     public void Play_InteractableObjects_OpenSkillTreeTable_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Open != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_OpenSkillTreeTable_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Open.clip = InteractableObjects_OpenSkillTreeTable_Clip;
+            audioSource_InteractableObjects_Open.pitch = 1f;
+            audioSource_InteractableObjects_Open.Play();
         }
     }
     public void Play_InteractableObjects_UngoingSkillTreeTable_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Ongoing != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_UngoingSkillTreeTable_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Ongoing.clip = InteractableObjects_UngoingSkillTreeTable_Clip;
+            audioSource_InteractableObjects_Ongoing.pitch = 1f;
+            audioSource_InteractableObjects_Ongoing.Play();
         }
     }
     public void Play_InteractableObjects_CloseSkillTreeTable_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Close != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_CloseSkillTreeTable_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Close.clip = InteractableObjects_CloseSkillTreeTable_Clip;
+            audioSource_InteractableObjects_Close.pitch = 1f;
+            audioSource_InteractableObjects_Close.Play();
         }
     }
     #endregion
@@ -1038,32 +1254,29 @@ public class SoundManager : Singleton<SoundManager>
     #region Crop Plot
     public void Play_InteractableObjects_OpenCropPlot_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Open != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_OpenCropPlot_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Open.clip = InteractableObjects_OpenCropPlot_Clip;
+            audioSource_InteractableObjects_Open.pitch = 1f;
+            audioSource_InteractableObjects_Open.Play();
         }
     }
     public void Play_InteractableObjects_UngoingCropPlot_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Ongoing != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_UngoingCropPlot_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Ongoing.clip = InteractableObjects_UngoingCropPlot_Clip;
+            audioSource_InteractableObjects_Ongoing.pitch = 1f;
+            audioSource_InteractableObjects_Ongoing.Play();
         }
     }
     public void Play_InteractableObjects_CloseCropPlot_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Close != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_CloseCropPlot_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Close.clip = InteractableObjects_CloseCropPlot_Clip;
+            audioSource_InteractableObjects_Close.pitch = 1f;
+            audioSource_InteractableObjects_Close.Play();
         }
     }
     #endregion
@@ -1071,12 +1284,11 @@ public class SoundManager : Singleton<SoundManager>
     #region Ghost Tank
     public void Play_InteractableObjects_UngoingGhostTank_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Ongoing != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_UngoingGhostTank_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Ongoing.clip = InteractableObjects_UngoingGhostTank_Clip;
+            audioSource_InteractableObjects_Ongoing.pitch = 1f;
+            audioSource_InteractableObjects_Ongoing.Play();
         }
     }
     #endregion
@@ -1084,12 +1296,11 @@ public class SoundManager : Singleton<SoundManager>
     #region Extractor
     public void Play_InteractableObjects_UngoingExtractor_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Ongoing != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_UngoingExtractor_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Ongoing.clip = InteractableObjects_UngoingExtractor_Clip;
+            audioSource_InteractableObjects_Ongoing.pitch = 1f;
+            audioSource_InteractableObjects_Ongoing.Play();
         }
     }
     #endregion
@@ -1097,12 +1308,11 @@ public class SoundManager : Singleton<SoundManager>
     #region Lamp
     public void Play_InteractableObjects_UngoingLamp_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Ongoing != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_UngoingLamp_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Ongoing.clip = InteractableObjects_UngoingLamp_Clip;
+            audioSource_InteractableObjects_Ongoing.pitch = 1f;
+            audioSource_InteractableObjects_Ongoing.Play();
         }
     }
     #endregion
@@ -1110,26 +1320,34 @@ public class SoundManager : Singleton<SoundManager>
     #region Spotlight
     public void Play_InteractableObjects_UngoingSpotlight_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_InteractableObjects_Ongoing != null)
         {
-            audioSource_WorldSound.clip = InteractableObjects_UngoingSpotlight_Clip;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_InteractableObjects_Ongoing.clip = InteractableObjects_UngoingSpotlight_Clip;
+            audioSource_InteractableObjects_Ongoing.pitch = 1f;
+            audioSource_InteractableObjects_Ongoing.Play();
         }
     }
     #endregion|
     #endregion
 
+
     #region Buffs
+    public void Play_Buff_Activated_Clip()
+    {
+        if (audioSource_Buffs_AddBuffEffect != null)
+        {
+            audioSource_Buffs_AddBuffEffect.clip = buff_Activated_Clip;
+            audioSource_Buffs_AddBuffEffect.pitch = 1f;
+            audioSource_Buffs_AddBuffEffect.Play();
+        }
+    }
     public void Play_Buff_Deactivated_Clip()
     {
-        if (audioSource_WorldSound != null)
+        if (audioSource_Buffs_RemoveBuffEffect != null)
         {
-            audioSource_WorldSound.clip = buff_Deactivated;
-            audioSource_WorldSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_WorldSFX();
-            audioSource_WorldSound.pitch = 1f;
-            audioSource_WorldSound.Play();
+            audioSource_Buffs_RemoveBuffEffect.clip = buff_Deactivated_Clip;
+            audioSource_Buffs_RemoveBuffEffect.pitch = 1f;
+            audioSource_Buffs_RemoveBuffEffect.Play();
         }
     }
     #endregion
@@ -1137,55 +1355,29 @@ public class SoundManager : Singleton<SoundManager>
     #region Journal Pages
     public void Play_JournalPage_GetNewJournalPage_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Journal_GetNewJournalPage != null)
         {
-            audioSource_MenuSound.clip = journalPage_GetNewJournalPage;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Journal_GetNewJournalPage.clip = journalPage_GetNewJournalPage_Clip;
+            audioSource_Journal_GetNewJournalPage.pitch = 1f;
+            audioSource_Journal_GetNewJournalPage.Play();
         }
     }
     public void Play_JournalPage_SelectingJournalPage_Clip()
     {
-        if (audioSource_MenuSound != null)
+        if (audioSource_Journal_SelectingJournalPage != null)
         {
-            audioSource_MenuSound.clip = journalPage_SelectingJournalPage;
-            audioSource_MenuSound.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound.pitch = 1f;
-            audioSource_MenuSound.Play();
+            audioSource_Journal_SelectingJournalPage.clip = journalPage_SelectingJournalPage_Clip;
+            audioSource_Journal_SelectingJournalPage.pitch = 1f;
+            audioSource_Journal_SelectingJournalPage.Play();
         }
     }
     public void Play_JournalPage_VoiceMessage_Clip(AudioClip clip)
     {
-        if (audioSource_VoiceMessages != null)
+        if (audioSource_Journal_VoiceMessage != null)
         {
-            audioSource_VoiceMessages.clip = clip;
-            audioSource_VoiceMessages.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_Voice();
-            audioSource_VoiceMessages.pitch = 1f;
-            audioSource_VoiceMessages.Play();
-        }
-    }
-    #endregion
-
-    #region Research
-    public void Play_Research_Ongoing_Clip()
-    {
-        if (audioSource_MenuSound2 != null)
-        {
-            audioSource_MenuSound2.clip = research_Ongoing;
-            audioSource_MenuSound2.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound2.pitch = 1f;
-            audioSource_MenuSound2.Play();
-        }
-    }
-    public void Play_Research_Complete_Clip()
-    {
-        if (audioSource_MenuSound2 != null)
-        {
-            audioSource_MenuSound2.clip = research_Complete;
-            audioSource_MenuSound2.volume = SettingsManager.Instance.Get_Sound_Master() * SettingsManager.Instance.Get_Sound_MenuSFX();
-            audioSource_MenuSound2.pitch = 1f;
-            audioSource_MenuSound2.Play();
+            audioSource_Journal_VoiceMessage.clip = clip;
+            audioSource_Journal_VoiceMessage.pitch = 1f;
+            audioSource_Journal_VoiceMessage.Play();
         }
     }
     #endregion

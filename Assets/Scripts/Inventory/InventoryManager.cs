@@ -31,6 +31,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public GameObject itemSlot_Prefab;
 
     public GameObject handDropPoint;
+    public float currentHandDropPoint_Y;
     public GameObject worldObject_Parent;
 
     [Header("Lists")]
@@ -48,7 +49,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public int chestInventoryOpen;
     GameObject itemTemp;
-    public float gravityTime = 1.5f;
+    public float gravityTime = 2.5f;
+
+    public bool itemDropped;
 
     [Header("Item Info")]
     public GameObject itemInfo_Parent;
@@ -197,8 +200,15 @@ public class InventoryManager : Singleton<InventoryManager>
             item.inventoryIndex = inventory;
             item.itemName = obj.GetComponent<InteractableObject>().itemName;
             item.itemSize = MainManager.Instance.GetItem(obj.GetComponent<InteractableObject>().itemName).itemSize;
-            item.durability_Current = MainManager.Instance.GetItem(obj.GetComponent<InteractableObject>().itemName).durability_Max;
-
+            if (obj.GetComponent<InteractableObject>().durability_Current <= 0)
+            {
+                item.durability_Current = MainManager.Instance.GetItem(obj.GetComponent<InteractableObject>().itemName).durability_Max;
+            }
+            else
+            {
+                item.durability_Current = obj.GetComponent<InteractableObject>().durability_Current;
+            }
+            
             lastItemToGet = obj.GetComponent<InteractableObject>().itemName;
 
             //Give the item an ID to be unique
@@ -291,6 +301,7 @@ public class InventoryManager : Singleton<InventoryManager>
         #region
         int index = -1;
 
+        //Remove from Hotbar
         for (int i = inventories[inventory].itemsInInventory.Count - 1; i >= 0 ; i--)
         {
             for (int j = 0; j < HotbarManager.Instance.hotbarList.Count; j++)
@@ -312,6 +323,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
         if (index >= 0)
         {
+            //Spawn item into the World, if the item has a WorldObject attached
+            SpawnItemToWorld(itemName, handDropPoint, true, inventories[inventory].itemsInInventory[index], 0);
+
             inventories[inventory].itemsInInventory.RemoveAt(index);
         }
         else
@@ -321,6 +335,9 @@ public class InventoryManager : Singleton<InventoryManager>
                 if (inventories[inventory].itemsInInventory[i].itemName == itemName
                     && inventories[inventory].itemsInInventory[i].itemID == ID)
                 {
+                    //Spawn item into the World, if the item has a WorldObject attached
+                    SpawnItemToWorld(itemName, handDropPoint, true, inventories[inventory].itemsInInventory[i], 0);
+
                     inventories[inventory].itemsInInventory.RemoveAt(i);
 
                     break;
@@ -332,9 +349,6 @@ public class InventoryManager : Singleton<InventoryManager>
         RemoveInventoriesUI();
         PrepareInventoryUI(inventory, false);
 
-        //Spawn item into the World, if the item has a WorldObject attached
-        SpawnItemToWorld(itemName, handDropPoint, true);
-
         //If item is removed from the inventory, update the Hotbar
         if (inventory <= 0)
         {
@@ -342,6 +356,12 @@ public class InventoryManager : Singleton<InventoryManager>
         }
 
         SetBuildingRequirement();
+
+
+        //Update Item In Hand (to prevent it from disappearing)
+        HotbarManager.Instance.SetSelectedItem();
+        HotbarManager.Instance.ChangeItemInHand();
+
 
         SaveData();
     }
@@ -351,8 +371,8 @@ public class InventoryManager : Singleton<InventoryManager>
         yield return new WaitForSeconds(gravityTime);
 
         //Turn off Gravity
-        spawnedObject.GetComponent<Rigidbody>().isKinematic = true;
-        spawnedObject.GetComponent<Rigidbody>().useGravity = false;
+        //spawnedObject.GetComponent<Rigidbody>().isKinematic = true;
+        //spawnedObject.GetComponent<Rigidbody>().useGravity = false;
     }
     public void RemoveItemFromInventory(int inventory, Items itemName, int ID, bool itemIsMovedOrRemoved)
     {
@@ -532,7 +552,7 @@ public class InventoryManager : Singleton<InventoryManager>
         HotbarManager.Instance.ChangeItemInHand();
     }
     
-    public void SpawnItemToWorld(Items itemName, GameObject dropPos, bool dropSound)
+    public void SpawnItemToWorld(Items itemName, GameObject dropPos, bool dropSound, InventoryItem item, float spawnPos_Offset)
     {
         if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
         {
@@ -544,7 +564,7 @@ public class InventoryManager : Singleton<InventoryManager>
             
             if (dropPos == handDropPoint)
             {
-                //If dropped from hand, have the same dropspot each time
+                //If dropped from hand, have the same DropSpot each time
                 WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, dropPos.transform.position, Quaternion.identity) as GameObject);
             }
             else
@@ -569,6 +589,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
                 Vector3 newSpawnPos = new Vector3(dropPos.transform.position.x + x, dropPos.transform.position.y + y, dropPos.transform.position.z + z);
 
+                newSpawnPos += new Vector3(0, spawnPos_Offset, 0);
+
                 WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, newSpawnPos, Quaternion.identity) as GameObject);
             }
 
@@ -578,14 +600,33 @@ public class InventoryManager : Singleton<InventoryManager>
             WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
             WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().useGravity = true;
 
+            //Set Durability
+            if (item == null)
+            {
+                WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<InteractableObject>().durability_Current = MainManager.Instance.GetItem(itemName).durability_Max;
+            }
+            else
+            {
+                WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<InteractableObject>().durability_Current = item.durability_Current;
+            }
+
             //Update item in the World
             WorldObjectManager.Instance.WorldObject_SaveState_AddObjectToWorld(itemName);
 
-            //Stop gravity after gravityTime-seconds
-            if (WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>())
-            {
-                //StartCoroutine(SpawnedObjectGravityTime(WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]));
-            }
+            StartGravityCoroutine(WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]);
+
+            WorldObjectManager.Instance.SaveWorldObjectPositions();
+
+            currentHandDropPoint_Y = handDropPoint.transform.position.y;
+            itemDropped = true;
+        }
+    }
+    public void StartGravityCoroutine(GameObject obj)
+    {
+        //Stop gravity after gravityTime-seconds
+        if (obj.GetComponent<Rigidbody>())
+        {
+            StartCoroutine(SpawnedObjectGravityTime(WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1]));
         }
     }
     #endregion
@@ -934,22 +975,40 @@ public class InventoryManager : Singleton<InventoryManager>
     public void SelectItemDurabilityDisplay()
     {
         //Assign HotbarInfo to the correct ItemSlot
-        for (int i = inventories[0].itemsInInventory.Count - 1; i >= 0; i--)
+        for (int k = 0; k < inventories.Count; k++)
         {
-            for (int j = itemSlotList_Player.Count - 1; j >= 0; j--)
+            for (int i = inventories[k].itemsInInventory.Count - 1; i >= 0; i--)
             {
-                //Find relevant item
-                if (itemSlotList_Player[j].GetComponent<ItemSlot>().itemName == inventories[0].itemsInInventory[i].itemName
-                    && itemSlotList_Player[j].GetComponent<ItemSlot>().itemID == inventories[0].itemsInInventory[i].itemID
-                    && MainManager.Instance.GetItem(itemSlotList_Player[j].GetComponent<ItemSlot>().itemName).durability_Max > 0)
+                for (int j = itemSlotList_Player.Count - 1; j >= 0; j--)
                 {
-                    //If the selected item has a durability
-                    itemSlotList_Player[j].GetComponent<ItemSlot>().ActivateDurabilityMeter();
+                    //Find relevant item
+                    if (itemSlotList_Player[j].GetComponent<ItemSlot>().itemName == inventories[k].itemsInInventory[i].itemName
+                        && itemSlotList_Player[j].GetComponent<ItemSlot>().itemID == inventories[k].itemsInInventory[i].itemID
+                        && MainManager.Instance.GetItem(itemSlotList_Player[j].GetComponent<ItemSlot>().itemName).durability_Max > 0)
+                    {
+                        //If the selected item has a durability
+                        itemSlotList_Player[j].GetComponent<ItemSlot>().ActivateDurabilityMeter();
 
-                    j = 0;
+                        j = 0;
+                    }
+                }
+
+                for (int j = itemSlotList_Chest.Count - 1; j >= 0; j--)
+                {
+                    //Find relevant item
+                    if (itemSlotList_Chest[j].GetComponent<ItemSlot>().itemName == inventories[k].itemsInInventory[i].itemName
+                        && itemSlotList_Chest[j].GetComponent<ItemSlot>().itemID == inventories[k].itemsInInventory[i].itemID
+                        && MainManager.Instance.GetItem(itemSlotList_Chest[j].GetComponent<ItemSlot>().itemName).durability_Max > 0)
+                    {
+                        //If the selected item has a durability
+                        itemSlotList_Chest[j].GetComponent<ItemSlot>().ActivateDurabilityMeter();
+
+                        j = 0;
+                    }
                 }
             }
         }
+        
     }
     public void DeselectItemDurabilityDisplay()
     {
@@ -957,6 +1016,11 @@ public class InventoryManager : Singleton<InventoryManager>
         for (int i = 0; i < itemSlotList_Player.Count; i++)
         {
             itemSlotList_Player[i].GetComponent<ItemSlot>().DeactivateDurabilityMeter();
+        }
+
+        for (int i = 0; i < itemSlotList_Chest.Count; i++)
+        {
+            itemSlotList_Chest[i].GetComponent<ItemSlot>().DeactivateDurabilityMeter();
         }
     }
     #endregion
@@ -1043,6 +1107,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    #region HotbarSlots_Quick
     void QuickHotbarSelect_1()
     {
         for (int i = 0; i < itemSlotList_Player.Count; i++)
@@ -1118,6 +1183,7 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
     }
+    #endregion
 
 
     //--------------------
@@ -1377,7 +1443,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     {
                         SoundManager.Instance.Play_Inventory_InventoryIsFull_Clip();
 
-                        print("attemptd picked up");
+                        //print("attemptd picked up");
                         RemoveItemFromInventory(inventory, lastItemToGet, inventories[inventory].itemsInInventory[i].itemID);
                     }
 

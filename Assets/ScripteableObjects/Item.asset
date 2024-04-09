@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Item
   m_EditorClassIdentifier: 
   itemList:
-  - itemName: 0
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 0
     categoryName: 0
     subCategoryName: 0
     itemSize: {x: 1, y: 1}
@@ -36,8 +38,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -45,7 +45,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 1
+  - worldObjectPrefab: {fileID: 9154823834292984189, guid: 9bb5afd9bb4934640a131628dc071a2c,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 1
     categoryName: 1
     subCategoryName: 1
     itemSize: {x: 1, y: 1}
@@ -68,9 +71,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 9154823834292984189, guid: 9bb5afd9bb4934640a131628dc071a2c,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -78,7 +78,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 2
+  - worldObjectPrefab: {fileID: 2059141651146438766, guid: 6e446e42744861b408ea624691a43488,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 2
     categoryName: 1
     subCategoryName: 1
     itemSize: {x: 1, y: 1}
@@ -101,9 +104,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 2059141651146438766, guid: 6e446e42744861b408ea624691a43488,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -111,7 +111,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 3
+  - worldObjectPrefab: {fileID: 4778707306582511513, guid: 769e6eaf22145f145b9745ba8a640433,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 3
     categoryName: 1
     subCategoryName: 1
     itemSize: {x: 1, y: 1}
@@ -134,9 +137,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 4778707306582511513, guid: 769e6eaf22145f145b9745ba8a640433,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -144,7 +144,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 4
+  - worldObjectPrefab: {fileID: 3998869373097655351, guid: 36639c1d62daa5f46b1e011a15575851,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 4
     categoryName: 1
     subCategoryName: 1
     itemSize: {x: 1, y: 1}
@@ -167,9 +170,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 3998869373097655351, guid: 36639c1d62daa5f46b1e011a15575851,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -177,7 +177,11 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 5
+  - worldObjectPrefab: {fileID: 3994159277824107152, guid: d568e8be0a3e1c04ca4fcf66b18d322f,
+      type: 3}
+    equippedPrefab: {fileID: 2027518484237026213, guid: c2dde6a92636bbb4384752f7c4dc677c,
+      type: 3}
+    itemName: 5
     categoryName: 8
     subCategoryName: 23
     itemSize: {x: 2, y: 2}
@@ -205,10 +209,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 3994159277824107152, guid: d568e8be0a3e1c04ca4fcf66b18d322f,
-      type: 3}
-    equippedPrefab: {fileID: 2027518484237026213, guid: c2dde6a92636bbb4384752f7c4dc677c,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -218,7 +218,10 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 69
       amount: 4
-  - itemName: 6
+  - worldObjectPrefab: {fileID: 4750337230919826237, guid: a9826923d09c037448425c6efe97e884,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 6
     categoryName: 1
     subCategoryName: 2
     itemSize: {x: 1, y: 1}
@@ -241,9 +244,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 4750337230919826237, guid: a9826923d09c037448425c6efe97e884,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -251,7 +251,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements: []
-  - itemName: 7
+  - worldObjectPrefab: {fileID: 149353346477130184, guid: 6f34dc0eb4490814f9532e8411171a96,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 7
     categoryName: 1
     subCategoryName: 2
     itemSize: {x: 1, y: 1}
@@ -274,9 +277,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 149353346477130184, guid: 6f34dc0eb4490814f9532e8411171a96,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -284,7 +284,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements: []
-  - itemName: 8
+  - worldObjectPrefab: {fileID: 1545961459860630358, guid: 2b7c021b603edd94ea83748d98bc66df,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 8
     categoryName: 1
     subCategoryName: 2
     itemSize: {x: 1, y: 1}
@@ -307,9 +310,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 1545961459860630358, guid: 2b7c021b603edd94ea83748d98bc66df,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -317,7 +317,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 1
     craftingRequirements: []
-  - itemName: 14
+  - worldObjectPrefab: {fileID: 2282415043916054515, guid: 5500d5354c3c244469af106f07c06b06,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 14
     categoryName: 8
     subCategoryName: 22
     itemSize: {x: 2, y: 2}
@@ -346,8 +349,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -363,7 +364,10 @@ MonoBehaviour:
       amount: 1
     - itemName: 2
       amount: 1
-  - itemName: 15
+  - worldObjectPrefab: {fileID: 174567827129593401, guid: 9fc578a087054ab4c804efff8e9eb610,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 15
     categoryName: 8
     subCategoryName: 22
     itemSize: {x: 2, y: 2}
@@ -392,8 +396,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -409,7 +411,10 @@ MonoBehaviour:
       amount: 1
     - itemName: 3
       amount: 1
-  - itemName: 16
+  - worldObjectPrefab: {fileID: 8586056964595273081, guid: 7f76b57c9652a44429f8c179e5da2e9a,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 16
     categoryName: 8
     subCategoryName: 22
     itemSize: {x: 2, y: 2}
@@ -438,8 +443,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -455,7 +458,10 @@ MonoBehaviour:
       amount: 1
     - itemName: 4
       amount: 1
-  - itemName: 17
+  - worldObjectPrefab: {fileID: 8304985152739549739, guid: aa63b124521404a49a0b9098b6b9e100,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 17
     categoryName: 4
     subCategoryName: 8
     itemSize: {x: 2, y: 2}
@@ -483,9 +489,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 8304985152739549739, guid: aa63b124521404a49a0b9098b6b9e100,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -497,7 +500,10 @@ MonoBehaviour:
       amount: 1
     - itemName: 2
       amount: 2
-  - itemName: 18
+  - worldObjectPrefab: {fileID: 368946190395319720, guid: 6add69ae8268d464f99e27731f7ec7e1,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 18
     categoryName: 8
     subCategoryName: 23
     itemSize: {x: 1, y: 2}
@@ -521,9 +527,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 368946190395319720, guid: 6add69ae8268d464f99e27731f7ec7e1,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -535,7 +538,11 @@ MonoBehaviour:
       amount: 1
     - itemName: 69
       amount: 1
-  - itemName: 34
+  - worldObjectPrefab: {fileID: 5035480046617749617, guid: 72cd27aa8bafccd419a3b5d2540d0ee3,
+      type: 3}
+    equippedPrefab: {fileID: 3740131063225789348, guid: 1f7757978dc54374cb9b915b9fecbc6e,
+      type: 3}
+    itemName: 34
     categoryName: 5
     subCategoryName: 12
     itemSize: {x: 1, y: 3}
@@ -561,9 +568,6 @@ MonoBehaviour:
     durability_Max: 20
     orePower: 0
     treePower: 1
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 3740131063225789348, guid: 1f7757978dc54374cb9b915b9fecbc6e,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -573,7 +577,11 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 6
       amount: 4
-  - itemName: 35
+  - worldObjectPrefab: {fileID: 7495563821845350734, guid: 226c719daae9aa24a946bf8ed6fc318d,
+      type: 3}
+    equippedPrefab: {fileID: 5654400252719517320, guid: e8aabaa9c00a2c846802c8d343075e6b,
+      type: 3}
+    itemName: 35
     categoryName: 5
     subCategoryName: 13
     itemSize: {x: 1, y: 3}
@@ -599,9 +607,6 @@ MonoBehaviour:
     durability_Max: 20
     orePower: 1
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 5654400252719517320, guid: e8aabaa9c00a2c846802c8d343075e6b,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -611,7 +616,11 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 6
       amount: 4
-  - itemName: 36
+  - worldObjectPrefab: {fileID: 5408217977248903811, guid: c73c8ed22fd42d14a930b6ef17ab24f4,
+      type: 3}
+    equippedPrefab: {fileID: 7535996872031319195, guid: 97318f5df5efd264c82e55d7627cfadb,
+      type: 3}
+    itemName: 36
     categoryName: 5
     subCategoryName: 14
     itemSize: {x: 1, y: 3}
@@ -638,9 +647,6 @@ MonoBehaviour:
     durability_Max: 20
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 7535996872031319195, guid: 97318f5df5efd264c82e55d7627cfadb,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -650,7 +656,11 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 6
       amount: 3
-  - itemName: 37
+  - worldObjectPrefab: {fileID: 861950304363719960, guid: 9de530d786d98834d9a6f9ba8dbb2dd5,
+      type: 3}
+    equippedPrefab: {fileID: 610790753315421977, guid: 6a9be7faffb83a646a68dcb78cbe9adb,
+      type: 3}
+    itemName: 37
     categoryName: 5
     subCategoryName: 11
     itemSize: {x: 1, y: 3}
@@ -677,9 +687,6 @@ MonoBehaviour:
     durability_Max: 20
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 610790753315421977, guid: 6a9be7faffb83a646a68dcb78cbe9adb,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -689,7 +696,11 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 6
       amount: 9
-  - itemName: 38
+  - worldObjectPrefab: {fileID: 3052672998244353882, guid: 4f11e1f322842b24db66afd57edf6d6d,
+      type: 3}
+    equippedPrefab: {fileID: 6029739926404462652, guid: 8bfb044d0671ff749a492cb4ccd4c727,
+      type: 3}
+    itemName: 38
     categoryName: 5
     subCategoryName: 12
     itemSize: {x: 1, y: 3}
@@ -715,9 +726,6 @@ MonoBehaviour:
     durability_Max: 100
     orePower: 0
     treePower: 2
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 6029739926404462652, guid: 8bfb044d0671ff749a492cb4ccd4c727,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -729,7 +737,11 @@ MonoBehaviour:
       amount: 1
     - itemName: 7
       amount: 3
-  - itemName: 39
+  - worldObjectPrefab: {fileID: 3247809680469740916, guid: c2942308898e1904398294807ffd4493,
+      type: 3}
+    equippedPrefab: {fileID: 434736963171876714, guid: 033202c8807919049a09265db9e21513,
+      type: 3}
+    itemName: 39
     categoryName: 5
     subCategoryName: 13
     itemSize: {x: 1, y: 3}
@@ -755,9 +767,6 @@ MonoBehaviour:
     durability_Max: 100
     orePower: 2
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 434736963171876714, guid: 033202c8807919049a09265db9e21513,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -769,7 +778,11 @@ MonoBehaviour:
       amount: 1
     - itemName: 7
       amount: 3
-  - itemName: 40
+  - worldObjectPrefab: {fileID: 7966377956658303716, guid: c066c61c11fc3064392b996526377663,
+      type: 3}
+    equippedPrefab: {fileID: 1430489478524335158, guid: 9ef0e97319c980243859e5148d621a34,
+      type: 3}
+    itemName: 40
     categoryName: 5
     subCategoryName: 14
     itemSize: {x: 1, y: 3}
@@ -796,9 +809,6 @@ MonoBehaviour:
     durability_Max: 100
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 1430489478524335158, guid: 9ef0e97319c980243859e5148d621a34,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -810,7 +820,11 @@ MonoBehaviour:
       amount: 1
     - itemName: 7
       amount: 2
-  - itemName: 41
+  - worldObjectPrefab: {fileID: 491021057281432185, guid: 7698053df312aa84e80853ac61852f3b,
+      type: 3}
+    equippedPrefab: {fileID: 2383225863483182673, guid: e2ff56243dc021b4d8987ae93beeffc0,
+      type: 3}
+    itemName: 41
     categoryName: 5
     subCategoryName: 11
     itemSize: {x: 1, y: 3}
@@ -837,9 +851,6 @@ MonoBehaviour:
     durability_Max: 100
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 2383225863483182673, guid: e2ff56243dc021b4d8987ae93beeffc0,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -851,7 +862,11 @@ MonoBehaviour:
       amount: 1
     - itemName: 7
       amount: 8
-  - itemName: 42
+  - worldObjectPrefab: {fileID: 300314331454449420, guid: 758310138b40c4f479c1ab887b649c26,
+      type: 3}
+    equippedPrefab: {fileID: 8971755898630984601, guid: c9efa3ae2eaf15b468ae7bed81ba6644,
+      type: 3}
+    itemName: 42
     categoryName: 5
     subCategoryName: 12
     itemSize: {x: 1, y: 3}
@@ -877,9 +892,6 @@ MonoBehaviour:
     durability_Max: 200
     orePower: 0
     treePower: 4
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 8971755898630984601, guid: c9efa3ae2eaf15b468ae7bed81ba6644,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -891,7 +903,11 @@ MonoBehaviour:
       amount: 1
     - itemName: 8
       amount: 3
-  - itemName: 43
+  - worldObjectPrefab: {fileID: 7383656432728975472, guid: a19decc636bb668439c3b105c290410d,
+      type: 3}
+    equippedPrefab: {fileID: 6222287741510366711, guid: e2d6c98dea2879643b1e233c2b05bd5e,
+      type: 3}
+    itemName: 43
     categoryName: 5
     subCategoryName: 13
     itemSize: {x: 1, y: 3}
@@ -917,9 +933,6 @@ MonoBehaviour:
     durability_Max: 200
     orePower: 4
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 6222287741510366711, guid: e2d6c98dea2879643b1e233c2b05bd5e,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -931,7 +944,11 @@ MonoBehaviour:
       amount: 1
     - itemName: 8
       amount: 3
-  - itemName: 44
+  - worldObjectPrefab: {fileID: 4168083765625390640, guid: 25d5f5b4a17c9f549bfd8c9f5a39cd9a,
+      type: 3}
+    equippedPrefab: {fileID: 199626688575356975, guid: f463f4e834c7f66408f3eb5bc4043cd9,
+      type: 3}
+    itemName: 44
     categoryName: 5
     subCategoryName: 14
     itemSize: {x: 1, y: 3}
@@ -958,9 +975,6 @@ MonoBehaviour:
     durability_Max: 200
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 199626688575356975, guid: f463f4e834c7f66408f3eb5bc4043cd9,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -972,7 +986,11 @@ MonoBehaviour:
       amount: 1
     - itemName: 8
       amount: 2
-  - itemName: 45
+  - worldObjectPrefab: {fileID: 1205677573358559222, guid: 81a10fb0c73741a4aa173d264bf709bf,
+      type: 3}
+    equippedPrefab: {fileID: 2587112584172054734, guid: bd12b692ecc9eb24e8ea833683375907,
+      type: 3}
+    itemName: 45
     categoryName: 5
     subCategoryName: 11
     itemSize: {x: 1, y: 3}
@@ -999,9 +1017,6 @@ MonoBehaviour:
     durability_Max: 200
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 2587112584172054734, guid: bd12b692ecc9eb24e8ea833683375907,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1013,7 +1028,10 @@ MonoBehaviour:
       amount: 1
     - itemName: 8
       amount: 8
-  - itemName: 60
+  - worldObjectPrefab: {fileID: 2955501004854773831, guid: 8aabba1d7bcec224ba57f5a67196b55d,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 60
     categoryName: 6
     subCategoryName: 0
     itemSize: {x: 1, y: 2}
@@ -1037,8 +1055,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1050,7 +1066,9 @@ MonoBehaviour:
       amount: 2
     - itemName: 67
       amount: 2
-  - itemName: 51
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 51
     categoryName: 6
     subCategoryName: 16
     itemSize: {x: 2, y: 2}
@@ -1079,8 +1097,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1092,7 +1108,9 @@ MonoBehaviour:
       amount: 3
     - itemName: 65
       amount: 3
-  - itemName: 52
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 52
     categoryName: 6
     subCategoryName: 16
     itemSize: {x: 2, y: 2}
@@ -1122,8 +1140,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1137,7 +1153,9 @@ MonoBehaviour:
       amount: 3
     - itemName: 5
       amount: 1
-  - itemName: 53
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 53
     categoryName: 6
     subCategoryName: 16
     itemSize: {x: 2, y: 2}
@@ -1166,8 +1184,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1179,7 +1195,9 @@ MonoBehaviour:
       amount: 3
     - itemName: 65
       amount: 3
-  - itemName: 54
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 54
     categoryName: 6
     subCategoryName: 17
     itemSize: {x: 2, y: 2}
@@ -1207,8 +1225,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1220,7 +1236,9 @@ MonoBehaviour:
       amount: 3
     - itemName: 65
       amount: 3
-  - itemName: 55
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 55
     categoryName: 6
     subCategoryName: 17
     itemSize: {x: 2, y: 2}
@@ -1249,8 +1267,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1262,7 +1278,9 @@ MonoBehaviour:
       amount: 3
     - itemName: 65
       amount: 3
-  - itemName: 56
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 56
     categoryName: 6
     subCategoryName: 17
     itemSize: {x: 2, y: 2}
@@ -1291,8 +1309,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1304,7 +1320,9 @@ MonoBehaviour:
       amount: 3
     - itemName: 65
       amount: 3
-  - itemName: 57
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 57
     categoryName: 6
     subCategoryName: 18
     itemSize: {x: 2, y: 2}
@@ -1332,8 +1350,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1345,7 +1361,9 @@ MonoBehaviour:
       amount: 3
     - itemName: 65
       amount: 3
-  - itemName: 58
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 58
     categoryName: 6
     subCategoryName: 18
     itemSize: {x: 2, y: 2}
@@ -1374,8 +1392,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1387,7 +1403,9 @@ MonoBehaviour:
       amount: 3
     - itemName: 65
       amount: 3
-  - itemName: 59
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 59
     categoryName: 6
     subCategoryName: 18
     itemSize: {x: 2, y: 2}
@@ -1416,8 +1434,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1429,7 +1445,10 @@ MonoBehaviour:
       amount: 3
     - itemName: 65
       amount: 3
-  - itemName: 65
+  - worldObjectPrefab: {fileID: 5309292601367801835, guid: de11b8d2b6e28b846b0e4f7fc28d9155,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 65
     categoryName: 2
     subCategoryName: 4
     itemSize: {x: 1, y: 2}
@@ -1454,9 +1473,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 5309292601367801835, guid: de11b8d2b6e28b846b0e4f7fc28d9155,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -1464,7 +1480,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 66
+  - worldObjectPrefab: {fileID: 6496479173327333623, guid: caaf8238de043dc499af052c0596b691,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 66
     categoryName: 2
     subCategoryName: 3
     itemSize: {x: 1, y: 1}
@@ -1486,9 +1505,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 6496479173327333623, guid: caaf8238de043dc499af052c0596b691,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -1496,7 +1512,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 67
+  - worldObjectPrefab: {fileID: 1743933868757232438, guid: ff5aec27515579e479c0e277c412edc9,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 67
     categoryName: 2
     subCategoryName: 4
     itemSize: {x: 1, y: 2}
@@ -1520,9 +1539,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 1743933868757232438, guid: ff5aec27515579e479c0e277c412edc9,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1530,7 +1546,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 68
+  - worldObjectPrefab: {fileID: 5249736885591442001, guid: 70a637eca13cb7d4d9213fb51c7fd752,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 68
     categoryName: 2
     subCategoryName: 3
     itemSize: {x: 1, y: 2}
@@ -1554,9 +1573,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 5249736885591442001, guid: 70a637eca13cb7d4d9213fb51c7fd752,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -1564,7 +1580,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 69
+  - worldObjectPrefab: {fileID: 6733907896066425463, guid: c7aa02904c2f4d74d9fd66c52d497705,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 69
     categoryName: 2
     subCategoryName: 5
     itemSize: {x: 2, y: 2}
@@ -1593,9 +1612,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 6733907896066425463, guid: c7aa02904c2f4d74d9fd66c52d497705,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -1603,7 +1619,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 70
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 70
     categoryName: 2
     subCategoryName: 5
     itemSize: {x: 1, y: 1}
@@ -1625,8 +1643,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1634,7 +1650,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 71
+  - worldObjectPrefab: {fileID: 320030197387143633, guid: f4c29f6428408ed4fbffcedc238dc1ac,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 71
     categoryName: 2
     subCategoryName: 4
     itemSize: {x: 1, y: 2}
@@ -1658,9 +1677,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 320030197387143633, guid: f4c29f6428408ed4fbffcedc238dc1ac,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1668,7 +1684,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 76
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 76
     categoryName: 3
     subCategoryName: 6
     itemSize: {x: 1, y: 1}
@@ -1691,8 +1709,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1702,7 +1718,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 69
       amount: 1
-  - itemName: 77
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 77
     categoryName: 3
     subCategoryName: 6
     itemSize: {x: 1, y: 1}
@@ -1724,8 +1742,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1735,7 +1751,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 66
       amount: 2
-  - itemName: 78
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 78
     categoryName: 3
     subCategoryName: 6
     itemSize: {x: 1, y: 1}
@@ -1758,8 +1776,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1769,7 +1785,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 67
       amount: 1
-  - itemName: 79
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 79
     categoryName: 3
     subCategoryName: 6
     itemSize: {x: 1, y: 1}
@@ -1792,8 +1810,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1803,7 +1819,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 67
       amount: 1
-  - itemName: 80
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 80
     categoryName: 3
     subCategoryName: 6
     itemSize: {x: 1, y: 1}
@@ -1825,8 +1843,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1836,7 +1852,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 68
       amount: 1
-  - itemName: 81
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 81
     categoryName: 3
     subCategoryName: 7
     itemSize: {x: 1, y: 1}
@@ -1859,8 +1877,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1870,7 +1886,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 95
       amount: 1
-  - itemName: 82
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 82
     categoryName: 3
     subCategoryName: 7
     itemSize: {x: 1, y: 1}
@@ -1893,8 +1911,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1904,7 +1920,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 95
       amount: 1
-  - itemName: 83
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 83
     categoryName: 3
     subCategoryName: 7
     itemSize: {x: 1, y: 1}
@@ -1927,8 +1945,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1938,7 +1954,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 95
       amount: 2
-  - itemName: 84
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 84
     categoryName: 3
     subCategoryName: 7
     itemSize: {x: 1, y: 1}
@@ -1961,8 +1979,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -1972,7 +1988,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 97
       amount: 1
-  - itemName: 85
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 85
     categoryName: 3
     subCategoryName: 7
     itemSize: {x: 1, y: 1}
@@ -1995,8 +2013,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2006,7 +2022,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 98
       amount: 1
-  - itemName: 86
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 86
     categoryName: 3
     subCategoryName: 7
     itemSize: {x: 1, y: 1}
@@ -2029,8 +2047,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2040,7 +2056,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 99
       amount: 1
-  - itemName: 87
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 87
     categoryName: 3
     subCategoryName: 7
     itemSize: {x: 1, y: 1}
@@ -2063,8 +2081,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2074,7 +2090,9 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 100
       amount: 1
-  - itemName: 88
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 88
     categoryName: 3
     subCategoryName: 7
     itemSize: {x: 1, y: 1}
@@ -2097,8 +2115,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2106,7 +2122,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 89
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 89
     categoryName: 3
     subCategoryName: 7
     itemSize: {x: 1, y: 1}
@@ -2129,8 +2147,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2138,7 +2154,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 95
+  - worldObjectPrefab: {fileID: 2447436741725595447, guid: c06486dac1fe8a642a4ad82fab80fe80,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 95
     categoryName: 7
     subCategoryName: 19
     itemSize: {x: 1, y: 2}
@@ -2162,9 +2181,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 2447436741725595447, guid: c06486dac1fe8a642a4ad82fab80fe80,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2172,7 +2188,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 98
+  - worldObjectPrefab: {fileID: 52203542677531810, guid: 3317b352177cf494a9fdbc77f83003ee,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 98
     categoryName: 7
     subCategoryName: 19
     itemSize: {x: 1, y: 2}
@@ -2196,9 +2215,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 52203542677531810, guid: 3317b352177cf494a9fdbc77f83003ee,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -2206,7 +2222,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 96
+  - worldObjectPrefab: {fileID: 885988641236619049, guid: 71703d1644543664aaac04dcc27dca21,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 96
     categoryName: 7
     subCategoryName: 19
     itemSize: {x: 1, y: 2}
@@ -2230,9 +2249,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 885988641236619049, guid: 71703d1644543664aaac04dcc27dca21,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2240,7 +2256,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 97
+  - worldObjectPrefab: {fileID: 5736703017609124289, guid: 663dd5f30ea327e48a3847c3803f09b2,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 97
     categoryName: 7
     subCategoryName: 19
     itemSize: {x: 2, y: 2}
@@ -2269,9 +2288,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 5736703017609124289, guid: 663dd5f30ea327e48a3847c3803f09b2,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1
@@ -2279,7 +2295,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 99
+  - worldObjectPrefab: {fileID: 6463989445906025499, guid: e33aa5956fbfd664bb2c67bac3efa279,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 99
     categoryName: 7
     subCategoryName: 19
     itemSize: {x: 1, y: 2}
@@ -2304,9 +2323,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 6463989445906025499, guid: e33aa5956fbfd664bb2c67bac3efa279,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2314,7 +2330,10 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 100
+  - worldObjectPrefab: {fileID: 329387942110904326, guid: 4cf985a7885f8fa4a874aab3b4bd22ed,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    itemName: 100
     categoryName: 7
     subCategoryName: 19
     itemSize: {x: 1, y: 2}
@@ -2339,9 +2358,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 329387942110904326, guid: 4cf985a7885f8fa4a874aab3b4bd22ed,
-      type: 3}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2349,7 +2365,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 106
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 106
     categoryName: 7
     subCategoryName: 20
     itemSize: {x: 1, y: 1}
@@ -2371,8 +2389,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2380,7 +2396,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 107
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 107
     categoryName: 7
     subCategoryName: 20
     itemSize: {x: 1, y: 1}
@@ -2402,8 +2420,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2411,7 +2427,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 108
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 108
     categoryName: 7
     subCategoryName: 20
     itemSize: {x: 1, y: 1}
@@ -2433,8 +2451,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2442,7 +2458,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 109
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 109
     categoryName: 7
     subCategoryName: 20
     itemSize: {x: 1, y: 1}
@@ -2465,8 +2483,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2474,7 +2490,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 110
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 110
     categoryName: 7
     subCategoryName: 20
     itemSize: {x: 1, y: 1}
@@ -2497,8 +2515,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2506,7 +2522,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 111
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 111
     categoryName: 7
     subCategoryName: 20
     itemSize: {x: 1, y: 1}
@@ -2529,8 +2547,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2538,7 +2554,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 117
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 117
     categoryName: 7
     subCategoryName: 21
     itemSize: {x: 1, y: 2}
@@ -2562,8 +2580,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2571,7 +2587,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 118
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 118
     categoryName: 7
     subCategoryName: 21
     itemSize: {x: 1, y: 2}
@@ -2595,8 +2613,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2604,7 +2620,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 119
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 119
     categoryName: 7
     subCategoryName: 21
     itemSize: {x: 1, y: 2}
@@ -2628,8 +2646,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2637,7 +2653,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 120
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 120
     categoryName: 7
     subCategoryName: 21
     itemSize: {x: 2, y: 2}
@@ -2665,8 +2683,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2674,7 +2690,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 121
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 121
     categoryName: 7
     subCategoryName: 21
     itemSize: {x: 1, y: 2}
@@ -2699,8 +2717,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2708,7 +2724,9 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 122
+  - worldObjectPrefab: {fileID: 0}
+    equippedPrefab: {fileID: 0}
+    itemName: 122
     categoryName: 7
     subCategoryName: 21
     itemSize: {x: 1, y: 2}
@@ -2733,8 +2751,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 0}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2742,7 +2758,11 @@ MonoBehaviour:
     research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
-  - itemName: 46
+  - worldObjectPrefab: {fileID: 159855061433217555, guid: eb4ac3cea5dec154a9228b558f479254,
+      type: 3}
+    equippedPrefab: {fileID: 5994904331811257363, guid: ce23f25e2a8cbea4aa26576c2dee0f50,
+      type: 3}
+    itemName: 46
     categoryName: 5
     subCategoryName: 48
     itemSize: {x: 2, y: 2}
@@ -2770,9 +2790,6 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 5994904331811257363, guid: ce23f25e2a8cbea4aa26576c2dee0f50,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2786,7 +2803,11 @@ MonoBehaviour:
       amount: 1
     - itemName: 5
       amount: 1
-  - itemName: 160
+  - worldObjectPrefab: {fileID: 6182482858119125883, guid: f315d764b82118f4eb702bd3e1ac822c,
+      type: 3}
+    equippedPrefab: {fileID: 583844602863912719, guid: 7d22cb1a14f57374990c958474f0ae6c,
+      type: 3}
+    itemName: 160
     categoryName: 5
     subCategoryName: 49
     itemSize: {x: 1, y: 2}
@@ -2810,9 +2831,6 @@ MonoBehaviour:
     durability_Max: 1
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 583844602863912719, guid: 7d22cb1a14f57374990c958474f0ae6c,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2822,7 +2840,11 @@ MonoBehaviour:
     craftingRequirements:
     - itemName: 71
       amount: 2
-  - itemName: 161
+  - worldObjectPrefab: {fileID: 2805240114258201884, guid: e8b04c17850803640ae5d966932e0fd0,
+      type: 3}
+    equippedPrefab: {fileID: 1884002324475986137, guid: 98089548e96e14a4c8dd1ec392b83d93,
+      type: 3}
+    itemName: 161
     categoryName: 5
     subCategoryName: 49
     itemSize: {x: 1, y: 2}
@@ -2846,9 +2868,6 @@ MonoBehaviour:
     durability_Max: 5
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 1884002324475986137, guid: 98089548e96e14a4c8dd1ec392b83d93,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 0
@@ -2860,7 +2879,11 @@ MonoBehaviour:
       amount: 1
     - itemName: 71
       amount: 4
-  - itemName: 162
+  - worldObjectPrefab: {fileID: 4885371400472726299, guid: 4e24275b34f8c2c47ade09ec1cb510f5,
+      type: 3}
+    equippedPrefab: {fileID: 4785710050809358832, guid: 8e1c4834f4b28914f8869214dcf68bd7,
+      type: 3}
+    itemName: 162
     categoryName: 5
     subCategoryName: 49
     itemSize: {x: 1, y: 2}
@@ -2884,9 +2907,6 @@ MonoBehaviour:
     durability_Max: 10
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
-    equippedPrefab: {fileID: 4785710050809358832, guid: 8e1c4834f4b28914f8869214dcf68bd7,
-      type: 3}
     idleAnimation: {fileID: 0}
     actionAnimation: {fileID: 0}
     isResearched: 1

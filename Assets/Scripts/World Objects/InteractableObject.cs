@@ -39,12 +39,14 @@ public class InteractableObject : MonoBehaviour
 
     private void Update()
     {
-        //If Item, reduce the velocity on the ground
-        if (isHittingGround && GetComponent<Rigidbody>() && interactableType == InteracteableType.Item)
-        {
-            GetComponent<Rigidbody>().isKinematic = true;
-            GetComponent<Rigidbody>().useGravity = false;
-        }
+        ////If Item, reduce the velocity on the ground
+        //if (isHittingGround && GetComponent<Rigidbody>() && interactableType == InteracteableType.Item)
+        //{
+        //    InventoryManager.Instance.StartGravityCoroutine(gameObject);
+
+        //    //GetComponent<Rigidbody>().isKinematic = true;
+        //    //GetComponent<Rigidbody>().useGravity = false;
+        //}
     }
 
 
@@ -286,7 +288,7 @@ public class InteractableObject : MonoBehaviour
 
 public enum InteracteableType
 {
-    [Description("")][InspectorName("Standing")] None,
+    [Description("None")][InspectorName("None")] None,
 
     [Description("Item")][InspectorName("Item/Item")] Item,
     [Description("Inventory")][InspectorName("Inventory/Inventory")] Inventory,

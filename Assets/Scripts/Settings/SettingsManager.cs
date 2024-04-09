@@ -109,6 +109,8 @@ public class SettingsManager : Singleton<SettingsManager>
         UI_Camera_FOV.value = settingsValues.camera_FOV;
         UI_Camera_MouseSensitivity.value = settingsValues.camera_MouseSensitivity;
 
+        SoundManager.Instance.UpdateSounds();
+
         SaveData();
 
         ChangeTextDisplay_Percent();
@@ -192,6 +194,8 @@ public class SettingsManager : Singleton<SettingsManager>
         ChangeMouseSensitivity();
 
         ChangeTextDisplay_Percent();
+
+        SoundManager.Instance.UpdateSounds();
     }
 
     #endregion

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class InvisibleLight : MonoBehaviour, EquippeableItem_Interface
 {
-    public SphereCollider sphereCollider;
-    public Vector3 spherePos;
+    public GameObject invisibleCalculationPoint;
 
 
     //--------------------
@@ -13,12 +12,8 @@ public class InvisibleLight : MonoBehaviour, EquippeableItem_Interface
 
     private void Start()
     {
-        sphereCollider = GetComponent<SphereCollider>();
-    }
-
-    private void Update()
-    {
-        spherePos = transform.TransformPoint(sphereCollider.center);
+        invisibleCalculationPoint.transform.SetLocalPositionAndRotation(HotbarManager.Instance.EquipmentHolder.transform.localPosition, Quaternion.identity);
+        //invisibleCalculationPoint.transform.SetLocalPositionAndRotation((Vector3.forward * maxCollissionDistance), Quaternion.identity);
     }
 
 

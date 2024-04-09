@@ -74,11 +74,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77a8a4a3b23b8634db6850328fd6dea3,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8966987032898194512}
+      addedObject: {fileID: 8965579413982230146}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77a8a4a3b23b8634db6850328fd6dea3,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8881128898259541641}
+      addedObject: {fileID: 3088047557947578514}
   m_SourcePrefab: {fileID: 100100000, guid: 77a8a4a3b23b8634db6850328fd6dea3, type: 3}
 --- !u!1 &1545961459860630358 stripped
 GameObject:
@@ -108,13 +108,13 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &8966987032898194512
-BoxCollider:
+--- !u!64 &8965579413982230146
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131,10 +131,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.22, y: 0.13, z: 0.25}
-  m_Center: {x: 0, y: 0.015, z: 0}
---- !u!114 &8881128898259541641
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8260708346676125442, guid: 77a8a4a3b23b8634db6850328fd6dea3, type: 3}
+--- !u!114 &3088047557947578514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,6 +152,7 @@ MonoBehaviour:
   amount: 1
   durability_Current: 0
   interactableType: 1
-  oreHealth: 0
   inventoryIndex: 0
   plantParent: {fileID: 0}
+  journalType: 0
+  journalPageIndex: 0

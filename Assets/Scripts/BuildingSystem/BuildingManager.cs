@@ -2269,7 +2269,7 @@ public class BuildingManager : Singleton<BuildingManager>
         }
         else
         {
-            print("Physics.Raycast Isn't hit");
+            print("Physics.RaycastHit Isn't hit");
         }
     }
 

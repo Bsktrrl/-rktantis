@@ -1,7 +1,4 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SelectionManager : Singleton<SelectionManager>
 {
@@ -27,6 +24,15 @@ public class SelectionManager : Singleton<SelectionManager>
 
             if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance))
             {
+                //If Hitting the SphereCollider to an InvisibleObject, ignore the hit
+                if (hit.transform.gameObject.GetComponent<InvisibleObject>())
+                {
+                    if (hit.transform.gameObject.GetComponent<SphereCollider>())
+                    {
+                        return;
+                    }
+                }
+
                 Transform selectionTransform = hit.transform;
 
                 //Get the layer looking at
@@ -57,6 +63,14 @@ public class SelectionManager : Singleton<SelectionManager>
                     selecedObject = newInteractableObject.gameObject;
 
                     LookAtManager.Instance.typeLookingAt = newInteractableObject.GetComponent<InteractableObject>().interactableType;
+
+                    if (newInteractableObject != null)
+                    {
+                        if (newInteractableObject.gameObject.activeInHierarchy)
+                        {
+                            LookAtManager.Instance.LookAt();
+                        }
+                    }
                 }
                 //If looking at a Plant, show its UI to the player
                 else if (newPlantObject != null)
@@ -66,6 +80,14 @@ public class SelectionManager : Singleton<SelectionManager>
                     selecedObject = newPlantObject.gameObject;
 
                     LookAtManager.Instance.typeLookingAt = newPlantObject.pickablePart.GetComponent<InteractableObject>().interactableType;
+
+                    if (newInteractableObject != null)
+                    {
+                        if (newInteractableObject.gameObject.activeInHierarchy)
+                        {
+                            LookAtManager.Instance.LookAt();
+                        }
+                    }
                 }
 
                 //If there is a Hit without an interacteable script
@@ -74,12 +96,16 @@ public class SelectionManager : Singleton<SelectionManager>
                     onTarget = false;
 
                     LookAtManager.Instance.typeLookingAt = InteracteableType.None;
+
+                    LookAtManager.Instance.TurnOffScreens();
                 }
             }
 
             //If there is no script attached at all
             else
             {
+                LookAtManager.Instance.TurnOffScreens();
+
                 onTarget = false;
 
                 //Get the layer looking at

@@ -213,7 +213,7 @@ public class Ore : MonoBehaviour
             if ((tempOreHealth - OreManager.Instance.oreHealthReducer) <= 0)
             {
                 //Play OreDestroy sound
-                SoundManager.Instance.Play_PickaxeUsage_OreIsDestroid_Clip();
+                SoundManager.Instance.Play_PickaxeUsage_OreIsDestroyd_Clip();
 
                 //Spawn at least 1 item into the World
                 SpawnOreItems(interactableType);
@@ -262,31 +262,31 @@ public class Ore : MonoBehaviour
     {
         if (interactableType == InteracteableType.Tungsten_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Tungsten, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Tungsten, gameObject, false, null, 0.2f);
         }
         else if (interactableType == InteracteableType.Stone_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Stone, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Stone, gameObject, false, null, 0.2f);
         }
         else if (interactableType == InteracteableType.Cryonite_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Cryonite, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Cryonite, gameObject, false, null, 0.2f);
         }
         else if (interactableType == InteracteableType.Magnetite_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Magnetite, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Magnetite, gameObject, false, null, 0.2f);
         }
         else if (interactableType == InteracteableType.Viridian_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Viridian, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Viridian, gameObject, false, null, 0.2f);
         }
         else if (interactableType == InteracteableType.Gold_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.Gold, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.Gold, gameObject, false, null, 0.2f);
         }
         else if (interactableType == InteracteableType.AríditeCrystal_Ore)
         {
-            InventoryManager.Instance.SpawnItemToWorld(Items.AríditeCrystal, gameObject, false);
+            InventoryManager.Instance.SpawnItemToWorld(Items.AríditeCrystal, gameObject, false, null, 0.2f);
         }
     }
 

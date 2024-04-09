@@ -94,7 +94,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b8b4f20502f0e14483b92c546fa0bd9,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1107726626673787936}
+      addedObject: {fileID: -6071326032927572944}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b8b4f20502f0e14483b92c546fa0bd9,
         type: 3}
       insertIndex: -1
@@ -128,13 +128,13 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &1107726626673787936
-CapsuleCollider:
+--- !u!64 &-6071326032927572944
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -151,11 +151,10 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.15
-  m_Height: 0.75
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8087472724582221000, guid: 5b8b4f20502f0e14483b92c546fa0bd9, type: 3}
 --- !u!114 &523075480808329254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +172,7 @@ MonoBehaviour:
   amount: 1
   durability_Current: 0
   interactableType: 1
-  oreHealth: 0
   inventoryIndex: 0
   plantParent: {fileID: 0}
+  journalType: 0
+  journalPageIndex: 0

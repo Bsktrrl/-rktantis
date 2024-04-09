@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -97,7 +96,7 @@ public class JournalPage : MonoBehaviour, IPointerEnterHandler
     }
     public void MessageClipButton_isClicked()
     {
-        if (message_Clip && SoundManager.Instance.audioSource_VoiceMessages != null)
+        if (message_Clip && SoundManager.Instance.audioSource_Journal_VoiceMessage != null)
         {
             SoundManager.Instance.Play_JournalPage_VoiceMessage_Clip(message_Clip);
 

@@ -308,7 +308,7 @@ public class ResearchManager : Singleton<ResearchManager>
     
     public void ResearchButton_isPressed()
     {
-        SoundManager.Instance.Play_Research_Ongoing_Clip();
+        SoundManager.Instance.Play_ResearchTable_Researching_Clip();
 
         researchTime_Max = MainManager.Instance.GetItem(activeItem).researchTime;
         researchTime_Current = 0;
@@ -318,6 +318,7 @@ public class ResearchManager : Singleton<ResearchManager>
     void CompleteResearch()
     {
         SoundManager.Instance.Play_Research_Complete_Clip();
+        SoundManager.Instance.Stop_ResearchTable_Researching_Clip();
 
         //Change isResearched stats
         for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)

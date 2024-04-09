@@ -66,6 +66,14 @@ public class LookAtManager : Singleton<LookAtManager>
     }
     private void Update()
     {
+        LookAt();
+    }
+
+    //--------------------
+
+
+    public void LookAt()
+    {
         if (!LookAt_Parent.activeInHierarchy)
         {
             return;
@@ -111,7 +119,7 @@ public class LookAtManager : Singleton<LookAtManager>
             return;
         }
         #endregion
-        
+
         //If looking at a Tree
         #region
         else if ((HotbarManager.Instance.selectedItem == Items.WoodAxe || HotbarManager.Instance.selectedItem == Items.StoneAxe || HotbarManager.Instance.selectedItem == Items.CryoniteAxe
@@ -295,18 +303,25 @@ public class LookAtManager : Singleton<LookAtManager>
             {
                 Item item = MainManager.Instance.GetItem(SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().itemName);
 
-                ItemImage.sprite = item.hotbarSprite;
+                if (item.hotbarSprite)
+                {
+                    ItemImage.sprite = item.hotbarSprite;
+                }
+                
                 ItemName.text = SpaceTextConverting.Instance.SetText(item.itemName.ToString());
             }
         }
     }
     int PlantDisplay()
     {
+        //print("0. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.name);
+
         if (SelectionManager.Instance.selecedObject && SelectionManager.Instance.onTarget)
         {
             //If looking at the Plant
             if (SelectionManager.Instance.selecedObject.GetComponent<Plant>())
             {
+
                 Plant plant = SelectionManager.Instance.selecedObject.GetComponent<Plant>();
                 InteractableObject plantResource = plant.pickablePart.GetComponent<InteractableObject>();
 
@@ -557,11 +572,11 @@ public class LookAtManager : Singleton<LookAtManager>
                             case InteracteableType.Palm_Tree:
                                 break;
                             case InteracteableType.BloodTree:
-                                treeDisplay_Text.text = "Requires a \"Stone Pickaxe\" or \"Cryonite Pickaxe\"";
+                                treeDisplay_Text.text = "Requires a \"Stone Axe\" or \"Cryonite Axe\"";
                                 treeDisplay_LineObject.SetActive(true);
                                 break;
                             case InteracteableType.BloodTreeBush:
-                                treeDisplay_Text.text = "Requires a \"Wood Pickaxe\", \"Stone Pickaxe\" or \"Cryonite Pickaxe\"";
+                                treeDisplay_Text.text = "Requires a \"Wood Axe\", \"Stone Axe\" or \"Cryonite Axe\"";
                                 treeDisplay_LineObject.SetActive(true);
                                 break;
                             case InteracteableType.Tree_4:
@@ -596,7 +611,7 @@ public class LookAtManager : Singleton<LookAtManager>
                             case InteracteableType.Palm_Tree:
                                 break;
                             case InteracteableType.BloodTree:
-                                treeDisplay_Text.text = "Requires a \"Stone Pickaxe\" or \"Cryonite Pickaxe\"";
+                                treeDisplay_Text.text = "Requires a \"Stone Axe\" or \"Cryonite Axe\"";
                                 treeDisplay_LineObject.SetActive(true);
                                 break;
                             case InteracteableType.BloodTreeBush:

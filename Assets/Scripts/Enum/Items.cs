@@ -7,7 +7,7 @@ public enum Items
 {
     //None
     #region
-    [Description("")][InspectorName("Standing")] None,
+    [Description("None")][InspectorName("None")] None,
     #endregion
 
 

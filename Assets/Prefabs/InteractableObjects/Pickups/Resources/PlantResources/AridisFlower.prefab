@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AridisFlower
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9bcd7ca2bffb3f749b6e716852a1c409,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -74,12 +79,28 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcd7ca2bffb3f749b6e716852a1c409,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -8363058256486096346}
+      addedObject: {fileID: 737639466181643553}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcd7ca2bffb3f749b6e716852a1c409,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5798925765831234655}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcd7ca2bffb3f749b6e716852a1c409,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1869722580097884652}
   m_SourcePrefab: {fileID: 100100000, guid: 9bcd7ca2bffb3f749b6e716852a1c409, type: 3}
+--- !u!1 &793195364218811489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2687748857981416633, guid: 9bcd7ca2bffb3f749b6e716852a1c409,
+    type: 3}
+  m_PrefabInstance: {fileID: 5886992359965720358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1998449951595333208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5334839183209757054, guid: 9bcd7ca2bffb3f749b6e716852a1c409,
+    type: 3}
+  m_PrefabInstance: {fileID: 5886992359965720358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6733907896066425463 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bcd7ca2bffb3f749b6e716852a1c409,
@@ -108,13 +129,13 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &-8363058256486096346
-CapsuleCollider:
+--- !u!64 &737639466181643553
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131,11 +152,10 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.11
-  m_Height: 0.38
-  m_Direction: 0
-  m_Center: {x: 0, y: 0.05, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7329997417681697008, guid: 9bcd7ca2bffb3f749b6e716852a1c409, type: 3}
 --- !u!114 &5798925765831234655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +173,44 @@ MonoBehaviour:
   amount: 1
   durability_Current: 0
   interactableType: 1
-  oreHealth: 0
   inventoryIndex: 0
   plantParent: {fileID: 0}
+  journalType: 0
+  journalPageIndex: 0
+--- !u!114 &1869722580097884652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6733907896066425463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2377caf940a2892419a95a491612e5c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparencyValue: 1
+  objectCollider: {fileID: 737639466181643553}
+  objectPartsList_Base:
+  - {fileID: 793195364218811489}
+  - {fileID: 1998449951595333208}
+  objectPartsList_Pickable: []
+  materialList:
+  - {fileID: 2100000, guid: 92d4c7bb496cedb459d048f7faad3817, type: 2}
+  rendererList:
+  - {fileID: 7000370751151540477}
+  - {fileID: 7269517226113597338}
+  isVisible: 0
+  collidingObjectList: []
+--- !u!23 &7000370751151540477 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -5722777395218483237, guid: 9bcd7ca2bffb3f749b6e716852a1c409,
+    type: 3}
+  m_PrefabInstance: {fileID: 5886992359965720358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7269517226113597338 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3841657595159150780, guid: 9bcd7ca2bffb3f749b6e716852a1c409,
+    type: 3}
+  m_PrefabInstance: {fileID: 5886992359965720358}
+  m_PrefabAsset: {fileID: 0}

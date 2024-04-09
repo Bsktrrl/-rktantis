@@ -113,6 +113,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 8cd3d95592fb7b149be3eb8fe6985778,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5967069819222355230, guid: 8cd3d95592fb7b149be3eb8fe6985778,
         type: 3}
       propertyPath: m_IsActive
@@ -144,7 +149,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8cd3d95592fb7b149be3eb8fe6985778,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1074538558339973517}
+      addedObject: {fileID: 8852221239284356608}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8cd3d95592fb7b149be3eb8fe6985778,
         type: 3}
       insertIndex: -1
@@ -189,8 +194,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!135 &1074538558339973517
-SphereCollider:
+--- !u!64 &8852221239284356608
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -207,9 +212,10 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.05
-  m_Center: {x: 0, y: 0.03, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8850737308589970959, guid: 8cd3d95592fb7b149be3eb8fe6985778, type: 3}
 --- !u!114 &7348214552008296405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,13 +230,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantType: 15
   pickablePart: {fileID: 7158299872372255586}
+  thisGrowthTime: 300
   ColorMeshObject: []
   plantColors: []
   isPicked: 0
   growthTimer: 0
   growthPrecentage: 0
-  plantIndex: 0
-  precentageCheck: 0
+  plantIndex_x: 0
+  plantIndex_y: 0
+  percentageCheck: 0
 --- !u!1 &7158299872372255586 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5967069819222355230, guid: 8cd3d95592fb7b149be3eb8fe6985778,
@@ -303,6 +311,7 @@ MonoBehaviour:
   amount: 1
   durability_Current: 0
   interactableType: 19
-  oreHealth: 0
   inventoryIndex: 0
   plantParent: {fileID: 4420635417419070253}
+  journalType: 0
+  journalPageIndex: 0

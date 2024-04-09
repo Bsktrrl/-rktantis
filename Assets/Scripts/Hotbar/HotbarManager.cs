@@ -7,6 +7,7 @@ public class HotbarManager : Singleton<HotbarManager>
 {
     public GameObject hotbar_Parent;
     public GameObject EquipmentHolder;
+    public GameObject equippedItem;
     public List<GameObject> EquipmentList = new List<GameObject>();
 
     public HotbarSave hotbarSave = new HotbarSave();
@@ -198,6 +199,11 @@ public class HotbarManager : Singleton<HotbarManager>
                 }
             }
 
+            equippedItem = EquipmentList[EquipmentList.Count - 1];
+
+            //Change ArmStates
+            EquippmentManager.Instance.GetEquipmentStates(selectedItem);
+
             SaveData();
             return;
         }
@@ -211,6 +217,8 @@ public class HotbarManager : Singleton<HotbarManager>
                 EquipmentList[i].GetComponent<EquippedItem>().DestroyObject();
             }
         }
+
+        equippedItem = null;
     }
 
 
