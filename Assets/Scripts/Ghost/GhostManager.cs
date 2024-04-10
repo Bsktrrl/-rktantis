@@ -22,7 +22,9 @@ public class GhostManager : Singleton<GhostManager>
 
     [Header("Ghost Capturer")]
     public GhostCapturerStats ghostCapturerStats;
-    public List<Material> ghostCapturerMaterials = new List<Material>();
+
+    [Header("Materials")]
+    public Material material_Empty;
     public Material material_Water;
 
 
@@ -45,6 +47,22 @@ public class GhostManager : Singleton<GhostManager>
     public void LoadData()
     {
         ghostCapturerStats = DataManager.Instance.ghostCapturerStats_Store;
+
+        //Make sure there is 8 slots int the list
+        if (ghostCapturerStats.activeGhostCapturerSlotList.Count != 8)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                ghostCapturerStats.activeGhostCapturerSlotList.Add(false);
+
+                if (ghostCapturerStats.activeGhostCapturerSlotList.Count == 8)
+                {
+                    SaveData();
+
+                    break;
+                }
+            }
+        }
     }
     public void SaveData()
     {

@@ -11,6 +11,7 @@ public class GhostCapturer : MonoBehaviour
 
     [Header("Slots")]
     public List<GameObject> slotObjectList = new List<GameObject>();
+    public List<Material> materialSlotList = new List<Material>();
 
 
     //--------------------
@@ -19,6 +20,8 @@ public class GhostCapturer : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+
+        anim.SetBool("Capturing", false);
 
         UpdateGhostCapturer();
     }
@@ -61,9 +64,51 @@ public class GhostCapturer : MonoBehaviour
                 anim.SetBool("slotName", false);
             }
 
+            //Set Filled Material
+            if (anim.GetBool("slotName") == true)
+            {
+                switch (GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[index].ghostElement)
+                {
+                    case GhostElement.None:
+                        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials[index + 3] = GhostManager.Instance.material_Empty;
+                        break;
+
+                    case GhostElement.Water:
+                        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials[index + 3] = GhostManager.Instance.material_Water;
+                        break;
+                    case GhostElement.Fire:
+                        break;
+                    case GhostElement.Stone:
+                        break;
+                    case GhostElement.Wind:
+                        break;
+                    case GhostElement.Poison:
+                        break;
+                    case GhostElement.Power:
+                        break;
+
+                    default:
+                        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials[index + 3] = GhostManager.Instance.material_Empty;
+                        break;
+                }
+            }
+
             //Set Slot active
             anim.SetInteger("SlotsAmount", index + 1);
             slotObjectList[index].SetActive(true);
         }
+    }
+
+
+    //--------------------
+
+
+    public void StartCapturing()
+    {
+        anim.SetBool("Capturing", true);
+    }
+    public void StopCapturing()
+    {
+        anim.SetBool("Capturing", false);
     }
 }

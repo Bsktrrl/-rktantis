@@ -35,6 +35,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
     //Equipment
     public static Action isPressed_EquipmentActivate;
+    public static Action isPressed_EquipmentDeactivate;
 
     //Crafting
     public static Action isPressed_CloseCraftingMenu;
@@ -92,10 +93,24 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
             || HotbarManager.Instance.selectedItem == Items.WoodPickaxe || HotbarManager.Instance.selectedItem == Items.StonePickaxe || HotbarManager.Instance.selectedItem == Items.CryonitePickaxe
             || HotbarManager.Instance.selectedItem == Items.WoodAxe || HotbarManager.Instance.selectedItem == Items.StoneAxe || HotbarManager.Instance.selectedItem == Items.CryoniteAxe
 
-            || HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
-            )
+            || HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket
+            || HotbarManager.Instance.selectedItem == Items.GhostCapturer
+            ))
         {
             isPressed_EquipmentActivate?.Invoke();
+        }
+        else if (Input.GetKeyUp(KeyCode.Mouse0) && MainManager.Instance.menuStates == MenuStates.None
+            &&
+
+            (HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.AríditeCrystal || HotbarManager.Instance.selectedItem == Items.None
+            || HotbarManager.Instance.selectedItem == Items.WoodPickaxe || HotbarManager.Instance.selectedItem == Items.StonePickaxe || HotbarManager.Instance.selectedItem == Items.CryonitePickaxe
+            || HotbarManager.Instance.selectedItem == Items.WoodAxe || HotbarManager.Instance.selectedItem == Items.StoneAxe || HotbarManager.Instance.selectedItem == Items.CryoniteAxe
+
+            || HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket
+            || HotbarManager.Instance.selectedItem == Items.GhostCapturer
+            ))
+        {
+            isPressed_EquipmentDeactivate?.Invoke();
         }
         #endregion
 

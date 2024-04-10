@@ -80618,11 +80618,11 @@ MonoBehaviour:
   spawnPosition: {x: 15, y: 25}
   despawnDistance: 25
   ghostCapturerStats:
-    activeGhostCapturerSlotList: 
+    activeGhostCapturerSlotList: 0000000000000000
     ghostCapturedStats: []
-  material_Water: {fileID: 2100000, guid: 3dabe33d20c4b574e8885e948abb238c, type: 2}
-  material_Fire: {fileID: 0}
-  material_Earth: {fileID: 0}
+  ghostCapturerMaterials: []
+  material_Empty: {fileID: 2100000, guid: 95c4fc7d6a04cb441acdec0bd80c9c05, type: 2}
+  material_Water: {fileID: 2100000, guid: 95d4e648f9b21954cb44ac50e2180a3a, type: 2}
 --- !u!1 &6257792781086497593
 GameObject:
   m_ObjectHideFlags: 0
@@ -84731,7 +84731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.010040283}
+  m_AnchoredPosition: {x: 0, y: 0.002105713}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763
