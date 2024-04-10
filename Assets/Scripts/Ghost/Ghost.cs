@@ -48,13 +48,16 @@ public class Ghost : MonoBehaviour
             anim.SetFloat("MovementSpeed", movementSpeed);
 
             //Check for Despawn distance
+            #region
             float distanceFromPlayer = Vector3.Distance(gameObject.transform.position, MainManager.Instance.playerBody.transform.position);
             if (distanceFromPlayer >= GhostManager.Instance.despawnDistance)
             {
                 GhostManager.Instance.DespawnGhost(gameObject);
             }
+            #endregion
 
             //Behavior Tree
+            #region
             switch (ghostState)
             {
                 //Get the action from the selected State
@@ -74,6 +77,7 @@ public class Ghost : MonoBehaviour
                     Captured();
                     break;
             }
+            #endregion
         }
     }
 

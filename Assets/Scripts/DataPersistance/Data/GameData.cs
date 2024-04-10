@@ -64,6 +64,8 @@ public class GameData
     //Crafting
     [HideInInspector] public List<CraftingItem> itemStates_Save = new List<CraftingItem>();
 
+    //GhostCapturer
+    [HideInInspector] public GhostCapturerStats ghostCapturerStats_Save;
 
     //--------------------
 

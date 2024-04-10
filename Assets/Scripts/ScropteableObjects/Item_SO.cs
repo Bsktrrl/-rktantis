@@ -50,14 +50,9 @@ public class Item
     public GameObject worldObjectPrefab;
     public GameObject equippedPrefab;
 
-    [Header("Animations")]
-    public Animation idleAnimation;
-    public Animation actionAnimation;
-
     [Header("Research")]
     public bool isResearched = true;
     public int researchTime;
-    [TextArea(5, 10)] public string research_ItemDescription;
 
     [Header("Crafting")]
     public bool isCrafteable;

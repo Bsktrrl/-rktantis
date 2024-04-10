@@ -220,7 +220,7 @@ Animator:
   m_GameObject: {fileID: 5204749936052980950}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2398f3dd308855d4d8bc102e04e68d76, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -357,6 +357,7 @@ MonoBehaviour:
   collidingObjectList:
   - {fileID: 5204749936052980950}
   isVisible: 0
+  isGhost: 0
   isPicture: 0
   pictureSprite: {fileID: 0}
 --- !u!1 &6331974908998395749 stripped

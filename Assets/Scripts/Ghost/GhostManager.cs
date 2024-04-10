@@ -20,6 +20,12 @@ public class GhostManager : Singleton<GhostManager>
     List<GameObject> ghostPool = new List<GameObject>();
 
 
+    [Header("Ghost Capturer")]
+    public GhostCapturerStats ghostCapturerStats;
+    public List<Material> ghostCapturerMaterials = new List<Material>();
+    public Material material_Water;
+
+
     //--------------------
 
 
@@ -30,6 +36,37 @@ public class GhostManager : Singleton<GhostManager>
         {
             SpawnGhost();
         }
+    }
+
+
+    //--------------------
+
+
+    public void LoadData()
+    {
+        ghostCapturerStats = DataManager.Instance.ghostCapturerStats_Store;
+    }
+    public void SaveData()
+    {
+        DataManager.Instance.ghostCapturerStats_Store = ghostCapturerStats;
+    }
+
+
+    //--------------------
+
+
+    public void AddGhostToCapturer(int slot, GhostStats ghostStats)
+    {
+        ghostCapturerStats.activeGhostCapturerSlotList[slot] = true;
+        ghostCapturerStats.ghostCapturedStats[slot] = ghostStats;
+    }
+    public void PlaceGhostInTank(int slot)
+    {
+
+    }
+    public void RemoveGhostFromCapturer(int slot)
+    {
+
     }
 
 
@@ -98,8 +135,7 @@ public class GhostManager : Singleton<GhostManager>
                 obj.GetComponent<Ghost>().ghostState = GhostStates.Moving;
 
                 //Set Beard State
-                int randomBeard = UnityEngine.Random.Range(0, 1);
-                if (randomBeard == 0)
+                if (UnityEngine.Random.value > 0.5f)
                 {
                     obj.GetComponent<Ghost>().isBeard = false;
                 }
@@ -109,7 +145,7 @@ public class GhostManager : Singleton<GhostManager>
                 }
 
                 //Set Style State
-                int randomStyle = UnityEngine.Random.Range(0, 2);
+                int randomStyle = UnityEngine.Random.Range(0, 2 + 1);
                 if (randomStyle == 0)
                 {
                     obj.GetComponent<Ghost>().ghostAppearance = GhostAppearance.Type1;
@@ -196,6 +232,14 @@ public class GhostStats
 
     public GhostElement ghostElement;
     public float elementFuel_Amount;
+}
+
+[Serializable]
+public class GhostCapturerStats
+{
+    public List<bool> activeGhostCapturerSlotList = new List<bool>();
+
+    public List<GhostStats> ghostCapturedStats;
 }
 
 public enum GhostElement

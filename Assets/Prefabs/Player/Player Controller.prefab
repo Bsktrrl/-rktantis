@@ -13716,6 +13716,9 @@ MonoBehaviour:
   researchedItemsListNames_Store: 
   researched_SOItem_Store: 
   itemStates_Store: []
+  ghostCapturerStats_Store:
+    activeGhostCapturerSlotList: 
+    ghostCapturedStats: []
 --- !u!1 &1098744314374730541
 GameObject:
   m_ObjectHideFlags: 0
@@ -60648,11 +60651,8 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    idleAnimation: {fileID: 0}
-    actionAnimation: {fileID: 0}
     isResearched: 1
     researchTime: 0
-    research_ItemDescription: 
     isCrafteable: 0
     craftingRequirements: []
   activeItemToCraft: {fileID: 0}
@@ -80611,13 +80611,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85c86d8c81bbd74a82463e4a7de9e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghostSpawnTime: 1
+  ghostSpawnAmount: 1
   ghostPoolParent: {fileID: 5900396331704334867}
   ghostPrefab: {fileID: 5204749936052980950, guid: 65b6250c5153b4a4e90f824f9c0c046f,
     type: 3}
-  poolStartSize: 20
   spawnPosition: {x: 15, y: 25}
   despawnDistance: 25
+  ghostCapturerStats:
+    activeGhostCapturerSlotList: 
+    ghostCapturedStats: []
+  material_Water: {fileID: 2100000, guid: 3dabe33d20c4b574e8885e948abb238c, type: 2}
+  material_Fire: {fileID: 0}
+  material_Earth: {fileID: 0}
 --- !u!1 &6257792781086497593
 GameObject:
   m_ObjectHideFlags: 0
@@ -84726,7 +84731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0082092285}
+  m_AnchoredPosition: {x: 0, y: 0.010040283}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763
