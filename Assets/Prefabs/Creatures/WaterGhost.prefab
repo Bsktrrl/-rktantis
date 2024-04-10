@@ -58,15 +58,69 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7844105008849561886, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6395528175556961842, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4977057436974734151, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -447375323128333690, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 272490639680800281, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
       propertyPath: m_Name
       value: WaterGhost
       objectReference: {fileID: 0}
+    - target: {fileID: 3187294714331667617, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4072351363856012417, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6051078177432606844, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286526239075682106, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118635925154882059, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1356757278938515359}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
       insertIndex: -1
@@ -156,6 +210,27 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4970731181028012423}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1356757278938515359
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5204749936052980950}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!64 &4144539713502107568
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -171,7 +246,7 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
@@ -203,7 +278,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 64
   m_CollisionDetection: 0
 --- !u!114 &8848925502034720160
 MonoBehaviour:
@@ -218,6 +293,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghostState: 0
+  ghostAppearance: 0
+  isBeard: 0
+  movementSpeed: 2
+  tempMovementSpeed: 0
+  rotationSpeed: 4
+  minDistance: 0.5
+  spawnPos: {x: 0, y: 0, z: 0}
+  targetPoint: {x: 0, y: 0, z: 0}
+  beard: {fileID: 7548066010567929126}
+  style1:
+  - {fileID: 9085560405803554110}
+  - {fileID: 8969042153050662150}
+  - {fileID: 6331974908998395749}
+  style2:
+  - {fileID: 5130586681126877086}
+  - {fileID: 4409322207940512513}
+  - {fileID: 4210991700255511436}
+  style3:
+  - {fileID: 1657933958053947899}
+  - {fileID: 7189170720479193161}
+  - {fileID: 3892291063748933309}
 --- !u!114 &6525312152521600679
 MonoBehaviour:
   m_ObjectHideFlags: 0

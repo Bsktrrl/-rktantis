@@ -14,7 +14,7 @@ public class GhostManager : Singleton<GhostManager>
     [SerializeField] GameObject ghostPoolParent;
     [SerializeField] GameObject ghostPrefab;
 
-    [SerializeField] Vector2 spawnPosition = new Vector2 (10, 30);
+    [SerializeField] Vector2 spawnPosition = new Vector2 (20, 25);
     public float despawnDistance = 35;
 
     List<GameObject> ghostPool = new List<GameObject>();
@@ -62,7 +62,7 @@ public class GhostManager : Singleton<GhostManager>
                 ghostSpawnAmount = 6;
                 break;
             case WeatherType.Sunny:
-                ghostSpawnAmount = 2;
+                ghostSpawnAmount = 3;
                 break;
             case WeatherType.Windy:
                 ghostSpawnAmount = 0;
@@ -96,9 +96,38 @@ public class GhostManager : Singleton<GhostManager>
                 obj.GetComponent<InvisibleObject>().transparencyValue = 1;
                 obj.GetComponent<InvisibleObject>().UpdateRenderList();
                 obj.GetComponent<Ghost>().ghostState = GhostStates.Moving;
+
+                //Set Beard State
+                int randomBeard = UnityEngine.Random.Range(0, 1);
+                if (randomBeard == 0)
+                {
+                    obj.GetComponent<Ghost>().isBeard = false;
+                }
+                else
+                {
+                    obj.GetComponent<Ghost>().isBeard = true;
+                }
+
+                //Set Style State
+                int randomStyle = UnityEngine.Random.Range(0, 2);
+                if (randomStyle == 0)
+                {
+                    obj.GetComponent<Ghost>().ghostAppearance = GhostAppearance.Type1;
+                }
+                else if (randomStyle == 1)
+                {
+                    obj.GetComponent<Ghost>().ghostAppearance = GhostAppearance.Type2;
+                }
+                else if (randomStyle == 2)
+                {
+                    obj.GetComponent<Ghost>().ghostAppearance = GhostAppearance.Type3;
+                }
+
+                obj.GetComponent<Ghost>().SetupGhost();
+
                 obj.SetActive(true);
 
-                break;
+                return;
             }
         }
         #endregion
@@ -114,10 +143,10 @@ public class GhostManager : Singleton<GhostManager>
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().transparencyValue = 1;
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().UpdateRenderList();
         ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostState = GhostStates.Moving;
+        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().SetupGhost();
+
         ghostPool[ghostPool.Count - 1].SetActive(true);
         #endregion
-
-
     }
     Vector3 GetSpawnPosition()
     {
@@ -143,10 +172,11 @@ public class GhostManager : Singleton<GhostManager>
                 count++;
             }
         }
+
         return count;
     }
 
-    public void ReturnGhostToPool(GameObject obj)
+    public void DespawnGhost(GameObject obj)
     {
         obj.GetComponent<InvisibleObject>().transparencyValue = 1;
         obj.GetComponent<InvisibleObject>().UpdateRenderList();
@@ -161,6 +191,9 @@ public class GhostManager : Singleton<GhostManager>
 public class GhostStats
 {
     public GhostStates ghostState;
+    public GhostAppearance ghostAppearance;
+    public bool isBeard;
+
     public GhostElement ghostElement;
     public float elementFuel_Amount;
 }
@@ -187,4 +220,10 @@ public enum GhostStates
     Fleeing,
 
     Captured
+}
+public enum GhostAppearance
+{
+    Type1,
+    Type2,
+    Type3
 }

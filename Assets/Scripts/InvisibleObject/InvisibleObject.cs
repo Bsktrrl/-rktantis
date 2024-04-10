@@ -27,6 +27,8 @@ public class InvisibleObject : MonoBehaviour
     public bool isVisible;
     float distance;
 
+    [SerializeField] bool isGhost;
+
     [SerializeField] bool isPicture;
     [SerializeField] Texture pictureSprite;
 
@@ -222,6 +224,7 @@ public class InvisibleObject : MonoBehaviour
 
             objectCollider.enabled = true;
 
+            //If a Plant
             if (gameObject.GetComponent<Plant>())
             {
                 if (gameObject.GetComponent<Plant>().isPicked)
@@ -249,6 +252,36 @@ public class InvisibleObject : MonoBehaviour
                     }
                 }
             }
+
+            //If a Ghost
+            else if (gameObject.GetComponent<Ghost>())
+            {
+                if (gameObject.GetComponent<Ghost>().isBeard)
+                {
+                    gameObject.GetComponent<Ghost>().beard.SetActive(true);
+                }
+
+                switch (gameObject.GetComponent<Ghost>().ghostAppearance)
+                {
+                    case GhostAppearance.Type1:
+                        for (int i = 0; i < gameObject.GetComponent<Ghost>().style1.Count; i++)
+                            gameObject.GetComponent<Ghost>().style1[i].SetActive(true);
+                        break;
+                    case GhostAppearance.Type2:
+                        for (int i = 0; i < gameObject.GetComponent<Ghost>().style2.Count; i++)
+                            gameObject.GetComponent<Ghost>().style2[i].SetActive(true);
+                        break;
+                    case GhostAppearance.Type3:
+                        for (int i = 0; i < gameObject.GetComponent<Ghost>().style3.Count; i++)
+                            gameObject.GetComponent<Ghost>().style3[i].SetActive(true);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            //If something else
             else
             {
                 for (int i = 0; i < objectPartsList_Base.Count; i++)
