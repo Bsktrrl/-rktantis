@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class EquippmentManager : Singleton<EquippmentManager>
@@ -37,7 +38,8 @@ public class EquippmentManager : Singleton<EquippmentManager>
         else if (selectedItem == Items.WoodBuildingHammer || selectedItem == Items.StoneBuildingHammer || selectedItem == Items.CryoniteBuildingHammer
             || selectedItem == Items.WoodAxe || selectedItem == Items.StoneAxe || selectedItem == Items.CryoniteAxe
             || selectedItem == Items.WoodPickaxe || selectedItem == Items.StonePickaxe || selectedItem == Items.CryonitePickaxe
-            || selectedItem == Items.WoodSword || selectedItem == Items.StoneSword || selectedItem == Items.CryoniteSword)
+            || selectedItem == Items.WoodSword || selectedItem == Items.StoneSword || selectedItem == Items.CryoniteSword
+            || selectedItem == Items.GhostCapturer)
         {
             armState = ArmState.Tools;
             arms.GetComponent<Arms>().anim.SetInteger("ItemCategory", 1);
@@ -67,6 +69,12 @@ public class EquippmentManager : Singleton<EquippmentManager>
             arms.GetComponent<Arms>().anim.SetInteger("ItemCategory", 5);
             arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
         }
+        else if (selectedItem == Items.GhostCapturer)
+        {
+            armState = ArmState.Bucket;
+            arms.GetComponent<Arms>().anim.SetInteger("ItemCategory", 5);
+            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
+        }
 
         else
         {
@@ -75,7 +83,8 @@ public class EquippmentManager : Singleton<EquippmentManager>
     }
     public void GetToolState(Items selectedItem)
     {
-        if (selectedItem == Items.Flashlight || selectedItem == Items.AríditeCrystal || selectedItem == Items.None)
+        if (selectedItem == Items.Flashlight || selectedItem == Items.AríditeCrystal || selectedItem == Items.None
+            || selectedItem == Items.GhostCapturer)
         {
             toolState = ToolState.Hand;
 
@@ -109,14 +118,6 @@ public class EquippmentManager : Singleton<EquippmentManager>
             toolState = ToolState.Sword;
 
             arms.GetComponent<Arms>().anim.SetInteger("ToolCategory", 4);
-            arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
-        }
-
-        else if (selectedItem == Items.GhostCapturer)
-        {
-            toolState = ToolState.GhostCapturer;
-
-            arms.GetComponent<Arms>().anim.SetInteger("ToolCategory", 0);
             arms.GetComponent<Arms>().anim.SetTrigger("ItemUpdate");
         }
 
@@ -159,14 +160,13 @@ public class EquippmentManager : Singleton<EquippmentManager>
     //--------------------
 
 
+    //The point in the animation where equipped item hits
     public void Hit(EquippedItem equippedItem)
     {
         print("0. Interact with a Tree");
         //print("Hit EquippedItem - " + subCategories + " [" + itemName.ToString() + "]");
 
-        //The point in the animation where equipped item hits
         #region
-
         //If Pickaxe is equipped - For Mining
         #region
         if (equippedItem.subCategories == ItemSubCategories.Pickaxe)
@@ -248,6 +248,14 @@ public class EquippmentManager : Singleton<EquippmentManager>
                 //Play Drinking Empty Sound
                 SoundManager.Instance.Play_Inventory_DrinkEmptyItem_Clip();
             }
+        }
+        #endregion
+
+        //If GhostCapturer is equipped - For capturing Ghosts
+        #region
+        else if (equippedItem.subCategories == ItemSubCategories.GhostCapturer)
+        {
+
         }
         #endregion
 

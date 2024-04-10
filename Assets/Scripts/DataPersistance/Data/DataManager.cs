@@ -77,7 +77,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //Crafting
     [HideInInspector] public List<CraftingItem> itemStates_Store = new List<CraftingItem>();
 
-    //Player Movement
+    //GhostCapturer
+    [HideInInspector] public GhostCapturerStats ghostCapturerStats_Store;
 
 
     //--------------------
@@ -127,6 +128,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.researched_SOItem_Store = gameData.researched_SOItem_Save;
 
         this.itemStates_Store = gameData.itemStates_Save;
+
+        this.ghostCapturerStats_Store = gameData.ghostCapturerStats_Save;
         #endregion
 
         //Load the saved data into the project
@@ -184,6 +187,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         CraftingManager.Instance.LoadData();
         print("17. Crafting has Loaded");
+
+        GhostManager.Instance.LoadData();
+        print("18. Ghost has Loaded");
         #endregion
 
         print("------------------------------");
@@ -233,6 +239,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.researched_SOItem_Save = this.researched_SOItem_Store;
 
         gameData.itemStates_Save = this.itemStates_Store;
+
+        gameData.ghostCapturerStats_Save = this.ghostCapturerStats_Store;
 
         print("Data has Saved");
     }

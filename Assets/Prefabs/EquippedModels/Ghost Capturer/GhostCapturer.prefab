@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 5540012342532315014}
   - component: {fileID: 1917844567996958790}
   - component: {fileID: 7890193611977913415}
+  - component: {fileID: -8824463033496307386}
   m_Layer: 0
   m_Name: GhostCapturer
   m_TagString: Untagged
@@ -260,6 +261,20 @@ MonoBehaviour:
   animator: {fileID: 0}
   itemName: 0
   subCategories: 15
+--- !u!114 &-8824463033496307386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3505129725780682515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5df899b7fe95e342b81cd4952c06c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsed: 0
+  slotObjectList: []
 --- !u!1 &4041042194490502979
 GameObject:
   m_ObjectHideFlags: 0

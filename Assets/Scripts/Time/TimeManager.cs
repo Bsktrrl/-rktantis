@@ -96,11 +96,14 @@ public class TimeManager : Singleton<TimeManager>
         //Set New Weather
         if (hours <= 0 && minutes <= 0 && !newDay_Weather)
         {
-            newDay_Weather = true;
+            if (!newDay_Weather)
+            {
+                WeatherManager.Instance.SetWeather();
+            }
 
-            WeatherManager.Instance.SetWeather();
+            newDay_Weather = true;
         }
-        else if (hours <= 0 && minutes >= 1 && !newDay_Weather)
+        else if (hours <= 0 && minutes >= 1 && newDay_Weather)
         {
             newDay_Weather = false;
         }
