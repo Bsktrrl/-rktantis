@@ -7,19 +7,17 @@ public class GhostManager : Singleton<GhostManager>
 {
     [Header("Ghost Lists")]
     List<GhostStats> capturedGhostList = new List<GhostStats>();
-    List<GameObject> worldGhostList = new List<GameObject>();
 
     [Header("Ghost Object Pool")]
-    [SerializeField] float ghostSpawnTime = 1;
-    float tempSpawnTime = 0;
+    public int ghostSpawnAmount = 1;
 
     [SerializeField] GameObject ghostPoolParent;
-    [SerializeField] GameObject ghostPrefab; // The prefab to pool
-    [SerializeField] int poolStartSize = 20; // Initial size of the object pool
-    [SerializeField] Vector2 spawnPosition = new Vector2 (3, 5);
-    public float despawnDistance = 25;
+    [SerializeField] GameObject ghostPrefab;
 
-    List<GameObject> ghostPool = new List<GameObject>(); // List to store pooled objects
+    [SerializeField] Vector2 spawnPosition = new Vector2 (10, 30);
+    public float despawnDistance = 35;
+
+    List<GameObject> ghostPool = new List<GameObject>();
 
 
     //--------------------
@@ -28,20 +26,8 @@ public class GhostManager : Singleton<GhostManager>
     void Start()
     {
         //Populate the ghostObjectPool
-        for (int i = 0; i < poolStartSize; i++)
+        for (int i = 0; i < ghostSpawnAmount; i++)
         {
-            SpawnGhost();
-        }
-    }
-
-    private void Update()
-    {
-        tempSpawnTime += Time.deltaTime;
-
-        if (tempSpawnTime >= ghostSpawnTime)
-        {
-            tempSpawnTime = 0;
-
             SpawnGhost();
         }
     }
@@ -50,15 +36,43 @@ public class GhostManager : Singleton<GhostManager>
     //--------------------
 
 
-    public GhostStats SetupGhost(GhostElement _ghostElement, float _elementFuel_Amount, bool _isInTank)
+    public GhostStats SetupGhost(GhostElement _ghostElement, float _elementFuel_Amount, GhostStates _ghostState)
     {
         GhostStats tempGhostStats = new GhostStats();
 
         tempGhostStats.ghostElement = _ghostElement;
         tempGhostStats.elementFuel_Amount = _elementFuel_Amount;
-        tempGhostStats.isInTank = _isInTank;
+        tempGhostStats.ghostState = _ghostState;
 
         return tempGhostStats;
+    }
+
+
+    //--------------------
+
+
+    public int SetGhostSpawnAmount()
+    {
+        switch (WeatherManager.Instance.weatherTypeDayList[0])
+        {
+            case WeatherType.Cold:
+                ghostSpawnAmount = 10;
+                break;
+            case WeatherType.Cloudy:
+                ghostSpawnAmount = 6;
+                break;
+            case WeatherType.Sunny:
+                ghostSpawnAmount = 2;
+                break;
+            case WeatherType.Windy:
+                ghostSpawnAmount = 0;
+                break;
+
+            default:
+                break;
+        }
+
+        return ghostSpawnAmount;
     }
 
 
@@ -67,7 +81,13 @@ public class GhostManager : Singleton<GhostManager>
 
     public void SpawnGhost()
     {
+        if (CountActiveGhosts() >= ghostSpawnAmount)
+        {
+            return;
+        }
+
         //If GhostPool isn't used up
+        #region
         foreach (GameObject obj in ghostPool)
         {
             if (!obj.activeInHierarchy)
@@ -75,13 +95,16 @@ public class GhostManager : Singleton<GhostManager>
                 obj.transform.position = GetSpawnPosition();
                 obj.GetComponent<InvisibleObject>().transparencyValue = 1;
                 obj.GetComponent<InvisibleObject>().UpdateRenderList();
+                obj.GetComponent<Ghost>().ghostState = GhostStates.Moving;
                 obj.SetActive(true);
 
                 break;
             }
         }
+        #endregion
 
-        #region If GhostPool needs expansion
+        //If GhostPool needs expansion
+        #region
         //Spawn Ghost at new spawn position
         GameObject newObj = Instantiate(ghostPrefab, GetSpawnPosition(), Quaternion.identity);
         newObj.transform.parent = ghostPoolParent.transform;
@@ -90,8 +113,11 @@ public class GhostManager : Singleton<GhostManager>
         ghostPool.Add(newObj);
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().transparencyValue = 1;
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().UpdateRenderList();
+        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostState = GhostStates.Moving;
         ghostPool[ghostPool.Count - 1].SetActive(true);
         #endregion
+
+
     }
     Vector3 GetSpawnPosition()
     {
@@ -107,21 +133,36 @@ public class GhostManager : Singleton<GhostManager>
 
         return tempSpawnPosition;
     }
+    int CountActiveGhosts()
+    {
+        int count = 0;
+        foreach (GameObject obj in ghostPool)
+        {
+            if (obj.activeSelf)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
 
     public void ReturnGhostToPool(GameObject obj)
     {
         obj.GetComponent<InvisibleObject>().transparencyValue = 1;
         obj.GetComponent<InvisibleObject>().UpdateRenderList();
         obj.SetActive(false);
+
+        //Spawn New Ghost to keep up with the set amount
+        SpawnGhost();
     }
 }
 
 [Serializable]
 public class GhostStats
 {
+    public GhostStates ghostState;
     public GhostElement ghostElement;
     public float elementFuel_Amount;
-    public bool isInTank;
 }
 
 public enum GhostElement

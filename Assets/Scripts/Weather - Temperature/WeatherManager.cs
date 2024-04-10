@@ -119,6 +119,9 @@ public class WeatherManager : Singleton<WeatherManager>
 
             SaveData();
         }
+
+        //Set Ghost amount
+        GhostManager.Instance.SetGhostSpawnAmount();
     }
     public void SaveData()
     {
@@ -290,29 +293,26 @@ public class WeatherManager : Singleton<WeatherManager>
 
     public void SetWeather()
     {
-        if (TimeManager.Instance.newDay_Weather)
-        {
-            if (termostatDisplay_Parent.activeInHierarchy)
-            {
-                //Add new Weather Type
-                CalculateLastWeather(1);
+        //Add new Weather Type
+        CalculateLastWeather(1);
 
-                //Remove yesterday's Weather Type
-                weatherTypeDayList.RemoveAt(0);
+        //Remove yesterday's Weather Type
+        weatherTypeDayList.RemoveAt(0);
 
 
-                //-----
+        //-----
 
 
-                //Set the stats for today's weather
-                SetWeatherStats_Today();
+        //Set the stats for today's weather
+        SetWeatherStats_Today();
 
-                //Display the weather for today and the next 4 days
-                SetWeatherDisplay();
+        //Display the weather for today and the next 4 days
+        SetWeatherDisplay();
 
-                SaveData();
-            }
-        }
+        //Set new Ghost amount
+        GhostManager.Instance.SetGhostSpawnAmount();
+
+        SaveData();
     }
     public void CalculateLastWeather(int daysForward)
     {
