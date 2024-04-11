@@ -26,6 +26,12 @@ public class GhostManager : Singleton<GhostManager>
     public float leafRotationSpeed = 60;
     public float capturedRateSpeed = 0.1f;
 
+    public Sprite ghostImage_Water;
+    public Sprite ghostImage_Fire;
+    public Sprite ghostImage_Earth;
+    public Sprite ghostImage_Wind;
+    public Sprite ghostImage_Electric;
+
     [Header("Materials")]
     public Material material_Empty;
     public Material material_Water;
@@ -194,33 +200,9 @@ public class GhostManager : Singleton<GhostManager>
                 obj.GetComponent<Ghost>().ghostStats.ghostElement = GhostElement.Water;
                 obj.GetComponent<Ghost>().ghostStats.elementFuel_Amount = 100;
 
-                //Set Beard State
-                if (UnityEngine.Random.value > 0.5f)
-                {
-                    obj.GetComponent<Ghost>().ghostStats.isBeard = false;
-                }
-                else
-                {
-                    obj.GetComponent<Ghost>().ghostStats.isBeard = true;
-                }
-
-                //Set Style State
-                int randomStyle = UnityEngine.Random.Range(0, 2 + 1);
-                if (randomStyle == 0)
-                {
-                    obj.GetComponent<Ghost>().ghostStats.ghostAppearance = GhostAppearance.Type1;
-                }
-                else if (randomStyle == 1)
-                {
-                    obj.GetComponent<Ghost>().ghostStats.ghostAppearance = GhostAppearance.Type2;
-                }
-                else if (randomStyle == 2)
-                {
-                    obj.GetComponent<Ghost>().ghostStats.ghostAppearance = GhostAppearance.Type3;
-                }
+                SetRandomStyle(obj);
 
                 obj.GetComponent<Ghost>().SetupGhost();
-
                 obj.SetActive(true);
 
                 return;
@@ -234,15 +216,46 @@ public class GhostManager : Singleton<GhostManager>
         GameObject newObj = Instantiate(ghostPrefab, GetSpawnPosition(), Quaternion.identity);
         newObj.transform.parent = ghostPoolParent.transform;
 
-        //newObj.SetActive(true);
         ghostPool.Add(newObj);
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().transparencyValue = 1;
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().UpdateRenderList();
         ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostStats.ghostState = GhostStates.Moving;
-        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().SetupGhost();
+        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostStats.ghostElement = GhostElement.Water;
+        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostStats.elementFuel_Amount = 100;
 
+        SetRandomStyle(ghostPool[ghostPool.Count - 1]);
+
+        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().SetupGhost();
         ghostPool[ghostPool.Count - 1].SetActive(true);
         #endregion
+    }
+    void SetRandomStyle(GameObject obj)
+    {
+        //Set Beard State
+        if (UnityEngine.Random.value > 0.5f)
+        {
+            obj.GetComponent<Ghost>().ghostStats.isBeard = false;
+        }
+        else
+        {
+            obj.GetComponent<Ghost>().ghostStats.isBeard = true;
+        }
+
+        //Set Style State
+        int randomStyle = UnityEngine.Random.Range(0, 2 + 1);
+        if (randomStyle == 0)
+        {
+            obj.GetComponent<Ghost>().ghostStats.ghostAppearance = GhostAppearance.Type1;
+        }
+        else if (randomStyle == 1)
+        {
+            obj.GetComponent<Ghost>().ghostStats.ghostAppearance = GhostAppearance.Type2;
+        }
+        else if (randomStyle == 2)
+        {
+            obj.GetComponent<Ghost>().ghostStats.ghostAppearance = GhostAppearance.Type3;
+        }
+
     }
     Vector3 GetSpawnPosition()
     {

@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: -7844105008849561886, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7828800282512470280, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: -6395528175556961842, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6082991741814568182, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
@@ -116,7 +116,7 @@ PrefabInstance:
     - target: {fileID: -4977057436974734151, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -832113418366751764, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: -447375323128333690, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 272490639680800281, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 272490639680800281, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
@@ -216,7 +216,7 @@ PrefabInstance:
     - target: {fileID: 4072351363856012417, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4605119304452347838, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
@@ -236,7 +236,7 @@ PrefabInstance:
     - target: {fileID: 6051078177432606844, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6401100942370105641, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
@@ -256,7 +256,7 @@ PrefabInstance:
     - target: {fileID: 8286526239075682106, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9118635925154882059, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
@@ -266,7 +266,7 @@ PrefabInstance:
     - target: {fileID: 9118635925154882059, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -553,13 +553,13 @@ MonoBehaviour:
     isBeard: 0
     ghostElement: 0
     elementFuel_Amount: 0
+  interactableType: 0
   movementSpeed: 2
   tempMovementSpeed: 0
   rotationSpeed: 4
   minDistance: 0.5
   isTargeted: 0
   capturedRate: 0
-  capturedRateSpeed: 5
   spawnPos: {x: 0, y: 0, z: 0}
   targetPoint: {x: 0, y: 0, z: 0}
   beard: {fileID: 7548066010567929126}

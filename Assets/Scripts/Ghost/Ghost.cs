@@ -49,7 +49,9 @@ public class Ghost : MonoBehaviour
         spawnPos = transform.position;
         isTargeted = false;
 
-        SetGhostMovment();
+        //SetGhostMovment();
+
+        SetupGhost();
     }
     private void Update()
     {
