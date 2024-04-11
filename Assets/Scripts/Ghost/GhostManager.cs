@@ -23,7 +23,7 @@ public class GhostManager : Singleton<GhostManager>
     public bool hasTarget;
     public GameObject targetGhostObject;
     public GhostCapturerStats ghostCapturerStats;
-    public float leafRotationSpeed = 60;
+    public float leafRotationSpeed = 250;
     public float capturedRateSpeed = 0.1f;
 
     public Sprite ghostImage_Water;
@@ -48,7 +48,7 @@ public class GhostManager : Singleton<GhostManager>
             SpawnGhost();
         }
 
-        leafRotationSpeed = 60;
+        leafRotationSpeed = 250;
         capturedRateSpeed = 0.1f;
     }
 

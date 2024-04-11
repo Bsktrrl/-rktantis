@@ -7,7 +7,7 @@ public class DistanceAboveGround : MonoBehaviour
     RaycastHit hit;
 
     [Header("RaycastHit Distance")]
-    [SerializeField] float raycastDistance_CheckGround = 0.75f;
+    [SerializeField] float raycastDistance_CheckGround = 0.1f;
 
     [Header("RayCast Points")]
     public GameObject point_0;
@@ -32,11 +32,13 @@ public class DistanceAboveGround : MonoBehaviour
 
     private void Start()
     {
-        point_0.transform.SetLocalPositionAndRotation(new Vector3(0, -1, 0), Quaternion.identity);
-        point_1.transform.SetLocalPositionAndRotation(new Vector3(0, -1, 0.5f), Quaternion.identity);
-        point_2.transform.SetLocalPositionAndRotation(new Vector3(0, -1, -0.5f), Quaternion.identity);
-        point_3.transform.SetLocalPositionAndRotation(new Vector3(0.5f, -1, 0), Quaternion.identity);
-        point_4.transform.SetLocalPositionAndRotation(new Vector3(-0.5f, -1, 0), Quaternion.identity);
+        raycastDistance_CheckGround = 0.1f;
+
+        //point_0.transform.SetLocalPositionAndRotation(new Vector3(0, -1, 0), Quaternion.identity);
+        //point_1.transform.SetLocalPositionAndRotation(new Vector3(0, -1, 0.5f), Quaternion.identity);
+        //point_2.transform.SetLocalPositionAndRotation(new Vector3(0, -1, -0.5f), Quaternion.identity);
+        //point_3.transform.SetLocalPositionAndRotation(new Vector3(0.5f, -1, 0), Quaternion.identity);
+        //point_4.transform.SetLocalPositionAndRotation(new Vector3(-0.5f, -1, 0), Quaternion.identity);
     }
     private void Update()
     {

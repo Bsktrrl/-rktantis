@@ -215,13 +215,13 @@ public class GhostCapturer : MonoBehaviour
         if (isActive)
         {
             // Calculate the rotation for the clockwise cube
-            Quaternion clockwiseRotation = Quaternion.Euler(0f, GhostManager.Instance.leafRotationSpeed * Time.deltaTime, 0f);
+            Quaternion clockwiseRotation = Quaternion.Euler(GhostManager.Instance.leafRotationSpeed * Time.deltaTime, 0f, 0f);
 
             // Apply rotation to the clockwise cube
             leaf1.transform.SetLocalPositionAndRotation(leaf1.transform.localPosition, leaf1.transform.localRotation * clockwiseRotation);
 
             // Calculate the rotation for the counter-clockwise cube
-            Quaternion counterClockwiseRotation = Quaternion.Euler(0f, -GhostManager.Instance.leafRotationSpeed * Time.deltaTime, 0f);
+            Quaternion counterClockwiseRotation = Quaternion.Euler(-GhostManager.Instance.leafRotationSpeed * Time.deltaTime, 0f, 0f);
 
             // Apply rotation to the counter-clockwise cube
             leaf2.transform.SetLocalPositionAndRotation(leaf2.transform.localPosition, leaf2.transform.localRotation * counterClockwiseRotation);
