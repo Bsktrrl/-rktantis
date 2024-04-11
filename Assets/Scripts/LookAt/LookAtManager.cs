@@ -53,6 +53,10 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] GameObject journalDisplay_Panel;
     [SerializeField] TextMeshProUGUI journalCategory_Text;
     [SerializeField] TextMeshProUGUI journalEntryNumber_Text;
+
+    [Header("Ghost Fight")]
+    [SerializeField] GameObject ghostFight_Panel;
+    [SerializeField] Image ghostFightBar;
     #endregion
 
 
@@ -136,6 +140,26 @@ public class LookAtManager : Singleton<LookAtManager>
             treeDisplay_Panel.SetActive(true);
 
             return;
+        }
+        #endregion
+
+        //If looking at a Ghost
+        #region
+        else if (HotbarManager.Instance.selectedItem == Items.GhostCapturer
+            && GhostManager.Instance.targetGhostObject)
+        {
+            //If looking at a Ghost
+            if (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>())
+            {
+                //Turn off all screens
+                TurnOffScreens();
+
+                GhostDisplay();
+
+                ghostFight_Panel.SetActive(true);
+
+                return;
+            }
         }
         #endregion
 
@@ -279,6 +303,7 @@ public class LookAtManager : Singleton<LookAtManager>
 
 
         //-------------------- Other
+
 
 
         //Else
@@ -734,6 +759,25 @@ public class LookAtManager : Singleton<LookAtManager>
             }
         }
     }
+
+    void GhostDisplay()
+    {
+        ghostFightBar.fillAmount = GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().capturedRate;
+
+        //if (ghostFightBar.fillAmount >= 1)
+        //{
+        //    ghostFight_Panel.SetActive(false);
+        //}
+        //else if (ghostFightBar.fillAmount > 0)
+        //{
+        //    ghostFight_Panel.SetActive(true);
+        //}
+        //else
+        //{
+        //    ghostFight_Panel.SetActive(false);
+        //}
+    }
+
     #endregion
 
 
@@ -751,6 +795,8 @@ public class LookAtManager : Singleton<LookAtManager>
         MovableObject_Panel.SetActive(false);
 
         journalDisplay_Panel.SetActive(false);
+
+        ghostFight_Panel.SetActive(false);
 
         centerImage.SetActive(true);
     }

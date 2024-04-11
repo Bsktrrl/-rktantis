@@ -22,6 +22,9 @@ public class SettingsManager : Singleton<SettingsManager>
     [SerializeField] Slider UI_Sound_Music;
     [SerializeField] TextMeshProUGUI UI_Sound_Music_Text;
     [Space(5)]
+    [SerializeField] Slider UI_Sound_CreaturesSFX;
+    [SerializeField] TextMeshProUGUI UI_Sound_CreaturesSFX_Text;
+    [Space(5)]
     [SerializeField] Slider UI_Sound_Voice;
     [SerializeField] TextMeshProUGUI UI_Sound_Voice_Text;
     [Space(5)]
@@ -48,6 +51,7 @@ public class SettingsManager : Singleton<SettingsManager>
             && DataManager.Instance.settingsValues_Store.sound_WorldSFX <= 0
             && DataManager.Instance.settingsValues_Store.sound_MenuSFX <= 0
             && DataManager.Instance.settingsValues_Store.sound_Music <= 0
+            && DataManager.Instance.settingsValues_Store.sound_Creatures <= 0
             && DataManager.Instance.settingsValues_Store.sound_Voice <= 0
             && DataManager.Instance.settingsValues_Store.sound_Weather <= 0
 
@@ -61,6 +65,7 @@ public class SettingsManager : Singleton<SettingsManager>
             settingsValues.sound_WorldSFX = 1f;
             settingsValues.sound_MenuSFX = 1f;
             settingsValues.sound_Music = 1f;
+            settingsValues.sound_Creatures = 1f;
             settingsValues.sound_Voice = 1f;
             settingsValues.sound_Weather = 1f;
 
@@ -72,6 +77,7 @@ public class SettingsManager : Singleton<SettingsManager>
             UI_Sound_WorldSFX.value = 1f;
             UI_Sound_MenuSFX.value = 1f;
             UI_Sound_Music.value = 1f;
+            UI_Sound_CreaturesSFX.value = 1f;
             UI_Sound_Voice.value = 1f;
             UI_Sound_Weather.value = 1f;
 
@@ -103,6 +109,7 @@ public class SettingsManager : Singleton<SettingsManager>
         UI_Sound_WorldSFX.value = settingsValues.sound_WorldSFX;
         UI_Sound_MenuSFX.value = settingsValues.sound_MenuSFX;
         UI_Sound_Music.value = settingsValues.sound_Music;
+        UI_Sound_CreaturesSFX.value = settingsValues.sound_Creatures;
         UI_Sound_Voice.value = settingsValues.sound_Voice;
         UI_Sound_Weather.value = settingsValues.sound_Weather;
 
@@ -152,6 +159,10 @@ public class SettingsManager : Singleton<SettingsManager>
     public float Get_Sound_Music()
     {
         return settingsValues.sound_Music;
+    }
+    public float Get_Sound_CreaturesSFX()
+    {
+        return settingsValues.sound_Creatures;
     }
     public float Get_Sound_Voice()
     {
@@ -213,6 +224,7 @@ public class SettingsManager : Singleton<SettingsManager>
         settingsValues.sound_WorldSFX = UI_Sound_WorldSFX.value;
         settingsValues.sound_MenuSFX = UI_Sound_MenuSFX.value;
         settingsValues.sound_Music = UI_Sound_Music.value;
+        settingsValues.sound_Creatures = UI_Sound_CreaturesSFX.value;
         settingsValues.sound_Voice = UI_Sound_Voice.value;
         settingsValues.sound_Weather = UI_Sound_Weather.value;
 
@@ -249,6 +261,7 @@ public class SettingsManager : Singleton<SettingsManager>
         UI_Sound_WorldSFX_Text.text = (settingsValues.sound_WorldSFX * 100).ToString("F0") + "%";
         UI_Sound_MenuSFX_Text.text = (settingsValues.sound_MenuSFX * 100).ToString("F0") + "%";
         UI_Sound_Music_Text.text = (settingsValues.sound_Music * 100).ToString("F0") + "%";
+        UI_Sound_CreaturesSFX_Text.text = (settingsValues.sound_Creatures * 100).ToString("F0") + "%";
         UI_Sound_Voice_Text.text = (settingsValues.sound_Voice * 100).ToString("F0") + "%";
         UI_Sound_Weather_Text.text = (settingsValues.sound_Weather * 100).ToString("F0") + "%";
 
@@ -265,6 +278,7 @@ public class SettingsValues
     public float sound_WorldSFX;
     public float sound_MenuSFX;
     public float sound_Music;
+    public float sound_Creatures;
     public float sound_Voice;
     public float sound_Weather;
 

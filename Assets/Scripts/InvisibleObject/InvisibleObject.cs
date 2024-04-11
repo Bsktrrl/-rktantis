@@ -27,8 +27,6 @@ public class InvisibleObject : MonoBehaviour
     public bool isVisible;
     float distance;
 
-    [SerializeField] bool isGhost;
-
     [SerializeField] bool isPicture;
     [SerializeField] Texture pictureSprite;
 
@@ -256,12 +254,12 @@ public class InvisibleObject : MonoBehaviour
             //If a Ghost
             else if (gameObject.GetComponent<Ghost>())
             {
-                if (gameObject.GetComponent<Ghost>().isBeard)
+                if (gameObject.GetComponent<Ghost>().ghostStats.isBeard)
                 {
                     gameObject.GetComponent<Ghost>().beard.SetActive(true);
                 }
 
-                switch (gameObject.GetComponent<Ghost>().ghostAppearance)
+                switch (gameObject.GetComponent<Ghost>().ghostStats.ghostAppearance)
                 {
                     case GhostAppearance.Type1:
                         for (int i = 0; i < gameObject.GetComponent<Ghost>().style1.Count; i++)
@@ -319,11 +317,15 @@ public class InvisibleObject : MonoBehaviour
     {
         if (HotbarManager.Instance.selectedItem == Items.Flashlight)
         {
-            sphereCollider.GetComponent<SphereCollider>().radius = 6f;
+            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.flashlight_Distance;
         }
         else if (HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
         {
-            sphereCollider.GetComponent<SphereCollider>().radius = 4f;
+            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.aríditeCrystal_Distance;
+        }
+        else if (HotbarManager.Instance.selectedItem == Items.GhostCapturer)
+        {
+            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.ghostCapture_Distance;
         }
     }
 }

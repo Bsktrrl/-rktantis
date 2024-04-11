@@ -4,17 +4,22 @@ using UnityEngine;
 public class Ghost : MonoBehaviour
 {
     Animator anim;
+    AudioSource audioSource_Ghost_GhostSounds;
 
     [Header("General")]
-    public GhostStates ghostState;
-    public GhostAppearance ghostAppearance;
-    public bool isBeard;
+    public GhostStats ghostStats = new GhostStats();
+
+    public InteracteableType interactableType;
 
     [Header("Stats")]
     public float movementSpeed = 2f;
     public float tempMovementSpeed;
     public float rotationSpeed = 4f;
     public float minDistance = 0.5f;
+
+    [Header("Capture")]
+    public bool isTargeted;
+    public float capturedRate;
 
     [Header("Position")]
     public Vector3 spawnPos;
@@ -32,12 +37,17 @@ public class Ghost : MonoBehaviour
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
+        audioSource_Ghost_GhostSounds = GetComponent<AudioSource>();
+
+        interactableType = InteracteableType.Ghost;
+
         movementSpeed = 2f;
         rotationSpeed = 4f;
         minDistance = 0.5f;
 
-        anim = GetComponent<Animator>();
         spawnPos = transform.position;
+        isTargeted = false;
 
         SetGhostMovment();
     }
@@ -58,7 +68,7 @@ public class Ghost : MonoBehaviour
 
             //Behavior Tree
             #region
-            switch (ghostState)
+            switch (ghostStats.ghostState)
             {
                 //Get the action from the selected State
                 case GhostStates.Idle:
@@ -79,6 +89,11 @@ public class Ghost : MonoBehaviour
             }
             #endregion
         }
+
+        CapturedRate();
+
+        UpdateSoundVolume();
+        UpdateGhostSounds();
     }
 
 
@@ -90,6 +105,9 @@ public class Ghost : MonoBehaviour
         SetGhostMovment();
 
         SetGhostAppearance();
+
+        isTargeted = false;
+        capturedRate = 0;
     }
     void SetGhostAppearance()
     {
@@ -102,7 +120,7 @@ public class Ghost : MonoBehaviour
             style3[i].SetActive(false);
 
         //Set Beard
-        if (isBeard)
+        if (ghostStats.isBeard)
         {
             beard.SetActive(true);
         }
@@ -112,7 +130,7 @@ public class Ghost : MonoBehaviour
         }
 
         //Set Style
-        switch (ghostAppearance)
+        switch (ghostStats.ghostAppearance)
         {
             case GhostAppearance.Type1:
                 for (int i = 0; i < style1.Count; i++)
@@ -129,6 +147,70 @@ public class Ghost : MonoBehaviour
 
             default:
                 break;
+        }
+    }
+
+    void CapturedRate()
+    {
+        isTargeted = false;
+
+        if (GhostManager.Instance.targetGhostObject == gameObject)
+        {
+            if (GhostManager.Instance.hasTarget)
+            {
+                isTargeted = true;
+            }
+        }
+        
+
+        if (isTargeted)
+        {
+            ghostStats.ghostState = GhostStates.Fleeing;
+
+            //print("capturedRate - UP: " + capturedRate);
+            capturedRate += (GhostManager.Instance.capturedRateSpeed * 1.5f) * Time.deltaTime;
+
+            if (capturedRate > 1)
+            {
+                GhostCaptured();
+            }
+        }
+        else
+        {
+            ghostStats.ghostState = GhostStates.Moving;
+
+            if (capturedRate >= -0.1)
+            {
+                //print("capturedRate - DOWN: " + capturedRate);
+                capturedRate -= GhostManager.Instance.capturedRateSpeed * Time.deltaTime;
+
+                if (capturedRate < 0)
+                {
+                    capturedRate = 0;
+                }
+            }
+        }
+    }
+    
+    void UpdateSoundVolume()
+    {
+        audioSource_Ghost_GhostSounds.volume = SoundManager.Instance.sound_Creatures;
+    }
+    void UpdateGhostSounds()
+    {
+        if (!isTargeted)
+        {
+            //Play Roaming Sounds with a silent timer in between
+            //...
+
+            //SoundManager.Instance.Play_Ghost_GhostMood_Happy_Clip(audioSource_Ghost_GhostSounds);
+        }
+        else
+        {
+            if (capturedRate <= 0)
+            {
+                SoundManager.Instance.Play_Ghost_GhostStartsGettingTarget_Clip(audioSource_Ghost_GhostSounds);
+            }
         }
     }
 
@@ -215,4 +297,19 @@ public class Ghost : MonoBehaviour
 
     }
     #endregion
+
+
+    //--------------------
+
+
+    void GhostCaptured()
+    {
+        print("Ghost Captured");
+
+        SoundManager.Instance.Play_Ghost_CaptureGhost_Clip();
+
+        GhostManager.Instance.AddGhostToCapturer(ghostStats);
+
+        GhostManager.Instance.DespawnGhost(gameObject);
+    }
 }

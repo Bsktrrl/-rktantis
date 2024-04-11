@@ -10,6 +10,7 @@ public class SelectionManager : Singleton<SelectionManager>
 
     InteractableObject newInteractableObject;
     Plant newPlantObject;
+    Ghost newGhostObject;
 
 
     //--------------------
@@ -41,6 +42,7 @@ public class SelectionManager : Singleton<SelectionManager>
                 //When raycasting something that is interactable
                 newInteractableObject = null;
                 newPlantObject = null;
+                newGhostObject = null;
 
                 if (selectionTransform.GetComponent<InteractableObject>())
                 {
@@ -49,6 +51,10 @@ public class SelectionManager : Singleton<SelectionManager>
                 else if(selectionTransform.GetComponent<Plant>())
                 {
                     newPlantObject = selectionTransform.GetComponent<Plant>();
+                }
+                else if (selectionTransform.GetComponent<Ghost>())
+                {
+                    newGhostObject = selectionTransform.GetComponent<Ghost>();
                 }
 
 
@@ -62,8 +68,11 @@ public class SelectionManager : Singleton<SelectionManager>
                     onTarget = true;
                     selecedObject = newInteractableObject.gameObject;
 
-                    LookAtManager.Instance.typeLookingAt = newInteractableObject.GetComponent<InteractableObject>().interactableType;
-
+                    if (newInteractableObject.GetComponent<InteractableObject>())
+                    {
+                        LookAtManager.Instance.typeLookingAt = newInteractableObject.GetComponent<InteractableObject>().interactableType;
+                    }
+                    
                     if (newInteractableObject != null)
                     {
                         if (newInteractableObject.gameObject.activeInHierarchy)
@@ -72,6 +81,7 @@ public class SelectionManager : Singleton<SelectionManager>
                         }
                     }
                 }
+
                 //If looking at a Plant, show its UI to the player
                 else if (newPlantObject != null)
                 {
@@ -79,11 +89,35 @@ public class SelectionManager : Singleton<SelectionManager>
                     onTarget = true;
                     selecedObject = newPlantObject.gameObject;
 
-                    LookAtManager.Instance.typeLookingAt = newPlantObject.pickablePart.GetComponent<InteractableObject>().interactableType;
-
-                    if (newInteractableObject != null)
+                    if (newPlantObject.pickablePart.GetComponent<InteractableObject>())
                     {
-                        if (newInteractableObject.gameObject.activeInHierarchy)
+                        LookAtManager.Instance.typeLookingAt = newPlantObject.pickablePart.GetComponent<InteractableObject>().interactableType;
+                    }
+
+                    if (newPlantObject != null)
+                    {
+                        if (newPlantObject.gameObject.activeInHierarchy)
+                        {
+                            LookAtManager.Instance.LookAt();
+                        }
+                    }
+                }
+
+                //If looking at a Ghost, show its UI to the player
+                else if (newGhostObject != null)
+                {
+                    //Show Inventory info
+                    onTarget = true;
+                    selecedObject = newGhostObject.gameObject;
+
+                    if (newGhostObject.GetComponent<Ghost>())
+                    {
+                        LookAtManager.Instance.typeLookingAt = newGhostObject.GetComponent<Ghost>().interactableType;
+                    }
+                    
+                    if (newGhostObject != null)
+                    {
+                        if (newGhostObject.gameObject.activeInHierarchy)
                         {
                             LookAtManager.Instance.LookAt();
                         }
