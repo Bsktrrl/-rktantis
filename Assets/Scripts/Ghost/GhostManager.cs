@@ -23,6 +23,7 @@ public class GhostManager : Singleton<GhostManager>
     public bool hasTarget;
     public GameObject targetGhostObject;
     public GhostCapturerStats ghostCapturerStats;
+
     public float leafRotationSpeed = 250;
     public float capturedRateSpeed = 0.1f;
 
@@ -61,20 +62,6 @@ public class GhostManager : Singleton<GhostManager>
         ghostCapturerStats = DataManager.Instance.ghostCapturerStats_Store;
 
         //Make sure there is 8 slots int the list
-        if (ghostCapturerStats.activeGhostCapturerSlotList.Count != 8)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                ghostCapturerStats.activeGhostCapturerSlotList.Add(false);
-
-                if (ghostCapturerStats.activeGhostCapturerSlotList.Count == 8)
-                {
-                    SaveData();
-
-                    break;
-                }
-            }
-        }
         if (ghostCapturerStats.ghostCapturedStats.Count != 8)
         {
             for (int i = 0; i < 8; i++)
@@ -89,39 +76,54 @@ public class GhostManager : Singleton<GhostManager>
 
                 ghostCapturerStats.ghostCapturedStats.Add(tempGhostStats);
 
-                if (ghostCapturerStats.activeGhostCapturerSlotList.Count == 8)
+                if (ghostCapturerStats.ghostCapturedStats.Count == 8)
                 {
-                    SaveData();
-
                     break;
                 }
             }
         }
+
+        if (ghostCapturerStats.slotsActivated == 0)
+        {
+            ghostCapturerStats.slotsActivated = 1;
+        }
+
+        SaveData();
     }
     public void SaveData()
     {
         DataManager.Instance.ghostCapturerStats_Store = ghostCapturerStats;
     }
-
+    
 
     //--------------------
 
 
     public void AddGhostToCapturer(GhostStats ghostStats)
     {
-        for (int i = 0; i < ghostCapturerStats.activeGhostCapturerSlotList.Count; i++)
+        for (int i = 0; i < ghostCapturerStats.slotsActivated; i++)
         {
-            if (!ghostCapturerStats.activeGhostCapturerSlotList[i])
+            if (!ghostCapturerStats.ghostCapturedStats[i].isTaken)
             {
+                ghostStats.isTaken = true;
                 ghostStats.ghostState = GhostStates.Idle;
 
-                ghostCapturerStats.activeGhostCapturerSlotList[i] = true;
                 ghostCapturerStats.ghostCapturedStats[i] = ghostStats;
 
                 break;
             }
         }
 
+        //Stop GhostCapturer from being Active
+        if (HotbarManager.Instance.selectedItem == Items.GhostCapturer)
+        {
+            if (HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>())
+            {
+                HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>().UpdateGhostCapturer();
+                HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>().StopCapturing();
+            }
+        }
+       
         SaveData();
     }
     public void PlaceGhostInTank(int slot)
@@ -285,6 +287,10 @@ public class GhostManager : Singleton<GhostManager>
         return count;
     }
 
+
+    //--------------------
+
+
     public void DespawnGhost(GameObject obj)
     {
         obj.GetComponent<InvisibleObject>().transparencyValue = 1;
@@ -299,6 +305,7 @@ public class GhostManager : Singleton<GhostManager>
 [Serializable]
 public class GhostStats
 {
+    public bool isTaken;
     public GhostStates ghostState;
     public GhostAppearance ghostAppearance;
     public bool isBeard;
@@ -310,8 +317,10 @@ public class GhostStats
 [Serializable]
 public class GhostCapturerStats
 {
-    public List<bool> activeGhostCapturerSlotList = new List<bool>();
+//    public List<bool> activeGhostCapturerSlotList = new List<bool>();
+//    public List<GhostStats> ghostCapturedStats;
 
+    public int slotsActivated;
     public List<GhostStats> ghostCapturedStats;
 }
 

@@ -4630,7 +4630,7 @@ Transform:
   m_GameObject: {fileID: 322653085882806954}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.4, z: 0.5}
+  m_LocalPosition: {x: 0, y: -1.4, z: 0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13721,7 +13721,7 @@ MonoBehaviour:
   researched_SOItem_Store: 
   itemStates_Store: []
   ghostCapturerStats_Store:
-    activeGhostCapturerSlotList: 
+    slotsActivated: 0
     ghostCapturedStats: []
 --- !u!1 &1098744314374730541
 GameObject:
@@ -41358,7 +41358,7 @@ Transform:
   m_GameObject: {fileID: 3306520505780371495}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.4, z: -0.5}
+  m_LocalPosition: {x: 0, y: -1.4, z: -0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63888,7 +63888,7 @@ Transform:
   m_GameObject: {fileID: 4893958102183829524}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -1.4, z: 0}
+  m_LocalPosition: {x: 0.55, y: -1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69332,7 +69332,7 @@ Transform:
   m_GameObject: {fileID: 5263479085212480546}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -1.4, z: 0}
+  m_LocalPosition: {x: -0.55, y: -1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -79005,7 +79005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InteractableDistance: 2.5
   movementSpeedMultiplier_SkillTree: 1
-  jumpHeight: 2
+  jumpHeight: 1.5
   oldMovementStates: 0
   movementStates: 0
   FOV_Addon: 0
@@ -81168,7 +81168,7 @@ MonoBehaviour:
   hasTarget: 0
   targetGhostObject: {fileID: 0}
   ghostCapturerStats:
-    activeGhostCapturerSlotList: 0000000000000000
+    slotsActivated: 0
     ghostCapturedStats: []
   leafRotationSpeed: 60
   capturedRateSpeed: 0.1
@@ -85334,7 +85334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.003112793}
+  m_AnchoredPosition: {x: 0, y: 0.0036010742}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763

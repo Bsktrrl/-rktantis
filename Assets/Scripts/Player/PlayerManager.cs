@@ -9,7 +9,7 @@ public class PlayerManager : Singleton<PlayerManager>
     public float InteractableDistance = 3.5f;
     public float movementSpeedMultiplier_SkillTree = 1f;
 
-    public float jumpHeight = 2f;
+    public float jumpHeight = 1.5f;
 
     PlayerStats playerStats;
 
