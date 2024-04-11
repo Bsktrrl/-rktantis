@@ -128,7 +128,7 @@ MonoBehaviour:
     worldObjectPrefab: {fileID: 4778707306582511513, guid: 769e6eaf22145f145b9745ba8a640433,
       type: 3}
     equippedPrefab: {fileID: 0}
-    isResearched: 1
+    isResearched: 0
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -198,6 +198,8 @@ MonoBehaviour:
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
+    - itemName: 1
+      amount: 2
     - itemName: 69
       amount: 4
   - itemName: 6
@@ -226,7 +228,7 @@ MonoBehaviour:
     worldObjectPrefab: {fileID: 4750337230919826237, guid: a9826923d09c037448425c6efe97e884,
       type: 3}
     equippedPrefab: {fileID: 0}
-    isResearched: 1
+    isResearched: 0
     researchTime: 5
     isCrafteable: 1
     craftingRequirements: []
@@ -2715,7 +2717,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 4902750131421289695, guid: 4324ab1bb8b9c7d41a2857edd60f51b7,
       type: 3}
-    equippedPrefab: {fileID: 3505129725780682515, guid: 597d7a9c619bb7149b7686253c1c0ea9,
+    equippedPrefab: {fileID: 6336801290415698824, guid: 1cc7f7baa6e16ff49af9e6a4d60dfa1b,
       type: 3}
     isResearched: 0
     researchTime: 5

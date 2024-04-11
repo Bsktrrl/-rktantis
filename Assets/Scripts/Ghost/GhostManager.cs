@@ -14,15 +14,26 @@ public class GhostManager : Singleton<GhostManager>
     [SerializeField] GameObject ghostPoolParent;
     [SerializeField] GameObject ghostPrefab;
 
-    [SerializeField] Vector2 spawnPosition = new Vector2 (20, 25);
-    public float despawnDistance = 35;
+    [SerializeField] Vector2 spawnPosition = new Vector2 (2, 3);
+    public float despawnDistance = 8;
 
     List<GameObject> ghostPool = new List<GameObject>();
 
-
     [Header("Ghost Capturer")]
+    public bool hasTarget;
+    public GameObject targetGhostObject;
     public GhostCapturerStats ghostCapturerStats;
-    public List<Material> ghostCapturerMaterials = new List<Material>();
+    public float leafRotationSpeed = 60;
+    public float capturedRateSpeed = 0.1f;
+
+    public Sprite ghostImage_Water;
+    public Sprite ghostImage_Fire;
+    public Sprite ghostImage_Earth;
+    public Sprite ghostImage_Wind;
+    public Sprite ghostImage_Electric;
+
+    [Header("Materials")]
+    public Material material_Empty;
     public Material material_Water;
 
 
@@ -36,6 +47,9 @@ public class GhostManager : Singleton<GhostManager>
         {
             SpawnGhost();
         }
+
+        leafRotationSpeed = 60;
+        capturedRateSpeed = 0.1f;
     }
 
 
@@ -45,6 +59,44 @@ public class GhostManager : Singleton<GhostManager>
     public void LoadData()
     {
         ghostCapturerStats = DataManager.Instance.ghostCapturerStats_Store;
+
+        //Make sure there is 8 slots int the list
+        if (ghostCapturerStats.activeGhostCapturerSlotList.Count != 8)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                ghostCapturerStats.activeGhostCapturerSlotList.Add(false);
+
+                if (ghostCapturerStats.activeGhostCapturerSlotList.Count == 8)
+                {
+                    SaveData();
+
+                    break;
+                }
+            }
+        }
+        if (ghostCapturerStats.ghostCapturedStats.Count != 8)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                GhostStats tempGhostStats = new GhostStats();
+
+                tempGhostStats.ghostState = GhostStates.Idle;
+                tempGhostStats.ghostAppearance = GhostAppearance.Type1;
+                tempGhostStats.isBeard = false;
+                tempGhostStats.ghostElement = GhostElement.None;
+                tempGhostStats.elementFuel_Amount = 0;
+
+                ghostCapturerStats.ghostCapturedStats.Add(tempGhostStats);
+
+                if (ghostCapturerStats.activeGhostCapturerSlotList.Count == 8)
+                {
+                    SaveData();
+
+                    break;
+                }
+            }
+        }
     }
     public void SaveData()
     {
@@ -55,10 +107,22 @@ public class GhostManager : Singleton<GhostManager>
     //--------------------
 
 
-    public void AddGhostToCapturer(int slot, GhostStats ghostStats)
+    public void AddGhostToCapturer(GhostStats ghostStats)
     {
-        ghostCapturerStats.activeGhostCapturerSlotList[slot] = true;
-        ghostCapturerStats.ghostCapturedStats[slot] = ghostStats;
+        for (int i = 0; i < ghostCapturerStats.activeGhostCapturerSlotList.Count; i++)
+        {
+            if (!ghostCapturerStats.activeGhostCapturerSlotList[i])
+            {
+                ghostStats.ghostState = GhostStates.Idle;
+
+                ghostCapturerStats.activeGhostCapturerSlotList[i] = true;
+                ghostCapturerStats.ghostCapturedStats[i] = ghostStats;
+
+                break;
+            }
+        }
+
+        SaveData();
     }
     public void PlaceGhostInTank(int slot)
     {
@@ -96,13 +160,13 @@ public class GhostManager : Singleton<GhostManager>
                 ghostSpawnAmount = 10;
                 break;
             case WeatherType.Cloudy:
-                ghostSpawnAmount = 6;
+                ghostSpawnAmount = 10; //(6)
                 break;
             case WeatherType.Sunny:
-                ghostSpawnAmount = 3;
+                ghostSpawnAmount = 10; //(3)
                 break;
             case WeatherType.Windy:
-                ghostSpawnAmount = 0;
+                ghostSpawnAmount = 10; //(0)
                 break;
 
             default:
@@ -132,35 +196,13 @@ public class GhostManager : Singleton<GhostManager>
                 obj.transform.position = GetSpawnPosition();
                 obj.GetComponent<InvisibleObject>().transparencyValue = 1;
                 obj.GetComponent<InvisibleObject>().UpdateRenderList();
-                obj.GetComponent<Ghost>().ghostState = GhostStates.Moving;
+                obj.GetComponent<Ghost>().ghostStats.ghostState = GhostStates.Moving;
+                obj.GetComponent<Ghost>().ghostStats.ghostElement = GhostElement.Water;
+                obj.GetComponent<Ghost>().ghostStats.elementFuel_Amount = 100;
 
-                //Set Beard State
-                if (UnityEngine.Random.value > 0.5f)
-                {
-                    obj.GetComponent<Ghost>().isBeard = false;
-                }
-                else
-                {
-                    obj.GetComponent<Ghost>().isBeard = true;
-                }
-
-                //Set Style State
-                int randomStyle = UnityEngine.Random.Range(0, 2 + 1);
-                if (randomStyle == 0)
-                {
-                    obj.GetComponent<Ghost>().ghostAppearance = GhostAppearance.Type1;
-                }
-                else if (randomStyle == 1)
-                {
-                    obj.GetComponent<Ghost>().ghostAppearance = GhostAppearance.Type2;
-                }
-                else if (randomStyle == 2)
-                {
-                    obj.GetComponent<Ghost>().ghostAppearance = GhostAppearance.Type3;
-                }
+                SetRandomStyle(obj);
 
                 obj.GetComponent<Ghost>().SetupGhost();
-
                 obj.SetActive(true);
 
                 return;
@@ -174,15 +216,46 @@ public class GhostManager : Singleton<GhostManager>
         GameObject newObj = Instantiate(ghostPrefab, GetSpawnPosition(), Quaternion.identity);
         newObj.transform.parent = ghostPoolParent.transform;
 
-        //newObj.SetActive(true);
         ghostPool.Add(newObj);
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().transparencyValue = 1;
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().UpdateRenderList();
-        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostState = GhostStates.Moving;
-        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().SetupGhost();
+        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostStats.ghostState = GhostStates.Moving;
+        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostStats.ghostElement = GhostElement.Water;
+        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostStats.elementFuel_Amount = 100;
 
+        SetRandomStyle(ghostPool[ghostPool.Count - 1]);
+
+        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().SetupGhost();
         ghostPool[ghostPool.Count - 1].SetActive(true);
         #endregion
+    }
+    void SetRandomStyle(GameObject obj)
+    {
+        //Set Beard State
+        if (UnityEngine.Random.value > 0.5f)
+        {
+            obj.GetComponent<Ghost>().ghostStats.isBeard = false;
+        }
+        else
+        {
+            obj.GetComponent<Ghost>().ghostStats.isBeard = true;
+        }
+
+        //Set Style State
+        int randomStyle = UnityEngine.Random.Range(0, 2 + 1);
+        if (randomStyle == 0)
+        {
+            obj.GetComponent<Ghost>().ghostStats.ghostAppearance = GhostAppearance.Type1;
+        }
+        else if (randomStyle == 1)
+        {
+            obj.GetComponent<Ghost>().ghostStats.ghostAppearance = GhostAppearance.Type2;
+        }
+        else if (randomStyle == 2)
+        {
+            obj.GetComponent<Ghost>().ghostStats.ghostAppearance = GhostAppearance.Type3;
+        }
+
     }
     Vector3 GetSpawnPosition()
     {
@@ -190,7 +263,7 @@ public class GhostManager : Singleton<GhostManager>
         Vector3 randomDirection = UnityEngine.Random.insideUnitSphere.normalized;
 
         //Get a random distance within a range
-        float randomDistanceAwayFromPlayer = UnityEngine.Random.Range(spawnPosition.x, spawnPosition.y);
+        float randomDistanceAwayFromPlayer = UnityEngine.Random.Range(MainManager.Instance.playerBody.transform.position.x + spawnPosition.x, MainManager.Instance.playerBody.transform.position.y + spawnPosition.y);
         float randomDistance_Y = UnityEngine.Random.Range(MainManager.Instance.playerBody.transform.position.y - 0.5f, MainManager.Instance.playerBody.transform.position.y + 1);
 
         Vector3 tempSpawnPosition = MainManager.Instance.playerBody.transform.position + randomDirection * randomDistanceAwayFromPlayer;

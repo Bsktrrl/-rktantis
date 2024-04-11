@@ -16,6 +16,7 @@ public class Arms : Singleton<Arms>
     {
         PlayerButtonManager.refillBottle_isPressed += FillWater;
         PlayerButtonManager.isPressed_EquipmentActivate += UseEquippedItem;
+        PlayerButtonManager.isPressed_EquipmentDeactivate += StopUsingEquipments;
 
         anim = GetComponent<Animator>();
     }
@@ -26,7 +27,29 @@ public class Arms : Singleton<Arms>
 
     void UseEquippedItem()
     {
-        anim.SetTrigger("Click");
+        if (HotbarManager.Instance.selectedItem == Items.GhostCapturer)
+        {
+            if (HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>())
+            {
+                print("StartCapturing");
+                HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>().StartCapturing();
+            }
+        }
+        else
+        {
+            anim.SetTrigger("Click");
+        }
+    }
+    void StopUsingEquipments()
+    {
+        if (HotbarManager.Instance.selectedItem == Items.GhostCapturer)
+        {
+            if (HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>())
+            {
+                print("StopCapturing");
+                HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>().StopCapturing();
+            }
+        }
     }
     void FillWater()
     {

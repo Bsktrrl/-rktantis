@@ -53,6 +53,11 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] GameObject journalDisplay_Panel;
     [SerializeField] TextMeshProUGUI journalCategory_Text;
     [SerializeField] TextMeshProUGUI journalEntryNumber_Text;
+
+    [Header("Ghost Fight")]
+    [SerializeField] GameObject ghostFight_Panel;
+    [SerializeField] Image ghostFightBar;
+    [SerializeField] Image ghostImage;
     #endregion
 
 
@@ -136,6 +141,26 @@ public class LookAtManager : Singleton<LookAtManager>
             treeDisplay_Panel.SetActive(true);
 
             return;
+        }
+        #endregion
+
+        //If looking at a Ghost
+        #region
+        else if (HotbarManager.Instance.selectedItem == Items.GhostCapturer
+            && GhostManager.Instance.targetGhostObject)
+        {
+            //If looking at a Ghost
+            if (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>())
+            {
+                //Turn off all screens
+                TurnOffScreens();
+
+                GhostDisplay();
+
+                ghostFight_Panel.SetActive(true);
+
+                return;
+            }
         }
         #endregion
 
@@ -279,6 +304,7 @@ public class LookAtManager : Singleton<LookAtManager>
 
 
         //-------------------- Other
+
 
 
         //Else
@@ -734,6 +760,41 @@ public class LookAtManager : Singleton<LookAtManager>
             }
         }
     }
+
+    void GhostDisplay()
+    {
+        //Set FIll Amount Display
+        ghostFightBar.fillAmount = GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().capturedRate;
+
+        //Set GhostDisplay
+        switch (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().ghostStats.ghostElement)
+        {
+            case GhostElement.None:
+                break;
+
+            case GhostElement.Water:
+                ghostImage.sprite = GhostManager.Instance.ghostImage_Water;
+                break;
+            case GhostElement.Fire:
+                ghostImage.sprite = GhostManager.Instance.ghostImage_Fire;
+                break;
+            case GhostElement.Stone:
+                ghostImage.sprite = GhostManager.Instance.ghostImage_Earth;
+                break;
+            case GhostElement.Wind:
+                ghostImage.sprite = GhostManager.Instance.ghostImage_Wind;
+                break;
+            case GhostElement.Poison:
+                break;
+            case GhostElement.Power:
+                ghostImage.sprite = GhostManager.Instance.ghostImage_Electric;
+                break;
+
+            default:
+                break;
+        }
+    }
+
     #endregion
 
 
@@ -751,6 +812,8 @@ public class LookAtManager : Singleton<LookAtManager>
         MovableObject_Panel.SetActive(false);
 
         journalDisplay_Panel.SetActive(false);
+
+        ghostFight_Panel.SetActive(false);
 
         centerImage.SetActive(true);
     }

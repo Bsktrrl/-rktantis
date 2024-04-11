@@ -5,10 +5,11 @@ using UnityEngine;
 public class SoundManager : Singleton<SoundManager>
 {
     #region Variables
-    float sound_Master;
+    public float sound_Master;
 
     float sound_World;
     float sound_Menu;
+    public float sound_Creatures;
     float sound_Music;
     float sound_Weather;
     float sound_Voice;
@@ -99,6 +100,9 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource audioSource_Journal_GetNewJournalPage; //
     public AudioSource audioSource_Journal_SelectingJournalPage; //
     public AudioSource audioSource_Journal_VoiceMessage; //Voice Source
+
+    [Header("GhostFight")]
+    public AudioSource audioSource_Ghost_TargetedGhostSFX; //
     #endregion
 
 
@@ -286,6 +290,28 @@ public class SoundManager : Singleton<SoundManager>
     #endregion
     #region Research
     #endregion
+    #region Ghost
+    [Header("Ghost")]
+    [SerializeField] AudioClip ghost_TargetGhost_Clip; //
+    [SerializeField] AudioClip ghost_StartsGettingTarget_Clip; //
+
+    [SerializeField] AudioClip ghost_GhostMood_Happy_Clip; //
+    [SerializeField] AudioClip ghost_GhostMood_Sad_Clip; //
+    [SerializeField] AudioClip ghost_GhostMood_Moderate_Clip; //
+    [SerializeField] AudioClip ghost_GhostMood_Thinking_Clip; //
+    [SerializeField] AudioClip ghost_GhostMood_Enjoying_Clip; //
+    [SerializeField] AudioClip ghost_GhostMood_Whispering_Clip; //
+
+    [SerializeField] AudioClip ghost_GhostMood_Captured_Clip; //
+
+    [SerializeField] AudioClip ghost_GhostAnimation_Spin1_Clip; //
+    [SerializeField] AudioClip ghost_GhostAnimation_Spin2_Clip; //
+    [SerializeField] AudioClip ghost_GhostAnimation_Spin3_Clip; //
+    [SerializeField] AudioClip ghost_GhostAnimation_FakeDeath_Clip; //
+    [SerializeField] AudioClip ghost_GhostAnimation_Sneeze1_Clip; //
+    [SerializeField] AudioClip ghost_GhostAnimation_Sneeze2_Clip; //
+    [SerializeField] AudioClip ghost_GhostAnimation_Wave_Clip; //
+    #endregion
 
     #endregion
 
@@ -301,6 +327,7 @@ public class SoundManager : Singleton<SoundManager>
 
         sound_World = SettingsManager.Instance.Get_Sound_WorldSFX() * sound_Master;
         sound_Menu = SettingsManager.Instance.Get_Sound_MenuSFX() * sound_Master;
+        sound_Creatures = SettingsManager.Instance.Get_Sound_CreaturesSFX() * sound_Master;
         sound_Music = SettingsManager.Instance.Get_Sound_Music() * sound_Master;
         sound_Weather = SettingsManager.Instance.Get_Sound_WeatherSFX() * sound_Master;
         sound_Voice = SettingsManager.Instance.Get_Sound_Voice() * sound_Master;
@@ -391,8 +418,12 @@ public class SoundManager : Singleton<SoundManager>
         audioSource_Journal_GetNewJournalPage.volume = sound_Menu;
         audioSource_Journal_SelectingJournalPage.volume = sound_Menu;
         audioSource_Journal_VoiceMessage.volume = sound_Voice;
-        #endregion
-    }
+
+        //GhostFight
+        audioSource_Ghost_TargetedGhostSFX.volume = sound_World; //
+
+    #endregion
+}
 
 
     //--------------------
@@ -1378,6 +1409,168 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_Journal_VoiceMessage.clip = clip;
             audioSource_Journal_VoiceMessage.pitch = 1f;
             audioSource_Journal_VoiceMessage.Play();
+        }
+    }
+    #endregion
+
+    #region Ghosts
+    //Is Targeted Sound Effects
+    public void Play_Ghost_TargetGhost_Clip()
+    {
+        if (audioSource_Ghost_TargetedGhostSFX != null)
+        {
+            audioSource_Ghost_TargetedGhostSFX.clip = ghost_TargetGhost_Clip;
+            audioSource_Ghost_TargetedGhostSFX.pitch = 1f;
+            audioSource_Ghost_TargetedGhostSFX.Play();
+        }
+    }
+    //public void Stop_Ghost_TargetGhost_Clip()
+    //{
+    //    if (audioSource_Ghost_TargetedGhostSFX != null)
+    //    {
+    //        audioSource_Ghost_TargetedGhostSFX.Stop();
+    //    }
+    //}
+
+    public void Play_Ghost_GhostStartsGettingTarget_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_StartsGettingTarget_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+
+    //In Roaming Sounds
+    public void Play_Ghost_GhostMood_Happy_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostMood_Happy_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_Ghost_GhostMood_Sad_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostMood_Sad_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_Ghost_GhostMood_Moderate_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostMood_Moderate_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_Ghost_GhostMood_Thinking_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostMood_Thinking_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_Ghost_GhostMood_Enjoying_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostMood_Enjoying_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_Ghost_GhostMood_Whispering_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostMood_Whispering_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+
+    //Captured
+    public void Play_Ghost_CaptureGhost_Clip()
+    {
+        if (audioSource_Ghost_TargetedGhostSFX != null)
+        {
+            audioSource_Ghost_TargetedGhostSFX.clip = ghost_GhostMood_Captured_Clip;
+            audioSource_Ghost_TargetedGhostSFX.pitch = 1f;
+            audioSource_Ghost_TargetedGhostSFX.Play();
+        }
+    }
+
+    //In GhostTank
+    public void Play_GhostAnimation_Spin1_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostAnimation_Spin1_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_GhostAnimation_Spin2_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostAnimation_Spin2_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_GhostAnimation_Spin3_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostAnimation_Spin3_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_GhostAnimation_FakeDeath_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostAnimation_FakeDeath_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_GhostAnimation_Sneeze1_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostAnimation_Sneeze1_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_GhostAnimation_Sneeze2_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostAnimation_Sneeze2_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_GhostAnimation_Wave_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostAnimation_Wave_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
         }
     }
     #endregion
