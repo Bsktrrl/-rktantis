@@ -39,6 +39,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField] float safeJumpDistance = 10f;
     [SerializeField] float fallDamage = 0;
 
+    public float normalRaycastPos = -1.4f;
+    public float crouchRaycastPos = -1.2f;
+
 
     //--------------------
 
@@ -116,13 +119,15 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (movement_X == 0 && movement_Z == 0)
         {
             velocity.x = 0;
-            velocity.y += gravity * Time.deltaTime;
             velocity.z = 0;
         }
-        else
+
+        if (GetComponent<DistanceAboveGround>().isGrounded && velocity.y < 0)
         {
-            velocity.y += gravity * Time.deltaTime;
+            velocity.y = -2;
         }
+
+        velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
     }
@@ -141,19 +146,19 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
                     if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
                     {
-                        MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                                                                                     MainManager.Instance.playerBody.transform.localPosition.x,
-                                                                                     crouch_Up,
-                                                                                     MainManager.Instance.playerBody.transform.localPosition.z);
+                        //MainManager.Instance.playerBody.transform.localPosition = new Vector3(
+                        //                                                             MainManager.Instance.playerBody.transform.localPosition.x,
+                        //                                                             crouch_Up,
+                        //                                                             MainManager.Instance.playerBody.transform.localPosition.z);
                     }
 
                     //MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
 
-                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, -1, 0);
-                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, -1, 0.5f);
-                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, -1, -0.5f);
-                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, -1, 0);
-                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, -1, 0);
+                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, normalRaycastPos, 0);
+                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, normalRaycastPos, 0.5f);
+                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, normalRaycastPos, -0.5f);
+                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, normalRaycastPos, 0);
+                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, normalRaycastPos, 0);
 
                     //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
                     //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
@@ -175,19 +180,19 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
                     if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
                     {
-                        MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                                                                                     MainManager.Instance.playerBody.transform.localPosition.x,
-                                                                                     crouch_Up,
-                                                                                     MainManager.Instance.playerBody.transform.localPosition.z);
+                        //MainManager.Instance.playerBody.transform.localPosition = new Vector3(
+                        //                                                             MainManager.Instance.playerBody.transform.localPosition.x,
+                        //                                                             crouch_Up,
+                        //                                                             MainManager.Instance.playerBody.transform.localPosition.z);
                     }
 
                     MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
 
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, -1, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, -1, 0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, -1, -0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, -1, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, -1, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, normalRaycastPos, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, normalRaycastPos, 0.5f);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, normalRaycastPos, -0.5f);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, normalRaycastPos, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, normalRaycastPos, 0);
 
                     MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
                     MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
@@ -209,18 +214,18 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 {
                     PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
 
-                    MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                                                                                     MainManager.Instance.playerBody.transform.localPosition.x,
-                                                                                     crouch_Kneel,
-                                                                                     MainManager.Instance.playerBody.transform.localPosition.z);
+                    //MainManager.Instance.playerBody.transform.localPosition = new Vector3(
+                    //                                                                 MainManager.Instance.playerBody.transform.localPosition.x,
+                    //                                                                 /*crouch_Kneel*/crouch_Up,
+                    //                                                                 MainManager.Instance.playerBody.transform.localPosition.z);
 
                     MainManager.Instance.player.GetComponent<CharacterController>().height = 0.25f;
 
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, 0.6f, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, 0.6f, 0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, 0.6f, -0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, 0.6f, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, 0.6f, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, crouchRaycastPos, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, crouchRaycastPos, 0.5f);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, crouchRaycastPos, -0.5f);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, crouchRaycastPos, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, crouchRaycastPos, 0);
 
                     MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.2f;
                     MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.5f, 0f);
@@ -244,19 +249,19 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
                     if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
                     {
-                        MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                                                                                     MainManager.Instance.playerBody.transform.localPosition.x,
-                                                                                     crouch_Up,
-                                                                                     MainManager.Instance.playerBody.transform.localPosition.z);
+                        //MainManager.Instance.playerBody.transform.localPosition = new Vector3(
+                        //                                                             MainManager.Instance.playerBody.transform.localPosition.x,
+                        //                                                             crouch_Up,
+                        //                                                             MainManager.Instance.playerBody.transform.localPosition.z);
                     }
 
                     MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
 
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, -1, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, -1, 0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, -1, -0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, -1, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, -1, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, normalRaycastPos, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, normalRaycastPos, 0.5f);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, normalRaycastPos, -0.5f);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, normalRaycastPos, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, normalRaycastPos, 0);
 
                     MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
                     MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
@@ -280,19 +285,19 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
                     if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
                     {
-                        MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                                                                                     MainManager.Instance.playerBody.transform.localPosition.x,
-                                                                                     crouch_Up,
-                                                                                     MainManager.Instance.playerBody.transform.localPosition.z);
+                        //MainManager.Instance.playerBody.transform.localPosition = new Vector3(
+                        //                                                             MainManager.Instance.playerBody.transform.localPosition.x,
+                        //                                                             crouch_Up,
+                        //                                                             MainManager.Instance.playerBody.transform.localPosition.z);
                     }
 
                     MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
 
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, -1, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, -1, 0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, -1, -0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, -1, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, -1, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, normalRaycastPos, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, normalRaycastPos, 0.5f);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, normalRaycastPos, -0.5f);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, normalRaycastPos, 0);
+                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, normalRaycastPos, 0);
 
                     MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
                     MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
@@ -320,11 +325,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
             MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
 
-            MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, -1, 0);
-            MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, -1, 0.5f);
-            MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, -1, -0.5f);
-            MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, -1, 0);
-            MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, -1, 0);
+            //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, -1, 0);
+            //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, -1, 0.5f);
+            //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, -1, -0.5f);
+            //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, -1, 0);
+            //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, -1, 0);
 
             MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
             MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
