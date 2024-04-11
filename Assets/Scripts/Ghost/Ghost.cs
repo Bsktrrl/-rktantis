@@ -258,9 +258,9 @@ public class Ghost : MonoBehaviour
         if (targetPoint == Vector3.zero)
         {
             randomPosition = new Quaternion(
-            Random.Range(spawnPos.x - 3f, spawnPos.x + 3f),
-            Random.Range(spawnPos.y - 1f, spawnPos.y + 1f),
-            Random.Range(spawnPos.z - 3f, spawnPos.z + 3f),
+            Random.Range(MainManager.Instance.playerBody.transform.position.x + spawnPos.x - 3f, MainManager.Instance.playerBody.transform.position.x + spawnPos.x + 3f),
+            Random.Range(MainManager.Instance.playerBody.transform.position.y + spawnPos.y - 1f, MainManager.Instance.playerBody.transform.position.y + spawnPos.y + 1f),
+            Random.Range(MainManager.Instance.playerBody.transform.position.z + spawnPos.z - 3f, MainManager.Instance.playerBody.transform.position.z + spawnPos.z + 3f),
 
             Random.Range(movementSpeed - 0.5f, movementSpeed + 0.5f));
         }

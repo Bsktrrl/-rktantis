@@ -151,7 +151,7 @@ public class GhostCapturer : MonoBehaviour
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, InvisibleObjectManager.Instance.ghostCapture_Distance, ghostLayerMask))
+            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, ghostLayerMask))
             {
                 if (hit.collider.gameObject.GetComponent<Ghost>() && hit.collider.gameObject.GetComponent<InvisibleObject>())
                 {

@@ -263,7 +263,7 @@ public class GhostManager : Singleton<GhostManager>
         Vector3 randomDirection = UnityEngine.Random.insideUnitSphere.normalized;
 
         //Get a random distance within a range
-        float randomDistanceAwayFromPlayer = UnityEngine.Random.Range(spawnPosition.x, spawnPosition.y);
+        float randomDistanceAwayFromPlayer = UnityEngine.Random.Range(MainManager.Instance.playerBody.transform.position.x + spawnPosition.x, MainManager.Instance.playerBody.transform.position.y + spawnPosition.y);
         float randomDistance_Y = UnityEngine.Random.Range(MainManager.Instance.playerBody.transform.position.y - 0.5f, MainManager.Instance.playerBody.transform.position.y + 1);
 
         Vector3 tempSpawnPosition = MainManager.Instance.playerBody.transform.position + randomDirection * randomDistanceAwayFromPlayer;
