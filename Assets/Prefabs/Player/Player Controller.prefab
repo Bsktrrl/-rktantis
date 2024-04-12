@@ -14164,8 +14164,10 @@ MonoBehaviour:
   buff_Deactivated_Clip: {fileID: 0}
   journalPage_GetNewJournalPage_Clip: {fileID: 0}
   journalPage_SelectingJournalPage_Clip: {fileID: 0}
-  ghost_TargetGhost_Clip: {fileID: 0}
-  ghost_StartsGettingTarget_Clip: {fileID: 0}
+  ghost_TargetGhost_Clip: {fileID: 8300000, guid: 9de37d6a02fab98408615270a2980c59,
+    type: 3}
+  ghost_GhostMood_Targeted_Clip: {fileID: 8300000, guid: 6f3e1e0fdb083d64aa1ffeb5ea7dc489,
+    type: 3}
   ghost_GhostMood_Happy_Clip: {fileID: 0}
   ghost_GhostMood_Sad_Clip: {fileID: 0}
   ghost_GhostMood_Moderate_Clip: {fileID: 0}
@@ -85334,7 +85336,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0036010742}
+  m_AnchoredPosition: {x: 0, y: 0.0015258789}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6867421022762371763

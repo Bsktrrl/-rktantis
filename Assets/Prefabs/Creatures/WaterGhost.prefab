@@ -390,7 +390,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 10
+  MaxDistance: 200
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -547,14 +547,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69924294c06338048a1b437242a4f840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource_Ghost_GhostSounds: {fileID: 2288203416835257315}
   ghostStats:
+    isTaken: 0
     ghostState: 0
     ghostAppearance: 0
     isBeard: 0
     ghostElement: 0
     elementFuel_Amount: 0
   interactableType: 0
-  movementSpeed: 2
   tempMovementSpeed: 0
   rotationSpeed: 4
   minDistance: 0.5
@@ -562,6 +563,7 @@ MonoBehaviour:
   capturedRate: 0
   spawnPos: {x: 0, y: 0, z: 0}
   targetPoint: {x: 0, y: 0, z: 0}
+  fleeTargetPoint: {x: 0, y: 0, z: 0}
   beard: {fileID: 7548066010567929126}
   style1:
   - {fileID: 9085560405803554110}
@@ -575,6 +577,13 @@ MonoBehaviour:
   - {fileID: 1657933958053947899}
   - {fileID: 7189170720479193161}
   - {fileID: 3892291063748933309}
+  isHittingTerrain: 0
+  ghostLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &6525312152521600679
 MonoBehaviour:
   m_ObjectHideFlags: 0

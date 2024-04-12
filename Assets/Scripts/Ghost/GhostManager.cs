@@ -10,11 +10,12 @@ public class GhostManager : Singleton<GhostManager>
 
     [Header("Ghost Object Pool")]
     public int ghostSpawnAmount = 1;
+    public float ghostMovementSpeed = 2f;
 
     [SerializeField] GameObject ghostPoolParent;
     [SerializeField] GameObject ghostPrefab;
 
-    [SerializeField] Vector2 spawnPosition = new Vector2 (2, 3);
+    public Vector2 spawnPosition = new Vector2 (2, 3);
     public float despawnDistance = 8;
 
     List<GameObject> ghostPool = new List<GameObject>();
@@ -94,7 +95,35 @@ public class GhostManager : Singleton<GhostManager>
     {
         DataManager.Instance.ghostCapturerStats_Store = ghostCapturerStats;
     }
-    
+
+
+    //--------------------
+
+
+    public int SetGhostSpawnAmount()
+    {
+        switch (WeatherManager.Instance.weatherTypeDayList[0])
+        {
+            case WeatherType.Cold:
+                ghostSpawnAmount = 1;
+                break;
+            case WeatherType.Cloudy:
+                ghostSpawnAmount = 1; //(6)
+                break;
+            case WeatherType.Sunny:
+                ghostSpawnAmount = 1; //(3)
+                break;
+            case WeatherType.Windy:
+                ghostSpawnAmount = 1; //(0)
+                break;
+
+            default:
+                break;
+        }
+
+        return ghostSpawnAmount;
+    }
+
 
     //--------------------
 
@@ -151,34 +180,6 @@ public class GhostManager : Singleton<GhostManager>
     }
 
 
-    //--------------------
-
-
-    public int SetGhostSpawnAmount()
-    {
-        switch (WeatherManager.Instance.weatherTypeDayList[0])
-        {
-            case WeatherType.Cold:
-                ghostSpawnAmount = 10;
-                break;
-            case WeatherType.Cloudy:
-                ghostSpawnAmount = 10; //(6)
-                break;
-            case WeatherType.Sunny:
-                ghostSpawnAmount = 10; //(3)
-                break;
-            case WeatherType.Windy:
-                ghostSpawnAmount = 10; //(0)
-                break;
-
-            default:
-                break;
-        }
-
-        return ghostSpawnAmount;
-    }
-
-
     //-------------------- Object Pooling of Ghosts
 
 
@@ -198,7 +199,7 @@ public class GhostManager : Singleton<GhostManager>
                 obj.transform.position = GetSpawnPosition();
                 obj.GetComponent<InvisibleObject>().transparencyValue = 1;
                 obj.GetComponent<InvisibleObject>().UpdateRenderList();
-                obj.GetComponent<Ghost>().ghostStats.ghostState = GhostStates.Moving;
+                obj.GetComponent<Ghost>().spawnPos = obj.transform.position;
                 obj.GetComponent<Ghost>().ghostStats.ghostElement = GhostElement.Water;
                 obj.GetComponent<Ghost>().ghostStats.elementFuel_Amount = 100;
 
@@ -221,7 +222,7 @@ public class GhostManager : Singleton<GhostManager>
         ghostPool.Add(newObj);
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().transparencyValue = 1;
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().UpdateRenderList();
-        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostStats.ghostState = GhostStates.Moving;
+        ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().spawnPos = ghostPool[ghostPool.Count - 1].transform.position;
         ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostStats.ghostElement = GhostElement.Water;
         ghostPool[ghostPool.Count - 1].GetComponent<Ghost>().ghostStats.elementFuel_Amount = 100;
 
@@ -259,17 +260,17 @@ public class GhostManager : Singleton<GhostManager>
         }
 
     }
-    Vector3 GetSpawnPosition()
+    public Vector3 GetSpawnPosition()
     {
         //Get a random direction vector
         Vector3 randomDirection = UnityEngine.Random.insideUnitSphere.normalized;
 
         //Get a random distance within a range
-        float randomDistanceAwayFromPlayer = UnityEngine.Random.Range(MainManager.Instance.playerBody.transform.position.x + spawnPosition.x, MainManager.Instance.playerBody.transform.position.y + spawnPosition.y);
-        float randomDistance_Y = UnityEngine.Random.Range(MainManager.Instance.playerBody.transform.position.y - 0.5f, MainManager.Instance.playerBody.transform.position.y + 1);
-
+        float randomDistanceAwayFromPlayer = UnityEngine.Random.Range(spawnPosition.x, spawnPosition.y);
         Vector3 tempSpawnPosition = MainManager.Instance.playerBody.transform.position + randomDirection * randomDistanceAwayFromPlayer;
-        tempSpawnPosition.y = MainManager.Instance.playerBody.transform.position.y + randomDistance_Y;
+        
+        float randomDistance_Y = UnityEngine.Random.Range(MainManager.Instance.playerBody.transform.position.y - 0.5f, MainManager.Instance.playerBody.transform.position.y + 1);
+        tempSpawnPosition.y = randomDistance_Y;
 
         return tempSpawnPosition;
     }
@@ -343,9 +344,7 @@ public enum GhostStates
     Moving,
 
     Attacking,
-    Fleeing,
-
-    Captured
+    Fleeing
 }
 public enum GhostAppearance
 {

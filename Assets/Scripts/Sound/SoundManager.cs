@@ -293,8 +293,9 @@ public class SoundManager : Singleton<SoundManager>
     #region Ghost
     [Header("Ghost")]
     [SerializeField] AudioClip ghost_TargetGhost_Clip; //
-    [SerializeField] AudioClip ghost_StartsGettingTarget_Clip; //
+    //[SerializeField] AudioClip ghost_StartsGettingTarget_Clip; //
 
+    [SerializeField] AudioClip ghost_GhostMood_Targeted_Clip; //
     [SerializeField] AudioClip ghost_GhostMood_Happy_Clip; //
     [SerializeField] AudioClip ghost_GhostMood_Sad_Clip; //
     [SerializeField] AudioClip ghost_GhostMood_Moderate_Clip; //
@@ -1421,7 +1422,16 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource_Ghost_TargetedGhostSFX.clip = ghost_TargetGhost_Clip;
             audioSource_Ghost_TargetedGhostSFX.pitch = 1f;
+            audioSource_Ghost_TargetedGhostSFX.loop = true;
             audioSource_Ghost_TargetedGhostSFX.Play();
+        }
+    }
+    public void Stop_Ghost_TargetGhost_Clip()
+    {
+        if (audioSource_Ghost_TargetedGhostSFX != null)
+        {
+            audioSource_Ghost_TargetedGhostSFX.loop = false;
+            audioSource_Ghost_TargetedGhostSFX.Stop();
         }
     }
     //public void Stop_Ghost_TargetGhost_Clip()
@@ -1432,17 +1442,26 @@ public class SoundManager : Singleton<SoundManager>
     //    }
     //}
 
-    public void Play_Ghost_GhostStartsGettingTarget_Clip(AudioSource objSource)
+    //public void Play_Ghost_GhostStartsGettingTarget_Clip(AudioSource objSource)
+    //{
+    //    if (objSource != null)
+    //    {
+    //        objSource.clip = ghost_StartsGettingTarget_Clip;
+    //        objSource.pitch = 1f;
+    //        objSource.Play();
+    //    }
+    //}
+    //In Roaming Sounds
+    public void Play_Ghost_GhostMood_Targeted_Clip(AudioSource objSource)
     {
         if (objSource != null)
         {
-            objSource.clip = ghost_StartsGettingTarget_Clip;
+            print("Play Voice");
+            objSource.clip = ghost_GhostMood_Targeted_Clip;
             objSource.pitch = 1f;
             objSource.Play();
         }
     }
-
-    //In Roaming Sounds
     public void Play_Ghost_GhostMood_Happy_Clip(AudioSource objSource)
     {
         if (objSource != null)

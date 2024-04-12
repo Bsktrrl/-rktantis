@@ -104,11 +104,11 @@ public class GhostCapturer : MonoBehaviour
                 switch (GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[index].ghostElement)
                 {
                     case GhostElement.None:
-                        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials[index + 3] = GhostManager.Instance.material_Empty;
+                        materialSlotList[index] = GhostManager.Instance.material_Empty;
                         break;
 
                     case GhostElement.Water:
-                        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials[index + 3] = GhostManager.Instance.material_Water;
+                        materialSlotList[index] = GhostManager.Instance.material_Water;
                         break;
                     case GhostElement.Fire:
                         break;
@@ -122,7 +122,7 @@ public class GhostCapturer : MonoBehaviour
                         break;
 
                     default:
-                        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials[index + 3] = GhostManager.Instance.material_Empty;
+                        materialSlotList[index] = GhostManager.Instance.material_Empty;
                         break;
                 }
             }
@@ -148,6 +148,8 @@ public class GhostCapturer : MonoBehaviour
                 invisibleObjectCollider.layer = LayerMask.NameToLayer(invisibleLightLayer);
                 isActive = true;
 
+                SoundManager.Instance.Play_Ghost_TargetGhost_Clip();
+
                 return;
             }
         }
@@ -155,6 +157,8 @@ public class GhostCapturer : MonoBehaviour
     public void StopCapturing()
     {
         invisibleObjectCollider.layer = LayerMask.NameToLayer(defaultLayer);
+
+        SoundManager.Instance.Stop_Ghost_TargetGhost_Clip();
 
         GhostManager.Instance.hasTarget = false;
         isActive = false;
@@ -211,9 +215,6 @@ public class GhostCapturer : MonoBehaviour
         {
             if (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>())
             {
-                //GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().isTargeted = false;
-                GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().ghostStats.ghostState = GhostStates.Moving;
-
                 GhostManager.Instance.hasTarget = false;
 
                 if (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().capturedRate <= 0)
