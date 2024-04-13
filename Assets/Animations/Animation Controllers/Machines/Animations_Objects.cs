@@ -56,7 +56,7 @@ public class Animations_Objects : MonoBehaviour
                 SoundManager.Instance.Play_InteractableObjects_OpenSkillTreeTable_Clip();
             }
 
-            //If Skill Tree Table
+            //If CropPlot
             else if (gameObject.GetComponent<InteractableObject>().itemName == Items.SmallCropPlot
                      || gameObject.GetComponent<InteractableObject>().itemName == Items.MediumCropPlot
                      || gameObject.GetComponent<InteractableObject>().itemName == Items.LargeCropPlot)
@@ -98,7 +98,7 @@ public class Animations_Objects : MonoBehaviour
                 SoundManager.Instance.Play_InteractableObjects_CloseSkillTreeTable_Clip();
             }
 
-            //If Skill Tree Table
+            //If CropPlot
             else if (gameObject.GetComponent<InteractableObject>().itemName == Items.SmallCropPlot
                      || gameObject.GetComponent<InteractableObject>().itemName == Items.MediumCropPlot
                      || gameObject.GetComponent<InteractableObject>().itemName == Items.LargeCropPlot)

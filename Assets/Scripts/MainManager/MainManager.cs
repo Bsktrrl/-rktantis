@@ -97,6 +97,19 @@ public class MainManager : Singleton<MainManager>
 
         return null;
     }
+    public MoveableObjectInfo GetMovableObject(FurnitureType furnitureType, MachineType machineType)
+    {
+        for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
+        {
+            if (moveableObject_SO.moveableObjectList[i].furnitureType == furnitureType
+                && moveableObject_SO.moveableObjectList[i].machineType == machineType)
+            {
+                return moveableObject_SO.moveableObjectList[i];
+            }
+        }
+
+        return null;
+    }
 
 
     //--------------------

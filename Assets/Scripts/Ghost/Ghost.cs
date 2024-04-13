@@ -1,10 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Ghost : MonoBehaviour
 {
@@ -88,6 +84,8 @@ public class Ghost : MonoBehaviour
     }
     private void Update()
     {
+        if (ghostStats.ghostState == GhostStates.Tank) { return; }
+
         if (gameObject.activeInHierarchy)
         {
             //Check for Despawn distance
@@ -128,8 +126,12 @@ public class Ghost : MonoBehaviour
 
         isTargeted = false;
         capturedRate = 0;
+
+        fleeRightDirectionTimer = 0;
+        fleeUpDirectionTimer = 0;
+        fleeTempSpeedMultiplier = 1;
     }
-    void SetGhostAppearance()
+    public void SetGhostAppearance()
     {
         //Reset
         for (int i = 0; i < style1.Count; i++)
@@ -306,7 +308,7 @@ public class Ghost : MonoBehaviour
     }
     IEnumerator WaitForNextTankAnimation(float time)
     {
-        if (ghostStats.ghostState == GhostStates.Tank)
+        if (ghostStats.ghostState == GhostStates.Tank && gameObject.activeInHierarchy)
         {
             if (anim.GetInteger("IdleAnimation") != 0)
             {
@@ -320,7 +322,7 @@ public class Ghost : MonoBehaviour
         
         yield return new WaitForSeconds(time);
 
-        tankAnimationTimer = Random.Range(25, 80);
+        tankAnimationTimer = Random.Range(5, 5); //25, 80
 
         StartCoroutine(WaitForNextTankAnimation(tankAnimationTimer));
     }
@@ -428,7 +430,7 @@ public class Ghost : MonoBehaviour
 
 
         //Change Right-Vector to random
-        fleeRightDirectionTimerCheck = Random.Range(-15f + PerkManager.Instance.perks.ghostMovementReducer_Right, 15f - PerkManager.Instance.perks.ghostMovementReducer_Right);
+        fleeRightDirectionTimerCheck = Random.Range(-10f + PerkManager.Instance.perks.ghostMovementReducer_Right, 10f - PerkManager.Instance.perks.ghostMovementReducer_Right);
         fleeRightDirectionTimer += fleeRightDirectionTimerCheck * Time.deltaTime;
 
         if (fleeRightDirectionTimer != 0)
@@ -475,7 +477,7 @@ public class Ghost : MonoBehaviour
         //--------------------
 
 
-        Vector3 fleePosition = transform.position + fleeDirection * GhostManager.Instance.ghostMovementSpeed * fleeTempSpeedMultiplier * fleeSpeedObstacleMultiplier * 1.5f * Time.deltaTime;
+        Vector3 fleePosition = transform.position + fleeDirection * GhostManager.Instance.ghostMovementSpeed * fleeTempSpeedMultiplier * fleeSpeedObstacleMultiplier * 1.25f * Time.deltaTime;
 
         //Move Ghost
         transform.position = fleePosition;
@@ -503,8 +505,6 @@ public class Ghost : MonoBehaviour
 
     void GhostCaptured()
     {
-        print("Ghost Captured");
-
         SoundManager.Instance.Play_Ghost_CaptureGhost_Clip();
 
         GhostManager.Instance.AddGhostToCapturer(ghostStats);
@@ -526,13 +526,11 @@ public class Ghost : MonoBehaviour
         {
             if (Vector3.Distance(hit.point, gameObject.transform.position) <= 0.5f)
             {
-                print("Go Upwards");
                 targetPoint = new Vector3(targetPoint.x, targetPoint.y + 0.25f, targetPoint.z);
                 terrainDirection_Down = 1;
             }
             else if (Vector3.Distance(hit.point, gameObject.transform.position) >= 2.5f)
             {
-                print("Go Downwards");
                 targetPoint = new Vector3(targetPoint.x, targetPoint.y - 0.25f, targetPoint.z);
                 terrainDirection_Down = 2;
             }

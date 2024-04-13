@@ -501,7 +501,7 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
@@ -577,7 +577,8 @@ MonoBehaviour:
   - {fileID: 1657933958053947899}
   - {fileID: 7189170720479193161}
   - {fileID: 3892291063748933309}
-  isHittingTerrain: 0
+  terrainDirection_Down: 0
+  terrainDirection_Forward: 0
   ghostLayerMask:
     serializedVersion: 2
     m_Bits: 2048
@@ -629,6 +630,7 @@ MonoBehaviour:
   isVisible: 0
   isPicture: 0
   pictureSprite: {fileID: 0}
+  isInTank: 0
 --- !u!1 &6331974908998395749 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7844105008849561886, guid: 24a295645ff9a0e4aa77abdeaa2730ca,

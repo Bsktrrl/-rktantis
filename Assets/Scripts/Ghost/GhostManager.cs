@@ -6,7 +6,7 @@ using UnityEngine;
 public class GhostManager : Singleton<GhostManager>
 {
     [Header("Ghost Lists")]
-    List<GhostStats> capturedGhostList = new List<GhostStats>();
+    //public List<GhostStats> capturedGhostList = new List<GhostStats>();
 
     [Header("Ghost Object Pool")]
     public int ghostSpawnAmount = 1;
@@ -51,7 +51,6 @@ public class GhostManager : Singleton<GhostManager>
         }
 
         leafRotationSpeed = 250;
-        capturedRateSpeed = 0.1f;
     }
 
 
@@ -134,10 +133,13 @@ public class GhostManager : Singleton<GhostManager>
         {
             if (!ghostCapturerStats.ghostCapturedStats[i].isTaken)
             {
+                ghostCapturerStats.ghostCapturedStats[i].isTaken = true;
+                ghostCapturerStats.ghostCapturedStats[i].ghostState = GhostStates.Idle;
+
                 ghostStats.isTaken = true;
                 ghostStats.ghostState = GhostStates.Idle;
 
-                ghostCapturerStats.ghostCapturedStats[i] = ghostStats;
+                //ghostCapturerStats.ghostCapturedStats[i] = ghostStats;
 
                 break;
             }
@@ -155,13 +157,40 @@ public class GhostManager : Singleton<GhostManager>
        
         SaveData();
     }
-    public void PlaceGhostInTank(int slot)
+    public GhostStats RemoveGhostFromCapturer()
     {
+        GhostStats tempStats = new GhostStats();
 
-    }
-    public void RemoveGhostFromCapturer(int slot)
-    {
+        for (int i = ghostCapturerStats.ghostCapturedStats.Count - 1; i >= 0; i--)
+        {
+            if (ghostCapturerStats.ghostCapturedStats[i].isTaken)
+            {
+                tempStats = ghostCapturerStats.ghostCapturedStats[i];
 
+                ghostCapturerStats.ghostCapturedStats[i].isTaken = false;
+                ghostCapturerStats.ghostCapturedStats[i].ghostState = GhostStates.Idle;
+                ghostCapturerStats.ghostCapturedStats[i].ghostAppearance = GhostAppearance.None;
+                ghostCapturerStats.ghostCapturedStats[i].isBeard = false;
+                ghostCapturerStats.ghostCapturedStats[i].ghostElement = GhostElement.None;
+                ghostCapturerStats.ghostCapturedStats[i].elementFuel_Amount = 0;
+
+                break;
+            }
+        }
+
+        //Stop GhostCapturer from being Active
+        if (HotbarManager.Instance.selectedItem == Items.GhostCapturer)
+        {
+            if (HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>())
+            {
+                HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>().UpdateGhostCapturer();
+                HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>().StopCapturing();
+            }
+        }
+
+        SaveData();
+
+        return tempStats;
     }
 
 
@@ -347,6 +376,8 @@ public enum GhostStates
 }
 public enum GhostAppearance
 {
+    None,
+
     Type1,
     Type2,
     Type3

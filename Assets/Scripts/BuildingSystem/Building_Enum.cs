@@ -52,7 +52,7 @@ public enum MoveableObjectType
 
 public enum FurnitureType
 {
-    [Description("")][InspectorName("Standing")] None,
+    [Description("None")][InspectorName("None")] None,
 
     [Description("Crafting Table")][InspectorName("Crafting Table")] CraftingTable,
     [Description("Skill Table")][InspectorName("Skill Table")] SkillTreeTable,
@@ -69,19 +69,11 @@ public enum FurnitureType
     [Description("Other3")][InspectorName("Other3")] FU_Other3,
     [Description("Other4")][InspectorName("Other4")] FU_Other4,
     [Description("Other5")][InspectorName("Other5")] FU_Other5
-
-
-    //None,
-    //Small_StorageChest,
-    //Medium_StorageChest,
-    //Big_StorageChest,
-
-    //Bed
 }
 
 public enum MachineType
 {
-    [Description("")][InspectorName("Standing")] None,
+    [Description("None")][InspectorName("None")] None,
 
     [Description("Crop Plot x1")][InspectorName("Crop Plot x1")] CropPlot_x1,
     [Description("Crop Plot x2")][InspectorName("Crop Plot x2")] CropPlot_x2,
@@ -108,27 +100,4 @@ public enum MachineType
     [Description("Other3")][InspectorName("Other3")] MA_Other3,
     [Description("Other4")][InspectorName("Other4")] MA_Other4,
     [Description("Other5")][InspectorName("Other5")] MA_Other5
-
-    //None,
-
-    //CraftingTable,
-    //SkillTreeTable,
-    //GhostTank,
-    //Extractor,
-    //GhostRepeller,
-    //HeatRegulator,
-    //ResourceConverter,
-
-    //BatteryCharger_1,
-    //BatteryCharger_2,
-    //BatteryCharger_3,
-
-    //CropPlot_1,
-    //CropPlot_2,
-    //CropPlot_3,
-
-    //Grill_Manual,
-    //Grill_1,
-    //Grill_2,
-    //Grill_4
 }

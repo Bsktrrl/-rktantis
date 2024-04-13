@@ -226,7 +226,12 @@ public class InteractableObject : MonoBehaviour
             #region
             else if (interactableType == InteracteableType.GhostTank)
             {
-                print("Interract with a GhostTank");
+                print("Interact with a GhostTank");
+
+                if (gameObject.GetComponent<GhostTank>())
+                {
+                    gameObject.GetComponent<GhostTank>().InteractWithGhostTank();
+                }
             }
             #endregion
 
