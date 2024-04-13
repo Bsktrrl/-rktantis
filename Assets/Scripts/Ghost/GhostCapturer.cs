@@ -181,9 +181,6 @@ public class GhostCapturer : MonoBehaviour
                     {
                         GhostManager.Instance.targetGhostObject = hit.collider.gameObject;
 
-                        //hit.collider.gameObject.GetComponent<Ghost>().isTargeted = true;
-                        hit.collider.gameObject.GetComponent<Ghost>().ghostStats.ghostState = GhostStates.Fleeing;
-
                         GhostManager.Instance.hasTarget = true;
                     }
                     else

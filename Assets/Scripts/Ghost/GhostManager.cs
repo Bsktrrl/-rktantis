@@ -318,9 +318,6 @@ public class GhostStats
 [Serializable]
 public class GhostCapturerStats
 {
-//    public List<bool> activeGhostCapturerSlotList = new List<bool>();
-//    public List<GhostStats> ghostCapturedStats;
-
     public int slotsActivated;
     public List<GhostStats> ghostCapturedStats;
 }
@@ -342,9 +339,11 @@ public enum GhostStates
     Idle,
 
     Moving,
+    Fleeing,
 
     Attacking,
-    Fleeing
+
+    Tank
 }
 public enum GhostAppearance
 {

@@ -67,6 +67,11 @@ public class GameData
     //GhostCapturer
     [HideInInspector] public GhostCapturerStats ghostCapturerStats_Save;
 
+    //Perks
+    [HideInInspector] public Perks perks_Save;
+    [HideInInspector] public PerkActivations perkActivations_Save;
+
+
     //--------------------
 
 

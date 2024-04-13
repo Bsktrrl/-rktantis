@@ -1456,7 +1456,6 @@ public class SoundManager : Singleton<SoundManager>
     {
         if (objSource != null)
         {
-            print("Play Voice");
             objSource.clip = ghost_GhostMood_Targeted_Clip;
             objSource.pitch = 1f;
             objSource.Play();
