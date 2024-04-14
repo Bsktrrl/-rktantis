@@ -1,10 +1,12 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
+    #region Variables
     Animator anim;
-    AudioSource audioSource_Ghost_GhostSounds;
+    [SerializeField] AudioSource audioSource_Ghost_GhostSounds;
 
     [Header("General")]
     public GhostStats ghostStats = new GhostStats();
@@ -12,7 +14,6 @@ public class Ghost : MonoBehaviour
     public InteracteableType interactableType;
 
     [Header("Stats")]
-    public float movementSpeed = 2f;
     public float tempMovementSpeed;
     public float rotationSpeed = 4f;
     public float minDistance = 0.5f;
@@ -20,16 +21,46 @@ public class Ghost : MonoBehaviour
     [Header("Capture")]
     public bool isTargeted;
     public float capturedRate;
+    bool targetedOnce;
+    bool targetedOnceOnce;
 
     [Header("Position")]
     public Vector3 spawnPos;
     public Vector3 targetPoint = Vector3.zero;
+    public Vector3 fleeTargetPoint = Vector3.zero;
 
     [Header("Styles")]
     public GameObject beard;
     public List<GameObject> style1 = new List<GameObject>();
     public List<GameObject> style2 = new List<GameObject>();
     public List<GameObject> style3 = new List<GameObject>();
+
+    [Header("Raycast")]
+    [SerializeField] int terrainDirection_Down;
+    [SerializeField] int terrainDirection_Forward;
+    public LayerMask ghostLayerMask;
+    public LayerMask groundLayerMask;
+
+    Ray ray;
+    RaycastHit hit;
+
+    float fleeRightDirectionTimer;
+    float fleeRightDirectionTimerCheck = 2;
+
+    float fleeUpDirectionTimer;
+    float fleeUpDirectionTimerCheck = 2;
+
+    float fleeSpeedTimer;
+    float fleeSpeedTimerCheck = 2;
+    float fleeTempSpeedMultiplier = 1;
+    float fleeSpeedObstacleMultiplier = 1;
+
+    float fleeDirectionKeepTimer;
+
+
+    [Header("In GhostTank")]
+    float tankAnimationTimer;
+    #endregion
 
 
     //--------------------
@@ -38,27 +69,25 @@ public class Ghost : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        audioSource_Ghost_GhostSounds = GetComponent<AudioSource>();
 
         interactableType = InteracteableType.Ghost;
 
-        movementSpeed = 2f;
+        GhostManager.Instance.ghostMovementSpeed = 2f;
         rotationSpeed = 4f;
         minDistance = 0.5f;
 
-        spawnPos = transform.position;
         isTargeted = false;
 
-        //SetGhostMovment();
-
         SetupGhost();
+
+        StartCoroutine(WaitForNextTankAnimation(tankAnimationTimer));
     }
     private void Update()
     {
+        if (ghostStats.ghostState == GhostStates.Tank) { return; }
+
         if (gameObject.activeInHierarchy)
         {
-            anim.SetFloat("MovementSpeed", movementSpeed);
-
             //Check for Despawn distance
             #region
             float distanceFromPlayer = Vector3.Distance(gameObject.transform.position, MainManager.Instance.playerBody.transform.position);
@@ -69,33 +98,17 @@ public class Ghost : MonoBehaviour
             #endregion
 
             //Behavior Tree
-            #region
-            switch (ghostStats.ghostState)
-            {
-                //Get the action from the selected State
-                case GhostStates.Idle:
-                    Idle();
-                    break;
-                case GhostStates.Moving:
-                    Move();
-                    break;
-                case GhostStates.Attacking:
-                    Attack();
-                    break;
-                case GhostStates.Fleeing:
-                    Flee();
-                    break;
-                case GhostStates.Captured:
-                    Captured();
-                    break;
-            }
-            #endregion
+            SetGhostBehavior();
         }
 
         CapturedRate();
 
+        SetGhostState();
+
         UpdateSoundVolume();
         UpdateGhostSounds();
+
+        TerrainRaycast();
     }
 
 
@@ -104,14 +117,21 @@ public class Ghost : MonoBehaviour
 
     public void SetupGhost()
     {
+        targetPoint = Vector3.zero;
+        ghostStats.isTaken = false;
+
         SetGhostMovment();
 
         SetGhostAppearance();
 
         isTargeted = false;
         capturedRate = 0;
+
+        fleeRightDirectionTimer = 0;
+        fleeUpDirectionTimer = 0;
+        fleeTempSpeedMultiplier = 1;
     }
-    void SetGhostAppearance()
+    public void SetGhostAppearance()
     {
         //Reset
         for (int i = 0; i < style1.Count; i++)
@@ -164,12 +184,8 @@ public class Ghost : MonoBehaviour
             }
         }
         
-
         if (isTargeted)
         {
-            ghostStats.ghostState = GhostStates.Fleeing;
-
-            //print("capturedRate - UP: " + capturedRate);
             capturedRate += (GhostManager.Instance.capturedRateSpeed * 1.5f) * Time.deltaTime;
 
             if (capturedRate > 1)
@@ -179,21 +195,18 @@ public class Ghost : MonoBehaviour
         }
         else
         {
-            ghostStats.ghostState = GhostStates.Moving;
-
-            if (capturedRate >= -0.1)
+            if (capturedRate > 0 && ghostStats.ghostState != GhostStates.Idle)
             {
-                //print("capturedRate - DOWN: " + capturedRate);
-                capturedRate -= GhostManager.Instance.capturedRateSpeed * Time.deltaTime;
+                capturedRate -= (GhostManager.Instance.capturedRateSpeed / 2) * Time.deltaTime;
+            }
 
-                if (capturedRate < 0)
-                {
-                    capturedRate = 0;
-                }
+            if (capturedRate < 0)
+            {
+                capturedRate = 0;
             }
         }
     }
-    
+
     void UpdateSoundVolume()
     {
         audioSource_Ghost_GhostSounds.volume = SoundManager.Instance.sound_Creatures;
@@ -209,30 +222,147 @@ public class Ghost : MonoBehaviour
         }
         else
         {
-            if (capturedRate <= 0)
+            
+        }
+    }
+
+    void SetGhostState()
+    {
+        //In Ghost Tank
+        if (ghostStats.isTaken)
+        {
+            ghostStats.ghostState = GhostStates.Idle;
+        }
+
+        //Moving Around
+        else if (capturedRate <= 0)
+        {
+            ghostStats.ghostState = GhostStates.Moving;
+
+            fleeRightDirectionTimer = 0;
+            fleeUpDirectionTimer = 0;
+            fleeTempSpeedMultiplier = 1;
+
+            targetedOnce = false;
+            targetedOnceOnce = false;
+        }
+
+        //Targeted - Fleeing
+        else if (capturedRate > 0 && ghostStats.ghostState != GhostStates.Idle)
+        {
+            if (!targetedOnce)
             {
-                SoundManager.Instance.Play_Ghost_GhostStartsGettingTarget_Clip(audioSource_Ghost_GhostSounds);
+                targetedOnce = true;
+
+                //Play Targeted Sound
+                SoundManager.Instance.Play_Ghost_GhostMood_Targeted_Clip(audioSource_Ghost_GhostSounds);
+
+                //Play Targeted Animation
+                //...
+
+                ghostStats.ghostState = GhostStates.Idle;
+
+                StartCoroutine(SetGhostFleeing(0.5f));
+            }
+            else
+            {
+                if (targetedOnceOnce)
+                {
+                    StartCoroutine(SetGhostFleeing(0));
+                }
             }
         }
+
+        SetOngoingGhostAnimations();
+    }
+    IEnumerator SetGhostFleeing(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        ghostStats.ghostState = GhostStates.Fleeing;
+
+        SetGhostMovment();
+        targetedOnceOnce = true;
+    }
+
+    void SetOngoingGhostAnimations()
+    {
+        switch (ghostStats.ghostState)
+        {
+            case GhostStates.Idle:
+                anim.SetBool("isMoving", false);
+                break;
+            case GhostStates.Moving:
+                anim.SetBool("isMoving", false);
+                break;
+            case GhostStates.Attacking:
+                break;
+            case GhostStates.Fleeing:
+                anim.SetBool("isMoving", true);
+                anim.SetTrigger("Move");
+                break;
+
+            default:
+                break;
+        }
+    }
+    IEnumerator WaitForNextTankAnimation(float time)
+    {
+        if (ghostStats.ghostState == GhostStates.Tank && gameObject.activeInHierarchy)
+        {
+            if (anim.GetInteger("IdleAnimation") != 0)
+            {
+                anim.SetInteger("IdleAnimation", 0);
+            }
+            else
+            {
+                anim.SetInteger("IdleAnimation", Random.Range(0, 8));
+            }
+        }
+        
+        yield return new WaitForSeconds(time);
+
+        tankAnimationTimer = Random.Range(5, 5); //25, 80
+
+        StartCoroutine(WaitForNextTankAnimation(tankAnimationTimer));
     }
 
 
     //--------------------
 
 
+    void SetGhostBehavior()
+    {
+        switch (ghostStats.ghostState)
+        {
+            //Get the action from the selected State
+            case GhostStates.Idle:
+                Idle();
+                break;
+            case GhostStates.Moving:
+                Move();
+                break;
+            case GhostStates.Attacking:
+                Attack();
+                break;
+            case GhostStates.Fleeing:
+                Flee();
+                break;
+            case GhostStates.Tank:
+                Tank();
+                break;
+        }
+    }
+
     #region Idle
     void Idle()
     {
-
+        
     }
     #endregion
 
     #region Movement
     void Move()
-    {
-        MoveTowardsTarget();
-    }
-    void MoveTowardsTarget()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPoint, tempMovementSpeed * Time.deltaTime);
 
@@ -245,24 +375,24 @@ public class Ghost : MonoBehaviour
         }
 
         //Check if ghost is close to the targetPoint
-        if (Vector3.Distance(transform.position, targetPoint) < minDistance)
+        if (Vector3.Distance(transform.position, targetPoint) <= minDistance)
         {
             SetGhostMovment();
         }
     }
     void SetGhostMovment()
     {
-        // Generate random target points and add them to the list
+        //Generate a random target point
         Quaternion randomPosition;
 
         if (targetPoint == Vector3.zero)
         {
             randomPosition = new Quaternion(
-            Random.Range(MainManager.Instance.playerBody.transform.position.x + spawnPos.x - 3f, MainManager.Instance.playerBody.transform.position.x + spawnPos.x + 3f),
-            Random.Range(MainManager.Instance.playerBody.transform.position.y + spawnPos.y - 1f, MainManager.Instance.playerBody.transform.position.y + spawnPos.y + 1f),
-            Random.Range(MainManager.Instance.playerBody.transform.position.z + spawnPos.z - 3f, MainManager.Instance.playerBody.transform.position.z + spawnPos.z + 3f),
+            Random.Range(spawnPos.x - 3f, spawnPos.x + 3f),
+            Random.Range(spawnPos.y - 0.5f, spawnPos.y + 0.5f),
+            Random.Range(spawnPos.z - 3f, spawnPos.z + 3f),
 
-            Random.Range(movementSpeed - 0.5f, movementSpeed + 0.5f));
+            Random.Range(GhostManager.Instance.ghostMovementSpeed - 0.5f, GhostManager.Instance.ghostMovementSpeed + 0.5f));
         }
         else
         {
@@ -271,7 +401,7 @@ public class Ghost : MonoBehaviour
             Random.Range(targetPoint.y - 1f, targetPoint.y + 1f),
             Random.Range(targetPoint.z - 3f, targetPoint.z + 3f),
 
-            Random.Range(movementSpeed - 0.5f, movementSpeed + 0.5f));
+            Random.Range(GhostManager.Instance.ghostMovementSpeed - 0.5f, GhostManager.Instance.ghostMovementSpeed + 0.5f));
         }
 
         targetPoint = new Vector3(randomPosition.x, randomPosition.y, randomPosition.z);
@@ -289,14 +419,83 @@ public class Ghost : MonoBehaviour
     #region Flee
     void Flee()
     {
+        //Get the movementDirection of the player
+        Vector3 ghostDirection = transform.position - MainManager.Instance.playerBody.transform.position;
 
+        //Get the direction for the Ghost to flee in
+        Vector3 fleeDirection = ghostDirection.normalized;
+
+
+        //--------------------
+
+
+        //Change Right-Vector to random
+        fleeRightDirectionTimerCheck = Random.Range(-10f + PerkManager.Instance.perks.ghostMovementReducer_Right, 10f - PerkManager.Instance.perks.ghostMovementReducer_Right);
+        fleeRightDirectionTimer += fleeRightDirectionTimerCheck * Time.deltaTime;
+
+        if (fleeRightDirectionTimer != 0)
+        {
+            if (terrainDirection_Forward == 1)
+            {
+                fleeRightDirectionTimer = Random.Range(0, 2) == 0 ? -0.5f : 0.5f;
+            }
+
+            fleeDirection.x = fleeRightDirectionTimer;
+        }
+
+
+        //Change Up-vector to random
+        fleeUpDirectionTimerCheck = Random.Range(-0.75f + PerkManager.Instance.perks.ghostMovementReducer_Up, 0.75f - PerkManager.Instance.perks.ghostMovementReducer_Up);
+
+        //Check for height and terrain collision
+        if (terrainDirection_Down == 1 || terrainDirection_Forward == 1)
+        {
+            fleeUpDirectionTimer = 0.35f;
+        }
+        if (terrainDirection_Down == 2 || terrainDirection_Forward == 2)
+        {
+            fleeUpDirectionTimer = -0.35f;
+        }
+        else
+        {
+            fleeUpDirectionTimer += fleeUpDirectionTimerCheck * Time.deltaTime;
+        }
+
+        fleeDirection.y = fleeUpDirectionTimer;
+
+
+        //Change Speed to random
+        fleeSpeedTimerCheck = Random.Range(-0.75f + PerkManager.Instance.perks.ghostMovementReducer_Speed, 0.75f - PerkManager.Instance.perks.ghostMovementReducer_Speed);
+        fleeTempSpeedMultiplier += fleeSpeedTimerCheck * Time.deltaTime;
+
+        if (fleeTempSpeedMultiplier <= 0.1f)
+            fleeTempSpeedMultiplier = 0.1f;
+        if (fleeTempSpeedMultiplier >= 1.5f)
+            fleeTempSpeedMultiplier = 1.5f;
+
+
+        //--------------------
+
+
+        Vector3 fleePosition = transform.position + fleeDirection * GhostManager.Instance.ghostMovementSpeed * fleeTempSpeedMultiplier * fleeSpeedObstacleMultiplier * 1.25f * Time.deltaTime;
+
+        //Move Ghost
+        transform.position = fleePosition;
+
+        //Rotate Ghost
+        Quaternion targetRotation = Quaternion.LookRotation(fleeDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 4f);
     }
     #endregion
 
-    #region Captured
-    void Captured()
+    #region Tank
+    void Tank()
     {
-
+        if (gameObject.GetComponent<InvisibleObject>())
+        {
+            gameObject.GetComponent<InvisibleObject>().isInTank = true;
+            gameObject.GetComponent<InvisibleObject>().transparencyValue = 0;
+        }
     }
     #endregion
 
@@ -306,12 +505,69 @@ public class Ghost : MonoBehaviour
 
     void GhostCaptured()
     {
-        print("Ghost Captured");
-
         SoundManager.Instance.Play_Ghost_CaptureGhost_Clip();
 
         GhostManager.Instance.AddGhostToCapturer(ghostStats);
 
         GhostManager.Instance.DespawnGhost(gameObject);
+    }
+
+
+    //--------------------
+
+
+    void TerrainRaycast()
+    {
+        //Raycast Down
+        #region
+        ray = new Ray(transform.position, Vector3.down);
+
+        if (Physics.Raycast(ray, out hit, 5, groundLayerMask))
+        {
+            if (Vector3.Distance(hit.point, gameObject.transform.position) <= 0.5f)
+            {
+                targetPoint = new Vector3(targetPoint.x, targetPoint.y + 0.25f, targetPoint.z);
+                terrainDirection_Down = 1;
+            }
+            else if (Vector3.Distance(hit.point, gameObject.transform.position) >= 2.5f)
+            {
+                targetPoint = new Vector3(targetPoint.x, targetPoint.y - 0.25f, targetPoint.z);
+                terrainDirection_Down = 2;
+            }
+            else
+            {
+                terrainDirection_Down = 0;
+            }
+        }
+        else
+        {
+            terrainDirection_Down = 0;
+        }
+        #endregion
+
+        //Raycast Forward
+        #region
+        ray = new Ray(transform.position, Vector3.forward);
+
+        if (Physics.Raycast(ray, out hit, 5, groundLayerMask))
+        {
+            if (Vector3.Distance(hit.point, gameObject.transform.position) <= 4)
+            {
+                print("Go Upwards");
+                targetPoint = new Vector3(targetPoint.x, targetPoint.y + 0.25f, targetPoint.z);
+                terrainDirection_Forward = 1;
+            }
+            else
+            {
+                terrainDirection_Forward = 0;
+                fleeSpeedObstacleMultiplier = 1;
+            }
+        }
+        else
+        {
+            terrainDirection_Forward = 0;
+            fleeSpeedObstacleMultiplier = 1;
+        }
+        #endregion
     }
 }

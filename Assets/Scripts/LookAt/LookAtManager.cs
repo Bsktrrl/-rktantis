@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +32,7 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] GameObject MovableObject_Panel;
     [SerializeField] Image MovableObjectImage;
     [SerializeField] TextMeshProUGUI MovableObjectName;
+    [SerializeField] TextMeshProUGUI MovableObject_Text;
 
     [Header("Water")]
     [SerializeField] GameObject WaterDisplay_Panel;
@@ -266,7 +268,6 @@ public class LookAtManager : Singleton<LookAtManager>
             || typeLookingAt == InteracteableType.Grill_x2
             || typeLookingAt == InteracteableType.Grill_x4
 
-            || typeLookingAt == InteracteableType.GhostTank
             || typeLookingAt == InteracteableType.GhostRepeller
             || typeLookingAt == InteracteableType.EnergyStorageTank
 
@@ -279,6 +280,19 @@ public class LookAtManager : Singleton<LookAtManager>
             TurnOffScreens();
 
             FurnitureMachineDisplay();
+
+            MovableObject_Panel.SetActive(true);
+
+            return;
+        }
+
+        //If looking at a GhostTank
+        else if (typeLookingAt == InteracteableType.GhostTank)
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            GhostTankDisplay();
 
             MovableObject_Panel.SetActive(true);
 
@@ -400,6 +414,33 @@ public class LookAtManager : Singleton<LookAtManager>
 
                 MovableObjectImage.sprite = tempObject.objectSprite;
                 MovableObjectName.text = tempObject.Name;
+                MovableObject_Text.text = "Press E to interact";
+            }
+        }
+    }
+    void GhostTankDisplay()
+    {
+        if (SelectionManager.Instance.selecedObject && SelectionManager.Instance.onTarget)
+        {
+            if (SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>())
+            {
+                if (SelectionManager.Instance.selecedObject.GetComponent<GhostTank>())
+                {
+                    if (SelectionManager.Instance.selecedObject.GetComponent<GhostTank>().ghostTankContent.GhostElement == GhostElement.None)
+                    {
+                        MoveableObjectInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>());
+
+                        MovableObjectImage.sprite = tempObject.objectSprite;
+                        MovableObjectName.text = tempObject.Name;
+                        MovableObject_Text.text = "Press E to interact";
+                    }
+                    else
+                    {
+                        MovableObjectImage.sprite = GhostManager.Instance.ghostImage_Water;
+                        MovableObjectName.text = "Water Ghost";
+                        MovableObject_Text.text = "Press E to release Ghost";
+                    }
+                }
             }
         }
     }

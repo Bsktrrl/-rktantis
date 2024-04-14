@@ -31,7 +31,6 @@ public class Arms : Singleton<Arms>
         {
             if (HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>())
             {
-                print("StartCapturing");
                 HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>().StartCapturing();
             }
         }
@@ -46,7 +45,6 @@ public class Arms : Singleton<Arms>
         {
             if (HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>())
             {
-                print("StopCapturing");
                 HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>().StopCapturing();
             }
         }

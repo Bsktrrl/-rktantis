@@ -80,6 +80,13 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //GhostCapturer
     [HideInInspector] public GhostCapturerStats ghostCapturerStats_Store;
 
+    //Machines
+    [HideInInspector] public List<GhostTankContent> ghostTankList_Store = new List<GhostTankContent>();
+
+    //Perks
+    [HideInInspector] public Perks perks_Store;
+    [HideInInspector] public PerkActivations perkActivations_Store;
+
 
     //--------------------
 
@@ -130,6 +137,11 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.itemStates_Store = gameData.itemStates_Save;
 
         this.ghostCapturerStats_Store = gameData.ghostCapturerStats_Save;
+
+        this.ghostTankList_Store = gameData.ghostTankList_Save;
+
+        this.perks_Store = gameData.perks_Save;
+        this.perkActivations_Store = gameData.perkActivations_Save;
         #endregion
 
         //Load the saved data into the project
@@ -190,6 +202,12 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         GhostManager.Instance.LoadData();
         print("18. Ghost has Loaded");
+
+        PerkManager.Instance.LoadData();
+        print("19. Perks has Loaded");
+
+        MachineManager.Instance.LoadData();
+        print("20. Machines has Loaded");
         #endregion
 
         print("------------------------------");
@@ -241,6 +259,11 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.itemStates_Save = this.itemStates_Store;
 
         gameData.ghostCapturerStats_Save = this.ghostCapturerStats_Store;
+
+        gameData.ghostTankList_Save = this.ghostTankList_Store;
+
+        gameData.perks_Save = this.perks_Store;
+        gameData.perkActivations_Save = this.perkActivations_Store;
 
         print("Data has Saved");
     }

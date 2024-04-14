@@ -102,7 +102,8 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource audioSource_Journal_VoiceMessage; //Voice Source
 
     [Header("GhostFight")]
-    public AudioSource audioSource_Ghost_TargetedGhostSFX; //
+    public AudioSource audioSource_Ghost_GhostCapturerSFX; //
+    public AudioSource audioSource_Ghost_WorldGhostSFX; //
     #endregion
 
 
@@ -293,8 +294,8 @@ public class SoundManager : Singleton<SoundManager>
     #region Ghost
     [Header("Ghost")]
     [SerializeField] AudioClip ghost_TargetGhost_Clip; //
-    [SerializeField] AudioClip ghost_StartsGettingTarget_Clip; //
 
+    [SerializeField] AudioClip ghost_GhostMood_Targeted_Clip; //
     [SerializeField] AudioClip ghost_GhostMood_Happy_Clip; //
     [SerializeField] AudioClip ghost_GhostMood_Sad_Clip; //
     [SerializeField] AudioClip ghost_GhostMood_Moderate_Clip; //
@@ -303,6 +304,9 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip ghost_GhostMood_Whispering_Clip; //
 
     [SerializeField] AudioClip ghost_GhostMood_Captured_Clip; //
+
+    [SerializeField] AudioClip ghost_GhostTank_AddedToGhostTank_Clip; //
+    [SerializeField] AudioClip ghost_GhostTank_RemovedFromGhostTank_Clip; //
 
     [SerializeField] AudioClip ghost_GhostAnimation_Spin1_Clip; //
     [SerializeField] AudioClip ghost_GhostAnimation_Spin2_Clip; //
@@ -420,10 +424,11 @@ public class SoundManager : Singleton<SoundManager>
         audioSource_Journal_VoiceMessage.volume = sound_Voice;
 
         //GhostFight
-        audioSource_Ghost_TargetedGhostSFX.volume = sound_World; //
+        audioSource_Ghost_GhostCapturerSFX.volume = sound_World; //
+        audioSource_Ghost_WorldGhostSFX.volume = sound_World; //
 
-    #endregion
-}
+        #endregion
+    }
 
 
     //--------------------
@@ -1417,32 +1422,33 @@ public class SoundManager : Singleton<SoundManager>
     //Is Targeted Sound Effects
     public void Play_Ghost_TargetGhost_Clip()
     {
-        if (audioSource_Ghost_TargetedGhostSFX != null)
+        if (audioSource_Ghost_GhostCapturerSFX != null)
         {
-            audioSource_Ghost_TargetedGhostSFX.clip = ghost_TargetGhost_Clip;
-            audioSource_Ghost_TargetedGhostSFX.pitch = 1f;
-            audioSource_Ghost_TargetedGhostSFX.Play();
+            audioSource_Ghost_GhostCapturerSFX.clip = ghost_TargetGhost_Clip;
+            audioSource_Ghost_GhostCapturerSFX.pitch = 1f;
+            audioSource_Ghost_GhostCapturerSFX.loop = true;
+            audioSource_Ghost_GhostCapturerSFX.Play();
         }
     }
-    //public void Stop_Ghost_TargetGhost_Clip()
-    //{
-    //    if (audioSource_Ghost_TargetedGhostSFX != null)
-    //    {
-    //        audioSource_Ghost_TargetedGhostSFX.Stop();
-    //    }
-    //}
-
-    public void Play_Ghost_GhostStartsGettingTarget_Clip(AudioSource objSource)
+    public void Stop_Ghost_TargetGhost_Clip()
     {
-        if (objSource != null)
+        if (audioSource_Ghost_GhostCapturerSFX != null)
         {
-            objSource.clip = ghost_StartsGettingTarget_Clip;
-            objSource.pitch = 1f;
-            objSource.Play();
+            audioSource_Ghost_GhostCapturerSFX.loop = false;
+            audioSource_Ghost_GhostCapturerSFX.Stop();
         }
     }
 
     //In Roaming Sounds
+    public void Play_Ghost_GhostMood_Targeted_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = ghost_GhostMood_Targeted_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
     public void Play_Ghost_GhostMood_Happy_Clip(AudioSource objSource)
     {
         if (objSource != null)
@@ -1501,11 +1507,29 @@ public class SoundManager : Singleton<SoundManager>
     //Captured
     public void Play_Ghost_CaptureGhost_Clip()
     {
-        if (audioSource_Ghost_TargetedGhostSFX != null)
+        if (audioSource_Ghost_WorldGhostSFX != null)
         {
-            audioSource_Ghost_TargetedGhostSFX.clip = ghost_GhostMood_Captured_Clip;
-            audioSource_Ghost_TargetedGhostSFX.pitch = 1f;
-            audioSource_Ghost_TargetedGhostSFX.Play();
+            audioSource_Ghost_WorldGhostSFX.clip = ghost_GhostMood_Captured_Clip;
+            audioSource_Ghost_WorldGhostSFX.pitch = 1f;
+            audioSource_Ghost_WorldGhostSFX.Play();
+        }
+    }
+    public void Play_GhostTank_AddedToGhostTank_Clip()
+    {
+        if (audioSource_Ghost_WorldGhostSFX != null)
+        {
+            audioSource_Ghost_WorldGhostSFX.clip = ghost_GhostTank_AddedToGhostTank_Clip;
+            audioSource_Ghost_WorldGhostSFX.pitch = 1f;
+            audioSource_Ghost_WorldGhostSFX.Play();
+        }
+    }
+    public void Play_GhostTank_RemovedFromGhostTank_Clip()
+    {
+        if (audioSource_Ghost_WorldGhostSFX != null)
+        {
+            audioSource_Ghost_WorldGhostSFX.clip = ghost_GhostTank_RemovedFromGhostTank_Clip;
+            audioSource_Ghost_WorldGhostSFX.pitch = 1f;
+            audioSource_Ghost_WorldGhostSFX.Play();
         }
     }
 

@@ -39,6 +39,8 @@ public class GhostCapturer : MonoBehaviour
         anim.SetBool("Capturing", false);
 
         StopCapturing();
+
+        UpdateGhostCapturer();
     }
     private void Update()
     {
@@ -64,41 +66,49 @@ public class GhostCapturer : MonoBehaviour
 
         //Set Active Slots and fill with capturedInfo
         #region
-        SetCapturerInfo(0, "Slot1");
-        SetCapturerInfo(1, "Slot2");
-        SetCapturerInfo(2, "Slot3");
-        SetCapturerInfo(3, "Slot4");
-        SetCapturerInfo(4, "Slot5");
-        SetCapturerInfo(5, "Slot6");
-        SetCapturerInfo(6, "Slot7");
-        SetCapturerInfo(7, "Slot8");
+        if (GhostManager.Instance.ghostCapturerStats.slotsActivated > 0)
+            SetCapturerInfo(0, "Slot1");
+        if (GhostManager.Instance.ghostCapturerStats.slotsActivated > 1)
+            SetCapturerInfo(1, "Slot2");
+        if (GhostManager.Instance.ghostCapturerStats.slotsActivated > 2)
+            SetCapturerInfo(2, "Slot3");
+        if (GhostManager.Instance.ghostCapturerStats.slotsActivated > 3)
+            SetCapturerInfo(3, "Slot4");
+        if (GhostManager.Instance.ghostCapturerStats.slotsActivated > 4)
+            SetCapturerInfo(4, "Slot5");
+        if (GhostManager.Instance.ghostCapturerStats.slotsActivated > 5)
+            SetCapturerInfo(5, "Slot6");
+        if (GhostManager.Instance.ghostCapturerStats.slotsActivated > 6)
+            SetCapturerInfo(6, "Slot7");
+        if (GhostManager.Instance.ghostCapturerStats.slotsActivated > 7)
+            SetCapturerInfo(7, "Slot8");
         #endregion
     }
     void SetCapturerInfo(int index, string slotName)
     {
-        if (GhostManager.Instance.ghostCapturerStats.activeGhostCapturerSlotList[index] == true)
+        //Set if filled
+        if (GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[index].isTaken)
         {
-            //Set if filled
-            if (GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[index].ghostElement != GhostElement.None)
-            {
-                anim.SetBool("slotName", true);
-            }
-            else
-            {
-                anim.SetBool("slotName", false);
-            }
+            anim.SetBool(slotName, true);
+        }
+        else
+        {
+            anim.SetBool(slotName, false);
+        }
 
-            //Set Filled Material
-            if (anim.GetBool("slotName") == true)
+        //Set Filled Material
+        if (gameObject.GetComponentInChildren<SkinnedMeshRenderer>())
+        {
+            if (anim.GetBool(slotName))
             {
                 switch (GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[index].ghostElement)
                 {
                     case GhostElement.None:
-                        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials[index + 3] = GhostManager.Instance.material_Empty;
+                        materialSlotList[index] = GhostManager.Instance.material_Empty;
                         break;
 
                     case GhostElement.Water:
-                        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials[index + 3] = GhostManager.Instance.material_Water;
+                        materialSlotList[index] = GhostManager.Instance.material_Water;
                         break;
                     case GhostElement.Fire:
                         break;
@@ -112,15 +122,15 @@ public class GhostCapturer : MonoBehaviour
                         break;
 
                     default:
-                        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials[index + 3] = GhostManager.Instance.material_Empty;
+                        materialSlotList[index] = GhostManager.Instance.material_Empty;
                         break;
                 }
             }
-
-            //Set Slot active
-            anim.SetInteger("SlotsAmount", index + 1);
-            slotObjectList[index].SetActive(true);
         }
+        
+        //Set Slot active
+        anim.SetInteger("SlotsAmount", index + 1);
+        slotObjectList[index].SetActive(true);
     }
 
 
@@ -129,14 +139,26 @@ public class GhostCapturer : MonoBehaviour
 
     public void StartCapturing()
     {
-        //anim.SetBool("Capturing", true);
-        invisibleObjectCollider.layer = LayerMask.NameToLayer(invisibleLightLayer);
-        isActive = true;
+        int tempIndex;
+
+        for (int i = 0; i < GhostManager.Instance.ghostCapturerStats.slotsActivated; i++)
+        {
+            if (!GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[i].isTaken)
+            {
+                invisibleObjectCollider.layer = LayerMask.NameToLayer(invisibleLightLayer);
+                isActive = true;
+
+                SoundManager.Instance.Play_Ghost_TargetGhost_Clip();
+
+                return;
+            }
+        }
     }
     public void StopCapturing()
     {
-        //anim.SetBool("Capturing", false);
         invisibleObjectCollider.layer = LayerMask.NameToLayer(defaultLayer);
+
+        SoundManager.Instance.Stop_Ghost_TargetGhost_Clip();
 
         GhostManager.Instance.hasTarget = false;
         isActive = false;
@@ -158,9 +180,6 @@ public class GhostCapturer : MonoBehaviour
                     if (hit.collider.gameObject.GetComponent<InvisibleObject>().transparencyValue < 1)
                     {
                         GhostManager.Instance.targetGhostObject = hit.collider.gameObject;
-
-                        //hit.collider.gameObject.GetComponent<Ghost>().isTargeted = true;
-                        hit.collider.gameObject.GetComponent<Ghost>().ghostStats.ghostState = GhostStates.Fleeing;
 
                         GhostManager.Instance.hasTarget = true;
                     }
@@ -193,9 +212,6 @@ public class GhostCapturer : MonoBehaviour
         {
             if (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>())
             {
-                //GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().isTargeted = false;
-                GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().ghostStats.ghostState = GhostStates.Moving;
-
                 GhostManager.Instance.hasTarget = false;
 
                 if (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().capturedRate <= 0)

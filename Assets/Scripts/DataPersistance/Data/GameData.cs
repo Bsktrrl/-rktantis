@@ -67,6 +67,14 @@ public class GameData
     //GhostCapturer
     [HideInInspector] public GhostCapturerStats ghostCapturerStats_Save;
 
+    //Machines
+    [HideInInspector] public List<GhostTankContent> ghostTankList_Save = new List<GhostTankContent>();
+
+    //Perks
+    [HideInInspector] public Perks perks_Save;
+    [HideInInspector] public PerkActivations perkActivations_Save;
+
+
     //--------------------
 
 
@@ -95,6 +103,8 @@ public class GameData
 
         this.researchedItemsListNames_Save.Clear();
         this.researched_SOItem_Save.Clear();
+
+        this.ghostTankList_Save.Clear();
 
         this.itemStates_Save.Clear();
     }

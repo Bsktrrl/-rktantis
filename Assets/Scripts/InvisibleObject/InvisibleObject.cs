@@ -30,6 +30,8 @@ public class InvisibleObject : MonoBehaviour
     [SerializeField] bool isPicture;
     [SerializeField] Texture pictureSprite;
 
+    public bool isInTank;
+
 
 
     //--------------------
@@ -71,9 +73,12 @@ public class InvisibleObject : MonoBehaviour
 
     private void Update()
     {
-        GetAllObjectsInSphere();
+        if (!isInTank)
+        {
+            GetAllObjectsInSphere();
 
-        SetSphereRange();
+            SetSphereRange();
+        }
     }
 
 
