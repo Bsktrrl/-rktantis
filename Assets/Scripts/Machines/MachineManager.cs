@@ -38,15 +38,6 @@ public class MachineManager : Singleton<MachineManager>
     }
     public void SaveData()
     {
-
-    }
-
-
-    //--------------------
-
-
-    public void TempSpawnGhostTank()
-    {
-
+        DataManager.Instance.ghostTankList_Store = ghostTankList;
     }
 }

@@ -157,16 +157,12 @@ public class GhostManager : Singleton<GhostManager>
        
         SaveData();
     }
-    public GhostStats RemoveGhostFromCapturer()
+    public void RemoveGhostFromCapturer()
     {
-        GhostStats tempStats = new GhostStats();
-
         for (int i = ghostCapturerStats.ghostCapturedStats.Count - 1; i >= 0; i--)
         {
             if (ghostCapturerStats.ghostCapturedStats[i].isTaken)
             {
-                tempStats = ghostCapturerStats.ghostCapturedStats[i];
-
                 ghostCapturerStats.ghostCapturedStats[i].isTaken = false;
                 ghostCapturerStats.ghostCapturedStats[i].ghostState = GhostStates.Idle;
                 ghostCapturerStats.ghostCapturedStats[i].ghostAppearance = GhostAppearance.None;
@@ -189,8 +185,6 @@ public class GhostManager : Singleton<GhostManager>
         }
 
         SaveData();
-
-        return tempStats;
     }
 
 

@@ -294,7 +294,6 @@ public class SoundManager : Singleton<SoundManager>
     #region Ghost
     [Header("Ghost")]
     [SerializeField] AudioClip ghost_TargetGhost_Clip; //
-    //[SerializeField] AudioClip ghost_StartsGettingTarget_Clip; //
 
     [SerializeField] AudioClip ghost_GhostMood_Targeted_Clip; //
     [SerializeField] AudioClip ghost_GhostMood_Happy_Clip; //
@@ -305,6 +304,9 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip ghost_GhostMood_Whispering_Clip; //
 
     [SerializeField] AudioClip ghost_GhostMood_Captured_Clip; //
+
+    [SerializeField] AudioClip ghost_GhostTank_AddedToGhostTank_Clip; //
+    [SerializeField] AudioClip ghost_GhostTank_RemovedFromGhostTank_Clip; //
 
     [SerializeField] AudioClip ghost_GhostAnimation_Spin1_Clip; //
     [SerializeField] AudioClip ghost_GhostAnimation_Spin2_Clip; //
@@ -1508,6 +1510,24 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_Ghost_WorldGhostSFX != null)
         {
             audioSource_Ghost_WorldGhostSFX.clip = ghost_GhostMood_Captured_Clip;
+            audioSource_Ghost_WorldGhostSFX.pitch = 1f;
+            audioSource_Ghost_WorldGhostSFX.Play();
+        }
+    }
+    public void Play_GhostTank_AddedToGhostTank_Clip()
+    {
+        if (audioSource_Ghost_WorldGhostSFX != null)
+        {
+            audioSource_Ghost_WorldGhostSFX.clip = ghost_GhostTank_AddedToGhostTank_Clip;
+            audioSource_Ghost_WorldGhostSFX.pitch = 1f;
+            audioSource_Ghost_WorldGhostSFX.Play();
+        }
+    }
+    public void Play_GhostTank_RemovedFromGhostTank_Clip()
+    {
+        if (audioSource_Ghost_WorldGhostSFX != null)
+        {
+            audioSource_Ghost_WorldGhostSFX.clip = ghost_GhostTank_RemovedFromGhostTank_Clip;
             audioSource_Ghost_WorldGhostSFX.pitch = 1f;
             audioSource_Ghost_WorldGhostSFX.Play();
         }
