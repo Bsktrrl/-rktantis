@@ -12,8 +12,6 @@ public class GhostTank : MonoBehaviour
 
     public GhostTankContent ghostTankContent;
 
-    float tankAnimationTimer;
-
     [Header("Display")]
     [SerializeField] GameObject Display_Parent;
     [SerializeField] Image fuel_Image;
@@ -40,8 +38,7 @@ public class GhostTank : MonoBehaviour
 
         anim.SetBool("isActive", false);
 
-        tankAnimationTimer = UnityEngine.Random.Range(10, 120);
-        StartCoroutine(WaitForNextTankAnimation(tankAnimationTimer));
+        StartCoroutine(WaitForNextTankAnimation(UnityEngine.Random.Range(10, 120)));
     }
     private void Update()
     {
@@ -268,8 +265,8 @@ public class GhostTank : MonoBehaviour
         
         yield return new WaitForSeconds(time);
 
-        tankAnimationTimer = UnityEngine.Random.Range(10, 120);
-        StartCoroutine(WaitForNextTankAnimation(tankAnimationTimer));
+        //tankAnimationTimer = UnityEngine.Random.Range(10, 120);
+        StartCoroutine(WaitForNextTankAnimation(UnityEngine.Random.Range(10, 120)));
     }
 }
 
