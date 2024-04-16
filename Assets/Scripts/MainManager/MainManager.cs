@@ -8,6 +8,7 @@ public class MainManager : Singleton<MainManager>
     public GameObject player;
     public GameObject playerBody;
     public Camera mainCamera;
+    public Camera mainMainCamera;
 
     public Canvas mainCanvas;
     public Canvas mainTabletCanvas;

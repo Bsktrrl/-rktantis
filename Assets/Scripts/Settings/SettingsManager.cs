@@ -90,7 +90,7 @@ public class SettingsManager : Singleton<SettingsManager>
             SaveData();
         }
 
-        MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
+        MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
     }
 
 
@@ -238,17 +238,17 @@ public class SettingsManager : Singleton<SettingsManager>
     {
         if (MainManager.Instance.menuStates == MenuStates.None)
         {
-            MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60 + timer;
+            MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60 + timer;
         }
         else
         {
-            MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
+            MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
         }
         
     }
     public void ChangeFOV()
     {
-        MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
+        MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
     }
     void ChangeMouseSensitivity()
     {
