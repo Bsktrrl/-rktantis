@@ -16,7 +16,7 @@ public class BuildingBlockObject
     public string Name;
 
     [Header("Type")]
-    public BuildingType BuildingType = BuildingType.None;
+    public BuildingBlockObjectNames BuildingType = BuildingBlockObjectNames.None;
     public BuildingMaterial buildingMaterial = BuildingMaterial.None;
 
     [Header("Sprite")]

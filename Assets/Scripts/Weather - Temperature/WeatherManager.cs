@@ -333,70 +333,73 @@ public class WeatherManager : Singleton<WeatherManager>
         HealthManager.Instance.mainHealth_SpeedMultiplier_ByWeather = 1f;
 
         //Sunny
-        if (weatherTypeDayList[0] == WeatherType.Sunny)
+        if (weatherTypeDayList.Count > 0)
         {
-            //Set Weather Type
-            weatherType = WeatherType.Sunny;
+            if (weatherTypeDayList[0] == WeatherType.Sunny)
+            {
+                //Set Weather Type
+                weatherType = WeatherType.Sunny;
 
-            //Set Min/Max temperatures
-            minTemperature = 10;
-            maxTemperature = 50;
+                //Set Min/Max temperatures
+                minTemperature = 10;
+                maxTemperature = 50;
 
-            //Set HealthParameters
-            HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
-            HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.Down_2;
-            //HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1.25f;
-        }
+                //Set HealthParameters
+                HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
+                HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.Down_2;
+                //HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1.25f;
+            }
 
-        //Cloudy
-        else if (weatherTypeDayList[0] == WeatherType.Cloudy)
-        {
-            //Set Weather Type
-            weatherType = WeatherType.Cloudy;
+            //Cloudy
+            else if (weatherTypeDayList[0] == WeatherType.Cloudy)
+            {
+                //Set Weather Type
+                weatherType = WeatherType.Cloudy;
 
-            //Set Min/Max temperatures
-            minTemperature = 0;
-            maxTemperature = 30;
+                //Set Min/Max temperatures
+                minTemperature = 0;
+                maxTemperature = 30;
 
-            //Set HealthParameters
-            HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.Up_1; 
-            HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.Up_1;
-        }
+                //Set HealthParameters
+                HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.Up_1;
+                HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.Up_1;
+            }
 
-        //Windy
-        else if (weatherTypeDayList[0] == WeatherType.Windy)
-        {
-            //Set Weather Type
-            weatherType = WeatherType.Windy;
+            //Windy
+            else if (weatherTypeDayList[0] == WeatherType.Windy)
+            {
+                //Set Weather Type
+                weatherType = WeatherType.Windy;
 
-            //Set Min/Max temperatures
-            minTemperature = -10;
-            maxTemperature = 40;
+                //Set Min/Max temperatures
+                minTemperature = -10;
+                maxTemperature = 40;
 
-            //Set HealthParameters
-            HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.None;
-            HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.None;
+                //Set HealthParameters
+                HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.None;
+                HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.None;
 
-            //Walking slower
-            PlayerMovement.Instance.movementSpeedVarianceByWeather = 0.75f;
-        }
+                //Walking slower
+                PlayerMovement.Instance.movementSpeedVarianceByWeather = 0.75f;
+            }
 
-        //Cold
-        else if (weatherTypeDayList[0] == WeatherType.Cold)
-        {
-            //Set Weather Type
-            weatherType = WeatherType.Cold;
+            //Cold
+            else if (weatherTypeDayList[0] == WeatherType.Cold)
+            {
+                //Set Weather Type
+                weatherType = WeatherType.Cold;
 
-            //Set Min/Max temperatures
-            minTemperature = -10;
-            maxTemperature = 10;
+                //Set Min/Max temperatures
+                minTemperature = -10;
+                maxTemperature = 10;
 
-            //Set HealthParameters
-            HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.Down_2;
-            HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.Down_1;
+                //Set HealthParameters
+                HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.Down_2;
+                HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.Down_1;
 
-            //Hungry faster
-            HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1.25f;
+                //Hungry faster
+                HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1.25f;
+            }
         }
     }
     void SetWeatherDisplay()
@@ -498,55 +501,55 @@ public class WeatherManager : Singleton<WeatherManager>
         {
             if (hit.transform.CompareTag("BuildingBlock"))
             {
-                if (hit.transform.gameObject.GetComponent<BuildingBlock>())
-                {
-                    //If standing in a shadow from a Wood Block
-                    if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
-                    {
-                        if (isWarm)
-                        {
-                            coverValue = -wood_Cover;
-                        }
-                        else
-                        {
-                            coverValue = wood_Cover;
-                        }
-                    }
+                //if (hit.transform.gameObject.GetComponent<BuildingBlock>())
+                //{
+                //    //If standing in a shadow from a Wood Block
+                //    if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
+                //    {
+                //        if (isWarm)
+                //        {
+                //            coverValue = -wood_Cover;
+                //        }
+                //        else
+                //        {
+                //            coverValue = wood_Cover;
+                //        }
+                //    }
 
-                    //If standing in a shadow from a Stone Block
-                    else if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Stone)
-                    {
-                        if (isWarm)
-                        {
-                            coverValue = -stone_Cover;
-                        }
-                        else
-                        {
-                            coverValue = stone_Cover;
-                        }
-                    }
+                //    //If standing in a shadow from a Stone Block
+                //    else if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Stone)
+                //    {
+                //        if (isWarm)
+                //        {
+                //            coverValue = -stone_Cover;
+                //        }
+                //        else
+                //        {
+                //            coverValue = stone_Cover;
+                //        }
+                //    }
 
-                    //If standing in a shadow from a Iron Block
-                    else if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Iron)
-                    {
-                        if (isWarm)
-                        {
-                            coverValue = -iron_Cover;
-                        }
-                        else
-                        {
-                            coverValue = iron_Cover;
-                        }
-                    }
-                    else
-                    {
-                        coverValue = 0;
-                    }
-                }
-                else
-                {
-                    coverValue = 0;
-                }
+                //    //If standing in a shadow from a Iron Block
+                //    else if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Cryonite)
+                //    {
+                //        if (isWarm)
+                //        {
+                //            coverValue = -iron_Cover;
+                //        }
+                //        else
+                //        {
+                //            coverValue = iron_Cover;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        coverValue = 0;
+                //    }
+                //}
+                //else
+                //{
+                //    coverValue = 0;
+                //}
             }
             else
             {

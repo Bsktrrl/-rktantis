@@ -1,0 +1,368 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 429b16e0ad8a3d349892efbf3ef8b9d5, type: 3}
+  m_Name: MachineObjects
+  m_EditorClassIdentifier: 
+  machineObjectsList:
+  - isActive: 0
+    objectName: Ghost Tank
+    machinesName: 1
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: -968311457, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 6696127574697431146, guid: b3abf569e8c3a4042abb93569d219210,
+        type: 3}
+      buildingRequirements:
+      - itemName: 5
+        amount: 1
+      - itemName: 1
+        amount: 4
+      - itemName: 17
+        amount: 1
+      - itemName: 71
+        amount: 1
+      removingReward:
+      - itemName: 5
+        amount: 1
+      - itemName: 1
+        amount: 2
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Small Crop Plot
+    machinesName: 8
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: -285864306, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 2
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      - itemName: 65
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 1
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Medium Crop Plot
+    machinesName: 9
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: -1542803645, guid: e0d26eb1393b4784480dae185f2f8eb1,
+        type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 4
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      - itemName: 65
+        amount: 2
+      removingReward:
+      - itemName: 1
+        amount: 2
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Big Crop Plot
+    machinesName: 10
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 685261889, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 6
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      - itemName: 65
+        amount: 4
+      removingReward:
+      - itemName: 1
+        amount: 4
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Energy Storage Tank
+    machinesName: 2
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 1964361736, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 4
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      - itemName: 71
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 3
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Ghost Repeller
+    machinesName: 3
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: -1295368278, guid: e0d26eb1393b4784480dae185f2f8eb1,
+        type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 4
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      - itemName: 4
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 3
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Extractor
+    machinesName: 4
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: -124361089, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 8
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 6
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Heat Regulator
+    machinesName: 5
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 40363623, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 4
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      - itemName: 4
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 3
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Resource Converter
+    machinesName: 6
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 1782163914, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 8
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 6
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Blender
+    machinesName: 7
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: -1602623267, guid: e0d26eb1393b4784480dae185f2f8eb1,
+        type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 4
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      - itemName: 4
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 3
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Small Grill
+    machinesName: 11
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 37225080, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 4
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 3
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Medium Grill
+    machinesName: 12
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 2086798069, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 8
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 3
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Big Grill
+    machinesName: 13
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: -1024762388, guid: e0d26eb1393b4784480dae185f2f8eb1,
+        type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 12
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 9
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Small Battery
+    machinesName: 14
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 1853877765, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 4
+      - itemName: 3
+        amount: 1
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 3
+      - itemName: 2
+        amount: 1
+  - isActive: 0
+    objectName: Medium Battery
+    machinesName: 15
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 1553896230, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 8
+      - itemName: 3
+        amount: 2
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 6
+      - itemName: 2
+        amount: 1
+      - itemName: 3
+        amount: 1
+  - isActive: 0
+    objectName: Big Battery
+    machinesName: 16
+    buildingObjectType: 3
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: -704012984, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 12
+      - itemName: 3
+        amount: 4
+      - itemName: 17
+        amount: 1
+      - itemName: 18
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 9
+      - itemName: 2
+        amount: 1
+      - itemName: 3
+        amount: 2

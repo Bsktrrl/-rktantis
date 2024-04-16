@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class BuildingSystemMenu : Singleton<BuildingSystemMenu>
 {
-    public GameObject buildingSystemMenu;
+    //public GameObject buildingSystemMenu;
     public Image selectedBuildingBlockImage;
 
     public List<GameObject> buildingBlockUIList = new List<GameObject>();
@@ -24,7 +24,7 @@ public class BuildingSystemMenu : Singleton<BuildingSystemMenu>
 
     private void Start()
     {
-        buildingSystemMenu.SetActive(false);
+        //buildingSystemMenu.SetActive(false);
     }
 
 
@@ -33,7 +33,7 @@ public class BuildingSystemMenu : Singleton<BuildingSystemMenu>
 
     public void SetSelectedImage(Sprite sprite)
     {
-        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.None)
+        if (MoveableObjectManager.Instance.moveableObjectType == BuildingObjectTypes.None)
         {
             selectedBuildingBlockImage.gameObject.SetActive(false);
         }
@@ -53,21 +53,21 @@ public class BuildingSystemMenu : Singleton<BuildingSystemMenu>
     {
         buildingSystemMenu_isOpen = true;
 
-        BuildingManager.Instance.SetAllGhostState_Off();
+        //BuildingManager.Instance.SetAllGhostState_Off();
 
-        //Deactivate old directionObjectList
-        if (BuildingManager.Instance.old_lastBuildingBlock_LookedAt != null)
-        {
-            for (int i = 0; i < BuildingManager.Instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList.Count; i++)
-            {
-                if (BuildingManager.Instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList[i].activeInHierarchy)
-                {
-                    BuildingManager.Instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList[i].SetActive(false);
-                }
-            }
+        ////Deactivate old directionObjectList
+        //if (BuildingManager.Instance.old_lastBuildingBlock_LookedAt != null)
+        //{
+        //    for (int i = 0; i < BuildingManager.Instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList.Count; i++)
+        //    {
+        //        if (BuildingManager.Instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList[i].activeInHierarchy)
+        //        {
+        //            BuildingManager.Instance.old_lastBuildingBlock_LookedAt.GetComponent<BuildingBlock_Parent>().directionObjectList[i].SetActive(false);
+        //        }
+        //    }
 
-            BuildingManager.Instance.old_lastBuildingBlock_LookedAt = null;
-        }
+        //    BuildingManager.Instance.old_lastBuildingBlock_LookedAt = null;
+        //}
     }
     public void BuildingBlockSelecter_Exit()
     {

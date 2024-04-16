@@ -37,11 +37,12 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<Hotbar> hotbarItem_StoreList = new List<Hotbar>();
 
     //BuidingSystem
-    [HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_StoreList = new List<BuildingBlockSaveList>();
+    [HideInInspector] public ActiveBuildingObject activeBuildingObject_Store;
+    //[HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_StoreList = new List<BuildingBlockSaveList>();
 
     //MoveableObjects
-    [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_StoreList = new List<MoveableObject_ToSave>();
-    [HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Store = new MoveableObjectSelected_ToSave();
+    //[HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_StoreList = new List<MoveableObject_ToSave>();
+    //[HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Store = new MoveableObjectSelected_ToSave();
 
     //Plants
     [HideInInspector] public List<ListOfPlantToSave> plantTypeObjectList_Store = new List<ListOfPlantToSave>();
@@ -109,10 +110,11 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.hotbarItem_StoreList = gameData.hotbarItem_SaveList;
         this.selectedSlot_Store = gameData.selectedSlot_Save;
 
-        this.buildingBlockList_StoreList = gameData.buildingBlockList_SaveList;
+        this.activeBuildingObject_Store = gameData.activeBuildingObject_Save;
+        //this.buildingBlockList_StoreList = gameData.buildingBlockList_SaveList;
 
-        this.placedMoveableObjectsList_StoreList = gameData.placedMoveableObjectsList_SaveList;
-        this.moveableObjectSelected_Store = gameData.moveableObjectSelected_Save;
+        //this.placedMoveableObjectsList_StoreList = gameData.placedMoveableObjectsList_SaveList;
+        //this.moveableObjectSelected_Store = gameData.moveableObjectSelected_Save;
 
         this.health_Store = gameData.health_Save;
 
@@ -160,9 +162,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         MenuEquipmentManager.Instance.LoadData();
         print("4. MenuEquipmentManager has Loaded");
-        
-        BuildingManager.Instance.LoadData();
-        print("5. BuildingManager has Loaded");
+
+        BuildingSystemManager.Instance.LoadData();
+        print("5. BuildingSystemManager has Loaded");
 
         HotbarManager.Instance.LoadData();
         print("6. HotbarManager has Loaded");
@@ -170,8 +172,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         WorldObjectManager.Instance.LoadData();
         print("7. WorldObjectManager has Loaded");
 
-        MoveableObjectManager.Instance.LoadData();
-        print("8. MoveableObjectManager has Loaded");
+        //MoveableObjectManager.Instance.LoadData();
+        //print("8. MoveableObjectManager has Loaded");
 
         HealthManager.Instance.LoadData();
         print("9. HealthManager has Loaded");
@@ -231,10 +233,11 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.hotbarItem_SaveList = this.hotbarItem_StoreList;
         gameData.selectedSlot_Save = this.selectedSlot_Store;
 
-        gameData.buildingBlockList_SaveList = this.buildingBlockList_StoreList;
+        gameData.activeBuildingObject_Save = this.activeBuildingObject_Store;
+        //gameData.buildingBlockList_SaveList = this.buildingBlockList_StoreList;
 
-        gameData.placedMoveableObjectsList_SaveList = this.placedMoveableObjectsList_StoreList;
-        gameData.moveableObjectSelected_Save = this.moveableObjectSelected_Store;
+        //gameData.placedMoveableObjectsList_SaveList = this.placedMoveableObjectsList_StoreList;
+        //gameData.moveableObjectSelected_Save = this.moveableObjectSelected_Store;
 
         gameData.health_Save = this.health_Store;
 

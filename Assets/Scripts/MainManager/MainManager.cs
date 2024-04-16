@@ -20,6 +20,10 @@ public class MainManager : Singleton<MainManager>
     public Item_SO item_SO;
     public MoveableObject_SO moveableObject_SO;
 
+    [Header("_SO")]
+    public Color mainColor_Blue;
+    public Color mainColor_Orange;
+
     //Update Delayer
     public int updateInterval = 10;
 
@@ -97,7 +101,7 @@ public class MainManager : Singleton<MainManager>
 
         return null;
     }
-    public MoveableObjectInfo GetMovableObject(FurnitureType furnitureType, MachineType machineType)
+    public MoveableObjectInfo GetMovableObject(FurnitureObjectNames furnitureType, MachineObjectNames machineType)
     {
         for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
         {

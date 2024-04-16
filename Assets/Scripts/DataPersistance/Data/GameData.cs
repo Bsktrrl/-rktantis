@@ -20,15 +20,16 @@ public class GameData
     [HideInInspector] public List<WorldObject> worldObject_SaveList = new List<WorldObject>();
 
     //BuidingSystem
-    [HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_SaveList = new List<BuildingBlockSaveList>();
+    [HideInInspector] public ActiveBuildingObject activeBuildingObject_Save;
+    //[HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_SaveList = new List<BuildingBlockSaveList>();
 
     //Hotbar
     [HideInInspector] public int selectedSlot_Save = new int();
     [HideInInspector] public List<Hotbar> hotbarItem_SaveList = new List<Hotbar>();
 
     //MoveableObjects
-    [HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_SaveList = new List<MoveableObject_ToSave>();
-    [HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Save = new MoveableObjectSelected_ToSave();
+    //[HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_SaveList = new List<MoveableObject_ToSave>();
+    //[HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Save = new MoveableObjectSelected_ToSave();
 
     //Plants
     [HideInInspector] public List<ListOfPlantToSave> plantTypeObjectList_Save = new List<ListOfPlantToSave>();
@@ -83,11 +84,11 @@ public class GameData
         //Input All Lists to clear
         this.worldObject_SaveList.Clear();
 
-        this.buildingBlockList_SaveList.Clear();
+        //this.buildingBlockList_SaveList.Clear();
 
         this.Inventories_SaveList.Clear();
         this.hotbarItem_SaveList.Clear();
-        this.placedMoveableObjectsList_SaveList.Clear();
+        //this.placedMoveableObjectsList_SaveList.Clear();
 
         this.menuEquipedItemList_SaveList.Clear();
 

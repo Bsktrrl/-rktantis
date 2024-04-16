@@ -170,20 +170,20 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
         //MoveableObject Rotation
         #region
-        else if (Input.GetKeyDown(KeyCode.Z) && MainManager.Instance.gameStates == GameStates.Building && BuildingManager_v2.Instance.buildingBlockGhost != null)
+        else if (Input.GetKeyDown(KeyCode.Z) && MainManager.Instance.gameStates == GameStates.Building)
         {
             isPressed_FixedRotation_Clockwise?.Invoke();
         }
-        else if (Input.GetKeyDown(KeyCode.X) && MainManager.Instance.gameStates == GameStates.Building && BuildingManager_v2.Instance.buildingBlockGhost != null)
+        else if (Input.GetKeyDown(KeyCode.X) && MainManager.Instance.gameStates == GameStates.Building)
         {
             isPressed_FixedRotation_CounterClockwise?.Invoke();
         }
 
-        else if (Input.GetKeyDown(KeyCode.E) && MainManager.Instance.gameStates == GameStates.Building && BuildingManager_v2.Instance.buildingBlockGhost != null)
+        else if (Input.GetKeyDown(KeyCode.E) && MainManager.Instance.gameStates == GameStates.Building)
         {
             isPressed_FixedRotation_Intern_Clockwise?.Invoke();
         }
-        else if (Input.GetKeyDown(KeyCode.R) && MainManager.Instance.gameStates == GameStates.Building && BuildingManager_v2.Instance.buildingBlockGhost != null)
+        else if (Input.GetKeyDown(KeyCode.R) && MainManager.Instance.gameStates == GameStates.Building)
         {
             isPressed_FixedRotation_Intern_CounterClockwise?.Invoke();
         }
@@ -205,7 +205,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         //Testing
         #region
         //Place BuildingBlock - Test
-        else if (Input.GetKeyDown(KeyCode.T) && MainManager.Instance.gameStates == GameStates.Building && BuildingManager_v2.Instance.buildingBlockGhost != null)
+        else if (Input.GetKeyDown(KeyCode.T) && MainManager.Instance.gameStates == GameStates.Building)
         {
             T_isPressed?.Invoke();
         }

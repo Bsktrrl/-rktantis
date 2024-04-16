@@ -246,6 +246,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
         SetBuildingRequirement();
 
+        BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
+
         return true;
     }
     public bool AddItemToInventory(int inventory, Items itemName)
@@ -292,6 +294,8 @@ public class InventoryManager : Singleton<InventoryManager>
         PrepareInventoryUI(inventory, false);
 
         SetBuildingRequirement();
+
+        BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
 
         return true;
     }
@@ -362,6 +366,7 @@ public class InventoryManager : Singleton<InventoryManager>
         HotbarManager.Instance.SetSelectedItem();
         HotbarManager.Instance.ChangeItemInHand();
 
+        BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
 
         SaveData();
     }
@@ -522,6 +527,10 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
         #endregion
+
+        BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
+
+        SaveData();
     }
 
     public void MoveItemToInventory(int inventory, GameObject obj, int ID)
@@ -550,6 +559,10 @@ public class InventoryManager : Singleton<InventoryManager>
 
         //Update the Hand to see if slot is empty
         HotbarManager.Instance.ChangeItemInHand();
+
+        BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
+
+        SaveData();
     }
     
     public void SpawnItemToWorld(Items itemName, GameObject dropPos, bool dropSound, InventoryItem item, float spawnPos_Offset)
@@ -730,16 +743,16 @@ public class InventoryManager : Singleton<InventoryManager>
 
     void SetBuildingRequirement()
     {
-        if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.BuildingBlock)
-        {
-            BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
-        }
-        else if (MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Machine
-            || MoveableObjectManager.Instance.moveableObjectType == MoveableObjectType.Furniture)
-        {
-            MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
-            BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
-        }
+        //if (MoveableObjectManager.Instance.moveableObjectType == BuildingObjectTypes.BuildingBlock)
+        //{
+        //    //BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
+        //}
+        //else if (MoveableObjectManager.Instance.moveableObjectType == BuildingObjectTypes.Machine
+        //    || MoveableObjectManager.Instance.moveableObjectType == BuildingObjectTypes.Furniture)
+        //{
+        //    //MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
+        //    //BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
+        //}
     }
 
     public void SetPlayerItemInfo(Items itemName, bool inventory) //true = player, false = chest

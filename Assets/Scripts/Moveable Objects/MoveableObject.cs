@@ -10,8 +10,8 @@ public class MoveableObject : MonoBehaviour
     [HideInInspector] public bool enoughItemsToBuild;
 
     [Header("MoveableObject Type")]
-    public FurnitureType furnitureType = FurnitureType.None;
-    public MachineType machineType = MachineType.None;
+    public FurnitureObjectNames furnitureType = FurnitureObjectNames.None;
+    public MachineObjectNames machineType = MachineObjectNames.None;
 
     [Header("Mesh")]
     public SkinnedMeshRenderer meshRenderer;
@@ -22,22 +22,22 @@ public class MoveableObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "BuildingBlock")
-        {
-            if (other.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingType == BuildingType.Floor
-                || other.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingType == BuildingType.Floor_Triangle)
-            {
-                canBePlaced = true;
-            }
-            else
-            {
-                canBePlaced = false;
-            }
-        }
-        else
-        {
-            canBePlaced = false;
-        }
+        //if (other.tag == "BuildingBlock")
+        //{
+        //    if (other.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingType == BuildingBlockObjectNames.Floor_Square
+        //        || other.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingType == BuildingBlockObjectNames.Floor_Triangle)
+        //    {
+        //        canBePlaced = true;
+        //    }
+        //    else
+        //    {
+        //        canBePlaced = false;
+        //    }
+        //}
+        //else
+        //{
+        //    canBePlaced = false;
+        //}
     }
 
     private void OnTriggerExit(Collider other)

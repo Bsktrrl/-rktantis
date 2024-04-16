@@ -1,0 +1,211 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f189c5b8af9f7974bb50ebf0202e74d2, type: 3}
+  m_Name: FurnitureObjects
+  m_EditorClassIdentifier: 
+  furnitureObjectsList:
+  - objectName: Crafting Table
+    furnitureName: 1
+    buildingObjectType: 2
+    objectInfo:
+      isActive: 1
+      objectSprite: {fileID: 1245441075, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 7136088843378850041, guid: 23a81b18b8aeb8e448bf68be14121ae8,
+        type: 3}
+      buildingRequirements:
+      - itemName: 1
+        amount: 4
+      - itemName: 66
+        amount: 2
+      - itemName: 71
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 2
+  - objectName: Research Table
+    furnitureName: 2
+    buildingObjectType: 2
+    objectInfo:
+      isActive: 1
+      objectSprite: {fileID: 1000895864, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 6873032877668145129, guid: e41f91dbdd2061641846cb08c75a14fa,
+        type: 3}
+      buildingRequirements:
+      - itemName: 1
+        amount: 4
+      - itemName: 66
+        amount: 2
+      - itemName: 65
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 2
+  - objectName: Skill Table
+    furnitureName: 3
+    buildingObjectType: 2
+    objectInfo:
+      isActive: 1
+      objectSprite: {fileID: -922280156, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 139275631102618609, guid: eb01aac661b18b64389ac297f2fe7e5e,
+        type: 3}
+      buildingRequirements:
+      - itemName: 1
+        amount: 4
+      - itemName: 66
+        amount: 2
+      - itemName: 17
+        amount: 1
+      - itemName: 65
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 2
+      - itemName: 2
+        amount: 1
+  - objectName: Small Chest
+    furnitureName: 4
+    buildingObjectType: 2
+    objectInfo:
+      isActive: 1
+      objectSprite: {fileID: -1913574161, guid: e0d26eb1393b4784480dae185f2f8eb1,
+        type: 3}
+      worldObject: {fileID: 500029343382258194, guid: 66c524b356e5e2941913b722865489c3,
+        type: 3}
+      buildingRequirements:
+      - itemName: 1
+        amount: 2
+      - itemName: 6
+        amount: 3
+      removingReward:
+      - itemName: 1
+        amount: 1
+      - itemName: 6
+        amount: 2
+  - objectName: Medium Chest
+    furnitureName: 5
+    buildingObjectType: 2
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 186268218, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 4
+      - itemName: 7
+        amount: 3
+      removingReward:
+      - itemName: 1
+        amount: 3
+      - itemName: 7
+        amount: 2
+  - objectName: Big Chest
+    furnitureName: 6
+    buildingObjectType: 2
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 551587976, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 4228448781326590327, guid: 48398d00d2f8d3d4880105f84f22f29e,
+        type: 3}
+      buildingRequirements:
+      - itemName: 1
+        amount: 6
+      - itemName: 8
+        amount: 3
+      removingReward:
+      - itemName: 1
+        amount: 4
+      - itemName: 8
+        amount: 2
+  - objectName: Lamp
+    furnitureName: 7
+    buildingObjectType: 2
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: -231569863, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 3
+      - itemName: 2
+        amount: 1
+      - itemName: 17
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 2
+      - itemName: 2
+        amount: 1
+  - objectName: "Ar\xEDdian Lamp"
+    furnitureName: 9
+    buildingObjectType: 2
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 1178798214, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 5
+        amount: 1
+      - itemName: 1
+        amount: 3
+      - itemName: 2
+        amount: 1
+      - itemName: 17
+        amount: 1
+      removingReward:
+      - itemName: 5
+        amount: 1
+      - itemName: 1
+        amount: 2
+      - itemName: 2
+        amount: 1
+  - objectName: Stoplight
+    furnitureName: 8
+    buildingObjectType: 2
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: -328414422, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 1
+        amount: 3
+      - itemName: 2
+        amount: 1
+      - itemName: 17
+        amount: 1
+      removingReward:
+      - itemName: 1
+        amount: 2
+      - itemName: 2
+        amount: 1
+  - objectName: "Ar\xEDdian Spotlight"
+    furnitureName: 10
+    buildingObjectType: 2
+    objectInfo:
+      isActive: 0
+      objectSprite: {fileID: 1122400009, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+      worldObject: {fileID: 0}
+      buildingRequirements:
+      - itemName: 5
+        amount: 1
+      - itemName: 1
+        amount: 3
+      - itemName: 2
+        amount: 1
+      - itemName: 17
+        amount: 1
+      removingReward:
+      - itemName: 5
+        amount: 1
+      - itemName: 1
+        amount: 2
+      - itemName: 2
+        amount: 1

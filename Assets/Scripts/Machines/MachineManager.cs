@@ -23,7 +23,7 @@ public class MachineManager : Singleton<MachineManager>
             ghostTankList = DataManager.Instance.ghostTankList_Store;
             for (int i = 0; i < ghostTankList.Count; i++)
             {
-                ghostTankObjectList.Add(Instantiate(MainManager.Instance.GetMovableObject(FurnitureType.None, MachineType.GhostTank).objectToMove));
+                ghostTankObjectList.Add(Instantiate(MainManager.Instance.GetMovableObject(FurnitureObjectNames.None, MachineObjectNames.GhostTank).objectToMove));
 
                 GameObject tempTank = ghostTankObjectList[ghostTankObjectList.Count - 1];
                 tempTank.transform.SetPositionAndRotation(ghostTankList[i].machinePos, ghostTankList[i].machineRot);

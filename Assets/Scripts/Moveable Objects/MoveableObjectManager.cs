@@ -13,16 +13,16 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     public GameObject moveableObject_Parent;
 
     [Header("Main Type")]
-    public MoveableObjectType moveableObjectType = MoveableObjectType.None;
+    public BuildingObjectTypes moveableObjectType = BuildingObjectTypes.None;
 
-    [Header("FurnitureType Type")]
-    public FurnitureType furnitureType = FurnitureType.None;
+    [Header("FurnitureObjectNames Type")]
+    public FurnitureObjectNames furnitureType = FurnitureObjectNames.None;
 
-    [Header("MachineType Type")]
-    public MachineType machineType = MachineType.None;
+    [Header("MachineObjectNames Type")]
+    public MachineObjectNames machineType = MachineObjectNames.None;
 
     [Header("Building Type")]
-    public BuildingType buildingType_Selected = BuildingType.None;
+    public BuildingBlockObjectNames buildingType_Selected = BuildingBlockObjectNames.None;
     public BuildingMaterial buildingMaterial_Selected = BuildingMaterial.None;
 
     [Header("ObjectToMove")]
@@ -44,7 +44,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         //Load placedMoveableObjectsList_ToSave
         #region
         placedMoveableObjectsList_ToSave.Clear();
-        placedMoveableObjectsList_ToSave = DataManager.Instance.placedMoveableObjectsList_StoreList;
+        //placedMoveableObjectsList_ToSave = DataManager.Instance.placedMoveableObjectsList_StoreList;
 
         //Place MoveableObjects into the World
         for (int i = 0; i < placedMoveableObjectsList_ToSave.Count; i++)
@@ -58,8 +58,8 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
                 placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].transform.parent = moveableObject_Parent.transform;
 
                 //If a chest is loaded
-                if (placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureType.SmallChest
-                    || placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureType.BigChest)
+                if (placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureObjectNames.Chest_Small
+                    || placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureObjectNames.Chest_Big)
                 {
                     if (placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>())
                     {
@@ -73,7 +73,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         //Load State for MoveableObject selected from BuildingHammer
         #region
         MoveableObjectSelected_ToSave temp = new MoveableObjectSelected_ToSave();
-        temp = DataManager.Instance.moveableObjectSelected_Store;
+        //temp = DataManager.Instance.moveableObjectSelected_Store;
         moveableObjectType = temp.moveableObjectType;
         machineType = temp.machineType;
         furnitureType = temp.furnitureType;
@@ -83,11 +83,11 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         //Set BuildingHammer UpToDate
         if (EquippmentManager.Instance.toolHolderParent)
         {
-            if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>())
-            {
-                BuildingManager.Instance.SetNewSelectedBlock();
-                //EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
-            }
+            //if (EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>())
+            //{
+            //    BuildingManager.Instance.SetNewSelectedBlock();
+            //    //EquippmentManager.Instance.toolHolderParent.GetComponentInChildren<BuildingHammer>().SetNewSelectedBlock();
+            //}
         }
         #endregion
 
@@ -97,7 +97,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         print("placedMoveableObjectsList_ToSave SAVED");
 
         //Save all MoveableObjects placed into the world
-        DataManager.Instance.placedMoveableObjectsList_StoreList = placedMoveableObjectsList_ToSave;
+        //DataManager.Instance.placedMoveableObjectsList_StoreList = placedMoveableObjectsList_ToSave;
 
         //Save State for MoveableObject selected from BuildingHammer
         MoveableObjectSelected_ToSave temp = new MoveableObjectSelected_ToSave();
@@ -107,7 +107,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         temp.buildingType = buildingType_Selected;
         temp.buildingMaterial = buildingMaterial_Selected;
 
-        DataManager.Instance.moveableObjectSelected_Store = temp;
+        //DataManager.Instance.moveableObjectSelected_Store = temp;
     }
 
 
@@ -116,42 +116,42 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 
     public void ResetInfo()
     {
-        moveableObjectType = MoveableObjectType.None;
-        buildingType_Selected = BuildingType.None;
+        moveableObjectType = BuildingObjectTypes.None;
+        buildingType_Selected = BuildingBlockObjectNames.None;
         buildingMaterial_Selected = BuildingMaterial.None;
-        machineType = MachineType.None;
-        furnitureType = FurnitureType.None;
+        machineType = MachineObjectNames.None;
+        furnitureType = FurnitureObjectNames.None;
     }
-    public void SetMachineInfo(MachineType _machineType)
+    public void SetMachineInfo(MachineObjectNames _machineType)
     {
-        moveableObjectType = MoveableObjectType.Machine;
-        buildingType_Selected = BuildingType.None;
+        moveableObjectType = BuildingObjectTypes.Machine;
+        buildingType_Selected = BuildingBlockObjectNames.None;
         buildingMaterial_Selected = BuildingMaterial.None;
         machineType = _machineType;
-        furnitureType = FurnitureType.None;
+        furnitureType = FurnitureObjectNames.None;
     }
-    public void SetFurnitureInfo(FurnitureType _furnitureType)
+    public void SetFurnitureInfo(FurnitureObjectNames _furnitureType)
     {
-        moveableObjectType = MoveableObjectType.Furniture;
-        buildingType_Selected = BuildingType.None;
+        moveableObjectType = BuildingObjectTypes.Furniture;
+        buildingType_Selected = BuildingBlockObjectNames.None;
         buildingMaterial_Selected = BuildingMaterial.None;
-        machineType = MachineType.None;
+        machineType = MachineObjectNames.None;
         furnitureType = _furnitureType;
     }
-    public void SetBuildingBlockInfo(BuildingType _buildingType_Selected, BuildingMaterial _buildingMaterial_Selected)
+    public void SetBuildingBlockInfo(BuildingBlockObjectNames _buildingType_Selected, BuildingMaterial _buildingMaterial_Selected)
     {
-        moveableObjectType = MoveableObjectType.BuildingBlock;
+        moveableObjectType = BuildingObjectTypes.BuildingBlock;
         buildingType_Selected = _buildingType_Selected;
         buildingMaterial_Selected = _buildingMaterial_Selected;
-        machineType = MachineType.None;
-        furnitureType = FurnitureType.None;
+        machineType = MachineObjectNames.None;
+        furnitureType = FurnitureObjectNames.None;
     }
 
 
     //--------------------
 
 
-    public GameObject GetObjectFromMoveableObject_SO(MoveableObjectType moveableObjectType, MachineType machineType, FurnitureType furnitureType)
+    public GameObject GetObjectFromMoveableObject_SO(BuildingObjectTypes moveableObjectType, MachineObjectNames machineType, FurnitureObjectNames furnitureType)
     {
         for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
         {
@@ -165,7 +165,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 
         return null;
     }
-    public MoveableObjectInfo GetObjectInfoFromMoveableObject_SO(MachineType machineType, FurnitureType furnitureType)
+    public MoveableObjectInfo GetObjectInfoFromMoveableObject_SO(MachineObjectNames machineType, FurnitureObjectNames furnitureType)
     {
         for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
         {
@@ -185,7 +185,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 
     public GameObject GetBuildingBlock()
     {
-        if (moveableObjectType == MoveableObjectType.BuildingBlock)
+        if (moveableObjectType == BuildingObjectTypes.BuildingBlock)
         {
             for (int i = 0; i < buildingBlockObjects_SO.buildingBlockObjectList.Count; i++)
             {
@@ -201,7 +201,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     }
     public BuildingBlockObject GetBuildingBlock_SO()
     {
-        if (moveableObjectType == MoveableObjectType.BuildingBlock)
+        if (moveableObjectType == BuildingObjectTypes.BuildingBlock)
         {
             for (int i = 0; i < buildingBlockObjects_SO.buildingBlockObjectList.Count; i++)
             {
@@ -218,7 +218,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     public GameObject GetMoveableObject()
     {
         //Machine
-        if (moveableObjectType == MoveableObjectType.Machine)
+        if (moveableObjectType == BuildingObjectTypes.Machine)
         {
             for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
             {
@@ -231,7 +231,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         }
 
         //Furniture
-        else if (moveableObjectType == MoveableObjectType.Furniture)
+        else if (moveableObjectType == BuildingObjectTypes.Furniture)
         {
             for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
             {
@@ -248,7 +248,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     public MoveableObjectInfo GetMoveableObjectInfo(MoveableObject moveableObject)
     {
         //Machine
-        if (moveableObject.machineType != MachineType.None)
+        if (moveableObject.machineType != MachineObjectNames.None)
         {
             for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
             {
@@ -260,7 +260,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         }
 
         //Furniture
-        else if (moveableObject.furnitureType != FurnitureType.None)
+        else if (moveableObject.furnitureType != FurnitureObjectNames.None)
         {
             for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
             {
@@ -276,7 +276,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     public MoveableObjectInfo GetMoveableObject_SO()
     {
         //Machine
-        if (moveableObjectType == MoveableObjectType.Machine)
+        if (moveableObjectType == BuildingObjectTypes.Machine)
         {
             for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
             {
@@ -289,7 +289,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
         }
 
         //Furniture
-        else if (moveableObjectType == MoveableObjectType.Furniture)
+        else if (moveableObjectType == BuildingObjectTypes.Furniture)
         {
             for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
             {
@@ -332,7 +332,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             tempToSave.objectRot = placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].transform.rotation;
             
             //If a small chest, update inventory info
-            if (tempToSave.furnitureType == FurnitureType.SmallChest)
+            if (tempToSave.furnitureType == FurnitureObjectNames.Chest_Small)
             {
                 InventoryManager.Instance.AddInventory(placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.smallChest_Size);
 
@@ -340,7 +340,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             }
 
             //If a big chest, update inventory info
-            else if (tempToSave.furnitureType == FurnitureType.BigChest)
+            else if (tempToSave.furnitureType == FurnitureObjectNames.Chest_Big)
             {
                 InventoryManager.Instance.AddInventory(placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.bigChest_Size);
 
@@ -383,9 +383,9 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
 [Serializable]
 public class MoveableObject_ToSave
 {
-    public MoveableObjectType moveableObjectType = MoveableObjectType.None;
-    public FurnitureType furnitureType = FurnitureType.None;
-    public MachineType machineType = MachineType.None;
+    public BuildingObjectTypes moveableObjectType = BuildingObjectTypes.None;
+    public FurnitureObjectNames furnitureType = FurnitureObjectNames.None;
+    public MachineObjectNames machineType = MachineObjectNames.None;
 
     public Vector3 objectPos = new Vector3();
     public Quaternion objectRot = new Quaternion();
@@ -396,10 +396,10 @@ public class MoveableObject_ToSave
 [Serializable]
 public class MoveableObjectSelected_ToSave
 {
-    public MoveableObjectType moveableObjectType = MoveableObjectType.None;
-    public MachineType machineType = MachineType.None;
-    public FurnitureType furnitureType = FurnitureType.None;
+    public BuildingObjectTypes moveableObjectType = BuildingObjectTypes.None;
+    public MachineObjectNames machineType = MachineObjectNames.None;
+    public FurnitureObjectNames furnitureType = FurnitureObjectNames.None;
 
-    public BuildingType buildingType = BuildingType.None;
+    public BuildingBlockObjectNames buildingType = BuildingBlockObjectNames.None;
     public BuildingMaterial buildingMaterial = BuildingMaterial.None;
 }

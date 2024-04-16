@@ -101,23 +101,26 @@ public class GhostManager : Singleton<GhostManager>
 
     public int SetGhostSpawnAmount()
     {
-        switch (WeatherManager.Instance.weatherTypeDayList[0])
+        if (WeatherManager.Instance.weatherTypeDayList.Count > 0)
         {
-            case WeatherType.Cold:
-                ghostSpawnAmount = 1;
-                break;
-            case WeatherType.Cloudy:
-                ghostSpawnAmount = 1; //(6)
-                break;
-            case WeatherType.Sunny:
-                ghostSpawnAmount = 1; //(3)
-                break;
-            case WeatherType.Windy:
-                ghostSpawnAmount = 1; //(0)
-                break;
+            switch (WeatherManager.Instance.weatherTypeDayList[0])
+            {
+                case WeatherType.Cold:
+                    ghostSpawnAmount = 1;
+                    break;
+                case WeatherType.Cloudy:
+                    ghostSpawnAmount = 1; //(6)
+                    break;
+                case WeatherType.Sunny:
+                    ghostSpawnAmount = 1; //(3)
+                    break;
+                case WeatherType.Windy:
+                    ghostSpawnAmount = 1; //(0)
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
 
         return ghostSpawnAmount;
