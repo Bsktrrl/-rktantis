@@ -114,8 +114,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.selectedSlot_Store = gameData.selectedSlot_Save;
 
         this.activeBuildingObject_Store = gameData.activeBuildingObject_Save;
-        this.activeBuildingBlockObject_SOList_Store = gameData.activeMachineObject_SOList_Save;
-        this.activeFurnitureObject_SOList_Store = gameData.activeMachineObject_SOList_Save;
+        this.activeBuildingBlockObject_SOList_Store = gameData.activeBuildingBlockObject_SOList_Save;
+        this.activeFurnitureObject_SOList_Store = gameData.activeFurnitureObject_SOList_Save;
         this.activeMachineObject_SOList_Store = gameData.activeMachineObject_SOList_Save;
         //this.buildingBlockList_StoreList = gameData.buildingBlockList_SaveList;
 
@@ -178,8 +178,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         WorldObjectManager.Instance.LoadData();
         print("7. WorldObjectManager has Loaded");
 
-        //MoveableObjectManager.Instance.LoadData();
-        //print("8. MoveableObjectManager has Loaded");
+        BlueprintManager.Instance.LoadData();
+        print("8. BlueprintManager has Loaded");
 
         HealthManager.Instance.LoadData();
         print("9. HealthManager has Loaded");
@@ -240,8 +240,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.selectedSlot_Save = this.selectedSlot_Store;
 
         gameData.activeBuildingObject_Save = this.activeBuildingObject_Store;
-        gameData.activeBuildingBlockObject_SOList_Save = this.activeMachineObject_SOList_Store;
-        gameData.activeFurnitureObject_SOList_Save = this.activeMachineObject_SOList_Store;
+        gameData.activeBuildingBlockObject_SOList_Save = this.activeBuildingBlockObject_SOList_Store;
+        gameData.activeFurnitureObject_SOList_Save = this.activeFurnitureObject_SOList_Store;
         gameData.activeMachineObject_SOList_Save = this.activeMachineObject_SOList_Store;
         //gameData.buildingBlockList_SaveList = this.buildingBlockList_StoreList;
 

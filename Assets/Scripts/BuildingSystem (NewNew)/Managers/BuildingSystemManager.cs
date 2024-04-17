@@ -8,65 +8,15 @@ using UnityEngine;
 public class BuildingSystemManager : Singleton<BuildingSystemManager>
 {
     [Header("_SO")]
-    [SerializeField] BuildingBlocks_SO buildingBlocks_SO;
-    [SerializeField] Furniture_SO furniture_SO;
-    [SerializeField] Machines_SO machines_SO;
+    public BuildingBlocks_SO buildingBlocks_SO;
+    public Furniture_SO furniture_SO;
+    public Machines_SO machines_SO;
 
     [Header("Active BuildingObject")] //From the BuildingObject Menu - Tablet
     public ActiveBuildingObject activeBuildingObject_Info;
 
-    public List<bool> activeBuildingBlockObject_SOList = new List<bool>();
-    public List<bool> activeFurnitureObject_SOList = new List<bool>();
-    public List<bool> activeMachineObject_SOList = new List<bool>();
-
     [Header("Have enough items to Build?")]
     public bool enoughItemsToBuild;
-
-    //--------------------
-
-
-    private void Start()
-    {
-        //Setup _SO isActive Lists
-        #region
-        for (int i = 0; i < buildingBlocks_SO.buildingBlockObjectsList.Count; i++)
-        {
-            if (buildingBlocks_SO.buildingBlockObjectsList[i].objectInfo.isActive)
-            {
-                activeBuildingBlockObject_SOList.Add(true);
-            }
-            else
-            {
-                activeBuildingBlockObject_SOList.Add(false);
-            }
-        }
-
-        for (int i = 0; i < furniture_SO.furnitureObjectsList.Count; i++)
-        {
-            if (furniture_SO.furnitureObjectsList[i].objectInfo.isActive)
-            {
-                activeFurnitureObject_SOList.Add(true);
-            }
-            else
-            {
-                activeFurnitureObject_SOList.Add(false);
-            }
-        }
-
-        for (int i = 0; i < machines_SO.machineObjectsList.Count; i++)
-        {
-            if (machines_SO.machineObjectsList[i].objectInfo.isActive)
-            {
-                activeMachineObject_SOList.Add(true);
-            }
-            else
-            {
-                activeMachineObject_SOList.Add(false);
-            }
-        }
-        #endregion
-    }
-
 
     //--------------------
 
@@ -77,46 +27,11 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
 
-        //Load _SOLists
-        #region
-        if (DataManager.Instance.activeBuildingBlockObject_SOList_Store.Count > 0)
-        {
-            activeBuildingBlockObject_SOList = DataManager.Instance.activeBuildingBlockObject_SOList_Store;
-
-            for (int i = 0; i < buildingBlocks_SO.buildingBlockObjectsList.Count; i++)
-            {
-                buildingBlocks_SO.buildingBlockObjectsList[i].objectInfo.isActive = activeBuildingBlockObject_SOList[i];
-            }
-        }
-        if (DataManager.Instance.activeFurnitureObject_SOList_Store.Count > 0)
-        {
-            activeFurnitureObject_SOList = DataManager.Instance.activeFurnitureObject_SOList_Store;
-
-            for (int i = 0; i < furniture_SO.furnitureObjectsList.Count; i++)
-            {
-                furniture_SO.furnitureObjectsList[i].objectInfo.isActive = activeFurnitureObject_SOList[i];
-            }
-        }
-        if (DataManager.Instance.activeMachineObject_SOList_Store.Count > 0)
-        {
-            activeMachineObject_SOList = DataManager.Instance.activeMachineObject_SOList_Store;
-
-            for (int i = 0; i < machines_SO.machineObjectsList.Count; i++)
-            {
-                machines_SO.machineObjectsList[i].objectInfo.isActive = activeMachineObject_SOList[i];
-            }
-        }
-        #endregion
-
         SaveData();
     }
     public void SaveData()
     {
         DataManager.Instance.activeBuildingObject_Store = activeBuildingObject_Info;
-
-        DataManager.Instance.activeBuildingBlockObject_SOList_Store = activeBuildingBlockObject_SOList;
-        DataManager.Instance.activeFurnitureObject_SOList_Store = activeFurnitureObject_SOList;
-        DataManager.Instance.activeMachineObject_SOList_Store = activeMachineObject_SOList;
     }
 
 
@@ -164,39 +79,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     }
     #endregion
 
-
-    //--------------------
-
-    public void SetActive_SOList(BuildingBlockObjectNames buildingBlockObjectName, BuildingMaterial buildingMaterial)
-    {
-        for (int i = 0; i < buildingBlocks_SO.buildingBlockObjectsList.Count; i++)
-        {
-            buildingBlocks_SO.buildingBlockObjectsList[i].objectInfo.isActive = true;
-            activeBuildingBlockObject_SOList[i] = true;
-        }
-
-        SaveData();
-    }
-    public void SetActive_SOList(FurnitureObjectNames furnitureObjectName)
-    {
-        for (int i = 0; i < furniture_SO.furnitureObjectsList.Count; i++)
-        {
-            furniture_SO.furnitureObjectsList[i].objectInfo.isActive = true;
-            activeFurnitureObject_SOList[i] = true;
-        }
-
-        SaveData();
-    }
-    public void SetActive_SOList(MachineObjectNames machineObjectName)
-    {
-        for (int i = 0; i < machines_SO.machineObjectsList.Count; i++)
-        {
-            machines_SO.machineObjectsList[i].objectInfo.isActive = true;
-            activeMachineObject_SOList[i] = true;
-        }
-
-        SaveData();
-    }
 }
 
 [Serializable]

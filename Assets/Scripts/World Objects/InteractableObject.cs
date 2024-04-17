@@ -24,6 +24,13 @@ public class InteractableObject : MonoBehaviour
     public JournalMenuState journalType;
     public int journalPageIndex;
 
+    [Header("If Object is a Blueprint")]
+    public BuildingBlockObjectNames blueprint_BuildingBlock_Name;
+    public BuildingMaterial buildingMaterial;
+    [Space(5)]
+    public FurnitureObjectNames blueprint_Furniture_Name;
+    public MachineObjectNames blueprint_Machine_Name;
+
     bool isHittingGround;
 
 
@@ -36,18 +43,6 @@ public class InteractableObject : MonoBehaviour
 
         //Add SphereCollider for the item
         Vector3 scale = gameObject.transform.lossyScale;
-    }
-
-    private void Update()
-    {
-        ////If Item, reduce the velocity on the ground
-        //if (isHittingGround && GetComponent<Rigidbody>() && interactableType == InteracteableType.Item)
-        //{
-        //    InventoryManager.Instance.StartGravityCoroutine(gameObject);
-
-        //    //GetComponent<Rigidbody>().isKinematic = true;
-        //    //GetComponent<Rigidbody>().useGravity = false;
-        //}
     }
 
 
@@ -247,6 +242,30 @@ public class InteractableObject : MonoBehaviour
                 DestroyThisObject();
             }
             #endregion
+
+            //If Object is a Blueprint
+            #region
+            else if (interactableType == InteracteableType.Blueprint)
+            {
+                print("Interact with a Blueprint");
+
+                if (blueprint_BuildingBlock_Name != BuildingBlockObjectNames.None)
+                {
+                    BlueprintManager.Instance.AddBlueprint(blueprint_BuildingBlock_Name, buildingMaterial);
+                }
+                else if (blueprint_Furniture_Name != FurnitureObjectNames.None)
+                {
+                    BlueprintManager.Instance.AddBlueprint(blueprint_Furniture_Name);
+                }
+                else if (blueprint_Machine_Name != MachineObjectNames.None)
+                {
+                    BlueprintManager.Instance.AddBlueprint(blueprint_Machine_Name);
+                }
+
+                //Destroy gameObject
+                DestroyThisObject();
+            }
+            #endregion
         }
     }
 
@@ -354,4 +373,7 @@ public enum InteracteableType
 
     //Ghost
     [Description("Ghost")][InspectorName("Ghost/Ghost")] Ghost,
+
+    //Blueprint
+    [Description("Blueprint")][InspectorName("Blueprint/Blueprint")] Blueprint,
 }
