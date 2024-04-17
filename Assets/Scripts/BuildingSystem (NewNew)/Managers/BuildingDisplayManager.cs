@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
     [SerializeField] Image selectedObject_Image;
 
-    [SerializeField] List<GameObject> buildingObjectList = new List<GameObject>();
+    [SerializeField] List<GameObject> BuildingObjectParentList = new List<GameObject>();
+    [SerializeField] List<DisplayBlock> buildingObjectList = new List<DisplayBlock>();
 
     [Header("ScreenInfo")]
     [SerializeField] GameObject buildingObject_ScreenInfo_Parent;
@@ -551,44 +553,67 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
     {
         print("222. CheckActiveBuildingObjects");
 
-        for (int i = 0; i < buildingObjectList.Count; i++)
+        for (int j = 0; j < buildingObjectList.Count; j++)
         {
-            if (buildingObjectList[i].GetComponent<BuildingDisplaySlot>())
+            bool tempActive = false;
+
+            for (int i = 0; i < buildingObjectList[j].buildingObjectChildList.Count; i++)
             {
-                if (buildingObjectList[i].GetComponent<BuildingDisplaySlot>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
+                if (buildingObjectList[j].buildingObjectChildList[i].GetComponent<BuildingDisplaySlot>())
                 {
-                    if (BuildingSystemManager.Instance.GetBuildingObjectInfo(buildingObjectList[i].GetComponent<BuildingDisplaySlot>().buildingBlockObjectName, buildingObjectList[i].GetComponent<BuildingDisplaySlot>().buildingMaterial).objectInfo.isActive)
+                    if (buildingObjectList[j].buildingObjectChildList[i].GetComponent<BuildingDisplaySlot>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
                     {
-                        buildingObjectList[i].transform.parent.gameObject.SetActive(true);
+                        if (BuildingSystemManager.Instance.GetBuildingObjectInfo(buildingObjectList[j].buildingObjectChildList[i].GetComponent<BuildingDisplaySlot>().buildingBlockObjectName, buildingObjectList[j].buildingObjectChildList[i].GetComponent<BuildingDisplaySlot>().buildingMaterial).objectInfo.isActive)
+                        {
+                            buildingObjectList[j].buildingObjectChildList[i].transform.parent.gameObject.SetActive(true);
+                            tempActive = true;
+                        }
+                        else
+                        {
+                            buildingObjectList[j].buildingObjectChildList[i].transform.parent.gameObject.SetActive(false);
+                        }
                     }
-                    else
+                    else if (buildingObjectList[j].buildingObjectChildList[i].GetComponent<BuildingDisplaySlot>().buildingObjectType == BuildingObjectTypes.Furniture)
                     {
-                        buildingObjectList[i].transform.parent.gameObject.SetActive(false);
+                        if (BuildingSystemManager.Instance.GetBuildingObjectInfo(buildingObjectList[j].buildingObjectChildList[i].GetComponent<BuildingDisplaySlot>().furnitureObjectName).objectInfo.isActive)
+                        {
+                            buildingObjectList[j].buildingObjectChildList[i].transform.parent.gameObject.SetActive(true);
+                            tempActive = true;
+                        }
+                        else
+                        {
+                            buildingObjectList[j].buildingObjectChildList[i].transform.parent.gameObject.SetActive(false);
+                        }
                     }
-                }
-                else if (buildingObjectList[i].GetComponent<BuildingDisplaySlot>().buildingObjectType == BuildingObjectTypes.Furniture)
-                {
-                    if (BuildingSystemManager.Instance.GetBuildingObjectInfo(buildingObjectList[i].GetComponent<BuildingDisplaySlot>().furnitureObjectName).objectInfo.isActive)
+                    else if (buildingObjectList[j].buildingObjectChildList[i].GetComponent<BuildingDisplaySlot>().buildingObjectType == BuildingObjectTypes.Machine)
                     {
-                        buildingObjectList[i].transform.parent.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        buildingObjectList[i].transform.parent.gameObject.SetActive(false);
-                    }
-                }
-                else if (buildingObjectList[i].GetComponent<BuildingDisplaySlot>().buildingObjectType == BuildingObjectTypes.Machine)
-                {
-                    if (BuildingSystemManager.Instance.GetBuildingObjectInfo(buildingObjectList[i].GetComponent<BuildingDisplaySlot>().machineObjectName).objectInfo.isActive)
-                    {
-                        buildingObjectList[i].transform.parent.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        buildingObjectList[i].transform.parent.gameObject.SetActive(false);
+                        if (BuildingSystemManager.Instance.GetBuildingObjectInfo(buildingObjectList[j].buildingObjectChildList[i].GetComponent<BuildingDisplaySlot>().machineObjectName).objectInfo.isActive)
+                        {
+                            buildingObjectList[j].buildingObjectChildList[i].transform.parent.gameObject.SetActive(true);
+                            tempActive = true;
+                        }
+                        else
+                        {
+                            buildingObjectList[j].buildingObjectChildList[i].transform.parent.gameObject.SetActive(false);
+                        }
                     }
                 }
             }
+
+            if (tempActive)
+            {
+                BuildingObjectParentList[j].SetActive(true);
+            }
+            else
+            {
+                BuildingObjectParentList[j].SetActive(false);
+            }
         }
     }
+}
+
+[Serializable]
+public class DisplayBlock
+{
+    public List<GameObject> buildingObjectChildList = new List<GameObject>();
 }
