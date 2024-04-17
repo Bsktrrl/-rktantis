@@ -87,7 +87,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         }
 
         #region Requirements
-        int requirementCounter = 0;
+        //int requirementCounter = 0;
 
         //for (int i = 0; i < perk.perkInfo.requirementList.Count; i++)
         //{

@@ -551,8 +551,6 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
     void CheckActiveBuildingObjects()
     {
-        print("222. CheckActiveBuildingObjects");
-
         for (int j = 0; j < buildingObjectList.Count; j++)
         {
             bool tempActive = false;

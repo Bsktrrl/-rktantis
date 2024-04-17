@@ -139,8 +139,6 @@ public class GhostCapturer : MonoBehaviour
 
     public void StartCapturing()
     {
-        int tempIndex;
-
         for (int i = 0; i < GhostManager.Instance.ghostCapturerStats.slotsActivated; i++)
         {
             if (!GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[i].isTaken)
