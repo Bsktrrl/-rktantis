@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AlbedoMap:
-        m_Texture: {fileID: 2800000, guid: c45105cc8127fc94c8f9da8189479133, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0954edff27983b847abeef9d407882c3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: ba5241830033fca42ab53d50056011a9, type: 3}
+        m_Texture: {fileID: 2800000, guid: da84b59967aa1484190476de455ab01b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -73,7 +73,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RoughnessMap:
-        m_Texture: {fileID: 2800000, guid: 94e1089857a2425449d036090f428c54, type: 3}
+        m_Texture: {fileID: 2800000, guid: 436d0d224eb8b7042b511f0a7ada1b8d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2DLOD_2ef41d3d7c8944b9a92c797e327ffd40_Texture_1_Texture2D:
@@ -142,7 +142,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlbedoColorMultiplier: 1.5
+    - _AlbedoColorMultiplier: 12
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -183,8 +183,8 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _Tiling: 5
-    - _TilingBlend: 0.5
+    - _Tiling: 2
+    - _TilingBlend: 0.75
     - _Transparency: 0
     - _TransparencyDither: 0
     - _TransparencyMultiplier: 0
@@ -192,7 +192,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 1, g: 0.36862746, b: 0.39607844, a: 0}
+    - _AlbedoColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
