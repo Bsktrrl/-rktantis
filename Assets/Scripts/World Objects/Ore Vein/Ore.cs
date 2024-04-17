@@ -77,10 +77,11 @@ public class Ore : MonoBehaviour
         }
 
         //If Object is an Ore
-        if (interactableType == InteracteableType.Tungsten_Ore || interactableType == InteracteableType.Stone_Ore
+        if ((interactableType == InteracteableType.Tungsten_Ore || interactableType == InteracteableType.Stone_Ore
                  || interactableType == InteracteableType.Cryonite_Ore || interactableType == InteracteableType.Magnetite_Ore
                  || interactableType == InteracteableType.Viridian_Ore || interactableType == InteracteableType.Gold_Ore
                  || interactableType == InteracteableType.AríditeCrystal_Ore)
+                 && SelectionManager.Instance.onTarget)
         {
             print("Interact with an Ore - " + itemName);
 
