@@ -91,10 +91,11 @@ public class Tree : MonoBehaviour
         }
 
         //If Object is a Tree
-        if (interactableType == InteracteableType.Palm_Tree || interactableType == InteracteableType.BloodTree || interactableType == InteracteableType.BloodTreeBush
+        if ((interactableType == InteracteableType.Palm_Tree || interactableType == InteracteableType.BloodTree || interactableType == InteracteableType.BloodTreeBush
             || interactableType == InteracteableType.Tree_4 || interactableType == InteracteableType.Tree_5 || interactableType == InteracteableType.Tree_6
             || interactableType == InteracteableType.Tree_7 || interactableType == InteracteableType.Tree_8 || interactableType == InteracteableType.Tree_9
             || interactableType == InteracteableType.Cactus)
+            && SelectionManager.Instance.onTarget)
         {
             print("Interact with a Tree - " + _itemName);
 

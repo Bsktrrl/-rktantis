@@ -21,6 +21,9 @@ public class GameData
 
     //BuidingSystem
     [HideInInspector] public ActiveBuildingObject activeBuildingObject_Save;
+    [HideInInspector] public List<bool> activeBuildingBlockObject_SOList_Save = new List<bool>();
+    [HideInInspector] public List<bool> activeFurnitureObject_SOList_Save = new List<bool>();
+    [HideInInspector] public List<bool> activeMachineObject_SOList_Save = new List<bool>();
     //[HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_SaveList = new List<BuildingBlockSaveList>();
 
     //Hotbar
@@ -85,6 +88,9 @@ public class GameData
         this.worldObject_SaveList.Clear();
 
         //this.buildingBlockList_SaveList.Clear();
+        this.activeBuildingBlockObject_SOList_Save.Clear();
+        this.activeFurnitureObject_SOList_Save.Clear();
+        this.activeMachineObject_SOList_Save.Clear();
 
         this.Inventories_SaveList.Clear();
         this.hotbarItem_SaveList.Clear();

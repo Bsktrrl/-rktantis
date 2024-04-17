@@ -38,6 +38,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
     //BuidingSystem
     [HideInInspector] public ActiveBuildingObject activeBuildingObject_Store;
+    [HideInInspector] public List<bool> activeBuildingBlockObject_SOList_Store = new List<bool>();
+    [HideInInspector] public List<bool> activeFurnitureObject_SOList_Store = new List<bool>();
+    [HideInInspector] public List<bool> activeMachineObject_SOList_Store = new List<bool>();
     //[HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_StoreList = new List<BuildingBlockSaveList>();
 
     //MoveableObjects
@@ -111,6 +114,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.selectedSlot_Store = gameData.selectedSlot_Save;
 
         this.activeBuildingObject_Store = gameData.activeBuildingObject_Save;
+        this.activeBuildingBlockObject_SOList_Store = gameData.activeMachineObject_SOList_Save;
+        this.activeFurnitureObject_SOList_Store = gameData.activeMachineObject_SOList_Save;
+        this.activeMachineObject_SOList_Store = gameData.activeMachineObject_SOList_Save;
         //this.buildingBlockList_StoreList = gameData.buildingBlockList_SaveList;
 
         //this.placedMoveableObjectsList_StoreList = gameData.placedMoveableObjectsList_SaveList;
@@ -234,6 +240,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.selectedSlot_Save = this.selectedSlot_Store;
 
         gameData.activeBuildingObject_Save = this.activeBuildingObject_Store;
+        gameData.activeBuildingBlockObject_SOList_Save = this.activeMachineObject_SOList_Store;
+        gameData.activeFurnitureObject_SOList_Save = this.activeMachineObject_SOList_Store;
+        gameData.activeMachineObject_SOList_Save = this.activeMachineObject_SOList_Store;
         //gameData.buildingBlockList_SaveList = this.buildingBlockList_StoreList;
 
         //gameData.placedMoveableObjectsList_SaveList = this.placedMoveableObjectsList_StoreList;
