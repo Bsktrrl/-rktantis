@@ -200,9 +200,14 @@ MonoBehaviour:
   amount: 0
   durability_Current: 0
   interactableType: 2
-  oreHealth: 0
   inventoryIndex: 0
   plantParent: {fileID: 0}
+  journalType: 0
+  journalPageIndex: 0
+  blueprint_BuildingBlock_Name: 0
+  buildingMaterial: 0
+  blueprint_Furniture_Name: 0
+  blueprint_Machine_Name: 0
 --- !u!114 &2582286417484250869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,8 +223,11 @@ MonoBehaviour:
   canBePlaced: 0
   isSelectedForMovement: 0
   enoughItemsToBuild: 0
-  furnitureType: 4
-  machineType: 0
+  buildingObjectType: 2
+  buildingMaterial: 0
+  buildingBlockObjectName: 0
+  furnitureObjectName: 6
+  machineObjectName: 0
   meshRenderer: {fileID: 1192526037546764022}
 --- !u!114 &5176174981612352771
 MonoBehaviour:

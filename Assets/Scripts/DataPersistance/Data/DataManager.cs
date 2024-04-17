@@ -37,6 +37,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<Hotbar> hotbarItem_StoreList = new List<Hotbar>();
 
     //BuidingSystem
+    [HideInInspector] public List<WorldBuildingObject> worldBuildingObjectInfoList_Store;
     [HideInInspector] public ActiveBuildingObject activeBuildingObject_Store;
     [HideInInspector] public List<bool> activeBuildingBlockObject_SOList_Store = new List<bool>();
     [HideInInspector] public List<bool> activeFurnitureObject_SOList_Store = new List<bool>();
@@ -113,6 +114,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.hotbarItem_StoreList = gameData.hotbarItem_SaveList;
         this.selectedSlot_Store = gameData.selectedSlot_Save;
 
+        this.worldBuildingObjectInfoList_Store = gameData.worldBuildingObjectInfoList_Save;
         this.activeBuildingObject_Store = gameData.activeBuildingObject_Save;
         this.activeBuildingBlockObject_SOList_Store = gameData.activeBuildingBlockObject_SOList_Save;
         this.activeFurnitureObject_SOList_Store = gameData.activeFurnitureObject_SOList_Save;
@@ -239,6 +241,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.hotbarItem_SaveList = this.hotbarItem_StoreList;
         gameData.selectedSlot_Save = this.selectedSlot_Store;
 
+        gameData.worldBuildingObjectInfoList_Save = this.worldBuildingObjectInfoList_Store;
         gameData.activeBuildingObject_Save = this.activeBuildingObject_Store;
         gameData.activeBuildingBlockObject_SOList_Save = this.activeBuildingBlockObject_SOList_Store;
         gameData.activeFurnitureObject_SOList_Save = this.activeFurnitureObject_SOList_Store;

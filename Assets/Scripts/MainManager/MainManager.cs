@@ -89,19 +89,53 @@ public class MainManager : Singleton<MainManager>
 
         return null;
     }
-    public MoveableObjectInfo GetMovableObject(MoveableObject moveableObject)
+
+
+    //--------------------
+
+
+    public BuildingBlockInfo GetMovableObject(BuildingBlockObjectNames buildingBlockObjectNames, BuildingMaterial buildingMaterial)
     {
-        for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
+        for (int i = 0; i < BuildingSystemManager.Instance.machines_SO.machineObjectsList.Count; i++)
         {
-            if (moveableObject_SO.moveableObjectList[i].furnitureType == moveableObject.furnitureType
-                && moveableObject_SO.moveableObjectList[i].machineType == moveableObject.machineType)
+            if (BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[i].blockName == buildingBlockObjectNames
+                && BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[i].buildingMaterial == buildingMaterial)
             {
-                return moveableObject_SO.moveableObjectList[i];
+                return BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[i];
             }
         }
 
         return null;
     }
+    public FurnitureInfo GetMovableObject(FurnitureObjectNames furnitureObjectName)
+    {
+        for (int i = 0; i < BuildingSystemManager.Instance.furniture_SO.furnitureObjectsList.Count; i++)
+        {
+            if (BuildingSystemManager.Instance.furniture_SO.furnitureObjectsList[i].furnitureName == furnitureObjectName)
+            {
+                return BuildingSystemManager.Instance.furniture_SO.furnitureObjectsList[i];
+            }
+        }
+
+        return null;
+    }
+    public MachineInfo GetMovableObject(MachineObjectNames machineObjectName)
+    {
+        for (int i = 0; i < BuildingSystemManager.Instance.machines_SO.machineObjectsList.Count; i++)
+        {
+            if (BuildingSystemManager.Instance.machines_SO.machineObjectsList[i].machinesName == machineObjectName)
+            {
+                return BuildingSystemManager.Instance.machines_SO.machineObjectsList[i];
+            }
+        }
+
+        return null;
+    }
+
+
+    //--------------------
+
+
     public MoveableObjectInfo GetMovableObject(FurnitureObjectNames furnitureType, MachineObjectNames machineType)
     {
         for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)

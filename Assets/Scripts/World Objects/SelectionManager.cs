@@ -20,8 +20,17 @@ public class SelectionManager : Singleton<SelectionManager>
     {
         if (Time.frameCount % MainManager.Instance.updateInterval == 0 && MainManager.Instance.menuStates == MenuStates.None)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            float screenWidth = Screen.width;
+            float screenHeight = Screen.height;
+
+            //// Calculate the middle of the screen
+            //Vector3 middleOfScreen = new Vector3(screenWidth / 2f, screenHeight / 2f, 0f);
+            //// Convert the middle of the screen to a ray
+            //Ray ray = Camera.main.ScreenPointToRay(middleOfScreen);
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition - new Vector3(0, -175f, 0));
             RaycastHit hit;
+
 
             if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance))
             {

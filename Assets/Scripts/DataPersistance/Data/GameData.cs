@@ -20,6 +20,7 @@ public class GameData
     [HideInInspector] public List<WorldObject> worldObject_SaveList = new List<WorldObject>();
 
     //BuidingSystem
+    [HideInInspector] public List<WorldBuildingObject> worldBuildingObjectInfoList_Save;
     [HideInInspector] public ActiveBuildingObject activeBuildingObject_Save;
     [HideInInspector] public List<bool> activeBuildingBlockObject_SOList_Save = new List<bool>();
     [HideInInspector] public List<bool> activeFurnitureObject_SOList_Save = new List<bool>();
@@ -88,6 +89,7 @@ public class GameData
         this.worldObject_SaveList.Clear();
 
         //this.buildingBlockList_SaveList.Clear();
+        //this.worldBuildingObjectInfoList_Save.Clear();
         this.activeBuildingBlockObject_SOList_Save.Clear();
         this.activeFurnitureObject_SOList_Save.Clear();
         this.activeMachineObject_SOList_Save.Clear();

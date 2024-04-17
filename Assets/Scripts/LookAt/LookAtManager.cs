@@ -408,12 +408,20 @@ public class LookAtManager : Singleton<LookAtManager>
     {
         if (SelectionManager.Instance.selecedObject && SelectionManager.Instance.onTarget)
         {
-            if (SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>())
+            if (SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
             {
-                MoveableObjectInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>());
+                FurnitureInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>().furnitureObjectName);
 
-                MovableObjectImage.sprite = tempObject.objectSprite;
-                MovableObjectName.text = tempObject.Name;
+                MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
+                MovableObject_Text.text = "Press E to interact";
+            }
+            else if (SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+            {
+                MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>().machineObjectName);
+
+                MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
                 MovableObject_Text.text = "Press E to interact";
             }
         }
@@ -428,10 +436,10 @@ public class LookAtManager : Singleton<LookAtManager>
                 {
                     if (SelectionManager.Instance.selecedObject.GetComponent<GhostTank>().ghostTankContent.GhostElement == GhostElement.None)
                     {
-                        MoveableObjectInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>());
+                        MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>().machineObjectName);
 
-                        MovableObjectImage.sprite = tempObject.objectSprite;
-                        MovableObjectName.text = tempObject.Name;
+                        MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                        MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
                         MovableObject_Text.text = "Press E to interact";
                     }
                     else

@@ -10,8 +10,12 @@ public class MoveableObject : MonoBehaviour
     [HideInInspector] public bool enoughItemsToBuild;
 
     [Header("MoveableObject Type")]
-    public FurnitureObjectNames furnitureType = FurnitureObjectNames.None;
-    public MachineObjectNames machineType = MachineObjectNames.None;
+    public BuildingObjectTypes buildingObjectType;
+    public BuildingMaterial buildingMaterial;
+    [Space(5)]
+    public BuildingBlockObjectNames buildingBlockObjectName;
+    public FurnitureObjectNames furnitureObjectName;
+    public MachineObjectNames machineObjectName;
 
     [Header("Mesh")]
     public SkinnedMeshRenderer meshRenderer;

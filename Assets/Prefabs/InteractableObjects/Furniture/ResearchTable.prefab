@@ -188,6 +188,10 @@ MonoBehaviour:
   plantParent: {fileID: 0}
   journalType: 0
   journalPageIndex: 0
+  blueprint_BuildingBlock_Name: 0
+  buildingMaterial: 0
+  blueprint_Furniture_Name: 0
+  blueprint_Machine_Name: 0
 --- !u!114 &2999226329214711316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,8 +207,11 @@ MonoBehaviour:
   canBePlaced: 0
   isSelectedForMovement: 0
   enoughItemsToBuild: 0
-  furnitureType: 7
-  machineType: 0
+  buildingObjectType: 2
+  buildingMaterial: 0
+  buildingBlockObjectName: 0
+  furnitureObjectName: 2
+  machineObjectName: 0
   meshRenderer: {fileID: 0}
 --- !u!114 &-6401591642461387822
 MonoBehaviour:

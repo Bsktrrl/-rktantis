@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1441987498674919137}
   - component: {fileID: 4857437435483990474}
-  - component: {fileID: 6015095176828018434}
   m_Layer: 7
   m_Name: Collider_Front
   m_TagString: BuildingBlock
@@ -54,20 +53,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.999, z: 0.001}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6015095176828018434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426201054430571085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b71b6f18ea55f443b9ae4e61a170a40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingBlock_Parent: {fileID: 6504768422917535472}
-  buildingBlockColliderDirection: 1
 --- !u!1 &1541758069435389023
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,7 +63,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2305245769229461416}
   - component: {fileID: 313518092939821299}
-  - component: {fileID: 1179265019605023565}
   m_Layer: 7
   m_Name: Collider_Left
   m_TagString: BuildingBlock
@@ -122,20 +106,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.001, y: 0.999, z: 0.999}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1179265019605023565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1541758069435389023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b71b6f18ea55f443b9ae4e61a170a40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingBlock_Parent: {fileID: 6504768422917535472}
-  buildingBlockColliderDirection: 6
 --- !u!1 &2270722248174799937
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +116,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5437045607479538699}
   - component: {fileID: 6566771166987993012}
-  - component: {fileID: 6963936733094225340}
   m_Layer: 7
   m_Name: Collider_Back
   m_TagString: BuildingBlock
@@ -190,20 +159,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.999, z: 0.001}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6963936733094225340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2270722248174799937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b71b6f18ea55f443b9ae4e61a170a40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingBlock_Parent: {fileID: 6504768422917535472}
-  buildingBlockColliderDirection: 2
 --- !u!1 &5992645443168284705
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +169,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9001352611904629135}
   - component: {fileID: 6921516424235771676}
-  - component: {fileID: 4035490279486351321}
   m_Layer: 7
   m_Name: Collider_Down
   m_TagString: BuildingBlock
@@ -258,20 +212,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.001, z: 0.999}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4035490279486351321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5992645443168284705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b71b6f18ea55f443b9ae4e61a170a40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingBlock_Parent: {fileID: 6504768422917535472}
-  buildingBlockColliderDirection: 4
 --- !u!1 &6504768422917535472
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3041353511166218813}
-  - component: {fileID: 7493058664295178372}
+  - component: {fileID: -119487736050799536}
   m_Layer: 0
   m_Name: Window_Wood_Parent
   m_TagString: Untagged
@@ -306,7 +246,7 @@ Transform:
   - {fileID: 3163026957862137713}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7493058664295178372
+--- !u!114 &-119487736050799536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,12 +255,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6504768422917535472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e0cc6ef6519c1448e6871cc46229e1, type: 3}
+  m_Script: {fileID: 11500000, guid: b1f7d593ae09aa24a9184f94ab51ee1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingType: 3
+  canBePlaced: 0
+  isSelectedForMovement: 0
+  enoughItemsToBuild: 0
+  buildingObjectType: 1
   buildingMaterial: 1
-  model: {fileID: 8815233503749311390}
+  buildingBlockObjectName: 0
+  furnitureObjectName: 0
+  machineObjectName: 0
+  meshRenderer: {fileID: 0}
 --- !u!1 &6914302463606165046
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +314,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2615711997894648254}
   - component: {fileID: 8861434505245067584}
-  - component: {fileID: 5623752957037690090}
   m_Layer: 7
   m_Name: Collider_Up
   m_TagString: BuildingBlock
@@ -412,20 +357,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.001, z: 0.999}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5623752957037690090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8260641079164957977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b71b6f18ea55f443b9ae4e61a170a40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingBlock_Parent: {fileID: 6504768422917535472}
-  buildingBlockColliderDirection: 3
 --- !u!1 &8591964494514012147
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +367,6 @@ GameObject:
   m_Component:
   - component: {fileID: 615166514839845391}
   - component: {fileID: 847440638143904105}
-  - component: {fileID: 8652638250064886698}
   m_Layer: 7
   m_Name: Collider_Right
   m_TagString: BuildingBlock
@@ -480,20 +410,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.001, y: 0.999, z: 0.999}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8652638250064886698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8591964494514012147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b71b6f18ea55f443b9ae4e61a170a40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingBlock_Parent: {fileID: 6504768422917535472}
-  buildingBlockColliderDirection: 5
 --- !u!1 &8815233503749311390
 GameObject:
   m_ObjectHideFlags: 0

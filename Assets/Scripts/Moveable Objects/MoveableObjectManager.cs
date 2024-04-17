@@ -248,28 +248,28 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     public MoveableObjectInfo GetMoveableObjectInfo(MoveableObject moveableObject)
     {
         //Machine
-        if (moveableObject.machineType != MachineObjectNames.None)
-        {
-            for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
-            {
-                if (moveableObject_SO.moveableObjectList[i].machineType == moveableObject.machineType)
-                {
-                    return moveableObject_SO.moveableObjectList[i];
-                }
-            }
-        }
+        //if (moveableObject.machineType != MachineObjectNames.None)
+        //{
+        //    for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
+        //    {
+        //        if (moveableObject_SO.moveableObjectList[i].machineType == moveableObject.machineType)
+        //        {
+        //            return moveableObject_SO.moveableObjectList[i];
+        //        }
+        //    }
+        //}
 
         //Furniture
-        else if (moveableObject.furnitureType != FurnitureObjectNames.None)
-        {
-            for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
-            {
-                if (moveableObject_SO.moveableObjectList[i].furnitureType == moveableObject.furnitureType)
-                {
-                    return moveableObject_SO.moveableObjectList[i];
-                }
-            }
-        }
+        //else if (moveableObject.furnitureType != FurnitureObjectNames.None)
+        //{
+        //    for (int i = 0; i < moveableObject_SO.moveableObjectList.Count; i++)
+        //    {
+        //        if (moveableObject_SO.moveableObjectList[i].furnitureType == moveableObject.furnitureType)
+        //        {
+        //            return moveableObject_SO.moveableObjectList[i];
+        //        }
+        //    }
+        //}
 
         return null;
     }

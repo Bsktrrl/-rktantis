@@ -14,6 +14,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
     [Header("Active BuildingObject")] //From the BuildingObject Menu - Tablet
     public ActiveBuildingObject activeBuildingObject_Info;
+    public List<WorldBuildingObject> worldBuildingObjectInfoList = new List<WorldBuildingObject>();
+
+    [Header("World Objects")]
+    public GameObject worldObject_Parent;
+    public List<GameObject> worldBuildingObjectList = new List<GameObject>();
+    public List<GameObject> worldBuildingObjectListSpawned = new List<GameObject>();
 
     [Header("Have enough items to Build?")]
     public bool enoughItemsToBuild;
@@ -23,15 +29,51 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
     public void LoadData()
     {
+        //Set activeBuildingObject_Info
         activeBuildingObject_Info = DataManager.Instance.activeBuildingObject_Store;
-
         BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
+
+        //Set worldBuildingObjectInfoList
+        worldBuildingObjectInfoList = DataManager.Instance.worldBuildingObjectInfoList_Store;
+
+        for (int i = 0; i < worldBuildingObjectInfoList.Count; i++)
+        {
+            for (int j = 0; j < worldBuildingObjectList.Count; j++)
+            {
+                if (worldBuildingObjectList[j].GetComponent<MoveableObject>())
+                {
+                    if (worldBuildingObjectInfoList[i].buildingObjectType_Active == worldBuildingObjectList[j].GetComponent<MoveableObject>().buildingObjectType
+                        && worldBuildingObjectInfoList[i].buildingMaterial_Active == worldBuildingObjectList[j].GetComponent<MoveableObject>().buildingMaterial
+                        && worldBuildingObjectInfoList[i].buildingBlockObjectName_Active == worldBuildingObjectList[j].GetComponent<MoveableObject>().buildingBlockObjectName
+                        && worldBuildingObjectInfoList[i].furnitureObjectName_Active == worldBuildingObjectList[j].GetComponent<MoveableObject>().furnitureObjectName
+                        && worldBuildingObjectInfoList[i].machineObjectName_Active == worldBuildingObjectList[j].GetComponent<MoveableObject>().machineObjectName)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(worldBuildingObjectList[j]) as GameObject);
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.parent = worldObject_Parent.transform;
+                    }
+                }
+            }
+        }
 
         SaveData();
     }
     public void SaveData()
     {
         DataManager.Instance.activeBuildingObject_Store = activeBuildingObject_Info;
+        DataManager.Instance.worldBuildingObjectInfoList_Store = worldBuildingObjectInfoList;
+    }
+
+
+    //--------------------
+
+
+    public void AddWorldBuildingObject()
+    {
+
+    }
+    public void RemoveBuildingObject()
+    {
+
     }
 
 
@@ -86,7 +128,21 @@ public class ActiveBuildingObject
 {
     public BuildingObjectTypes buildingObjectType_Active;
     public BuildingMaterial buildingMaterial_Active;
+    [Space(5)]
+    public BuildingBlockObjectNames buildingBlockObjectName_Active;
+    public FurnitureObjectNames furnitureObjectName_Active;
+    public MachineObjectNames machineObjectName_Active;
+}
 
+[Serializable]
+public class WorldBuildingObject
+{
+    public Vector3 objectPos;
+    public Quaternion objectRot;
+
+    public BuildingObjectTypes buildingObjectType_Active;
+    public BuildingMaterial buildingMaterial_Active;
+    [Space(5)]
     public BuildingBlockObjectNames buildingBlockObjectName_Active;
     public FurnitureObjectNames furnitureObjectName_Active;
     public MachineObjectNames machineObjectName_Active;
