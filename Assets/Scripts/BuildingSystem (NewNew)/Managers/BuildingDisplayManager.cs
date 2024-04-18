@@ -23,15 +23,26 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
     [Header("ScreenInfo")]
     [SerializeField] GameObject buildingObject_ScreenInfo_Parent;
+
+    [SerializeField] GameObject buildingObject_Requirement_ScreenInfo_Parent;
     public List<GameObject> requirementScreenList = new List<GameObject>();
+
+    [SerializeField] GameObject buildingObject_Reward_ScreenInfo_Parent;
+    public List<GameObject> rewardScreenList = new List<GameObject>();
 
 
     //--------------------
 
 
+    private void Start()
+    {
+        buildingObject_ScreenInfo_Parent.SetActive(true);
+    }
     private void Update()
     {
-        UpdateScreenBuildingDisplay();
+        UpdateScreenBuildingRequirementDisplay();
+
+        UpdateScreenBuildingRewardDisplay();
     }
 
 
@@ -119,6 +130,50 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         }
 
         //Add all RequirementObjects to the List
+        for (int i = 0; i < index; i++)
+        {
+            requirementSlotTempList.Add(Instantiate(buildingObject_RequirementListSlot_Prefab) as GameObject);
+            requirementSlotTempList[requirementSlotTempList.Count - 1].transform.parent = parent.transform;
+            requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        }
+
+        return requirementSlotTempList;
+    }
+    List<GameObject> InstantiateRewardList(GameObject parent)
+    {
+        List<GameObject> requirementSlotTempList = new List<GameObject>();
+
+        //Setup the Header
+        requirementSlotTempList.Add(Instantiate(buildingObject_RequirementListHeader_Prefab) as GameObject);
+        requirementSlotTempList[requirementSlotTempList.Count - 1].transform.parent = parent.transform;
+        requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+        requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+
+        //Setup all rewards
+        int index = 0;
+        if (SelectionManager.Instance.selectedMovableObjectToRemove)
+        {
+            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
+            {
+                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
+                {
+                    index = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingBlockObjectName, SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingMaterial).objectInfo.removingReward.Count;
+                }
+
+                else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+                {
+                    index = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().furnitureObjectName).objectInfo.removingReward.Count;
+                }
+
+                else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+                {
+                    index = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().machineObjectName).objectInfo.removingReward.Count;
+                }
+            }
+        }
+
+        //Add all RewardObjects to the List
         for (int i = 0; i < index; i++)
         {
             requirementSlotTempList.Add(Instantiate(buildingObject_RequirementListSlot_Prefab) as GameObject);
@@ -276,7 +331,6 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         #endregion
     }
 
-
     public void ResetDisplay()
     {
         for (int i = requirementList.Count - 1; i >= 0; i--)
@@ -295,87 +349,93 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
     //--------------------
 
 
-    #region Display Screen - Hammer
-    void UpdateScreenBuildingDisplay()
+    #region Display Screen - Hammer & Axe
+    //Hammer
+    void UpdateScreenBuildingRequirementDisplay()
     {
         if ((HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer
             || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer
             || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
             && MainManager.Instance.menuStates == MenuStates.None)
         {
-            buildingObject_ScreenInfo_Parent.SetActive(true);
+            buildingObject_Requirement_ScreenInfo_Parent.SetActive(true);
+
+            return;
         }
         else
         {
-            buildingObject_ScreenInfo_Parent.SetActive(false);
+            buildingObject_Requirement_ScreenInfo_Parent.SetActive(false);
         }
     }
-
-    public void UpdateScreenBuildingDisplayInfo()
+    public void UpdateScreenBuildingRequirementDisplayInfo()
     {
-        if (BuildingSystemManager.Instance.activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
+        if (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
         {
-            UpdateSelectedScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(BuildingSystemManager.Instance.activeBuildingObject_Info.buildingBlockObjectName_Active, BuildingSystemManager.Instance.activeBuildingObject_Info.buildingMaterial_Active));
-        }
-        else if (BuildingSystemManager.Instance.activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
-        {
-            UpdateSelectedScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(BuildingSystemManager.Instance.activeBuildingObject_Info.furnitureObjectName_Active));
-        }
-        else if (BuildingSystemManager.Instance.activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
-        {
-            UpdateSelectedScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(BuildingSystemManager.Instance.activeBuildingObject_Info.machineObjectName_Active));
-        }
-        else
-        {
-            ResetScreenDisplay();
+            if (BuildingSystemManager.Instance.activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
+            {
+                UpdateSelectedRequirementScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(BuildingSystemManager.Instance.activeBuildingObject_Info.buildingBlockObjectName_Active, BuildingSystemManager.Instance.activeBuildingObject_Info.buildingMaterial_Active));
+            }
+            else if (BuildingSystemManager.Instance.activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
+            {
+                UpdateSelectedRequirementScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(BuildingSystemManager.Instance.activeBuildingObject_Info.furnitureObjectName_Active));
+            }
+            else if (BuildingSystemManager.Instance.activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
+            {
+                UpdateSelectedRequirementScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(BuildingSystemManager.Instance.activeBuildingObject_Info.machineObjectName_Active));
+            }
+            else
+            {
+                ResetRequirementScreenDisplay();
+            }
         }
     }
 
-    public void UpdateSelectedScreenDisplay(BuildingBlockInfo buildingBlocksInfo)
+    public void UpdateSelectedRequirementScreenDisplay(BuildingBlockInfo buildingBlocksInfo)
     {
         if (buildingBlocksInfo == null)
         {
-            ResetScreenDisplay();
+            ResetRequirementScreenDisplay();
             return;
         }
 
-        ResetScreenDisplay();
+        ResetRequirementScreenDisplay();
 
-        buildingObject_ScreenInfo_Parent.SetActive(true);
+        buildingObject_Requirement_ScreenInfo_Parent.SetActive(true);
 
-        requirementScreenList = InstantiateRequirementList(buildingObject_ScreenInfo_Parent);
+        requirementScreenList = InstantiateRewardList(buildingObject_Requirement_ScreenInfo_Parent);
         DisplayScreenRequirements();
     }
-    public void UpdateSelectedScreenDisplay(FurnitureInfo furnitureInfo)
+    public void UpdateSelectedRequirementScreenDisplay(FurnitureInfo furnitureInfo)
     {
         if (furnitureInfo == null)
         {
-            ResetScreenDisplay();
+            ResetRequirementScreenDisplay();
             return;
         }
 
-        ResetScreenDisplay();
+        ResetRequirementScreenDisplay();
 
-        buildingObject_ScreenInfo_Parent.SetActive(true);
+        buildingObject_Requirement_ScreenInfo_Parent.SetActive(true);
 
-        requirementScreenList = InstantiateRequirementList(buildingObject_ScreenInfo_Parent);
+        requirementScreenList = InstantiateRewardList(buildingObject_Requirement_ScreenInfo_Parent);
         DisplayScreenRequirements();
     }
-    public void UpdateSelectedScreenDisplay(MachineInfo machinesInfo)
+    public void UpdateSelectedRequirementScreenDisplay(MachineInfo machinesInfo)
     {
         if (machinesInfo == null)
         {
-            ResetScreenDisplay();
+            ResetRequirementScreenDisplay();
             return;
         }
 
-        ResetScreenDisplay();
+        ResetRequirementScreenDisplay();
 
-        buildingObject_ScreenInfo_Parent.SetActive(true);
+        buildingObject_Requirement_ScreenInfo_Parent.SetActive(true);
 
-        requirementScreenList = InstantiateRequirementList(buildingObject_ScreenInfo_Parent);
+        requirementScreenList = InstantiateRewardList(buildingObject_Requirement_ScreenInfo_Parent);
         DisplayScreenRequirements();
     }
+
     void DisplayScreenRequirements()
     {
         BuildingBlockInfo buildingBlocksInfo = new BuildingBlockInfo();
@@ -513,8 +573,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         }
         #endregion
     }
-    
-    public void ResetScreenDisplay()
+    public void ResetRequirementScreenDisplay()
     {
         for (int i = requirementScreenList.Count - 1; i >= 0; i--)
         {
@@ -523,7 +582,231 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         requirementScreenList.Clear();
 
-        buildingObject_ScreenInfo_Parent.SetActive(false);
+        buildingObject_Requirement_ScreenInfo_Parent.SetActive(false);
+    }
+
+
+    //--------------------
+
+
+    //Axe
+    void UpdateScreenBuildingRewardDisplay()
+    {
+        if (SelectionManager.Instance.selectedMovableObjectToRemove)
+        {
+            if ((HotbarManager.Instance.selectedItem == Items.WoodAxe
+            || HotbarManager.Instance.selectedItem == Items.StoneAxe
+            || HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
+            && MainManager.Instance.menuStates == MenuStates.None
+            && SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
+            {
+                buildingObject_Reward_ScreenInfo_Parent.SetActive(true);
+
+                return;
+            }
+            else
+            {
+                buildingObject_Reward_ScreenInfo_Parent.SetActive(false);
+            }
+        }
+    }
+    public void UpdateScreenBuildingRewardDisplayInfo()
+    {
+        if (SelectionManager.Instance.selectedMovableObjectToRemove)
+        {
+            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
+            {
+                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
+                {
+                    UpdateSelectedRewardScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingBlockObjectName, SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingMaterial));
+                }
+                else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+                {
+                    UpdateSelectedRewardScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().furnitureObjectName));
+                }
+                else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+                {
+                    UpdateSelectedRewardScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().machineObjectName));
+                }
+                else
+                {
+                    print("1. Reset");
+
+                    ResetRewardScreenDisplay();
+                }
+            }
+            else
+            {
+                print("2. Reset");
+
+                ResetRewardScreenDisplay();
+            }
+        }
+        else
+        {
+            print("3. Reset");
+
+            ResetRewardScreenDisplay();
+        }
+    }
+
+    public void UpdateSelectedRewardScreenDisplay(BuildingBlockInfo buildingBlocksInfo)
+    {
+        if (buildingBlocksInfo == null)
+        {
+            ResetRewardScreenDisplay();
+            return;
+        }
+
+        ResetRewardScreenDisplay();
+
+        buildingObject_Reward_ScreenInfo_Parent.SetActive(true);
+
+        rewardScreenList = InstantiateRewardList(buildingObject_Reward_ScreenInfo_Parent);
+        DisplayScreenRewards();
+    }
+    public void UpdateSelectedRewardScreenDisplay(FurnitureInfo furnitureInfo)
+    {
+        if (furnitureInfo == null)
+        {
+            ResetRewardScreenDisplay();
+            return;
+        }
+
+        ResetRewardScreenDisplay();
+
+        buildingObject_Reward_ScreenInfo_Parent.SetActive(true);
+
+        rewardScreenList = InstantiateRewardList(buildingObject_Reward_ScreenInfo_Parent);
+        DisplayScreenRewards();
+    }
+    public void UpdateSelectedRewardScreenDisplay(MachineInfo machinesInfo)
+    {
+        if (machinesInfo == null)
+        {
+            ResetRewardScreenDisplay();
+            return;
+        }
+
+        ResetRewardScreenDisplay();
+
+        buildingObject_Reward_ScreenInfo_Parent.SetActive(true);
+
+        rewardScreenList = InstantiateRewardList(buildingObject_Reward_ScreenInfo_Parent);
+        DisplayScreenRewards();
+    }
+
+    void DisplayScreenRewards()
+    {
+        BuildingBlockInfo buildingBlocksInfo = new BuildingBlockInfo();
+        FurnitureInfo furnitureInfo = new FurnitureInfo();
+        MachineInfo machineInfo = new MachineInfo();
+
+        //Display the Header
+        #region
+        if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
+        {
+            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
+            {
+                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingBlockObjectName != BuildingBlockObjectNames.None)
+                {
+                    buildingBlocksInfo = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingBlockObjectName, SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingMaterial);
+
+                    if (rewardScreenList.Count > 0)
+                    {
+                        if (rewardScreenList[0].GetComponent<BuildingRequirementSlot>())
+                        {
+                            rewardScreenList[0].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = Color.white;
+                            rewardScreenList[0].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = buildingBlocksInfo.objectInfo.objectSprite;
+                            rewardScreenList[0].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = buildingBlocksInfo.objectName;
+                        }
+                    }
+                }
+            }
+            else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+            {
+                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().furnitureObjectName != FurnitureObjectNames.None)
+                {
+                    furnitureInfo = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().furnitureObjectName);
+
+                    if (rewardScreenList.Count > 0)
+                    {
+                        if (rewardScreenList[0].GetComponent<BuildingRequirementSlot>())
+                        {
+                            rewardScreenList[0].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = Color.white;
+                            rewardScreenList[0].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = furnitureInfo.objectInfo.objectSprite;
+                            rewardScreenList[0].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = furnitureInfo.objectName;
+                        }
+                    }
+                }
+            }
+            else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+            {
+                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().machineObjectName != MachineObjectNames.None)
+                {
+                    machineInfo = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().machineObjectName);
+
+                    if (rewardScreenList.Count > 0)
+                    {
+                        if (rewardScreenList[0].GetComponent<BuildingRequirementSlot>())
+                        {
+                            rewardScreenList[0].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = Color.white;
+                            rewardScreenList[0].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = machineInfo.objectInfo.objectSprite;
+                            rewardScreenList[0].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = machineInfo.objectName;
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+        //Display the Requirements
+        #region
+        for (int i = 1; i < rewardScreenList.Count; i++)
+        {
+            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
+            {
+                if (rewardScreenList[i].GetComponent<BuildingRequirementSlot>())
+                {
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.gameObject.SetActive(false);
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(buildingBlocksInfo.objectInfo.removingReward[i - 1].itemName).hotbarSprite;
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = buildingBlocksInfo.objectInfo.removingReward[i - 1].itemName.ToString();
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + buildingBlocksInfo.objectInfo.removingReward[i - 1].amount;
+                }
+            }
+            else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+            {
+                if (rewardScreenList[i].GetComponent<BuildingRequirementSlot>())
+                {
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.gameObject.SetActive(false);
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(furnitureInfo.objectInfo.removingReward[i - 1].itemName).hotbarSprite;
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = furnitureInfo.objectInfo.removingReward[i - 1].itemName.ToString();
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + furnitureInfo.objectInfo.removingReward[i - 1].amount;
+                }
+            }
+            else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+            {
+                if (rewardScreenList[i].GetComponent<BuildingRequirementSlot>())
+                {
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.gameObject.SetActive(false);
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(machineInfo.objectInfo.removingReward[i - 1].itemName).hotbarSprite;
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = machineInfo.objectInfo.removingReward[i - 1].itemName.ToString();
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + machineInfo.objectInfo.removingReward[i - 1].amount;
+                }
+            }
+        }
+        #endregion
+    }
+    public void ResetRewardScreenDisplay()
+    {
+        for (int i = rewardScreenList.Count - 1; i >= 0; i--)
+        {
+            Destroy(rewardScreenList[i]);
+        }
+
+        rewardScreenList.Clear();
+
+        buildingObject_Reward_ScreenInfo_Parent.SetActive(false);
     }
     #endregion
 

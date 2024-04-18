@@ -61,7 +61,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     {
         //Set activeBuildingObject_Info
         activeBuildingObject_Info = DataManager.Instance.activeBuildingObject_Store;
-        BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
 
         //Set worldBuildingObjectInfoList
         worldBuildingObjectInfoList = DataManager.Instance.worldBuildingObjectInfoList_Store;
@@ -101,6 +100,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         SpawnNewSelectedBuildingObject();
+
+        BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
 
         SaveData();
     }
@@ -147,7 +148,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             newObject.transform.localRotation = Quaternion.identity;
         }
     }
-    public void RemoveSelectedBuildingObjectChild()
+    void RemoveSelectedBuildingObjectChild()
     {
         for (int i = WorldObjectGhost_Parent.transform.childCount - 1; i >= 0; i--)
         {
@@ -175,16 +176,10 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                     if (enoughItemsToBuild)
                     {
-                        // Assign the new material to all materials in the array
                         for (int j = 0; j < materials.Length; j++)
                         {
                             materials[j] = canPlace_Material;
                         }
-
-                        //for (int j = 0; j < WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().sharedMaterials.Length; j++)
-                        //{
-                        //    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials[j] = canPlace_Material;
-                        //}
                     }
                     else
                     {
@@ -192,14 +187,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                         {
                             materials[j] = cannotPlace_Material;
                         }
-                        
-                        //for (int j = 0; j < WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().sharedMaterials.Length; j++)
-                        //{
-                        //    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials[j] = cannotPlace_Material;
-                        //}
                     }
 
-                    // Assign the updated materials array back to the MeshRenderer
                     WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials = materials;
                 }
                 else if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>())
@@ -212,11 +201,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                         {
                             materials[j] = canPlace_Material;
                         }
-
-                        //for (int j = 0; j < WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().sharedMaterials.Length; j++)
-                        //{
-                        //    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials[j] = canPlace_Material;
-                        //}
                     }
                     else
                     {
@@ -224,14 +208,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                         {
                             materials[j] = cannotPlace_Material;
                         }
-
-                        //for (int j = 0; j < WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().sharedMaterials.Length; j++)
-                        //{
-                        //    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials[j] = cannotPlace_Material;
-                        //}
                     }
 
-                    // Assign the updated materials array back to the MeshRenderer
                     WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials = materials;
                 }
             }
@@ -392,9 +370,22 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         SaveData();
     }
-    public void RemoveWorldBuildingObject()
+    public void RemoveWorldBuildingObject(MoveableObject buildingObject)
     {
+        for (int i = 0; i < worldBuildingObjectListSpawned.Count; i++)
+        {
+            if (buildingObject.gameObject == worldBuildingObjectListSpawned[i])
+            {
+                worldBuildingObjectInfoList.RemoveAt(i);
 
+                Destroy(worldBuildingObjectListSpawned[i]);
+                worldBuildingObjectListSpawned.RemoveAt(i);
+
+                break;
+            }
+        }
+
+        SaveData();
     }
 
 

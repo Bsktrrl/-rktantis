@@ -246,7 +246,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
         SetBuildingRequirement();
 
-        BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
+        BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
 
         return true;
     }
@@ -295,7 +295,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
         SetBuildingRequirement();
 
-        BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
+        BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
 
         return true;
     }
@@ -366,7 +366,7 @@ public class InventoryManager : Singleton<InventoryManager>
         HotbarManager.Instance.SetSelectedItem();
         HotbarManager.Instance.ChangeItemInHand();
 
-        BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
+        BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
 
         SaveData();
     }
@@ -528,7 +528,7 @@ public class InventoryManager : Singleton<InventoryManager>
         }
         #endregion
 
-        BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
+        BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
 
         SaveData();
     }
@@ -560,7 +560,7 @@ public class InventoryManager : Singleton<InventoryManager>
         //Update the Hand to see if slot is empty
         HotbarManager.Instance.ChangeItemInHand();
 
-        BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
+        BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
 
         SaveData();
     }

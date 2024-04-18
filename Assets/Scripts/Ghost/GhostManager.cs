@@ -106,16 +106,16 @@ public class GhostManager : Singleton<GhostManager>
             switch (WeatherManager.Instance.weatherTypeDayList[0])
             {
                 case WeatherType.Cold:
-                    ghostSpawnAmount = 1;
+                    ghostSpawnAmount = 6;
                     break;
                 case WeatherType.Cloudy:
-                    ghostSpawnAmount = 1; //(6)
+                    ghostSpawnAmount = 4;
                     break;
                 case WeatherType.Sunny:
-                    ghostSpawnAmount = 1; //(3)
+                    ghostSpawnAmount = 2;
                     break;
                 case WeatherType.Windy:
-                    ghostSpawnAmount = 1; //(0)
+                    ghostSpawnAmount = 0;
                     break;
 
                 default:

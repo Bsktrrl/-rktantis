@@ -51,19 +51,19 @@ public class InteractableObject : MonoBehaviour
 
     void ObjectInteraction()
     {
-        if (gameObject)
-        {
-            if (gameObject.GetComponent<MoveableObject>())
-            {
-                if (gameObject.GetComponent<MoveableObject>().isSelectedForMovement) { return; }
-            }
-        }
+        //if (gameObject)
+        //{
+        //    if (gameObject.GetComponent<MoveableObject>())
+        //    {
+        //        if (gameObject.GetComponent<MoveableObject>().isSelectedForMovement) { return; }
+        //    }
+        //}
         
 
         //-----
 
 
-        if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selecedObject == gameObject
+        if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selectedObject == gameObject
             && MainManager.Instance.menuStates == MenuStates.None)
         {
             //If Object is an item

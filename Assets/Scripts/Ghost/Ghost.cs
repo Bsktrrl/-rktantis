@@ -553,7 +553,6 @@ public class Ghost : MonoBehaviour
         {
             if (Vector3.Distance(hit.point, gameObject.transform.position) <= 4)
             {
-                print("Go Upwards");
                 targetPoint = new Vector3(targetPoint.x, targetPoint.y + 0.25f, targetPoint.z);
                 terrainDirection_Forward = 1;
             }
