@@ -218,6 +218,20 @@ public class EquippmentManager : Singleton<EquippmentManager>
                         //Add Items to inventory from the removal
                         if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
                         {
+                            //Play Placement Sound
+                            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingMaterial == BuildingMaterial.Wood)
+                            {
+                                SoundManager.Instance.Play_Building_Remove_Wood_Clip();
+                            }
+                            else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingMaterial == BuildingMaterial.Stone)
+                            {
+                                SoundManager.Instance.Play_Building_Remove_Stone_Clip();
+                            }
+                            else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingMaterial == BuildingMaterial.Cryonite)
+                            {
+                                SoundManager.Instance.Play_Building_Remove_Cryonite_Clip();
+                            }
+
                             BuildingBlockInfo buildingBlockInfo = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingBlockObjectName, SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingMaterial);
 
                             for (int i = 0; i < buildingBlockInfo.objectInfo.removingReward.Count; i++)
@@ -230,6 +244,12 @@ public class EquippmentManager : Singleton<EquippmentManager>
                         }
                         else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
                         {
+                            //Play Placement Sound
+                            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingMaterial == BuildingMaterial.Wood)
+                            {
+                                SoundManager.Instance.Play_Building_Remove_MoveableObject_Clip();
+                            }
+
                             FurnitureInfo furnitureInfo = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().furnitureObjectName);
 
                             for (int i = 0; i < furnitureInfo.objectInfo.removingReward.Count; i++)
@@ -242,6 +262,12 @@ public class EquippmentManager : Singleton<EquippmentManager>
                         }
                         else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
                         {
+                            //Play Placement Sound
+                            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingMaterial == BuildingMaterial.Wood)
+                            {
+                                SoundManager.Instance.Play_Building_Remove_MoveableObject_Clip();
+                            }
+
                             MachineInfo machineInfo = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().machineObjectName);
 
                             for (int i = 0; i < machineInfo.objectInfo.removingReward.Count; i++)

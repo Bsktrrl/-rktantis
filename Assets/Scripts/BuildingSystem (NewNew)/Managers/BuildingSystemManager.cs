@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class BuildingSystemManager : Singleton<BuildingSystemManager>
 {
+    #region Variables
     [Header("_SO")]
     public BuildingBlocks_SO buildingBlocks_SO;
     public Furniture_SO furniture_SO;
@@ -38,6 +39,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
     [Header("Have enough items to Build?")]
     public bool enoughItemsToBuild;
+    #endregion
 
 
     //--------------------
@@ -57,6 +59,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     //--------------------
 
 
+    #region Save/Load
     public void LoadData()
     {
         //Set activeBuildingObject_Info
@@ -110,11 +113,13 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         DataManager.Instance.activeBuildingObject_Store = activeBuildingObject_Info;
         DataManager.Instance.worldBuildingObjectInfoList_Store = worldBuildingObjectInfoList;
     }
+    #endregion
 
 
     //--------------------
 
 
+    #region Object Spawning
     public void SpawnNewSelectedBuildingObject()
     {
         //Remove previous child
@@ -155,11 +160,13 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().DestroyObject();
         }
     }
+    #endregion
 
 
     //--------------------
 
 
+    #region ObjectMovement
     public void MoveWorldBuildingObject()
     {
         if (WorldObjectGhost_Parent.transform.childCount > 0
@@ -252,11 +259,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             WorldObjectGhost_Parent.SetActive(false);
         }
     }
+    #endregion
 
 
     //--------------------
 
-
+    #region Object Rotation
     void SetObjectRotation_Right()
     {
         rotationValue += rotationSpeed * Time.deltaTime;
@@ -265,11 +273,13 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     {
         rotationValue -= rotationSpeed * Time.deltaTime;
     }
+    #endregion
 
 
     //--------------------
 
 
+    #region Add/Remove BuildingBlocks
     public void PlaceWorldBuildingObject()
     {
         if (WorldObjectGhost_Parent.activeInHierarchy && WorldObjectGhost_Parent.transform.childCount > 0
@@ -387,6 +397,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         SaveData();
     }
+    #endregion
 
 
     //--------------------
