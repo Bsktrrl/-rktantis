@@ -163,8 +163,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
     //The point in the animation where equipped item hits
     public void Hit(EquippedItem equippedItem)
     {
-        print("0. Interact with a Tree");
-        //print("Hit EquippedItem - " + subCategories + " [" + itemName.ToString() + "]");
+        print("0. Interact with a hit");
 
         #region
         //If Pickaxe is equipped - For Mining
@@ -194,9 +193,8 @@ public class EquippmentManager : Singleton<EquippmentManager>
         }
         #endregion
 
-        //If Axe is equipped
+        //If Axe is equipped - For cutting
         #region
-        print("1. Interact with a Tree");
         if (equippedItem.subCategories == ItemSubCategories.Axe)
         {
             if (equippedItem.itemName == Items.WoodAxe || equippedItem.itemName == Items.StoneAxe || equippedItem.itemName == Items.CryoniteAxe)
@@ -212,15 +210,25 @@ public class EquippmentManager : Singleton<EquippmentManager>
         }
         else if (equippedItem.itemName == Items.Flashlight || equippedItem.itemName == Items.AríditeCrystal || equippedItem.itemName == Items.None)
         {
-            print("2. Interact with a Tree");
             if (SelectionManager.Instance.selecedObject)
             {
-                print("3. Interact with a Tree");
                 if (SelectionManager.Instance.selecedObject.GetComponent<Tree>())
                 {
-                    print("4. Interact with a Tree");
                     SelectionManager.Instance.selecedObject.GetComponent<Tree>().TreeInteraction(equippedItem.itemName);
                 }
+            }
+        }
+        #endregion
+
+        //If Hammer is equipped - For Building
+        #region
+        if (equippedItem.subCategories == ItemSubCategories.BuildingHammer)
+        {
+            print("1. Hammer");
+            if (equippedItem.itemName == Items.WoodBuildingHammer || equippedItem.itemName == Items.StoneBuildingHammer || equippedItem.itemName == Items.CryoniteBuildingHammer)
+            {
+                print("2. Hammer");
+                BuildingSystemManager.Instance.PlaceWorldBuildingObject();
             }
         }
         #endregion
@@ -272,6 +280,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
             equippedItem.RemoveDurability();
         }
 
+        //Change Water level in water container
         if (HotbarManager.Instance.selectedItem == Items.Bucket || HotbarManager.Instance.selectedItem == Items.Cup)
         {
             if (equippedItem.gameObject.GetComponent<WaterContainer>())

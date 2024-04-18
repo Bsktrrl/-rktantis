@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Arms : Singleton<Arms>
@@ -708,6 +709,22 @@ public class Arms : Singleton<Arms>
                             }
                         }
                     }
+                    #endregion
+
+                    #region Hammer
+                    //Hammer
+                    if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.WoodBuildingHammer
+                        || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.StoneBuildingHammer
+                        || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.CryoniteBuildingHammer)
+                    {
+                        EquippedItem equippedItem = EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>();
+
+                        //Hit the Tree
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
+                    }
+
+                    
                     #endregion
 
                     #region Water Container

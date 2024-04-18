@@ -18,7 +18,7 @@ public class MoveableObject : MonoBehaviour
     public MachineObjectNames machineObjectName;
 
     [Header("Mesh")]
-    public SkinnedMeshRenderer meshRenderer;
+    public List<GameObject> modelList = new List<GameObject>();
 
 
     //--------------------
@@ -47,5 +47,10 @@ public class MoveableObject : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         canBePlaced = false;
+    }
+
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
     }
 }

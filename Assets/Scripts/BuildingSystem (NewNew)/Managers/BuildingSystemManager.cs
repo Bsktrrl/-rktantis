@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,7 +21,20 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public GameObject worldObject_Parent;
     public List<GameObject> worldBuildingObjectListSpawned = new List<GameObject>(); //All Physical Objects in the world
 
-    public GameObject WorldObjectGhost_Parent;
+    public GameObject WorldObjectGhost_Parent; //Ghost Parent
+
+    [Header("Object Ghost")]
+    public Material canPlace_Material;
+    public Material cannotPlace_Material;
+    public LayerMask layerMask_Ground;
+
+    public float rotationValue = 0;
+    [SerializeField] float rotationSpeed = 75;
+
+    public GameObject freeGhost_LookedAt;
+
+    Ray ray;
+    RaycastHit hit;
 
     [Header("Have enough items to Build?")]
     public bool enoughItemsToBuild;
@@ -29,6 +43,11 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     //--------------------
 
 
+    private void Start()
+    {
+        PlayerButtonManager.isPressed_MoveableRotation_Right += SetObjectRotation_Right;
+        PlayerButtonManager.isPressed_MoveableRotation_Left += SetObjectRotation_Left;
+    }
     private void Update()
     {
         MoveWorldBuildingObject();
@@ -51,22 +70,37 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         {
             if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
             {
-                worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active).objectInfo.worldObject) as GameObject);
-    }
+                if (GetBuildingObjectInfo(worldBuildingObjectInfoList[i].buildingBlockObjectName_Active, worldBuildingObjectInfoList[i].buildingMaterial_Active).objectInfo.worldObject != null)
+                {
+                    worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(worldBuildingObjectInfoList[i].buildingBlockObjectName_Active, worldBuildingObjectInfoList[i].buildingMaterial_Active).objectInfo.worldObject) as GameObject);
+
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.parent = worldObject_Parent.transform;
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
+                }
+            }
             else if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.Furniture)
             {
-                worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.furnitureObjectName_Active).objectInfo.worldObject) as GameObject);
+                if (GetBuildingObjectInfo(worldBuildingObjectInfoList[i].furnitureObjectName_Active).objectInfo.worldObject != null)
+                {
+                    worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(worldBuildingObjectInfoList[i].furnitureObjectName_Active).objectInfo.worldObject) as GameObject);
+
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.parent = worldObject_Parent.transform;
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
+                }
             }
             else if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.Machine)
             {
-                worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active).objectInfo.worldObject) as GameObject);
-            }
+                if (GetBuildingObjectInfo(worldBuildingObjectInfoList[i].machineObjectName_Active).objectInfo.worldObject != null)
+                {
+                    worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(worldBuildingObjectInfoList[i].machineObjectName_Active).objectInfo.worldObject) as GameObject);
 
-            worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.parent = worldObject_Parent.transform;
-            worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.parent = worldObject_Parent.transform;
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
+                }
+            }
         }
 
-        SpawnNewBuildingObject();
+        SpawnNewSelectedBuildingObject();
 
         SaveData();
     }
@@ -80,10 +114,10 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     //--------------------
 
 
-    public void SpawnNewBuildingObject()
+    public void SpawnNewSelectedBuildingObject()
     {
         //Remove previous child
-        RemoveBuildingObjectChild();
+        RemoveSelectedBuildingObjectChild();
 
         //Get a new Child of the selected BuildingObject
         GameObject newObject = new GameObject();
@@ -113,29 +147,145 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             newObject.transform.localRotation = Quaternion.identity;
         }
     }
-    public void RemoveBuildingObjectChild()
+    public void RemoveSelectedBuildingObjectChild()
     {
         for (int i = WorldObjectGhost_Parent.transform.childCount - 1; i >= 0; i--)
         {
-            Destroy(WorldObjectGhost_Parent.transform.GetChild(i));
+            WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().DestroyObject();
         }
     }
+
+
+    //--------------------
+
+
     public void MoveWorldBuildingObject()
     {
         if (WorldObjectGhost_Parent.transform.childCount > 0
             && MainManager.Instance.menuStates == MenuStates.None
             && (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer))
         {
-            print("Move BuildingObject");
+            //Set New Material on all Materials of the Object
+            #region
+            for (int i = 0; i < WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList.Count; i++)
+            {
+                if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>())
+                {
+                    Material[] materials = WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials;
 
-            WorldObjectGhost_Parent.SetActive(true);
+                    if (enoughItemsToBuild)
+                    {
+                        // Assign the new material to all materials in the array
+                        for (int j = 0; j < materials.Length; j++)
+                        {
+                            materials[j] = canPlace_Material;
+                        }
+
+                        //for (int j = 0; j < WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().sharedMaterials.Length; j++)
+                        //{
+                        //    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials[j] = canPlace_Material;
+                        //}
+                    }
+                    else
+                    {
+                        for (int j = 0; j < materials.Length; j++)
+                        {
+                            materials[j] = cannotPlace_Material;
+                        }
+                        
+                        //for (int j = 0; j < WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().sharedMaterials.Length; j++)
+                        //{
+                        //    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials[j] = cannotPlace_Material;
+                        //}
+                    }
+
+                    // Assign the updated materials array back to the MeshRenderer
+                    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials = materials;
+                }
+                else if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>())
+                {
+                    Material[] materials = WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials;
+
+                    if (enoughItemsToBuild)
+                    {
+                        for (int j = 0; j < materials.Length; j++)
+                        {
+                            materials[j] = canPlace_Material;
+                        }
+
+                        //for (int j = 0; j < WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().sharedMaterials.Length; j++)
+                        //{
+                        //    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials[j] = canPlace_Material;
+                        //}
+                    }
+                    else
+                    {
+                        for (int j = 0; j < materials.Length; j++)
+                        {
+                            materials[j] = cannotPlace_Material;
+                        }
+
+                        //for (int j = 0; j < WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().sharedMaterials.Length; j++)
+                        //{
+                        //    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials[j] = cannotPlace_Material;
+                        //}
+                    }
+
+                    // Assign the updated materials array back to the MeshRenderer
+                    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials = materials;
+                }
+            }
+            #endregion
+
+            //Change Position and Rotation
+            #region
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + 2, layerMask_Ground))
+            {
+                //Set the object's position to the ground height
+                freeGhost_LookedAt = WorldObjectGhost_Parent.transform.GetChild(0).gameObject;
+
+                if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
+                {
+                    WorldObjectGhost_Parent.transform.GetChild(0).transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
+                }
+                else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
+                {
+                    WorldObjectGhost_Parent.transform.GetChild(0).transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
+                }
+                else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
+                {
+                    WorldObjectGhost_Parent.transform.GetChild(0).transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
+                }
+
+                WorldObjectGhost_Parent.SetActive(true);
+            }
+            else
+            {
+                freeGhost_LookedAt = null;
+
+                WorldObjectGhost_Parent.SetActive(false);
+            }
+            #endregion
         }
         else
         {
-            print("Don't Move BuildingObject");
-
             WorldObjectGhost_Parent.SetActive(false);
         }
+    }
+
+
+    //--------------------
+
+
+    void SetObjectRotation_Right()
+    {
+        rotationValue += rotationSpeed * Time.deltaTime;
+    }
+    void SetObjectRotation_Left()
+    {
+        rotationValue -= rotationSpeed * Time.deltaTime;
     }
 
 
@@ -148,28 +298,99 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             && MainManager.Instance.menuStates == MenuStates.None
             && (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer))
         {
-            //Spawn correct item
-            if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
+            //Check if requirements are met (resources) - Use the variable "enoughItemsToBuild" instead of "true"
+            //...
+            if (true)
             {
-                worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active).objectInfo.worldObject) as GameObject);
-            }
-            else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
-            {
-                worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.furnitureObjectName_Active).objectInfo.worldObject) as GameObject);
-            }
-            else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
-            {
-                worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active).objectInfo.worldObject) as GameObject);
-            }
+                //Spawn correct item
+                if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
+                {
+                    print("Place BuildingBlock Object");
+                    if (activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Wood)
+                        SoundManager.Instance.Play_Building_Place_Wood_Clip();
+                    else if (activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Stone)
+                        SoundManager.Instance.Play_Building_Place_Stone_Clip();
+                    else if (activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Cryonite)
+                        SoundManager.Instance.Play_Building_Place_Cryonite_Clip();
 
-            worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.parent = worldObject_Parent.transform;
+                    worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active).objectInfo.worldObject) as GameObject);
+                }
+                else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
+                {
+                    print("Place Furniture Object");
+                    SoundManager.Instance.Play_Building_Place_MoveableObject_Clip();
 
-            //Set position and Rotation to be the same as the Ghost
-            if (WorldObjectGhost_Parent.transform.childCount > 0)
-            {
+                    worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.furnitureObjectName_Active).objectInfo.worldObject) as GameObject);
+                }
+                else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
+                {
+                    print("Place Machine Object");
+                    SoundManager.Instance.Play_Building_Place_MoveableObject_Clip();
+
+                    worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active).objectInfo.worldObject) as GameObject);
+                }
+
+                worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.parent = worldObject_Parent.transform;
+
+                //Set position and Rotation to be the same as the Ghost
                 worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(WorldObjectGhost_Parent.transform.GetChild(0).transform.position, WorldObjectGhost_Parent.transform.GetChild(0).transform.rotation);
             }
+            else
+            {
+                SoundManager.Instance.Play_Building_CannotPlaceBlock_Clip();
+            }
+
+            AddBuildingObjectInfoToWorld();
         }
+    }
+    void AddBuildingObjectInfoToWorld()
+    {
+        //Add Info to saveList
+        if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
+        {
+            BuildingBlockInfo buildingBlockInfo = GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active);
+            WorldBuildingObject worldBuildingObject = new WorldBuildingObject();
+
+            worldBuildingObject.objectPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.position;
+            worldBuildingObject.objectRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.rotation;
+
+            worldBuildingObject.buildingObjectType_Active = buildingBlockInfo.buildingObjectType;
+            worldBuildingObject.buildingMaterial_Active = buildingBlockInfo.buildingMaterial;
+
+            worldBuildingObject.buildingBlockObjectName_Active = buildingBlockInfo.blockName;
+
+            worldBuildingObjectInfoList.Add(worldBuildingObject);
+        }
+        else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
+        {
+            FurnitureInfo buildingBlockInfo = GetBuildingObjectInfo(activeBuildingObject_Info.furnitureObjectName_Active);
+            WorldBuildingObject worldFurnitureObject = new WorldBuildingObject();
+
+            worldFurnitureObject.objectPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.position;
+            worldFurnitureObject.objectRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.rotation;
+
+            worldFurnitureObject.buildingObjectType_Active = buildingBlockInfo.buildingObjectType;
+
+            worldFurnitureObject.furnitureObjectName_Active = buildingBlockInfo.furnitureName;
+
+            worldBuildingObjectInfoList.Add(worldFurnitureObject);
+        }
+        else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
+        {
+            MachineInfo buildingBlockInfo = GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active);
+            WorldBuildingObject worldMachineObject = new WorldBuildingObject();
+
+            worldMachineObject.objectPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.position;
+            worldMachineObject.objectRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.rotation;
+
+            worldMachineObject.buildingObjectType_Active = buildingBlockInfo.buildingObjectType;
+
+            worldMachineObject.machineObjectName_Active = buildingBlockInfo.machinesName;
+
+            worldBuildingObjectInfoList.Add(worldMachineObject);
+        }
+
+        SaveData();
     }
     public void RemoveWorldBuildingObject()
     {

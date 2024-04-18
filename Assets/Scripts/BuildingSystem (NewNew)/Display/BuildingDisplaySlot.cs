@@ -41,7 +41,7 @@ public class BuildingDisplaySlot : MonoBehaviour
         }
 
         BuildingDisplayManager.Instance.UpdateScreenBuildingDisplayInfo();
-        BuildingSystemManager.Instance.SpawnNewBuildingObject();
+        BuildingSystemManager.Instance.SpawnNewSelectedBuildingObject();
 
         BuildingSystemManager.Instance.SaveData();
     }

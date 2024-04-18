@@ -217,7 +217,11 @@ MonoBehaviour:
   buildingBlockObjectName: 0
   furnitureObjectName: 0
   machineObjectName: 10
-  meshRenderer: {fileID: 7457434400606176386}
+  modelList:
+  - {fileID: 7446548037061086230}
+  - {fileID: 2928362979055078152}
+  - {fileID: 7133139682471770869}
+  - {fileID: 5081651333316295433}
 --- !u!114 &5413797534964809342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,9 +234,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b72052c85ec9746aa2880f936bee62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!137 &7457434400606176386 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8249146268816677109, guid: 4f06101b044975849b7a1ecab887b2f3,
+--- !u!1 &2928362979055078152 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4442617815020459903, guid: 4f06101b044975849b7a1ecab887b2f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1514612177341144183}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5081651333316295433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6017193067416872830, guid: 4f06101b044975849b7a1ecab887b2f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1514612177341144183}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7133139682471770869 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8645498960391087746, guid: 4f06101b044975849b7a1ecab887b2f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1514612177341144183}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7446548037061086230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8238077936097218657, guid: 4f06101b044975849b7a1ecab887b2f3,
     type: 3}
   m_PrefabInstance: {fileID: 1514612177341144183}
   m_PrefabAsset: {fileID: 0}
