@@ -5,6 +5,9 @@ using System.ComponentModel;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BuildingSystemManager : Singleton<BuildingSystemManager>
 {
@@ -29,13 +32,36 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public Material cannotPlace_Material;
     public LayerMask layerMask_Ground;
 
+
     public float rotationValue = 0;
     [SerializeField] float rotationSpeed = 75;
 
-    public GameObject freeGhost_LookedAt;
+    public GameObject ghostObject_Holding;
+
+    public GameObject buildingBlockHit;
+    public BuildingBlockColliderDirection directionHit;
 
     Ray ray;
     RaycastHit hit;
+    RaycastHit rayHit;
+    [SerializeField] LayerMask mask;
+    [SerializeField] LayerMask builingObjectGhost_LayerMask;
+    Transform hitTransform;
+
+    [SerializeField] float rayHitAngle_Normal;
+    [SerializeField] float rayHitAngle_Left;
+    [SerializeField] float rayHitAngle_Right;
+    [SerializeField] float rayHitAngle_Up;
+    [SerializeField] float rayHitAngle_Down;
+
+    Quaternion ghostRotation = Quaternion.identity;
+
+    [Header("BuildingBlocks Detected")]
+    [SerializeField] GameObject BB_Normal;
+    [SerializeField] GameObject BB_Up;
+    [SerializeField] GameObject BB_Down;
+    [SerializeField] GameObject BB_Left;
+    [SerializeField] GameObject BB_Right;
 
     [Header("Have enough items to Build?")]
     public bool enoughItemsToBuild;
@@ -52,6 +78,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     }
     private void Update()
     {
+        RaycastSettings();
         MoveWorldBuildingObject();
     }
 
@@ -152,6 +179,23 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             newObject.transform.localPosition = Vector3.zero;
             newObject.transform.localRotation = Quaternion.identity;
         }
+
+        //Set layer to be GhostLayer
+        newObject.layer = builingObjectGhost_LayerMask;
+        for (int i = 0; i < newObject.transform.childCount; i++)
+        {
+            newObject.transform.GetChild(i).gameObject.layer = builingObjectGhost_LayerMask;
+
+            for (int j = 0; j < newObject.transform.GetChild(i).transform.childCount; j++)
+            {
+                newObject.transform.GetChild(i).transform.GetChild(j).gameObject.layer = builingObjectGhost_LayerMask;
+
+                for (int k = 0; k < newObject.transform.GetChild(i).transform.GetChild(j).transform.childCount; k++)
+                {
+                    newObject.transform.GetChild(i).transform.GetChild(j).transform.GetChild(k).gameObject.layer = builingObjectGhost_LayerMask;
+                }
+            }
+        }
     }
     void RemoveSelectedBuildingObjectChild()
     {
@@ -173,6 +217,48 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             && MainManager.Instance.menuStates == MenuStates.None
             && (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer))
         {
+            //Change Position and Rotation
+            #region
+
+            if (directionHit != BuildingBlockColliderDirection.None)
+            {
+                DisplayBuildingBlockGhost();
+            }
+            else
+            {
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + 2, layerMask_Ground))
+                {
+                    //Set the object's position to the ground height
+                    ghostObject_Holding = WorldObjectGhost_Parent.transform.GetChild(0).gameObject;
+
+                    if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
+                    {
+                        ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
+                    }
+                    else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
+                    {
+                        ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
+                    }
+                    else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
+                    {
+                        ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
+                    }
+
+                    WorldObjectGhost_Parent.SetActive(true);
+                    GetBuildingObjectGhost().SetActive(true);
+                }
+                else
+                {
+                    WorldObjectGhost_Parent.SetActive(false);
+
+                    ghostObject_Holding = GetBuildingObjectGhost();
+                    GetBuildingObjectGhost().SetActive(false);
+                }
+            }
+            #endregion
+            
             //Set New Material on all Materials of the Object
             #region
             for (int i = 0; i < WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList.Count; i++)
@@ -221,43 +307,391 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 }
             }
             #endregion
-
-            //Change Position and Rotation
-            #region
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + 2, layerMask_Ground))
-            {
-                //Set the object's position to the ground height
-                freeGhost_LookedAt = WorldObjectGhost_Parent.transform.GetChild(0).gameObject;
-
-                if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
-                {
-                    WorldObjectGhost_Parent.transform.GetChild(0).transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
-                }
-                else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
-                {
-                    WorldObjectGhost_Parent.transform.GetChild(0).transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
-                }
-                else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
-                {
-                    WorldObjectGhost_Parent.transform.GetChild(0).transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
-                }
-
-                WorldObjectGhost_Parent.SetActive(true);
-            }
-            else
-            {
-                freeGhost_LookedAt = null;
-
-                WorldObjectGhost_Parent.SetActive(false);
-            }
-            #endregion
         }
         else
         {
             WorldObjectGhost_Parent.SetActive(false);
+
+            ghostObject_Holding = GetBuildingObjectGhost();
+            GetBuildingObjectGhost().SetActive(false);
         }
+    }
+    #endregion
+
+
+    //--------------------
+
+
+    #region Snapping
+    void RaycastSettings()
+    {
+        //Only run RayCast when "BuildingHammer" is in the hand
+        if (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer
+            || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer
+            || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
+        {
+            Raycast();
+        }
+
+        ////If looking at a BuildingBlock, show a BuildingBlock_Ghost in the correct position based on the "directionHit"
+        //if (buildingBlockHit != null)
+        //{
+        //    DisplayBuildingBlockGhost();
+
+        //    if (GetBuildingObjectGhost())
+        //    {
+        //        GetBuildingObjectGhost().SetActive(true);
+        //    }
+        //}
+        //else if (MainManager.Instance.gameStates != GameStates.Building)
+        //{
+        //    if (GetBuildingObjectGhost())
+        //    {
+        //        GetBuildingObjectGhost().SetActive(false);
+        //    }
+        //}
+        //else
+        //{
+        //    if (GetBuildingObjectGhost())
+        //    {
+        //        GetBuildingObjectGhost().SetActive(false);
+        //    }
+        //}
+
+        ////Hide ghost when "BuildingHammer" is NOT in the hand
+        //if (HotbarManager.Instance.selectedItem != Items.WoodSword
+        //    && HotbarManager.Instance.selectedItem != Items.StoneSword
+        //    && HotbarManager.Instance.selectedItem != Items.CryoniteSword)
+        //{
+        //    GetBuildingObjectGhost().SetActive(false);
+        //}
+    }
+    public void Raycast()
+    {
+        // Cast a Ray from the mouse position to the world space
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //Make 5 Raycasts (Forward, Up-Forward, Down-Forward, Right-Forward, Left-Forward)
+        RaycastDirection(RaycastDirections.Right, Color.blue);
+        RaycastDirection(RaycastDirections.Left, Color.blue);
+        RaycastDirection(RaycastDirections.Down, Color.cyan);
+        RaycastDirection(RaycastDirections.Up, Color.cyan);
+        RaycastDirection(RaycastDirections.Normal, Color.green);
+
+        #region Update which BuildingBlock to look at
+        if (hitTransform != null)
+        {
+            //If looking directly at a BuildingBlock
+            if ((BB_Normal != null))
+            {
+                //Get the direction of the object looking at
+                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
+            }
+
+            else if (BB_Normal == null && BB_Up != null)
+            {
+                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Up();
+            }
+            else if (BB_Normal == null && BB_Down != null)
+            {
+                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Down();
+            }
+
+            //If Left/Right looks at the BuildingBlock with a smaller Angle
+            else if (BB_Normal == null && BB_Left != null && rayHitAngle_Left <= 125)
+            {
+                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
+            }
+            else if (BB_Normal == null && BB_Right != null && rayHitAngle_Right <= 125)
+            {
+                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
+            }
+
+            //If Left/Right + Top looks at the BuildingBlock
+            else if (BB_Normal == null && BB_Left != null && BB_Up != null && BB_Left != BB_Up)
+            {
+                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
+            }
+            else if (BB_Normal == null && BB_Right != null && BB_Up != null && BB_Right != BB_Up)
+            {
+                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
+            }
+
+            //If only 1 Ray looks at the BuildingBlock
+            else if (BB_Normal == null && BB_Right != null)
+            {
+                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Right();
+            }
+            else if (BB_Normal == null && BB_Left != null)
+            {
+                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Left();
+            }
+
+            //If not looking at a BuildingBlock at all
+            else
+            {
+                directionHit = BuildingBlockColliderDirection.None;
+                buildingBlockHit = null;
+            }
+        }
+
+        //If not looking at a BuildingBlock at all
+        else
+        {
+            directionHit = BuildingBlockColliderDirection.None;
+            buildingBlockHit = null;
+        }
+        #endregion
+    }
+    void RaycastDirection(RaycastDirections _raycastDirection, Color color)
+    {
+        Vector3 direction = Vector3.zero;
+
+        //Get the correct Direction
+        switch (_raycastDirection)
+        {
+            case RaycastDirections.None:
+                direction = Vector3.zero;
+                break;
+
+            case RaycastDirections.Normal:
+                direction = Vector3.zero;
+                break;
+            case RaycastDirections.Up:
+                direction = transform.up;
+                break;
+            case RaycastDirections.Down:
+                direction = -transform.up;
+                break;
+            case RaycastDirections.Left:
+                direction = -transform.right;
+                break;
+            case RaycastDirections.Right:
+                direction = transform.right;
+                break;
+
+            default:
+                direction = Vector3.zero;
+                break;
+        }
+
+        Vector3 startPoint = ray.origin + direction * 0.75f;
+
+        Debug.DrawRay(startPoint, Camera.main.transform.forward * (PlayerManager.Instance.InteractableDistance + 2), color);
+
+        if (Physics.Raycast(startPoint, Camera.main.transform.forward * (PlayerManager.Instance.InteractableDistance + 2), out rayHit, (PlayerManager.Instance.InteractableDistance + 2), mask))
+        {
+            //Get the Transform of GameObject hit
+            hitTransform = rayHit.transform;
+
+            //Get the Object looking at
+            if (hitTransform.gameObject.GetComponent<BuildingBlockDirection>())
+            {
+                switch (_raycastDirection)
+                {
+                    case global::RaycastDirections.None:
+                        BB_Normal = hitTransform.gameObject;
+                        rayHitAngle_Normal = Vector3.Angle(ray.direction, rayHit.normal);
+                        break;
+
+                    case global::RaycastDirections.Normal:
+                        BB_Normal = hitTransform.gameObject;
+                        rayHitAngle_Normal = Vector3.Angle(ray.direction, rayHit.normal);
+                        break;
+                    case global::RaycastDirections.Up:
+                        BB_Up = hitTransform.gameObject;
+                        rayHitAngle_Up = Vector3.Angle(ray.direction, rayHit.normal);
+                        break;
+                    case global::RaycastDirections.Down:
+                        BB_Down = hitTransform.gameObject;
+                        rayHitAngle_Down = Vector3.Angle(ray.direction, rayHit.normal);
+                        break;
+                    case global::RaycastDirections.Left:
+                        BB_Right = hitTransform.gameObject;
+                        rayHitAngle_Right = Vector3.Angle(ray.direction, rayHit.normal);
+                        break;
+                    case global::RaycastDirections.Right:
+                        BB_Left = hitTransform.gameObject;
+                        rayHitAngle_Left = Vector3.Angle(ray.direction, rayHit.normal);
+                        break;
+
+                    default:
+                        BB_Normal = hitTransform.gameObject;
+                        rayHitAngle_Normal = Vector3.Angle(ray.direction, rayHit.normal);
+                        break;
+                }
+            }
+        }
+
+        //Looking at something not a BuildingBlock
+        else if (Physics.Raycast(startPoint, Camera.main.transform.forward * (PlayerManager.Instance.InteractableDistance + 2), out rayHit, (PlayerManager.Instance.InteractableDistance + 2)))
+        {
+            switch (_raycastDirection)
+            {
+                case global::RaycastDirections.None:
+                    BB_Normal = null;
+                    rayHitAngle_Normal = 0;
+                    break;
+
+                case global::RaycastDirections.Normal:
+                    rayHitAngle_Normal = 0;
+                    BB_Normal = null;
+                    break;
+                case global::RaycastDirections.Up:
+                    rayHitAngle_Up = 0;
+                    BB_Up = null;
+                    break;
+                case global::RaycastDirections.Down:
+                    rayHitAngle_Down = 0;
+                    BB_Down = null;
+                    break;
+                case global::RaycastDirections.Left:
+                    rayHitAngle_Right = 0;
+                    BB_Right = null;
+                    break;
+                case global::RaycastDirections.Right:
+                    BB_Left = null;
+                    rayHitAngle_Left = 0;
+                    break;
+
+                default:
+                    BB_Normal = null;
+                    rayHitAngle_Normal = 0;
+                    break;
+            }
+        }
+
+        //Looking at Nothing (out in the thin air)
+        else
+        {
+            switch (_raycastDirection)
+            {
+                case global::RaycastDirections.None:
+                    BB_Normal = null;
+                    rayHitAngle_Normal = 0;
+                    break;
+
+                case global::RaycastDirections.Normal:
+                    BB_Normal = null;
+                    rayHitAngle_Normal = 0;
+                    break;
+                case global::RaycastDirections.Up:
+                    BB_Up = null;
+                    rayHitAngle_Up = 0;
+                    break;
+                case global::RaycastDirections.Down:
+                    BB_Down = null;
+                    rayHitAngle_Down = 0;
+                    break;
+                case global::RaycastDirections.Left:
+                    BB_Right = null;
+                    rayHitAngle_Right = 0;
+                    break;
+                case global::RaycastDirections.Right:
+                    BB_Left = null;
+                    rayHitAngle_Left = 0;
+                    break;
+
+                default:
+                    BB_Normal = null;
+                    rayHitAngle_Normal = 0;
+                    break;
+            }
+        }
+    }
+
+    void DisplayBuildingBlockGhost()
+    {
+        ////Check if "buildingBlockHit" has a Script
+        //if (buildingBlockHit.GetComponent<MoveableObject>())
+        //{
+        //    //Check if the Ghost has a MeshRenderer
+        //    if (buildingBlockGhost.GetComponent<MoveableObject>())
+        //    {
+        //        //Set new Info in Ghost_Parent
+        //        buildingBlockGhost.GetComponent<MoveableObject>().buildingObjectType = buildingBlockHit.GetComponent<MoveableObject>().buildingObjectType;
+        //        buildingBlockGhost.GetComponent<MoveableObject>().buildingMaterial = buildingBlockHit.GetComponent<MoveableObject>().buildingMaterial;
+
+        //        if (buildingBlockGhost.GetComponent<MoveableObject>().model)
+        //        {
+        //            if (buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshFilter>()
+        //                && buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshRenderer>()
+        //                && buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshCollider>())
+        //            {
+        //                //Set new Mesh on the Ghost
+        //                //buildingBlockGhost.GetComponent<BuildingBlock_v2>().model.GetComponent<MeshFilter>().mesh = buildingBlockHit.GetComponent<BuildingBlock_v2>().model.GetComponent<MeshFilter>().mesh;
+        //                if (MoveableObjectManager.Instance.GetBuildingBlock())
+        //                {
+        //                    if (MoveableObjectManager.Instance.GetBuildingBlock().GetComponent<MoveableObject>())
+        //                    {
+        //                        buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshFilter>().sharedMesh = MoveableObjectManager.Instance.GetBuildingBlock().GetComponent<MoveableObject>().model.GetComponent<MeshFilter>().sharedMesh;
+        //                    }
+        //                }
+
+        //                //Set new Material on the Ghost
+        //                buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshRenderer>().material = canPlace_Material;
+
+        //                //Set new MeshCollider
+        //                //buildingBlockGhost.GetComponent<BuildingBlock_v2>().model.GetComponent<MeshCollider>().sharedMesh = buildingBlockHit.GetComponent<BuildingBlock_v2>().model.GetComponent<MeshCollider>().sharedMesh;
+        //                if (MoveableObjectManager.Instance.GetBuildingBlock())
+        //                {
+        //                    if (MoveableObjectManager.Instance.GetBuildingBlock().GetComponent<MoveableObject>())
+        //                    {
+        //                        buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshCollider>().sharedMesh = MoveableObjectManager.Instance.GetBuildingBlock().GetComponent<MoveableObject>().model.GetComponent<MeshCollider>().sharedMesh;
+        //                    }
+        //                }
+
+        //                //Set new Position of the Ghost
+        //                buildingBlockGhost.transform.SetPositionAndRotation(SetPosition(buildingBlockGhost), ghostRotation);
+        //            }
+        //        }
+        //    }
+        //}
+
+        //Set new Position of the Ghost
+        ghostObject_Holding.transform.SetPositionAndRotation(SetPosition(buildingBlockHit), buildingBlockHit.transform.rotation);
+    }
+
+    Vector3 SetPosition(GameObject _object)
+    {
+        switch (directionHit)
+        {
+            case BuildingBlockColliderDirection.None:
+                break;
+
+            case BuildingBlockColliderDirection.Front:
+                return buildingBlockHit.transform.position + buildingBlockHit.transform.forward * 2;
+
+            case BuildingBlockColliderDirection.Back:
+                return buildingBlockHit.transform.position - buildingBlockHit.transform.forward * 2;
+
+            case BuildingBlockColliderDirection.Up:
+                return buildingBlockHit.transform.position + buildingBlockHit.transform.up * 2;
+
+            case BuildingBlockColliderDirection.Down:
+                return buildingBlockHit.transform.position - buildingBlockHit.transform.up * 2;
+
+            case BuildingBlockColliderDirection.Right:
+                return buildingBlockHit.transform.position + buildingBlockHit.transform.right * 2;
+
+            case BuildingBlockColliderDirection.Left:
+                return buildingBlockHit.transform.position - buildingBlockHit.transform.right * 2;
+
+            default:
+                break;
+        }
+
+        return Vector3.zero;
+    }
+
+    GameObject GetBuildingObjectGhost()
+    {
+        if (WorldObjectGhost_Parent.transform.childCount > 0)
+        {
+            return WorldObjectGhost_Parent.transform.GetChild(0).gameObject;
+        }
+
+        return null;
     }
     #endregion
 
@@ -446,6 +880,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
 }
 
+#region Classes
 [Serializable]
 public class ActiveBuildingObject
 {
@@ -470,7 +905,9 @@ public class WorldBuildingObject
     public FurnitureObjectNames furnitureObjectName_Active;
     public MachineObjectNames machineObjectName_Active;
 }
+#endregion
 
+#region Enums
 public enum BuildingObjectTypes
 {
     None,
@@ -564,3 +1001,26 @@ public enum MachineObjectNames
     [Description("Other4")][InspectorName("Other4")] MA_Other4,
     [Description("Other5")][InspectorName("Other5")] MA_Other5
 }
+public enum RaycastDirections
+{
+    None,
+
+    Normal,
+    Up,
+    Down,
+    Left,
+    Right
+}
+
+public enum BuildingBlockColliderDirection
+{
+    None,
+
+    Front,
+    Back,
+    Up,
+    Down,
+    Left,
+    Right
+}
+#endregion

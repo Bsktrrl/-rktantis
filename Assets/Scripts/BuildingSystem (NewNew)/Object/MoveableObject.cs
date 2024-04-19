@@ -24,25 +24,6 @@ public class MoveableObject : MonoBehaviour
     //--------------------
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        //if (other.tag == "BuildingBlock")
-        //{
-        //    if (other.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingType == BuildingBlockObjectNames.Floor_Square
-        //        || other.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingType == BuildingBlockObjectNames.Floor_Triangle)
-        //    {
-        //        canBePlaced = true;
-        //    }
-        //    else
-        //    {
-        //        canBePlaced = false;
-        //    }
-        //}
-        //else
-        //{
-        //    canBePlaced = false;
-        //}
-    }
 
     private void OnTriggerExit(Collider other)
     {

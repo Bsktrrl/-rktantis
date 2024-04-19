@@ -351,6 +351,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
     #region Display Screen - Hammer & Axe
     //Hammer
+    #region
     void UpdateScreenBuildingRequirementDisplay()
     {
         if ((HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer
@@ -402,7 +403,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         buildingObject_Requirement_ScreenInfo_Parent.SetActive(true);
 
-        requirementScreenList = InstantiateRewardList(buildingObject_Requirement_ScreenInfo_Parent);
+        requirementScreenList = InstantiateRequirementList(buildingObject_Requirement_ScreenInfo_Parent);
         DisplayScreenRequirements();
     }
     public void UpdateSelectedRequirementScreenDisplay(FurnitureInfo furnitureInfo)
@@ -417,7 +418,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         buildingObject_Requirement_ScreenInfo_Parent.SetActive(true);
 
-        requirementScreenList = InstantiateRewardList(buildingObject_Requirement_ScreenInfo_Parent);
+        requirementScreenList = InstantiateRequirementList(buildingObject_Requirement_ScreenInfo_Parent);
         DisplayScreenRequirements();
     }
     public void UpdateSelectedRequirementScreenDisplay(MachineInfo machinesInfo)
@@ -432,7 +433,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         buildingObject_Requirement_ScreenInfo_Parent.SetActive(true);
 
-        requirementScreenList = InstantiateRewardList(buildingObject_Requirement_ScreenInfo_Parent);
+        requirementScreenList = InstantiateRequirementList(buildingObject_Requirement_ScreenInfo_Parent);
         DisplayScreenRequirements();
     }
 
@@ -584,12 +585,14 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         buildingObject_Requirement_ScreenInfo_Parent.SetActive(false);
     }
+    #endregion
 
 
     //--------------------
 
 
     //Axe
+    #region
     void UpdateScreenBuildingRewardDisplay()
     {
         if (SelectionManager.Instance.selectedMovableObjectToRemove)
@@ -808,6 +811,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         buildingObject_Reward_ScreenInfo_Parent.SetActive(false);
     }
+    #endregion
+    
     #endregion
 
 

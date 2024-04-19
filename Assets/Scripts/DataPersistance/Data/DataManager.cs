@@ -171,11 +171,11 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         MenuEquipmentManager.Instance.LoadData();
         print("4. MenuEquipmentManager has Loaded");
 
-        BuildingSystemManager.Instance.LoadData();
-        print("5. BuildingSystemManager has Loaded");
-
         HotbarManager.Instance.LoadData();
-        print("6. HotbarManager has Loaded");
+        print("5. HotbarManager has Loaded");
+
+        BuildingSystemManager.Instance.LoadData();
+        print("6. BuildingSystemManager has Loaded");
 
         WorldObjectManager.Instance.LoadData();
         print("7. WorldObjectManager has Loaded");
