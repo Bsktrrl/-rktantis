@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -30,15 +31,18 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     [Header("Object Ghost")]
     public Material canPlace_Material;
     public Material cannotPlace_Material;
+    public Material invisible_Material;
     public LayerMask layerMask_Ground;
+
+    public bool isSnapping;
 
 
     public float rotationValue = 0;
     [SerializeField] float rotationSpeed = 75;
 
     public GameObject ghostObject_Holding;
-
     public GameObject buildingBlockHit;
+
     public BuildingBlockColliderDirection directionHit;
 
     Ray ray;
@@ -46,6 +50,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     RaycastHit rayHit;
     [SerializeField] LayerMask mask;
     [SerializeField] LayerMask builingObjectGhost_LayerMask;
+    public LayerMask modelColliderMask;
     Transform hitTransform;
 
     [SerializeField] float rayHitAngle_Normal;
@@ -63,8 +68,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     [SerializeField] GameObject BB_Left;
     [SerializeField] GameObject BB_Right;
 
-    [Header("Have enough items to Build?")]
-    public bool enoughItemsToBuild;
+    [Header("Having correct conditions to Build?")]
+    public bool canPlaceBuildingObject = false;
+    [Space(5)]
+    public bool enoughItemsToBuild = false;
+    public bool isColliding = false;
+    public bool isCollidingWithBuildingBlock = false;
     #endregion
 
 
@@ -131,7 +140,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         SpawnNewSelectedBuildingObject();
 
-        BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
+        SetupHammerDisplayScreen();
 
         SaveData();
     }
@@ -140,6 +149,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         DataManager.Instance.activeBuildingObject_Store = activeBuildingObject_Info;
         DataManager.Instance.worldBuildingObjectInfoList_Store = worldBuildingObjectInfoList;
     }
+
     #endregion
 
 
@@ -196,6 +206,13 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 }
             }
         }
+
+        //Hide Colliders
+        Destroy(newObject.GetComponent<MoveableObject>().collidersOnObject);
+
+        //Make sure not getting errors when changing to Furniture or Machine Object
+        isColliding = false;
+        CanPlaceBuildingObjectCheck();
     }
     void RemoveSelectedBuildingObjectChild()
     {
@@ -203,6 +220,30 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         {
             WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().DestroyObject();
         }
+    }
+    void SetupHammerDisplayScreen()
+    {
+        if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
+        {
+            BuildingDisplayManager.Instance.UpdateSelectedDisplay(GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active));
+        }
+        else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
+        {
+            BuildingDisplayManager.Instance.UpdateSelectedDisplay(GetBuildingObjectInfo(activeBuildingObject_Info.furnitureObjectName_Active));
+        }
+        else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
+        {
+            BuildingDisplayManager.Instance.UpdateSelectedDisplay(GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active));
+        }
+        else
+        {
+            BuildingDisplayManager.Instance.ResetDisplay();
+        }
+
+        BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
+        SpawnNewSelectedBuildingObject();
+
+        SaveData();
     }
     #endregion
 
@@ -215,14 +256,18 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     {
         if (WorldObjectGhost_Parent.transform.childCount > 0
             && MainManager.Instance.menuStates == MenuStates.None
-            && (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer))
+            && (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
+            && ghostObject_Holding)
         {
             //Change Position and Rotation
             #region
 
             if (directionHit != BuildingBlockColliderDirection.None)
             {
-                DisplayBuildingBlockGhost();
+                isSnapping = true;
+
+                //Set new Position of the Ghost
+                ghostObject_Holding.transform.SetPositionAndRotation(SetPosition(), SetRotation(buildingBlockHit));
             }
             else
             {
@@ -256,57 +301,13 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     ghostObject_Holding = GetBuildingObjectGhost();
                     GetBuildingObjectGhost().SetActive(false);
                 }
+
+                isSnapping = false;
             }
             #endregion
-            
+
             //Set New Material on all Materials of the Object
-            #region
-            for (int i = 0; i < WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList.Count; i++)
-            {
-                if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>())
-                {
-                    Material[] materials = WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials;
-
-                    if (enoughItemsToBuild)
-                    {
-                        for (int j = 0; j < materials.Length; j++)
-                        {
-                            materials[j] = canPlace_Material;
-                        }
-                    }
-                    else
-                    {
-                        for (int j = 0; j < materials.Length; j++)
-                        {
-                            materials[j] = cannotPlace_Material;
-                        }
-                    }
-
-                    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials = materials;
-                }
-                else if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>())
-                {
-                    Material[] materials = WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials;
-
-                    if (enoughItemsToBuild)
-                    {
-                        for (int j = 0; j < materials.Length; j++)
-                        {
-                            materials[j] = canPlace_Material;
-                        }
-                    }
-                    else
-                    {
-                        for (int j = 0; j < materials.Length; j++)
-                        {
-                            materials[j] = cannotPlace_Material;
-                        }
-                    }
-
-                    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials = materials;
-                }
-            }
-            #endregion
+            ObjectMaterial();
         }
         else
         {
@@ -314,6 +315,100 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
             ghostObject_Holding = GetBuildingObjectGhost();
             GetBuildingObjectGhost().SetActive(false);
+        }
+    }
+    void ObjectMaterial()
+    {
+        for (int i = 0; i < ghostObject_Holding.GetComponent<MoveableObject>().modelList.Count; i++)
+        {
+            //MeshRenderer
+            if (ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>())
+            {
+                if (isCollidingWithBuildingBlock)
+                {
+                    Material[] materials = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials;
+
+                    for (int j = 0; j < materials.Length; j++)
+                    {
+                        materials[j] = cannotPlace_Material;
+                    }
+
+                    ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials = materials;
+                }
+                else if (enoughItemsToBuild && !isColliding)
+                {
+                    Material[] materials = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials;
+
+                    for (int j = 0; j < materials.Length; j++)
+                    {
+                        materials[j] = canPlace_Material;
+                    }
+
+                    ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials = materials;
+                }
+                else
+                {
+                    Material[] materials = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials;
+
+                    for (int j = 0; j < materials.Length; j++)
+                    {
+                        materials[j] = cannotPlace_Material;
+                    }
+
+                    ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshRenderer>().materials = materials;
+                }
+            }
+
+            //SkinnedMeshRenderer
+            else if (ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>())
+            {
+                if (isCollidingWithBuildingBlock)
+                {
+                    Material[] materials = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials;
+
+                    for (int j = 0; j < materials.Length; j++)
+                    {
+                        materials[j] = cannotPlace_Material;
+                    }
+
+                    ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials = materials;
+                }
+
+                else if (enoughItemsToBuild && !isColliding)
+                {
+                    Material[] materials = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials;
+
+                    for (int j = 0; j < materials.Length; j++)
+                    {
+                        materials[j] = canPlace_Material;
+                    }
+
+                    ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials = materials;
+                }
+                else
+                {
+                    Material[] materials = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials;
+
+                    for (int j = 0; j < materials.Length; j++)
+                    {
+                        materials[j] = cannotPlace_Material;
+                    }
+
+                    ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].GetComponent<SkinnedMeshRenderer>().materials = materials;
+                }
+            }
+        }
+    }
+    
+    public void CanPlaceBuildingObjectCheck()
+    {
+        if (enoughItemsToBuild && !isColliding && !isCollidingWithBuildingBlock)
+        {
+            canPlaceBuildingObject = true;
+        }
+        else
+        {
+            canPlaceBuildingObject = false;
         }
     }
     #endregion
@@ -326,45 +421,17 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     void RaycastSettings()
     {
         //Only run RayCast when "BuildingHammer" is in the hand
-        if (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer
+        if ((HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer
             || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer
             || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
+            && MainManager.Instance.menuStates == MenuStates.None)
         {
             Raycast();
         }
-
-        ////If looking at a BuildingBlock, show a BuildingBlock_Ghost in the correct position based on the "directionHit"
-        //if (buildingBlockHit != null)
-        //{
-        //    DisplayBuildingBlockGhost();
-
-        //    if (GetBuildingObjectGhost())
-        //    {
-        //        GetBuildingObjectGhost().SetActive(true);
-        //    }
-        //}
-        //else if (MainManager.Instance.gameStates != GameStates.Building)
-        //{
-        //    if (GetBuildingObjectGhost())
-        //    {
-        //        GetBuildingObjectGhost().SetActive(false);
-        //    }
-        //}
-        //else
-        //{
-        //    if (GetBuildingObjectGhost())
-        //    {
-        //        GetBuildingObjectGhost().SetActive(false);
-        //    }
-        //}
-
-        ////Hide ghost when "BuildingHammer" is NOT in the hand
-        //if (HotbarManager.Instance.selectedItem != Items.WoodSword
-        //    && HotbarManager.Instance.selectedItem != Items.StoneSword
-        //    && HotbarManager.Instance.selectedItem != Items.CryoniteSword)
-        //{
-        //    GetBuildingObjectGhost().SetActive(false);
-        //}
+        else
+        {
+            isSnapping = false;
+        }
     }
     public void Raycast()
     {
@@ -381,57 +448,60 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         #region Update which BuildingBlock to look at
         if (hitTransform != null)
         {
-            //If looking directly at a BuildingBlock
-            if ((BB_Normal != null))
+            if (hitTransform.gameObject.GetComponent<BuildingBlockDirection>())
             {
-                //Get the direction of the object looking at
-                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
-            }
+                //If looking directly at a BuildingBlock
+                if ((BB_Normal != null))
+                {
+                    //Get the direction of the object looking at
+                    hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
+                }
 
-            else if (BB_Normal == null && BB_Up != null)
-            {
-                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Up();
-            }
-            else if (BB_Normal == null && BB_Down != null)
-            {
-                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Down();
-            }
+                else if (BB_Normal == null && BB_Up != null)
+                {
+                    hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Up();
+                }
+                else if (BB_Normal == null && BB_Down != null)
+                {
+                    hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Down();
+                }
 
-            //If Left/Right looks at the BuildingBlock with a smaller Angle
-            else if (BB_Normal == null && BB_Left != null && rayHitAngle_Left <= 125)
-            {
-                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
-            }
-            else if (BB_Normal == null && BB_Right != null && rayHitAngle_Right <= 125)
-            {
-                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
-            }
+                //If Left/Right looks at the BuildingBlock with a smaller Angle
+                else if (BB_Normal == null && BB_Left != null && rayHitAngle_Left <= 125)
+                {
+                    hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
+                }
+                else if (BB_Normal == null && BB_Right != null && rayHitAngle_Right <= 125)
+                {
+                    hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
+                }
 
-            //If Left/Right + Top looks at the BuildingBlock
-            else if (BB_Normal == null && BB_Left != null && BB_Up != null && BB_Left != BB_Up)
-            {
-                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
-            }
-            else if (BB_Normal == null && BB_Right != null && BB_Up != null && BB_Right != BB_Up)
-            {
-                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
-            }
+                //If Left/Right + Top looks at the BuildingBlock
+                else if (BB_Normal == null && BB_Left != null && BB_Up != null && BB_Left != BB_Up)
+                {
+                    hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
+                }
+                else if (BB_Normal == null && BB_Right != null && BB_Up != null && BB_Right != BB_Up)
+                {
+                    hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Normal();
+                }
 
-            //If only 1 Ray looks at the BuildingBlock
-            else if (BB_Normal == null && BB_Right != null)
-            {
-                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Right();
-            }
-            else if (BB_Normal == null && BB_Left != null)
-            {
-                hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Left();
-            }
+                //If only 1 Ray looks at the BuildingBlock
+                else if (BB_Normal == null && BB_Right != null)
+                {
+                    hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Right();
+                }
+                else if (BB_Normal == null && BB_Left != null)
+                {
+                    hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Left();
+                }
 
-            //If not looking at a BuildingBlock at all
-            else
-            {
-                directionHit = BuildingBlockColliderDirection.None;
-                buildingBlockHit = null;
+                //If not looking at a BuildingBlock at all
+                else
+                {
+                    directionHit = BuildingBlockColliderDirection.None;
+                    buildingBlockHit = null;
+                }
             }
         }
 
@@ -458,16 +528,16 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 direction = Vector3.zero;
                 break;
             case RaycastDirections.Up:
-                direction = transform.up;
+                direction = MainManager.Instance.mainMainCamera.transform.up;
                 break;
             case RaycastDirections.Down:
-                direction = -transform.up;
+                direction = -MainManager.Instance.mainMainCamera.transform.up;
                 break;
             case RaycastDirections.Left:
-                direction = -transform.right;
+                direction = -MainManager.Instance.mainMainCamera.transform.right;
                 break;
             case RaycastDirections.Right:
-                direction = transform.right;
+                direction = MainManager.Instance.mainMainCamera.transform.right;
                 break;
 
             default:
@@ -475,11 +545,11 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 break;
         }
 
-        Vector3 startPoint = ray.origin + direction * 0.75f;
+        Vector3 startPoint = ray.origin + direction * 0.5f;
 
-        Debug.DrawRay(startPoint, Camera.main.transform.forward * (PlayerManager.Instance.InteractableDistance + 2), color);
+        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 2), color);
 
-        if (Physics.Raycast(startPoint, Camera.main.transform.forward * (PlayerManager.Instance.InteractableDistance + 2), out rayHit, (PlayerManager.Instance.InteractableDistance + 2), mask))
+        if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 2), out rayHit, (PlayerManager.Instance.InteractableDistance + 2), mask))
         {
             //Get the Transform of GameObject hit
             hitTransform = rayHit.transform;
@@ -600,59 +670,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
     }
 
-    void DisplayBuildingBlockGhost()
-    {
-        ////Check if "buildingBlockHit" has a Script
-        //if (buildingBlockHit.GetComponent<MoveableObject>())
-        //{
-        //    //Check if the Ghost has a MeshRenderer
-        //    if (buildingBlockGhost.GetComponent<MoveableObject>())
-        //    {
-        //        //Set new Info in Ghost_Parent
-        //        buildingBlockGhost.GetComponent<MoveableObject>().buildingObjectType = buildingBlockHit.GetComponent<MoveableObject>().buildingObjectType;
-        //        buildingBlockGhost.GetComponent<MoveableObject>().buildingMaterial = buildingBlockHit.GetComponent<MoveableObject>().buildingMaterial;
-
-        //        if (buildingBlockGhost.GetComponent<MoveableObject>().model)
-        //        {
-        //            if (buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshFilter>()
-        //                && buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshRenderer>()
-        //                && buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshCollider>())
-        //            {
-        //                //Set new Mesh on the Ghost
-        //                //buildingBlockGhost.GetComponent<BuildingBlock_v2>().model.GetComponent<MeshFilter>().mesh = buildingBlockHit.GetComponent<BuildingBlock_v2>().model.GetComponent<MeshFilter>().mesh;
-        //                if (MoveableObjectManager.Instance.GetBuildingBlock())
-        //                {
-        //                    if (MoveableObjectManager.Instance.GetBuildingBlock().GetComponent<MoveableObject>())
-        //                    {
-        //                        buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshFilter>().sharedMesh = MoveableObjectManager.Instance.GetBuildingBlock().GetComponent<MoveableObject>().model.GetComponent<MeshFilter>().sharedMesh;
-        //                    }
-        //                }
-
-        //                //Set new Material on the Ghost
-        //                buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshRenderer>().material = canPlace_Material;
-
-        //                //Set new MeshCollider
-        //                //buildingBlockGhost.GetComponent<BuildingBlock_v2>().model.GetComponent<MeshCollider>().sharedMesh = buildingBlockHit.GetComponent<BuildingBlock_v2>().model.GetComponent<MeshCollider>().sharedMesh;
-        //                if (MoveableObjectManager.Instance.GetBuildingBlock())
-        //                {
-        //                    if (MoveableObjectManager.Instance.GetBuildingBlock().GetComponent<MoveableObject>())
-        //                    {
-        //                        buildingBlockGhost.GetComponent<MoveableObject>().model.GetComponent<MeshCollider>().sharedMesh = MoveableObjectManager.Instance.GetBuildingBlock().GetComponent<MoveableObject>().model.GetComponent<MeshCollider>().sharedMesh;
-        //                    }
-        //                }
-
-        //                //Set new Position of the Ghost
-        //                buildingBlockGhost.transform.SetPositionAndRotation(SetPosition(buildingBlockGhost), ghostRotation);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //Set new Position of the Ghost
-        ghostObject_Holding.transform.SetPositionAndRotation(SetPosition(buildingBlockHit), buildingBlockHit.transform.rotation);
-    }
-
-    Vector3 SetPosition(GameObject _object)
+    Vector3 SetPosition()
     {
         switch (directionHit)
         {
@@ -682,6 +700,82 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         return Vector3.zero;
+    }
+    Quaternion SetRotation(GameObject _object)
+    {
+        //If a BuildingBlock
+        if (ghostObject_Holding.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
+        {
+            switch (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName)
+            {
+                case BuildingBlockObjectNames.None:
+                    return _object.transform.rotation;
+
+                //Floor
+                case BuildingBlockObjectNames.Floor_Square:
+                    return _object.transform.rotation;
+                case BuildingBlockObjectNames.Floor_Triangle:
+                    return _object.transform.rotation;
+
+                //Wall
+                case BuildingBlockObjectNames.Wall:
+                    break;
+                case BuildingBlockObjectNames.Wall_Triangle:
+                    break;
+                case BuildingBlockObjectNames.Wall_Diagonal:
+                    break;
+                case BuildingBlockObjectNames.Wall_Window:
+                    return SnapRotation_Wall(_object);
+                case BuildingBlockObjectNames.Wall_Door:
+                    break;
+                case BuildingBlockObjectNames.Fence:
+                    break;
+                case BuildingBlockObjectNames.Fence_Diagonal:
+                    break;
+
+                //Ramp
+                case BuildingBlockObjectNames.Ramp_Stair:
+                    break;
+                case BuildingBlockObjectNames.Ramp_Ramp:
+                    break;
+                case BuildingBlockObjectNames.Ramp_Triangle:
+                    break;
+                case BuildingBlockObjectNames.Ramp_Corner:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        
+
+        return _object.transform.rotation;
+    }
+    Quaternion SnapRotation_Wall(GameObject _object)
+    {
+        switch (directionHit)
+        {
+            case BuildingBlockColliderDirection.None:
+                break;
+
+            case BuildingBlockColliderDirection.Front:
+                return _object.transform.rotation * Quaternion.Euler(0, 0, 0);
+            case BuildingBlockColliderDirection.Back:
+                return _object.transform.rotation * Quaternion.Euler(0, 180, 0);
+            case BuildingBlockColliderDirection.Up:
+                break;
+            case BuildingBlockColliderDirection.Down:
+                break;
+            case BuildingBlockColliderDirection.Left:
+                return _object.transform.rotation * Quaternion.Euler(0, 270, 0);
+            case BuildingBlockColliderDirection.Right:
+                return _object.transform.rotation * Quaternion.Euler(0, 90, 0);
+
+            default:
+                break;
+        }
+
+        return _object.transform.rotation;
     }
 
     GameObject GetBuildingObjectGhost()
@@ -721,8 +815,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             && (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer))
         {
             //Check if requirements are met (resources) - Use the variable "enoughItemsToBuild" instead of "true"
-            //...
-            if (true)
+            if (canPlaceBuildingObject)
             {
                 //Spawn correct item
                 if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
@@ -756,13 +849,21 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 //Set position and Rotation to be the same as the Ghost
                 worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(WorldObjectGhost_Parent.transform.GetChild(0).transform.position, WorldObjectGhost_Parent.transform.GetChild(0).transform.rotation);
+
+                //Remove Building Items from inventory
+                RemoveItemsFromInventory();
+
+                //Add the Info to the List
+                AddBuildingObjectInfoToWorld();
             }
             else
             {
                 SoundManager.Instance.Play_Building_CannotPlaceBlock_Clip();
             }
-
-            AddBuildingObjectInfoToWorld();
+        }
+        else
+        {
+            SoundManager.Instance.Play_Building_CannotPlaceBlock_Clip();
         }
     }
     void AddBuildingObjectInfoToWorld()
@@ -814,6 +915,32 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         SaveData();
     }
+    void RemoveItemsFromInventory()
+    {
+        List<CraftingRequirements> resources = new List<CraftingRequirements>();
+
+        if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
+        {
+            resources = GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active).objectInfo.buildingRequirements;
+        }
+        else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
+        {
+            resources = GetBuildingObjectInfo(activeBuildingObject_Info.furnitureObjectName_Active).objectInfo.buildingRequirements;
+        }
+        else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
+        {
+            resources = GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active).objectInfo.buildingRequirements;
+        }
+
+        for (int i = 0; i < resources.Count; i++)
+        {
+            for (int j = 0; j < resources[i].amount; j++)
+            {
+                InventoryManager.Instance.RemoveItemFromInventory(0, resources[i].itemName, -1, false);
+            }
+        }
+    }
+    
     public void RemoveWorldBuildingObject(MoveableObject buildingObject)
     {
         for (int i = 0; i < worldBuildingObjectListSpawned.Count; i++)

@@ -20,6 +20,9 @@ public class MoveableObject : MonoBehaviour
     [Header("Mesh")]
     public List<GameObject> modelList = new List<GameObject>();
 
+    [Header("Colliders")]
+    public GameObject collidersOnObject;
+
 
     //--------------------
 

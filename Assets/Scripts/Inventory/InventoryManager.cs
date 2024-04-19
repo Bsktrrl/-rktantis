@@ -244,9 +244,8 @@ public class InventoryManager : Singleton<InventoryManager>
         RemoveInventoriesUI();
         PrepareInventoryUI(inventory, itemIsMoved);
 
-        SetBuildingRequirement();
-
         BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
+        BuildingDisplayManager.Instance.DisplayRequirements();
 
         return true;
     }
@@ -293,9 +292,8 @@ public class InventoryManager : Singleton<InventoryManager>
         RemoveInventoriesUI();
         PrepareInventoryUI(inventory, false);
 
-        SetBuildingRequirement();
-
         BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
+        BuildingDisplayManager.Instance.DisplayRequirements();
 
         return true;
     }
@@ -359,14 +357,12 @@ public class InventoryManager : Singleton<InventoryManager>
             CheckHotbarItemInInventory();
         }
 
-        SetBuildingRequirement();
-
-
         //Update Item In Hand (to prevent it from disappearing)
         HotbarManager.Instance.SetSelectedItem();
         HotbarManager.Instance.ChangeItemInHand();
 
         BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
+        BuildingDisplayManager.Instance.DisplayRequirements();
 
         SaveData();
     }
@@ -397,7 +393,10 @@ public class InventoryManager : Singleton<InventoryManager>
                 RemoveInventoriesUI();
                 PrepareInventoryUI(inventory, true);
 
-                SetBuildingRequirement();
+                BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
+                BuildingDisplayManager.Instance.DisplayRequirements();
+
+                SaveData();
 
                 return;
             }
@@ -445,7 +444,10 @@ public class InventoryManager : Singleton<InventoryManager>
                         RemoveInventoriesUI();
                         PrepareInventoryUI(inventory, true);
 
-                        SetBuildingRequirement();
+                        BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
+                        BuildingDisplayManager.Instance.DisplayRequirements();
+
+                        SaveData();
 
                         return;
                     }
@@ -489,7 +491,10 @@ public class InventoryManager : Singleton<InventoryManager>
                         RemoveInventoriesUI();
                         PrepareInventoryUI(inventory, true);
 
-                        SetBuildingRequirement();
+                        BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
+                        BuildingDisplayManager.Instance.DisplayRequirements();
+
+                        SaveData();
 
                         return;
                     }
@@ -518,7 +523,10 @@ public class InventoryManager : Singleton<InventoryManager>
                             RemoveInventoriesUI();
                             PrepareInventoryUI(inventory, true);
 
-                            SetBuildingRequirement();
+                            BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
+                            BuildingDisplayManager.Instance.DisplayRequirements();
+
+                            SaveData();
 
                             return;
                         }
@@ -529,6 +537,7 @@ public class InventoryManager : Singleton<InventoryManager>
         #endregion
 
         BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
+        BuildingDisplayManager.Instance.DisplayRequirements();
 
         SaveData();
     }
@@ -561,6 +570,7 @@ public class InventoryManager : Singleton<InventoryManager>
         HotbarManager.Instance.ChangeItemInHand();
 
         BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
+        BuildingDisplayManager.Instance.DisplayRequirements();
 
         SaveData();
     }
@@ -739,20 +749,6 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
         }
-    }
-
-    void SetBuildingRequirement()
-    {
-        //if (MoveableObjectManager.Instance.moveableObjectType == BuildingObjectTypes.BuildingBlock)
-        //{
-        //    //BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
-        //}
-        //else if (MoveableObjectManager.Instance.moveableObjectType == BuildingObjectTypes.Machine
-        //    || MoveableObjectManager.Instance.moveableObjectType == BuildingObjectTypes.Furniture)
-        //{
-        //    //MoveableObjectInfo tempObject = MoveableObjectManager.Instance.GetMoveableObject_SO();
-        //    //BuildingManager.Instance.SetBuildingRequirements(tempObject, BuildingManager.Instance.buildingRequirement_Parent);
-        //}
     }
 
     public void SetPlayerItemInfo(Items itemName, bool inventory) //true = player, false = chest

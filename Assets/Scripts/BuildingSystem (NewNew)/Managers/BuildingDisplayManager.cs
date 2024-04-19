@@ -184,7 +184,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         return requirementSlotTempList;
     }
-    void DisplayRequirements()
+    public void DisplayRequirements()
     {
         BuildingBlockInfo buildingBlocksInfo = new BuildingBlockInfo();
         FurnitureInfo furnitureInfo = new FurnitureInfo();
@@ -256,14 +256,14 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         //Display the Requirements
         #region
+        bool enoughItems = true;
+
         for (int i = 1; i < requirementList.Count; i++)
         {
             if (BuildingSystemManager.Instance.activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
             {
                 if (requirementList[i].GetComponent<BuildingRequirementSlot>())
                 {
-                    BuildingSystemManager.Instance.enoughItemsToBuild = true;
-
                     requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(buildingBlocksInfo.objectInfo.buildingRequirements[i - 1].itemName).hotbarSprite;
                     requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = buildingBlocksInfo.objectInfo.buildingRequirements[i - 1].itemName.ToString();
                     requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + InventoryManager.Instance.GetAmountOfItemInInventory(0, buildingBlocksInfo.objectInfo.buildingRequirements[i - 1].itemName) + "/" + buildingBlocksInfo.objectInfo.buildingRequirements[i - 1].amount;
@@ -272,7 +272,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
                     {
                         requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.gameObject.SetActive(true);
                         requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = MainManager.Instance.mainColor_Orange;
-                        BuildingSystemManager.Instance.enoughItemsToBuild = false;
+
+                        enoughItems = false;
                     }
                     else
                     {
@@ -285,8 +286,6 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
             {
                 if (requirementList[i].GetComponent<BuildingRequirementSlot>())
                 {
-                    BuildingSystemManager.Instance.enoughItemsToBuild = true;
-
                     requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(furnitureInfo.objectInfo.buildingRequirements[i - 1].itemName).hotbarSprite;
                     requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = furnitureInfo.objectInfo.buildingRequirements[i - 1].itemName.ToString();
                     requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + InventoryManager.Instance.GetAmountOfItemInInventory(0, furnitureInfo.objectInfo.buildingRequirements[i - 1].itemName) + "/" + furnitureInfo.objectInfo.buildingRequirements[i - 1].amount;
@@ -295,7 +294,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
                     {
                         requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.gameObject.SetActive(true);
                         requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = MainManager.Instance.mainColor_Orange;
-                        BuildingSystemManager.Instance.enoughItemsToBuild = false;
+
+                        enoughItems = false;
                     }
                     else
                     {
@@ -308,8 +308,6 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
             {
                 if (requirementList[i].GetComponent<BuildingRequirementSlot>())
                 {
-                    BuildingSystemManager.Instance.enoughItemsToBuild = true;
-
                     requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(machineInfo.objectInfo.buildingRequirements[i - 1].itemName).hotbarSprite;
                     requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = machineInfo.objectInfo.buildingRequirements[i - 1].itemName.ToString();
                     requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + InventoryManager.Instance.GetAmountOfItemInInventory(0, machineInfo.objectInfo.buildingRequirements[i - 1].itemName) + "/" + machineInfo.objectInfo.buildingRequirements[i - 1].amount;
@@ -318,7 +316,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
                     {
                         requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.gameObject.SetActive(true);
                         requirementList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = MainManager.Instance.mainColor_Orange;
-                        BuildingSystemManager.Instance.enoughItemsToBuild = false;
+
+                        enoughItems = false;
                     }
                     else
                     {
@@ -327,6 +326,19 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
                     }
                 }
             }
+        }
+
+        if (enoughItems)
+        {
+            print("1. enoughItemsToBuild");
+            BuildingSystemManager.Instance.enoughItemsToBuild = true;
+            BuildingSystemManager.Instance.CanPlaceBuildingObjectCheck();
+        }
+        else
+        {
+            print("1. NOT enoughItemsToBuild");
+            BuildingSystemManager.Instance.enoughItemsToBuild = false;
+            BuildingSystemManager.Instance.CanPlaceBuildingObjectCheck();
         }
         #endregion
     }
@@ -500,14 +512,14 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         //Display the Requirements
         #region
+        bool enoughItems = true;
+
         for (int i = 1; i < requirementScreenList.Count; i++)
         {
             if (BuildingSystemManager.Instance.activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
             {
                 if (requirementScreenList[i].GetComponent<BuildingRequirementSlot>())
                 {
-                    BuildingSystemManager.Instance.enoughItemsToBuild = true;
-
                     requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(buildingBlocksInfo.objectInfo.buildingRequirements[i - 1].itemName).hotbarSprite;
                     requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = buildingBlocksInfo.objectInfo.buildingRequirements[i - 1].itemName.ToString();
                     requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + InventoryManager.Instance.GetAmountOfItemInInventory(0, buildingBlocksInfo.objectInfo.buildingRequirements[i - 1].itemName) + "/" + buildingBlocksInfo.objectInfo.buildingRequirements[i - 1].amount;
@@ -516,7 +528,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
                     {
                         requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.gameObject.SetActive(true);
                         requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = MainManager.Instance.mainColor_Orange;
-                        BuildingSystemManager.Instance.enoughItemsToBuild = false;
+
+                        enoughItems = false;
                     }
                     else
                     {
@@ -529,8 +542,6 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
             {
                 if (requirementScreenList[i].GetComponent<BuildingRequirementSlot>())
                 {
-                    BuildingSystemManager.Instance.enoughItemsToBuild = true;
-
                     requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(furnitureInfo.objectInfo.buildingRequirements[i - 1].itemName).hotbarSprite;
                     requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = furnitureInfo.objectInfo.buildingRequirements[i - 1].itemName.ToString();
                     requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + InventoryManager.Instance.GetAmountOfItemInInventory(0, furnitureInfo.objectInfo.buildingRequirements[i - 1].itemName) + "/" + furnitureInfo.objectInfo.buildingRequirements[i - 1].amount;
@@ -539,7 +550,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
                     {
                         requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.gameObject.SetActive(true);
                         requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = MainManager.Instance.mainColor_Orange;
-                        BuildingSystemManager.Instance.enoughItemsToBuild = false;
+
+                        enoughItems = false;
                     }
                     else
                     {
@@ -552,8 +564,6 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
             {
                 if (requirementScreenList[i].GetComponent<BuildingRequirementSlot>())
                 {
-                    BuildingSystemManager.Instance.enoughItemsToBuild = true;
-
                     requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(machineInfo.objectInfo.buildingRequirements[i - 1].itemName).hotbarSprite;
                     requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = machineInfo.objectInfo.buildingRequirements[i - 1].itemName.ToString();
                     requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + InventoryManager.Instance.GetAmountOfItemInInventory(0, machineInfo.objectInfo.buildingRequirements[i - 1].itemName) + "/" + machineInfo.objectInfo.buildingRequirements[i - 1].amount;
@@ -562,7 +572,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
                     {
                         requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.gameObject.SetActive(true);
                         requirementScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.color = MainManager.Instance.mainColor_Orange;
-                        BuildingSystemManager.Instance.enoughItemsToBuild = false;
+
+                        enoughItems = false;
                     }
                     else
                     {
@@ -572,6 +583,20 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
                 }
             }
         }
+
+        if (enoughItems)
+        {
+            print("2. enoughItemsToBuild");
+            BuildingSystemManager.Instance.enoughItemsToBuild = true;
+            BuildingSystemManager.Instance.CanPlaceBuildingObjectCheck();
+        }
+        else
+        {
+            print("2. NOT enoughItemsToBuild");
+            BuildingSystemManager.Instance.enoughItemsToBuild = false;
+            BuildingSystemManager.Instance.CanPlaceBuildingObjectCheck();
+        }
+
         #endregion
     }
     public void ResetRequirementScreenDisplay()
