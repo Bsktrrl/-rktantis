@@ -95,12 +95,12 @@ public class HotbarManager : Singleton<HotbarManager>
             || hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName == Items.StoneBuildingHammer
             || hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName == Items.CryoniteBuildingHammer)
         {
-            BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
-            BuildingManager.Instance.buildingRequirement_Parent.SetActive(true);
+            //BuildingManager.Instance.SetBuildingRequirements(BuildingManager.Instance.GetBuildingBlock(MoveableObjectManager.Instance.buildingType_Selected, MoveableObjectManager.Instance.buildingMaterial_Selected), BuildingManager.Instance.buildingRequirement_Parent);
+            //BuildingManager.Instance.buildingRequirement_Parent.SetActive(true);
         }
         else
         {
-            BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
+            //BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
         }
         #endregion
 

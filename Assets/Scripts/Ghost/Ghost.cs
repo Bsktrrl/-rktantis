@@ -35,7 +35,7 @@ public class Ghost : MonoBehaviour
     public List<GameObject> style2 = new List<GameObject>();
     public List<GameObject> style3 = new List<GameObject>();
 
-    [Header("Raycast")]
+    [Header("Snapping_Raycast")]
     [SerializeField] int terrainDirection_Down;
     [SerializeField] int terrainDirection_Forward;
     public LayerMask ghostLayerMask;
@@ -553,7 +553,6 @@ public class Ghost : MonoBehaviour
         {
             if (Vector3.Distance(hit.point, gameObject.transform.position) <= 4)
             {
-                print("Go Upwards");
                 targetPoint = new Vector3(targetPoint.x, targetPoint.y + 0.25f, targetPoint.z);
                 terrainDirection_Forward = 1;
             }

@@ -20,6 +20,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
     //--------------------
 
 
+    #region Get States
     public void GetEquipmentStates(Items selectedItem)
     {
         GetArmState(selectedItem);
@@ -155,6 +156,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
             toolRank = ToolRank.None;
         }
     }
+    #endregion
 
 
     //--------------------
@@ -163,8 +165,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
     //The point in the animation where equipped item hits
     public void Hit(EquippedItem equippedItem)
     {
-        print("0. Interact with a Tree");
-        //print("Hit EquippedItem - " + subCategories + " [" + itemName.ToString() + "]");
+        print("0. Hit Something with the use of a " + equippedItem.itemName);
 
         #region
         //If Pickaxe is equipped - For Mining
@@ -173,53 +174,146 @@ public class EquippmentManager : Singleton<EquippmentManager>
         {
             if (equippedItem.itemName == Items.WoodPickaxe || equippedItem.itemName == Items.StonePickaxe || equippedItem.itemName == Items.CryonitePickaxe)
             {
-                if (SelectionManager.Instance.selecedObject)
+                if (SelectionManager.Instance.selectedObject)
                 {
-                    if (SelectionManager.Instance.selecedObject.GetComponent<Ore>())
+                    if (SelectionManager.Instance.selectedObject.GetComponent<Ore>())
                     {
-                        SelectionManager.Instance.selecedObject.GetComponent<Ore>().OreInteraction(equippedItem.itemName);
+                        SelectionManager.Instance.selectedObject.GetComponent<Ore>().OreInteraction(equippedItem.itemName);
                     }
                 }
             }
         }
         else if (equippedItem.itemName == Items.Flashlight || equippedItem.itemName == Items.AríditeCrystal || equippedItem.itemName == Items.None)
         {
-            if (SelectionManager.Instance.selecedObject)
+            if (SelectionManager.Instance.selectedObject)
             {
-                if (SelectionManager.Instance.selecedObject.GetComponent<Ore>())
+                if (SelectionManager.Instance.selectedObject.GetComponent<Ore>())
                 {
-                    SelectionManager.Instance.selecedObject.GetComponent<Ore>().OreInteraction(equippedItem.itemName);
+                    SelectionManager.Instance.selectedObject.GetComponent<Ore>().OreInteraction(equippedItem.itemName);
                 }
             }
         }
         #endregion
 
-        //If Axe is equipped
+        //If Hammer is equipped - For Building
         #region
-        print("1. Interact with a Tree");
+        if (equippedItem.subCategories == ItemSubCategories.BuildingHammer)
+        {
+            if (equippedItem.itemName == Items.WoodBuildingHammer || equippedItem.itemName == Items.StoneBuildingHammer || equippedItem.itemName == Items.CryoniteBuildingHammer)
+            {
+                BuildingSystemManager.Instance.PlaceWorldBuildingObject();
+            }
+        }
+        #endregion
+
+        //If Axe is equipped - For "Removing BuildingObjects" and "Cutting"
+        #region
         if (equippedItem.subCategories == ItemSubCategories.Axe)
         {
             if (equippedItem.itemName == Items.WoodAxe || equippedItem.itemName == Items.StoneAxe || equippedItem.itemName == Items.CryoniteAxe)
             {
-                if (SelectionManager.Instance.selecedObject)
+                //Removing Objects
+                if (SelectionManager.Instance.selectedMovableObjectToRemove)
                 {
-                    if (SelectionManager.Instance.selecedObject.GetComponent<Tree>())
+                    //Furniture & Machines
+                    if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
                     {
-                        SelectionManager.Instance.selecedObject.GetComponent<Tree>().TreeInteraction(equippedItem.itemName);
+                        if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+                        {
+                            //Play Placement Sound
+                            SoundManager.Instance.Play_Building_Remove_MoveableObject_Clip();
+
+                            FurnitureInfo furnitureInfo = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().furnitureObjectName);
+
+                            for (int i = 0; i < furnitureInfo.objectInfo.removingReward.Count; i++)
+                            {
+                                for (int j = 0; j < furnitureInfo.objectInfo.removingReward[i].amount; j++)
+                                {
+                                    InventoryManager.Instance.AddItemToInventory(0, furnitureInfo.objectInfo.removingReward[i].itemName);
+                                }
+                            }
+                        }
+
+                        else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+                        {
+                            //Play Placement Sound
+                            SoundManager.Instance.Play_Building_Remove_MoveableObject_Clip();
+
+                            MachineInfo machineInfo = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().machineObjectName);
+
+                            for (int i = 0; i < machineInfo.objectInfo.removingReward.Count; i++)
+                            {
+                                for (int j = 0; j < machineInfo.objectInfo.removingReward[i].amount; j++)
+                                {
+                                    InventoryManager.Instance.AddItemToInventory(0, machineInfo.objectInfo.removingReward[i].itemName);
+                                }
+                            }
+                        }
+
+                        //Remove BuildingObject from World and SaveList
+                        BuildingSystemManager.Instance.RemoveWorldBuildingObject(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>());
+                    }
+
+                    //BuildingBlocks
+                    else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>())
+                    {
+                        if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>())
+                        {
+                            //Add Items to inventory from the removal
+                            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
+                            {
+                                //Play Placement Sound
+                                #region
+                                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingMaterial == BuildingMaterial.Wood)
+                                {
+                                    SoundManager.Instance.Play_Building_Remove_Wood_Clip();
+                                }
+                                else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingMaterial == BuildingMaterial.Stone)
+                                {
+                                    SoundManager.Instance.Play_Building_Remove_Stone_Clip();
+                                }
+                                else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingMaterial == BuildingMaterial.Cryonite)
+                                {
+                                    SoundManager.Instance.Play_Building_Remove_Cryonite_Clip();
+                                }
+                                #endregion
+
+                                BuildingBlockInfo buildingBlockInfo = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingBlockObjectName, SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingMaterial);
+
+                                for (int i = 0; i < buildingBlockInfo.objectInfo.removingReward.Count; i++)
+                                {
+                                    for (int j = 0; j < buildingBlockInfo.objectInfo.removingReward[i].amount; j++)
+                                    {
+                                        InventoryManager.Instance.AddItemToInventory(0, buildingBlockInfo.objectInfo.removingReward[i].itemName);
+                                    }
+                                }
+
+                                //Remove BuildingObject from World and SaveList
+                                BuildingSystemManager.Instance.RemoveWorldBuildingObject(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>());
+                            }
+                        }
+                    }
+                }
+
+                //Cutting with Axe
+                else if (SelectionManager.Instance.selectedObject)
+                {
+                    if (SelectionManager.Instance.selectedObject.GetComponent<Tree>())
+                    {
+                        SelectionManager.Instance.selectedObject.GetComponent<Tree>().TreeInteraction(equippedItem.itemName);
                     }
                 }
             }
         }
+
+        //Cutting with Hand
         else if (equippedItem.itemName == Items.Flashlight || equippedItem.itemName == Items.AríditeCrystal || equippedItem.itemName == Items.None)
         {
-            print("2. Interact with a Tree");
-            if (SelectionManager.Instance.selecedObject)
+            if (SelectionManager.Instance.selectedObject)
             {
-                print("3. Interact with a Tree");
-                if (SelectionManager.Instance.selecedObject.GetComponent<Tree>())
+                if (SelectionManager.Instance.selectedObject.GetComponent<Tree>())
                 {
-                    print("4. Interact with a Tree");
-                    SelectionManager.Instance.selecedObject.GetComponent<Tree>().TreeInteraction(equippedItem.itemName);
+                    SelectionManager.Instance.selectedObject.GetComponent<Tree>().TreeInteraction(equippedItem.itemName);
                 }
             }
         }
@@ -227,7 +321,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
 
         //If WaterContainer is equipped
         #region
-        else if (equippedItem.subCategories == ItemSubCategories.Drinking)
+        if (equippedItem.subCategories == ItemSubCategories.Drinking)
         {
             //Heal thirst parameter
             if (MainManager.Instance.GetItem(equippedItem.itemName).thirstHealthHeal > 0 && HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].durabilityCurrent > 0)
@@ -253,7 +347,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
 
         //If GhostCapturer is equipped - For capturing Ghosts
         #region
-        else if (equippedItem.subCategories == ItemSubCategories.GhostCapturer)
+        if (equippedItem.subCategories == ItemSubCategories.GhostCapturer)
         {
 
         }
@@ -261,10 +355,26 @@ public class EquippmentManager : Singleton<EquippmentManager>
 
         #endregion
 
+        //Remove Durability
         if (equippedItem.itemName == Items.Flashlight || equippedItem.itemName == Items.AríditeCrystal || equippedItem.itemName == Items.None)
         {
-            //Damage the player when hitting ore vein with the Hand
-            float percentage = OreManager.Instance.handDamage / 100;
+            float percentage;
+
+            if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Cactus)
+            {
+                //Damage the player when hitting ore vein with the Hand
+                percentage = OreManager.Instance.handDamage / 50;
+
+                SoundManager.Instance.Play_Player_FallDamage_Clip();
+            }
+            else
+            {
+                //Damage the player when hitting ore vein with the Hand
+                percentage = OreManager.Instance.handDamage / 100;
+
+                SoundManager.Instance.Play_Player_FallDamage_Clip();
+            }
+
             HealthManager.Instance.mainHealthValue -= percentage;
         }
         else
@@ -272,6 +382,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
             equippedItem.RemoveDurability();
         }
 
+        //Change Water level in water container
         if (HotbarManager.Instance.selectedItem == Items.Bucket || HotbarManager.Instance.selectedItem == Items.Cup)
         {
             if (equippedItem.gameObject.GetComponent<WaterContainer>())

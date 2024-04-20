@@ -70,6 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
         type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
+        type: 3}
       propertyPath: m_TagString
       value: Furniture
       objectReference: {fileID: 0}
@@ -102,9 +107,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5176174981612352771}
   m_SourcePrefab: {fileID: 100100000, guid: 08d6f09a53d011f4a9eaabd96bbbe43d, type: 3}
---- !u!137 &1192526037546764022 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2802270372014824144, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
+--- !u!1 &3811494903824246832 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 183020828014507030, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
     type: 3}
   m_PrefabInstance: {fileID: 3922386865502198822}
   m_PrefabAsset: {fileID: 0}
@@ -181,8 +186,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5, y: 0.6, z: 0.75}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!114 &-2523189389046659669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,9 +205,14 @@ MonoBehaviour:
   amount: 0
   durability_Current: 0
   interactableType: 2
-  oreHealth: 0
   inventoryIndex: 0
   plantParent: {fileID: 0}
+  journalType: 0
+  journalPageIndex: 0
+  blueprint_BuildingBlock_Name: 0
+  buildingMaterial: 0
+  blueprint_Furniture_Name: 0
+  blueprint_Machine_Name: 0
 --- !u!114 &2582286417484250869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,9 +228,16 @@ MonoBehaviour:
   canBePlaced: 0
   isSelectedForMovement: 0
   enoughItemsToBuild: 0
-  furnitureType: 4
-  machineType: 0
-  meshRenderer: {fileID: 1192526037546764022}
+  buildingObjectType: 2
+  buildingMaterial: 0
+  buildingBlockObjectName: 0
+  furnitureObjectName: 6
+  machineObjectName: 0
+  modelList:
+  - {fileID: 8975300269464566470}
+  - {fileID: 7167948095266452337}
+  - {fileID: 3811494903824246832}
+  collidersOnObject: {fileID: 0}
 --- !u!114 &5176174981612352771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,3 +250,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b72052c85ec9746aa2880f936bee62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7167948095266452337 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3092085347767423145, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3922386865502198822}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8975300269464566470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5395789645588834016, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3922386865502198822}
+  m_PrefabAsset: {fileID: 0}

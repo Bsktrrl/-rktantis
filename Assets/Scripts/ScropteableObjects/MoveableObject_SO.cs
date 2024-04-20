@@ -16,9 +16,9 @@ public class MoveableObjectInfo
     public string Name;
 
     [Header("MoveableObjectTypes")]
-    public MoveableObjectType moveableObjectType = MoveableObjectType.None;
-    public FurnitureType furnitureType = FurnitureType.None;
-    public MachineType machineType = MachineType.None;
+    public BuildingObjectTypes moveableObjectType = BuildingObjectTypes.None;
+    public FurnitureObjectNames furnitureType = FurnitureObjectNames.None;
+    public MachineObjectNames machineType = MachineObjectNames.None;
 
     [Header("Sprite")]
     public Sprite objectSprite;

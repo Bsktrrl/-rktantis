@@ -48,6 +48,7 @@ public class MouseMovement : Singleton<MouseMovement>
             //applying both rotations
             MainManager.Instance.playerBody.transform.localRotation = Quaternion.Euler(0f, YRotation, 0f);
             MainManager.Instance.mainCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            MainManager.Instance.mainMainCamera.transform.localRotation = MainManager.Instance.mainCamera.transform.localRotation;
         }
     }
 }

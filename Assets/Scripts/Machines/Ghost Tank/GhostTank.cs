@@ -110,6 +110,7 @@ public class GhostTank : MonoBehaviour
         }
 
         ghostObject_Parent.GetComponent<GhostInTank>().SetGhostAppearance();
+        ghostObject_Parent.GetComponent<GhostInTank>().UpdateRenderList();
 
         List<Material> materials = new List<Material>();
 

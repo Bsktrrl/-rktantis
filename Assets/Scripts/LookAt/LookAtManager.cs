@@ -149,10 +149,9 @@ public class LookAtManager : Singleton<LookAtManager>
         //If looking at a Ghost
         #region
         else if (HotbarManager.Instance.selectedItem == Items.GhostCapturer
-            && GhostManager.Instance.targetGhostObject)
+            && SelectionManager.Instance.selectedObject)
         {
-            //If looking at a Ghost
-            if (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>())
+            if (SelectionManager.Instance.selectedObject.GetComponent<Ghost>())
             {
                 //Turn off all screens
                 TurnOffScreens();
@@ -163,11 +162,17 @@ public class LookAtManager : Singleton<LookAtManager>
 
                 return;
             }
+
+            ////If looking at a Ghost
+            //if (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>())
+            //{
+                
+            //}
         }
         #endregion
 
 
-        //-------------------- InteracteableType
+        //-------------------- InteractableType
 
 
         //If looking at nothing
@@ -337,11 +342,11 @@ public class LookAtManager : Singleton<LookAtManager>
     #region Displays
     void ItemDisplay()
     {
-        if (SelectionManager.Instance.selecedObject && SelectionManager.Instance.onTarget)
+        if (SelectionManager.Instance.selectedObject && SelectionManager.Instance.onTarget)
         {
-            if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+            if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>())
             {
-                Item item = MainManager.Instance.GetItem(SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().itemName);
+                Item item = MainManager.Instance.GetItem(SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().itemName);
 
                 if (item.hotbarSprite)
                 {
@@ -356,13 +361,13 @@ public class LookAtManager : Singleton<LookAtManager>
     {
         //print("0. Plant is Invisible: " + SelectionManager.Instance.selecedObject.gameObject.transform.parent.name);
 
-        if (SelectionManager.Instance.selecedObject && SelectionManager.Instance.onTarget)
+        if (SelectionManager.Instance.selectedObject && SelectionManager.Instance.onTarget)
         {
             //If looking at the Plant
-            if (SelectionManager.Instance.selecedObject.GetComponent<Plant>())
+            if (SelectionManager.Instance.selectedObject.GetComponent<Plant>())
             {
 
-                Plant plant = SelectionManager.Instance.selecedObject.GetComponent<Plant>();
+                Plant plant = SelectionManager.Instance.selectedObject.GetComponent<Plant>();
                 InteractableObject plantResource = plant.pickablePart.GetComponent<InteractableObject>();
 
                 PlantName.text = SpaceTextConverting.Instance.SetText(plant.plantType.ToString());
@@ -391,9 +396,9 @@ public class LookAtManager : Singleton<LookAtManager>
             }
 
             //If looking at the PlantResource
-            else if(SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+            else if(SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>())
             {
-                Item plantItem = MainManager.Instance.GetItem(SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().itemName);
+                Item plantItem = MainManager.Instance.GetItem(SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().itemName);
 
                 ItemImage.sprite = plantItem.hotbarSprite;
                 ItemName.text = SpaceTextConverting.Instance.SetText(plantItem.itemName.ToString());
@@ -406,32 +411,40 @@ public class LookAtManager : Singleton<LookAtManager>
     }
     void FurnitureMachineDisplay()
     {
-        if (SelectionManager.Instance.selecedObject && SelectionManager.Instance.onTarget)
+        if (SelectionManager.Instance.selectedObject && SelectionManager.Instance.onTarget)
         {
-            if (SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>())
+            if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
             {
-                MoveableObjectInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>());
+                FurnitureInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().furnitureObjectName);
 
-                MovableObjectImage.sprite = tempObject.objectSprite;
-                MovableObjectName.text = tempObject.Name;
+                MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
+                MovableObject_Text.text = "Press E to interact";
+            }
+            else if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+            {
+                MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().machineObjectName);
+
+                MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
                 MovableObject_Text.text = "Press E to interact";
             }
         }
     }
     void GhostTankDisplay()
     {
-        if (SelectionManager.Instance.selecedObject && SelectionManager.Instance.onTarget)
+        if (SelectionManager.Instance.selectedObject && SelectionManager.Instance.onTarget)
         {
-            if (SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>())
+            if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>())
             {
-                if (SelectionManager.Instance.selecedObject.GetComponent<GhostTank>())
+                if (SelectionManager.Instance.selectedObject.GetComponent<GhostTank>())
                 {
-                    if (SelectionManager.Instance.selecedObject.GetComponent<GhostTank>().ghostTankContent.GhostElement == GhostElement.None)
+                    if (SelectionManager.Instance.selectedObject.GetComponent<GhostTank>().ghostTankContent.GhostElement == GhostElement.None)
                     {
-                        MoveableObjectInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selecedObject.GetComponent<MoveableObject>());
+                        MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().machineObjectName);
 
-                        MovableObjectImage.sprite = tempObject.objectSprite;
-                        MovableObjectName.text = tempObject.Name;
+                        MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                        MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
                         MovableObject_Text.text = "Press E to interact";
                     }
                     else
@@ -452,9 +465,9 @@ public class LookAtManager : Singleton<LookAtManager>
     }
     void OreDisplay()
     {
-        if (SelectionManager.Instance.selecedObject)
+        if (SelectionManager.Instance.selectedObject)
         {
-            if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+            if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>())
             {
                 //Set Pickaxe Image
                 if (HotbarManager.Instance.selectedItem == Items.WoodPickaxe || HotbarManager.Instance.selectedItem == Items.StonePickaxe || HotbarManager.Instance.selectedItem == Items.CryonitePickaxe)
@@ -475,7 +488,7 @@ public class LookAtManager : Singleton<LookAtManager>
                 {
                     if (HotbarManager.Instance.selectedItem == Items.None || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
                     {
-                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        switch (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType)
                         {
                             case InteracteableType.None:
                                 break;
@@ -511,7 +524,7 @@ public class LookAtManager : Singleton<LookAtManager>
                     }
                     else if (HotbarManager.Instance.selectedItem == Items.WoodPickaxe)
                     {
-                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        switch (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType)
                         {
                             case InteracteableType.None:
                                 break;
@@ -547,7 +560,7 @@ public class LookAtManager : Singleton<LookAtManager>
                     }
                     else if (HotbarManager.Instance.selectedItem == Items.StonePickaxe)
                     {
-                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        switch (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType)
                         {
                             case InteracteableType.None:
                                 break;
@@ -577,7 +590,7 @@ public class LookAtManager : Singleton<LookAtManager>
                     }
                     else if (HotbarManager.Instance.selectedItem == Items.CryonitePickaxe)
                     {
-                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        switch (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType)
                         {
                             case InteracteableType.None:
                                 break;
@@ -607,9 +620,9 @@ public class LookAtManager : Singleton<LookAtManager>
     }
     void TreeDisplay()
     {
-        if (SelectionManager.Instance.selecedObject)
+        if (SelectionManager.Instance.selectedObject)
         {
-            if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+            if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>())
             {
                 //Set Axe Image
                 if (HotbarManager.Instance.selectedItem == Items.WoodAxe || HotbarManager.Instance.selectedItem == Items.StoneAxe || HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
@@ -631,7 +644,7 @@ public class LookAtManager : Singleton<LookAtManager>
                     //Hands
                     if (HotbarManager.Instance.selectedItem == Items.None || HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
                     {
-                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        switch (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType)
                         {
                             case InteracteableType.None:
                                 break;
@@ -670,7 +683,7 @@ public class LookAtManager : Singleton<LookAtManager>
                     //Wood Axe
                     else if (HotbarManager.Instance.selectedItem == Items.WoodAxe)
                     {
-                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        switch (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType)
                         {
                             case InteracteableType.None:
                                 break;
@@ -707,7 +720,7 @@ public class LookAtManager : Singleton<LookAtManager>
                     //Stone Axe
                     else if (HotbarManager.Instance.selectedItem == Items.StoneAxe)
                     {
-                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        switch (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType)
                         {
                             case InteracteableType.None:
                                 break;
@@ -742,7 +755,7 @@ public class LookAtManager : Singleton<LookAtManager>
                     //Cryonite Axe
                     else if (HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
                     {
-                        switch (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().interactableType)
+                        switch (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType)
                         {
                             case InteracteableType.None:
                                 break;
@@ -780,24 +793,24 @@ public class LookAtManager : Singleton<LookAtManager>
 
     void JournalDisplay()
     {
-        if (SelectionManager.Instance.selecedObject)
+        if (SelectionManager.Instance.selectedObject)
         {
-            if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>())
+            if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>())
             {
-                if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().journalType == JournalMenuState.MentorJournal)
+                if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().journalType == JournalMenuState.MentorJournal)
                 {
                     journalCategory_Text.text = "Mentor Journal Page";
                 }
-                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().journalType == JournalMenuState.PlayerJournal)
+                else if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().journalType == JournalMenuState.PlayerJournal)
                 {
                     journalCategory_Text.text = "Player Journal Page";
                 }
-                else if (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().journalType == JournalMenuState.PersonalJournal)
+                else if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().journalType == JournalMenuState.PersonalJournal)
                 {
                     journalCategory_Text.text = "Personal Journal Page";
                 }
 
-                journalEntryNumber_Text.text = "Entry no. " + (SelectionManager.Instance.selecedObject.GetComponent<InteractableObject>().journalPageIndex + 1);
+                journalEntryNumber_Text.text = "Entry no. " + (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().journalPageIndex + 1);
             }
         }
     }

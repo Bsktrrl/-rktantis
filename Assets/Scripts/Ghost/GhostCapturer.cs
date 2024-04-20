@@ -23,7 +23,7 @@ public class GhostCapturer : MonoBehaviour
     [SerializeField] GameObject leaf1;
     [SerializeField] GameObject leaf2;
 
-    [Header("Raycast")]
+    [Header("Snapping_Raycast")]
     public LayerMask ghostLayerMask;
     Ray ray;
     RaycastHit hit;
@@ -139,8 +139,6 @@ public class GhostCapturer : MonoBehaviour
 
     public void StartCapturing()
     {
-        int tempIndex;
-
         for (int i = 0; i < GhostManager.Instance.ghostCapturerStats.slotsActivated; i++)
         {
             if (!GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[i].isTaken)

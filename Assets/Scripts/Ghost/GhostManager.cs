@@ -101,23 +101,26 @@ public class GhostManager : Singleton<GhostManager>
 
     public int SetGhostSpawnAmount()
     {
-        switch (WeatherManager.Instance.weatherTypeDayList[0])
+        if (WeatherManager.Instance.weatherTypeDayList.Count > 0)
         {
-            case WeatherType.Cold:
-                ghostSpawnAmount = 1;
-                break;
-            case WeatherType.Cloudy:
-                ghostSpawnAmount = 1; //(6)
-                break;
-            case WeatherType.Sunny:
-                ghostSpawnAmount = 1; //(3)
-                break;
-            case WeatherType.Windy:
-                ghostSpawnAmount = 1; //(0)
-                break;
+            switch (WeatherManager.Instance.weatherTypeDayList[0])
+            {
+                case WeatherType.Cold:
+                    ghostSpawnAmount = 6;
+                    break;
+                case WeatherType.Cloudy:
+                    ghostSpawnAmount = 4;
+                    break;
+                case WeatherType.Sunny:
+                    ghostSpawnAmount = 2;
+                    break;
+                case WeatherType.Windy:
+                    ghostSpawnAmount = 0;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
 
         return ghostSpawnAmount;
@@ -135,11 +138,12 @@ public class GhostManager : Singleton<GhostManager>
             {
                 ghostCapturerStats.ghostCapturedStats[i].isTaken = true;
                 ghostCapturerStats.ghostCapturedStats[i].ghostState = GhostStates.Idle;
+                ghostCapturerStats.ghostCapturedStats[i].ghostAppearance = ghostStats.ghostAppearance;
+                ghostCapturerStats.ghostCapturedStats[i].isBeard = ghostStats.isBeard;
+                ghostCapturerStats.ghostCapturedStats[i].elementFuel_Amount = 100;
 
                 ghostStats.isTaken = true;
                 ghostStats.ghostState = GhostStates.Idle;
-
-                //ghostCapturerStats.ghostCapturedStats[i] = ghostStats;
 
                 break;
             }
@@ -240,7 +244,7 @@ public class GhostManager : Singleton<GhostManager>
         #region
         //Spawn Ghost at new spawn position
         GameObject newObj = Instantiate(ghostPrefab, GetSpawnPosition(), Quaternion.identity);
-        newObj.transform.parent = ghostPoolParent.transform;
+        newObj.transform.SetParent(ghostPoolParent.transform);
 
         ghostPool.Add(newObj);
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().transparencyValue = 1;

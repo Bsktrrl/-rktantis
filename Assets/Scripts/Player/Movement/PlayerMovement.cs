@@ -15,7 +15,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     bool movementAppearance_isHappening;
     float FOV_Smoother = 0;
-    float crouch_Kneel = -0.75f;
+    //float crouch_Kneel = -0.75f;
     float crouch_Up = -0.5f;
 
     float movement_X;

@@ -141,13 +141,13 @@ public class Perk : MonoBehaviour, IPointerEnterHandler
             perk_BG_Image.sprite = SkillTreeManager.Instance.BG_Active;
 
             //Remove items from player inventory
-            for (int i = 0; i < perkInfo.requirementList.Count; i++)
-            {
-                for (int j = 0; j < perkInfo.requirementList[i].amount; j++)
-                {
-                    InventoryManager.Instance.RemoveItemFromInventory(0, perkInfo.requirementList[i].itemName, -1, false);
-                }
-            }
+            //for (int i = 0; i < perkInfo.requirementList.Count; i++)
+            //{
+            //    for (int j = 0; j < perkInfo.requirementList[i].amount; j++)
+            //    {
+            //        InventoryManager.Instance.RemoveItemFromInventory(0, perkInfo.requirementList[i].itemName, -1, false);
+            //    }
+            //}
 
             SkillTreeManager.Instance.SetupSkillTree_Information(gameObject);
         }

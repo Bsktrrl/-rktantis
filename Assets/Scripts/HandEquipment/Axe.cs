@@ -6,14 +6,14 @@ public class Axe : MonoBehaviour, EquippeableItem_Interface
 {
     private void Start()
     {
-        if (BuildingManager.Instance.Axe_buildingBlockLookingAt)
-        {
-            BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(true);
-        }
-        else
-        {
-            BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(false);
-        }
+        //if (BuildingManager.Instance.Axe_buildingBlockLookingAt)
+        //{
+        //    BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(true);
+        //}
+        //else
+        //{
+        //    BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(false);
+        //}
     }
 
 
@@ -22,11 +22,13 @@ public class Axe : MonoBehaviour, EquippeableItem_Interface
 
     public void CutBlock()
     {
-        BuildingManager.Instance.CutBlock();
+        //BuildingManager.Instance.CutBlock();
     }
 
     public void DestroyThisObject()
     {
-        BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(false);
+        Destroy(gameObject);
+
+        //BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(false);
     }
 }

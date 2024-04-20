@@ -152,26 +152,26 @@ public class EquippedItem : MonoBehaviour
     public void DestroyObject()
     {
         //If Equipped Object is a BuildingHammer
-        if (gameObject.GetComponent<BuildingHammer>() != null)
-        {
-            if (gameObject.GetComponent<BuildingHammer>().tempObj_Selected)
-            {
-                if (gameObject.GetComponent<BuildingHammer>().tempObj_Selected.GetComponent<InteractableObject>())
-                {
-                    gameObject.GetComponent<BuildingHammer>().tempObj_Selected.GetComponent<InteractableObject>().DestroyThisObject();
-                    gameObject.GetComponent<BuildingHammer>().DestroyThisObject();
-                }
-                else
-                {
-                    Destroy(gameObject.GetComponent<BuildingHammer>().tempObj_Selected);
-                }
-            }
+        //if (gameObject.GetComponent<BuildingHammer>() != null)
+        //{
+        //    if (gameObject.GetComponent<BuildingHammer>().tempObj_Selected)
+        //    {
+        //        if (gameObject.GetComponent<BuildingHammer>().tempObj_Selected.GetComponent<InteractableObject>())
+        //        {
+        //            gameObject.GetComponent<BuildingHammer>().tempObj_Selected.GetComponent<InteractableObject>().DestroyThisObject();
+        //            gameObject.GetComponent<BuildingHammer>().DestroyThisObject();
+        //        }
+        //        else
+        //        {
+        //            Destroy(gameObject.GetComponent<BuildingHammer>().tempObj_Selected);
+        //        }
+        //    }
             
-            gameObject.GetComponent<BuildingHammer>().tempObj_Selected = null;
-        }
+        //    gameObject.GetComponent<BuildingHammer>().tempObj_Selected = null;
+        //}
 
         //If Equipped Object is an Axe
-        else if (gameObject.GetComponent<Axe>() != null)
+        if (gameObject.GetComponent<Axe>() != null)
         {
             gameObject.GetComponent<Axe>().DestroyThisObject();
         }

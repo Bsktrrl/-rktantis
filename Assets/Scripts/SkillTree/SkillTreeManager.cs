@@ -79,7 +79,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     {
         if (perk.perkInfo.perkState == PerkState.Active) { return; }
 
-        if (perk.perkInfo.requirementList.Count <= 0 && perk.perkInfo.perkConnectionList.Count <= 0)
+        if (/*perk.perkInfo.requirementList.Count <= 0 && */perk.perkInfo.perkConnectionList.Count <= 0)
         {
             perk.perkInfo.perkState = PerkState.Ready;
 
@@ -87,23 +87,23 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         }
 
         #region Requirements
-        int requirementCounter = 0;
+        //int requirementCounter = 0;
 
-        for (int i = 0; i < perk.perkInfo.requirementList.Count; i++)
-        {
-            //If player has the required amount of items in inventory
-            if (InventoryManager.Instance.GetAmountOfItemInInventory(0, perk.perkInfo.requirementList[i].itemName) >= perk.perkInfo.requirementList[i].amount)
-            {
-                requirementCounter++;
-            }
-            else
-            {
-                requirementCounter = -100;
+        //for (int i = 0; i < perk.perkInfo.requirementList.Count; i++)
+        //{
+        //    //If player has the required amount of items in inventory
+        //    if (InventoryManager.Instance.GetAmountOfItemInInventory(0, perk.perkInfo.requirementList[i].itemName) >= perk.perkInfo.requirementList[i].amount)
+        //    {
+        //        requirementCounter++;
+        //    }
+        //    else
+        //    {
+        //        requirementCounter = -100;
 
-                //perk.perkInfo.perkState = PerkState.Passive;
-                //return;
-            }
-        }
+        //        //perk.perkInfo.perkState = PerkState.Passive;
+        //        //return;
+        //    }
+        //}
         #endregion
 
         #region Connections
@@ -126,29 +126,29 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         #endregion
 
         //Make the Perk Ready to be purchased (both Requirements and Connections must be fullfilled
-        if (requirementCounter >= perk.perkInfo.requirementList.Count && connectionsCounter >= perk.perkInfo.perkConnectionList.Count)
-        {
-            perk.perkInfo.perkState = PerkState.Ready;
-        }
-        else
-        {
-            perk.perkInfo.perkState = PerkState.Passive;
-        }
+        //if (requirementCounter >= perk.perkInfo.requirementList.Count && connectionsCounter >= perk.perkInfo.perkConnectionList.Count)
+        //{
+        //    perk.perkInfo.perkState = PerkState.Ready;
+        //}
+        //else
+        //{
+        //    perk.perkInfo.perkState = PerkState.Passive;
+        //}
     }
     
     void UpdateRequirementDisplay(Perk perk)
     {
         for (int i = 0; i < perkRequirementList.Count; i++)
         {
-            //If player has the required amount of items in inventory
-            if (InventoryManager.Instance.GetAmountOfItemInInventory(0, perk.perkInfo.requirementList[i].itemName) >= perk.perkInfo.requirementList[i].amount)
-            {
-                perkRequirementList[i].GetComponent<PerkRequirementSlot>().requirement_BGimage.sprite = TabletManager.Instance.squareButton_Active;
-            }
-            else
-            {
-                perkRequirementList[i].GetComponent<PerkRequirementSlot>().requirement_BGimage.sprite = TabletManager.Instance.squareButton_Passive;
-            }
+            ////If player has the required amount of items in inventory
+            //if (InventoryManager.Instance.GetAmountOfItemInInventory(0, perk.perkInfo.requirementList[i].itemName) >= perk.perkInfo.requirementList[i].amount)
+            //{
+            //    perkRequirementList[i].GetComponent<PerkRequirementSlot>().requirement_BGimage.sprite = TabletManager.Instance.squareButton_Active;
+            //}
+            //else
+            //{
+            //    perkRequirementList[i].GetComponent<PerkRequirementSlot>().requirement_BGimage.sprite = TabletManager.Instance.squareButton_Passive;
+            //}
         }
     }
 
@@ -186,12 +186,12 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         }
         perkRequirementList.Clear();
 
-        for (int i = 0; i < perk.GetComponent<Perk>().perkInfo.requirementList.Count; i++)
-        {
-            perkRequirementList.Add(Instantiate(requirement_Prefab, requirement_Parent.transform));
+        //for (int i = 0; i < perk.GetComponent<Perk>().perkInfo.requirementList.Count; i++)
+        //{
+        //    perkRequirementList.Add(Instantiate(requirement_Prefab, requirement_Parent.transform));
 
-            perkRequirementList[perkRequirementList.Count - 1].GetComponent<PerkRequirementSlot>().SetRequirementSlot(MainManager.Instance.GetItem(perk.GetComponent<Perk>().perkInfo.requirementList[i].itemName).hotbarSprite, perk.GetComponent<Perk>().perkInfo.requirementList[i].itemName, perk.GetComponent<Perk>().perkInfo.requirementList[i].amount);
-        }
+        //    perkRequirementList[perkRequirementList.Count - 1].GetComponent<PerkRequirementSlot>().SetRequirementSlot(MainManager.Instance.GetItem(perk.GetComponent<Perk>().perkInfo.requirementList[i].itemName).hotbarSprite, perk.GetComponent<Perk>().perkInfo.requirementList[i].itemName, perk.GetComponent<Perk>().perkInfo.requirementList[i].amount);
+        //}
 
         UpdateRequirementDisplay(perk.gameObject.GetComponent<Perk>());
 
@@ -218,7 +218,7 @@ public class PerkInfo
     public Sprite perkIcon;
     public PerkState perkState;
 
-    public List<ItemRequirement> requirementList = new List<ItemRequirement>();
+    //public List<ItemRequirement> requirementList = new List<ItemRequirement>();
 
     public List<GameObject> perkConnectionList = new List<GameObject>();
 }

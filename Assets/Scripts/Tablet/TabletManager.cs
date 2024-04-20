@@ -224,7 +224,7 @@ public class TabletManager : Singleton<TabletManager>
         //Play Change Menu Sound
         SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
 
-        MenuTransition(tabletMenuState, TabletMenuState.MoveableObjects);
+        MenuTransition(tabletMenuState, TabletMenuState.BuildingObject);
     }
     public void MenuButton_Settings_onClick()
     {
@@ -383,7 +383,7 @@ public class TabletManager : Singleton<TabletManager>
             case TabletMenuState.SkillTree:
                 menu_Skilltree.SetActive(false);
                 break;
-            case TabletMenuState.MoveableObjects:
+            case TabletMenuState.BuildingObject:
                 menu_MoveableObjects.SetActive(false);
                 BuildingSystemMenu.Instance.BuildingBlockSelecter_Exit();
                 break;
@@ -533,9 +533,12 @@ public class TabletManager : Singleton<TabletManager>
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Active;
                 break;
-            case TabletMenuState.MoveableObjects:
+            
+            case TabletMenuState.BuildingObject:
                 MainManager.Instance.menuStates = MenuStates.MoveableObjectMenu;
-                tabletMenuState = TabletMenuState.MoveableObjects;
+                tabletMenuState = TabletMenuState.BuildingObject;
+
+                BuildingDisplayManager.Instance.OpenTablet();
 
                 menu_MoveableObjects.SetActive(true);
 
@@ -552,6 +555,7 @@ public class TabletManager : Singleton<TabletManager>
 
                 BuildingSystemMenu.Instance.BuildingBlockSelecter_Enter();
                 break;
+            
             case TabletMenuState.Journal:
                 MainManager.Instance.menuStates = MenuStates.JournalMenu;
                 tabletMenuState = TabletMenuState.Journal;
@@ -614,6 +618,8 @@ public class TabletManager : Singleton<TabletManager>
     {
         tabletObject.SetActive(true);
 
+        BuildingDisplayManager.Instance.OpenTablet();
+
         if (!menuObjectIsOpened)
         {
             tempMenuAmount = menuAmount;
@@ -628,7 +634,7 @@ public class TabletManager : Singleton<TabletManager>
         //If BuildingHammer is in hand, open the MoveableObjectMenu
         if (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
         {
-            MenuTransition(tabletMenuState, TabletMenuState.MoveableObjects);
+            MenuTransition(tabletMenuState, TabletMenuState.BuildingObject);
         }
 
         //Set the MenuButtonBackround size
@@ -767,12 +773,12 @@ public class TabletManager : Singleton<TabletManager>
         MainManager.Instance.menuStates = MenuStates.None;
 
         //Hide all Requirement_Parents
-        BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
+        //BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
 
-        if (MainManager.Instance.gameStates != GameStates.Cutting)
-        {
-            BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(false);
-        }
+        //if (MainManager.Instance.gameStates != GameStates.Cutting)
+        //{
+        //    BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(false);
+        //}
 
         //Hide Buttons
         menu_CraftingTable_Button.SetActive(false);
@@ -811,7 +817,7 @@ public class TabletManager : Singleton<TabletManager>
                     menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Active;
                     menu_Skilltree.SetActive(true);
                     break;
-                case TabletMenuState.MoveableObjects:
+                case TabletMenuState.BuildingObject:
                     menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Active;
                     menu_MoveableObjects.SetActive(true);
                     break;
@@ -913,7 +919,7 @@ public enum TabletMenuState
     Inventory,
     CraftingTable,
     SkillTree,
-    MoveableObjects,
+    BuildingObject,
     ChestInventory,
     Equipment,
     Journal,

@@ -62,7 +62,6 @@ public class PlayerManager : Singleton<PlayerManager>
             //Set Player Position
             MainManager.Instance.player.transform.SetPositionAndRotation(playerStats.playerPos, playerStats.playerRot);
 
-            InteractableDistance = playerStats.InteractableDistance;
             movementSpeedMultiplier_SkillTree = playerStats.movementSpeedMultiplier_SkillTree;
 
             jumpHeight = playerStats.jumpHeight;
@@ -73,7 +72,6 @@ public class PlayerManager : Singleton<PlayerManager>
         playerStats.playerPos = MainManager.Instance.player.transform.position;
         playerStats.playerRot = MainManager.Instance.player.transform.rotation;
 
-        playerStats.InteractableDistance = InteractableDistance;
         playerStats.movementSpeedMultiplier_SkillTree = movementSpeedMultiplier_SkillTree;
 
         playerStats.jumpHeight = jumpHeight;

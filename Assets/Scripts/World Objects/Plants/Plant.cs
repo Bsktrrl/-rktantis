@@ -174,7 +174,7 @@ public class Plant : MonoBehaviour
     {
         if (isPicked) { return; }
 
-        if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selecedObject == gameObject
+        if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selectedObject == gameObject
             && MainManager.Instance.menuStates == MenuStates.None)
         {
             //If Object is a Plant

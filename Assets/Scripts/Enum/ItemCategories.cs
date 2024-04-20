@@ -106,18 +106,18 @@ public enum ItemSubCategories
 
 
     //BuildingBlock
-    [Description("Floor")][InspectorName("BuildingBlock/Floor")] Floor,
-    [Description("Floor Triangle")][InspectorName("BuildingBlock/Floor Triangle")] FloorTriangle,
+    [Description("Floor_Square")][InspectorName("BuildingBlock/Floor_Square")] Floor,
+    [Description("Floor_Square Triangle")][InspectorName("BuildingBlock/Floor_Square Triangle")] FloorTriangle,
 
     [Description("Wall")][InspectorName("BuildingBlock/Wall")] Wall,
     [Description("Wall Triangle")][InspectorName("BuildingBlock/Wall Triangle")] WallTriangle,
-    [Description("Door")][InspectorName("BuildingBlock/Door")] Door,
-    [Description("Window")][InspectorName("BuildingBlock/Window")] Window,
+    [Description("Wall_Door")][InspectorName("BuildingBlock/Wall_Door")] Door,
+    [Description("Wall_Window")][InspectorName("BuildingBlock/Wall_Window")] Window,
 
-    [Description("Stair")][InspectorName("BuildingBlock/Stair")] Stair,
-    [Description("Ramp")][InspectorName("BuildingBlock/Ramp")] Ramp,
-    [Description("Ramp Triangle")][InspectorName("BuildingBlock/Ramp Triangle")] RampTriangle,
-    [Description("Ramp Corner")][InspectorName("BuildingBlock/Ramp Corner")] RampCorner,
+    [Description("Ramp_Stair")][InspectorName("BuildingBlock/Ramp_Stair")] Stair,
+    [Description("Ramp_Ramp")][InspectorName("BuildingBlock/Ramp_Ramp")] Ramp,
+    [Description("Ramp_Ramp Triangle")][InspectorName("BuildingBlock/Ramp_Ramp Triangle")] RampTriangle,
+    [Description("Ramp_Ramp Corner")][InspectorName("BuildingBlock/Ramp_Ramp Corner")] RampCorner,
 
     [Description("Fence")][InspectorName("BuildingBlock/Fence")] Fence,
 

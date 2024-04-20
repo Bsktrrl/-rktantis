@@ -1,16 +1,27 @@
+using System.Drawing;
 using UnityEngine;
 
 public class SelectionManager : Singleton<SelectionManager>
 {
+    [Header("OnTarget")]
     public bool onTarget = false;
+    bool onTargetTemp = false;
 
-    public GameObject selecedObject;
+    [Header("Selected Objects")]
+    public GameObject selectedObject; //Object Looking at
+    public GameObject selectedMovableObjectToRemove; //Object for removal with Axe
 
+    [Header("Tags")]
     public string tag;
 
+    [Header("Object Types")]
     InteractableObject newInteractableObject;
     Plant newPlantObject;
     Ghost newGhostObject;
+
+    [Header("Raycast")]
+    Ray ray;
+    RaycastHit hit;
 
 
     //--------------------
@@ -18,135 +29,227 @@ public class SelectionManager : Singleton<SelectionManager>
 
     void Update()
     {
-        if (Time.frameCount % MainManager.Instance.updateInterval == 0 && MainManager.Instance.menuStates == MenuStates.None)
+        if (Time.frameCount % MainManager.Instance.updateInterval == 0
+            && MainManager.Instance.menuStates == MenuStates.None)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            Raycast_SelectedObject();
+            Raycast_ObjectToRemove();
+        }
+    }
 
-            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance))
+    void Raycast_SelectedObject()
+    {
+        selectedObject = null;
+
+        ray = MainManager.Instance.mainMainCamera.ScreenPointToRay(Input.mousePosition);
+
+        Vector3 startPoint = ray.origin /*+ MainManager.Instance.mainMainCamera.transform.forward*/;
+
+        //Make Debug Line
+        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), UnityEngine.Color.white);
+
+        if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, ~BuildingSystemManager.Instance.layerMask_BuildingBlock))
+        {
+            Transform selectionTransform = hit.transform;
+            tag = selectionTransform.gameObject.tag;
+
+            //Reset ObjectReferences
+            newInteractableObject = null;
+            newPlantObject = null;
+            newGhostObject = null;
+
+            //Check if hitting an InteractableObject
+            if (selectionTransform.GetComponent<InteractableObject>())
             {
-                //If Hitting the SphereCollider to an InvisibleObject, ignore the hit
-                if (hit.transform.gameObject.GetComponent<InvisibleObject>())
+                newInteractableObject = selectionTransform.GetComponent<InteractableObject>();
+                onTarget = true;
+                selectedObject = selectionTransform.gameObject;
+
+                LookAtCheck();
+            }
+
+            //Check if hitting a Plant
+            else if (selectionTransform.GetComponent<Plant>())
+            {
+                newPlantObject = selectionTransform.GetComponent<Plant>();
+                onTarget = true;
+                selectedObject = selectionTransform.gameObject;
+
+                LookAtCheck();
+            }
+            else if (selectionTransform.GetComponent<Ghost>())
+            {
+                newGhostObject = selectionTransform.GetComponent<Ghost>();
+                onTarget = true;
+                selectedObject = selectionTransform.gameObject;
+
+                LookAtCheck();
+            }
+
+            //If Hitting the SphereCollider to an InvisibleObject, ignore the hit
+            else if (hit.transform.gameObject.GetComponent<InvisibleObject>())
+            {
+                if (hit.transform.gameObject.GetComponent<SphereCollider>())
                 {
-                    if (hit.transform.gameObject.GetComponent<SphereCollider>())
-                    {
-                        return;
-                    }
-                }
-
-                Transform selectionTransform = hit.transform;
-
-                //Get the layer looking at
-                tag = selectionTransform.gameObject.tag;
-
-                //When raycasting something that is interactable
-                newInteractableObject = null;
-                newPlantObject = null;
-                newGhostObject = null;
-
-                if (selectionTransform.GetComponent<InteractableObject>())
-                {
-                    newInteractableObject = selectionTransform.GetComponent<InteractableObject>();
-                }
-                else if(selectionTransform.GetComponent<Plant>())
-                {
-                    newPlantObject = selectionTransform.GetComponent<Plant>();
-                }
-                else if (selectionTransform.GetComponent<Ghost>())
-                {
-                    newGhostObject = selectionTransform.GetComponent<Ghost>();
-                }
-
-
-                //-----
-
-
-                //If looking at an Interacteable Object, show its UI to the player
-                if (newInteractableObject != null)
-                {
-                    //Show Inventory info
-                    onTarget = true;
-                    selecedObject = newInteractableObject.gameObject;
-
-                    if (newInteractableObject.GetComponent<InteractableObject>())
-                    {
-                        LookAtManager.Instance.typeLookingAt = newInteractableObject.GetComponent<InteractableObject>().interactableType;
-                    }
-                    
-                    if (newInteractableObject != null)
-                    {
-                        if (newInteractableObject.gameObject.activeInHierarchy)
-                        {
-                            LookAtManager.Instance.LookAt();
-                        }
-                    }
-                }
-
-                //If looking at a Plant, show its UI to the player
-                else if (newPlantObject != null)
-                {
-                    //Show Inventory info
-                    onTarget = true;
-                    selecedObject = newPlantObject.gameObject;
-
-                    if (newPlantObject.pickablePart.GetComponent<InteractableObject>())
-                    {
-                        LookAtManager.Instance.typeLookingAt = newPlantObject.pickablePart.GetComponent<InteractableObject>().interactableType;
-                    }
-
-                    if (newPlantObject != null)
-                    {
-                        if (newPlantObject.gameObject.activeInHierarchy)
-                        {
-                            LookAtManager.Instance.LookAt();
-                        }
-                    }
-                }
-
-                //If looking at a Ghost, show its UI to the player
-                else if (newGhostObject != null)
-                {
-                    //Show Inventory info
-                    onTarget = true;
-                    selecedObject = newGhostObject.gameObject;
-
-                    if (newGhostObject.GetComponent<Ghost>())
-                    {
-                        LookAtManager.Instance.typeLookingAt = newGhostObject.GetComponent<Ghost>().interactableType;
-                    }
-                    
-                    if (newGhostObject != null)
-                    {
-                        if (newGhostObject.gameObject.activeInHierarchy)
-                        {
-                            LookAtManager.Instance.LookAt();
-                        }
-                    }
-                }
-
-                //If there is a Hit without an interacteable script
-                else
-                {
+                    tag = "";
+                    BuildingDisplayManager.Instance.ResetRewardScreenDisplay();
+                    LookAtManager.Instance.typeLookingAt = InteracteableType.None;
                     onTarget = false;
 
-                    LookAtManager.Instance.typeLookingAt = InteracteableType.None;
+                    return;
+                }
+            }
+            else
+            {
+                tag = "";
+                BuildingDisplayManager.Instance.ResetRewardScreenDisplay();
+                LookAtManager.Instance.typeLookingAt = InteracteableType.None;
+                onTarget = false;
+            }
+        }
+        else
+        {
+            tag = "";
+            BuildingDisplayManager.Instance.ResetRewardScreenDisplay();
+            LookAtManager.Instance.typeLookingAt = InteracteableType.None;
+        }
+    }
+    void LookAtCheck()
+    {
+        //If looking at an Interactable Object, show its UI to the player
+        if (newInteractableObject != null)
+        {
+            print("newInteractableObject != null");
+            //Show Inventory info
+            onTarget = true;
+            selectedObject = newInteractableObject.gameObject;
 
-                    LookAtManager.Instance.TurnOffScreens();
+            if (newInteractableObject.GetComponent<InteractableObject>())
+            {
+                LookAtManager.Instance.typeLookingAt = newInteractableObject.GetComponent<InteractableObject>().interactableType;
+            }
+
+            if (newInteractableObject.gameObject.activeInHierarchy)
+            {
+                LookAtManager.Instance.LookAt();
+            }
+        }
+
+        //If looking at a Plant, show its UI to the player
+        else if (newPlantObject != null)
+        {
+            print("newPlantObject != null");
+            //Show Inventory info
+            onTarget = true;
+            selectedObject = newPlantObject.gameObject;
+
+            if (newPlantObject.pickablePart.GetComponent<InteractableObject>())
+            {
+                LookAtManager.Instance.typeLookingAt = newPlantObject.pickablePart.GetComponent<InteractableObject>().interactableType;
+            }
+
+            if (newPlantObject.gameObject.activeInHierarchy)
+            {
+                LookAtManager.Instance.LookAt();
+            }
+        }
+
+        //If looking at a Ghost, show its UI to the player
+        else if (newGhostObject != null)
+        {
+            print("newGhostObject != null");
+            //Show Inventory info
+            onTarget = true;
+            selectedObject = newGhostObject.gameObject;
+
+            if (newGhostObject.GetComponent<Ghost>())
+            {
+                LookAtManager.Instance.typeLookingAt = newGhostObject.GetComponent<Ghost>().interactableType;
+            }
+
+            if (newGhostObject.gameObject.activeInHierarchy)
+            {
+                LookAtManager.Instance.LookAt();
+            }
+        }
+
+        //If there is a Hit without an "Interactable"-script
+        else
+        {
+            print("If there is a Hit without an \"Interactable\"-script");
+
+            selectedObject = null;
+            onTarget = false;
+
+            //BuildingDisplayManager.Instance.ResetRewardScreenDisplay();
+
+            LookAtManager.Instance.typeLookingAt = InteracteableType.None;
+            LookAtManager.Instance.TurnOffScreens();
+        }
+    }
+    
+    void Raycast_ObjectToRemove()
+    {
+        if (HotbarManager.Instance.selectedItem == Items.WoodAxe
+            || HotbarManager.Instance.selectedItem == Items.StoneAxe
+            || HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
+        {
+            ray = MainManager.Instance.mainMainCamera.ScreenPointToRay(Input.mousePosition);
+
+            Vector3 startPoint = ray.origin /*+ MainManager.Instance.mainMainCamera.transform.forward*/;
+
+            //Make Debug Line
+            Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), UnityEngine.Color.blue);
+
+            //Check if hitting an Object with a Layer
+            #region
+            //Furniture
+            if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out hit, PlayerManager.Instance.InteractableDistance + 1, BuildingSystemManager.Instance.layerMask_Furniture))
+            {
+                if (hit.transform.gameObject.GetComponent<MoveableObject>())
+                {
+                    print("Select a Furniture: " + hit.transform.gameObject.name);
+
+                    selectedMovableObjectToRemove = hit.transform.gameObject;
                 }
             }
 
-            //If there is no script attached at all
+            //Machine
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out hit, PlayerManager.Instance.InteractableDistance + 1, BuildingSystemManager.Instance.layerMask_Machine))
+            {
+                if (hit.transform.gameObject.GetComponent<MoveableObject>())
+                {
+                    print("Select a Machine: " + hit.transform.gameObject.name);
+
+                    selectedMovableObjectToRemove = hit.transform.gameObject;
+                }
+            }
+
+            //BuildingBlock
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out hit, PlayerManager.Instance.InteractableDistance + 1, BuildingSystemManager.Instance.layerMask_BuildingBlockModel))
+            {
+                if (hit.transform.gameObject.GetComponent<Model>())
+                {
+                    print("Select a BuildingBlock: " + hit.transform.gameObject.name);
+
+                    selectedMovableObjectToRemove = hit.transform.gameObject;
+                }
+            }
+
+            //Nothing
             else
             {
-                LookAtManager.Instance.TurnOffScreens();
-
-                onTarget = false;
-
-                //Get the layer looking at
-                tag = "";
-
-                LookAtManager.Instance.typeLookingAt = InteracteableType.None;
+                selectedMovableObjectToRemove = null;
             }
+            #endregion
+
+            BuildingDisplayManager.Instance.UpdateScreenBuildingRewardDisplayInfo();
+        }
+        else
+        {
+            selectedMovableObjectToRemove = null;
+
+            BuildingDisplayManager.Instance.UpdateScreenBuildingRewardDisplayInfo();
         }
     }
 }
