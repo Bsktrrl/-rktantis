@@ -85,6 +85,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b55c0e30fd9f6124fa3f1a964cc2b02a,
         type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b55c0e30fd9f6124fa3f1a964cc2b02a,
+        type: 3}
       propertyPath: m_TagString
       value: Furniture
       objectReference: {fileID: 0}
@@ -252,6 +257,7 @@ MonoBehaviour:
   - {fileID: 460143051689642904}
   - {fileID: 5905524294169999942}
   - {fileID: 4758722416591788303}
+  collidersOnObject: {fileID: 0}
 --- !u!114 &7423484670578734567
 MonoBehaviour:
   m_ObjectHideFlags: 0

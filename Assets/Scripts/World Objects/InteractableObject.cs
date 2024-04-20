@@ -51,221 +51,212 @@ public class InteractableObject : MonoBehaviour
 
     void ObjectInteraction()
     {
-        //if (gameObject)
-        //{
-        //    if (gameObject.GetComponent<MoveableObject>())
-        //    {
-        //        if (gameObject.GetComponent<MoveableObject>().isSelectedForMovement) { return; }
-        //    }
-        //}
-        
-
-        //-----
-
-
-        if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selectedObject == gameObject
-            && MainManager.Instance.menuStates == MenuStates.None)
+        if (SelectionManager.Instance.selectedObject)
         {
-            //If Object is an item
-            #region
-            if (interactableType == InteracteableType.Item)
+            if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selectedObject == gameObject
+            && MainManager.Instance.menuStates == MenuStates.None)
             {
-                //print("Interact with a Pickup");
-
-                //Check If item can be added
-                for (int i = 0; i < amount; i++)
+                //If Object is an item
+                #region
+                if (interactableType == InteracteableType.Item)
                 {
-                    if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
+                    //print("Interact with a Pickup");
+
+                    //Check If item can be added
+                    for (int i = 0; i < amount; i++)
                     {
-                        SoundManager.Instance.Play_Inventory_PickupItem_Clip();
-
-                        //Remove Object from the worldObjectList
-                        WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
-
-                        //Destroy gameObject
-                        DestroyThisObject();
-                    }
-                }
-            }
-            #endregion
-
-            //If Object is a PlantItem
-            #region
-            else if (interactableType == InteracteableType.Plant)
-            {
-                print("Interract with a PlantItem");
-
-                //Pick the Plant
-                if (plantParent)
-                {
-                    if (plantParent.GetComponent<Plant>() && !plantParent.GetComponent<Plant>().isPicked)
-                    {
-                        for (int i = 0; i < amount; i++)
+                        if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
                         {
                             SoundManager.Instance.Play_Inventory_PickupItem_Clip();
 
-                            //Check If item can be added
-                            InventoryManager.Instance.AddItemToInventory(0, itemName);
+                            //Remove Object from the worldObjectList
+                            WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
 
-                            plantParent.GetComponent<Plant>().PickPlant();
+                            //Destroy gameObject
+                            DestroyThisinteractableObject();
                         }
                     }
                 }
-            }
-            #endregion
-            
-            //If Object is an Inventory
-            #region
-            else if (interactableType == InteracteableType.Inventory)
-            {
-                //print("Interract with an Inventory");
+                #endregion
 
-                TabletManager.Instance.objectInteractingWith_Object = gameObject;
-
-                //Set Open Chest Animation
-                if (gameObject.GetComponent<Animations_Objects>())
+                //If Object is a PlantItem
+                #region
+                else if (interactableType == InteracteableType.Plant)
                 {
-                    gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                    print("Interract with a PlantItem");
+
+                    //Pick the Plant
+                    if (plantParent)
+                    {
+                        if (plantParent.GetComponent<Plant>() && !plantParent.GetComponent<Plant>().isPicked)
+                        {
+                            for (int i = 0; i < amount; i++)
+                            {
+                                SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+
+                                //Check If item can be added
+                                InventoryManager.Instance.AddItemToInventory(0, itemName);
+
+                                plantParent.GetComponent<Plant>().PickPlant();
+                            }
+                        }
+                    }
                 }
+                #endregion
 
-                //Open the chest Inventory
-                InventoryManager.Instance.chestInventoryOpen = inventoryIndex;
-                InventoryManager.Instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Chest Inventory
-                TabletManager.Instance.chestInventory_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
-                TabletManager.Instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
-                TabletManager.Instance.chestInventory_Parent.SetActive(true);
-
-                InventoryManager.Instance.chestInventory_Fake_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
-                InventoryManager.Instance.chestInventory_Fake_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
-                InventoryManager.Instance.chestInventory_Fake_Parent.SetActive(true);
-
-                MainManager.Instance.menuStates = MenuStates.ChestMenu;
-                TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.Chest;
-
-                InventoryManager.Instance.ClosePlayerInventory();
-                InventoryManager.Instance.OpenPlayerInventory();
-                TabletManager.Instance.OpenTablet(TabletMenuState.ChestInventory);
-            }
-            #endregion
-
-            //If Object is a Crafting Table
-            #region
-            else if (interactableType == InteracteableType.CraftingTable)
-            {
-                //print("Interract with a CraftingTable");
-
-                SoundManager.Instance.Play_InteractableObjects_OpenCraftingTable_Clip();
-
-                TabletManager.Instance.objectInteractingWith_Object = gameObject;
-
-                //Set Crafting Table Animation
-                if (gameObject.GetComponent<Animations_Objects>())
+                //If Object is an Inventory
+                #region
+                else if (interactableType == InteracteableType.Inventory)
                 {
-                    gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                    //print("Interract with an Inventory");
+
+                    TabletManager.Instance.objectInteractingWith_Object = gameObject;
+
+                    //Set Open Chest Animation
+                    if (gameObject.GetComponent<Animations_Objects>())
+                    {
+                        gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                    }
+
+                    //Open the chest Inventory
+                    InventoryManager.Instance.chestInventoryOpen = inventoryIndex;
+                    InventoryManager.Instance.PrepareInventoryUI(inventoryIndex, false); //Prepare Chest Inventory
+                    TabletManager.Instance.chestInventory_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
+                    TabletManager.Instance.chestInventory_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
+                    TabletManager.Instance.chestInventory_Parent.SetActive(true);
+
+                    InventoryManager.Instance.chestInventory_Fake_Parent.GetComponent<RectTransform>().sizeDelta = InventoryManager.Instance.inventories[inventoryIndex].inventorySize * InventoryManager.Instance.cellsize;
+                    InventoryManager.Instance.chestInventory_Fake_Parent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(InventoryManager.Instance.cellsize, InventoryManager.Instance.cellsize);
+                    InventoryManager.Instance.chestInventory_Fake_Parent.SetActive(true);
+
+                    MainManager.Instance.menuStates = MenuStates.ChestMenu;
+                    TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.Chest;
+
+                    InventoryManager.Instance.ClosePlayerInventory();
+                    InventoryManager.Instance.OpenPlayerInventory();
+                    TabletManager.Instance.OpenTablet(TabletMenuState.ChestInventory);
                 }
+                #endregion
 
-                //Open the crafting menu
-                TabletManager.Instance.OpenTablet(TabletMenuState.CraftingTable);
-
-                TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.CraftingTable;
-            }
-            #endregion
-
-            //If Object is a Research Table
-            #region
-            else if (interactableType == InteracteableType.ResearchTable)
-            {
-                //print("Interact with a Research Table");
-
-                SoundManager.Instance.Play_InteractableObjects_OpenResearchTable_Clip();
-
-                TabletManager.Instance.objectInteractingWith_Object = gameObject;
-
-                //Set Research Table Animation
-                if (gameObject.GetComponent<Animations_Objects>())
+                //If Object is a Crafting Table
+                #region
+                else if (interactableType == InteracteableType.CraftingTable)
                 {
-                    gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                    //print("Interract with a CraftingTable");
+
+                    SoundManager.Instance.Play_InteractableObjects_OpenCraftingTable_Clip();
+
+                    TabletManager.Instance.objectInteractingWith_Object = gameObject;
+
+                    //Set Crafting Table Animation
+                    if (gameObject.GetComponent<Animations_Objects>())
+                    {
+                        gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                    }
+
+                    //Open the crafting menu
+                    TabletManager.Instance.OpenTablet(TabletMenuState.CraftingTable);
+
+                    TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.CraftingTable;
                 }
+                #endregion
 
-                //Open the Research menu
-                TabletManager.Instance.OpenTablet(TabletMenuState.ResearchTable);
-
-                TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.ResearchTable;
-            }
-            #endregion
-
-            //If Object is a SkillTree
-            #region
-            else if (interactableType == InteracteableType.SkillTreeTable)
-            {
-                //print("Interract with a SkillTree");
-
-                SoundManager.Instance.Play_InteractableObjects_OpenSkillTreeTable_Clip();
-
-                TabletManager.Instance.objectInteractingWith_Object = gameObject;
-
-                //Set SkillTree Animation
-                if (gameObject.GetComponent<Animations_Objects>())
+                //If Object is a Research Table
+                #region
+                else if (interactableType == InteracteableType.ResearchTable)
                 {
-                    gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                    //print("Interact with a Research Table");
+
+                    SoundManager.Instance.Play_InteractableObjects_OpenResearchTable_Clip();
+
+                    TabletManager.Instance.objectInteractingWith_Object = gameObject;
+
+                    //Set Research Table Animation
+                    if (gameObject.GetComponent<Animations_Objects>())
+                    {
+                        gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                    }
+
+                    //Open the Research menu
+                    TabletManager.Instance.OpenTablet(TabletMenuState.ResearchTable);
+
+                    TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.ResearchTable;
                 }
+                #endregion
 
-                //Open the crafting menu
-                TabletManager.Instance.OpenTablet(TabletMenuState.SkillTree);
-
-                TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.SkillTree;
-            }
-            #endregion
-
-            //If Object is a GhostTank
-            #region
-            else if (interactableType == InteracteableType.GhostTank)
-            {
-                print("Interact with a GhostTank");
-
-                if (gameObject.GetComponent<GhostTank>())
+                //If Object is a SkillTree
+                #region
+                else if (interactableType == InteracteableType.SkillTreeTable)
                 {
-                    gameObject.GetComponent<GhostTank>().InteractWithGhostTank();
+                    //print("Interract with a SkillTree");
+
+                    SoundManager.Instance.Play_InteractableObjects_OpenSkillTreeTable_Clip();
+
+                    TabletManager.Instance.objectInteractingWith_Object = gameObject;
+
+                    //Set SkillTree Animation
+                    if (gameObject.GetComponent<Animations_Objects>())
+                    {
+                        gameObject.GetComponent<Animations_Objects>().StartAnimation();
+                    }
+
+                    //Open the crafting menu
+                    TabletManager.Instance.OpenTablet(TabletMenuState.SkillTree);
+
+                    TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.SkillTree;
                 }
-            }
-            #endregion
+                #endregion
 
-            //If Object is a JournalPage
-            #region
-            else if (interactableType == InteracteableType.JournalPage)
-            {
-                print("Interact with a Journal Page");
-
-                JournalManager.Instance.AddJournalPageToList(journalType, journalPageIndex);
-
-                //Destroy gameObject
-                DestroyThisObject();
-            }
-            #endregion
-
-            //If Object is a Blueprint
-            #region
-            else if (interactableType == InteracteableType.Blueprint)
-            {
-                print("Interact with a Blueprint");
-
-                if (blueprint_BuildingBlock_Name != BuildingBlockObjectNames.None)
+                //If Object is a GhostTank
+                #region
+                else if (interactableType == InteracteableType.GhostTank)
                 {
-                    BlueprintManager.Instance.AddBlueprint(blueprint_BuildingBlock_Name, buildingMaterial);
-                }
-                else if (blueprint_Furniture_Name != FurnitureObjectNames.None)
-                {
-                    BlueprintManager.Instance.AddBlueprint(blueprint_Furniture_Name);
-                }
-                else if (blueprint_Machine_Name != MachineObjectNames.None)
-                {
-                    BlueprintManager.Instance.AddBlueprint(blueprint_Machine_Name);
-                }
+                    print("Interact with a GhostTank");
 
-                //Destroy gameObject
-                DestroyThisObject();
+                    if (gameObject.GetComponent<GhostTank>())
+                    {
+                        gameObject.GetComponent<GhostTank>().InteractWithGhostTank();
+                    }
+                }
+                #endregion
+
+                //If Object is a JournalPage
+                #region
+                else if (interactableType == InteracteableType.JournalPage)
+                {
+                    print("Interact with a Journal Page");
+
+                    JournalManager.Instance.AddJournalPageToList(journalType, journalPageIndex);
+
+                    //Destroy gameObject
+                    DestroyThisinteractableObject();
+                }
+                #endregion
+
+                //If Object is a Blueprint
+                #region
+                else if (interactableType == InteracteableType.Blueprint)
+                {
+                    print("Interact with a Blueprint");
+
+                    if (blueprint_BuildingBlock_Name != BuildingBlockObjectNames.None)
+                    {
+                        BlueprintManager.Instance.AddBlueprint(blueprint_BuildingBlock_Name, buildingMaterial);
+                    }
+                    else if (blueprint_Furniture_Name != FurnitureObjectNames.None)
+                    {
+                        BlueprintManager.Instance.AddBlueprint(blueprint_Furniture_Name);
+                    }
+                    else if (blueprint_Machine_Name != MachineObjectNames.None)
+                    {
+                        BlueprintManager.Instance.AddBlueprint(blueprint_Machine_Name);
+                    }
+
+                    //Destroy gameObject
+                    DestroyThisinteractableObject();
+                }
+                #endregion
             }
-            #endregion
         }
     }
 
@@ -302,7 +293,7 @@ public class InteractableObject : MonoBehaviour
     //--------------------
 
 
-    public void DestroyThisObject()
+    public void DestroyThisinteractableObject()
     {
         //Unsubscribe from Event
         PlayerButtonManager.objectInterraction_isPressedDown -= ObjectInteraction;

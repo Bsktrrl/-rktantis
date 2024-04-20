@@ -35,7 +35,7 @@ public class Ghost : MonoBehaviour
     public List<GameObject> style2 = new List<GameObject>();
     public List<GameObject> style3 = new List<GameObject>();
 
-    [Header("Raycast")]
+    [Header("Snapping_Raycast")]
     [SerializeField] int terrainDirection_Down;
     [SerializeField] int terrainDirection_Forward;
     public LayerMask ghostLayerMask;

@@ -65,6 +65,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f06101b044975849b7a1ecab887b2f3,
         type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4f06101b044975849b7a1ecab887b2f3,
+        type: 3}
       propertyPath: m_TagString
       value: Machine
       objectReference: {fileID: 0}
@@ -222,6 +227,7 @@ MonoBehaviour:
   - {fileID: 2928362979055078152}
   - {fileID: 7133139682471770869}
   - {fileID: 5081651333316295433}
+  collidersOnObject: {fileID: 0}
 --- !u!114 &5413797534964809342
 MonoBehaviour:
   m_ObjectHideFlags: 0

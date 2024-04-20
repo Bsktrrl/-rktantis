@@ -23,7 +23,7 @@ public class GhostCapturer : MonoBehaviour
     [SerializeField] GameObject leaf1;
     [SerializeField] GameObject leaf2;
 
-    [Header("Raycast")]
+    [Header("Snapping_Raycast")]
     public LayerMask ghostLayerMask;
     Ray ray;
     RaycastHit hit;

@@ -338,7 +338,6 @@ public class Arms : Singleton<Arms>
                     }
                     #endregion
 
-
                     #region Hammer
                     //Hammer
                     else if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.WoodBuildingHammer
@@ -365,10 +364,12 @@ public class Arms : Singleton<Arms>
                     #endregion
 
                     #region Axe
+                    //Remove Objects
                     if (SelectionManager.Instance.selectedMovableObjectToRemove)
                     {
                         //If a movableObject (BuildingObjects)
-                        if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
+                        if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>()
+                            || SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>())
                         {
                             EquippedItem equippedItem = EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>();
 
@@ -389,9 +390,9 @@ public class Arms : Singleton<Arms>
                             EquippmentManager.Instance.Hit(equippedItem);
                             CanHit();
                         }
-
                     }
 
+                    //Cutting
                     else if (SelectionManager.Instance.selectedObject)
                     {
                         //If an InteractableObject (Trees)

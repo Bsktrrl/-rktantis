@@ -152,8 +152,10 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         //Setup all rewards
         int index = 0;
+
         if (SelectionManager.Instance.selectedMovableObjectToRemove)
         {
+            //Furniture & Machine
             if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
             {
                 if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
@@ -169,6 +171,28 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
                 else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
                 {
                     index = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().machineObjectName).objectInfo.removingReward.Count;
+                }
+            }
+
+            //BuildingBlocks
+            else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>())
+            {
+                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>())
+                {
+                    if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
+                    {
+                        index = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingBlockObjectName, SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingMaterial).objectInfo.removingReward.Count;
+                    }
+
+                    else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+                    {
+                        index = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().furnitureObjectName).objectInfo.removingReward.Count;
+                    }
+
+                    else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+                    {
+                        index = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().machineObjectName).objectInfo.removingReward.Count;
+                    }
                 }
             }
         }
@@ -330,15 +354,11 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         if (enoughItems)
         {
-            print("1. enoughItemsToBuild");
             BuildingSystemManager.Instance.enoughItemsToBuild = true;
-            BuildingSystemManager.Instance.CanPlaceBuildingObjectCheck();
         }
         else
         {
-            print("1. NOT enoughItemsToBuild");
             BuildingSystemManager.Instance.enoughItemsToBuild = false;
-            BuildingSystemManager.Instance.CanPlaceBuildingObjectCheck();
         }
         #endregion
     }
@@ -362,6 +382,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
 
     #region Display Screen - Hammer & Axe
+
     //Hammer
     #region
     void UpdateScreenBuildingRequirementDisplay()
@@ -372,6 +393,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
             && MainManager.Instance.menuStates == MenuStates.None)
         {
             buildingObject_Requirement_ScreenInfo_Parent.SetActive(true);
+            UpdateScreenBuildingRequirementDisplayInfo();
 
             return;
         }
@@ -586,15 +608,11 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         if (enoughItems)
         {
-            print("2. enoughItemsToBuild");
             BuildingSystemManager.Instance.enoughItemsToBuild = true;
-            BuildingSystemManager.Instance.CanPlaceBuildingObjectCheck();
         }
         else
         {
-            print("2. NOT enoughItemsToBuild");
             BuildingSystemManager.Instance.enoughItemsToBuild = false;
-            BuildingSystemManager.Instance.CanPlaceBuildingObjectCheck();
         }
 
         #endregion
@@ -622,33 +640,47 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
     {
         if (SelectionManager.Instance.selectedMovableObjectToRemove)
         {
-            if ((HotbarManager.Instance.selectedItem == Items.WoodAxe
-            || HotbarManager.Instance.selectedItem == Items.StoneAxe
-            || HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
-            && MainManager.Instance.menuStates == MenuStates.None
-            && SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
+            if ((HotbarManager.Instance.selectedItem == Items.WoodAxe || HotbarManager.Instance.selectedItem == Items.StoneAxe || HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
+            && MainManager.Instance.menuStates == MenuStates.None)
             {
-                buildingObject_Reward_ScreenInfo_Parent.SetActive(true);
+                //BuildingBlock
+                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>())
+                {
+                    if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>())
+                    {
+                        buildingObject_Reward_ScreenInfo_Parent.SetActive(true);
+                    }
+                }
 
-                return;
+                //Furniture & Machines
+                else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
+                {
+                    buildingObject_Reward_ScreenInfo_Parent.SetActive(true);
+                }
+
+                else
+                {
+                    buildingObject_Reward_ScreenInfo_Parent.SetActive(false);
+                }
             }
             else
             {
                 buildingObject_Reward_ScreenInfo_Parent.SetActive(false);
             }
         }
+        else
+        {
+            buildingObject_Reward_ScreenInfo_Parent.SetActive(false);
+        }
     }
     public void UpdateScreenBuildingRewardDisplayInfo()
     {
         if (SelectionManager.Instance.selectedMovableObjectToRemove)
         {
+            //Furniture & Machines
             if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
             {
-                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
-                {
-                    UpdateSelectedRewardScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingBlockObjectName, SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingMaterial));
-                }
-                else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
                 {
                     UpdateSelectedRewardScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().furnitureObjectName));
                 }
@@ -658,22 +690,30 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
                 }
                 else
                 {
-                    print("1. Reset");
-
                     ResetRewardScreenDisplay();
                 }
             }
-            else
-            {
-                print("2. Reset");
 
-                ResetRewardScreenDisplay();
+            //BuildingBlocks
+            else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>())
+            {
+                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>())
+                {
+                    if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
+                    {
+                        UpdateSelectedRewardScreenDisplay(BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingBlockObjectName, SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingMaterial));
+                    }
+                    else
+                    {
+                        ResetRewardScreenDisplay();
+                    }
+                }
             }
         }
+
+        //Nothing
         else
         {
-            print("3. Reset");
-
             ResetRewardScreenDisplay();
         }
     }
@@ -691,7 +731,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         buildingObject_Reward_ScreenInfo_Parent.SetActive(true);
 
         rewardScreenList = InstantiateRewardList(buildingObject_Reward_ScreenInfo_Parent);
-        DisplayScreenRewards();
+        DisplayScreenRewards_BuildingBlocks();
     }
     public void UpdateSelectedRewardScreenDisplay(FurnitureInfo furnitureInfo)
     {
@@ -706,7 +746,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         buildingObject_Reward_ScreenInfo_Parent.SetActive(true);
 
         rewardScreenList = InstantiateRewardList(buildingObject_Reward_ScreenInfo_Parent);
-        DisplayScreenRewards();
+        DisplayScreenRewardsFurnitureAndMachines();
     }
     public void UpdateSelectedRewardScreenDisplay(MachineInfo machinesInfo)
     {
@@ -721,10 +761,10 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         buildingObject_Reward_ScreenInfo_Parent.SetActive(true);
 
         rewardScreenList = InstantiateRewardList(buildingObject_Reward_ScreenInfo_Parent);
-        DisplayScreenRewards();
+        DisplayScreenRewardsFurnitureAndMachines();
     }
 
-    void DisplayScreenRewards()
+    void DisplayScreenRewards_BuildingBlocks()
     {
         BuildingBlockInfo buildingBlocksInfo = new BuildingBlockInfo();
         FurnitureInfo furnitureInfo = new FurnitureInfo();
@@ -732,13 +772,13 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         //Display the Header
         #region
-        if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
+        if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>())
         {
-            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
+            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
             {
-                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingBlockObjectName != BuildingBlockObjectNames.None)
+                if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingBlockObjectName != BuildingBlockObjectNames.None)
                 {
-                    buildingBlocksInfo = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingBlockObjectName, SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingMaterial);
+                    buildingBlocksInfo = BuildingSystemManager.Instance.GetBuildingObjectInfo(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingBlockObjectName, SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingMaterial);
 
                     if (rewardScreenList.Count > 0)
                     {
@@ -751,7 +791,37 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
                     }
                 }
             }
-            else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+        }
+        #endregion
+
+        //Display the Requirements
+        #region
+        for (int i = 1; i < rewardScreenList.Count; i++)
+        {
+            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
+            {
+                if (rewardScreenList[i].GetComponent<BuildingRequirementSlot>())
+                {
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.gameObject.SetActive(false);
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(buildingBlocksInfo.objectInfo.removingReward[i - 1].itemName).hotbarSprite;
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = buildingBlocksInfo.objectInfo.removingReward[i - 1].itemName.ToString();
+                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + buildingBlocksInfo.objectInfo.removingReward[i - 1].amount;
+                }
+            }
+        }
+        #endregion
+    }
+    void DisplayScreenRewardsFurnitureAndMachines()
+    {
+        BuildingBlockInfo buildingBlocksInfo = new BuildingBlockInfo();
+        FurnitureInfo furnitureInfo = new FurnitureInfo();
+        MachineInfo machineInfo = new MachineInfo();
+
+        //Display the Header
+        #region
+        if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>())
+        {
+            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
             {
                 if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().furnitureObjectName != FurnitureObjectNames.None)
                 {
@@ -792,17 +862,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         #region
         for (int i = 1; i < rewardScreenList.Count; i++)
         {
-            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
-            {
-                if (rewardScreenList[i].GetComponent<BuildingRequirementSlot>())
-                {
-                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_BGimage.gameObject.SetActive(false);
-                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_image.sprite = MainManager.Instance.GetItem(buildingBlocksInfo.objectInfo.removingReward[i - 1].itemName).hotbarSprite;
-                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_ItemName.text = buildingBlocksInfo.objectInfo.removingReward[i - 1].itemName.ToString();
-                    rewardScreenList[i].GetComponent<BuildingRequirementSlot>().requirement_amount.text = "x" + buildingBlocksInfo.objectInfo.removingReward[i - 1].amount;
-                }
-            }
-            else if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+            if (SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
             {
                 if (rewardScreenList[i].GetComponent<BuildingRequirementSlot>())
                 {

@@ -70,6 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
         type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
+        type: 3}
       propertyPath: m_TagString
       value: Furniture
       objectReference: {fileID: 0}
@@ -181,8 +186,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5, y: 0.6, z: 0.75}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!114 &-2523189389046659669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +237,7 @@ MonoBehaviour:
   - {fileID: 8975300269464566470}
   - {fileID: 7167948095266452337}
   - {fileID: 3811494903824246832}
+  collidersOnObject: {fileID: 0}
 --- !u!114 &5176174981612352771
 MonoBehaviour:
   m_ObjectHideFlags: 0

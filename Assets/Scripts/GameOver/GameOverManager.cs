@@ -30,7 +30,7 @@ public class GameOverManager : MonoBehaviour
         {
             if (WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>())
             {
-                WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().DestroyThisObject();
+                WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().DestroyThisinteractableObject();
             }
         }
 

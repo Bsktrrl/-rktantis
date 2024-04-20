@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BatteryCharger3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a5cab3ab8b5d36947943e83438c55ccc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -92,12 +97,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6419364462516011174}
   m_SourcePrefab: {fileID: 100100000, guid: a5cab3ab8b5d36947943e83438c55ccc, type: 3}
---- !u!137 &2164006914085202043 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7896960396706934430, guid: a5cab3ab8b5d36947943e83438c55ccc,
-    type: 3}
-  m_PrefabInstance: {fileID: 8331583954335483621}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9178004706848406452 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a5cab3ab8b5d36947943e83438c55ccc,
@@ -187,8 +186,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInRange: 0
   itemName: 18
-  interacteableType: 12
+  amount: 0
+  durability_Current: 0
+  interactableType: 0
   inventoryIndex: 0
+  plantParent: {fileID: 0}
+  journalType: 0
+  journalPageIndex: 0
+  blueprint_BuildingBlock_Name: 0
+  buildingMaterial: 0
+  blueprint_Furniture_Name: 0
+  blueprint_Machine_Name: 0
 --- !u!114 &-277456268407433947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,9 +212,13 @@ MonoBehaviour:
   canBePlaced: 0
   isSelectedForMovement: 0
   enoughItemsToBuild: 0
-  furnitureType: 0
-  machineType: 10
-  meshRenderer: {fileID: 2164006914085202043}
+  buildingObjectType: 0
+  buildingMaterial: 0
+  buildingBlockObjectName: 0
+  furnitureObjectName: 0
+  machineObjectName: 0
+  modelList: []
+  collidersOnObject: {fileID: 0}
 --- !u!114 &6419364462516011174
 MonoBehaviour:
   m_ObjectHideFlags: 0
