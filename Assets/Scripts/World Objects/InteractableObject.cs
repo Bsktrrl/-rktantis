@@ -73,7 +73,7 @@ public class InteractableObject : MonoBehaviour
                             WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
 
                             //Destroy gameObject
-                            DestroyThisinteractableObject();
+                            DestroyThisObject();
                         }
                     }
                 }
@@ -229,7 +229,7 @@ public class InteractableObject : MonoBehaviour
                     JournalManager.Instance.AddJournalPageToList(journalType, journalPageIndex);
 
                     //Destroy gameObject
-                    DestroyThisinteractableObject();
+                    DestroyThisObject();
                 }
                 #endregion
 
@@ -253,7 +253,7 @@ public class InteractableObject : MonoBehaviour
                     }
 
                     //Destroy gameObject
-                    DestroyThisinteractableObject();
+                    DestroyThisObject();
                 }
                 #endregion
             }
@@ -293,7 +293,7 @@ public class InteractableObject : MonoBehaviour
     //--------------------
 
 
-    public void DestroyThisinteractableObject()
+    public void DestroyThisObject()
     {
         //Unsubscribe from Event
         PlayerButtonManager.objectInterraction_isPressedDown -= ObjectInteraction;

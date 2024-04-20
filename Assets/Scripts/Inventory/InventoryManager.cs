@@ -13,7 +13,8 @@ public class InventoryManager : Singleton<InventoryManager>
     public int cellsize = 70;
 
     public Vector2 smallChest_Size = new Vector2(4, 4);
-    public Vector2 bigChest_Size = new Vector2(7, 7);
+    public Vector2 mediumChest_Size = new Vector2(6, 6);
+    public Vector2 bigChest_Size = new Vector2(8, 8);
 
     [Header("Item")]
     public Items lastItemToGet;
@@ -74,6 +75,10 @@ public class InventoryManager : Singleton<InventoryManager>
         PlayerButtonManager.isPressed_3 += QuickHotbarSelect_3;
         PlayerButtonManager.isPressed_4 += QuickHotbarSelect_4;
         PlayerButtonManager.isPressed_5 += QuickHotbarSelect_5;
+
+        smallChest_Size = new Vector2(4, 4);
+        mediumChest_Size = new Vector2(6, 6);
+        bigChest_Size = new Vector2(8, 8);
 
         itemInfo = itemInfo_Parent.GetComponent<InventoryItemInfo>();
     }

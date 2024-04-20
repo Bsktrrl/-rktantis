@@ -311,7 +311,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
     {
         if (moveableObject.canBePlaced && moveableObject.isSelectedForMovement && moveableObject.enoughItemsToBuild)
         {
-            print("0. Place MoveableObject");
+            print("0000000. Place MoveableObject");
             SoundManager.Instance.Play_Building_Place_MoveableObject_Clip();
 
             objectToMove.GetComponent<MoveableObject>().isSelectedForMovement = false;

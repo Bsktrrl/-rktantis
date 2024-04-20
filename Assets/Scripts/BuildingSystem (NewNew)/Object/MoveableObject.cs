@@ -33,7 +33,7 @@ public class MoveableObject : MonoBehaviour
         canBePlaced = false;
     }
 
-    public void DestroyThisMovableObject()
+    public void DestroyObject()
     {
         Destroy(gameObject);
     }

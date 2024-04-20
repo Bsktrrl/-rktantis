@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using UnityEngine;
 
 public class BuildingSystemManager : Singleton<BuildingSystemManager>
@@ -101,6 +102,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         activeBuildingObject_Info = DataManager.Instance.activeBuildingObject_Store;
 
         //Set worldBuildingObjectInfoList
+        #region
         worldBuildingObjectInfoList = DataManager.Instance.worldBuildingObjectInfoList_Store;
 
         for (int i = 0; i < worldBuildingObjectInfoList.Count; i++)
@@ -123,6 +125,17 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.parent = worldObject_Parent.transform;
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
+
+                    #region If Chest's added
+                    //If a small chest, update inventory info
+                    if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>())
+                    {
+                        if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>().interactableType == InteracteableType.Inventory)
+                        {
+                            worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>().inventoryIndex = worldBuildingObjectInfoList[i].chestIndex;
+                        }
+                    }
+                    #endregion
                 }
             }
             else if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.Machine)
@@ -136,9 +149,11 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 }
             }
         }
+        #endregion
 
+
+        //BuildingObjects
         SpawnNewSelectedBuildingObject();
-
         SetupHammerDisplayScreen();
 
         SaveData();
@@ -146,9 +161,9 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public void SaveData()
     {
         DataManager.Instance.activeBuildingObject_Store = activeBuildingObject_Info;
+
         DataManager.Instance.worldBuildingObjectInfoList_Store = worldBuildingObjectInfoList;
     }
-
     #endregion
 
 
@@ -218,17 +233,17 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         {
             if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<InteractableObject>())
             {
-                WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<InteractableObject>().DestroyThisinteractableObject();
+                WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<InteractableObject>().DestroyThisObject();
             }
             else if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>())
             {
-                WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().DestroyThisMovableObject();
+                WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>().DestroyObject();
             }
             else if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<Model>())
             {
                 if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>())
                 {
-                    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().DestroyThisMovableObject();
+                    WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().DestroyObject();
                 }
             }
         }
@@ -1017,6 +1032,32 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
             worldFurnitureObject.furnitureObjectName_Active = buildingBlockInfo.furnitureName;
 
+            #region If Chests added
+            //If a small chest, update inventory info
+            if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.Chest_Small)
+            {
+                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.smallChest_Size);
+
+                worldFurnitureObject.chestIndex = InventoryManager.Instance.inventories.Count - 1;
+            }
+
+            //If a small chest, update inventory info
+            else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.Chest_Medium)
+            {
+                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.mediumChest_Size);
+
+                worldFurnitureObject.chestIndex = InventoryManager.Instance.inventories.Count - 1;
+            }
+
+            //If a big chest, update inventory info
+            else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.Chest_Big)
+            {
+                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.bigChest_Size);
+
+                worldFurnitureObject.chestIndex = InventoryManager.Instance.inventories.Count - 1;
+            }
+            #endregion
+
             worldBuildingObjectInfoList.Add(worldFurnitureObject);
         }
         else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
@@ -1072,7 +1113,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 if (worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>())
                 {
-                    worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>().DestroyThisinteractableObject();
+                    worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>().DestroyThisObject();
                 }
                 else
                 {
@@ -1140,6 +1181,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 [Serializable]
 public class ActiveBuildingObject
 {
+    [Header("Base")]
     public BuildingObjectTypes buildingObjectType_Active;
     public BuildingMaterial buildingMaterial_Active;
     [Space(5)]
@@ -1151,15 +1193,20 @@ public class ActiveBuildingObject
 [Serializable]
 public class WorldBuildingObject
 {
+    [Header("Posision")]
     public Vector3 objectPos;
     public Quaternion objectRot;
 
+    [Header("Base")]
     public BuildingObjectTypes buildingObjectType_Active;
     public BuildingMaterial buildingMaterial_Active;
     [Space(5)]
     public BuildingBlockObjectNames buildingBlockObjectName_Active;
     public FurnitureObjectNames furnitureObjectName_Active;
     public MachineObjectNames machineObjectName_Active;
+
+    [Header("If Chest")]
+    public int chestIndex;
 }
 #endregion
 
