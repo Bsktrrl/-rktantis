@@ -278,7 +278,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     //--------------------
 
 
-    #region ObjectMovement
+    #region Object Movement
     public void MoveWorldBuildingObject()
     {
         if (WorldObjectGhost_Parent.transform.childCount > 0
@@ -423,7 +423,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 }
             }
         }
-        #endregion
     }
     void Materials_MeshRenderer_Can(int index)
     {
@@ -519,6 +518,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         return false;
     }
+    #endregion
 
 
     //--------------------
@@ -1109,6 +1109,22 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         {
             if (buildingObject.gameObject == worldBuildingObjectListSpawned[i])
             {
+                //If a Chest, Spawn all items from the chest into the World
+                #region
+                if (worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>())
+                {
+                    if (worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>().interactableType == InteracteableType.Inventory)
+                    {
+                        int inventoryIndex = worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>().inventoryIndex;
+
+                        for (int j = 0; j < InventoryManager.Instance.inventories[inventoryIndex].itemsInInventory.Count; j++)
+                        {
+                            InventoryManager.Instance.RemoveItemFromInventory(inventoryIndex, InventoryManager.Instance.inventories[inventoryIndex].itemsInInventory[j].itemName, InventoryManager.Instance.inventories[inventoryIndex].itemsInInventory[j].itemID);
+                        }
+                    }
+                }
+                #endregion
+
                 worldBuildingObjectInfoList.RemoveAt(i);
 
                 if (worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>())
