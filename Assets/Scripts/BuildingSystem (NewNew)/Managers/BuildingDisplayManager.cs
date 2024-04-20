@@ -108,7 +108,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         //Setup the Header
         requirementSlotTempList.Add(Instantiate(buildingObject_RequirementListHeader_Prefab) as GameObject);
-        requirementSlotTempList[requirementSlotTempList.Count - 1].transform.parent = parent.transform;
+        requirementSlotTempList[requirementSlotTempList.Count - 1].transform.SetParent(parent.transform);
         requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
@@ -133,7 +133,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         for (int i = 0; i < index; i++)
         {
             requirementSlotTempList.Add(Instantiate(buildingObject_RequirementListSlot_Prefab) as GameObject);
-            requirementSlotTempList[requirementSlotTempList.Count - 1].transform.parent = parent.transform;
+            requirementSlotTempList[requirementSlotTempList.Count - 1].transform.SetParent(parent.transform);
             requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         }
@@ -146,7 +146,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         //Setup the Header
         requirementSlotTempList.Add(Instantiate(buildingObject_RequirementListHeader_Prefab) as GameObject);
-        requirementSlotTempList[requirementSlotTempList.Count - 1].transform.parent = parent.transform;
+        requirementSlotTempList[requirementSlotTempList.Count - 1].transform.SetParent(parent.transform);
         requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
@@ -201,7 +201,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         for (int i = 0; i < index; i++)
         {
             requirementSlotTempList.Add(Instantiate(buildingObject_RequirementListSlot_Prefab) as GameObject);
-            requirementSlotTempList[requirementSlotTempList.Count - 1].transform.parent = parent.transform;
+            requirementSlotTempList[requirementSlotTempList.Count - 1].transform.SetParent(parent.transform);
             requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             requirementSlotTempList[requirementSlotTempList.Count - 1].GetComponent<RectTransform>().SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         }

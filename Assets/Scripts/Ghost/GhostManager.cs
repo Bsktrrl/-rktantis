@@ -244,7 +244,7 @@ public class GhostManager : Singleton<GhostManager>
         #region
         //Spawn Ghost at new spawn position
         GameObject newObj = Instantiate(ghostPrefab, GetSpawnPosition(), Quaternion.identity);
-        newObj.transform.parent = ghostPoolParent.transform;
+        newObj.transform.SetParent(ghostPoolParent.transform);
 
         ghostPool.Add(newObj);
         ghostPool[ghostPool.Count - 1].GetComponent<InvisibleObject>().transparencyValue = 1;

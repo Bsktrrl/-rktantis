@@ -622,7 +622,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 WorldObjectManager.Instance.worldObjectList.Add(Instantiate(MainManager.Instance.GetItem(itemName).worldObjectPrefab, newSpawnPos, Quaternion.identity) as GameObject);
             }
 
-            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].transform.parent = worldObject_Parent.transform;
+            WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].transform.SetParent(worldObject_Parent.transform);
 
             //Set Gravity true on the worldObject
             WorldObjectManager.Instance.worldObjectList[WorldObjectManager.Instance.worldObjectList.Count - 1].GetComponent<Rigidbody>().isKinematic = false;
