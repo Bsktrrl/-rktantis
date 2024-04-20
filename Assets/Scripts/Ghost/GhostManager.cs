@@ -138,11 +138,12 @@ public class GhostManager : Singleton<GhostManager>
             {
                 ghostCapturerStats.ghostCapturedStats[i].isTaken = true;
                 ghostCapturerStats.ghostCapturedStats[i].ghostState = GhostStates.Idle;
+                ghostCapturerStats.ghostCapturedStats[i].ghostAppearance = ghostStats.ghostAppearance;
+                ghostCapturerStats.ghostCapturedStats[i].isBeard = ghostStats.isBeard;
+                ghostCapturerStats.ghostCapturedStats[i].elementFuel_Amount = 100;
 
                 ghostStats.isTaken = true;
                 ghostStats.ghostState = GhostStates.Idle;
-
-                //ghostCapturerStats.ghostCapturedStats[i] = ghostStats;
 
                 break;
             }

@@ -58,7 +58,7 @@ public class GhostInTank : MonoBehaviour
 
     public void SetGhostAppearance()
     {
-        //Reset
+        //Reset Styles
         for (int i = 0; i < style1.Count; i++)
             style1[i].SetActive(false);
         for (int i = 0; i < style2.Count; i++)

@@ -149,10 +149,9 @@ public class LookAtManager : Singleton<LookAtManager>
         //If looking at a Ghost
         #region
         else if (HotbarManager.Instance.selectedItem == Items.GhostCapturer
-            && GhostManager.Instance.targetGhostObject)
+            && SelectionManager.Instance.selectedObject)
         {
-            //If looking at a Ghost
-            if (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>())
+            if (SelectionManager.Instance.selectedObject.GetComponent<Ghost>())
             {
                 //Turn off all screens
                 TurnOffScreens();
@@ -163,11 +162,17 @@ public class LookAtManager : Singleton<LookAtManager>
 
                 return;
             }
+
+            ////If looking at a Ghost
+            //if (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>())
+            //{
+                
+            //}
         }
         #endregion
 
 
-        //-------------------- InteracteableType
+        //-------------------- InteractableType
 
 
         //If looking at nothing
