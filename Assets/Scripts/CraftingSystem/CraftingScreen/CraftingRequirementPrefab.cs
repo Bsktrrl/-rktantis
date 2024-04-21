@@ -34,6 +34,8 @@ public class CraftingRequirementPrefab : MonoBehaviour
     }
     private void Update()
     {
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         if (MainManager.Instance.menuStates == MenuStates.CraftingMenu)
         {
             SetDisplay();

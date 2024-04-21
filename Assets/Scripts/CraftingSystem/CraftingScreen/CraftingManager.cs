@@ -53,6 +53,9 @@ public class CraftingManager : Singleton<CraftingManager>
 
     public List<CraftingItem> itemStateList = new List<CraftingItem>();
     public bool startup = false;
+
+    [Header("Researched text")]
+    public GameObject noItemResearched_Text;
     #endregion
 
 
@@ -86,6 +89,8 @@ public class CraftingManager : Singleton<CraftingManager>
     }
     private void Update()
     {
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         if (MainManager.Instance.menuStates == MenuStates.CraftingMenu)
         {
             CheckForRequiermentsMet();

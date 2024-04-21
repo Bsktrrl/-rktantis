@@ -83,6 +83,10 @@ MonoBehaviour:
   plantParent: {fileID: 0}
   journalType: 0
   journalPageIndex: 0
+  blueprint_BuildingBlock_Name: 0
+  buildingMaterial: 0
+  blueprint_Furniture_Name: 0
+  blueprint_Machine_Name: 0
 --- !u!114 &864090777689678032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +109,9 @@ MonoBehaviour:
   oreIndex_x: 0
   oreIndex_y: 0
   percentageCheck: 0
+  rendererList:
+  - {fileID: 7657074874109914050}
+  - {fileID: 5231557170743378981}
 --- !u!1001 &547960333417692805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -236,6 +243,12 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8260708346676125442, guid: 77a8a4a3b23b8634db6850328fd6dea3, type: 3}
+--- !u!23 &5231557170743378981 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5692697822975179424, guid: 77a8a4a3b23b8634db6850328fd6dea3,
+    type: 3}
+  m_PrefabInstance: {fileID: 547960333417692805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &7657074874109914050 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7915597523576575303, guid: 77a8a4a3b23b8634db6850328fd6dea3,

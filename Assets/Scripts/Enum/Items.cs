@@ -260,4 +260,9 @@ public enum Items
     [Description("Other3")][InspectorName("Drinking/Other3")] D_Other3,
     [Description("Other4")][InspectorName("Drinking/Other4")] D_Other4,
     #endregion
+
+    //Arídian Key
+    #region
+    [Description("Arídian Key")][InspectorName("Arídian Key/Arídian Key")] ArídianKey,
+    #endregion
 }

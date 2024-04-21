@@ -53,9 +53,18 @@ public class JournalManager : Singleton<JournalManager>
     public bool journalPageIsSelected;
 
 
+    [Header("Folder Structure")]
+    GameObject journalPageWorldObject_Parent;
+    [SerializeField] List<List<JournalPageToSave>> journalPageTypeObjectList = new List<List<JournalPageToSave>>();
+
+
     //--------------------
 
 
+    private void Awake()
+    {
+        journalPageWorldObject_Parent = GameObject.Find("JournalPage_Parent");
+    }
     private void Start()
     {
         journalMenuState = JournalMenuState.MentorJournal;
@@ -68,6 +77,7 @@ public class JournalManager : Singleton<JournalManager>
 
     public void LoadData()
     {
+        #region LoadJournals
         //Load Mentor Journal
         mentorStoryJournalPageIndexList = DataManager.Instance.mentorStoryJournalPageIndexList_Store;
         for (int i = 0; i < mentorStoryJournalPageIndexList.Count; i++)
@@ -88,12 +98,51 @@ public class JournalManager : Singleton<JournalManager>
         {
             SetupJournalPageList_Start(JournalMenuState.PersonalJournal, personalStoryJournalPageIndexList[i]);
         }
+        #endregion
+
+        #region Save/Load Objects
+        journalPageTypeObjectList.Clear();
+
+        for (int i = 0; i < DataManager.Instance.journalPageTypeObjectList_Store.Count; i++)
+        {
+            List<JournalPageToSave> journalPageToSaveList = new List<JournalPageToSave>();
+
+            journalPageTypeObjectList.Add(journalPageToSaveList);
+
+            for (int j = 0; j < DataManager.Instance.journalPageTypeObjectList_Store[i].journalPageToSaveList.Count; j++)
+            {
+                journalPageTypeObjectList[journalPageTypeObjectList.Count - 1].Add(DataManager.Instance.journalPageTypeObjectList_Store[i].journalPageToSaveList[j]);
+            }
+        }
+
+        SetupJournalPageList();
+        #endregion
+
+        SaveData();
     }
     public void SaveData()
     {
         DataManager.Instance.mentorStoryJournalPageIndexList_Store = mentorStoryJournalPageIndexList;
         DataManager.Instance.playerStoryJournalPageIndexList_Store = playerStoryJournalPageIndexList;
         DataManager.Instance.personalStoryJournalPageIndexList_Store = personalStoryJournalPageIndexList;
+
+        #region Save/Load Objects
+        List<ListOfJournalPageToSave> journalPageToSaveList = new List<ListOfJournalPageToSave>();
+
+        for (int i = 0; i < journalPageTypeObjectList.Count; i++)
+        {
+            ListOfJournalPageToSave journalPageToSave = new ListOfJournalPageToSave();
+
+            journalPageToSaveList.Add(journalPageToSave);
+
+            for (int j = 0; j < journalPageTypeObjectList[i].Count; j++)
+            {
+                journalPageToSaveList[journalPageToSaveList.Count - 1].journalPageToSaveList.Add(journalPageTypeObjectList[i][j]);
+            }
+        }
+
+        DataManager.Instance.journalPageTypeObjectList_Store = journalPageToSaveList;
+        #endregion
     }
     public void SaveData(ref GameData gameData)
     {
@@ -488,6 +537,117 @@ public class JournalManager : Singleton<JournalManager>
                 return mentorJournalPage_SO;
         }
     }
+
+
+    //--------------------
+
+
+    void SetupJournalPageList()
+    {
+        List<List<JournalPageToSave>> tempJournalPageTypeObjectList = new List<List<JournalPageToSave>>();
+        List<List<bool>> checkedJournalPage = new List<List<bool>>();
+
+        //Add elements to "checkedBlueprint" as children
+        for (int i = 0; i < journalPageWorldObject_Parent.transform.childCount; i++)
+        {
+            List<JournalPageToSave> tempJournalPagetoSave = new List<JournalPageToSave>();
+            tempJournalPageTypeObjectList.Add(tempJournalPagetoSave);
+
+            List<bool> templist_Outer = new List<bool>();
+            checkedJournalPage.Add(templist_Outer);
+
+            for (int j = 0; j < journalPageWorldObject_Parent.transform.GetChild(i).transform.childCount; j++)
+            {
+                bool templist_Inner = false;
+                checkedJournalPage[i].Add(templist_Inner);
+            }
+        }
+
+        //Set Old JournalPage
+        for (int i = 0; i < checkedJournalPage.Count; i++)
+        {
+            for (int k = 0; k < checkedJournalPage[i].Count; k++)
+            {
+                if (journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(k).GetComponent<JournalObject>())
+                {
+                    for (int j = 0; j < journalPageTypeObjectList.Count; j++)
+                    {
+                        for (int l = 0; l < journalPageTypeObjectList[j].Count; l++)
+                        {
+                            if (journalPageTypeObjectList[j][l].journalPagePos == journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(k).GetComponent<JournalObject>().transform.position)
+                            {
+                                //Setup Save_List
+                                JournalPageToSave tempJournalPage = new JournalPageToSave();
+
+                                tempJournalPage.isPicked = journalPageTypeObjectList[j][l].isPicked;
+                                tempJournalPage.journalPagePos = journalPageTypeObjectList[j][l].journalPagePos;
+
+                                tempJournalPageTypeObjectList[i].Add(tempJournalPage);
+
+                                checkedJournalPage[i][k] = true;
+
+                                //Set info in Child
+                                journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(k).GetComponent<JournalObject>().LoadJournalPage(journalPageTypeObjectList[j][l].isPicked, j, l);
+
+                                l = journalPageTypeObjectList[j].Count;
+                                j = journalPageTypeObjectList.Count;
+
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //Set New JournalPage
+        for (int i = 0; i < checkedJournalPage.Count; i++)
+        {
+            for (int j = 0; j < checkedJournalPage[i].Count; j++)
+            {
+                if (!checkedJournalPage[i][j])
+                {
+                    if (journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(j))
+                    {
+                        print("New JournalPage: [" + i + "][" + j + "]");
+                        //Give all Legal Objects an index
+                        journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<JournalObject>().journalPageIndex_x = i;
+                        journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<JournalObject>().journalPageIndex_y = j;
+
+                        //Make a TreeTypeObjectList
+                        JournalPageToSave tempJournalPage = new JournalPageToSave();
+
+                        tempJournalPage.isPicked = journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<JournalObject>().isPicked;
+                        tempJournalPage.journalPageIndex_x = journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<JournalObject>().journalPageIndex_x;
+                        tempJournalPage.journalPageIndex_y = journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<JournalObject>().journalPageIndex_y;
+                        tempJournalPage.journalPagePos = journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<JournalObject>().transform.position;
+
+                        tempJournalPageTypeObjectList[i].Add(tempJournalPage);
+                    }
+                }
+            }
+        }
+
+        //Set New BlueprintTypeObjectList
+        journalPageTypeObjectList.Clear();
+        journalPageTypeObjectList = tempJournalPageTypeObjectList;
+
+        SaveData();
+    }
+    public void ChangeJournalPageInfo(bool _isPicked, int _journalPageIndex_j, int _journalPageIndex_l, Vector3 _journalPagePos)
+    {
+        JournalPageToSave journalPageTree = new JournalPageToSave();
+
+        journalPageTree.isPicked = _isPicked;
+        journalPageTree.journalPageIndex_x = _journalPageIndex_j;
+        journalPageTree.journalPageIndex_y = _journalPageIndex_l;
+        journalPageTree.journalPagePos = _journalPagePos;
+
+        journalPageTypeObjectList[_journalPageIndex_j][_journalPageIndex_l] = journalPageTree;
+
+        SaveData();
+    }
+
 }
 
 public enum JournalMenuState
@@ -497,4 +657,22 @@ public enum JournalMenuState
     MentorJournal,
     PlayerJournal,
     PersonalJournal
+}
+
+
+[Serializable]
+public class JournalPageToSave
+{
+    public bool isPicked;
+
+    public int journalPageIndex_x;
+    public int journalPageIndex_y;
+
+    public Vector3 journalPagePos = new Vector3();
+}
+
+[Serializable]
+public class ListOfJournalPageToSave
+{
+    public List<JournalPageToSave> journalPageToSaveList = new List<JournalPageToSave>();
 }

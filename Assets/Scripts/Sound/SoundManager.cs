@@ -7,12 +7,12 @@ public class SoundManager : Singleton<SoundManager>
     #region Variables
     public float sound_Master;
 
-    float sound_World;
-    float sound_Menu;
+    public float sound_World;
+    public float sound_Menu;
     public float sound_Creatures;
-    float sound_Music;
-    float sound_Weather;
-    float sound_Voice;
+    public float sound_Music;
+    public float sound_Weather;
+    public float sound_Voice;
     #endregion
 
     #region Sound Categories
@@ -104,6 +104,10 @@ public class SoundManager : Singleton<SoundManager>
     [Header("GhostFight")]
     public AudioSource audioSource_Ghost_GhostCapturerSFX; //
     public AudioSource audioSource_Ghost_WorldGhostSFX; //
+
+    [Header("GameOver")]
+    public AudioSource audioSource_GameOver_Screen; //
+
     #endregion
 
 
@@ -316,6 +320,10 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip ghost_GhostAnimation_Sneeze2_Clip; //
     [SerializeField] AudioClip ghost_GhostAnimation_Wave_Clip; //
     #endregion
+    #region GameOver
+    [Header("GameOver")]
+    [SerializeField] AudioClip gameOver_GameOverSound_Clip; //
+    #endregion
 
     #endregion
 
@@ -426,6 +434,9 @@ public class SoundManager : Singleton<SoundManager>
         //GhostFight
         audioSource_Ghost_GhostCapturerSFX.volume = sound_World; //
         audioSource_Ghost_WorldGhostSFX.volume = sound_World; //
+
+        //GameOver
+        audioSource_GameOver_Screen.volume = sound_Menu;
 
         #endregion
     }
@@ -1161,7 +1172,6 @@ public class SoundManager : Singleton<SoundManager>
     }
     #endregion
 
-
     #region InteractableObjects //"Ungoing" have yet to be implemented
     #region Crafting Table
     public void Play_InteractableObjects_OpenCraftingTable_Clip()
@@ -1365,7 +1375,6 @@ public class SoundManager : Singleton<SoundManager>
     }
     #endregion|
     #endregion
-
 
     #region Buffs
     public void Play_Buff_Activated_Clip()
@@ -1595,6 +1604,25 @@ public class SoundManager : Singleton<SoundManager>
             objSource.clip = ghost_GhostAnimation_Wave_Clip;
             objSource.pitch = 1f;
             objSource.Play();
+        }
+    }
+    #endregion
+
+    #region GameOver
+    public void Play_GameOver_Clip()
+    {
+        if (audioSource_GameOver_Screen != null)
+        {
+            audioSource_GameOver_Screen.clip = gameOver_GameOverSound_Clip;
+            audioSource_GameOver_Screen.pitch = 1f;
+            audioSource_GameOver_Screen.Play();
+        }
+    }
+    public void Stop_GameOver_Clip()
+    {
+        if (audioSource_GameOver_Screen != null)
+        {
+            audioSource_GameOver_Screen.Stop();
         }
     }
     #endregion

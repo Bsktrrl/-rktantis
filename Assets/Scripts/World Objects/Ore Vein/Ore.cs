@@ -23,12 +23,23 @@ public class Ore : MonoBehaviour
     public int oreIndex_y;
     public int percentageCheck = 0;
 
+    [Header("Cracks")]
+    public List<Renderer> rendererList = new List<Renderer>();
+    public MaterialPropertyBlock propertyBlock;
+
 
     //--------------------
 
 
     private void Start()
     {
+        propertyBlock = new MaterialPropertyBlock();
+
+        for (int i = 0; i < rendererList.Count; i++)
+        {
+            rendererList[i].SetPropertyBlock(propertyBlock);
+        }
+
         tempOreHealth = oreHealth;
     }
     private void Update()
@@ -297,7 +308,15 @@ public class Ore : MonoBehaviour
 
     public void SetOreCracks()
     {
-        renderer.sharedMaterial.SetFloat("_Cracks", 1 - (tempOreHealth / oreHealth));
+        for (int i = 0; i < rendererList.Count; i++)
+        {
+            if (propertyBlock != null)
+            {
+                propertyBlock.SetFloat("_Cracks", 1 - (tempOreHealth / oreHealth));
+
+                rendererList[i].SetPropertyBlock(propertyBlock);
+            }
+        }
     }
 
 

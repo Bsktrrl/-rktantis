@@ -616,6 +616,8 @@ public class TabletManager : Singleton<TabletManager>
     //When Opening Tablet from hand
     public void OpenTablet()
     {
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         tabletObject.SetActive(true);
 
         BuildingDisplayManager.Instance.OpenTablet();
@@ -682,6 +684,8 @@ public class TabletManager : Singleton<TabletManager>
     //When Opening Tablet from an InteracteableObject
     public void OpenTablet(TabletMenuState menuToOpen)
     {
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         menuObjectIsOpened = true;
 
         if (menuToOpen != TabletMenuState.ChestInventory)

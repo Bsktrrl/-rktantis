@@ -16,9 +16,6 @@ public class GhostInTank : MonoBehaviour
     public List<GameObject> style2 = new List<GameObject>();
     public List<GameObject> style3 = new List<GameObject>();
 
-    [Header("Animations")]
-    float tankAnimationTimer = 2;
-
     [Header("Invisibility")]
     public float transparencyValue = 0;
     string TransparencyName = "_Transparency";

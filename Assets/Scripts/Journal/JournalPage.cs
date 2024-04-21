@@ -117,4 +117,6 @@ public class JournalPage : MonoBehaviour, IPointerEnterHandler
             JournalManager.Instance.SetupInfoPage(this);
         }
     }
+
+
 }

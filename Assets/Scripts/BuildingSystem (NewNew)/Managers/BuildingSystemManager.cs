@@ -85,6 +85,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     }
     private void Update()
     {
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         Snapping_RaycastSettings();
         MoveWorldBuildingObject();
 
