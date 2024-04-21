@@ -9,6 +9,15 @@ public class Arms : Singleton<Arms>
 
     public bool cannotHit;
 
+    [Header("Cooldown")]
+    bool cooldown;
+    float cooldownTimer;
+    float cooldownTimer_Tier1 = 1f;
+    float cooldownTimer_Tier2 = 0.75f;
+    float cooldownTimer_Tier3 = 0.5f;
+    float cooldownTimer_Drinking = 2f;
+    float cooldownTimer_Arms = 0.5f;
+
 
     //--------------------
 
@@ -20,6 +29,19 @@ public class Arms : Singleton<Arms>
         PlayerButtonManager.isPressed_EquipmentDeactivate += StopUsingEquipments;
 
         anim = GetComponent<Animator>();
+    }
+    private void Update()
+    {
+        //Run Cooldown timer
+        if (cooldown)
+        {
+            cooldownTimer -= Time.deltaTime;
+
+            if (cooldownTimer <= 0)
+            {
+                cooldown = false;
+            }
+        }
     }
 
 
@@ -37,7 +59,44 @@ public class Arms : Singleton<Arms>
         }
         else
         {
+            if (Cooldown()) { return; }
+
             anim.SetTrigger("Click");
+        }
+    }
+    bool Cooldown()
+    {
+        if (!cooldown)
+        {
+            if (HotbarManager.Instance.selectedItem == Items.WoodAxe || HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.WoodPickaxe || HotbarManager.Instance.selectedItem == Items.WoodSword)
+            {
+                cooldownTimer = cooldownTimer_Tier1;
+            }
+            else if (HotbarManager.Instance.selectedItem == Items.StoneAxe || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.StonePickaxe || HotbarManager.Instance.selectedItem == Items.StoneSword)
+            {
+                cooldownTimer = cooldownTimer_Tier2;
+            }
+            else if (HotbarManager.Instance.selectedItem == Items.CryoniteAxe || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryonitePickaxe || HotbarManager.Instance.selectedItem == Items.CryoniteSword)
+            {
+                cooldownTimer = cooldownTimer_Tier3;
+            }
+            else if (HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
+            {
+                cooldownTimer = cooldownTimer_Drinking;
+            }
+            else if (HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.AríditeCrystal
+                || HotbarManager.Instance.selectedItem == Items.None)
+            {
+                cooldownTimer = cooldownTimer_Arms;
+            }
+
+            cooldown = true;
+
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
     void StopUsingEquipments()

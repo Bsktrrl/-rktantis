@@ -168,6 +168,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
         print("0. Hit Something with the use of a " + equippedItem.itemName);
 
         #region
+
         //If Pickaxe is equipped - For Mining
         #region
         if (equippedItem.subCategories == ItemSubCategories.Pickaxe)
@@ -342,14 +343,6 @@ public class EquippmentManager : Singleton<EquippmentManager>
                 //Play Drinking Empty Sound
                 SoundManager.Instance.Play_Inventory_DrinkEmptyItem_Clip();
             }
-        }
-        #endregion
-
-        //If GhostCapturer is equipped - For capturing Ghosts
-        #region
-        if (equippedItem.subCategories == ItemSubCategories.GhostCapturer)
-        {
-
         }
         #endregion
 
