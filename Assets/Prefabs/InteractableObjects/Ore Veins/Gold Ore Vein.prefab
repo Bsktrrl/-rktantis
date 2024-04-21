@@ -83,6 +83,10 @@ MonoBehaviour:
   plantParent: {fileID: 0}
   journalType: 0
   journalPageIndex: 0
+  blueprint_BuildingBlock_Name: 0
+  buildingMaterial: 0
+  blueprint_Furniture_Name: 0
+  blueprint_Machine_Name: 0
 --- !u!114 &864090777689678032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +109,9 @@ MonoBehaviour:
   oreIndex_x: 0
   oreIndex_y: 0
   percentageCheck: 0
+  rendererList:
+  - {fileID: 8803568863193107684}
+  - {fileID: 481222756521990109}
 --- !u!1001 &7678405689142296453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,6 +209,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8460397745843309754}
   m_SourcePrefab: {fileID: 100100000, guid: 4e2b2fd64012525469289062376bb689, type: 3}
+--- !u!23 &481222756521990109 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7791940693365745752, guid: 4e2b2fd64012525469289062376bb689,
+    type: 3}
+  m_PrefabInstance: {fileID: 7678405689142296453}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7371905073412506324 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e2b2fd64012525469289062376bb689,
