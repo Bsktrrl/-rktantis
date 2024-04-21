@@ -95,6 +95,8 @@ public class HealthManager : Singleton<HealthManager>
     }
     private void Update()
     {
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         if (dataHasLoaded)
         {
             SetHealthValues();
@@ -253,6 +255,12 @@ public class HealthManager : Singleton<HealthManager>
             mainHealthValue = 0;
 
             mainHealthIcon_Image.color = emptyColor;
+
+            //Set GameOver
+            if (MainManager.Instance.gameStates != GameStates.GameOver)
+            {
+                GameOverManager.Instance.TriggerGameOver();
+            }
         }
         else if (mainHealthValue >= 1)
         {
@@ -268,6 +276,14 @@ public class HealthManager : Singleton<HealthManager>
 
         //Set Main Health Arrow Display
         SetMainHealthArrowDisplay(mainHealthValueMultiplier_Image);
+    }
+    public void ResetPlayerHealthValues()
+    {
+        hungerValue = 1;
+        heatResistanceValue = 1;
+        thirstValue = 1;
+
+        mainHealthValue = 1;
     }
 
     int MultiplierCheck(int multiplier_Check)

@@ -42,6 +42,8 @@ public class GhostTank : MonoBehaviour
     }
     private void Update()
     {
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         UpdateTankDisplay();
         ReduceFuel(Time.deltaTime * 3);
     }

@@ -91,6 +91,8 @@ public class ResearchManager : Singleton<ResearchManager>
 
         Update_SOItemList();
 
+        CheckIfNoItemsAreResearched();
+
         SaveData();
     }
     public void SaveData()
@@ -250,6 +252,8 @@ public class ResearchManager : Singleton<ResearchManager>
 
         researchedItemList_Parent.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 55);
 
+        CheckIfNoItemsAreResearched();
+
         SaveData();
     }
     public void Update_SOItemList()
@@ -257,6 +261,32 @@ public class ResearchManager : Singleton<ResearchManager>
         for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)
         {
             MainManager.Instance.item_SO.itemList[i].isResearched = researched_SOItem[i];
+        }
+    }
+    void CheckIfNoItemsAreResearched()
+    {
+        bool check = false;
+
+        //for (int i = 0; i < researchedItemsList.Count; i++)
+        //{
+        //    if (researchedItemsList.Count <= 0)
+        //    {
+        //        check = true;
+        //    }
+        //}
+
+        if (researchedItemsList.Count <= 0)
+        {
+            check = true;
+        }
+
+        if (check)
+        {
+            CraftingManager.Instance.noItemResearched_Text.SetActive(true);
+        }
+        else
+        {
+            CraftingManager.Instance.noItemResearched_Text.SetActive(false);
         }
     }
 

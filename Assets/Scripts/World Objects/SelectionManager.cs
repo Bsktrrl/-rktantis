@@ -5,7 +5,6 @@ public class SelectionManager : Singleton<SelectionManager>
 {
     [Header("OnTarget")]
     public bool onTarget = false;
-    bool onTargetTemp = false;
 
     [Header("Selected Objects")]
     public GameObject selectedObject; //Object Looking at

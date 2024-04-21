@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerManager : Singleton<PlayerManager>
@@ -11,7 +12,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public float jumpHeight = 1.5f;
 
-    PlayerStats playerStats;
+    public PlayerStats playerStats;
 
     [Header("Movement States")]
     public MovementStates oldMovementStates;
@@ -52,7 +53,10 @@ public class PlayerManager : Singleton<PlayerManager>
             && DataManager.Instance.playerStats_Store.jumpHeight == 0)
         {
             //Set Player Start Position - New Game
-            MainManager.Instance.player.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+            MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-26.5f, 29.9f, -45.1f), Quaternion.identity); //Change to Playtest
+
+            //Also set StartDeathPos to catch if the player dies before building Floors
+            UpdatePlayerDyingPos(MainManager.Instance.player.transform);
         }
         else
         {
@@ -62,10 +66,17 @@ public class PlayerManager : Singleton<PlayerManager>
             //Set Player Position
             MainManager.Instance.player.transform.SetPositionAndRotation(playerStats.playerPos, playerStats.playerRot);
 
+            if (playerStats.playerGameOverPos == Vector3.zero)
+            {
+                UpdatePlayerDyingPos(MainManager.Instance.player.transform);
+            }
+
             movementSpeedMultiplier_SkillTree = playerStats.movementSpeedMultiplier_SkillTree;
 
             jumpHeight = playerStats.jumpHeight;
         }
+
+        SaveData();
     }
     public void SaveData()
     {
@@ -73,7 +84,6 @@ public class PlayerManager : Singleton<PlayerManager>
         playerStats.playerRot = MainManager.Instance.player.transform.rotation;
 
         playerStats.movementSpeedMultiplier_SkillTree = movementSpeedMultiplier_SkillTree;
-
         playerStats.jumpHeight = jumpHeight;
 
         DataManager.Instance.playerStats_Store = playerStats;
@@ -89,6 +99,19 @@ public class PlayerManager : Singleton<PlayerManager>
     //--------------------
 
 
+    public void TransferPlayerToDyingPos() //Upon GameOver
+    {
+        PlayerMovement.Instance.controller.Move(playerStats.playerGameOverPos - MainManager.Instance.player.transform.position);
+
+        SaveData();
+    }
+    public void UpdatePlayerDyingPos(Transform obj) //When entering a new BuildingBlockFloor
+    {
+        playerStats.playerGameOverPos = obj.position;
+        playerStats.playerGameOverRot = MainManager.Instance.playerBody.transform.rotation;
+
+        SaveData();
+    }
 }
 
 [Serializable]
@@ -96,6 +119,9 @@ public class PlayerStats
 {
     public Vector3 playerPos;
     public Quaternion playerRot;
+
+    public Vector3 playerGameOverPos;
+    public Quaternion playerGameOverRot;
 
     public float jumpHeight;
 

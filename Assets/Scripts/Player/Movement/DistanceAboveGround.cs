@@ -25,6 +25,7 @@ public class DistanceAboveGround : MonoBehaviour
 
     [Header("isGrounded")]
     public bool isGrounded;
+    public GameObject GroundLookingAt;
 
 
     //--------------------
@@ -42,6 +43,8 @@ public class DistanceAboveGround : MonoBehaviour
     }
     private void Update()
     {
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         point_0_Hit = false;
         point_1_Hit = false;
         point_2_Hit = false;
@@ -83,10 +86,19 @@ public class DistanceAboveGround : MonoBehaviour
     {
         if (Physics.Raycast(pos, Vector3.down, out hit, raycastDistance_CheckGround))
         {
+            GroundLookingAt = hit.transform.gameObject;
+
+            if (GroundLookingAt.GetComponent<Model>())
+            {
+                PlayerManager.Instance.UpdatePlayerDyingPos(GroundLookingAt.transform);
+            }
+
             return true;
         }
         else
         {
+            GroundLookingAt = null;
+
             return false;
         }
     }

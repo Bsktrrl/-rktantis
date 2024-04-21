@@ -40,6 +40,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
     }
     private void Update()
     {
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         UpdateScreenBuildingRequirementDisplay();
 
         UpdateScreenBuildingRewardDisplay();

@@ -52,9 +52,11 @@ public class MainManager : Singleton<MainManager>
 
     void UpdateGameStates()
     {
+        if (gameStates == GameStates.GameOver) { return; }
+
         //Set to Building
 
-        if(HotbarManager.Instance.selectedItem != Items.None)
+        if (HotbarManager.Instance.selectedItem != Items.None)
         {
             if (GetItem(HotbarManager.Instance.selectedItem).subCategoryName == ItemSubCategories.BuildingHammer)
             {
@@ -154,7 +156,7 @@ public class MainManager : Singleton<MainManager>
     //--------------------
 
 
-    void SaveData()
+    public void SaveData()
     {
         DataPersistanceManager.instance.SaveGame();
     }
@@ -182,5 +184,7 @@ public enum GameStates
     None,
 
     Building,
-    Cutting
+    Cutting,
+
+    GameOver
 }

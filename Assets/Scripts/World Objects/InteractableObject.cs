@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InteractableObject : MonoBehaviour
 {
+    #region Variables
     [Header("Is the player in range?")]
     [HideInInspector] public bool playerInRange;
 
@@ -31,7 +32,8 @@ public class InteractableObject : MonoBehaviour
     public FurnitureObjectNames blueprint_Furniture_Name;
     public MachineObjectNames blueprint_Machine_Name;
 
-    bool isHittingGround;
+    //bool isHittingGround;
+    #endregion
 
 
     //--------------------
@@ -51,6 +53,8 @@ public class InteractableObject : MonoBehaviour
 
     void ObjectInteraction()
     {
+        //if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         if (SelectionManager.Instance.selectedObject)
         {
             if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selectedObject == gameObject
@@ -269,7 +273,7 @@ public class InteractableObject : MonoBehaviour
         //Spawn on the gorund, if an item
         if (collision.gameObject.tag == "Ground" && interactableType == InteracteableType.Item)
         {
-            isHittingGround = true;
+            //isHittingGround = true;
         }
     }
     private void OnTriggerEnter(Collider collision)

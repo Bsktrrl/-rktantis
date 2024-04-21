@@ -59,6 +59,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
     }
     void Update()
     {
+        if (MainManager.Instance.gameStates == GameStates.GameOver)  { return; }
+
         //Perform the movement
         Movement();
 
