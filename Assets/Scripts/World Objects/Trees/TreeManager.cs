@@ -6,6 +6,7 @@ public class TreeManager : Singleton<TreeManager>
 {
     public float dormantTimer = 2;
 
+    [Header("Folder Structure")]
     GameObject treeWorldObject_Parent;
     [SerializeField] List<List<TreeToSave>> treeTypeObjectList = new List<List<TreeToSave>>();
 

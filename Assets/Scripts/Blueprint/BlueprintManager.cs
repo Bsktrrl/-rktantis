@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,26 @@ public class BlueprintManager : Singleton<BlueprintManager>
     public List<bool> activeMachineObject_SOList = new List<bool>();
 
 
+    [Header("Folder Structure")]
+    GameObject blueprintWorldObject_Parent;
+    [SerializeField] List<List<BlueprintToSave>> blueprintTypeObjectList = new List<List<BlueprintToSave>>();
+
+
+    //--------------------
+
+
+    private void Awake()
+    {
+        blueprintWorldObject_Parent = GameObject.Find("Blueprint_Parent");
+    }
+
+
     //--------------------
 
 
     public void LoadData()
     {
+        #region Load _SO
         //Load _SOBuildingLists
         if (DataManager.Instance.activeBuildingBlockObject_SOList_Store.Count > 0)
         {
@@ -58,6 +74,25 @@ public class BlueprintManager : Singleton<BlueprintManager>
         {
             SetStart_Machine_BlueprintSet();
         }
+        #endregion
+
+        #region Save/Load Objects
+        blueprintTypeObjectList.Clear();
+
+        for (int i = 0; i < DataManager.Instance.blueprintTypeObjectList_Store.Count; i++)
+        {
+            List<BlueprintToSave> blueprintToSaveList = new List<BlueprintToSave>();
+
+            blueprintTypeObjectList.Add(blueprintToSaveList);
+
+            for (int j = 0; j < DataManager.Instance.blueprintTypeObjectList_Store[i].blueprintToSaveList.Count; j++)
+            {
+                blueprintTypeObjectList[blueprintTypeObjectList.Count - 1].Add(DataManager.Instance.blueprintTypeObjectList_Store[i].blueprintToSaveList[j]);
+            }
+        }
+
+        SetupBlueprintList();
+        #endregion
 
         SaveData();
     }
@@ -66,13 +101,140 @@ public class BlueprintManager : Singleton<BlueprintManager>
         DataManager.Instance.activeBuildingBlockObject_SOList_Store = activeBuildingBlockObject_SOList;
         DataManager.Instance.activeFurnitureObject_SOList_Store = activeFurnitureObject_SOList;
         DataManager.Instance.activeMachineObject_SOList_Store = activeMachineObject_SOList;
-    }
 
+        #region Save/Load Objects
+        List<ListOfBlueprintToSave> blueprintToSaveList = new List<ListOfBlueprintToSave>();
+
+        for (int i = 0; i < blueprintTypeObjectList.Count; i++)
+        {
+            ListOfBlueprintToSave blueprintToSave = new ListOfBlueprintToSave();
+
+            blueprintToSaveList.Add(blueprintToSave);
+
+            for (int j = 0; j < blueprintTypeObjectList[i].Count; j++)
+            {
+                blueprintToSaveList[blueprintToSaveList.Count - 1].blueprintToSaveList.Add(blueprintTypeObjectList[i][j]);
+            }
+        }
+
+        DataManager.Instance.blueprintTypeObjectList_Store = blueprintToSaveList;
+        #endregion
+    }
 
 
     //--------------------
 
 
+    void SetupBlueprintList()
+    {
+        List<List<BlueprintToSave>> tempBlueprintTypeObjectList = new List<List<BlueprintToSave>>();
+        List<List<bool>> checkedBlueprint = new List<List<bool>>();
+
+        //Add elements to "checkedBlueprint" as children
+        for (int i = 0; i < blueprintWorldObject_Parent.transform.childCount; i++)
+        {
+            List<BlueprintToSave> tempBlueprinttoSave = new List<BlueprintToSave>();
+            tempBlueprintTypeObjectList.Add(tempBlueprinttoSave);
+
+            List<bool> templist_Outer = new List<bool>();
+            checkedBlueprint.Add(templist_Outer);
+
+            for (int j = 0; j < blueprintWorldObject_Parent.transform.GetChild(i).transform.childCount; j++)
+            {
+                bool templist_Inner = false;
+                checkedBlueprint[i].Add(templist_Inner);
+            }
+        }
+
+        //Set Old Blueprints
+        for (int i = 0; i < checkedBlueprint.Count; i++)
+        {
+            for (int k = 0; k < checkedBlueprint[i].Count; k++)
+            {
+                if (blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(k).GetComponent<Blueprint>())
+                {
+                    for (int j = 0; j < blueprintTypeObjectList.Count; j++)
+                    {
+                        for (int l = 0; l < blueprintTypeObjectList[j].Count; l++)
+                        {
+                            if (blueprintTypeObjectList[j][l].blueprintPos == blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(k).GetComponent<Blueprint>().transform.position)
+                            {
+                                //Setup Save_List
+                                BlueprintToSave tempBlueprint = new BlueprintToSave();
+
+                                tempBlueprint.isPicked = blueprintTypeObjectList[j][l].isPicked;
+                                tempBlueprint.blueprintPos = blueprintTypeObjectList[j][l].blueprintPos;
+
+                                tempBlueprintTypeObjectList[i].Add(tempBlueprint);
+
+                                checkedBlueprint[i][k] = true;
+
+                                //Set info in Child
+                                blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(k).GetComponent<Blueprint>().LoadBlueprint(blueprintTypeObjectList[j][l].isPicked, j, l);
+
+                                l = blueprintTypeObjectList[j].Count;
+                                j = blueprintTypeObjectList.Count;
+
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //Set New Blueprint
+        for (int i = 0; i < checkedBlueprint.Count; i++)
+        {
+            for (int j = 0; j < checkedBlueprint[i].Count; j++)
+            {
+                if (!checkedBlueprint[i][j])
+                {
+                    if (blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(j))
+                    {
+                        print("New Blueprint: [" + i + "][" + j + "]");
+                        //Give all Legal Objects an index
+                        blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Blueprint>().blueprintIndex_x = i;
+                        blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Blueprint>().blueprintIndex_y = j;
+
+                        //Make a TreeTypeObjectList
+                        BlueprintToSave tempBlueprint = new BlueprintToSave();
+
+                        tempBlueprint.isPicked = blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Blueprint>().isPicked;
+                        tempBlueprint.blueprintIndex_x = blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Blueprint>().blueprintIndex_x;
+                        tempBlueprint.blueprintIndex_y = blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Blueprint>().blueprintIndex_y;
+                        tempBlueprint.blueprintPos = blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Blueprint>().transform.position;
+
+                        tempBlueprintTypeObjectList[i].Add(tempBlueprint);
+                    }
+                }
+            }
+        }
+
+        //Set New BlueprintTypeObjectList
+        blueprintTypeObjectList.Clear();
+        blueprintTypeObjectList = tempBlueprintTypeObjectList;
+
+        SaveData();
+    }
+    public void ChangeBlueprintInfo(bool _isPicked, int _blueprintIndex_j, int _blueprintIndex_l, Vector3 _blueprintPos)
+    {
+        BlueprintToSave blueprintTree = new BlueprintToSave();
+
+        blueprintTree.isPicked = _isPicked;
+        blueprintTree.blueprintIndex_x = _blueprintIndex_j;
+        blueprintTree.blueprintIndex_y = _blueprintIndex_l;
+        blueprintTree.blueprintPos = _blueprintPos;
+
+        blueprintTypeObjectList[_blueprintIndex_j][_blueprintIndex_l] = blueprintTree;
+
+        SaveData();
+    }
+
+
+    //--------------------
+
+    #region SetStart
     public void SetStart_BuildingBock_BlueprintSet()
     {
         //Setup _SO isActive Lists
@@ -118,11 +280,13 @@ public class BlueprintManager : Singleton<BlueprintManager>
             }
         }
     }
+    #endregion
 
 
     //--------------------
 
 
+    #region AddBlueprint
     public void AddBlueprint(BuildingBlockObjectNames buildingBlockObjectNames, BuildingMaterial buildingMaterial)
     {
         for (int i = 0; i < BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList.Count; i++)
@@ -169,4 +333,22 @@ public class BlueprintManager : Singleton<BlueprintManager>
 
         SaveData();
     }
+    #endregion
+}
+
+[Serializable]
+public class BlueprintToSave
+{
+    public bool isPicked;
+
+    public int blueprintIndex_x;
+    public int blueprintIndex_y;
+
+    public Vector3 blueprintPos = new Vector3();
+}
+
+[Serializable]
+public class ListOfBlueprintToSave
+{
+    public List<BlueprintToSave> blueprintToSaveList = new List<BlueprintToSave>();
 }

@@ -56,6 +56,12 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] TextMeshProUGUI journalCategory_Text;
     [SerializeField] TextMeshProUGUI journalEntryNumber_Text;
 
+    [Header("Blueprint")]
+    [SerializeField] GameObject blueprintDisplay_Panel;
+    [SerializeField] Image blueprintDisplay_Image;
+    [SerializeField] TextMeshProUGUI blueprintCategory_Text;
+    [SerializeField] TextMeshProUGUI blueprintDescription_Text;
+
     [Header("Ghost Fight")]
     [SerializeField] GameObject ghostFight_Panel;
     [SerializeField] Image ghostFightBar;
@@ -321,9 +327,23 @@ public class LookAtManager : Singleton<LookAtManager>
         }
         #endregion
 
+        //If looking at a Blueprint
+        #region
+        else if (typeLookingAt == InteracteableType.Blueprint)
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            BlueprintDisplay();
+
+            blueprintDisplay_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
+
 
         //-------------------- Other
-
 
 
         //Else
@@ -814,6 +834,16 @@ public class LookAtManager : Singleton<LookAtManager>
             }
         }
     }
+    void BlueprintDisplay()
+    {
+        if (SelectionManager.Instance.selectedObject)
+        {
+            if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>())
+            {
+                blueprintDescription_Text.text = "\"" + SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().blueprintName + "\"";
+            }
+        }
+    }
 
     void GhostDisplay()
     {
@@ -866,6 +896,7 @@ public class LookAtManager : Singleton<LookAtManager>
         MovableObject_Panel.SetActive(false);
 
         journalDisplay_Panel.SetActive(false);
+        blueprintDisplay_Panel.SetActive(false);
 
         ghostFight_Panel.SetActive(false);
 

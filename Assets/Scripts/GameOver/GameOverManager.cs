@@ -97,7 +97,6 @@ public class GameOverManager : Singleton<GameOverManager>
             }
 
             SoundManager.Instance.Stop_GameOver_Clip();
-
         }
     }
 
@@ -110,7 +109,8 @@ public class GameOverManager : Singleton<GameOverManager>
         //Remove all items from the world
         for (int i = WorldObjectManager.Instance.worldObjectList.Count - 1; i >= 0; i--)
         {
-            if (WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>())
+            if (WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>()
+                && WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().itemName != Items.ArídianKey)
             {
                 WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().DestroyThisObject();
             }
@@ -125,7 +125,10 @@ public class GameOverManager : Singleton<GameOverManager>
     {
         for (int i = InventoryManager.Instance.inventories[0].itemsInInventory.Count - 1; i >= 0; i--)
         {
-            InventoryManager.Instance.RemoveItemFromInventory(0, InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName, InventoryManager.Instance.inventories[0].itemsInInventory[i].itemID, true);
+            if (InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName != Items.ArídianKey)
+            {
+                InventoryManager.Instance.RemoveItemFromInventory(0, InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName, InventoryManager.Instance.inventories[0].itemsInInventory[i].itemID, true);
+            }
         }
     }
 }

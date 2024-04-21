@@ -25,15 +25,10 @@ public class GameData
     [HideInInspector] public List<bool> activeBuildingBlockObject_SOList_Save = new List<bool>();
     [HideInInspector] public List<bool> activeFurnitureObject_SOList_Save = new List<bool>();
     [HideInInspector] public List<bool> activeMachineObject_SOList_Save = new List<bool>();
-    //[HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_SaveList = new List<BuildingBlockSaveList>();
 
     //Hotbar
     [HideInInspector] public int selectedSlot_Save = new int();
     [HideInInspector] public List<Hotbar> hotbarItem_SaveList = new List<Hotbar>();
-
-    //MoveableObjects
-    //[HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_SaveList = new List<MoveableObject_ToSave>();
-    //[HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Save = new MoveableObjectSelected_ToSave();
 
     //Plants
     [HideInInspector] public List<ListOfPlantToSave> plantTypeObjectList_Save = new List<ListOfPlantToSave>();
@@ -44,6 +39,13 @@ public class GameData
     //Trees
     [HideInInspector] public List<ListOfTreeToSave> treeTypeObjectList_Save = new List<ListOfTreeToSave>();
 
+    //Blueprints
+    [HideInInspector] public List<ListOfBlueprintToSave> blueprintTypeObjectList_Save = new List<ListOfBlueprintToSave>();
+
+    //Arídian Objects
+    [HideInInspector] public List<ListOfArídianKeyToSave> arídianKeyTypeObjectList_Save= new List<ListOfArídianKeyToSave>();
+    [HideInInspector] public List<ListOfAríditeCrystalToSave> aríditeCrystalTypeObjectList_Save = new List<ListOfAríditeCrystalToSave>();
+
     //HealthParameter
     [HideInInspector] public HealthToSave health_Save = new HealthToSave();
 
@@ -52,6 +54,7 @@ public class GameData
     [HideInInspector] public int day_Save = new int();
 
     //Journals
+    [HideInInspector] public List<ListOfJournalPageToSave> journalPageTypeObjectList_Save = new List<ListOfJournalPageToSave>();
     [HideInInspector] public List<int> mentorStoryJournalPageIndexList_Save = new List<int>();
     [HideInInspector] public List<int> playerStoryJournalPageIndexList_Save = new List<int>();
     [HideInInspector] public List<int> personalStoryJournalPageIndexList_Save = new List<int>();
@@ -88,22 +91,23 @@ public class GameData
         //Input All Lists to clear
         this.worldObject_SaveList.Clear();
 
-        //this.buildingBlockList_SaveList.Clear();
-        //this.worldBuildingObjectInfoList_Save.Clear();
         this.activeBuildingBlockObject_SOList_Save.Clear();
         this.activeFurnitureObject_SOList_Save.Clear();
         this.activeMachineObject_SOList_Save.Clear();
 
         this.Inventories_SaveList.Clear();
         this.hotbarItem_SaveList.Clear();
-        //this.placedMoveableObjectsList_SaveList.Clear();
 
         this.menuEquipedItemList_SaveList.Clear();
 
         this.plantTypeObjectList_Save.Clear();
         this.oreTypeObjectList_Save.Clear();
         this.treeTypeObjectList_Save.Clear();
+        this.blueprintTypeObjectList_Save.Clear();
+        this.arídianKeyTypeObjectList_Save.Clear();
+        this.aríditeCrystalTypeObjectList_Save.Clear();
 
+        this.journalPageTypeObjectList_Save.Clear();
         this.mentorStoryJournalPageIndexList_Save.Clear();
         this.playerStoryJournalPageIndexList_Save.Clear();
         this.personalStoryJournalPageIndexList_Save.Clear();

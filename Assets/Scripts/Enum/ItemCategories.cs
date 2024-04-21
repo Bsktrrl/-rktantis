@@ -18,7 +18,10 @@ public enum ItemCategories
 
     [Description("Machines")] Machines,
     [Description("Furniture")] Furniture,
-    [Description("BuildingBlock")] BuildingBlock
+    [Description("BuildingBlock")] BuildingBlock,
+
+
+    [Description("Arídian Key")] ArídianKey
 
 
     #region Old
@@ -128,7 +131,10 @@ public enum ItemSubCategories
     [Description("Drinking")][InspectorName("Tools/Drinking")] Drinking,
 
     //Tablet
-    [Description("Tablet")][InspectorName("Tools/Tablet")] Tablet
+    [Description("Tablet")][InspectorName("Tools/Tablet")] Tablet,
+
+    //Tablet
+    [Description("Arídian Key")][InspectorName("Arídian Key/Arídian Key")] ArídianKey,
 
 
     //--------------------

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
@@ -25,12 +27,9 @@ public class InteractableObject : MonoBehaviour
     public JournalMenuState journalType;
     public int journalPageIndex;
 
-    [Header("If Object is a Blueprint")]
-    public BuildingBlockObjectNames blueprint_BuildingBlock_Name;
-    public BuildingMaterial buildingMaterial;
-    [Space(5)]
-    public FurnitureObjectNames blueprint_Furniture_Name;
-    public MachineObjectNames blueprint_Machine_Name;
+    [Header("If Object is a BlueprintInfo")]
+    public string blueprintName;
+    public List<BlueprintInfo> blueprintInfo;
 
     //bool isHittingGround;
     #endregion
@@ -75,6 +74,17 @@ public class InteractableObject : MonoBehaviour
 
                             //Remove Object from the worldObjectList
                             WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
+
+                            //Update the ArídianKey
+                            if (gameObject.GetComponent<ArídianKey>())
+                            {
+                                gameObject.GetComponent<ArídianKey>().ArídianKeyInteraction();
+                            }
+                            //Update the AriditeCrystal
+                            else if (gameObject.GetComponent<AríditeCrystal>())
+                            {
+                                gameObject.GetComponent<AríditeCrystal>().AríditeCrystalInteraction();
+                            }
 
                             //Destroy gameObject
                             DestroyThisObject();
@@ -232,6 +242,13 @@ public class InteractableObject : MonoBehaviour
 
                     JournalManager.Instance.AddJournalPageToList(journalType, journalPageIndex);
 
+                    //Update the JournalPage
+                    if (gameObject.GetComponent<JournalObject>())
+                    {
+                        SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+                        gameObject.GetComponent<JournalObject>().JournalPageInteraction();
+                    }
+
                     //Destroy gameObject
                     DestroyThisObject();
                 }
@@ -241,19 +258,29 @@ public class InteractableObject : MonoBehaviour
                 #region
                 else if (interactableType == InteracteableType.Blueprint)
                 {
-                    print("Interact with a Blueprint");
+                    print("Interact with a BlueprintInfo");
 
-                    if (blueprint_BuildingBlock_Name != BuildingBlockObjectNames.None)
+                    for (int i = 0; i < blueprintInfo.Count; i++)
                     {
-                        BlueprintManager.Instance.AddBlueprint(blueprint_BuildingBlock_Name, buildingMaterial);
+                        if (blueprintInfo[i].blueprint_BuildingBlock_Name != BuildingBlockObjectNames.None)
+                        {
+                            BlueprintManager.Instance.AddBlueprint(blueprintInfo[i].blueprint_BuildingBlock_Name, blueprintInfo[i].buildingMaterial);
+                        }
+                        else if (blueprintInfo[i].blueprint_Furniture_Name != FurnitureObjectNames.None)
+                        {
+                            BlueprintManager.Instance.AddBlueprint(blueprintInfo[i].blueprint_Furniture_Name);
+                        }
+                        else if (blueprintInfo[i].blueprint_Machine_Name != MachineObjectNames.None)
+                        {
+                            BlueprintManager.Instance.AddBlueprint(blueprintInfo[i].blueprint_Machine_Name);
+                        }
                     }
-                    else if (blueprint_Furniture_Name != FurnitureObjectNames.None)
+
+                    //Update the Blueprint
+                    if (gameObject.GetComponent<Blueprint>())
                     {
-                        BlueprintManager.Instance.AddBlueprint(blueprint_Furniture_Name);
-                    }
-                    else if (blueprint_Machine_Name != MachineObjectNames.None)
-                    {
-                        BlueprintManager.Instance.AddBlueprint(blueprint_Machine_Name);
+                        SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+                        gameObject.GetComponent<Blueprint>().BlueprintInteraction();
                     }
 
                     //Destroy gameObject
@@ -370,5 +397,14 @@ public enum InteracteableType
     [Description("Ghost")][InspectorName("Ghost/Ghost")] Ghost,
 
     //Blueprint
-    [Description("Blueprint")][InspectorName("Blueprint/Blueprint")] Blueprint,
+    [Description("BlueprintInfo")][InspectorName("BlueprintInfo/BlueprintInfo")] Blueprint,
+}
+
+[Serializable]
+public class BlueprintInfo
+{
+    public BuildingBlockObjectNames blueprint_BuildingBlock_Name;
+    public BuildingMaterial buildingMaterial;
+    public FurnitureObjectNames blueprint_Furniture_Name;
+    public MachineObjectNames blueprint_Machine_Name;
 }

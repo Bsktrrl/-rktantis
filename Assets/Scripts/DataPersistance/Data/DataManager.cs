@@ -17,10 +17,6 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //Player Stats
     [HideInInspector] public PlayerStats playerStats_Store = new PlayerStats();
 
-    //Player Pos and Rotation
-    //[HideInInspector] public Vector3 playerPos_Store = new Vector3();
-    //[HideInInspector] public Quaternion playerRot_Store = new Quaternion();
-
     //WorldObjects
     [HideInInspector] public List<WorldObject> worldObject_StoreList = new List<WorldObject>();
 
@@ -42,11 +38,6 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<bool> activeBuildingBlockObject_SOList_Store = new List<bool>();
     [HideInInspector] public List<bool> activeFurnitureObject_SOList_Store = new List<bool>();
     [HideInInspector] public List<bool> activeMachineObject_SOList_Store = new List<bool>();
-    //[HideInInspector] public List<BuildingBlockSaveList> buildingBlockList_StoreList = new List<BuildingBlockSaveList>();
-
-    //MoveableObjects
-    //[HideInInspector] public List<MoveableObject_ToSave> placedMoveableObjectsList_StoreList = new List<MoveableObject_ToSave>();
-    //[HideInInspector] public MoveableObjectSelected_ToSave moveableObjectSelected_Store = new MoveableObjectSelected_ToSave();
 
     //Plants
     [HideInInspector] public List<ListOfPlantToSave> plantTypeObjectList_Store = new List<ListOfPlantToSave>();
@@ -57,6 +48,13 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //Trees
     [HideInInspector] public List<ListOfTreeToSave> treeTypeObjectList_Store = new List<ListOfTreeToSave>();
 
+    //Blueprints
+    [HideInInspector] public List<ListOfBlueprintToSave> blueprintTypeObjectList_Store = new List<ListOfBlueprintToSave>();
+
+    //Arídian Objects
+    [HideInInspector] public List<ListOfArídianKeyToSave> arídianKeyTypeObjectList_Store = new List<ListOfArídianKeyToSave>();
+    [HideInInspector] public List<ListOfAríditeCrystalToSave> aríditeCrystalTypeObjectList_Store = new List<ListOfAríditeCrystalToSave>();
+
     //HealthParameter
     [HideInInspector] public HealthToSave health_Store = new HealthToSave();
 
@@ -65,6 +63,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public int day_Store = new int();
 
     //Journals
+    [HideInInspector] public List<ListOfJournalPageToSave> journalPageTypeObjectList_Store = new List<ListOfJournalPageToSave>();
     [HideInInspector] public List<int> mentorStoryJournalPageIndexList_Store = new List<int>();
     [HideInInspector] public List<int> playerStoryJournalPageIndexList_Store = new List<int>();
     [HideInInspector] public List<int> personalStoryJournalPageIndexList_Store = new List<int>();
@@ -119,10 +118,6 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.activeBuildingBlockObject_SOList_Store = gameData.activeBuildingBlockObject_SOList_Save;
         this.activeFurnitureObject_SOList_Store = gameData.activeFurnitureObject_SOList_Save;
         this.activeMachineObject_SOList_Store = gameData.activeMachineObject_SOList_Save;
-        //this.buildingBlockList_StoreList = gameData.buildingBlockList_SaveList;
-
-        //this.placedMoveableObjectsList_StoreList = gameData.placedMoveableObjectsList_SaveList;
-        //this.moveableObjectSelected_Store = gameData.moveableObjectSelected_Save;
 
         this.health_Store = gameData.health_Save;
 
@@ -132,7 +127,11 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.plantTypeObjectList_Store = gameData.plantTypeObjectList_Save;
         this.oreTypeObjectList_Store = gameData.oreTypeObjectList_Save;
         this.treeTypeObjectList_Store = gameData.treeTypeObjectList_Save;
+        this.blueprintTypeObjectList_Store = gameData.blueprintTypeObjectList_Save;
+        this.arídianKeyTypeObjectList_Store = gameData.arídianKeyTypeObjectList_Save;
+        this.aríditeCrystalTypeObjectList_Store = gameData.aríditeCrystalTypeObjectList_Save;
 
+        this.journalPageTypeObjectList_Store = gameData.journalPageTypeObjectList_Save;
         this.mentorStoryJournalPageIndexList_Store = gameData.mentorStoryJournalPageIndexList_Save;
         this.playerStoryJournalPageIndexList_Store = gameData.playerStoryJournalPageIndexList_Save;
         this.personalStoryJournalPageIndexList_Store = gameData.personalStoryJournalPageIndexList_Save;
@@ -218,6 +217,12 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         MachineManager.Instance.LoadData();
         print("20. Machines has Loaded");
+
+        ArídianKeyManager.Instance.LoadData();
+        print("21. AríditeKeyManager has Loaded");
+
+        AríditeCrystalManager.Instance.LoadData();
+        print("22. AríditeCrystalManager has Loaded");
         #endregion
 
         print("------------------------------");
@@ -246,10 +251,6 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.activeBuildingBlockObject_SOList_Save = this.activeBuildingBlockObject_SOList_Store;
         gameData.activeFurnitureObject_SOList_Save = this.activeFurnitureObject_SOList_Store;
         gameData.activeMachineObject_SOList_Save = this.activeMachineObject_SOList_Store;
-        //gameData.buildingBlockList_SaveList = this.buildingBlockList_StoreList;
-
-        //gameData.placedMoveableObjectsList_SaveList = this.placedMoveableObjectsList_StoreList;
-        //gameData.moveableObjectSelected_Save = this.moveableObjectSelected_Store;
 
         gameData.health_Save = this.health_Store;
 
@@ -259,7 +260,11 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.plantTypeObjectList_Save = this.plantTypeObjectList_Store;
         gameData.oreTypeObjectList_Save = this.oreTypeObjectList_Store;
         gameData.treeTypeObjectList_Save = this.treeTypeObjectList_Store;
+        gameData.blueprintTypeObjectList_Save = this.blueprintTypeObjectList_Store;
+        gameData.arídianKeyTypeObjectList_Save = this.arídianKeyTypeObjectList_Store;
+        gameData.aríditeCrystalTypeObjectList_Save = this.aríditeCrystalTypeObjectList_Store;
 
+        gameData.journalPageTypeObjectList_Save = this.journalPageTypeObjectList_Store;
         gameData.mentorStoryJournalPageIndexList_Save = this.mentorStoryJournalPageIndexList_Store;
         gameData.playerStoryJournalPageIndexList_Save = this.playerStoryJournalPageIndexList_Store;
         gameData.personalStoryJournalPageIndexList_Save = this.personalStoryJournalPageIndexList_Store;
