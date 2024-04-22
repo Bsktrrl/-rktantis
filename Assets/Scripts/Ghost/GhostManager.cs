@@ -10,7 +10,7 @@ public class GhostManager : Singleton<GhostManager>
 
     [Header("Ghost Object Pool")]
     public int ghostSpawnAmount = 1;
-    public float ghostMovementSpeed = 2f;
+    public float ghostMovementSpeed = 3f;
 
     [SerializeField] GameObject ghostPoolParent;
     [SerializeField] GameObject ghostPrefab;

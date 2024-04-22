@@ -291,15 +291,16 @@ public class Ghost : MonoBehaviour
         {
             case GhostStates.Idle:
                 anim.SetBool("isMoving", false);
+                anim.SetTrigger("Move");
                 break;
             case GhostStates.Moving:
                 anim.SetBool("isMoving", false);
                 break;
             case GhostStates.Attacking:
+                anim.SetBool("isMoving", false);
                 break;
             case GhostStates.Fleeing:
                 anim.SetBool("isMoving", true);
-                anim.SetTrigger("Move");
                 break;
 
             default:
