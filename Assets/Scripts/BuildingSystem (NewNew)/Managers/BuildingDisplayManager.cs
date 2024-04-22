@@ -31,7 +31,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
 
     [Header("+ Sign")]
-    public List<bool> menuObjects_PlussSign;
+    public List<bool> menuObjects_PlussSign = new List<bool>();
 
 
     //--------------------

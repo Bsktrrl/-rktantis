@@ -70,6 +70,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<int> mentorStoryJournalPageIndexList_Store = new List<int>();
     [HideInInspector] public List<int> playerStoryJournalPageIndexList_Store = new List<int>();
     [HideInInspector] public List<int> personalStoryJournalPageIndexList_Store = new List<int>();
+    [HideInInspector] public List<bool> journalPage_PlussSign_Mentor_Store = new List<bool>();
+    [HideInInspector] public List<bool> journalPage_PlussSign_Player_Store = new List<bool>();
+    [HideInInspector] public List<bool> journalPage_PlussSign_Personal_Store = new List<bool>();
 
     //Settings
     [HideInInspector] public SettingsValues settingsValues_Store = new SettingsValues();
@@ -139,6 +142,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.mentorStoryJournalPageIndexList_Store = gameData.mentorStoryJournalPageIndexList_Save;
         this.playerStoryJournalPageIndexList_Store = gameData.playerStoryJournalPageIndexList_Save;
         this.personalStoryJournalPageIndexList_Store = gameData.personalStoryJournalPageIndexList_Save;
+        this.journalPage_PlussSign_Mentor_Store = gameData.journalPage_PlussSign_Mentor_Save;
+        this.journalPage_PlussSign_Player_Store = gameData.journalPage_PlussSign_Player_Save;
+        this.journalPage_PlussSign_Personal_Store = gameData.journalPage_PlussSign_Personal_Save;
 
         this.settingsValues_Store = gameData.settingsValues_Save;
 
@@ -278,6 +284,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.mentorStoryJournalPageIndexList_Save = this.mentorStoryJournalPageIndexList_Store;
         gameData.playerStoryJournalPageIndexList_Save = this.playerStoryJournalPageIndexList_Store;
         gameData.personalStoryJournalPageIndexList_Save = this.personalStoryJournalPageIndexList_Store;
+        gameData.journalPage_PlussSign_Mentor_Save = this.journalPage_PlussSign_Mentor_Store;
+        gameData.journalPage_PlussSign_Player_Save = this.journalPage_PlussSign_Player_Store;
+        gameData.journalPage_PlussSign_Personal_Save = this.journalPage_PlussSign_Personal_Store;
 
         gameData.settingsValues_Save = this.settingsValues_Store;
 

@@ -59,6 +59,9 @@ public class GameData
     [HideInInspector] public List<int> mentorStoryJournalPageIndexList_Save = new List<int>();
     [HideInInspector] public List<int> playerStoryJournalPageIndexList_Save = new List<int>();
     [HideInInspector] public List<int> personalStoryJournalPageIndexList_Save = new List<int>();
+    [HideInInspector] public List<bool> journalPage_PlussSign_Mentor_Save = new List<bool>();
+    [HideInInspector] public List<bool> journalPage_PlussSign_Player_Save = new List<bool>();
+    [HideInInspector] public List<bool> journalPage_PlussSign_Personal_Save = new List<bool>();
 
     //Settings
     [HideInInspector] public SettingsValues settingsValues_Save = new SettingsValues();
@@ -113,6 +116,9 @@ public class GameData
         this.mentorStoryJournalPageIndexList_Save.Clear();
         this.playerStoryJournalPageIndexList_Save.Clear();
         this.personalStoryJournalPageIndexList_Save.Clear();
+        this.journalPage_PlussSign_Mentor_Save.Clear();
+        this.journalPage_PlussSign_Player_Save.Clear();
+        this.journalPage_PlussSign_Personal_Save.Clear();
 
         this.weatherTypeDayList_Save.Clear();
 

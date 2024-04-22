@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class JournalPage : MonoBehaviour, IPointerEnterHandler
@@ -16,6 +17,9 @@ public class JournalPage : MonoBehaviour, IPointerEnterHandler
     public TextMeshProUGUI message;
     public GameObject message_Clip_Button;
     public AudioClip message_Clip;
+
+    [Header("+ Sign")]
+    public GameObject Image_Pluss;
 
 
     //--------------------
@@ -86,9 +90,42 @@ public class JournalPage : MonoBehaviour, IPointerEnterHandler
 
     //--------------------
 
+    public void SetupIfPlussIsActive(bool isActive)
+    {
+        if (Image_Pluss)
+        {
+            Image_Pluss.SetActive(isActive);
+        }
+    }
+
+    //--------------------
 
     public void JournalPageButton_isClicked()
     {
+        switch (journalMenuState)
+        {
+            case JournalMenuState.None:
+                break;
+
+            case JournalMenuState.MentorJournal:
+                JournalManager.Instance.UpdateMentorPlussSignsSave(gameObject);
+                break;
+            case JournalMenuState.PlayerJournal:
+                JournalManager.Instance.UpdatePlayerPlussSignsSave(gameObject);
+                break;
+            case JournalMenuState.PersonalJournal:
+                JournalManager.Instance.UpdatePersonalPlussSignsSave(gameObject);
+                break;
+
+            default:
+                break;
+        }
+
+        if (Image_Pluss)
+        {
+            Image_Pluss.SetActive(false);
+        }
+
         SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
 
         JournalManager.Instance.journalPageIsSelected = true;
@@ -96,6 +133,13 @@ public class JournalPage : MonoBehaviour, IPointerEnterHandler
     }
     public void MessageClipButton_isClicked()
     {
+        JournalManager.Instance.UpdateMentorPlussSignsSave(gameObject);
+
+        if (Image_Pluss)
+        {
+            Image_Pluss.SetActive(false);
+        }
+
         if (message_Clip && SoundManager.Instance.audioSource_Journal_VoiceMessage != null)
         {
             SoundManager.Instance.Play_JournalPage_VoiceMessage_Clip(message_Clip);
@@ -112,11 +156,9 @@ public class JournalPage : MonoBehaviour, IPointerEnterHandler
     {
         SoundManager.Instance.Play_Inventory_ItemHover_Clip();
 
-        if (!JournalManager.Instance.journalPageIsSelected)
-        {
-            JournalManager.Instance.SetupInfoPage(this);
-        }
+        //if (!JournalManager.Instance.journalPageIsSelected)
+        //{
+        //    JournalManager.Instance.SetupInfoPage(this);
+        //}
     }
-
-
 }

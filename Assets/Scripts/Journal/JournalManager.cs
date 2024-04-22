@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class JournalManager : Singleton<JournalManager>
 {
+    #region Variables
     public JournalMenuState journalMenuState;
     int activeJournalPageIndex;
 
@@ -56,6 +57,12 @@ public class JournalManager : Singleton<JournalManager>
     [Header("Folder Structure")]
     GameObject journalPageWorldObject_Parent;
     [SerializeField] List<List<JournalPageToSave>> journalPageTypeObjectList = new List<List<JournalPageToSave>>();
+
+    [Header("+ Sign")]
+    public List<bool> journalPage_PlussSign_Mentor = new List<bool>();
+    public List<bool> journalPage_PlussSign_Player = new List<bool>();
+    public List<bool> journalPage_PlussSign_Personal = new List<bool>();
+    #endregion
 
 
     //--------------------
@@ -118,6 +125,30 @@ public class JournalManager : Singleton<JournalManager>
         SetupJournalPageList();
         #endregion
 
+        #region JournalPage "+"
+        journalPage_PlussSign_Mentor = DataManager.Instance.journalPage_PlussSign_Mentor_Store;
+        journalPage_PlussSign_Player = DataManager.Instance.journalPage_PlussSign_Player_Store;
+        journalPage_PlussSign_Personal = DataManager.Instance.journalPage_PlussSign_Personal_Store;
+
+        //Mentor Journal
+        if (journalPage_PlussSign_Mentor.Count <= 0)
+            SetupJournalPage_Mentor_SignList();
+        else
+            UpdateJournalPage_Mentor_SignsObject();
+
+        //Player Journal
+        if (journalPage_PlussSign_Player.Count <= 0)
+            SetupJournalPage_Player_SignList();
+        else
+            UpdateJournalPage_Player_SignsObject();
+
+        //Personal Journal
+        if (journalPage_PlussSign_Personal.Count <= 0)
+            SetupJournalPage_Personal_SignList();
+        else
+            UpdateJournalPage_Personal_SignsObject();
+        #endregion
+
         SaveData();
     }
     public void SaveData()
@@ -142,6 +173,12 @@ public class JournalManager : Singleton<JournalManager>
         }
 
         DataManager.Instance.journalPageTypeObjectList_Store = journalPageToSaveList;
+        #endregion
+
+        #region JournalPage "+"
+        DataManager.Instance.journalPage_PlussSign_Mentor_Store = journalPage_PlussSign_Mentor;
+        DataManager.Instance.journalPage_PlussSign_Player_Store = journalPage_PlussSign_Player;
+        DataManager.Instance.journalPage_PlussSign_Personal_Store = journalPage_PlussSign_Personal;
         #endregion
     }
     public void SaveData(ref GameData gameData)
@@ -631,8 +668,6 @@ public class JournalManager : Singleton<JournalManager>
         //Set New BlueprintTypeObjectList
         journalPageTypeObjectList.Clear();
         journalPageTypeObjectList = tempJournalPageTypeObjectList;
-
-        SaveData();
     }
     public void ChangeJournalPageInfo(bool _isPicked, int _journalPageIndex_j, int _journalPageIndex_l, Vector3 _journalPagePos)
     {
@@ -648,6 +683,152 @@ public class JournalManager : Singleton<JournalManager>
         SaveData();
     }
 
+
+    //--------------------
+
+
+    //Journal "+"
+    #region Mentor
+    void SetupJournalPage_Mentor_SignList()
+    {
+        for (int i = 0; i < mentorJournalPageList.Count; i++)
+        {
+            journalPage_PlussSign_Mentor.Add(true);
+
+            mentorJournalPageList[i].GetComponent<JournalPage>().SetupIfPlussIsActive(true);
+        }
+
+        SaveData();
+    }
+    public void UpdateJournalPage_Mentor_SignsObject()
+    {
+        CheckIfJournalPage_MentorListCountHasChanged();
+
+        for (int i = 0; i < mentorJournalPageList.Count; i++)
+        {
+            mentorJournalPageList[i].GetComponent<JournalPage>().SetupIfPlussIsActive(journalPage_PlussSign_Mentor[i]);
+        }
+
+        SaveData();
+    }
+    public void UpdateMentorPlussSignsSave(GameObject obj)
+    {
+        CheckIfJournalPage_MentorListCountHasChanged();
+
+        for (int i = 0; i < mentorJournalPageList.Count; i++)
+        {
+            if (mentorJournalPageList[i] == obj)
+            {
+                journalPage_PlussSign_Mentor[i] = false;
+
+                break;
+            }
+        }
+
+        SaveData();
+    }
+    public void CheckIfJournalPage_MentorListCountHasChanged()
+    {
+        while (mentorJournalPageList.Count > journalPage_PlussSign_Mentor.Count)
+        {
+            journalPage_PlussSign_Mentor.Add(true);
+        }
+    }
+    #endregion
+    #region Player
+    void SetupJournalPage_Player_SignList()
+    {
+        for (int i = 0; i < playerJournalPageList.Count; i++)
+        {
+            journalPage_PlussSign_Player.Add(true);
+
+            playerJournalPageList[i].GetComponent<JournalPage>().SetupIfPlussIsActive(true);
+        }
+
+        SaveData();
+    }
+    public void UpdateJournalPage_Player_SignsObject()
+    {
+        CheckIfJournalPage_PlayerListCountHasChanged();
+
+        for (int i = 0; i < playerJournalPageList.Count; i++)
+        {
+            playerJournalPageList[i].GetComponent<JournalPage>().SetupIfPlussIsActive(journalPage_PlussSign_Player[i]);
+        }
+
+        SaveData();
+    }
+    public void UpdatePlayerPlussSignsSave(GameObject obj)
+    {
+        CheckIfJournalPage_PlayerListCountHasChanged();
+
+        for (int i = 0; i < playerJournalPageList.Count; i++)
+        {
+            if (playerJournalPageList[i] == obj)
+            {
+                journalPage_PlussSign_Player[i] = false;
+
+                break;
+            }
+        }
+
+        SaveData();
+    }
+    public void CheckIfJournalPage_PlayerListCountHasChanged()
+    {
+        while (playerJournalPageList.Count > journalPage_PlussSign_Player.Count)
+        {
+            journalPage_PlussSign_Player.Add(true);
+        }
+    }
+    #endregion
+    #region Personal
+    void SetupJournalPage_Personal_SignList()
+    {
+        for (int i = 0; i < personalJournalPageList.Count; i++)
+        {
+            journalPage_PlussSign_Personal.Add(true);
+
+            personalJournalPageList[i].GetComponent<JournalPage>().SetupIfPlussIsActive(true);
+        }
+
+        SaveData();
+    }
+    public void UpdateJournalPage_Personal_SignsObject()
+    {
+        CheckIfJournalPage_PersonalListCountHasChanged();
+
+        for (int i = 0; i < personalJournalPageList.Count; i++)
+        {
+            personalJournalPageList[i].GetComponent<JournalPage>().SetupIfPlussIsActive(journalPage_PlussSign_Personal[i]);
+        }
+
+        SaveData();
+    }
+    public void UpdatePersonalPlussSignsSave(GameObject obj)
+    {
+        CheckIfJournalPage_PersonalListCountHasChanged();
+
+        for (int i = 0; i < personalJournalPageList.Count; i++)
+        {
+            if (personalJournalPageList[i] == obj)
+            {
+                journalPage_PlussSign_Personal[i] = false;
+
+                break;
+            }
+        }
+
+        SaveData();
+    }
+    public void CheckIfJournalPage_PersonalListCountHasChanged()
+    {
+        while (personalJournalPageList.Count > journalPage_PlussSign_Personal.Count)
+        {
+            journalPage_PlussSign_Personal.Add(true);
+        }
+    }
+    #endregion
 }
 
 public enum JournalMenuState

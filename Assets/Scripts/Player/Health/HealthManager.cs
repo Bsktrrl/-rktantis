@@ -123,15 +123,15 @@ public class HealthManager : Singleton<HealthManager>
     {
         HealthToSave tempHealth = DataManager.Instance.health_Store;
 
-        print("1. tempHealth: Thirst:" + tempHealth.thirstValue + " | Hunger" + tempHealth.hungerValue + " | Resist" + tempHealth.heatResistanceValue + " | Main" + tempHealth.mainHealthValue);
-        print("2. DataManager.Instance.health_Store: Thirst:" + DataManager.Instance.health_Store.thirstValue + " | Hunger" + DataManager.Instance.health_Store.hungerValue + " | Resist" + DataManager.Instance.health_Store.heatResistanceValue + " | Main" + DataManager.Instance.health_Store.mainHealthValue);
+        //print("1. tempHealth: Thirst:" + tempHealth.thirstValue + " | Hunger" + tempHealth.hungerValue + " | Resist" + tempHealth.heatResistanceValue + " | Main" + tempHealth.mainHealthValue);
+        //print("2. DataManager.Instance.health_Store: Thirst:" + DataManager.Instance.health_Store.thirstValue + " | Hunger" + DataManager.Instance.health_Store.hungerValue + " | Resist" + DataManager.Instance.health_Store.heatResistanceValue + " | Main" + DataManager.Instance.health_Store.mainHealthValue);
 
         if (tempHealth.thirstValue <= 0
             && tempHealth.hungerValue <= 0 
             && tempHealth.heatResistanceValue <= 0 
             && tempHealth.mainHealthValue <= 0)
         {
-            print("3. Reset");
+            //print("3. Reset");
 
             hungerValue = 1;
             hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
@@ -153,7 +153,7 @@ public class HealthManager : Singleton<HealthManager>
         }
         else
         {
-            print("4. Not Reset");
+            //print("4. Not Reset");
 
             hungerValue = tempHealth.hungerValue;
             hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
