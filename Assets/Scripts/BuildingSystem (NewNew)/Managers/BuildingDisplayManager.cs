@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -30,6 +31,9 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
     [SerializeField] GameObject buildingObject_Reward_ScreenInfo_Parent;
     public List<GameObject> rewardScreenList = new List<GameObject>();
 
+    [Header("+ Sign")]
+    public List<bool> menuObjects_PlussSign;
+
 
     //--------------------
 
@@ -45,6 +49,85 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         UpdateScreenBuildingRequirementDisplay();
 
         UpdateScreenBuildingRewardDisplay();
+    }
+
+
+    //--------------------
+
+
+    public void LoadData()
+    {
+        if (DataManager.Instance.menuObjects_PlussSign_Store.Count <= 0)
+        {
+            SetupMenuSignList();
+        }
+        else
+        {
+            menuObjects_PlussSign = DataManager.Instance.menuObjects_PlussSign_Store;
+
+            UpdateMenuPlussSignsObject();
+        }
+    }
+    public void SaveData()
+    {
+        DataManager.Instance.menuObjects_PlussSign_Store = menuObjects_PlussSign;
+    }
+
+
+    //--------------------
+
+
+    void SetupMenuSignList()
+    {
+        for (int i = 0; i < buildingObjectList.Count; i++)
+        {
+            for (int j = 0; j < buildingObjectList[i].buildingObjectChildList.Count; j++)
+            {
+                menuObjects_PlussSign.Add(true);
+
+                buildingObjectList[i].buildingObjectChildList[j].GetComponent<BuildingDisplaySlot>().SetupIfPlussIsActive(true);
+            }
+        }
+
+        SaveData();
+    }
+    public void UpdateMenuPlussSignsObject()
+    {
+        int counter = -1;
+
+        for (int i = 0; i < buildingObjectList.Count; i++)
+        {
+            for (int j = 0; j < buildingObjectList[i].buildingObjectChildList.Count; j++)
+            {
+                counter++;
+
+                buildingObjectList[i].buildingObjectChildList[j].GetComponent<BuildingDisplaySlot>().SetupIfPlussIsActive(menuObjects_PlussSign[counter]);
+            }
+        }
+
+        SaveData();
+    }
+
+    public void UpdateMenuPlussSignsSave(GameObject obj)
+    {
+        int counter = -1;
+
+        for (int i = 0; i < buildingObjectList.Count; i++)
+        {
+            for (int j = 0; j < buildingObjectList[i].buildingObjectChildList.Count; j++)
+            {
+                counter++;
+
+                if (buildingObjectList[i].buildingObjectChildList[j] == obj)
+                {
+                    menuObjects_PlussSign[counter] = false;
+
+                    break;
+                }
+            }
+        }
+
+        SaveData();
     }
 
 

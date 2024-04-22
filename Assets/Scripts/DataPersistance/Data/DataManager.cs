@@ -10,6 +10,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     public static Action dataIsSaving;
     public static Action datahasLoaded;
 
+    public bool hasLoaded;
+
 
     //--------------------
 
@@ -33,11 +35,12 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<Hotbar> hotbarItem_StoreList = new List<Hotbar>();
 
     //BuidingSystem
-    [HideInInspector] public List<WorldBuildingObject> worldBuildingObjectInfoList_Store;
+    [HideInInspector] public List<WorldBuildingObject> worldBuildingObjectInfoList_Store = new List<WorldBuildingObject>();
     [HideInInspector] public ActiveBuildingObject activeBuildingObject_Store;
     [HideInInspector] public List<bool> activeBuildingBlockObject_SOList_Store = new List<bool>();
     [HideInInspector] public List<bool> activeFurnitureObject_SOList_Store = new List<bool>();
     [HideInInspector] public List<bool> activeMachineObject_SOList_Store = new List<bool>();
+    [HideInInspector] public List<bool> menuObjects_PlussSign_Store = new List<bool>();
 
     //Plants
     [HideInInspector] public List<ListOfPlantToSave> plantTypeObjectList_Store = new List<ListOfPlantToSave>();
@@ -82,14 +85,14 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<CraftingItem> itemStates_Store = new List<CraftingItem>();
 
     //GhostCapturer
-    [HideInInspector] public GhostCapturerStats ghostCapturerStats_Store;
+    [HideInInspector] public GhostCapturerStats ghostCapturerStats_Store = new GhostCapturerStats();
 
     //Machines
     [HideInInspector] public List<GhostTankContent> ghostTankList_Store = new List<GhostTankContent>();
 
     //Perks
-    [HideInInspector] public Perks perks_Store;
-    [HideInInspector] public PerkActivations perkActivations_Store;
+    [HideInInspector] public Perks perks_Store = new Perks();
+    [HideInInspector] public PerkActivations perkActivations_Store = new PerkActivations();
 
 
     //--------------------
@@ -118,6 +121,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.activeBuildingBlockObject_SOList_Store = gameData.activeBuildingBlockObject_SOList_Save;
         this.activeFurnitureObject_SOList_Store = gameData.activeFurnitureObject_SOList_Save;
         this.activeMachineObject_SOList_Store = gameData.activeMachineObject_SOList_Save;
+        this.menuObjects_PlussSign_Store = gameData.menuObjects_PlussSign_Save;
 
         this.health_Store = gameData.health_Save;
 
@@ -176,56 +180,61 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         BuildingSystemManager.Instance.LoadData();
         print("6. BuildingSystemManager has Loaded");
 
+        BuildingDisplayManager.Instance.LoadData();
+        print("7. BuildingDisplayManager has Loaded");
+
         WorldObjectManager.Instance.LoadData();
-        print("7. WorldObjectManager has Loaded");
+        print("8. WorldObjectManager has Loaded");
 
         BlueprintManager.Instance.LoadData();
-        print("8. BlueprintManager has Loaded");
+        print("9. BlueprintManager has Loaded");
 
         HealthManager.Instance.LoadData();
-        print("9. HealthManager has Loaded");
+        print("10. HealthManager has Loaded");
 
         TimeManager.Instance.LoadData();
-        print("10. TimeManager has Loaded");
+        print("11. TimeManager has Loaded");
 
         PlantManager.Instance.LoadData();
-        print("11. Plants has Loaded");
+        print("12. Plants has Loaded");
 
         OreManager.Instance.LoadData();
-        print("12. Ores has Loaded");
+        print("13. Ores has Loaded");
 
         TreeManager.Instance.LoadData();
-        print("13. Trees has Loaded");
+        print("14. Trees has Loaded");
 
         JournalManager.Instance.LoadData();
-        print("14. Journals has Loaded");
+        print("15. Journals has Loaded");
 
         WeatherManager.Instance.LoadData();
-        print("15. Weather has Loaded");
+        print("16. Weather has Loaded");
 
         ResearchManager.Instance.LoadData(this.researched_SOItem_Store);
-        print("16. Research has Loaded");
+        print("17. Research has Loaded");
 
         CraftingManager.Instance.LoadData();
-        print("17. Crafting has Loaded");
+        print("18. Crafting has Loaded");
 
         GhostManager.Instance.LoadData();
-        print("18. Ghost has Loaded");
+        print("19. Ghost has Loaded");
 
         PerkManager.Instance.LoadData();
-        print("19. Perks has Loaded");
+        print("20. Perks has Loaded");
 
         MachineManager.Instance.LoadData();
-        print("20. Machines has Loaded");
+        print("21. Machines has Loaded");
 
         ArídianKeyManager.Instance.LoadData();
-        print("21. AríditeKeyManager has Loaded");
+        print("22. AríditeKeyManager has Loaded");
 
         AríditeCrystalManager.Instance.LoadData();
-        print("22. AríditeCrystalManager has Loaded");
+        print("23. AríditeCrystalManager has Loaded");
         #endregion
 
         print("------------------------------");
+
+        hasLoaded = true;
     }
 
     public void SaveData(ref GameData gameData)
@@ -251,6 +260,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.activeBuildingBlockObject_SOList_Save = this.activeBuildingBlockObject_SOList_Store;
         gameData.activeFurnitureObject_SOList_Save = this.activeFurnitureObject_SOList_Store;
         gameData.activeMachineObject_SOList_Save = this.activeMachineObject_SOList_Store;
+        gameData.menuObjects_PlussSign_Save = this.menuObjects_PlussSign_Store;
 
         gameData.health_Save = this.health_Store;
 

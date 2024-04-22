@@ -62,7 +62,7 @@ public class HealthManager : Singleton<HealthManager>
     public int mainHealthValueMultiplier;
 
     bool dataHasLoaded = false;
-    public int mainHealthCounter = 0;
+    public int mainHealthCounter = 1;
     #endregion
 
 
@@ -72,6 +72,12 @@ public class HealthManager : Singleton<HealthManager>
     private void Start()
     {
         health_Parent.SetActive(true);
+
+        //Set HealthParameters
+        hungerValue = 1;
+        heatResistanceValue = 1;
+        thirstValue = 1;
+        mainHealthValue = 1;
 
         //Set Arrows unactive
         #region
@@ -95,6 +101,8 @@ public class HealthManager : Singleton<HealthManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         if (dataHasLoaded)
@@ -117,25 +125,53 @@ public class HealthManager : Singleton<HealthManager>
 
     public void LoadData()
     {
-        HealthToSave tempHealth = DataManager.Instance.health_Store;
+        if (DataManager.Instance.health_Store.thirstValue <= 0
+            && DataManager.Instance.health_Store.hungerValue <= 0 
+            && DataManager.Instance.health_Store.heatResistanceValue <= 0 
+            && DataManager.Instance.health_Store.mainHealthValue <= 0)
+        {
+            HealthToSave tempHealth = DataManager.Instance.health_Store;
 
-        hungerValue = tempHealth.hungerValue;
-        hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
-        healthValueMultiplier = tempHealth.healthValueMultiplier;
+            hungerValue = 1;
+            hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
+            healthValueMultiplier = tempHealth.healthValueMultiplier;
 
-        heatResistanceValue = tempHealth.heatResistanceValue;
-        heatResistanceValueMultiplier_Check = tempHealth.heatResistanceValueMultiplier_Check;
-        heatResistanceValueMultiplier = tempHealth.heatResistanceValueMultiplier;
+            heatResistanceValue = 1;
+            heatResistanceValueMultiplier_Check = tempHealth.heatResistanceValueMultiplier_Check;
+            heatResistanceValueMultiplier = tempHealth.heatResistanceValueMultiplier;
 
-        thirstValue = tempHealth.thirstValue;
-        thirstValueMultiplier_Check = HealthValueMultiplier.Down_1;
-        thirstValueMultiplier = tempHealth.thirstValueMultiplier;
+            thirstValue = 1;
+            thirstValueMultiplier_Check = HealthValueMultiplier.Down_1;
+            thirstValueMultiplier = tempHealth.thirstValueMultiplier;
 
-        mainHealthValue = tempHealth.mainHealthValue;
-        mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
-        mainHealthValueMultiplier = tempHealth.mainHealthValueMultiplier;
+            mainHealthValue = 1;
+            mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
+            mainHealthValueMultiplier = tempHealth.mainHealthValueMultiplier;
 
-        dataHasLoaded = true;
+            dataHasLoaded = true;
+        }
+        else
+        {
+            HealthToSave tempHealth = DataManager.Instance.health_Store;
+
+            hungerValue = tempHealth.hungerValue;
+            hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
+            healthValueMultiplier = tempHealth.healthValueMultiplier;
+
+            heatResistanceValue = tempHealth.heatResistanceValue;
+            heatResistanceValueMultiplier_Check = tempHealth.heatResistanceValueMultiplier_Check;
+            heatResistanceValueMultiplier = tempHealth.heatResistanceValueMultiplier;
+
+            thirstValue = tempHealth.thirstValue;
+            thirstValueMultiplier_Check = HealthValueMultiplier.Down_1;
+            thirstValueMultiplier = tempHealth.thirstValueMultiplier;
+
+            mainHealthValue = tempHealth.mainHealthValue;
+            mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
+            mainHealthValueMultiplier = tempHealth.mainHealthValueMultiplier;
+
+            dataHasLoaded = true;
+        }
     }
     void SaveData()
     {

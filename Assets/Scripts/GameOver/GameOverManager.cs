@@ -24,6 +24,8 @@ public class GameOverManager : Singleton<GameOverManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+
         //For testing
         if (Input.GetKeyDown(KeyCode.G))
         {

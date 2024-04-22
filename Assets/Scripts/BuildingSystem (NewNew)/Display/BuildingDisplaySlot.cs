@@ -11,12 +11,34 @@ public class BuildingDisplaySlot : MonoBehaviour
     public FurnitureObjectNames furnitureObjectName;
     public MachineObjectNames machineObjectName;
 
+    [Header("+ Sign")]
+    public GameObject Image_Pluss;
+
+
+    //--------------------
+
+
+    public void SetupIfPlussIsActive(bool isActive)
+    {
+        if (Image_Pluss)
+        {
+            Image_Pluss.SetActive(isActive);
+        }
+    }
+
 
     //--------------------
 
 
     public void SelectButton_isPressed()
     {
+        BuildingDisplayManager.Instance.UpdateMenuPlussSignsSave(gameObject);
+
+        if (Image_Pluss)
+        {
+            Image_Pluss.SetActive(false);
+        }
+
         BuildingSystemManager.Instance.activeBuildingObject_Info.buildingObjectType_Active = buildingObjectType;
         BuildingSystemManager.Instance.activeBuildingObject_Info.buildingMaterial_Active = buildingMaterial;
         BuildingSystemManager.Instance.activeBuildingObject_Info.buildingBlockObjectName_Active = buildingBlockObjectName;

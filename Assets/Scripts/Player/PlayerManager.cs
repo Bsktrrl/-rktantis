@@ -47,10 +47,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void LoadData()
     {
-        if (DataManager.Instance.playerStats_Store.playerPos == Vector3.zero && DataManager.Instance.playerStats_Store.playerRot == Quaternion.identity
-            && DataManager.Instance.playerStats_Store.InteractableDistance == 0
-            && DataManager.Instance.playerStats_Store.movementSpeedMultiplier_SkillTree == 0
-            && DataManager.Instance.playerStats_Store.jumpHeight == 0)
+        if (playerStats.playerGameOverPos == Vector3.zero)
         {
             //Set Player Start Position - New Game
             MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-26.5f, 29.9f, -45.1f), Quaternion.identity); //Change to Playtest
