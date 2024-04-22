@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +19,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
     [SerializeField] List<GameObject> BuildingObjectParentList = new List<GameObject>();
     [SerializeField] List<DisplayBlock> buildingObjectList = new List<DisplayBlock>();
 
+
     [Header("ScreenInfo")]
     [SerializeField] GameObject buildingObject_ScreenInfo_Parent;
 
@@ -30,6 +28,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
     [SerializeField] GameObject buildingObject_Reward_ScreenInfo_Parent;
     public List<GameObject> rewardScreenList = new List<GameObject>();
+
 
     [Header("+ Sign")]
     public List<bool> menuObjects_PlussSign;
@@ -41,6 +40,9 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
     private void Start()
     {
         buildingObject_ScreenInfo_Parent.SetActive(true);
+
+        TurnOffAll_SOBuildingObjects();
+        SetNewGame_SOBuildingObjects();
     }
     private void Update()
     {
@@ -71,6 +73,46 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
     public void SaveData()
     {
         DataManager.Instance.menuObjects_PlussSign_Store = menuObjects_PlussSign;
+    }
+
+
+    //--------------------
+
+
+    void TurnOffAll_SOBuildingObjects()
+    {
+        //BuildingBlocks
+        for (int i = 0; i < BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList.Count; i++)
+        {
+            BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[i].objectInfo.isActive = false;
+        }
+
+        //Furniture
+        for (int i = 0; i < BuildingSystemManager.Instance.furniture_SO.furnitureObjectsList.Count; i++)
+        {
+            BuildingSystemManager.Instance.furniture_SO.furnitureObjectsList[i].objectInfo.isActive = false;
+        }
+
+        //Machines
+        for (int i = 0; i < BuildingSystemManager.Instance.machines_SO.machineObjectsList.Count; i++)
+        {
+            BuildingSystemManager.Instance.machines_SO.machineObjectsList[i].objectInfo.isActive = false;
+        }
+    }
+    void SetNewGame_SOBuildingObjects()
+    {
+        //BuildingBlocks - Wood BuildingBlocks
+        BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[0].objectInfo.isActive = true;
+        BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[1].objectInfo.isActive = true;
+        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[2].objectInfo.isActive = true;
+        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[3].objectInfo.isActive = true;
+        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[4].objectInfo.isActive = true;
+        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[5].objectInfo.isActive = true;
+        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[6].objectInfo.isActive = true;
+        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[7].objectInfo.isActive = true;
+        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[8].objectInfo.isActive = true;
+        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[9].objectInfo.isActive = true;
+        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[10].objectInfo.isActive = true;
     }
 
 
@@ -1005,6 +1047,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         }
 
         CheckActiveBuildingObjects();
+
+        BlueprintManager.Instance.check_SOBuildingObjectLists();
     }
 
     void CheckActiveBuildingObjects()

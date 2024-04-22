@@ -100,7 +100,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     #region Save/Load
     public void LoadData()
     {
-        //Set activeBuildingObject_Info
+        //Set activeBuildingObject_Info (active right now for the player)
         activeBuildingObject_Info = DataManager.Instance.activeBuildingObject_Store;
 
         //Set worldBuildingObjectInfoList

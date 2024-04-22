@@ -3958,7 +3958,7 @@ PrefabInstance:
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
       propertyPath: blueprintInfo.Array.data[0].blueprint_Machine_Name
-      value: 13
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
@@ -6300,7 +6300,7 @@ PrefabInstance:
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
       propertyPath: blueprintInfo.Array.data[0].blueprint_Furniture_Name
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
@@ -57811,12 +57811,17 @@ PrefabInstance:
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
       propertyPath: blueprintInfo.Array.data[0].buildingMaterial
-      value: 3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: blueprintInfo.Array.data[0].blueprint_Furniture_Name
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
       propertyPath: blueprintInfo.Array.data[0].blueprint_BuildingBlock_Name
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -47,19 +47,20 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void LoadData()
     {
+        //Get loaded data
+        playerStats = DataManager.Instance.playerStats_Store;
+
         if (playerStats.playerGameOverPos == Vector3.zero)
         {
             //Set Player Start Position - New Game
-            MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-26.5f, 29.9f, -45.1f), Quaternion.identity); //Change to Playtest
+            //MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-26.5f, 29.9f, -45.1f), Quaternion.identity);
+            MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(17f, 2f, 25f), Quaternion.identity); //Change to Playtest
 
             //Also set StartDeathPos to catch if the player dies before building Floors
             UpdatePlayerDyingPos(MainManager.Instance.player.transform);
         }
         else
         {
-            //Get loaded data
-            playerStats = DataManager.Instance.playerStats_Store;
-
             //Set Player Position
             MainManager.Instance.player.transform.SetPositionAndRotation(playerStats.playerPos, playerStats.playerRot);
 
