@@ -61,7 +61,6 @@ public class HealthManager : Singleton<HealthManager>
     public HealthValueMultiplier mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
     public int mainHealthValueMultiplier;
 
-    bool dataHasLoaded = false;
     public int mainHealthCounter = 1;
     #endregion
 
@@ -74,10 +73,10 @@ public class HealthManager : Singleton<HealthManager>
         health_Parent.SetActive(true);
 
         //Set HealthParameters
-        hungerValue = 1;
-        heatResistanceValue = 1;
-        thirstValue = 1;
-        mainHealthValue = 1;
+        //hungerValue = 1;
+        //heatResistanceValue = 1;
+        //thirstValue = 1;
+        //mainHealthValue = 1;
 
         //Set Arrows unactive
         #region
@@ -105,18 +104,15 @@ public class HealthManager : Singleton<HealthManager>
 
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
-        if (dataHasLoaded)
-        {
-            SetHealthValues();
-            SetHealthDisplay(hunger_Image, hungerValueMultiplier_Image,
-                             heatResistance_Image, heatResistanceValueMultiplier_Image,
-                             thirst_Image, thirstValueMultiplier_Image,
-                             mainHealth_Image);
+        SetHealthValues();
+        SetHealthDisplay(hunger_Image, hungerValueMultiplier_Image,
+                         heatResistance_Image, heatResistanceValueMultiplier_Image,
+                         thirst_Image, thirstValueMultiplier_Image,
+                         mainHealth_Image);
 
-            SetPlayerHeatResistance();
+        SetPlayerHeatResistance();
 
-            SaveData();
-        }
+        SaveData();
     }
 
 
@@ -125,34 +121,39 @@ public class HealthManager : Singleton<HealthManager>
 
     public void LoadData()
     {
-        if (DataManager.Instance.health_Store.thirstValue <= 0
-            && DataManager.Instance.health_Store.hungerValue <= 0 
-            && DataManager.Instance.health_Store.heatResistanceValue <= 0 
-            && DataManager.Instance.health_Store.mainHealthValue <= 0)
+        HealthToSave tempHealth = DataManager.Instance.health_Store;
+
+        print("1. tempHealth: Thirst:" + tempHealth.thirstValue + " | Hunger" + tempHealth.hungerValue + " | Resist" + tempHealth.heatResistanceValue + " | Main" + tempHealth.mainHealthValue);
+        print("2. DataManager.Instance.health_Store: Thirst:" + DataManager.Instance.health_Store.thirstValue + " | Hunger" + DataManager.Instance.health_Store.hungerValue + " | Resist" + DataManager.Instance.health_Store.heatResistanceValue + " | Main" + DataManager.Instance.health_Store.mainHealthValue);
+
+        if (tempHealth.thirstValue <= 0
+            && tempHealth.hungerValue <= 0 
+            && tempHealth.heatResistanceValue <= 0 
+            && tempHealth.mainHealthValue <= 0)
         {
-            HealthToSave tempHealth = DataManager.Instance.health_Store;
+            print("3. Reset");
 
             hungerValue = 1;
             hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
-            healthValueMultiplier = tempHealth.healthValueMultiplier;
+            healthValueMultiplier = -1;
 
             heatResistanceValue = 1;
-            heatResistanceValueMultiplier_Check = tempHealth.heatResistanceValueMultiplier_Check;
-            heatResistanceValueMultiplier = tempHealth.heatResistanceValueMultiplier;
+            heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_1;
+            heatResistanceValueMultiplier = -1;
 
             thirstValue = 1;
             thirstValueMultiplier_Check = HealthValueMultiplier.Down_1;
-            thirstValueMultiplier = tempHealth.thirstValueMultiplier;
+            thirstValueMultiplier = -1;
 
             mainHealthValue = 1;
             mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
-            mainHealthValueMultiplier = tempHealth.mainHealthValueMultiplier;
+            mainHealthValueMultiplier = 5;
 
-            dataHasLoaded = true;
+            SaveData();
         }
         else
         {
-            HealthToSave tempHealth = DataManager.Instance.health_Store;
+            print("4. Not Reset");
 
             hungerValue = tempHealth.hungerValue;
             hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
@@ -169,8 +170,6 @@ public class HealthManager : Singleton<HealthManager>
             mainHealthValue = tempHealth.mainHealthValue;
             mainHealthValueMultiplier_Check = HealthValueMultiplier.None;
             mainHealthValueMultiplier = tempHealth.mainHealthValueMultiplier;
-
-            dataHasLoaded = true;
         }
     }
     void SaveData()
@@ -315,6 +314,8 @@ public class HealthManager : Singleton<HealthManager>
     }
     public void ResetPlayerHealthValues()
     {
+        print("999999. GameOver: ResetPlayerHealthValues");
+
         hungerValue = 1;
         heatResistanceValue = 1;
         thirstValue = 1;

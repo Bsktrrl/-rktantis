@@ -118,7 +118,6 @@ public class SelectionManager : Singleton<SelectionManager>
         //If looking at an Interactable Object, show its UI to the player
         if (newInteractableObject != null)
         {
-            print("newInteractableObject != null");
             //Show Inventory info
             onTarget = true;
             selectedObject = newInteractableObject.gameObject;

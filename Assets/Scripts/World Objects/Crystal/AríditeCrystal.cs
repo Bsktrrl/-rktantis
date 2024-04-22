@@ -22,7 +22,7 @@ public class AríditeCrystal : MonoBehaviour
     }
     public void LoadAríditeCrystal(bool _isPicked, int _aríditeCrystalIndex_j, int _aríditeCrystalIndex_l)
     {
-        print("Load AríditeCrystal: [" + _aríditeCrystalIndex_j + "][" + _aríditeCrystalIndex_l + "]: " + _isPicked);
+        //print("Load AríditeCrystal: [" + _aríditeCrystalIndex_j + "][" + _aríditeCrystalIndex_l + "]: " + _isPicked);
 
         //Set Parameters
         isPicked = _isPicked;

@@ -22,7 +22,7 @@ public class JournalObject : MonoBehaviour
     }
     public void LoadJournalPage(bool _isPicked, int _journalPageIndex_j, int _journalPageIndex_l)
     {
-        print("Load JournalPage: [" + _journalPageIndex_j + "][" + _journalPageIndex_l + "]: " + _isPicked);
+        //print("Load JournalPage: [" + _journalPageIndex_j + "][" + _journalPageIndex_l + "]: " + _isPicked);
 
         //Set Parameters
         isPicked = _isPicked;
