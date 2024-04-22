@@ -62,6 +62,9 @@ public class JournalManager : Singleton<JournalManager>
     public List<bool> journalPage_PlussSign_Mentor = new List<bool>();
     public List<bool> journalPage_PlussSign_Player = new List<bool>();
     public List<bool> journalPage_PlussSign_Personal = new List<bool>();
+    public GameObject journalPageButton_PlussSign_Mentor;
+    public GameObject journalPageButton_PlussSign_Player;
+    public GameObject journalPageButton_PlussSign_Personal;
 
     [Header("Notification")]
     public GameObject notificationParent;
@@ -115,6 +118,11 @@ public class JournalManager : Singleton<JournalManager>
             notificationImage.color = new Color(1, 1, 1, fadingNotificationImageValue);
         }
         #endregion
+
+        if (TabletManager.Instance.journal_Parent.activeInHierarchy)
+        {
+            SetButtonPlussIcons();
+        }
     }
 
 
@@ -797,7 +805,7 @@ public class JournalManager : Singleton<JournalManager>
     {
         while (mentorJournalPageList.Count > journalPage_PlussSign_Mentor.Count)
         {
-            journalPage_PlussSign_Mentor.Add(true);
+            journalPage_PlussSign_Mentor.Insert(0, true);
         }
     }
     #endregion
@@ -844,7 +852,7 @@ public class JournalManager : Singleton<JournalManager>
     {
         while (playerJournalPageList.Count > journalPage_PlussSign_Player.Count)
         {
-            journalPage_PlussSign_Player.Add(true);
+            journalPage_PlussSign_Player.Insert(0, true);
         }
     }
     #endregion
@@ -891,8 +899,78 @@ public class JournalManager : Singleton<JournalManager>
     {
         while (personalJournalPageList.Count > journalPage_PlussSign_Personal.Count)
         {
-            journalPage_PlussSign_Personal.Add(true);
+            journalPage_PlussSign_Personal.Insert(0, true);
         }
+    }
+    #endregion
+
+    //Buttons with "+"
+    #region
+    void SetButtonPlussIcons()
+    {
+        bool plussIconCheck = false;
+
+        if (mentorJournalPageList.Count > journalPage_PlussSign_Mentor.Count)
+        {
+            plussIconCheck = true;
+        }
+        else
+        {
+            for (int i = 0; i < journalPage_PlussSign_Mentor.Count; i++)
+            {
+                if (journalPage_PlussSign_Mentor[i])
+                {
+                    plussIconCheck = true;
+                }
+            }
+        }
+
+        if (plussIconCheck)
+            journalPageButton_PlussSign_Mentor.SetActive(true);
+        else
+            journalPageButton_PlussSign_Mentor.SetActive(false);
+
+        plussIconCheck = false;
+        if (playerJournalPageList.Count > journalPage_PlussSign_Player.Count)
+        {
+            plussIconCheck = true;
+        }
+        else
+        {
+            for (int i = 0; i < journalPage_PlussSign_Player.Count; i++)
+            {
+                if (journalPage_PlussSign_Player[i])
+                {
+                    plussIconCheck = true;
+                }
+            }
+        }
+
+        if (plussIconCheck)
+            journalPageButton_PlussSign_Player.SetActive(true);
+        else
+            journalPageButton_PlussSign_Player.SetActive(false);
+
+        plussIconCheck = false;
+        if (personalJournalPageList.Count > journalPage_PlussSign_Personal.Count)
+        {
+            plussIconCheck = true;
+        }
+        else
+        {
+            for (int i = 0; i < journalPage_PlussSign_Personal.Count; i++)
+            {
+                if (journalPage_PlussSign_Personal[i])
+                {
+                    plussIconCheck = true;
+                }
+            }
+        }
+
+        if (plussIconCheck)
+            journalPageButton_PlussSign_Personal.SetActive(true);
+        else
+            journalPageButton_PlussSign_Personal.SetActive(false);
     }
     #endregion
 }
