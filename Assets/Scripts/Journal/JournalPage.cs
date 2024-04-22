@@ -133,7 +133,24 @@ public class JournalPage : MonoBehaviour, IPointerEnterHandler
     }
     public void MessageClipButton_isClicked()
     {
-        JournalManager.Instance.UpdateMentorPlussSignsSave(gameObject);
+        switch (journalMenuState)
+        {
+            case JournalMenuState.None:
+                break;
+
+            case JournalMenuState.MentorJournal:
+                JournalManager.Instance.UpdateMentorPlussSignsSave(gameObject);
+                break;
+            case JournalMenuState.PlayerJournal:
+                JournalManager.Instance.UpdatePlayerPlussSignsSave(gameObject);
+                break;
+            case JournalMenuState.PersonalJournal:
+                JournalManager.Instance.UpdatePersonalPlussSignsSave(gameObject);
+                break;
+
+            default:
+                break;
+        }
 
         if (Image_Pluss)
         {

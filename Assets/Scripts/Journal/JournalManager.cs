@@ -39,9 +39,9 @@ public class JournalManager : Singleton<JournalManager>
     [SerializeField] AudioClip message_Clip;
 
     [Header("lists")]
-    [SerializeField] List<GameObject> mentorJournalPageList = new List<GameObject>();
-    [SerializeField] List<GameObject> playerJournalPageList = new List<GameObject>();
-    [SerializeField] List<GameObject> personalJournalPageList = new List<GameObject>();
+    public List<GameObject> mentorJournalPageList = new List<GameObject>();
+    public List<GameObject> playerJournalPageList = new List<GameObject>();
+    public List<GameObject> personalJournalPageList = new List<GameObject>();
     [Space(10)]
     public List<JournalPageInfo> mentorStoryJournalPageList = new List<JournalPageInfo>();
     public List<JournalPageInfo> playerStoryJournalPageList = new List<JournalPageInfo>();
@@ -685,7 +685,7 @@ public class JournalManager : Singleton<JournalManager>
                 {
                     if (journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(j))
                     {
-                        print("New JournalPage: [" + i + "][" + j + "]");
+                        //print("New JournalPage: [" + i + "][" + j + "]");
                         //Give all Legal Objects an index
                         journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<JournalObject>().journalPageIndex_x = i;
                         journalPageWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<JournalObject>().journalPageIndex_y = j;

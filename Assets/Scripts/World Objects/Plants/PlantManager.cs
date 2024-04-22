@@ -140,7 +140,7 @@ public class PlantManager : Singleton<PlantManager>
             {
                 if (!checkedPlants[i][j])
                 {
-                    print("New Plants: [" + i + "][" + j + "]");
+                    //print("New Plants: [" + i + "][" + j + "]");
 
                     //Give all Legal Objects an index
                     plantWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Plant>().plantIndex_x = i;

@@ -142,7 +142,7 @@ public class AríditeCrystalManager : Singleton<AríditeCrystalManager>
                 {
                     if (aríditeCrystalWorldObject_Parent.transform.GetChild(i).transform.GetChild(j))
                     {
-                        print("New AríditeCrystal: [" + i + "][" + j + "]");
+                        //print("New AríditeCrystal: [" + i + "][" + j + "]");
                         //Give all Legal Objects an index
                         aríditeCrystalWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<AríditeCrystal>().aríditeCrystalIndex_x = i;
                         aríditeCrystalWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<AríditeCrystal>().aríditeCrystalIndex_y = j;

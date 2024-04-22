@@ -17,7 +17,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
     [SerializeField] Image selectedObject_Image;
 
     [SerializeField] List<GameObject> BuildingObjectParentList = new List<GameObject>();
-    [SerializeField] List<DisplayBlock> buildingObjectList = new List<DisplayBlock>();
+    public List<DisplayBlock> buildingObjectList = new List<DisplayBlock>();
 
 
     [Header("ScreenInfo")]
