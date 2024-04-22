@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -239,6 +238,8 @@ public class InteractableObject : MonoBehaviour
                 else if (interactableType == InteracteableType.JournalPage)
                 {
                     print("Interact with a Journal Page");
+
+                    JournalManager.Instance.JournalNotification();
 
                     JournalManager.Instance.AddJournalPageToList(journalType, journalPageIndex);
 

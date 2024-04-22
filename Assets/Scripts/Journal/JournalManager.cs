@@ -62,6 +62,14 @@ public class JournalManager : Singleton<JournalManager>
     public List<bool> journalPage_PlussSign_Mentor = new List<bool>();
     public List<bool> journalPage_PlussSign_Player = new List<bool>();
     public List<bool> journalPage_PlussSign_Personal = new List<bool>();
+
+    [Header("Notification")]
+    public GameObject notificationParent;
+    public Image notificationImage;
+    float fadingNotificationImageValue;
+    bool fadingNotificationImageCheck;
+    bool towardsVisible;
+
     #endregion
 
 
@@ -76,6 +84,37 @@ public class JournalManager : Singleton<JournalManager>
     {
         journalMenuState = JournalMenuState.MentorJournal;
         journalPageIsSelected = false;
+    }
+    private void Update()
+    {
+        //Set NotificationImage Visibility
+        #region
+        if (fadingNotificationImageCheck)
+        {
+            //Change Visible Value
+            if (towardsVisible)
+            {
+                fadingNotificationImageValue += Time.deltaTime;
+            }
+            else
+            {
+                fadingNotificationImageValue -= Time.deltaTime;
+            }
+
+            //Set if Visibility is going Up or Down
+            if (fadingNotificationImageValue >= 1 && towardsVisible)
+            {
+                towardsVisible = false;
+            }
+            else if (fadingNotificationImageValue <= 0 && !towardsVisible)
+            {
+                towardsVisible = true;
+            }
+
+            //Change Visibility
+            notificationImage.color = new Color(1, 1, 1, fadingNotificationImageValue);
+        }
+        #endregion
     }
 
 
@@ -681,6 +720,33 @@ public class JournalManager : Singleton<JournalManager>
         journalPageTypeObjectList[_journalPageIndex_j][_journalPageIndex_l] = journalPageTree;
 
         SaveData();
+    }
+
+
+    //--------------------
+
+
+    public void JournalNotification()
+    {
+        SoundManager.Instance.Play_JournalPage_GetNewJournalPage_Clip();
+
+        fadingNotificationImageValue = 0;
+
+        notificationImage.color = new Color(1, 1, 1, fadingNotificationImageValue);
+        notificationParent.SetActive(true);
+
+        towardsVisible = true;
+        fadingNotificationImageCheck = true;
+
+        StartCoroutine(NotificationDuration(6));
+    }
+    IEnumerator NotificationDuration(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        notificationParent.SetActive(false);
+
+        fadingNotificationImageCheck = false;
     }
 
 
