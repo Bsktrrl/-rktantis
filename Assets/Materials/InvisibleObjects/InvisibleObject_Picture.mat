@@ -20,12 +20,12 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _NormalMap
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _AlbedoMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 187d123708f7cc34bb8c40ba353d1b77, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3a9d01016f8aa4f488646e0cfa15db22, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -73,7 +73,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RoughnessMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 367daa049ced8e24da52421b26c9c010, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2DLOD_2ef41d3d7c8944b9a92c797e327ffd40_Texture_1_Texture2D:
@@ -158,6 +158,7 @@ Material:
     - _Dither: 0.5
     - _DrawOrder: 0
     - _DstBlend: 0
+    - _EmissionStrength: 2
     - _EnvironmentReflections: 1
     - _GlitterSpeed: 0
     - _GlossMapScale: 0
@@ -177,7 +178,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _Tiling: 1
-    - _TilingBlend: 0.5
+    - _TilingBlend: 1
     - _Transparency: 0
     - _TransparencyDither: 1
     - _TransparencyMultiplier: 1
@@ -185,7 +186,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 1, g: 1, b: 1, a: 0}
+    - _AlbedoColor: {r: 0.5372549, g: 0.9098039, b: 0.9098039, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
