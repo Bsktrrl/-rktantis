@@ -53,8 +53,8 @@ public class PlayerManager : Singleton<PlayerManager>
         if (playerStats.playerGameOverPos == Vector3.zero)
         {
             //Set Player Start Position - New Game
-            //MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-26.5f, 29.9f, -45.1f), Quaternion.identity);
-            MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(17f, 2f, 25f), Quaternion.identity); //Change to Playtest
+            MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-26.5f, 29.9f, -45.1f), Quaternion.identity); //Main Scene
+            //MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(17f, 2f, 25f), Quaternion.identity); //Adrian Secene
 
             //Also set StartDeathPos to catch if the player dies before building Floors
             UpdatePlayerDyingPos(MainManager.Instance.player.transform);

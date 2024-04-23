@@ -393,8 +393,6 @@ public class JournalManager : Singleton<JournalManager>
     }
     public void SetupJournalPageList_WhenAdding(JournalMenuState journalMenuState, int index)
     {
-        SoundManager.Instance.Play_JournalPage_GetNewJournalPage_Clip();
-
         //Add page info
         JournalPageInfo tempJournalPageInfo = new JournalPageInfo();
 

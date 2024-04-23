@@ -63,6 +63,8 @@ public class GameData
     [HideInInspector] public List<bool> journalPage_PlussSign_Player_Save = new List<bool>();
     [HideInInspector] public List<bool> journalPage_PlussSign_Personal_Save = new List<bool>();
 
+    [HideInInspector] public MessagesConditionChecks messagesConditionChecks_Save = new MessagesConditionChecks();
+
     //Settings
     [HideInInspector] public SettingsValues settingsValues_Save = new SettingsValues();
 

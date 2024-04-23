@@ -54,6 +54,7 @@ public class Arms : Singleton<Arms>
         {
             if (HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>())
             {
+                print("2. Use GhostCapturer");
                 HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>().StartCapturing();
             }
         }

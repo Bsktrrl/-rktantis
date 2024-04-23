@@ -74,6 +74,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<bool> journalPage_PlussSign_Player_Store = new List<bool>();
     [HideInInspector] public List<bool> journalPage_PlussSign_Personal_Store = new List<bool>();
 
+    [HideInInspector] public MessagesConditionChecks messagesConditionChecks_Store = new MessagesConditionChecks();
+
     //Settings
     [HideInInspector] public SettingsValues settingsValues_Store = new SettingsValues();
 
@@ -146,6 +148,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.journalPage_PlussSign_Player_Store = gameData.journalPage_PlussSign_Player_Save;
         this.journalPage_PlussSign_Personal_Store = gameData.journalPage_PlussSign_Personal_Save;
 
+        this.messagesConditionChecks_Store = gameData.messagesConditionChecks_Save;
+
         this.settingsValues_Store = gameData.settingsValues_Save;
 
         this.weatherTypeDayList_Store = gameData.weatherTypeDayList_Save;
@@ -213,29 +217,32 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         JournalManager.Instance.LoadData();
         print("15. Journals has Loaded");
 
+        JournalMessagesManager.Instance.LoadData();
+        print("16. JournalMessagesManager has Loaded");
+
         WeatherManager.Instance.LoadData();
-        print("16. Weather has Loaded");
+        print("17. Weather has Loaded");
 
         ResearchManager.Instance.LoadData(this.researched_SOItem_Store);
-        print("17. Research has Loaded");
+        print("18. Research has Loaded");
 
         CraftingManager.Instance.LoadData();
-        print("18. Crafting has Loaded");
+        print("19. Crafting has Loaded");
 
         GhostManager.Instance.LoadData();
-        print("19. Ghost has Loaded");
+        print("20. Ghost has Loaded");
 
         PerkManager.Instance.LoadData();
-        print("20. Perks has Loaded");
+        print("21. Perks has Loaded");
 
         MachineManager.Instance.LoadData();
-        print("21. Machines has Loaded");
+        print("22. Machines has Loaded");
 
         ArídianKeyManager.Instance.LoadData();
-        print("22. AríditeKeyManager has Loaded");
+        print("23. AríditeKeyManager has Loaded");
 
         AríditeCrystalManager.Instance.LoadData();
-        print("23. AríditeCrystalManager has Loaded");
+        print("24. AríditeCrystalManager has Loaded");
         #endregion
 
         print("------------------------------");
@@ -287,6 +294,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.journalPage_PlussSign_Mentor_Save = this.journalPage_PlussSign_Mentor_Store;
         gameData.journalPage_PlussSign_Player_Save = this.journalPage_PlussSign_Player_Store;
         gameData.journalPage_PlussSign_Personal_Save = this.journalPage_PlussSign_Personal_Store;
+
+        gameData.messagesConditionChecks_Save = this.messagesConditionChecks_Store;
 
         gameData.settingsValues_Save = this.settingsValues_Store;
 

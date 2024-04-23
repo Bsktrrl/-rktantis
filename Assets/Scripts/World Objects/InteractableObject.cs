@@ -239,6 +239,8 @@ public class InteractableObject : MonoBehaviour
                 {
                     print("Interact with a Journal Page");
 
+                    SoundManager.Instance.Play_JournalPage_GetNewJournalPage_Clip();
+
                     JournalManager.Instance.JournalNotification();
 
                     JournalManager.Instance.AddJournalPageToList(journalType, journalPageIndex);
