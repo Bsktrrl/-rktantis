@@ -24,6 +24,8 @@ public class GameOverManager : Singleton<GameOverManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+
         //For testing
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -109,10 +111,15 @@ public class GameOverManager : Singleton<GameOverManager>
         //Remove all items from the world
         for (int i = WorldObjectManager.Instance.worldObjectList.Count - 1; i >= 0; i--)
         {
-            if (WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>()
-                && WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().itemName != Items.ArídianKey)
+            //Check which items not to remove when Dying
+            if (WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>())
             {
-                WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().DestroyThisObject();
+                if (WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().itemName != Items.ArídianKey
+                && WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().itemName != Items.AríditeCrystal
+                && WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().itemName != Items.Flashlight)
+                {
+                    WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().DestroyThisObject();
+                }
             }
         }
 

@@ -10,7 +10,7 @@ public class GhostManager : Singleton<GhostManager>
 
     [Header("Ghost Object Pool")]
     public int ghostSpawnAmount = 1;
-    public float ghostMovementSpeed = 2f;
+    public float ghostMovementSpeed = 3f;
 
     [SerializeField] GameObject ghostPoolParent;
     [SerializeField] GameObject ghostPrefab;
@@ -62,30 +62,36 @@ public class GhostManager : Singleton<GhostManager>
         ghostCapturerStats = DataManager.Instance.ghostCapturerStats_Store;
 
         //Make sure there is 8 slots int the list
-        if (ghostCapturerStats.ghostCapturedStats.Count != 8)
+        if (ghostCapturerStats != null)
         {
-            for (int i = 0; i < 8; i++)
+            if (ghostCapturerStats.ghostCapturedStats != null)
             {
-                GhostStats tempGhostStats = new GhostStats();
-
-                tempGhostStats.ghostState = GhostStates.Idle;
-                tempGhostStats.ghostAppearance = GhostAppearance.Type1;
-                tempGhostStats.isBeard = false;
-                tempGhostStats.ghostElement = GhostElement.None;
-                tempGhostStats.elementFuel_Amount = 0;
-
-                ghostCapturerStats.ghostCapturedStats.Add(tempGhostStats);
-
-                if (ghostCapturerStats.ghostCapturedStats.Count == 8)
+                if (ghostCapturerStats.ghostCapturedStats.Count != 8)
                 {
-                    break;
+                    for (int i = 0; i < 8; i++)
+                    {
+                        GhostStats tempGhostStats = new GhostStats();
+
+                        tempGhostStats.ghostState = GhostStates.Idle;
+                        tempGhostStats.ghostAppearance = GhostAppearance.Type1;
+                        tempGhostStats.isBeard = false;
+                        tempGhostStats.ghostElement = GhostElement.None;
+                        tempGhostStats.elementFuel_Amount = 0;
+
+                        ghostCapturerStats.ghostCapturedStats.Add(tempGhostStats);
+
+                        if (ghostCapturerStats.ghostCapturedStats.Count == 8)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (ghostCapturerStats.slotsActivated == 0)
+                {
+                    ghostCapturerStats.slotsActivated = 1;
                 }
             }
-        }
-
-        if (ghostCapturerStats.slotsActivated == 0)
-        {
-            ghostCapturerStats.slotsActivated = 1;
         }
 
         SaveData();

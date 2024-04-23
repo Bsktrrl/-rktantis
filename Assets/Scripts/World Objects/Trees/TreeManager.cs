@@ -151,7 +151,7 @@ public class TreeManager : Singleton<TreeManager>
             {
                 if (!checkedTrees[i][j])
                 {
-                    print("New Trees: [" + i + "][" + j + "]");
+                    //print("New Trees: [" + i + "][" + j + "]");
 
                     if (treeWorldObject_Parent.transform.GetChild(i).transform.GetChild(j))
                     {

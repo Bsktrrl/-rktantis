@@ -155,7 +155,7 @@ public class OreManager : Singleton<OreManager>
             {
                 if (!checkedOres[i][j])
                 {
-                    print("New Ores: [" + i + "][" + j + "]");
+                    //print("New Ores: [" + i + "][" + j + "]");
 
                     if (oreWorldObject_Parent.transform.GetChild(i).transform.GetChild(j))
                     {

@@ -847,35 +847,38 @@ public class LookAtManager : Singleton<LookAtManager>
 
     void GhostDisplay()
     {
-        //Set FIll Amount Display
-        ghostFightBar.fillAmount = GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().capturedRate;
-
-        //Set GhostDisplay
-        switch (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().ghostStats.ghostElement)
+        //Set Fill Amount Display
+        if (GhostManager.Instance.targetGhostObject)
         {
-            case GhostElement.None:
-                break;
+            ghostFightBar.fillAmount = GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().capturedRate;
 
-            case GhostElement.Water:
-                ghostImage.sprite = GhostManager.Instance.ghostImage_Water;
-                break;
-            case GhostElement.Fire:
-                ghostImage.sprite = GhostManager.Instance.ghostImage_Fire;
-                break;
-            case GhostElement.Stone:
-                ghostImage.sprite = GhostManager.Instance.ghostImage_Earth;
-                break;
-            case GhostElement.Wind:
-                ghostImage.sprite = GhostManager.Instance.ghostImage_Wind;
-                break;
-            case GhostElement.Poison:
-                break;
-            case GhostElement.Power:
-                ghostImage.sprite = GhostManager.Instance.ghostImage_Electric;
-                break;
+            //Set GhostDisplay
+            switch (GhostManager.Instance.targetGhostObject.GetComponent<Ghost>().ghostStats.ghostElement)
+            {
+                case GhostElement.None:
+                    break;
 
-            default:
-                break;
+                case GhostElement.Water:
+                    ghostImage.sprite = GhostManager.Instance.ghostImage_Water;
+                    break;
+                case GhostElement.Fire:
+                    ghostImage.sprite = GhostManager.Instance.ghostImage_Fire;
+                    break;
+                case GhostElement.Stone:
+                    ghostImage.sprite = GhostManager.Instance.ghostImage_Earth;
+                    break;
+                case GhostElement.Wind:
+                    ghostImage.sprite = GhostManager.Instance.ghostImage_Wind;
+                    break;
+                case GhostElement.Poison:
+                    break;
+                case GhostElement.Power:
+                    ghostImage.sprite = GhostManager.Instance.ghostImage_Electric;
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 

@@ -26,7 +26,7 @@ public class Blueprint : MonoBehaviour
 
     public void LoadBlueprint(bool _isPicked, int _blueprintIndex_j, int _blueprintIndex_l)
     {
-        print("Load Blueprint: [" + _blueprintIndex_j + "][" + _blueprintIndex_l + "]: " + _isPicked);
+        //print("Load Blueprint: [" + _blueprintIndex_j + "][" + _blueprintIndex_l + "]: " + _isPicked);
 
         //Set Parameters
         isPicked = _isPicked;

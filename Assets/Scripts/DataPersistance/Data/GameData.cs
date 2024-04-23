@@ -20,11 +20,12 @@ public class GameData
     [HideInInspector] public List<WorldObject> worldObject_SaveList = new List<WorldObject>();
 
     //BuidingSystem
-    [HideInInspector] public List<WorldBuildingObject> worldBuildingObjectInfoList_Save;
-    [HideInInspector] public ActiveBuildingObject activeBuildingObject_Save;
+    [HideInInspector] public List<WorldBuildingObject> worldBuildingObjectInfoList_Save = new List<WorldBuildingObject>();
+    [HideInInspector] public ActiveBuildingObject activeBuildingObject_Save = new ActiveBuildingObject();
     [HideInInspector] public List<bool> activeBuildingBlockObject_SOList_Save = new List<bool>();
     [HideInInspector] public List<bool> activeFurnitureObject_SOList_Save = new List<bool>();
     [HideInInspector] public List<bool> activeMachineObject_SOList_Save = new List<bool>();
+    [HideInInspector] public List<bool> menuObjects_PlussSign_Save = new List<bool>();
 
     //Hotbar
     [HideInInspector] public int selectedSlot_Save = new int();
@@ -58,6 +59,11 @@ public class GameData
     [HideInInspector] public List<int> mentorStoryJournalPageIndexList_Save = new List<int>();
     [HideInInspector] public List<int> playerStoryJournalPageIndexList_Save = new List<int>();
     [HideInInspector] public List<int> personalStoryJournalPageIndexList_Save = new List<int>();
+    [HideInInspector] public List<bool> journalPage_PlussSign_Mentor_Save = new List<bool>();
+    [HideInInspector] public List<bool> journalPage_PlussSign_Player_Save = new List<bool>();
+    [HideInInspector] public List<bool> journalPage_PlussSign_Personal_Save = new List<bool>();
+
+    [HideInInspector] public MessagesConditionChecks messagesConditionChecks_Save = new MessagesConditionChecks();
 
     //Settings
     [HideInInspector] public SettingsValues settingsValues_Save = new SettingsValues();
@@ -73,14 +79,14 @@ public class GameData
     [HideInInspector] public List<CraftingItem> itemStates_Save = new List<CraftingItem>();
 
     //GhostCapturer
-    [HideInInspector] public GhostCapturerStats ghostCapturerStats_Save;
+    [HideInInspector] public GhostCapturerStats ghostCapturerStats_Save = new GhostCapturerStats();
 
     //Machines
     [HideInInspector] public List<GhostTankContent> ghostTankList_Save = new List<GhostTankContent>();
 
     //Perks
-    [HideInInspector] public Perks perks_Save;
-    [HideInInspector] public PerkActivations perkActivations_Save;
+    [HideInInspector] public Perks perks_Save = new Perks();
+    [HideInInspector] public PerkActivations perkActivations_Save = new PerkActivations();
 
 
     //--------------------
@@ -89,11 +95,12 @@ public class GameData
     public GameData()
     {
         //Input All Lists to clear
-        this.worldObject_SaveList.Clear();
+        this.worldObject_SaveList.Clear(); 
 
         this.activeBuildingBlockObject_SOList_Save.Clear();
         this.activeFurnitureObject_SOList_Save.Clear();
         this.activeMachineObject_SOList_Save.Clear();
+        this.menuObjects_PlussSign_Save.Clear();
 
         this.Inventories_SaveList.Clear();
         this.hotbarItem_SaveList.Clear();
@@ -111,6 +118,9 @@ public class GameData
         this.mentorStoryJournalPageIndexList_Save.Clear();
         this.playerStoryJournalPageIndexList_Save.Clear();
         this.personalStoryJournalPageIndexList_Save.Clear();
+        this.journalPage_PlussSign_Mentor_Save.Clear();
+        this.journalPage_PlussSign_Player_Save.Clear();
+        this.journalPage_PlussSign_Personal_Save.Clear();
 
         this.weatherTypeDayList_Save.Clear();
 

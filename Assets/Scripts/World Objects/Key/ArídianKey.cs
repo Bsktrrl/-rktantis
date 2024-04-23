@@ -22,7 +22,7 @@ public class ArídianKey : MonoBehaviour
     }
     public void LoadArídianKey(bool _isPicked, int _arídianKeyIndex_j, int _arídianKeyIndex_l)
     {
-        print("Load ArídianKey: [" + _arídianKeyIndex_j + "][" + _arídianKeyIndex_l + "]: " + _isPicked);
+        //print("Load ArídianKey: [" + _arídianKeyIndex_j + "][" + _arídianKeyIndex_l + "]: " + _isPicked);
 
         //Set Parameters
         isPicked = _isPicked;

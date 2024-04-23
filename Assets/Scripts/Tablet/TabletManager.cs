@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,12 +34,19 @@ public class TabletManager : Singleton<TabletManager>
 
     [Header("Buttons")]
     [SerializeField] GameObject menu_Inventory_Button;
+    [SerializeField] GameObject menu_Inventory_PlussIcon;
     [SerializeField] GameObject menu_CraftingTable_Button;
+    [SerializeField] GameObject menu_CraftingTable_PlussIcon;
     [SerializeField] GameObject menu_ResearchTable_Button;
+    [SerializeField] GameObject menu_ResearchTable_PlussIcon;
     [SerializeField] GameObject menu_Skilltree_Button;
+    [SerializeField] GameObject menu_Skilltree_PlussIcon;
     [SerializeField] GameObject menu_MoveableObjects_Button;
+    [SerializeField] GameObject menu_MoveableObjects_PlussIcon;
     [SerializeField] GameObject menu_Journal_Button;
+    [SerializeField] GameObject menu_Journal_PlussIcon;
     [SerializeField] GameObject menu_Settings_Button;
+    [SerializeField] GameObject menu_Settings_PlussIcon;
 
     [SerializeField] GameObject menu_Equipment_Button;
     [SerializeField] GameObject menu_Chest_Button;
@@ -131,6 +139,8 @@ public class TabletManager : Singleton<TabletManager>
     {
         if (tablet_Parent.activeInHierarchy)
         {
+            SetPlussIcons();
+
             //Set Health Parameter Display
             HealthManager.Instance.SetHealthDisplay(hunger_Image, hungerValueMultiplier_Image,
                                  heatResistance_Image, heatResistanceValueMultiplier_Image,
@@ -327,6 +337,8 @@ public class TabletManager : Singleton<TabletManager>
     //--------------------
 
 
+    //Open/Close Tablet
+    #region
     void MenuTransition(TabletMenuState currentMenu, TabletMenuState newMenu)
     {
         MainManager.Instance.menuStates = MenuStates.None;
@@ -790,6 +802,7 @@ public class TabletManager : Singleton<TabletManager>
         menu_Skilltree_Button.SetActive(false);
         tabletObject.SetActive(false);
     }
+    #endregion
 
     void SetMenuDisplay(bool state)
     {
@@ -913,6 +926,260 @@ public class TabletManager : Singleton<TabletManager>
                 hotbarItemDurabilityListParent_Tablet[i].SetActive(false);
             }
         }
+    }
+
+
+    //--------------------
+
+
+    void SetPlussIcons()
+    {
+        bool plussIconcheck = false;
+
+        //JournalPage
+        #region
+        if (JournalManager.Instance.mentorJournalPageList.Count > JournalManager.Instance.journalPage_PlussSign_Mentor.Count)
+        {
+            plussIconcheck = true;
+        }
+        else
+        {
+            for (int i = 0; i < JournalManager.Instance.journalPage_PlussSign_Mentor.Count; i++)
+            {
+                if (JournalManager.Instance.journalPage_PlussSign_Mentor[i])
+                {
+                    plussIconcheck = true;
+                }
+            }
+        }
+
+        if (JournalManager.Instance.playerJournalPageList.Count > JournalManager.Instance.journalPage_PlussSign_Player.Count)
+        {
+            plussIconcheck = true;
+        }
+        else
+        {
+            for (int i = 0; i < JournalManager.Instance.journalPage_PlussSign_Player.Count; i++)
+            {
+                if (JournalManager.Instance.journalPage_PlussSign_Player[i])
+                {
+                    plussIconcheck = true;
+                }
+            }
+        }
+
+        if (JournalManager.Instance.personalJournalPageList.Count > JournalManager.Instance.journalPage_PlussSign_Personal.Count)
+        {
+            plussIconcheck = true;
+        }
+        else
+        {
+            for (int i = 0; i < JournalManager.Instance.journalPage_PlussSign_Personal.Count; i++)
+            {
+                if (JournalManager.Instance.journalPage_PlussSign_Personal[i])
+                {
+                    plussIconcheck = true;
+                }
+            }
+        }
+
+        if (plussIconcheck)
+        {
+            menu_Journal_PlussIcon.SetActive(true);
+
+            if (!menu_Journal_PlussIcon.activeInHierarchy)
+            {
+                menu_Journal_PlussIcon.SetActive(true);
+            }
+        }
+        else
+        {
+            menu_Journal_PlussIcon.SetActive(false);
+
+            if (menu_Journal_PlussIcon.activeInHierarchy)
+            {
+                menu_Journal_PlussIcon.SetActive(false);
+            }
+        }
+        #endregion
+
+        //Blueprints
+        #region
+        plussIconcheck = false;
+
+        int counter = -1;
+
+        if (BuildingDisplayManager.Instance.menuObjects_PlussSign.Count > 0)
+        {
+            for (int i = 0; i < BuildingDisplayManager.Instance.buildingObjectList.Count; i++)
+            {
+                for (int j = 0; j < BuildingDisplayManager.Instance.buildingObjectList[i].buildingObjectChildList.Count; j++)
+                {
+                    counter++;
+
+                    print("Counter = " + counter);
+
+                    if (BuildingDisplayManager.Instance.buildingObjectList[i].buildingObjectChildList[j].GetComponent<BuildingDisplaySlot>())
+                    {
+                        //BuildingBlockInfo
+                        BuildingBlockInfo buildingBlockInfo = BuildingSystemManager.Instance.GetBuildingObjectInfo(BuildingDisplayManager.Instance.buildingObjectList[i].buildingObjectChildList[j].GetComponent<BuildingDisplaySlot>().buildingBlockObjectName, BuildingDisplayManager.Instance.buildingObjectList[i].buildingObjectChildList[j].GetComponent<BuildingDisplaySlot>().buildingMaterial);
+
+                        if (buildingBlockInfo != null)
+                        {
+                            if (buildingBlockInfo.objectInfo.isActive)
+                            {
+                                if (BuildingDisplayManager.Instance.menuObjects_PlussSign[counter])
+                                {
+                                    plussIconcheck = true;
+
+                                    i = BuildingDisplayManager.Instance.buildingObjectList.Count;
+
+                                    break;
+                                }
+                            }
+                        }
+
+                        //FurnitureInfo
+                        FurnitureInfo furnitureInfo = BuildingSystemManager.Instance.GetBuildingObjectInfo(BuildingDisplayManager.Instance.buildingObjectList[i].buildingObjectChildList[j].GetComponent<BuildingDisplaySlot>().furnitureObjectName);
+
+                        if (furnitureInfo != null)
+                        {
+                            if (furnitureInfo.objectInfo.isActive)
+                            {
+                                if (BuildingDisplayManager.Instance.menuObjects_PlussSign[counter])
+                                {
+                                    plussIconcheck = true;
+
+                                    i = BuildingDisplayManager.Instance.buildingObjectList.Count;
+
+                                    break;
+                                }
+                            }
+                        }
+
+                        //MachineInfo
+                        MachineInfo machineInfo = BuildingSystemManager.Instance.GetBuildingObjectInfo(BuildingDisplayManager.Instance.buildingObjectList[i].buildingObjectChildList[j].GetComponent<BuildingDisplaySlot>().machineObjectName);
+
+                        if (machineInfo != null)
+                        {
+                            if (machineInfo.objectInfo.isActive)
+                            {
+                                if (BuildingDisplayManager.Instance.menuObjects_PlussSign[counter])
+                                {
+                                    plussIconcheck = true;
+
+                                    i = BuildingDisplayManager.Instance.buildingObjectList.Count;
+
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+
+
+            //for (int i = 0; i < BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList.Count; i++)
+            //{
+            //    if (BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[i].objectInfo.isActive)
+            //    {
+            //        if (!BuildingDisplayManager.Instance.menuObjects_PlussSign[i])
+            //        {
+            //            print("1. True");
+            //            plussIconcheck = true;
+
+            //            break;
+            //        }
+            //    }
+            //}
+
+            //if (!plussIconcheck)
+            //{
+            //    for (int i = 0; i < BuildingSystemManager.Instance.furniture_SO.furnitureObjectsList.Count; i++)
+            //    {
+            //        if (!BuildingSystemManager.Instance.furniture_SO.furnitureObjectsList[i].objectInfo.isActive)
+            //        {
+            //            if (BuildingDisplayManager.Instance.menuObjects_PlussSign[BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList.Count - 1 + i])
+            //            {
+            //                print("2. True");
+            //                plussIconcheck = true;
+
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
+            
+            //if (!plussIconcheck)
+            //{
+            //    for (int i = 0; i < BuildingSystemManager.Instance.machines_SO.machineObjectsList.Count; i++)
+            //    {
+            //        if (!BuildingSystemManager.Instance.machines_SO.machineObjectsList[i].objectInfo.isActive)
+            //        {
+            //            if (BuildingDisplayManager.Instance.menuObjects_PlussSign[BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList.Count - 1 + BuildingSystemManager.Instance.furniture_SO.furnitureObjectsList.Count - 1 + i])
+            //            {
+            //                print("3. True");
+            //                plussIconcheck = true;
+
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
+        }
+
+        if (plussIconcheck)
+        {
+            menu_MoveableObjects_PlussIcon.SetActive(true);
+
+            if (!menu_MoveableObjects_PlussIcon.activeInHierarchy)
+            {
+                menu_MoveableObjects_PlussIcon.SetActive(true);
+            }
+        }
+        else
+        {
+            menu_MoveableObjects_PlussIcon.SetActive(false);
+
+            if (menu_MoveableObjects_PlussIcon.activeInHierarchy)
+            {
+                menu_MoveableObjects_PlussIcon.SetActive(false);
+            }
+        }
+        #endregion
+        
+        //CraftingTable
+        #region
+        plussIconcheck = false;
+
+        for (int i = 0; i < CraftingManager.Instance.itemStateList.Count; i++)
+        {
+            if (CraftingManager.Instance.itemStateList[i].itemState == CraftingItemState.New)
+            {
+                plussIconcheck = true;
+            }
+        }
+
+        if (plussIconcheck)
+        {
+            if (!menu_CraftingTable_PlussIcon.activeInHierarchy)
+            {
+                menu_CraftingTable_PlussIcon.SetActive(true);
+            }
+        }
+        else
+        {
+            if (menu_CraftingTable_PlussIcon.activeInHierarchy)
+            {
+                menu_CraftingTable_PlussIcon.SetActive(false);
+            }
+        }
+        #endregion
     }
 }
 
