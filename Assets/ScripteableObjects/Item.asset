@@ -1989,7 +1989,8 @@ MonoBehaviour:
     categoryName: 7
     subCategoryName: 19
     itemSize: {x: 1, y: 2}
-    itemDescription: Heals Hunger a lot and Thirst slightly
+    itemDescription: Heals Hunger slightly, Thirst slightly and Increase Heat Resistance
+      slightly
     hotbarSprite: {fileID: -993071880, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
     - {fileID: -13486799, guid: c15e568b9f9442f41b3212b5c796493c, type: 3}
@@ -2001,8 +2002,8 @@ MonoBehaviour:
     isEquipableInHand: 0
     isEquipableClothes: 0
     mainHealthHeal: 0
-    heatresistanceHealthHeal: 0
-    hungerHealthHeal: 50
+    heatresistanceHealthHeal: 25
+    hungerHealthHeal: 25
     thirstHealthHeal: 25
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
@@ -2020,7 +2021,8 @@ MonoBehaviour:
     categoryName: 7
     subCategoryName: 19
     itemSize: {x: 1, y: 2}
-    itemDescription: Heals Hunger slightlty and Thirst a lot
+    itemDescription: Heals Hunger slightlty,  Thirst a lot and Increase Heat Resistance
+      slightly
     hotbarSprite: {fileID: -630275936, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
     - {fileID: 1229009089, guid: 093de5db674a6e447bf973cab539f391, type: 3}
@@ -2032,7 +2034,7 @@ MonoBehaviour:
     isEquipableInHand: 0
     isEquipableClothes: 0
     mainHealthHeal: 0
-    heatresistanceHealthHeal: 0
+    heatresistanceHealthHeal: 25
     hungerHealthHeal: 25
     thirstHealthHeal: 50
     heatColdRegulator: 0
@@ -2051,7 +2053,8 @@ MonoBehaviour:
     categoryName: 7
     subCategoryName: 19
     itemSize: {x: 1, y: 2}
-    itemDescription: Heals Hunger a lot and Thirst a lot
+    itemDescription: Heals Hunger a lot, Thirst a lot and Increase Heat Resistance
+      a lot
     hotbarSprite: {fileID: -628637600, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
     - {fileID: 194608554, guid: b0c009d09dfb4014a92f6c2528ee5cce, type: 3}
@@ -2063,7 +2066,7 @@ MonoBehaviour:
     isEquipableInHand: 0
     isEquipableClothes: 0
     mainHealthHeal: 0
-    heatresistanceHealthHeal: 0
+    heatresistanceHealthHeal: 50
     hungerHealthHeal: 50
     thirstHealthHeal: 50
     heatColdRegulator: 0
@@ -2082,8 +2085,8 @@ MonoBehaviour:
     categoryName: 7
     subCategoryName: 19
     itemSize: {x: 2, y: 2}
-    itemDescription: Heals Hunger slightly, Thirst slightly and your Main Health
-      slightly
+    itemDescription: Heals Hunger slightly, Thirst slightly, Increases Heat Resistance
+      alot and your Main Health slightly
     hotbarSprite: {fileID: -1797223384, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
     - {fileID: -1744547793, guid: e4e345da105ed7a43b7f205cb4b31c50, type: 3}
@@ -2099,7 +2102,7 @@ MonoBehaviour:
     isEquipableInHand: 0
     isEquipableClothes: 0
     mainHealthHeal: 25
-    heatresistanceHealthHeal: 0
+    heatresistanceHealthHeal: 50
     hungerHealthHeal: 25
     thirstHealthHeal: 25
     heatColdRegulator: 0
@@ -2192,7 +2195,7 @@ MonoBehaviour:
     isEquipableInHand: 0
     isEquipableClothes: 0
     mainHealthHeal: 0
-    heatresistanceHealthHeal: 0
+    heatresistanceHealthHeal: 50
     hungerHealthHeal: 50
     thirstHealthHeal: 25
     heatColdRegulator: 0
@@ -2592,8 +2595,8 @@ MonoBehaviour:
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
-    mainHealthHeal: 0
-    heatresistanceHealthHeal: 0
+    mainHealthHeal: 10
+    heatresistanceHealthHeal: 25
     hungerHealthHeal: 0
     thirstHealthHeal: 25
     heatColdRegulator: 0
@@ -2626,8 +2629,8 @@ MonoBehaviour:
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
-    mainHealthHeal: 0
-    heatresistanceHealthHeal: 0
+    mainHealthHeal: 10
+    heatresistanceHealthHeal: 25
     hungerHealthHeal: 0
     thirstHealthHeal: 25
     heatColdRegulator: 0
@@ -2662,8 +2665,8 @@ MonoBehaviour:
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
-    mainHealthHeal: 0
-    heatresistanceHealthHeal: 0
+    mainHealthHeal: 10
+    heatresistanceHealthHeal: 25
     hungerHealthHeal: 0
     thirstHealthHeal: 25
     heatColdRegulator: 0

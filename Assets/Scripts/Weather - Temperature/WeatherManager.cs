@@ -179,7 +179,10 @@ public class WeatherManager : Singleton<WeatherManager>
     void SetPlayerTemperature(float coverValue, float temperatureFruit)
     {
         //Set Temperature for BuildingBlock Coverage (doesn't affect temperature under idealTemperature)
-        float coverResistance = coverValue;
+        float coverResistance = coverValue + temperatureFruit;
+
+        //print("0. coverResistance = " + coverResistance);
+        //print("0. PlayerTemperature = " + playerTemperature);
 
         //BuildingBlock Cover Calculation (perform this first to get the playerTemperature. Add other buffs later
         #region
@@ -188,10 +191,12 @@ public class WeatherManager : Singleton<WeatherManager>
             if ((currentWorldTemperature + coverResistance) >= idealTemperature)
             {
                 playerTemperature = currentWorldTemperature + coverResistance;
+                //print("1. PlayerTemperature = " + playerTemperature);
             }
             else
             {
                 playerTemperature = idealTemperature;
+                //print("2. PlayerTemperature = " + playerTemperature);
             }
         }
         else
@@ -199,10 +204,12 @@ public class WeatherManager : Singleton<WeatherManager>
             if ((currentWorldTemperature + coverResistance) <= idealTemperature)
             {
                 playerTemperature = currentWorldTemperature + coverResistance;
+                //print("3. PlayerTemperature = " + playerTemperature);
             }
             else
             {
                 playerTemperature = idealTemperature;
+                //print("4. PlayerTemperature = " + playerTemperature);
             }
         }
         #endregion
@@ -210,42 +217,48 @@ public class WeatherManager : Singleton<WeatherManager>
 
         //Add Heat/Freeze Fruit influence to the playerTemperature
         #region
-        float fruitResistance = temperatureFruit;
+        //float fruitResistance = temperatureFruit;
 
-        if (playerTemperature >= idealTemperature)
-        {
-            if ((playerTemperature + fruitResistance) >= idealTemperature)
-            {
-                if (fruitResistance <= 0)
-                {
-                    playerTemperature = currentWorldTemperature + fruitResistance;
-                }
-            }
-            else
-            {
-                playerTemperature = idealTemperature;
-            }
-        }
-        else
-        {
-            if ((playerTemperature + fruitResistance) <= idealTemperature)
-            {
-                if (fruitResistance >= 0)
-                {
-                    playerTemperature = currentWorldTemperature + fruitResistance;
-                }
-            }
-            else
-            {
-                playerTemperature = idealTemperature;
-            }
-        }
+        //if (playerTemperature >= idealTemperature)
+        //{
+        //    if ((playerTemperature + fruitResistance) >= idealTemperature)
+        //    {
+        //        if (fruitResistance <= 0)
+        //        {
+        //            playerTemperature = currentWorldTemperature + fruitResistance;
+        //            print("5. PlayerTemperature = " + playerTemperature);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        playerTemperature = idealTemperature;
+        //        print("6. PlayerTemperature = " + playerTemperature);
+        //    }
+        //}
+        //else
+        //{
+        //    if ((playerTemperature + fruitResistance) <= idealTemperature)
+        //    {
+        //        if (fruitResistance >= 0)
+        //        {
+        //            playerTemperature = currentWorldTemperature + fruitResistance;
+        //            print("7. PlayerTemperature = " + playerTemperature);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        playerTemperature = idealTemperature;
+        //        print("8. PlayerTemperature = " + playerTemperature);
+        //    }
+        //}
         #endregion
 
         //Add further variables to the playerTemperature
         #region
 
         #endregion
+
+        //print("9. PlayerTemperature = " + playerTemperature);
     }
     public void SetTemperatureDisplay(TextMeshProUGUI temperatureDisplay, TextMeshProUGUI playerTemperatureDisplay)
     {
@@ -501,6 +514,7 @@ public class WeatherManager : Singleton<WeatherManager>
         {
             if (hit.transform.CompareTag("BuildingBlock"))
             {
+                print("Inside BuildingBlock");
                 //if (hit.transform.gameObject.GetComponent<BuildingBlock>())
                 //{
                 //    //If standing in a shadow from a Wood Block
@@ -550,6 +564,17 @@ public class WeatherManager : Singleton<WeatherManager>
                 //{
                 //    coverValue = 0;
                 //}
+            }
+            else if (hit.transform.CompareTag("Ground"))
+            {
+                if (isWarm)
+                {
+                    coverValue = -stone_Cover;
+                }
+                else
+                {
+                    coverValue = stone_Cover;
+                }
             }
             else
             {

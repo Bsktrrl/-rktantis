@@ -1017,8 +1017,6 @@ public class TabletManager : Singleton<TabletManager>
                 {
                     counter++;
 
-                    print("Counter = " + counter);
-
                     if (BuildingDisplayManager.Instance.buildingObjectList[i].buildingObjectChildList[j].GetComponent<BuildingDisplaySlot>())
                     {
                         //BuildingBlockInfo
