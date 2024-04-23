@@ -408,13 +408,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     movementAppearance_isHappening = false;
                 }
 
-                //MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
-                //MainManager.Instance.player.GetComponent<CharacterController>().center = new Vector3(0f, -0.85f, 0f);
-
-                //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
-                //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
-
-                SettingsManager.Instance.ChangeFOV(FOV_Smoother);
+                //SettingsManager.Instance.ChangeFOV(FOV_Smoother);
                 movementSpeedVarianceByMovement = 1;
                 break;
             case MovementStates.Walking:
@@ -434,13 +428,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     movementAppearance_isHappening = false;
                 }
 
-                //MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
-                //MainManager.Instance.player.GetComponent<CharacterController>().center = new Vector3(0f, -0.85f, 0f);
-
-                //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
-                //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
-
-                SettingsManager.Instance.ChangeFOV(FOV_Smoother);
+                //SettingsManager.Instance.ChangeFOV(FOV_Smoother);
                 movementSpeedVarianceByMovement = 1;
                 break;
             case MovementStates.Running:
@@ -460,13 +448,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     movementAppearance_isHappening = false;
                 }
 
-                //MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
-                //MainManager.Instance.player.GetComponent<CharacterController>().center = new Vector3(0f, -0.85f, 0f);
-
-                //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
-                //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
-
-                SettingsManager.Instance.ChangeFOV(FOV_Smoother);
+                //SettingsManager.Instance.ChangeFOV(FOV_Smoother);
                 movementSpeedVarianceByMovement = 2;
                 break;
             case MovementStates.Crouching:
@@ -486,13 +468,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     movementAppearance_isHappening = false;
                 }
 
-                //MainManager.Instance.player.GetComponent<CharacterController>().height = 0.5f;
-                //MainManager.Instance.player.GetComponent<CharacterController>().center = new Vector3(0f, -0.4f, 0f);
-
-                //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.2f;
-                //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.5f, 0f);
-
-                SettingsManager.Instance.ChangeFOV(FOV_Smoother);
+                //SettingsManager.Instance.ChangeFOV(FOV_Smoother);
                 movementSpeedVarianceByMovement = 0.5f;
                 break;
             case MovementStates.Jumping:
