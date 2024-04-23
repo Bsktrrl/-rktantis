@@ -69,7 +69,7 @@ public class SettingsManager : Singleton<SettingsManager>
             settingsValues.sound_Voice = 1f;
             settingsValues.sound_Weather = 1f;
 
-            settingsValues.camera_FOV = 0.25f;
+            settingsValues.camera_FOV = 0f;
             settingsValues.camera_MouseSensitivity = 0.2f;
 
             //Setup all Slider
@@ -81,7 +81,7 @@ public class SettingsManager : Singleton<SettingsManager>
             UI_Sound_Voice.value = 1f;
             UI_Sound_Weather.value = 1f;
 
-            UI_Camera_FOV.value = 0.25f;
+            UI_Camera_FOV.value = 0f;
             UI_Camera_MouseSensitivity.value = 0.2f;
 
             firstSetup = true;
@@ -91,6 +91,7 @@ public class SettingsManager : Singleton<SettingsManager>
         }
 
         MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
+        MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
     }
 
 
@@ -229,7 +230,7 @@ public class SettingsManager : Singleton<SettingsManager>
         settingsValues.sound_Weather = UI_Sound_Weather.value;
 
         //Camera
-        settingsValues.camera_FOV = (UI_Camera_FOV.value);
+        settingsValues.camera_FOV = UI_Camera_FOV.value;
         settingsValues.camera_MouseSensitivity = UI_Camera_MouseSensitivity.value;
 
         SaveData();
@@ -239,16 +240,19 @@ public class SettingsManager : Singleton<SettingsManager>
         if (MainManager.Instance.menuStates == MenuStates.None)
         {
             MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60 + timer;
+            MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60 + timer;
         }
         else
         {
             MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
+            MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
         }
         
     }
     public void ChangeFOV()
     {
         MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
+        MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
     }
     void ChangeMouseSensitivity()
     {

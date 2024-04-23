@@ -50,6 +50,13 @@ public class PlayerManager : Singleton<PlayerManager>
         //Get loaded data
         playerStats = DataManager.Instance.playerStats_Store;
 
+        playerStats.playerPos = DataManager.Instance.playerStats_Store.playerPos;
+        playerStats.playerRot = DataManager.Instance.playerStats_Store.playerRot;
+
+        playerStats.playerGameOverPos = DataManager.Instance.playerStats_Store.playerGameOverPos;
+        playerStats.playerGameOverRot = DataManager.Instance.playerStats_Store.playerGameOverRot;
+
+
         if (playerStats.playerGameOverPos == Vector3.zero)
         {
             //Set Player Start Position - New Game
@@ -64,10 +71,11 @@ public class PlayerManager : Singleton<PlayerManager>
             //Set Player Position
             MainManager.Instance.player.transform.SetPositionAndRotation(playerStats.playerPos, playerStats.playerRot);
 
-            if (playerStats.playerGameOverPos == Vector3.zero)
-            {
-                UpdatePlayerDyingPos(MainManager.Instance.player.transform);
-            }
+            //if (playerStats.playerGameOverPos == Vector3.zero)
+            //{
+            //    print("3. Start - " + playerStats.playerGameOverPos);
+            //    UpdatePlayerDyingPos(MainManager.Instance.player.transform);
+            //}
 
             movementSpeedMultiplier_SkillTree = playerStats.movementSpeedMultiplier_SkillTree;
 
@@ -99,7 +107,8 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void TransferPlayerToDyingPos() //Upon GameOver
     {
-        PlayerMovement.Instance.controller.Move(playerStats.playerGameOverPos - MainManager.Instance.player.transform.position);
+        MainManager.Instance.player.transform.SetPositionAndRotation(playerStats.playerGameOverPos, Quaternion.identity);
+        //PlayerMovement.Instance.controller.Move(playerStats.playerGameOverPos - MainManager.Instance.player.transform.position);
 
         SaveData();
     }

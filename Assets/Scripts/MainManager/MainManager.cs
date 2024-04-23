@@ -31,6 +31,8 @@ public class MainManager : Singleton<MainManager>
     //CenterImage
     public GameObject centerImage;
 
+    public bool deleyedStart;
+
 
     //--------------------
 
@@ -43,7 +45,22 @@ public class MainManager : Singleton<MainManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+
         UpdateGameStates();
+
+        StartCoroutine(DelayStart(0.25f));
+    }
+
+
+    //--------------------
+
+
+    IEnumerator DelayStart(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        deleyedStart = true;
     }
 
 

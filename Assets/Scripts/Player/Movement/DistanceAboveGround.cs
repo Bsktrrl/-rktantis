@@ -43,7 +43,16 @@ public class DistanceAboveGround : MonoBehaviour
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
+        if (!MainManager.Instance.deleyedStart)
+        {
+            return;
+        }
+
+        print("2000000. DelayedStart");
 
         point_0_Hit = false;
         point_1_Hit = false;
@@ -88,9 +97,16 @@ public class DistanceAboveGround : MonoBehaviour
         {
             GroundLookingAt = hit.transform.gameObject;
 
-            if (GroundLookingAt.GetComponent<Model>())
+            if (GroundLookingAt)
             {
-                PlayerManager.Instance.UpdatePlayerDyingPos(GroundLookingAt.transform);
+                if (GroundLookingAt.GetComponent<Model>())
+                {
+                    if (GroundLookingAt.GetComponent<Model>().gameObject.transform.parent.GetComponent<MoveableObject>())
+                    {
+                        print("100000000000000. UpdatePlayerDyingPos");
+                        PlayerManager.Instance.UpdatePlayerDyingPos(GroundLookingAt.transform);
+                    }
+                }
             }
 
             return true;
