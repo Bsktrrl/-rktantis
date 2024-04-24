@@ -6,6 +6,7 @@ public class LightingUpdates : MonoBehaviour
 {
     public Light mainLight;
     public Light secondaryLight;
+    public GameObject player;
     float fogDarkness;
 
     void Start()
@@ -28,7 +29,10 @@ public class LightingUpdates : MonoBehaviour
         //Intensity of ambient light
         RenderSettings.ambientIntensity = Mathf.Pow(Mathf.Clamp(mainLight.transform.forward.y, 0, 1) + 1, 2f);
 
-        DynamicGI.UpdateEnvironment();
+        if (Vector3.Dot(Vector3.Normalize(player.transform.position), mainLight.transform.forward) <= 0.9f)
+        {
+            DynamicGI.UpdateEnvironment();
+        }
         yield return new WaitForSeconds(1);
         StartCoroutine(UpdateLighting());
     }
