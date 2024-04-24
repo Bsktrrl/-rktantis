@@ -17,7 +17,7 @@ public class Model : MonoBehaviour
             else
             {
                 //Get the bounds of the MeshCollider
-                Bounds colliderBounds = GetComponent<BoxCollider>().bounds;
+                Bounds colliderBounds = GetComponent<MeshCollider>().bounds;
 
                 //Check for overlapping colliders within the bounds of the MeshCollider
                 Collider[] collidersInside = Physics.OverlapBox(colliderBounds.center, colliderBounds.extents/* * 0.58f*/, Quaternion.identity);
@@ -57,6 +57,7 @@ public class Model : MonoBehaviour
                     //Check the outcome - If colliding with anything special
                     if (isSuperCollidingCheck)
                     {
+                        BuildingSystemManager.Instance.isColliding = false;
                         BuildingSystemManager.Instance.isCollidingWithBuildingBlock = true;
                     }
                     else if (isCollidingCheck)

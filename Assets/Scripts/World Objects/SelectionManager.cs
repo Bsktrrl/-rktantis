@@ -197,12 +197,12 @@ public class SelectionManager : Singleton<SelectionManager>
             Vector3 startPoint = ray.origin /*+ MainManager.Instance.mainMainCamera.transform.forward*/;
 
             //Make Debug Line
-            Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), UnityEngine.Color.blue);
+            Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), UnityEngine.Color.blue);
 
             //Check if hitting an Object with a Layer
             #region
             //Furniture
-            if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out hit, PlayerManager.Instance.InteractableDistance + 1, BuildingSystemManager.Instance.layerMask_Furniture))
+            if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_Furniture))
             {
                 if (hit.transform.gameObject.GetComponent<MoveableObject>())
                 {
@@ -213,7 +213,7 @@ public class SelectionManager : Singleton<SelectionManager>
             }
 
             //Machine
-            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out hit, PlayerManager.Instance.InteractableDistance + 1, BuildingSystemManager.Instance.layerMask_Machine))
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_Machine))
             {
                 if (hit.transform.gameObject.GetComponent<MoveableObject>())
                 {
@@ -224,7 +224,9 @@ public class SelectionManager : Singleton<SelectionManager>
             }
 
             //BuildingBlock
-            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out hit, PlayerManager.Instance.InteractableDistance + 1, BuildingSystemManager.Instance.layerMask_BuildingBlockModel))
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Floor)
+                || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Wall)
+                || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Ramp))
             {
                 if (hit.transform.gameObject.GetComponent<Model>())
                 {

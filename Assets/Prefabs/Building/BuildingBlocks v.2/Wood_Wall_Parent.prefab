@@ -425,9 +425,8 @@ GameObject:
   - component: {fileID: 2917275578563414756}
   - component: {fileID: 8392674396036942108}
   - component: {fileID: 4256597097107983200}
-  - component: {fileID: 7679820417166292355}
   - component: {fileID: 1405874914579520391}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: Model
   m_TagString: BuildingBlock
   m_Icon: {fileID: 0}
@@ -518,7 +517,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1576510244663426410, guid: c6f2f76df4f3a8b408bb3df23b54fb1b, type: 3}
 --- !u!54 &4256597097107983200
@@ -548,27 +547,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &7679820417166292355
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8815233503749311390}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.5, y: 1.5, z: 0.05}
-  m_Center: {x: 0, y: 0, z: -1}
 --- !u!114 &1405874914579520391
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,8 +52,6 @@ public class DistanceAboveGround : MonoBehaviour
             return;
         }
 
-        print("2000000. DelayedStart");
-
         point_0_Hit = false;
         point_1_Hit = false;
         point_2_Hit = false;

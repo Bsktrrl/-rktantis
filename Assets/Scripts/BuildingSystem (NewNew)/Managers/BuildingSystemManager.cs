@@ -31,6 +31,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public GameObject buildingBlockHit;
 
     public bool isSnapping;
+    public Vector3 snappingPosition;
+    public Quaternion snappingRotation;
 
     public float rotationValue = 0;
     [SerializeField] float rotationSpeed = 75;
@@ -44,7 +46,9 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public LayerMask layerMask_Ground;
     public LayerMask layerMask_IgnoreRaycast;
     public LayerMask layerMask_BuildingBlock;
-    public LayerMask layerMask_BuildingBlockModel;
+    public LayerMask layerMask_BuildingBlockModel_Floor;
+    public LayerMask layerMask_BuildingBlockModel_Wall;
+    public LayerMask layerMask_BuildingBlockModel_Ramp;
     public LayerMask layerMask_Furniture;
     public LayerMask layerMask_Machine;
 
@@ -55,8 +59,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     [SerializeField] float rayHitAngle_Right;
     [SerializeField] float rayHitAngle_Up;
     [SerializeField] float rayHitAngle_Down;
-
-    Quaternion ghostRotation = Quaternion.identity;
 
     [Header("BuildingBlocks Detected")]
     [SerializeField] GameObject BB_Normal;
@@ -224,6 +226,10 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         //Hide Colliders
+        for (int i = 0; i < newObject.GetComponent<MoveableObject>().modelList.Count; i++)
+        {
+            newObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshCollider>().isTrigger = true;
+        }
         Destroy(newObject.GetComponent<MoveableObject>().collidersOnObject);
 
         //Make sure not getting errors when changing to Furniture or Machine Object
@@ -317,17 +323,21 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             }
             else
             {
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                isSnapping = false;
 
-                if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + 1, layerMask_BuildingBlockModel))
+                ray = MainManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Floor)
+                    //|| Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Wall)
+                    || Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Ramp))
                 {
                     isTouchingABuildingBlock = true;
-                    SetPosToGroundAndBuldingBlock();
+                    SetPosToGroundAndBuildingBlock();
                 }
-                else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + 1, layerMask_Ground))
+                else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_Ground))
                 {
                     isTouchingABuildingBlock = false;
-                    SetPosToGroundAndBuldingBlock();
+                    SetPosToGroundAndBuildingBlock();
                 }
                 else
                 {
@@ -337,8 +347,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     WorldObjectGhost_Parent.SetActive(false);
                     GetBuildingObjectGhost().SetActive(false);
                 }
-
-                isSnapping = false;
             }
         }
     }
@@ -347,17 +355,21 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         if (ghostObject_Holding.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture
             || ghostObject_Holding.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            isSnapping = false;
 
-            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + 1, layerMask_BuildingBlockModel))
+            ray = MainManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Floor)
+                //|| Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Wall)
+                || Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Ramp))
             {
                 isTouchingABuildingBlock = true;
-                SetPosToGroundAndBuldingBlock();
+                SetPosToGroundAndBuildingBlock();
             }
-            else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + 1, layerMask_Ground))
+            else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_Ground))
             {
                 isTouchingABuildingBlock = false;
-                SetPosToGroundAndBuldingBlock();
+                SetPosToGroundAndBuildingBlock();
             }
             else
             {
@@ -369,11 +381,10 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 GetBuildingObjectGhost().SetActive(false);
             }
 
-            isSnapping = false;
         }
     }
 
-    void SetPosToGroundAndBuldingBlock() //- Fixed
+    void SetPosToGroundAndBuildingBlock() //- Fixed
     {
         WorldObjectGhost_Parent.SetActive(true);
         GetBuildingObjectGhost().SetActive(true);
@@ -476,7 +487,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         //BuildingBlock
         if (ghostObject_Holding.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
         {
-            if (enoughItemsToBuild && !isColliding && !isCollidingWithBuildingBlock && !isTouchingABuildingBlock)
+            if (enoughItemsToBuild && !isColliding /*&& !isCollidingWithBuildingBlock && !isTouchingABuildingBlock*/)
             {
                 canPlaceBuildingObject = true;
                 return true;
@@ -553,7 +564,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public void Snapping_Raycast()
     {
         // Cast a Ray from the mouse position to the world space
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        ray = MainManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
 
         //Make 5 Raycasts (Forward, Up-Forward, Down-Forward, Right-Forward, Left-Forward)
         Snapping_RaycastDirection(RaycastDirections.Right, Color.blue);
@@ -664,9 +675,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         Vector3 startPoint = ray.origin + direction /** 0.5f*/;
 
-        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), color);
+        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), color);
 
-        if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out rayHit, (PlayerManager.Instance.InteractableDistance + 1), layerMask_BuildingBlock))
+        if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlock)
+            || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Floor)
+            //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Wall)
+            || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Ramp))
         {
             //Get the Transform of GameObject hit
             hitTransform = rayHit.transform;
@@ -711,7 +725,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         //Looking at something not a BuildingBlock
-        else if (Physics.Raycast(startPoint, Camera.main.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out rayHit, (PlayerManager.Instance.InteractableDistance + 1)))
+        else if (Physics.Raycast(startPoint, Camera.main.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance)))
         {
             switch (_raycastDirection)
             {

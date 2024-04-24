@@ -104,15 +104,15 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         //BuildingBlocks - Wood BuildingBlocks
         BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[0].objectInfo.isActive = true;
         BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[1].objectInfo.isActive = true;
-        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[2].objectInfo.isActive = true;
-        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[3].objectInfo.isActive = true;
-        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[4].objectInfo.isActive = true;
-        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[5].objectInfo.isActive = true;
-        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[6].objectInfo.isActive = true;
-        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[7].objectInfo.isActive = true;
-        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[8].objectInfo.isActive = true;
-        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[9].objectInfo.isActive = true;
-        //BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[10].objectInfo.isActive = true;
+        BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[2].objectInfo.isActive = true;
+        BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[3].objectInfo.isActive = true;
+        BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[4].objectInfo.isActive = true;
+        BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[5].objectInfo.isActive = true;
+        BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[6].objectInfo.isActive = true;
+        BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[7].objectInfo.isActive = true;
+        BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[8].objectInfo.isActive = true;
+        BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[9].objectInfo.isActive = true;
+        BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[10].objectInfo.isActive = true;
     }
 
 
