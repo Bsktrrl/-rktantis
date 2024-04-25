@@ -101,7 +101,6 @@ public class DistanceAboveGround : MonoBehaviour
                 {
                     if (GroundLookingAt.GetComponent<Model>().gameObject.transform.parent.GetComponent<MoveableObject>())
                     {
-                        print("100000000000000. UpdatePlayerDyingPos");
                         PlayerManager.Instance.UpdatePlayerDyingPos(GroundLookingAt.transform);
                     }
                 }

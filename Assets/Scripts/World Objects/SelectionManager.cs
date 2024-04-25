@@ -183,6 +183,13 @@ public class SelectionManager : Singleton<SelectionManager>
                 LookAtManager.Instance.typeLookingAt = InteracteableType.None;
                 onTarget = false;
             }
+
+            //If hitting a Door
+            if (selectionTransform.gameObject.CompareTag("BuildingBlock_Door"))
+            {
+                onTarget = true;
+                selectedObject = selectionTransform.gameObject;
+            }
         }
         else
         {

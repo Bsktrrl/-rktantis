@@ -514,7 +514,6 @@ public class WeatherManager : Singleton<WeatherManager>
         {
             if (hit.transform.CompareTag("BuildingBlock"))
             {
-                print("Inside BuildingBlock");
                 //if (hit.transform.gameObject.GetComponent<BuildingBlock>())
                 //{
                 //    //If standing in a shadow from a Wood Block

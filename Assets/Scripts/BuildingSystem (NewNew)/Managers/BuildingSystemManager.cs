@@ -981,6 +981,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     GameObject model = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i];
 
                     //If Floor Block
+                    #region
                     if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Square
                         || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Triangle)
                     {
@@ -991,8 +992,27 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                             rotationSnappingValue_Floor = 0;
                         }
 
-                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Floor/*model.transform.localRotation.x*/, rotationSnappingValue_Floor, model.transform.localRotation.z));
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Floor, rotationSnappingValue_Floor, model.transform.localRotation.z));
                     }
+                    #endregion
+
+                    //If Wall Block
+                    #region
+                    else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Door
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Triangle
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Window)
+                    {
+                        rotationSnappingValue_Wall -= 90;
+
+                        if (rotationSnappingValue_Wall <= -360)
+                        {
+                            rotationSnappingValue_Wall = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
+                    }
+                    #endregion
                 }
             }
         }
@@ -1008,6 +1028,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     GameObject model = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i];
 
                     //If Floor Block
+                    #region
                     if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Square
                         || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Triangle)
                     {
@@ -1018,8 +1039,27 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                             rotationSnappingValue_Floor = 0;
                         }
 
-                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Floor/*model.transform.localRotation.x*/, rotationSnappingValue_Floor, model.transform.localRotation.z));
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Floor, rotationSnappingValue_Floor, model.transform.localRotation.z));
                     }
+                    #endregion
+
+                    //If Wall Block
+                    #region
+                    else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Door
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Triangle
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Window)
+                    {
+                        rotationSnappingValue_Wall += 90;
+
+                        if (rotationSnappingValue_Wall >= 360)
+                        {
+                            rotationSnappingValue_Wall = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
+                    }
+                    #endregion
                 }
             }
         }
@@ -1036,6 +1076,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     GameObject model = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i];
 
                     //If Floor Block
+                    #region
                     if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Square
                         || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Triangle)
                     {
@@ -1048,13 +1089,40 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                         if (rotationMirrorValue_Floor == 180)
                         {
-                            model.transform.SetLocalPositionAndRotation(new Vector3(model.transform.localPosition.x, -2/*model.transform.localPosition.y*/, model.transform.localPosition.z), Quaternion.Euler(rotationMirrorValue_Floor, rotationSnappingValue_Floor, model.transform.localRotation.z));
+                            model.transform.SetLocalPositionAndRotation(new Vector3(model.transform.localPosition.x, -2, model.transform.localPosition.z), Quaternion.Euler(rotationMirrorValue_Floor, rotationSnappingValue_Floor, model.transform.localRotation.z));
                         }
                         else
                         {
                             model.transform.SetLocalPositionAndRotation(new Vector3(model.transform.localPosition.x, 0, model.transform.localPosition.z), Quaternion.Euler(rotationMirrorValue_Floor, rotationSnappingValue_Floor, model.transform.localRotation.z));
                         }
                     }
+                    #endregion
+
+                    //If Wall Block
+                    #region
+                    else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Door
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Triangle
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Window
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Fence)
+                    {
+                        rotationMirrorValue_Wall += 180;
+
+                        if (rotationMirrorValue_Wall >= 360)
+                        {
+                            rotationMirrorValue_Wall = 0;
+                        }
+
+                        if (rotationMirrorValue_Wall == 180)
+                        {
+                            model.transform.SetLocalPositionAndRotation(new Vector3(model.transform.localPosition.x, model.transform.localPosition.x, -2), Quaternion.Euler(model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
+                        }
+                        else
+                        {
+                            model.transform.SetLocalPositionAndRotation(new Vector3(model.transform.localPosition.x, model.transform.localPosition.x, 0), Quaternion.Euler(model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
+                        }
+                    }
+                    #endregion
                 }
             }
         }
