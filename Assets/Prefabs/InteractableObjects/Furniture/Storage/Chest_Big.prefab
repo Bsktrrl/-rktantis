@@ -106,6 +106,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5176174981612352771}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7867722899934051273}
   m_SourcePrefab: {fileID: 100100000, guid: 08d6f09a53d011f4a9eaabd96bbbe43d, type: 3}
 --- !u!1 &3811494903824246832 stripped
 GameObject:
@@ -209,10 +213,8 @@ MonoBehaviour:
   plantParent: {fileID: 0}
   journalType: 0
   journalPageIndex: 0
-  blueprint_BuildingBlock_Name: 0
-  buildingMaterial: 0
-  blueprint_Furniture_Name: 0
-  blueprint_Machine_Name: 0
+  blueprintName: 
+  blueprintInfo: []
 --- !u!114 &2582286417484250869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +252,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b72052c85ec9746aa2880f936bee62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7867722899934051273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228448781326590327}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &7167948095266452337 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3092085347767423145, guid: 08d6f09a53d011f4a9eaabd96bbbe43d,

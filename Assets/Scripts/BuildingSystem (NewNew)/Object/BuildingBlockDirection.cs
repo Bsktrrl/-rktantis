@@ -10,14 +10,14 @@ public class BuildingBlockDirection : MonoBehaviour
     public void EnterBlockDirection_BB_Normal()
     {
         BuildingSystemManager.Instance.directionHit = BuildingBlockColliderDirection.None;
-        BuildingSystemManager.Instance.buildingBlockHit = buildingBlock_Parent;
+        BuildingSystemManager.Instance.buildingBlock_Hit = buildingBlock_Parent;
         BuildingSystemManager.Instance.directionHit = buildingBlockColliderDirection;
     }
 
     public void EnterBlockDirection_BB_Left()
     {
         BuildingSystemManager.Instance.directionHit = BuildingBlockColliderDirection.None;
-        BuildingSystemManager.Instance.buildingBlockHit = buildingBlock_Parent;
+        BuildingSystemManager.Instance.buildingBlock_Hit = buildingBlock_Parent;
 
         switch (buildingBlockColliderDirection)
         {
@@ -50,7 +50,7 @@ public class BuildingBlockDirection : MonoBehaviour
     public void EnterBlockDirection_BB_Right()
     {
         BuildingSystemManager.Instance.directionHit = BuildingBlockColliderDirection.None;
-        BuildingSystemManager.Instance.buildingBlockHit = buildingBlock_Parent;
+        BuildingSystemManager.Instance.buildingBlock_Hit = buildingBlock_Parent;
 
         switch (buildingBlockColliderDirection)
         {
@@ -83,13 +83,13 @@ public class BuildingBlockDirection : MonoBehaviour
     public void EnterBlockDirection_BB_Up()
     {
         BuildingSystemManager.Instance.directionHit = BuildingBlockColliderDirection.None;
-        BuildingSystemManager.Instance.buildingBlockHit = buildingBlock_Parent;
+        BuildingSystemManager.Instance.buildingBlock_Hit = buildingBlock_Parent;
         BuildingSystemManager.Instance.directionHit = buildingBlockColliderDirection;
     }
     public void EnterBlockDirection_BB_Down()
     {
         BuildingSystemManager.Instance.directionHit = BuildingBlockColliderDirection.None;
-        BuildingSystemManager.Instance.buildingBlockHit = buildingBlock_Parent;
+        BuildingSystemManager.Instance.buildingBlock_Hit = buildingBlock_Parent;
         BuildingSystemManager.Instance.directionHit = buildingBlockColliderDirection;
     }
 }

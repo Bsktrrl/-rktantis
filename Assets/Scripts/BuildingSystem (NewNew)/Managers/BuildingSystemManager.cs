@@ -28,7 +28,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public Material cannotPlace_Material;
     public Material invisible_Material;
 
-    public GameObject buildingBlockHit;
+    public GameObject buildingBlock_Hit;
+    public GameObject buildingBlock_LookingAt;
 
     public bool isSnapping;
     public Vector3 snappingPosition;
@@ -51,6 +52,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public LayerMask layerMask_BuildingBlockModel_Ramp;
     public LayerMask layerMask_Furniture;
     public LayerMask layerMask_Machine;
+
+    public LayerMask layerMask_AllBuildingBlockModelTypes;
 
     Transform hitTransform;
 
@@ -316,7 +319,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 isSnapping = true;
 
                 //Set new Position and Rotation of the Ghost
-                ghostObject_Holding.transform.SetPositionAndRotation(Snapping_SetPosition(), Snapping_SetRotation(buildingBlockHit));
+                ghostObject_Holding.transform.SetPositionAndRotation(Snapping_SetPosition(), Snapping_SetRotation(buildingBlock_Hit));
 
                 WorldObjectGhost_Parent.SetActive(true);
                 GetBuildingObjectGhost().SetActive(true);
@@ -624,11 +627,16 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Left();
                 }
 
-                //If not looking at a BuildingBlock at all
+
+                //--------------------
+
+
+                //If NOT looking at a BuildingBlock at all
                 else
                 {
                     directionHit = BuildingBlockColliderDirection.None;
-                    buildingBlockHit = null;
+                    buildingBlock_Hit = null;
+                    buildingBlock_LookingAt = null;
                 }
             }
         }
@@ -637,7 +645,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         else
         {
             directionHit = BuildingBlockColliderDirection.None;
-            buildingBlockHit = null;
+            buildingBlock_Hit = null;
+            buildingBlock_LookingAt = null;
         }
         #endregion
     }
@@ -678,9 +687,9 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), color);
 
         if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlock)
-            || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Floor)
+            || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Floor))
             //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Wall)
-            || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Ramp))
+            //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Ramp))
         {
             //Get the Transform of GameObject hit
             hitTransform = rayHit.transform;
@@ -809,22 +818,22 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 break;
 
             case BuildingBlockColliderDirection.Front:
-                return buildingBlockHit.transform.position + buildingBlockHit.transform.forward * 2;
+                return buildingBlock_Hit.transform.position + buildingBlock_Hit.transform.forward * 2;
 
             case BuildingBlockColliderDirection.Back:
-                return buildingBlockHit.transform.position - buildingBlockHit.transform.forward * 2;
+                return buildingBlock_Hit.transform.position - buildingBlock_Hit.transform.forward * 2;
 
             case BuildingBlockColliderDirection.Up:
-                return buildingBlockHit.transform.position + buildingBlockHit.transform.up * 2;
+                return buildingBlock_Hit.transform.position + buildingBlock_Hit.transform.up * 2;
 
             case BuildingBlockColliderDirection.Down:
-                return buildingBlockHit.transform.position - buildingBlockHit.transform.up * 2;
+                return buildingBlock_Hit.transform.position - buildingBlock_Hit.transform.up * 2;
 
             case BuildingBlockColliderDirection.Right:
-                return buildingBlockHit.transform.position + buildingBlockHit.transform.right * 2;
+                return buildingBlock_Hit.transform.position + buildingBlock_Hit.transform.right * 2;
 
             case BuildingBlockColliderDirection.Left:
-                return buildingBlockHit.transform.position - buildingBlockHit.transform.right * 2;
+                return buildingBlock_Hit.transform.position - buildingBlock_Hit.transform.right * 2;
 
             default:
                 break;

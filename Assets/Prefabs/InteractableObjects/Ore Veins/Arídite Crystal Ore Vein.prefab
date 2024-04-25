@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 8810164635594553347}
   - component: {fileID: 3038654265240625525}
   - component: {fileID: 864090777689678032}
+  - component: {fileID: -3142973340076507465}
   m_Layer: 0
   m_Name: "Ar\xEDdite Crystal Ore Vein"
   m_TagString: Ore
@@ -186,6 +187,10 @@ MonoBehaviour:
   interactableType: 28
   inventoryIndex: 0
   plantParent: {fileID: 0}
+  journalType: 0
+  journalPageIndex: 0
+  blueprintName: 
+  blueprintInfo: []
 --- !u!114 &864090777689678032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,11 +203,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544f14798540afe48a62c72edaec7ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderer: {fileID: 0}
   oreVein: {fileID: 1337610471336242441}
   oreHealth: 10
   tempOreHealth: 0
   isHacked: 0
   dormantTimer: 0
   dormantPercentage: 0
-  oreIndex: 0
+  oreIndex_x: 0
+  oreIndex_y: 0
   percentageCheck: 0
+  rendererList: []
+--- !u!114 &-3142973340076507465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958918549798363544}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bakeKeys:
+  - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  bakeValues:
+  - data:
+    - {x: 0.57735026, y: -0.57735026, z: 0.57735026}
+    - {x: -0.57735026, y: -0.57735026, z: 0.57735026}
+    - {x: 0.57735026, y: 0.57735026, z: 0.57735026}
+    - {x: -0.57735026, y: 0.57735026, z: 0.57735026}
+    - {x: 0.57735026, y: 0.57735026, z: -0.57735026}
+    - {x: -0.57735026, y: 0.57735026, z: -0.57735026}
+    - {x: 0.57735026, y: -0.57735026, z: -0.57735026}
+    - {x: -0.57735026, y: -0.57735026, z: -0.57735026}
+    - {x: 0.57735026, y: 0.57735026, z: 0.57735026}
+    - {x: -0.57735026, y: 0.57735026, z: 0.57735026}
+    - {x: 0.57735026, y: 0.57735026, z: -0.57735026}
+    - {x: -0.57735026, y: 0.57735026, z: -0.57735026}
+    - {x: 0.57735026, y: -0.57735026, z: -0.57735026}
+    - {x: 0.57735026, y: -0.57735026, z: 0.57735026}
+    - {x: -0.57735026, y: -0.57735026, z: 0.57735026}
+    - {x: -0.57735026, y: -0.57735026, z: -0.57735026}
+    - {x: -0.57735026, y: -0.57735026, z: 0.57735026}
+    - {x: -0.57735026, y: 0.57735026, z: 0.57735026}
+    - {x: -0.57735026, y: 0.57735026, z: -0.57735026}
+    - {x: -0.57735026, y: -0.57735026, z: -0.57735026}
+    - {x: 0.57735026, y: -0.57735026, z: -0.57735026}
+    - {x: 0.57735026, y: 0.57735026, z: -0.57735026}
+    - {x: 0.57735026, y: 0.57735026, z: 0.57735026}
+    - {x: 0.57735026, y: -0.57735026, z: 0.57735026}

@@ -79,6 +79,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1941745251831348192}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3bc4ddb38fe7b12428b4699019e0287f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6141640054739157991}
   m_SourcePrefab: {fileID: 100100000, guid: 3bc4ddb38fe7b12428b4699019e0287f, type: 3}
 --- !u!1 &4902750131421289695 stripped
 GameObject:
@@ -156,3 +160,19 @@ MonoBehaviour:
   plantParent: {fileID: 0}
   journalType: 0
   journalPageIndex: 0
+  blueprintName: 
+  blueprintInfo: []
+--- !u!114 &6141640054739157991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4902750131421289695}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bakeKeys: []
+  bakeValues: []

@@ -2698,6 +2698,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4404803019082176403}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f3638f5d2eeab474985da6408b460bd8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -432995377324820975}
   m_SourcePrefab: {fileID: 100100000, guid: f3638f5d2eeab474985da6408b460bd8, type: 3}
 --- !u!1 &2274494633448040856 stripped
 GameObject:
@@ -2915,10 +2919,8 @@ MonoBehaviour:
   plantParent: {fileID: 0}
   journalType: 0
   journalPageIndex: 0
-  blueprint_BuildingBlock_Name: 0
-  buildingMaterial: 0
-  blueprint_Furniture_Name: 0
-  blueprint_Machine_Name: 0
+  blueprintName: 
+  blueprintInfo: []
 --- !u!114 &1910089391727248810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2972,6 +2974,20 @@ MonoBehaviour:
   skinnedMeshRenderer2: {fileID: 7274394433786125864}
   ghostTankBase: {fileID: 2100000, guid: 820443311951e3a48a932ca7da65bd8d, type: 2}
   ghostTankWater: {fileID: 2100000, guid: 95d4e648f9b21954cb44ac50e2180a3a, type: 2}
+--- !u!114 &-432995377324820975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6696127574697431146}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bakeKeys: []
+  bakeValues: []
 --- !u!137 &7274394433786125864 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3809995183515398931, guid: f3638f5d2eeab474985da6408b460bd8,
