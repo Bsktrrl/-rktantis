@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 3041353511166218813}
   - component: {fileID: -119487736050799536}
   m_Layer: 7
-  m_Name: Wood_Door
+  m_Name: Wood_Fence_Diagonal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,7 +263,7 @@ MonoBehaviour:
   enoughItemsToBuild: 0
   buildingObjectType: 1
   buildingMaterial: 1
-  buildingBlockObjectName: 7
+  buildingBlockObjectName: 9
   furnitureObjectName: 0
   machineObjectName: 0
   modelList:
@@ -456,7 +456,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8815233503749311390}
-  m_Mesh: {fileID: 5033906361026140736, guid: 4f9fccfff0ece1c4c8781578d9abeac9, type: 3}
+  m_Mesh: {fileID: -3630542933291062790, guid: 7207d9821687a3b45a961a6ba502d215, type: 3}
 --- !u!23 &2917275578563414756
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -520,7 +520,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -5930673308185535630, guid: 4f9fccfff0ece1c4c8781578d9abeac9, type: 3}
+  m_Mesh: {fileID: -9158220483565954683, guid: 7207d9821687a3b45a961a6ba502d215, type: 3}
 --- !u!54 &4256597097107983200
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -225,7 +225,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         if (newObject)
         {
             newObject.transform.SetParent(WorldObjectGhost_Parent.transform);
-
             newObject.transform.localPosition = Vector3.zero;
             newObject.transform.localRotation = Quaternion.identity;
         }
@@ -250,8 +249,18 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         //Hide Colliders
         for (int i = 0; i < newObject.GetComponent<MoveableObject>().modelList.Count; i++)
         {
-            newObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshCollider>().isTrigger = true;
+            if (newObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshCollider>())
+            {
+                newObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshCollider>().isTrigger = true;
+            }
         }
+
+        if (newObject.GetComponent<BoxCollider>())
+        {
+            newObject.GetComponent<BoxCollider>().isTrigger = true;
+        }
+
+        //Destroy Colliders
         Destroy(newObject.GetComponent<MoveableObject>().collidersOnObject);
 
         //Make sure not getting errors when changing to Furniture or Machine Object
@@ -416,15 +425,25 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
         {
-            ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 0, 0));
+            if (activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Ramp_Stair
+                || activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Ramp_Ramp
+                || activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Ramp_Corner
+                || activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Ramp_Triangle)
+            {
+                ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
+            }
+            else
+            {
+                ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 0, 0));
+            }
         }
         else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
         {
-            ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 0, 0));
+            ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
         }
         else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
         {
-            ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 0, 0));
+            ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
         }
     }
     
@@ -895,13 +914,13 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 //Ramp
                 case BuildingBlockObjectNames.Ramp_Stair:
-                    break;
+                    return SnapRotation_Ramp(_object);
                 case BuildingBlockObjectNames.Ramp_Ramp:
-                    break;
+                    return SnapRotation_Ramp(_object);
                 case BuildingBlockObjectNames.Ramp_Triangle:
-                    break;
+                    return SnapRotation_Ramp(_object);
                 case BuildingBlockObjectNames.Ramp_Corner:
-                    break;
+                    return SnapRotation_Ramp(_object);
 
                 default:
                     break;
@@ -930,6 +949,32 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 return _object.transform.rotation * Quaternion.Euler(0, 270, 0);
             case BuildingBlockColliderDirection.Right:
                 return _object.transform.rotation * Quaternion.Euler(0, 90, 0);
+
+            default:
+                break;
+        }
+
+        return _object.transform.rotation;
+    }
+    Quaternion SnapRotation_Ramp(GameObject _object)
+    {
+        switch (directionHit)
+        {
+            case BuildingBlockColliderDirection.None:
+                break;
+
+            case BuildingBlockColliderDirection.Front:
+                return _object.transform.rotation * Quaternion.Euler(0, 180 + 0, 0);
+            case BuildingBlockColliderDirection.Back:
+                return _object.transform.rotation * Quaternion.Euler(0, 180 + 180, 0);
+            case BuildingBlockColliderDirection.Up:
+                break;
+            case BuildingBlockColliderDirection.Down:
+                break;
+            case BuildingBlockColliderDirection.Left:
+                return _object.transform.rotation * Quaternion.Euler(0, 180 + 270, 0);
+            case BuildingBlockColliderDirection.Right:
+                return _object.transform.rotation * Quaternion.Euler(0, 180 + 90, 0);
 
             default:
                 break;
@@ -996,6 +1041,25 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     }
                     #endregion
 
+                    //If Ramp Block
+                    #region
+                    else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Ramp
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Stair
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Triangle
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Corner)
+                    {
+                        print("Pressed X");
+                        rotationSnappingValue_Ramp -= 90;
+
+                        if (rotationSnappingValue_Ramp <= -360)
+                        {
+                            rotationSnappingValue_Ramp = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Ramp, rotationSnappingValue_Ramp, model.transform.localRotation.z));
+                    }
+                    #endregion
+
                     //If Wall Block
                     #region
                     else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall
@@ -1010,7 +1074,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                             rotationSnappingValue_Wall = 0;
                         }
 
-                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(/*rotationMirrorValue_Wall, rotationSnappingValue_Wall, model.transform.localRotation.z*/model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
                     }
                     #endregion
                 }
@@ -1043,6 +1107,25 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     }
                     #endregion
 
+                    //If Ramp Block
+                    #region
+                    else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Ramp
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Stair
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Triangle
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Corner)
+                    {
+                        print("Pressed C");
+                        rotationSnappingValue_Ramp += 90;
+
+                        if (rotationSnappingValue_Ramp >= 360)
+                        {
+                            rotationSnappingValue_Ramp = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Ramp, rotationSnappingValue_Ramp, model.transform.localRotation.z));
+                    }
+                    #endregion
+
                     //If Wall Block
                     #region
                     else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall
@@ -1057,7 +1140,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                             rotationSnappingValue_Wall = 0;
                         }
 
-                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(/*rotationMirrorValue_Wall, rotationSnappingValue_Wall, model.transform.localRotation.z*/model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
                     }
                     #endregion
                 }
@@ -1147,7 +1230,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 //Spawn BuildingBlock
                 if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
                 {
-                    print("Place BuildingBlock Object");
                     #region Play Sound
                     if (activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Wood)
                         SoundManager.Instance.Play_Building_Place_Wood_Clip();
@@ -1163,7 +1245,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 //Spawn Furniture
                 else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
                 {
-                    print("Place Furniture Object");
                     #region Play Sound
                     SoundManager.Instance.Play_Building_Place_MoveableObject_Clip();
                     #endregion
@@ -1174,7 +1255,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 //Spawn Machine
                 else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
                 {
-                    print("Place Machine Object");
                     #region Play Sound
                     SoundManager.Instance.Play_Building_Place_MoveableObject_Clip();
                     #endregion

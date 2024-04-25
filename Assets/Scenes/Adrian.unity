@@ -4868,7 +4868,7 @@ PrefabInstance:
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
       propertyPath: blueprintName
-      value: Big Grill
+      value: Ghost Tank
       objectReference: {fileID: 0}
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
@@ -8052,7 +8052,7 @@ PrefabInstance:
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
       propertyPath: blueprintName
-      value: Area Lamp
+      value: Research Table
       objectReference: {fileID: 0}
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
@@ -16374,6 +16374,110 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4761904822424070173, guid: 061625c8b3a5e61488ae3c5a73ba4fee,
     type: 3}
   m_PrefabInstance: {fileID: 375090497}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &377668606
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1635446184}
+    m_Modifications:
+    - target: {fileID: 5141051638237698825, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.161
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141051638237698825, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.286
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141051638237698825, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.243
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141051638237698825, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141051638237698825, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141051638237698825, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141051638237698825, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141051638237698825, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141051638237698825, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141051638237698825, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481865451106025907, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: m_Name
+      value: Blueprint (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: blueprintName
+      value: Small Chest
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: blueprintInfo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: blueprintInfo.Array.data[0].buildingMaterial
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: blueprintInfo.Array.data[0].blueprint_Machine_Name
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: blueprintInfo.Array.data[0].blueprint_Furniture_Name
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
+        type: 3}
+      propertyPath: blueprintInfo.Array.data[0].blueprint_BuildingBlock_Name
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0b737b7ab073e5b42a724a4b15335d04, type: 3}
+--- !u!4 &377668607 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5141051638237698825, guid: 0b737b7ab073e5b42a724a4b15335d04,
+    type: 3}
+  m_PrefabInstance: {fileID: 377668606}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &379788590
 PrefabInstance:
@@ -61151,6 +61255,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4230422569923015765, guid: cd9a8f07b5d2fc747916340b223af79f,
+        type: 3}
+      propertyPath: m_SlopeLimit
+      value: 46
+      objectReference: {fileID: 0}
     - target: {fileID: 4335558766605938135, guid: cd9a8f07b5d2fc747916340b223af79f,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -69249,7 +69358,7 @@ PrefabInstance:
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
       propertyPath: blueprintName
-      value: Cryonite Wall
+      value: Crafting Table
       objectReference: {fileID: 0}
     - target: {fileID: 5569155290851227653, guid: 0b737b7ab073e5b42a724a4b15335d04,
         type: 3}
@@ -70824,6 +70933,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 135952268}
+  - {fileID: 377668607}
   m_Father: {fileID: 300948745}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1636228356

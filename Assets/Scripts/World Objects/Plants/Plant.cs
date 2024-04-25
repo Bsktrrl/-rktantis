@@ -178,8 +178,6 @@ public class Plant : MonoBehaviour
             && MainManager.Instance.menuStates == MenuStates.None)
         {
             //If Object is a Plant
-            print("Interract with a Plant");
-
             InteractableObject tempObject = pickablePart.GetComponent<InteractableObject>();
 
             //Pick the PlantItem from the plant

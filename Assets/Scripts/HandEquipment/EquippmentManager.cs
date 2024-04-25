@@ -165,8 +165,6 @@ public class EquippmentManager : Singleton<EquippmentManager>
     //The point in the animation where equipped item hits
     public void Hit(EquippedItem equippedItem)
     {
-        print("0. Hit Something with the use of a " + equippedItem.itemName);
-
         #region
 
         //If Pickaxe is equipped - For Mining

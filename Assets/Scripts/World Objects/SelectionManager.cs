@@ -221,7 +221,6 @@ public class SelectionManager : Singleton<SelectionManager>
         //If looking at a Plant, show its UI to the player
         else if (newPlantObject != null)
         {
-            print("newPlantObject != null");
             //Show Inventory info
             onTarget = true;
             selectedObject = newPlantObject.gameObject;
@@ -291,8 +290,6 @@ public class SelectionManager : Singleton<SelectionManager>
             {
                 if (hit.transform.gameObject.GetComponent<MoveableObject>())
                 {
-                    print("Select a Furniture: " + hit.transform.gameObject.name);
-
                     selectedMovableObjectToRemove = hit.transform.gameObject;
                 }
             }
@@ -302,8 +299,6 @@ public class SelectionManager : Singleton<SelectionManager>
             {
                 if (hit.transform.gameObject.GetComponent<MoveableObject>())
                 {
-                    print("Select a Machine: " + hit.transform.gameObject.name);
-
                     selectedMovableObjectToRemove = hit.transform.gameObject;
                 }
             }
@@ -315,7 +310,6 @@ public class SelectionManager : Singleton<SelectionManager>
             {
                 if (hit.transform.gameObject.GetComponent<Model>())
                 {
-                    print("Select a BuildingBlock: " + hit.transform.gameObject.name);
                     oldSelectedObject = hit.transform.gameObject;
 
                     selectedMovableObjectToRemove = hit.transform.gameObject;
