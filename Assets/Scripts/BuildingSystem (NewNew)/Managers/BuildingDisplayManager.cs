@@ -21,6 +21,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
 
     [Header("ScreenInfo")]
+    [SerializeField] GameObject rotateInfo;
+    [SerializeField] GameObject mirrorInfo;
     [SerializeField] GameObject buildingObject_ScreenInfo_Parent;
 
     [SerializeField] GameObject buildingObject_Requirement_ScreenInfo_Parent;
@@ -51,6 +53,17 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         UpdateScreenBuildingRequirementDisplay();
 
         UpdateScreenBuildingRewardDisplay();
+
+        if (MainManager.Instance.gameStates == GameStates.Building)
+        {
+            rotateInfo.SetActive(true);
+            mirrorInfo.SetActive(true);
+        }
+        else
+        {
+            rotateInfo.SetActive(false);
+            mirrorInfo.SetActive(false);
+        }
     }
 
 
@@ -189,6 +202,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         selectedObject_Image.gameObject.SetActive(true);
         buildingObject_RequirementList_Parent.SetActive(true);
+
         selectedObject_Image.sprite = buildingBlocksInfo.objectInfo.objectSprite;
 
         requirementList = InstantiateRequirementList(buildingObject_RequirementList_Parent);
@@ -206,6 +220,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         selectedObject_Image.gameObject.SetActive(true);
         buildingObject_RequirementList_Parent.SetActive(true);
+
         selectedObject_Image.sprite = furnitureInfo.objectInfo.objectSprite;
 
         requirementList = InstantiateRequirementList(buildingObject_RequirementList_Parent);
@@ -223,6 +238,7 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
 
         selectedObject_Image.gameObject.SetActive(true);
         buildingObject_RequirementList_Parent.SetActive(true);
+
         selectedObject_Image.sprite = machinesInfo.objectInfo.objectSprite;
 
         requirementList = InstantiateRequirementList(buildingObject_RequirementList_Parent);

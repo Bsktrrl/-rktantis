@@ -78,7 +78,7 @@ public class Outline : MonoBehaviour {
 
     private bool needsUpdate;
 
-    float outlineWidth = 8;
+    float outlineWidth;
 
 
     //--------------------
@@ -100,7 +100,7 @@ public class Outline : MonoBehaviour {
         LoadSmoothNormals();
 
         //outlineMode = Mode.OutlineVisible;
-        outlineWidth = 8;
+        outlineWidth = 5;
         precomputeOutline = true;
 
         // Apply material properties immediately

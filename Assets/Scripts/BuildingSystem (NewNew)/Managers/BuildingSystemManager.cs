@@ -36,6 +36,14 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public Quaternion snappingRotation;
 
     public float rotationValue = 0;
+
+    public float rotationSnappingValue_Floor = 0;
+    public float rotationMirrorValue_Floor = 0;
+    public float rotationSnappingValue_Wall = 0;
+    public float rotationMirrorValue_Wall = 0;
+    public float rotationSnappingValue_Ramp = 0;
+    public float rotationMirrorValue_Ramp = 0;
+
     [SerializeField] float rotationSpeed = 75;
 
     public BuildingBlockColliderDirection directionHit;
@@ -87,6 +95,11 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     {
         PlayerButtonManager.isPressed_MoveableRotation_Right += SetObjectRotation_Right;
         PlayerButtonManager.isPressed_MoveableRotation_Left += SetObjectRotation_Left;
+
+        PlayerButtonManager.isPressed_MoveableSnappingRotation_Right += SetObjectSnappingRotation_Right;
+        PlayerButtonManager.isPressed_MoveableSnappingRotation_Left += SetObjectSnappingRotation_Left;
+
+        PlayerButtonManager.isPressed_MoveableMirrorRotation += SetObjectMirrorRotation;
     }
     private void Update()
     {
@@ -122,6 +135,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetParent(worldObject_Parent.transform);
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
+
+                    //Set Rotation of the Model
+                    for (int j = 0; j < worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList.Count; j++)
+                    {
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList[j].transform.SetLocalPositionAndRotation(worldBuildingObjectInfoList[i].modelPos, worldBuildingObjectInfoList[i].modelRot);
+                    }
                 }
             }
             else if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.Furniture)
@@ -566,7 +585,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     }
     public void Snapping_Raycast()
     {
-        // Cast a Ray from the mouse position to the world space
+        //Cast a Ray from the mouse position
         ray = MainManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
 
         //Make 5 Raycasts (Forward, Up-Forward, Down-Forward, Right-Forward, Left-Forward)
@@ -687,9 +706,10 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), color);
 
         if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlock)
-            || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Floor))
+            || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Floor)
             //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Wall)
-            //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Ramp))
+            //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Ramp)
+            )
         {
             //Get the Transform of GameObject hit
             hitTransform = rayHit.transform;
@@ -950,6 +970,95 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     {
         rotationValue -= rotationSpeed * Time.deltaTime;
     }
+    void SetObjectSnappingRotation_Right()
+    {
+        if (ghostObject_Holding)
+        {
+            if (ghostObject_Holding.GetComponent<MoveableObject>())
+            {
+                for (int i = 0; i < ghostObject_Holding.GetComponent<MoveableObject>().modelList.Count; i++)
+                {
+                    GameObject model = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i];
+
+                    //If Floor Block
+                    if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Square
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Triangle)
+                    {
+                        rotationSnappingValue_Floor -= 90;
+
+                        if (rotationSnappingValue_Floor <= -360)
+                        {
+                            rotationSnappingValue_Floor = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Floor/*model.transform.localRotation.x*/, rotationSnappingValue_Floor, model.transform.localRotation.z));
+                    }
+                }
+            }
+        }
+    }
+    void SetObjectSnappingRotation_Left()
+    {
+        if (ghostObject_Holding)
+        {
+            if (ghostObject_Holding.GetComponent<MoveableObject>())
+            {
+                for (int i = 0; i < ghostObject_Holding.GetComponent<MoveableObject>().modelList.Count; i++)
+                {
+                    GameObject model = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i];
+
+                    //If Floor Block
+                    if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Square
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Triangle)
+                    {
+                        rotationSnappingValue_Floor += 90;
+
+                        if (rotationSnappingValue_Floor >= 360)
+                        {
+                            rotationSnappingValue_Floor = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Floor/*model.transform.localRotation.x*/, rotationSnappingValue_Floor, model.transform.localRotation.z));
+                    }
+                }
+            }
+        }
+    }
+
+    void SetObjectMirrorRotation()
+    {
+        if (ghostObject_Holding)
+        {
+            if (ghostObject_Holding.GetComponent<MoveableObject>())
+            {
+                for (int i = 0; i < ghostObject_Holding.GetComponent<MoveableObject>().modelList.Count; i++)
+                {
+                    GameObject model = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i];
+
+                    //If Floor Block
+                    if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Square
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Triangle)
+                    {
+                        rotationMirrorValue_Floor += 180;
+
+                        if (rotationMirrorValue_Floor >= 360)
+                        {
+                            rotationMirrorValue_Floor = 0;
+                        }
+
+                        if (rotationMirrorValue_Floor == 180)
+                        {
+                            model.transform.SetLocalPositionAndRotation(new Vector3(model.transform.localPosition.x, -2/*model.transform.localPosition.y*/, model.transform.localPosition.z), Quaternion.Euler(rotationMirrorValue_Floor, rotationSnappingValue_Floor, model.transform.localRotation.z));
+                        }
+                        else
+                        {
+                            model.transform.SetLocalPositionAndRotation(new Vector3(model.transform.localPosition.x, 0, model.transform.localPosition.z), Quaternion.Euler(rotationMirrorValue_Floor, rotationSnappingValue_Floor, model.transform.localRotation.z));
+                        }
+                    }
+                }
+            }
+        }
+    }
     #endregion
 
 
@@ -1011,6 +1120,14 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 //Set position and Rotation to be the same as the Ghost
                 worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(ghostObject_Holding.transform.position, ghostObject_Holding.transform.rotation);
 
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                {
+                    for (int i = 0; i < worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList.Count; i++)
+                    {
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList[i].transform.SetLocalPositionAndRotation(ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].transform.localPosition, ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].transform.localRotation);
+                    }
+                }
+
                 //Remove Building Items from inventory
                 RemoveItemsFromInventoryAfterPlacingObject();
 
@@ -1037,6 +1154,13 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
             worldBuildingObject.objectPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.position;
             worldBuildingObject.objectRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.rotation;
+
+            //Add Local Rotation to ModelObject
+            if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+            {
+                worldBuildingObject.modelPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList[0].transform.localPosition;
+                worldBuildingObject.modelRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList[0].transform.localRotation;
+            }
 
             worldBuildingObject.buildingObjectType_Active = buildingBlockInfo.buildingObjectType;
             worldBuildingObject.buildingMaterial_Active = buildingBlockInfo.buildingMaterial;
@@ -1163,6 +1287,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 worldBuildingObjectListSpawned.RemoveAt(i);
 
+                buildingBlock_Hit = null;
+
                 break;
             }
         }
@@ -1234,9 +1360,13 @@ public class ActiveBuildingObject
 [Serializable]
 public class WorldBuildingObject
 {
-    [Header("Posision")]
+    [Header("MainObject Posision")]
     public Vector3 objectPos;
     public Quaternion objectRot;
+
+    [Header("ModelObject Posision")]
+    public Vector3 modelPos;
+    public Quaternion modelRot;
 
     [Header("Base")]
     public BuildingObjectTypes buildingObjectType_Active;
