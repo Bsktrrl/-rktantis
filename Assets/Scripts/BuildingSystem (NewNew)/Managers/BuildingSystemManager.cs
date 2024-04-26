@@ -518,6 +518,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         ghostObject_Holding.GetComponent<MoveableObject>().modelList[index].GetComponent<MeshRenderer>().materials = materials;
+
+        ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced = true;
     }
     void Materials_MeshRenderer_Cannot(int index)
     {
@@ -529,6 +531,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         ghostObject_Holding.GetComponent<MoveableObject>().modelList[index].GetComponent<MeshRenderer>().materials = materials;
+
+        ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced = false;
     }
     void Materials_SkinnedMeshRenderer_Can(int index)
     {
@@ -540,6 +544,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         ghostObject_Holding.GetComponent<MoveableObject>().modelList[index].GetComponent<SkinnedMeshRenderer>().materials = materials;
+
+        ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced = true;
     }
     void Materials_SkinnedMeshRenderer_Cannot(int index)
     {
@@ -551,6 +557,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         ghostObject_Holding.GetComponent<MoveableObject>().modelList[index].GetComponent<SkinnedMeshRenderer>().materials = materials;
+
+        ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced = false;
     }
 
     public bool CanPlaceBuildingObject_Check() //- Fixed
@@ -1381,7 +1389,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
             #region If Chests added
             //If a small chest, update inventory info
-            if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.Chest_Small)
+            if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestSmall)
             {
                 InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.smallChest_Size);
 
@@ -1389,7 +1397,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             }
 
             //If a small chest, update inventory info
-            else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.Chest_Medium)
+            else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestMedium)
             {
                 InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.mediumChest_Size);
 
@@ -1397,7 +1405,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             }
 
             //If a big chest, update inventory info
-            else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.Chest_Big)
+            else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestBig)
             {
                 InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.bigChest_Size);
 
@@ -1627,14 +1635,14 @@ public enum FurnitureObjectNames
     [Description("Research Table")][InspectorName("Research Table")] ResearchTable,
     [Description("Skill Table")][InspectorName("Skill Table")] SkillTreeTable,
 
-    [Description("Chest Small")][InspectorName("Chest Small")] Chest_Small,
-    [Description("Chest Medium")][InspectorName("Chest Medium")] Chest_Medium,
-    [Description("Chest Big")][InspectorName("Chest Big")] Chest_Big,
+    [Description("Chest Small")][InspectorName("Chest Small")] ChestSmall,
+    [Description("Chest Medium")][InspectorName("Chest Medium")] ChestMedium,
+    [Description("Chest Big")][InspectorName("Chest Big")] ChestBig,
 
-    [Description("Lamp Area")][InspectorName("Lamp Area")] Lamp_Area,
-    [Description("Lamp Spot")][InspectorName("Lamp Spot")] Lamp_Spot,
-    [Description("Lamp Arídia Area")][InspectorName("Lamp Arídia Area")] Lamp_Arídia_Area,
-    [Description("Lamp Arídia Spot")][InspectorName("Lamp Arídia Spot")] Lamp_Arídia_Spot,
+    [Description("Lamp Area")][InspectorName("Lamp Area")] LampArea,
+    [Description("Lamp Spot")][InspectorName("Lamp Spot")] LampSpot,
+    [Description("Lamp Arídia Area")][InspectorName("Lamp Arídia Area")] LampArídiaArea,
+    [Description("Lamp Arídia Spot")][InspectorName("Lamp Arídia Spot")] LampArídiaSpot,
 
     [Description("Other1")][InspectorName("Other1")] FU_Other1,
     [Description("Other2")][InspectorName("Other2")] FU_Other2,
@@ -1655,17 +1663,17 @@ public enum MachineObjectNames
     [Description("Resource Converter")][InspectorName("Resource Converter")] ResourceConverter,
     [Description("Blender")][InspectorName("Blender")] Blender,
 
-    [Description("Crop Plot Small")][InspectorName("Crop Plot Small")] CropPlot_Small,
-    [Description("Crop Plot Medium")][InspectorName("Crop Plot Medium")] CropPlot_Medium,
-    [Description("Crop Plot Big")][InspectorName("Crop Plot Big")] CropPlot_Big,
+    [Description("Crop Plot Small")][InspectorName("Crop Plot Small")] CropPlotSmall,
+    [Description("Crop Plot Medium")][InspectorName("Crop Plot Medium")] CropPlotMedium,
+    [Description("Crop Plot Big")][InspectorName("Crop Plot Big")] CropPlotBig,
 
-    [Description("Grill Small")][InspectorName("Grill Small")] Grill_Small,
-    [Description("Grill Medium")][InspectorName("Grill Medium")] Grill_Medium,
-    [Description("Grill Big")][InspectorName("Grill Big")] Grill_Big,
+    [Description("Grill Small")][InspectorName("Grill Small")] GrillSmall,
+    [Description("Grill Medium")][InspectorName("Grill Medium")] GrillMedium,
+    [Description("Grill Big")][InspectorName("Grill Big")] GrillBig,
 
-    [Description("Battery Small")][InspectorName("Battery Small")] Battery_Small,
-    [Description("Battery Medium")][InspectorName("Battery Medium")] Battery_Medium,
-    [Description("Battery Big")][InspectorName("Battery Big")] Battery_Big,
+    [Description("Battery Small")][InspectorName("Battery Small")] BatterySmall,
+    [Description("Battery Medium")][InspectorName("Battery Medium")] BatteryMedium,
+    [Description("Battery Big")][InspectorName("Battery Big")] BatteryBig,
 
     [Description("Other1")][InspectorName("Other1")] MA_Other1,
     [Description("Other2")][InspectorName("Other2")] MA_Other2,

@@ -239,7 +239,7 @@ public enum Items
     [Description("Big Chest")][InspectorName("Furniture/Big Chest")] BigChest,
 
     [Description("Lamp")][InspectorName("Furniture/Lamp")] Lamp,
-    [Description("Lamp_Spot")][InspectorName("Furniture/Lamp_Spot")] Spotlight,
+    [Description("LampSpot")][InspectorName("Furniture/LampSpot")] Spotlight,
 
     [Description("Medium Chest")][InspectorName("Furniture/Medium Chest")] MediumChest,
     [Description("Research Table")][InspectorName("Furniture/Research Table")] ResearchTable,

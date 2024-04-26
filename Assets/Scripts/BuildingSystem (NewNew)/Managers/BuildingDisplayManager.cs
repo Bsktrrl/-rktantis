@@ -50,6 +50,8 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
     {
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
+        if (!DataManager.Instance.hasLoaded) { return; }
+
         UpdateScreenBuildingRequirementDisplay();
 
         UpdateScreenBuildingRewardDisplay();
@@ -754,10 +756,24 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
         if (enoughItems)
         {
             BuildingSystemManager.Instance.enoughItemsToBuild = true;
+            if (BuildingSystemManager.Instance.ghostObject_Holding)
+            {
+                if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>())
+                {
+                    BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().enoughItemsToBuild = true;
+                }
+            }
         }
         else
         {
             BuildingSystemManager.Instance.enoughItemsToBuild = false;
+            if (BuildingSystemManager.Instance.ghostObject_Holding)
+            {
+                if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>())
+                {
+                    BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().enoughItemsToBuild = false;
+                }
+            }
         }
 
         #endregion

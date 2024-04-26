@@ -25,6 +25,10 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
         //Set Frame Blue
         GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Active;
     }
+    private void Update()
+    {
+        SetNewCategoryButtonItemDisplay();
+    }
 
 
     //--------------------
@@ -79,7 +83,16 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
             if (CraftingManager.Instance.itemStateList[i].itemCategory == categoryType
                 && CraftingManager.Instance.itemStateList[i].itemState == CraftingItemState.New)
             {
-                newItemObject.SetActive(true);
+                if (CraftingManager.Instance.itemStateList[i].itemName == Items.WoodSword
+                    || CraftingManager.Instance.itemStateList[i].itemName == Items.StoneSword
+                    || CraftingManager.Instance.itemStateList[i].itemName == Items.CryoniteSword)
+                {
+                    CraftingManager.Instance.itemStateList[i].itemState = CraftingItemState.Unactive;
+                }
+                else
+                {
+                    newItemObject.SetActive(true);
+                }
 
                 break;
             }

@@ -5,9 +5,9 @@ using UnityEngine;
 public class MoveableObject : MonoBehaviour
 {
     [Header("General")]
-    [HideInInspector] public bool canBePlaced;
-    [HideInInspector] public bool isSelectedForMovement;
-    [HideInInspector] public bool enoughItemsToBuild;
+    public bool canBePlaced;
+    public bool isSelectedForMovement;
+    public bool enoughItemsToBuild;
 
     [Header("MoveableObject Type")]
     public BuildingObjectTypes buildingObjectType;

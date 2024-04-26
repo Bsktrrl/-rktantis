@@ -58,8 +58,8 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
                 placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].transform.parent = moveableObject_Parent.transform;
 
                 //If a chest is loaded
-                if (placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureObjectNames.Chest_Small
-                    || placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureObjectNames.Chest_Big)
+                if (placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureObjectNames.ChestSmall
+                    || placedMoveableObjectsList_ToSave[i].furnitureType == FurnitureObjectNames.ChestBig)
                 {
                     if (placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>())
                     {
@@ -332,7 +332,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             tempToSave.objectRot = placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].transform.rotation;
             
             //If a small chest, update inventory info
-            if (tempToSave.furnitureType == FurnitureObjectNames.Chest_Small)
+            if (tempToSave.furnitureType == FurnitureObjectNames.ChestSmall)
             {
                 InventoryManager.Instance.AddInventory(placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.smallChest_Size);
 
@@ -340,7 +340,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             }
 
             //If a big chest, update inventory info
-            else if (tempToSave.furnitureType == FurnitureObjectNames.Chest_Big)
+            else if (tempToSave.furnitureType == FurnitureObjectNames.ChestBig)
             {
                 InventoryManager.Instance.AddInventory(placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.bigChest_Size);
 
