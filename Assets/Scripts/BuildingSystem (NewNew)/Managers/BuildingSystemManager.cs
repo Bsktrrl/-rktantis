@@ -23,6 +23,9 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public GameObject WorldObjectGhost_Parent; //Ghost Parent
     public GameObject ghostObject_Holding; //GhostBlock Holding
 
+    public GameObject wood_Door_Prefab;
+    public GameObject stone_Door_Prefab;
+
     [Header("Object Ghost")]
     public Material canPlace_Material;
     public Material cannotPlace_Material;
@@ -57,6 +60,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public LayerMask layerMask_BuildingBlock;
     public LayerMask layerMask_BuildingBlockModel_Floor;
     public LayerMask layerMask_BuildingBlockModel_Wall;
+    public LayerMask layerMask_BuildingBlockModel_Door;
     public LayerMask layerMask_BuildingBlockModel_Ramp;
     public LayerMask layerMask_Furniture;
     public LayerMask layerMask_Machine;
@@ -131,7 +135,23 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             {
                 if (GetBuildingObjectInfo(worldBuildingObjectInfoList[i].buildingBlockObjectName_Active, worldBuildingObjectInfoList[i].buildingMaterial_Active).objectInfo.worldObject != null)
                 {
-                    worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(worldBuildingObjectInfoList[i].buildingBlockObjectName_Active, worldBuildingObjectInfoList[i].buildingMaterial_Active).objectInfo.worldObject) as GameObject);
+                    //Wooden Door
+                    if (worldBuildingObjectInfoList[i].buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && worldBuildingObjectInfoList[i].buildingMaterial_Active == BuildingMaterial.Wood)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(wood_Door_Prefab) as GameObject);
+                    }
+
+                    //Stone Door
+                    else if (worldBuildingObjectInfoList[i].buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && worldBuildingObjectInfoList[i].buildingMaterial_Active == BuildingMaterial.Wood)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(stone_Door_Prefab) as GameObject);
+                    }
+
+                    //Any other BuildingBlock
+                    else
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(worldBuildingObjectInfoList[i].buildingBlockObjectName_Active, worldBuildingObjectInfoList[i].buildingMaterial_Active).objectInfo.worldObject) as GameObject);
+                    }
 
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetParent(worldObject_Parent.transform);
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
@@ -1239,7 +1259,23 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                         SoundManager.Instance.Play_Building_Place_Cryonite_Clip();
                     #endregion
 
-                    worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active).objectInfo.worldObject) as GameObject);
+                    //Wooden Door
+                    if (activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Wood)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(wood_Door_Prefab) as GameObject);
+                    }
+
+                    //Stone Door
+                    else if (activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Wood)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(stone_Door_Prefab) as GameObject);
+                    }
+
+                    //Any other BuildingBlock
+                    else
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active).objectInfo.worldObject) as GameObject);
+                    }
                 }
 
                 //Spawn Furniture

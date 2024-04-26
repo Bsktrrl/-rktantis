@@ -49,7 +49,10 @@ public class SelectionManager : Singleton<SelectionManager>
         {
             oldSelectedMovableObjectToRemove = selectedMovableObjectToRemove;
 
-            oldSelectedMovableObjectToRemove.GetComponent<Outline>().enabled = true;
+            if (oldSelectedMovableObjectToRemove.GetComponent<Outline>())
+            {
+                oldSelectedMovableObjectToRemove.GetComponent<Outline>().enabled = true;
+            }
         }
         else
         {
@@ -97,7 +100,10 @@ public class SelectionManager : Singleton<SelectionManager>
         {
             oldSelectedMovableObjectToRemove = selectedMovableObjectToRemove;
 
-            oldSelectedMovableObjectToRemove.GetComponent<Outline>().enabled = true;
+            if (oldSelectedMovableObjectToRemove.GetComponent<Outline>())
+            {
+                oldSelectedMovableObjectToRemove.GetComponent<Outline>().enabled = true;
+            }
         }
         else
         {
@@ -176,6 +182,17 @@ public class SelectionManager : Singleton<SelectionManager>
                     return;
                 }
             }
+
+            //If hitting a Door
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Door))
+            {
+                print("Door");
+                oldSelectedObject = hit.transform.gameObject;
+
+                selectedObject = hit.transform.gameObject;
+                onTarget = true;
+            }
+
             else
             {
                 tag = "";
@@ -316,6 +333,14 @@ public class SelectionManager : Singleton<SelectionManager>
                 }
             }
 
+            //Door
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Door))
+            {
+                //oldSelectedObject = hit.transform.gameObject;
+
+                selectedMovableObjectToRemove = hit.transform.gameObject;
+            }
+
             //Nothing
             else
             {
@@ -341,7 +366,22 @@ public class SelectionManager : Singleton<SelectionManager>
             {
                 if (oldSelectedObject == selectedObject)
                 {
-                    oldSelectedObject.GetComponent<Outline>().enabled = true;
+                    if (oldSelectedObject.GetComponent<MoveableObject>())
+                    {
+                        //If a Door
+                        if (oldSelectedObject.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Door)
+                        {
+                            oldSelectedObject.GetComponent<Outline>().enabled = false;
+                        }
+                        else
+                        {
+                            oldSelectedObject.GetComponent<Outline>().enabled = true;
+                        }
+                    }
+                    else
+                    {
+                        oldSelectedObject.GetComponent<Outline>().enabled = true;
+                    }
                 }
                 else
                 {
