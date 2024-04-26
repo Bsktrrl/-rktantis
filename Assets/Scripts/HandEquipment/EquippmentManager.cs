@@ -328,8 +328,13 @@ public class EquippmentManager : Singleton<EquippmentManager>
                 //Play Drinking Sound
                 SoundManager.Instance.Play_Inventory_DrinkItem_Clip();
 
+                //Thirst Refill
                 float percentage = (float)MainManager.Instance.GetItem(equippedItem.itemName).thirstHealthHeal / 100;
                 HealthManager.Instance.thirstValue += percentage;
+
+                //Heat Resistance Refill
+                percentage = (float)MainManager.Instance.GetItem(equippedItem.itemName).heatresistanceHealthHeal / 100;
+                HealthManager.Instance.heatResistanceValue += percentage;
 
                 if (HealthManager.Instance.thirstValue > 1)
                 {

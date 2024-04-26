@@ -118,6 +118,8 @@ public class Arms : Singleton<Arms>
             {
                 if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>())
                 {
+                    print("000. Water Refill");
+
                     EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().FillDrink();
                 }
             }
@@ -412,7 +414,7 @@ public class Arms : Singleton<Arms>
                     }
                     #endregion
 
-                    #region Water Container
+                    #region Water Container - Drinking
                     //WaterContainer
                     else if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Cup
                         || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Bottle
