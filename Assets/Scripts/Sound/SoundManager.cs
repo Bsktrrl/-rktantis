@@ -108,6 +108,9 @@ public class SoundManager : Singleton<SoundManager>
     [Header("GameOver")]
     public AudioSource audioSource_GameOver_Screen; //
 
+    [Header("Arídea Gate")]
+    public AudioSource audioSource_ArídeaGate_Rotate; //
+
     #endregion
 
 
@@ -331,6 +334,12 @@ public class SoundManager : Singleton<SoundManager>
     [Header("GameOver")]
     [SerializeField] AudioClip gameOver_GameOverSound_Clip; //
     #endregion
+    #region Arídea Gate
+    [Header("Arídea Gate")]
+    [SerializeField] AudioClip gameOver_ArídeaGate_KeyPlacement_Clip; //
+    [SerializeField] AudioClip gameOver_ArídeaGate_Rotate_Clip; //
+    [SerializeField] AudioClip gameOver_ArídeaGate_InPlace_Clip; //
+    #endregion
 
     #endregion
 
@@ -444,6 +453,9 @@ public class SoundManager : Singleton<SoundManager>
 
         //GameOver
         audioSource_GameOver_Screen.volume = sound_Menu;
+
+        //Arídea Gate
+        audioSource_ArídeaGate_Rotate.volume = sound_World;
 
         #endregion
     }
@@ -1685,6 +1697,36 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_GameOver_Screen != null)
         {
             audioSource_GameOver_Screen.Stop();
+        }
+    }
+    #endregion
+
+    #region Arídea Gate
+    public void Play_ArídeaGate_KeyPlacement_Clip()
+    {
+        if (audioSource_ArídeaGate_Rotate != null)
+        {
+            audioSource_ArídeaGate_Rotate.clip = gameOver_ArídeaGate_KeyPlacement_Clip;
+            audioSource_ArídeaGate_Rotate.pitch = 0.25f;
+            audioSource_ArídeaGate_Rotate.Play();
+        }
+    }
+    public void Play_ArídeaGate_Rotate_Clip()
+    {
+        if (audioSource_ArídeaGate_Rotate != null)
+        {
+            audioSource_ArídeaGate_Rotate.clip = gameOver_ArídeaGate_Rotate_Clip;
+            audioSource_ArídeaGate_Rotate.pitch = 1f;
+            audioSource_ArídeaGate_Rotate.Play();
+        }
+    }
+    public void Play_ArídeaGate_InPlace_Clip()
+    {
+        if (audioSource_ArídeaGate_Rotate != null)
+        {
+            audioSource_ArídeaGate_Rotate.clip = gameOver_ArídeaGate_InPlace_Clip;
+            audioSource_ArídeaGate_Rotate.pitch = 1f;
+            audioSource_ArídeaGate_Rotate.Play();
         }
     }
     #endregion

@@ -108,6 +108,9 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             print("AddInventory");
             AddInventory(new Vector2(5, 7));
+            AddInventory(new Vector2(4, 4));
+            AddInventory(new Vector2(4, 4));
+            AddInventory(new Vector2(4, 4));
 
             SaveData();
         }

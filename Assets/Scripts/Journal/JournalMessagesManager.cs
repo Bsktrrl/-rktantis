@@ -122,12 +122,21 @@ public class JournalMessagesManager : Singleton<JournalMessagesManager>
     }
     void CapturingGhost()
     {
-        if (!messagesConditionChecks.capturingGhost
-            && GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[0].isTaken)
+        if (GhostManager.Instance.ghostCapturerStats != null)
         {
-            messagesConditionChecks.capturingGhost = true;
+            if (GhostManager.Instance.ghostCapturerStats.ghostCapturedStats != null)
+            {
+                if (GhostManager.Instance.ghostCapturerStats.ghostCapturedStats.Count > 0)
+                {
+                    if (!messagesConditionChecks.capturingGhost
+                    && GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[0].isTaken)
+                    {
+                        messagesConditionChecks.capturingGhost = true;
 
-            ActivateJournalPage(5);
+                        ActivateJournalPage(5);
+                    }
+                }
+            }
         }
     }
     void HoldingArídianKey()

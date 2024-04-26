@@ -96,7 +96,7 @@ public class InteractableObject : MonoBehaviour
                 #region
                 else if (interactableType == InteracteableType.Plant)
                 {
-                    print("Interract with a PlantItem");
+                    //print("Interract with a PlantItem");
 
                     //Pick the Plant
                     if (plantParent)
@@ -224,7 +224,7 @@ public class InteractableObject : MonoBehaviour
                 #region
                 else if (interactableType == InteracteableType.GhostTank)
                 {
-                    print("Interact with a GhostTank");
+                    //print("Interact with a GhostTank");
 
                     if (gameObject.GetComponent<GhostTank>())
                     {
@@ -237,7 +237,7 @@ public class InteractableObject : MonoBehaviour
                 #region
                 else if (interactableType == InteracteableType.JournalPage)
                 {
-                    print("Interact with a Journal Page");
+                    //print("Interact with a Journal Page");
 
                     SoundManager.Instance.Play_JournalPage_GetNewJournalPage_Clip();
 
@@ -261,7 +261,7 @@ public class InteractableObject : MonoBehaviour
                 #region
                 else if (interactableType == InteracteableType.Blueprint)
                 {
-                    print("Interact with a BlueprintInfo");
+                    //print("Interact with a BlueprintInfo");
 
                     for (int i = 0; i < blueprintInfo.Count; i++)
                     {
@@ -288,6 +288,17 @@ public class InteractableObject : MonoBehaviour
 
                     //Destroy gameObject
                     DestroyThisObject();
+                }
+                #endregion
+
+                //If Object is the Arídea Gate
+                #region
+                else if (interactableType == InteracteableType.ArídeaGate)
+                {
+                    if (SelectionManager.Instance.selectedObject.GetComponent<ArideaGateTest>())
+                    {
+                        SelectionManager.Instance.selectedObject.GetComponent<ArideaGateTest>().ActivateArídeaGate();
+                    }
                 }
                 #endregion
             }
@@ -401,6 +412,9 @@ public enum InteracteableType
 
     //Blueprint
     [Description("BlueprintInfo")][InspectorName("BlueprintInfo/BlueprintInfo")] Blueprint,
+
+    //Arídea Gate
+    [Description("Arídea Gate")][InspectorName("Arídea Gate/Arídea Gate")] ArídeaGate,
 }
 
 [Serializable]
