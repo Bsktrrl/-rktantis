@@ -45,10 +45,10 @@ public class WeatherManager : Singleton<WeatherManager>
     public WeatherType weatherType = WeatherType.Sunny;
     public GameObject weatherDisplay_Parent;
     public bool weatherImageDisplay_Day1_isUpgraded = true;
-    public bool weatherImageDisplay_Day2_isUpgraded = true;
-    public bool weatherImageDisplay_Day3_isUpgraded = true;
-    public bool weatherImageDisplay_Day4_isUpgraded = true;
-    public bool weatherImageDisplay_Day5_isUpgraded = true;
+    public bool weatherImageDisplay_Day2_isUpgraded = false;
+    public bool weatherImageDisplay_Day3_isUpgraded = false;
+    public bool weatherImageDisplay_Day4_isUpgraded = false;
+    public bool weatherImageDisplay_Day5_isUpgraded = false;
     public GameObject weatherImageDisplay_Day1_Parent;
     public GameObject weatherImageDisplay_Day2_Parent;
     public GameObject weatherImageDisplay_Day3_Parent;
@@ -107,6 +107,17 @@ public class WeatherManager : Singleton<WeatherManager>
             CalculateLastWeather(20);
 
             SetWeather();
+
+            weatherImageDisplay_Day1_isUpgraded = true;
+            weatherImageDisplay_Day2_isUpgraded = false;
+            weatherImageDisplay_Day3_isUpgraded = false;
+            weatherImageDisplay_Day4_isUpgraded = false;
+            weatherImageDisplay_Day5_isUpgraded = false;
+            weatherImageDisplay_Day1_Parent.SetActive(true);
+            weatherImageDisplay_Day2_Parent.SetActive(false);
+            weatherImageDisplay_Day3_Parent.SetActive(false);
+            weatherImageDisplay_Day4_Parent.SetActive(false);
+            weatherImageDisplay_Day5_Parent.SetActive(false);
         }
 
         //If not NewGame, set the parameters given by the list

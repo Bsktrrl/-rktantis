@@ -452,7 +452,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 }
 
                 //SettingsManager.Instance.ChangeFOV(FOV_Smoother);
-                movementSpeedVarianceByMovement = 2;
+                movementSpeedVarianceByMovement = 2.5f;
                 break;
             case MovementStates.Crouching:
                 PlayerManager.Instance.FOV_Addon = PlayerManager.Instance.FOV_Crouching;
