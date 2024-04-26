@@ -117,8 +117,30 @@ public class PlayerMovement : Singleton<PlayerMovement>
         //check if the player is on the ground so he can jump
         if (Input.GetKeyDown(KeyCode.Space) && GetComponent<DistanceAboveGround>().isGrounded)
         {
-            //the equation for jumping
-            velocity.y = Mathf.Sqrt(PlayerManager.Instance.jumpHeight * -gravityResistance * gravity);
+            //Check if the player can jump - is standing on a slope less than 50 degrees
+
+            Vector3 raycastDirection = Vector3.down;
+
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, raycastDirection, out hit, 10))
+            {
+                //Calculate the normal of the surface hit by the raycast
+                Vector3 groundNormal = hit.normal;
+
+                //Calculate the angle between the ground normal and the up direction (vertical)
+                float slopeAngle = Vector3.Angle(groundNormal, Vector3.up);
+
+                //Check if the player can jump
+                if (slopeAngle > 46)
+                {
+
+                }
+                else
+                {
+                    //The equation for jumping
+                    velocity.y = Mathf.Sqrt(PlayerManager.Instance.jumpHeight * -gravityResistance * gravity);
+                }
+            }
         }
 
         if (movement_X == 0 && movement_Z == 0)
