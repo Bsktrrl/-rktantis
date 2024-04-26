@@ -1078,7 +1078,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                         || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Triangle
                         || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Corner)
                     {
-                        print("Pressed X");
                         rotationSnappingValue_Ramp -= 90;
 
                         if (rotationSnappingValue_Ramp <= -360)
@@ -1144,7 +1143,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                         || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Triangle
                         || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Corner)
                     {
-                        print("Pressed C");
                         rotationSnappingValue_Ramp += 90;
 
                         if (rotationSnappingValue_Ramp >= 360)

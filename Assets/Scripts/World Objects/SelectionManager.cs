@@ -186,7 +186,6 @@ public class SelectionManager : Singleton<SelectionManager>
             //If hitting a Door
             else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Door))
             {
-                print("Door");
                 oldSelectedObject = hit.transform.gameObject;
 
                 selectedObject = hit.transform.gameObject;
@@ -256,7 +255,6 @@ public class SelectionManager : Singleton<SelectionManager>
         //If looking at a Ghost, show its UI to the player
         else if (newGhostObject != null)
         {
-            print("newGhostObject != null");
             //Show Inventory info
             onTarget = true;
             selectedObject = newGhostObject.gameObject;
@@ -275,8 +273,6 @@ public class SelectionManager : Singleton<SelectionManager>
         //If there is a Hit without an "Interactable"-script
         else
         {
-            print("If there is a Hit without an \"Interactable\"-script");
-
             selectedObject = null;
             onTarget = false;
 
