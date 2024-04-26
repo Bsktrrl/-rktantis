@@ -30,7 +30,9 @@ public class ArideaGateTest : MonoBehaviour
             ArídianKey_1.SetActive(true);
             SoundManager.Instance.Play_ArídeaGate_KeyPlacement_Clip();
 
-            StartCoroutine(WaitForGateToTurn(1));
+            InventoryManager.Instance.RemoveItemFromInventory(0, Items.ArídianKey, -1, true);
+
+            StartCoroutine(WaitForGateToTurn(2.5f));
         }
     }
 
