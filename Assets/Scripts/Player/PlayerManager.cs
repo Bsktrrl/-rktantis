@@ -107,7 +107,14 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void TransferPlayerToDyingPos() //Upon GameOver
     {
-        MainManager.Instance.player.transform.SetPositionAndRotation(playerStats.playerGameOverPos, Quaternion.identity);
+        PlayerMovement.Instance.Teleport(playerStats.playerGameOverPos);
+
+        //Vector3 targetPosition = playerStats.playerGameOverPos;
+
+        //// Teleport the object to the target position
+        //MainManager.Instance.player.transform.position = targetPosition;
+
+        //MainManager.Instance.player.transform.SetPositionAndRotation(playerStats.playerGameOverPos, Quaternion.identity);
         //PlayerMovement.Instance.controller.Move(playerStats.playerGameOverPos - MainManager.Instance.player.transform.position);
 
         SaveData();

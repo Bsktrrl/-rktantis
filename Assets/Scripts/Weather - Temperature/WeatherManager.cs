@@ -129,6 +129,19 @@ public class WeatherManager : Singleton<WeatherManager>
             SetWeatherDisplay();
 
             SaveData();
+
+
+            //As long as the SkillTree isn't up yet
+            weatherImageDisplay_Day1_isUpgraded = true;
+            weatherImageDisplay_Day2_isUpgraded = false;
+            weatherImageDisplay_Day3_isUpgraded = false;
+            weatherImageDisplay_Day4_isUpgraded = false;
+            weatherImageDisplay_Day5_isUpgraded = false;
+            weatherImageDisplay_Day1_Parent.SetActive(true);
+            weatherImageDisplay_Day2_Parent.SetActive(false);
+            weatherImageDisplay_Day3_Parent.SetActive(false);
+            weatherImageDisplay_Day4_Parent.SetActive(false);
+            weatherImageDisplay_Day5_Parent.SetActive(false);
         }
 
         //Set Ghost amount

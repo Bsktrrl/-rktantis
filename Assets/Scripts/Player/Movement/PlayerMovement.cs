@@ -131,7 +131,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 float slopeAngle = Vector3.Angle(groundNormal, Vector3.up);
 
                 //Check if the player can jump
-                if (slopeAngle > 46)
+                if (slopeAngle > 50)
                 {
 
                 }
@@ -585,5 +585,18 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 jumpDistance_End = Vector3.zero;
             }
         }
+    }
+
+    public void Teleport(Vector3 newPos)
+    {
+        print("1. Teleport: Pos: " + transform.position);
+
+        GetComponent<CharacterController>().enabled = false;
+
+        transform.SetPositionAndRotation(newPos, Quaternion.Euler(0, -20, 0));
+
+        GetComponent<CharacterController>().enabled = true;
+
+        print("2. Teleport: Pos: " + transform.position);
     }
 }
