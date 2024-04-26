@@ -25,6 +25,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
     public GameObject wood_Door_Prefab;
     public GameObject stone_Door_Prefab;
+    public GameObject cryonite_Door_Prefab;
 
     [Header("Object Ghost")]
     public Material canPlace_Material;
@@ -142,9 +143,15 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     }
 
                     //Stone Door
-                    else if (worldBuildingObjectInfoList[i].buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && worldBuildingObjectInfoList[i].buildingMaterial_Active == BuildingMaterial.Wood)
+                    else if (worldBuildingObjectInfoList[i].buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && worldBuildingObjectInfoList[i].buildingMaterial_Active == BuildingMaterial.Stone)
                     {
                         worldBuildingObjectListSpawned.Add(Instantiate(stone_Door_Prefab) as GameObject);
+                    }
+
+                    //Cryonite Door
+                    else if (worldBuildingObjectInfoList[i].buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && worldBuildingObjectInfoList[i].buildingMaterial_Active == BuildingMaterial.Cryonite)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(cryonite_Door_Prefab) as GameObject);
                     }
 
                     //Any other BuildingBlock
@@ -157,9 +164,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
 
                     //Set Rotation of the Model
-                    for (int j = 0; j < worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList.Count; j++)
+                    if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
                     {
-                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList[j].transform.SetLocalPositionAndRotation(worldBuildingObjectInfoList[i].modelPos, worldBuildingObjectInfoList[i].modelRot);
+                        for (int j = 0; j < worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList.Count; j++)
+                        {
+                            worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList[j].transform.SetLocalPositionAndRotation(worldBuildingObjectInfoList[i].modelPos, worldBuildingObjectInfoList[i].modelRot);
+                        }
                     }
                 }
             }
@@ -1266,9 +1276,15 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     }
 
                     //Stone Door
-                    else if (activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Wood)
+                    else if (activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Stone)
                     {
                         worldBuildingObjectListSpawned.Add(Instantiate(stone_Door_Prefab) as GameObject);
+                    }
+
+                    //Cryonite Door
+                    else if (activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Cryonite)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(cryonite_Door_Prefab) as GameObject);
                     }
 
                     //Any other BuildingBlock
