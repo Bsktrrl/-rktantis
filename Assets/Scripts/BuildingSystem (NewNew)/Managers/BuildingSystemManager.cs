@@ -558,7 +558,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         //BuildingBlock
         if (ghostObject_Holding.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
         {
-            if (enoughItemsToBuild && !isColliding /*&& !isCollidingWithBuildingBlock && !isTouchingABuildingBlock*/)
+            if (enoughItemsToBuild /*&& !isColliding && !isCollidingWithBuildingBlock && !isTouchingABuildingBlock*/)
             {
                 canPlaceBuildingObject = true;
                 return true;

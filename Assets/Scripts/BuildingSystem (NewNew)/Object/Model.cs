@@ -6,6 +6,7 @@ public class Model : MonoBehaviour
 {
     private void Update()
     {
+        //BuildingBlock
         if (gameObject.transform.parent.gameObject == BuildingSystemManager.Instance.ghostObject_Holding
             && gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
         {
@@ -46,7 +47,8 @@ public class Model : MonoBehaviour
                             && collider.gameObject != MainManager.Instance.player //Don't collide with player
                             && !collider.gameObject.CompareTag("Ground") //Don't collide with the ground
                             && collider.gameObject.layer != 10 //Don't collide with invisibleSphereColliders
-                            && collider.gameObject.layer != 7) //Don't collide with other BuildingBlocks
+                            && collider.gameObject.layer != 7 //Don't collide with other BuildingBlocks
+                            )
                         {
                             isCollidingCheck = true;
 
