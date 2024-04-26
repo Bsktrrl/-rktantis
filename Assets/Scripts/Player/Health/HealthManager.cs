@@ -314,8 +314,6 @@ public class HealthManager : Singleton<HealthManager>
     }
     public void ResetPlayerHealthValues()
     {
-        print("999999. GameOver: ResetPlayerHealthValues");
-
         hungerValue = 1;
         heatResistanceValue = 1;
         thirstValue = 1;

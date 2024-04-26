@@ -115,7 +115,7 @@ public class MainManager : Singleton<MainManager>
 
     public BuildingBlockInfo GetMovableObject(BuildingBlockObjectNames buildingBlockObjectNames, BuildingMaterial buildingMaterial)
     {
-        for (int i = 0; i < BuildingSystemManager.Instance.machines_SO.machineObjectsList.Count; i++)
+        for (int i = 0; i < BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList.Count; i++)
         {
             if (BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[i].blockName == buildingBlockObjectNames
                 && BuildingSystemManager.Instance.buildingBlocks_SO.buildingBlockObjectsList[i].buildingMaterial == buildingMaterial)

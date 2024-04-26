@@ -296,6 +296,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6525312152521600679}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 24a295645ff9a0e4aa77abdeaa2730ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5697980787899227546}
   m_SourcePrefab: {fileID: 100100000, guid: 24a295645ff9a0e4aa77abdeaa2730ca, type: 3}
 --- !u!1 &1657933958053947899 stripped
 GameObject:
@@ -631,6 +635,20 @@ MonoBehaviour:
   isPicture: 0
   pictureSprite: {fileID: 0}
   isInTank: 0
+--- !u!114 &5697980787899227546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5204749936052980950}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6331974908998395749 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7844105008849561886, guid: 24a295645ff9a0e4aa77abdeaa2730ca,

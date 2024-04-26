@@ -512,68 +512,74 @@ public class WeatherManager : Singleton<WeatherManager>
     {
         if (Physics.Raycast(MainManager.Instance.player.transform.position, raycastDirection, out hit, maxRange))
         {
-            if (hit.transform.CompareTag("BuildingBlock"))
+            if (hit.transform.CompareTag("BuildingBlock")) //It's a "Model"-Block
             {
-                print("Inside BuildingBlock");
-                //if (hit.transform.gameObject.GetComponent<BuildingBlock>())
-                //{
-                //    //If standing in a shadow from a Wood Block
-                //    if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Wood)
-                //    {
-                //        if (isWarm)
-                //        {
-                //            coverValue = -wood_Cover;
-                //        }
-                //        else
-                //        {
-                //            coverValue = wood_Cover;
-                //        }
-                //    }
-
-                //    //If standing in a shadow from a Stone Block
-                //    else if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Stone)
-                //    {
-                //        if (isWarm)
-                //        {
-                //            coverValue = -stone_Cover;
-                //        }
-                //        else
-                //        {
-                //            coverValue = stone_Cover;
-                //        }
-                //    }
-
-                //    //If standing in a shadow from a Iron Block
-                //    else if (hit.transform.gameObject.GetComponent<BuildingBlock>().buidingBlock_Parent.GetComponent<BuildingBlock_Parent>().buildingMaterial == BuildingMaterial.Cryonite)
-                //    {
-                //        if (isWarm)
-                //        {
-                //            coverValue = -iron_Cover;
-                //        }
-                //        else
-                //        {
-                //            coverValue = iron_Cover;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        coverValue = 0;
-                //    }
-                //}
-                //else
-                //{
-                //    coverValue = 0;
-                //}
-            }
-            else if (hit.transform.CompareTag("Ground"))
-            {
-                if (isWarm)
+                if (hit.transform.gameObject.GetComponent<Model>())
                 {
-                    coverValue = -stone_Cover;
+                    if (hit.transform.gameObject.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>()) //The parentObject of the "Model"
+                    {
+                        //If standing in a shadow from a Wood Block
+                        if (hit.transform.gameObject.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingMaterial == BuildingMaterial.Wood)
+                        {
+                            if (isWarm)
+                            {
+                                coverValue = -wood_Cover;
+                            }
+                            else
+                            {
+                                coverValue = wood_Cover;
+                            }
+                        }
+
+                        //If standing in a shadow from a Stone Block
+                        else if (hit.transform.gameObject.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingMaterial == BuildingMaterial.Stone)
+                        {
+                            if (isWarm)
+                            {
+                                coverValue = -stone_Cover;
+                            }
+                            else
+                            {
+                                coverValue = stone_Cover;
+                            }
+                        }
+
+                        //If standing in a shadow from a Iron Block
+                        else if (hit.transform.gameObject.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingMaterial == BuildingMaterial.Cryonite)
+                        {
+                            if (isWarm)
+                            {
+                                coverValue = -iron_Cover;
+                            }
+                            else
+                            {
+                                coverValue = iron_Cover;
+                            }
+                        }
+                        else
+                        {
+                            coverValue = 0;
+                        }
+                    }
+                    else
+                    {
+                        coverValue = 0;
+                    }
                 }
                 else
                 {
-                    coverValue = stone_Cover;
+                    coverValue = 0;
+                }
+            }
+            else if (hit.transform.CompareTag("Ground")) //Is inside eks. a cave
+            {
+                if (isWarm)
+                {
+                    coverValue = -wood_Cover;
+                }
+                else
+                {
+                    coverValue = wood_Cover;
                 }
             }
             else

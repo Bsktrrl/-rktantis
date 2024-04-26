@@ -23,16 +23,31 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public GameObject WorldObjectGhost_Parent; //Ghost Parent
     public GameObject ghostObject_Holding; //GhostBlock Holding
 
+    public GameObject wood_Door_Prefab;
+    public GameObject stone_Door_Prefab;
+    public GameObject cryonite_Door_Prefab;
+
     [Header("Object Ghost")]
     public Material canPlace_Material;
     public Material cannotPlace_Material;
     public Material invisible_Material;
 
-    public GameObject buildingBlockHit;
+    public GameObject buildingBlock_Hit;
+    public GameObject buildingBlock_LookingAt;
 
     public bool isSnapping;
+    public Vector3 snappingPosition;
+    public Quaternion snappingRotation;
 
     public float rotationValue = 0;
+
+    public float rotationSnappingValue_Floor = 0;
+    public float rotationMirrorValue_Floor = 0;
+    public float rotationSnappingValue_Wall = 0;
+    public float rotationMirrorValue_Wall = 0;
+    public float rotationSnappingValue_Ramp = 0;
+    public float rotationMirrorValue_Ramp = 0;
+
     [SerializeField] float rotationSpeed = 75;
 
     public BuildingBlockColliderDirection directionHit;
@@ -44,9 +59,14 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     public LayerMask layerMask_Ground;
     public LayerMask layerMask_IgnoreRaycast;
     public LayerMask layerMask_BuildingBlock;
-    public LayerMask layerMask_BuildingBlockModel;
+    public LayerMask layerMask_BuildingBlockModel_Floor;
+    public LayerMask layerMask_BuildingBlockModel_Wall;
+    public LayerMask layerMask_BuildingBlockModel_Door;
+    public LayerMask layerMask_BuildingBlockModel_Ramp;
     public LayerMask layerMask_Furniture;
     public LayerMask layerMask_Machine;
+
+    public LayerMask layerMask_AllBuildingBlockModelTypes;
 
     Transform hitTransform;
 
@@ -55,8 +75,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     [SerializeField] float rayHitAngle_Right;
     [SerializeField] float rayHitAngle_Up;
     [SerializeField] float rayHitAngle_Down;
-
-    Quaternion ghostRotation = Quaternion.identity;
 
     [Header("BuildingBlocks Detected")]
     [SerializeField] GameObject BB_Normal;
@@ -82,6 +100,11 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     {
         PlayerButtonManager.isPressed_MoveableRotation_Right += SetObjectRotation_Right;
         PlayerButtonManager.isPressed_MoveableRotation_Left += SetObjectRotation_Left;
+
+        PlayerButtonManager.isPressed_MoveableSnappingRotation_Right += SetObjectSnappingRotation_Right;
+        PlayerButtonManager.isPressed_MoveableSnappingRotation_Left += SetObjectSnappingRotation_Left;
+
+        PlayerButtonManager.isPressed_MoveableMirrorRotation += SetObjectMirrorRotation;
     }
     private void Update()
     {
@@ -113,10 +136,41 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             {
                 if (GetBuildingObjectInfo(worldBuildingObjectInfoList[i].buildingBlockObjectName_Active, worldBuildingObjectInfoList[i].buildingMaterial_Active).objectInfo.worldObject != null)
                 {
-                    worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(worldBuildingObjectInfoList[i].buildingBlockObjectName_Active, worldBuildingObjectInfoList[i].buildingMaterial_Active).objectInfo.worldObject) as GameObject);
+                    //Wooden Door
+                    if (worldBuildingObjectInfoList[i].buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && worldBuildingObjectInfoList[i].buildingMaterial_Active == BuildingMaterial.Wood)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(wood_Door_Prefab) as GameObject);
+                    }
+
+                    //Stone Door
+                    else if (worldBuildingObjectInfoList[i].buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && worldBuildingObjectInfoList[i].buildingMaterial_Active == BuildingMaterial.Stone)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(stone_Door_Prefab) as GameObject);
+                    }
+
+                    //Cryonite Door
+                    else if (worldBuildingObjectInfoList[i].buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && worldBuildingObjectInfoList[i].buildingMaterial_Active == BuildingMaterial.Cryonite)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(cryonite_Door_Prefab) as GameObject);
+                    }
+
+                    //Any other BuildingBlock
+                    else
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(worldBuildingObjectInfoList[i].buildingBlockObjectName_Active, worldBuildingObjectInfoList[i].buildingMaterial_Active).objectInfo.worldObject) as GameObject);
+                    }
 
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetParent(worldObject_Parent.transform);
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
+
+                    //Set Rotation of the Model
+                    if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                    {
+                        for (int j = 0; j < worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList.Count; j++)
+                        {
+                            worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList[j].transform.SetLocalPositionAndRotation(worldBuildingObjectInfoList[i].modelPos, worldBuildingObjectInfoList[i].modelRot);
+                        }
+                    }
                 }
             }
             else if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.Furniture)
@@ -201,7 +255,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         if (newObject)
         {
             newObject.transform.SetParent(WorldObjectGhost_Parent.transform);
-
             newObject.transform.localPosition = Vector3.zero;
             newObject.transform.localRotation = Quaternion.identity;
         }
@@ -224,6 +277,20 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         //Hide Colliders
+        for (int i = 0; i < newObject.GetComponent<MoveableObject>().modelList.Count; i++)
+        {
+            if (newObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshCollider>())
+            {
+                newObject.GetComponent<MoveableObject>().modelList[i].GetComponent<MeshCollider>().isTrigger = true;
+            }
+        }
+
+        if (newObject.GetComponent<BoxCollider>())
+        {
+            newObject.GetComponent<BoxCollider>().isTrigger = true;
+        }
+
+        //Destroy Colliders
         Destroy(newObject.GetComponent<MoveableObject>().collidersOnObject);
 
         //Make sure not getting errors when changing to Furniture or Machine Object
@@ -310,24 +377,28 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 isSnapping = true;
 
                 //Set new Position and Rotation of the Ghost
-                ghostObject_Holding.transform.SetPositionAndRotation(Snapping_SetPosition(), Snapping_SetRotation(buildingBlockHit));
+                ghostObject_Holding.transform.SetPositionAndRotation(Snapping_SetPosition(), Snapping_SetRotation(buildingBlock_Hit));
 
                 WorldObjectGhost_Parent.SetActive(true);
                 GetBuildingObjectGhost().SetActive(true);
             }
             else
             {
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                isSnapping = false;
 
-                if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + 1, layerMask_BuildingBlockModel))
+                ray = MainManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Floor)
+                    //|| Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Wall)
+                    || Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Ramp))
                 {
                     isTouchingABuildingBlock = true;
-                    SetPosToGroundAndBuldingBlock();
+                    SetPosToGroundAndBuildingBlock();
                 }
-                else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + 1, layerMask_Ground))
+                else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_Ground))
                 {
                     isTouchingABuildingBlock = false;
-                    SetPosToGroundAndBuldingBlock();
+                    SetPosToGroundAndBuildingBlock();
                 }
                 else
                 {
@@ -337,8 +408,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     WorldObjectGhost_Parent.SetActive(false);
                     GetBuildingObjectGhost().SetActive(false);
                 }
-
-                isSnapping = false;
             }
         }
     }
@@ -347,17 +416,21 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         if (ghostObject_Holding.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture
             || ghostObject_Holding.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            isSnapping = false;
 
-            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + 1, layerMask_BuildingBlockModel))
+            ray = MainManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Floor)
+                //|| Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Wall)
+                || Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Ramp))
             {
                 isTouchingABuildingBlock = true;
-                SetPosToGroundAndBuldingBlock();
+                SetPosToGroundAndBuildingBlock();
             }
-            else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + 1, layerMask_Ground))
+            else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_Ground))
             {
                 isTouchingABuildingBlock = false;
-                SetPosToGroundAndBuldingBlock();
+                SetPosToGroundAndBuildingBlock();
             }
             else
             {
@@ -369,11 +442,10 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 GetBuildingObjectGhost().SetActive(false);
             }
 
-            isSnapping = false;
         }
     }
 
-    void SetPosToGroundAndBuldingBlock() //- Fixed
+    void SetPosToGroundAndBuildingBlock() //- Fixed
     {
         WorldObjectGhost_Parent.SetActive(true);
         GetBuildingObjectGhost().SetActive(true);
@@ -383,15 +455,25 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
         {
-            ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 0, 0));
+            if (activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Ramp_Stair
+                || activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Ramp_Ramp
+                || activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Ramp_Corner
+                || activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Ramp_Triangle)
+            {
+                ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
+            }
+            else
+            {
+                ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 0, 0));
+            }
         }
         else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
         {
-            ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 0, 0));
+            ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
         }
         else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
         {
-            ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 0, 0));
+            ghostObject_Holding.transform.SetPositionAndRotation(new Vector3(hit.point.x, hit.point.y, hit.point.z), MainManager.Instance.playerBody.transform.rotation * Quaternion.Euler(0, rotationValue + 180, 0));
         }
     }
     
@@ -476,7 +558,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         //BuildingBlock
         if (ghostObject_Holding.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)
         {
-            if (enoughItemsToBuild && !isColliding && !isCollidingWithBuildingBlock && !isTouchingABuildingBlock)
+            if (enoughItemsToBuild /*&& !isColliding && !isCollidingWithBuildingBlock && !isTouchingABuildingBlock*/)
             {
                 canPlaceBuildingObject = true;
                 return true;
@@ -552,8 +634,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     }
     public void Snapping_Raycast()
     {
-        // Cast a Ray from the mouse position to the world space
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Cast a Ray from the mouse position
+        ray = MainManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
 
         //Make 5 Raycasts (Forward, Up-Forward, Down-Forward, Right-Forward, Left-Forward)
         Snapping_RaycastDirection(RaycastDirections.Right, Color.blue);
@@ -613,11 +695,16 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     hitTransform.gameObject.GetComponent<BuildingBlockDirection>().EnterBlockDirection_BB_Left();
                 }
 
-                //If not looking at a BuildingBlock at all
+
+                //--------------------
+
+
+                //If NOT looking at a BuildingBlock at all
                 else
                 {
                     directionHit = BuildingBlockColliderDirection.None;
-                    buildingBlockHit = null;
+                    buildingBlock_Hit = null;
+                    buildingBlock_LookingAt = null;
                 }
             }
         }
@@ -626,7 +713,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         else
         {
             directionHit = BuildingBlockColliderDirection.None;
-            buildingBlockHit = null;
+            buildingBlock_Hit = null;
+            buildingBlock_LookingAt = null;
         }
         #endregion
     }
@@ -664,9 +752,13 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         Vector3 startPoint = ray.origin + direction /** 0.5f*/;
 
-        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), color);
+        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), color);
 
-        if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out rayHit, (PlayerManager.Instance.InteractableDistance + 1), layerMask_BuildingBlock))
+        if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlock)
+            || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Floor)
+            //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Wall)
+            //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Ramp)
+            )
         {
             //Get the Transform of GameObject hit
             hitTransform = rayHit.transform;
@@ -711,7 +803,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         //Looking at something not a BuildingBlock
-        else if (Physics.Raycast(startPoint, Camera.main.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out rayHit, (PlayerManager.Instance.InteractableDistance + 1)))
+        else if (Physics.Raycast(startPoint, Camera.main.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance)))
         {
             switch (_raycastDirection)
             {
@@ -795,22 +887,22 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 break;
 
             case BuildingBlockColliderDirection.Front:
-                return buildingBlockHit.transform.position + buildingBlockHit.transform.forward * 2;
+                return buildingBlock_Hit.transform.position + buildingBlock_Hit.transform.forward * 2;
 
             case BuildingBlockColliderDirection.Back:
-                return buildingBlockHit.transform.position - buildingBlockHit.transform.forward * 2;
+                return buildingBlock_Hit.transform.position - buildingBlock_Hit.transform.forward * 2;
 
             case BuildingBlockColliderDirection.Up:
-                return buildingBlockHit.transform.position + buildingBlockHit.transform.up * 2;
+                return buildingBlock_Hit.transform.position + buildingBlock_Hit.transform.up * 2;
 
             case BuildingBlockColliderDirection.Down:
-                return buildingBlockHit.transform.position - buildingBlockHit.transform.up * 2;
+                return buildingBlock_Hit.transform.position - buildingBlock_Hit.transform.up * 2;
 
             case BuildingBlockColliderDirection.Right:
-                return buildingBlockHit.transform.position + buildingBlockHit.transform.right * 2;
+                return buildingBlock_Hit.transform.position + buildingBlock_Hit.transform.right * 2;
 
             case BuildingBlockColliderDirection.Left:
-                return buildingBlockHit.transform.position - buildingBlockHit.transform.right * 2;
+                return buildingBlock_Hit.transform.position - buildingBlock_Hit.transform.right * 2;
 
             default:
                 break;
@@ -852,13 +944,13 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 //Ramp
                 case BuildingBlockObjectNames.Ramp_Stair:
-                    break;
+                    return SnapRotation_Ramp(_object);
                 case BuildingBlockObjectNames.Ramp_Ramp:
-                    break;
+                    return SnapRotation_Ramp(_object);
                 case BuildingBlockObjectNames.Ramp_Triangle:
-                    break;
+                    return SnapRotation_Ramp(_object);
                 case BuildingBlockObjectNames.Ramp_Corner:
-                    break;
+                    return SnapRotation_Ramp(_object);
 
                 default:
                     break;
@@ -887,6 +979,32 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 return _object.transform.rotation * Quaternion.Euler(0, 270, 0);
             case BuildingBlockColliderDirection.Right:
                 return _object.transform.rotation * Quaternion.Euler(0, 90, 0);
+
+            default:
+                break;
+        }
+
+        return _object.transform.rotation;
+    }
+    Quaternion SnapRotation_Ramp(GameObject _object)
+    {
+        switch (directionHit)
+        {
+            case BuildingBlockColliderDirection.None:
+                break;
+
+            case BuildingBlockColliderDirection.Front:
+                return _object.transform.rotation * Quaternion.Euler(0, 180 + 0, 0);
+            case BuildingBlockColliderDirection.Back:
+                return _object.transform.rotation * Quaternion.Euler(0, 180 + 180, 0);
+            case BuildingBlockColliderDirection.Up:
+                break;
+            case BuildingBlockColliderDirection.Down:
+                break;
+            case BuildingBlockColliderDirection.Left:
+                return _object.transform.rotation * Quaternion.Euler(0, 180 + 270, 0);
+            case BuildingBlockColliderDirection.Right:
+                return _object.transform.rotation * Quaternion.Euler(0, 180 + 90, 0);
 
             default:
                 break;
@@ -927,6 +1045,199 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     {
         rotationValue -= rotationSpeed * Time.deltaTime;
     }
+    void SetObjectSnappingRotation_Right()
+    {
+        if (ghostObject_Holding)
+        {
+            if (ghostObject_Holding.GetComponent<MoveableObject>())
+            {
+                for (int i = 0; i < ghostObject_Holding.GetComponent<MoveableObject>().modelList.Count; i++)
+                {
+                    GameObject model = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i];
+
+                    //If Floor Block
+                    #region
+                    if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Square
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Triangle)
+                    {
+                        rotationSnappingValue_Floor -= 90;
+
+                        if (rotationSnappingValue_Floor <= -360)
+                        {
+                            rotationSnappingValue_Floor = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Floor, rotationSnappingValue_Floor, model.transform.localRotation.z));
+                    }
+                    #endregion
+
+                    //If Ramp Block
+                    #region
+                    else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Ramp
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Stair
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Triangle
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Corner)
+                    {
+                        rotationSnappingValue_Ramp -= 90;
+
+                        if (rotationSnappingValue_Ramp <= -360)
+                        {
+                            rotationSnappingValue_Ramp = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Ramp, rotationSnappingValue_Ramp, model.transform.localRotation.z));
+                    }
+                    #endregion
+
+                    //If Wall Block
+                    #region
+                    else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Door
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Triangle
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Window)
+                    {
+                        rotationSnappingValue_Wall -= 90;
+
+                        if (rotationSnappingValue_Wall <= -360)
+                        {
+                            rotationSnappingValue_Wall = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(/*rotationMirrorValue_Wall, rotationSnappingValue_Wall, model.transform.localRotation.z*/model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
+                    }
+                    #endregion
+                }
+            }
+        }
+    }
+    void SetObjectSnappingRotation_Left()
+    {
+        if (ghostObject_Holding)
+        {
+            if (ghostObject_Holding.GetComponent<MoveableObject>())
+            {
+                for (int i = 0; i < ghostObject_Holding.GetComponent<MoveableObject>().modelList.Count; i++)
+                {
+                    GameObject model = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i];
+
+                    //If Floor Block
+                    #region
+                    if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Square
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Triangle)
+                    {
+                        rotationSnappingValue_Floor += 90;
+
+                        if (rotationSnappingValue_Floor >= 360)
+                        {
+                            rotationSnappingValue_Floor = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Floor, rotationSnappingValue_Floor, model.transform.localRotation.z));
+                    }
+                    #endregion
+
+                    //If Ramp Block
+                    #region
+                    else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Ramp
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Stair
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Triangle
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Ramp_Corner)
+                    {
+                        rotationSnappingValue_Ramp += 90;
+
+                        if (rotationSnappingValue_Ramp >= 360)
+                        {
+                            rotationSnappingValue_Ramp = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(rotationMirrorValue_Ramp, rotationSnappingValue_Ramp, model.transform.localRotation.z));
+                    }
+                    #endregion
+
+                    //If Wall Block
+                    #region
+                    else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Door
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Triangle
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Window)
+                    {
+                        rotationSnappingValue_Wall += 90;
+
+                        if (rotationSnappingValue_Wall >= 360)
+                        {
+                            rotationSnappingValue_Wall = 0;
+                        }
+
+                        model.transform.SetLocalPositionAndRotation(model.transform.localPosition, Quaternion.Euler(/*rotationMirrorValue_Wall, rotationSnappingValue_Wall, model.transform.localRotation.z*/model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
+                    }
+                    #endregion
+                }
+            }
+        }
+    }
+
+    void SetObjectMirrorRotation()
+    {
+        if (ghostObject_Holding)
+        {
+            if (ghostObject_Holding.GetComponent<MoveableObject>())
+            {
+                for (int i = 0; i < ghostObject_Holding.GetComponent<MoveableObject>().modelList.Count; i++)
+                {
+                    GameObject model = ghostObject_Holding.GetComponent<MoveableObject>().modelList[i];
+
+                    //If Floor Block
+                    #region
+                    if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Square
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Floor_Triangle)
+                    {
+                        rotationMirrorValue_Floor += 180;
+
+                        if (rotationMirrorValue_Floor >= 360)
+                        {
+                            rotationMirrorValue_Floor = 0;
+                        }
+
+                        if (rotationMirrorValue_Floor == 180)
+                        {
+                            model.transform.SetLocalPositionAndRotation(new Vector3(model.transform.localPosition.x, -2, model.transform.localPosition.z), Quaternion.Euler(rotationMirrorValue_Floor, rotationSnappingValue_Floor, model.transform.localRotation.z));
+                        }
+                        else
+                        {
+                            model.transform.SetLocalPositionAndRotation(new Vector3(model.transform.localPosition.x, 0, model.transform.localPosition.z), Quaternion.Euler(rotationMirrorValue_Floor, rotationSnappingValue_Floor, model.transform.localRotation.z));
+                        }
+                    }
+                    #endregion
+
+                    //If Wall Block
+                    #region
+                    else if (ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Door
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Triangle
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Window
+                        || ghostObject_Holding.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Fence)
+                    {
+                        rotationMirrorValue_Wall += 180;
+
+                        if (rotationMirrorValue_Wall >= 360)
+                        {
+                            rotationMirrorValue_Wall = 0;
+                        }
+
+                        if (rotationMirrorValue_Wall == 180)
+                        {
+                            model.transform.SetLocalPositionAndRotation(new Vector3(model.transform.localPosition.x, model.transform.localPosition.x, -2), Quaternion.Euler(model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
+                        }
+                        else
+                        {
+                            model.transform.SetLocalPositionAndRotation(new Vector3(model.transform.localPosition.x, model.transform.localPosition.x, 0), Quaternion.Euler(model.transform.localRotation.x, rotationMirrorValue_Wall, rotationSnappingValue_Wall));
+                        }
+                    }
+                    #endregion
+                }
+            }
+        }
+    }
     #endregion
 
 
@@ -947,7 +1258,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 //Spawn BuildingBlock
                 if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
                 {
-                    print("Place BuildingBlock Object");
                     #region Play Sound
                     if (activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Wood)
                         SoundManager.Instance.Play_Building_Place_Wood_Clip();
@@ -957,13 +1267,34 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                         SoundManager.Instance.Play_Building_Place_Cryonite_Clip();
                     #endregion
 
-                    worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active).objectInfo.worldObject) as GameObject);
+                    //Wooden Door
+                    if (activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Wood)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(wood_Door_Prefab) as GameObject);
+                    }
+
+                    //Stone Door
+                    else if (activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Stone)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(stone_Door_Prefab) as GameObject);
+                    }
+
+                    //Cryonite Door
+                    else if (activeBuildingObject_Info.buildingBlockObjectName_Active == BuildingBlockObjectNames.Wall_Door && activeBuildingObject_Info.buildingMaterial_Active == BuildingMaterial.Cryonite)
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(cryonite_Door_Prefab) as GameObject);
+                    }
+
+                    //Any other BuildingBlock
+                    else
+                    {
+                        worldBuildingObjectListSpawned.Add(Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active).objectInfo.worldObject) as GameObject);
+                    }
                 }
 
                 //Spawn Furniture
                 else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Furniture)
                 {
-                    print("Place Furniture Object");
                     #region Play Sound
                     SoundManager.Instance.Play_Building_Place_MoveableObject_Clip();
                     #endregion
@@ -974,7 +1305,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 //Spawn Machine
                 else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
                 {
-                    print("Place Machine Object");
                     #region Play Sound
                     SoundManager.Instance.Play_Building_Place_MoveableObject_Clip();
                     #endregion
@@ -987,6 +1317,14 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 //Set position and Rotation to be the same as the Ghost
                 worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(ghostObject_Holding.transform.position, ghostObject_Holding.transform.rotation);
+
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                {
+                    for (int i = 0; i < worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList.Count; i++)
+                    {
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList[i].transform.SetLocalPositionAndRotation(ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].transform.localPosition, ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].transform.localRotation);
+                    }
+                }
 
                 //Remove Building Items from inventory
                 RemoveItemsFromInventoryAfterPlacingObject();
@@ -1014,6 +1352,13 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
             worldBuildingObject.objectPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.position;
             worldBuildingObject.objectRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.rotation;
+
+            //Add Local Rotation to ModelObject
+            if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+            {
+                worldBuildingObject.modelPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList[0].transform.localPosition;
+                worldBuildingObject.modelRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList[0].transform.localRotation;
+            }
 
             worldBuildingObject.buildingObjectType_Active = buildingBlockInfo.buildingObjectType;
             worldBuildingObject.buildingMaterial_Active = buildingBlockInfo.buildingMaterial;
@@ -1140,6 +1485,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 worldBuildingObjectListSpawned.RemoveAt(i);
 
+                buildingBlock_Hit = null;
+
                 break;
             }
         }
@@ -1211,9 +1558,13 @@ public class ActiveBuildingObject
 [Serializable]
 public class WorldBuildingObject
 {
-    [Header("Posision")]
+    [Header("MainObject Posision")]
     public Vector3 objectPos;
     public Quaternion objectRot;
+
+    [Header("ModelObject Posision")]
+    public Vector3 modelPos;
+    public Quaternion modelRot;
 
     [Header("Base")]
     public BuildingObjectTypes buildingObjectType_Active;

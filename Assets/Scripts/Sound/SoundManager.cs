@@ -234,6 +234,13 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip building_CannotPlaceBlock_Clip;
     [SerializeField] AudioClip building_Place_MoveableObject_Clip; //
     [SerializeField] AudioClip building_Remove_MoveableObject_Clip; //
+
+    [SerializeField] AudioClip building_WoodDoor_Open_Clip; //
+    [SerializeField] AudioClip building_WoodDoor_Close_Clip; //
+    [SerializeField] AudioClip building_StoneDoor_Open_Clip; //
+    [SerializeField] AudioClip building_StoneDoor_Close_Clip; //
+    [SerializeField] AudioClip building_CryoniteDoor_Open_Clip; //
+    [SerializeField] AudioClip building_CryoniteDoor_Close_Clip; //
     #endregion
     #region Chests
     [Header("Chests")]
@@ -1109,6 +1116,61 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_Building_Remove.clip = building_Remove_MoveableObject_Clip;
             audioSource_Building_Remove.pitch = 1f;
             audioSource_Building_Remove.Play();
+        }
+    }
+
+    public void Play_Building_WoodDoor_Open_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = building_WoodDoor_Open_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_Building_WoodDoor_Close_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = building_WoodDoor_Close_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_Building_StoneDoor_Open_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = building_StoneDoor_Open_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_Building_StoneDoor_Close_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = building_StoneDoor_Close_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_Building_CryoniteDoor_Open_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = building_CryoniteDoor_Open_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
+        }
+    }
+    public void Play_Building_CryoniteDoor_Close_Clip(AudioSource objSource)
+    {
+        if (objSource != null)
+        {
+            objSource.clip = building_CryoniteDoor_Close_Clip;
+            objSource.pitch = 1f;
+            objSource.Play();
         }
     }
     #endregion

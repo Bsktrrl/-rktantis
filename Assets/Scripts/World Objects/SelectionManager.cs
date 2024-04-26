@@ -1,4 +1,3 @@
-using System.Drawing;
 using UnityEngine;
 
 public class SelectionManager : Singleton<SelectionManager>
@@ -9,6 +8,12 @@ public class SelectionManager : Singleton<SelectionManager>
     [Header("Selected Objects")]
     public GameObject selectedObject; //Object Looking at
     public GameObject selectedMovableObjectToRemove; //Object for removal with Axe
+
+    [Header("Outline")]
+    public GameObject oldSelectedObject;
+    public GameObject oldSelectedMovableObjectToRemove;
+    public Color outlineColor = Color.white;
+    //[Range(0f, 10f)] public float outlineWidth = 8f;
 
     [Header("Tags")]
     public string tag;
@@ -21,6 +26,7 @@ public class SelectionManager : Singleton<SelectionManager>
     [Header("Raycast")]
     Ray ray;
     RaycastHit hit;
+    [SerializeField] LayerMask layersToIgnore;
 
 
     //--------------------
@@ -28,11 +34,88 @@ public class SelectionManager : Singleton<SelectionManager>
 
     void Update()
     {
+        //Set oldSelectedObject
+        if (selectedObject)
+        {
+            oldSelectedObject = selectedObject;
+        }
+        else
+        {
+            oldSelectedObject = null;
+        }
+
+        //Set oldSelectedMovableObjectToRemove
+        if (selectedMovableObjectToRemove)
+        {
+            oldSelectedMovableObjectToRemove = selectedMovableObjectToRemove;
+
+            if (oldSelectedMovableObjectToRemove.GetComponent<Outline>())
+            {
+                oldSelectedMovableObjectToRemove.GetComponent<Outline>().enabled = true;
+            }
+        }
+        else
+        {
+            if (oldSelectedMovableObjectToRemove)
+            {
+                if (oldSelectedMovableObjectToRemove.GetComponent<Outline>())
+                {
+                    oldSelectedMovableObjectToRemove.GetComponent<Outline>().enabled = false;
+                }
+            }
+
+            oldSelectedMovableObjectToRemove = null;
+        }
+
+        //Perform Raycasts
         if (Time.frameCount % MainManager.Instance.updateInterval == 0
             && MainManager.Instance.menuStates == MenuStates.None)
         {
             Raycast_SelectedObject();
             Raycast_ObjectToRemove();
+        }
+
+        //Activate/Deactivate Outline
+        if (selectedObject)
+        {
+            ActivateOutlineOnSelectedObject();
+        }
+        if (selectedMovableObjectToRemove)
+        {
+            ActivateOutlineOnSelectedMovableObjectToRemove();
+        }
+
+        if (!selectedObject)
+        {
+            if (oldSelectedObject)
+            {
+                if (oldSelectedObject.GetComponent<Outline>())
+                {
+                    oldSelectedObject.GetComponent<Outline>().enabled = false;
+                }
+            }
+        }
+
+        if (selectedMovableObjectToRemove)
+        {
+            oldSelectedMovableObjectToRemove = selectedMovableObjectToRemove;
+
+            if (oldSelectedMovableObjectToRemove.GetComponent<Outline>())
+            {
+                oldSelectedMovableObjectToRemove.GetComponent<Outline>().enabled = true;
+            }
+        }
+        else
+        {
+            if (oldSelectedMovableObjectToRemove)
+            {
+                if (oldSelectedMovableObjectToRemove.GetComponent<Outline>())
+                {
+                    oldSelectedMovableObjectToRemove.GetComponent<Outline>().enabled = false;
+                }
+            }
+
+            oldSelectedMovableObjectToRemove = null;
         }
     }
 
@@ -47,9 +130,10 @@ public class SelectionManager : Singleton<SelectionManager>
         //Make Debug Line
         Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), UnityEngine.Color.white);
 
-        if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, ~BuildingSystemManager.Instance.layerMask_BuildingBlock))
+        if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, ~layersToIgnore))
         {
             Transform selectionTransform = hit.transform;
+
             tag = selectionTransform.gameObject.tag;
 
             //Reset ObjectReferences
@@ -98,12 +182,29 @@ public class SelectionManager : Singleton<SelectionManager>
                     return;
                 }
             }
+
+            //If hitting a Door
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Door))
+            {
+                oldSelectedObject = hit.transform.gameObject;
+
+                selectedObject = hit.transform.gameObject;
+                onTarget = true;
+            }
+
             else
             {
                 tag = "";
                 BuildingDisplayManager.Instance.ResetRewardScreenDisplay();
                 LookAtManager.Instance.typeLookingAt = InteracteableType.None;
                 onTarget = false;
+            }
+
+            //If hitting a Door
+            if (selectionTransform.gameObject.CompareTag("BuildingBlock_Door"))
+            {
+                onTarget = true;
+                selectedObject = selectionTransform.gameObject;
             }
         }
         else
@@ -136,7 +237,6 @@ public class SelectionManager : Singleton<SelectionManager>
         //If looking at a Plant, show its UI to the player
         else if (newPlantObject != null)
         {
-            print("newPlantObject != null");
             //Show Inventory info
             onTarget = true;
             selectedObject = newPlantObject.gameObject;
@@ -155,7 +255,6 @@ public class SelectionManager : Singleton<SelectionManager>
         //If looking at a Ghost, show its UI to the player
         else if (newGhostObject != null)
         {
-            print("newGhostObject != null");
             //Show Inventory info
             onTarget = true;
             selectedObject = newGhostObject.gameObject;
@@ -174,8 +273,6 @@ public class SelectionManager : Singleton<SelectionManager>
         //If there is a Hit without an "Interactable"-script
         else
         {
-            print("If there is a Hit without an \"Interactable\"-script");
-
             selectedObject = null;
             onTarget = false;
 
@@ -197,41 +294,47 @@ public class SelectionManager : Singleton<SelectionManager>
             Vector3 startPoint = ray.origin /*+ MainManager.Instance.mainMainCamera.transform.forward*/;
 
             //Make Debug Line
-            Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), UnityEngine.Color.blue);
+            Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), UnityEngine.Color.blue);
 
             //Check if hitting an Object with a Layer
             #region
             //Furniture
-            if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out hit, PlayerManager.Instance.InteractableDistance + 1, BuildingSystemManager.Instance.layerMask_Furniture))
+            if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_Furniture))
             {
                 if (hit.transform.gameObject.GetComponent<MoveableObject>())
                 {
-                    print("Select a Furniture: " + hit.transform.gameObject.name);
-
                     selectedMovableObjectToRemove = hit.transform.gameObject;
                 }
             }
 
             //Machine
-            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out hit, PlayerManager.Instance.InteractableDistance + 1, BuildingSystemManager.Instance.layerMask_Machine))
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_Machine))
             {
                 if (hit.transform.gameObject.GetComponent<MoveableObject>())
                 {
-                    print("Select a Machine: " + hit.transform.gameObject.name);
-
                     selectedMovableObjectToRemove = hit.transform.gameObject;
                 }
             }
 
             //BuildingBlock
-            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + 1), out hit, PlayerManager.Instance.InteractableDistance + 1, BuildingSystemManager.Instance.layerMask_BuildingBlockModel))
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Floor)
+                || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Wall)
+                || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Ramp))
             {
                 if (hit.transform.gameObject.GetComponent<Model>())
                 {
-                    print("Select a BuildingBlock: " + hit.transform.gameObject.name);
+                    oldSelectedObject = hit.transform.gameObject;
 
                     selectedMovableObjectToRemove = hit.transform.gameObject;
                 }
+            }
+
+            //Door
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Door))
+            {
+                //oldSelectedObject = hit.transform.gameObject;
+
+                selectedMovableObjectToRemove = hit.transform.gameObject;
             }
 
             //Nothing
@@ -248,6 +351,56 @@ public class SelectionManager : Singleton<SelectionManager>
             selectedMovableObjectToRemove = null;
 
             BuildingDisplayManager.Instance.UpdateScreenBuildingRewardDisplayInfo();
+        }
+    }
+
+    void ActivateOutlineOnSelectedObject()
+    {
+        if (oldSelectedObject)
+        {
+            if (oldSelectedObject.GetComponent<Outline>())
+            {
+                if (oldSelectedObject == selectedObject)
+                {
+                    if (oldSelectedObject.GetComponent<MoveableObject>())
+                    {
+                        //If a Door
+                        if (oldSelectedObject.GetComponent<MoveableObject>().buildingBlockObjectName == BuildingBlockObjectNames.Wall_Door)
+                        {
+                            oldSelectedObject.GetComponent<Outline>().enabled = false;
+                        }
+                        else
+                        {
+                            oldSelectedObject.GetComponent<Outline>().enabled = true;
+                        }
+                    }
+                    else
+                    {
+                        oldSelectedObject.GetComponent<Outline>().enabled = true;
+                    }
+                }
+                else
+                {
+                    oldSelectedObject.GetComponent<Outline>().enabled = false;
+                }
+            }
+        }
+    }
+    void ActivateOutlineOnSelectedMovableObjectToRemove()
+    {
+        if (oldSelectedMovableObjectToRemove)
+        {
+            if (oldSelectedMovableObjectToRemove.GetComponent<Outline>())
+            {
+                if (oldSelectedMovableObjectToRemove == selectedMovableObjectToRemove)
+                {
+                    oldSelectedMovableObjectToRemove.GetComponent<Outline>().enabled = true;
+                }
+                else
+                {
+                    oldSelectedMovableObjectToRemove.GetComponent<Outline>().enabled = false;
+                }
+            }
         }
     }
 }

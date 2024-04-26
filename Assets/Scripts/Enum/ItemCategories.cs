@@ -21,7 +21,8 @@ public enum ItemCategories
     [Description("BuildingBlock")] BuildingBlock,
 
 
-    [Description("Arídian Key")] ArídianKey
+    [Description("Arídian Key")] ArídianKey,
+    [Description("Drinkable")] Drinkable
 
 
     #region Old
@@ -135,6 +136,11 @@ public enum ItemSubCategories
 
     //Tablet
     [Description("Arídian Key")][InspectorName("Arídian Key/Arídian Key")] ArídianKey,
+
+    //Drinkable
+    [Description("Cup")][InspectorName("Drinkable/Cup")] Cup,
+    [Description("Bottle")][InspectorName("Drinkable/Bottle")] Bottle,
+    [Description("Bucket")][InspectorName("Drinkable/Bucket")] Bucket,
 
 
     //--------------------

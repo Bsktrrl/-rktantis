@@ -165,8 +165,6 @@ public class EquippmentManager : Singleton<EquippmentManager>
     //The point in the animation where equipped item hits
     public void Hit(EquippedItem equippedItem)
     {
-        print("0. Hit Something with the use of a " + equippedItem.itemName);
-
         #region
 
         //If Pickaxe is equipped - For Mining
@@ -280,7 +278,7 @@ public class EquippmentManager : Singleton<EquippmentManager>
                                 #endregion
 
                                 BuildingBlockInfo buildingBlockInfo = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingBlockObjectName, SelectionManager.Instance.selectedMovableObjectToRemove.GetComponent<Model>().gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingMaterial);
-
+                                
                                 for (int i = 0; i < buildingBlockInfo.objectInfo.removingReward.Count; i++)
                                 {
                                     for (int j = 0; j < buildingBlockInfo.objectInfo.removingReward[i].amount; j++)

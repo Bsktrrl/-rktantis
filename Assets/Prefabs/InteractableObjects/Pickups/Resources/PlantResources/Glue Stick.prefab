@@ -79,6 +79,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -6039316298887661277}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1023f3aa8882130458bf6eecc975800e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5025906486385347338}
   m_SourcePrefab: {fileID: 100100000, guid: 1023f3aa8882130458bf6eecc975800e, type: 3}
 --- !u!1 &6496479173327333623 stripped
 GameObject:
@@ -156,3 +160,41 @@ MonoBehaviour:
   plantParent: {fileID: 0}
   journalType: 0
   journalPageIndex: 0
+  blueprintName: 
+  blueprintInfo: []
+--- !u!114 &5025906486385347338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6496479173327333623}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bakeKeys:
+  - {fileID: 8696928402115059526, guid: 1023f3aa8882130458bf6eecc975800e, type: 3}
+  bakeValues:
+  - data:
+    - {x: -0.00006103833, y: -0.9200613, z: -0.3917745}
+    - {x: 0.7267281, y: -0.6142641, z: 0.30748302}
+    - {x: 0.0085148215, y: -0.7071269, z: 0.70703536}
+    - {x: 0.85205823, y: 0.070559785, z: 0.5186694}
+    - {x: 0.004058981, y: 0.057161435, z: 0.99835664}
+    - {x: 0.6938881, y: -0.6884251, z: -0.21116345}
+    - {x: 0.80383384, y: -0.26218674, z: -0.53395635}
+    - {x: 0.0025330726, y: -0.48088703, z: -0.87677884}
+    - {x: 0.67316633, y: 0.5494712, z: -0.49490252}
+    - {x: 0.6824719, y: 0.6617799, z: 0.3102894}
+    - {x: -0.0015564857, y: 0.57324445, z: -0.8193829}
+    - {x: -0.01959347, y: 0.7932914, z: 0.6085268}
+    - {x: -0.84538823, y: 0.03378501, z: 0.5330829}
+    - {x: 0.0085148215, y: -0.7071269, z: 0.70703536}
+    - {x: -0.70466226, y: 0.6354442, z: 0.3156926}
+    - {x: -0.6892987, y: 0.5318824, z: -0.4919028}
+    - {x: -0.801621, y: -0.28614935, z: -0.5249022}
+    - {x: -0.00006103833, y: -0.9200613, z: -0.3917745}
+    - {x: -0.7004376, y: -0.6871314, z: -0.19297054}
+    - {x: -0.70929986, y: -0.6253717, z: 0.32527506}

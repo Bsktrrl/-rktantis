@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3583861046409479377}
   - component: {fileID: 6673104955638064279}
   - component: {fileID: 3399950525970836357}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: InvisiblePainting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,6 +109,7 @@ MonoBehaviour:
   isVisible: 0
   isPicture: 1
   pictureSprite: {fileID: 2800000, guid: dabd8f8397298da40845b09ebbb7f60b, type: 3}
+  isInTank: 0
 --- !u!1 &8240750408204315782
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +124,7 @@ GameObject:
   - component: {fileID: 6831768571790510530}
   - component: {fileID: 8707383700741301557}
   - component: {fileID: 1341334372468429790}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

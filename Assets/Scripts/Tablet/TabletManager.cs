@@ -390,6 +390,7 @@ public class TabletManager : Singleton<TabletManager>
                 menu_CraftingTable.SetActive(false);
                 break;
             case TabletMenuState.ResearchTable:
+                InventoryManager.Instance.itemInfo.research_Parent.SetActive(false);
                 menu_ResearchTable.SetActive(false);
                 break;
             case TabletMenuState.SkillTree:
@@ -738,6 +739,8 @@ public class TabletManager : Singleton<TabletManager>
     {
         Arms.Instance.CloseTabletAnimation();
         SoundManager.Instance.Play_Tablet_CloseTablet_Clip();
+
+        InventoryManager.Instance.itemInfo.research_Parent.SetActive(false);
 
         //Turn everyting off after animation is finished
         StartCoroutine(CloseTabletCoroutine(0.2f));

@@ -23,6 +23,9 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
     ////BuildingSystem
     public static Action isPressed_MoveableRotation_Right;
     public static Action isPressed_MoveableRotation_Left;
+    public static Action isPressed_MoveableSnappingRotation_Right;
+    public static Action isPressed_MoveableSnappingRotation_Left;
+    public static Action isPressed_MoveableMirrorRotation;
 
     //Equipment
     public static Action isPressed_EquipmentActivate;
@@ -89,8 +92,6 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
             || HotbarManager.Instance.selectedItem == Items.GhostCapturer
             ))
         {
-
-            print("1. Use GhostCapturer");
             isPressed_EquipmentActivate?.Invoke();
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0) && MainManager.Instance.menuStates == MenuStates.None
@@ -165,23 +166,37 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
         //MoveableObject Rotation
         #region
-        else if (Input.GetKey(KeyCode.C) && MainManager.Instance.menuStates == MenuStates.None && MainManager.Instance.gameStates == GameStates.Building)
+        else if (Input.GetKey(KeyCode.C) && MainManager.Instance.menuStates == MenuStates.None && MainManager.Instance.gameStates == GameStates.Building && !BuildingSystemManager.Instance.isSnapping)
         {
             isPressed_MoveableRotation_Right?.Invoke();
         }
-        else if (Input.GetKey(KeyCode.X) && MainManager.Instance.menuStates == MenuStates.None && MainManager.Instance.gameStates == GameStates.Building)
+        else if (Input.GetKey(KeyCode.X) && MainManager.Instance.menuStates == MenuStates.None && MainManager.Instance.gameStates == GameStates.Building && !BuildingSystemManager.Instance.isSnapping)
         {
             isPressed_MoveableRotation_Left?.Invoke();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.C) && MainManager.Instance.menuStates == MenuStates.None && MainManager.Instance.gameStates == GameStates.Building && BuildingSystemManager.Instance.isSnapping)
+        {
+            isPressed_MoveableSnappingRotation_Right?.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.X) && MainManager.Instance.menuStates == MenuStates.None && MainManager.Instance.gameStates == GameStates.Building && BuildingSystemManager.Instance.isSnapping)
+        {
+            isPressed_MoveableSnappingRotation_Left?.Invoke();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Z) && MainManager.Instance.menuStates == MenuStates.None && MainManager.Instance.gameStates == GameStates.Building)
+        {
+            isPressed_MoveableMirrorRotation?.Invoke();
         }
         #endregion
 
 
-        //--------------------
+            //--------------------
 
 
-        //Testing
-        #region
-        //Place BuildingBlock - Test
+            //Testing
+            #region
+            //Place BuildingBlock - Test
         else if (Input.GetKeyDown(KeyCode.T) && MainManager.Instance.gameStates == GameStates.Building)
         {
             T_isPressed?.Invoke();

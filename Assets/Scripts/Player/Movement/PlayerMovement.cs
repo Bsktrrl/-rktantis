@@ -84,7 +84,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
             PlayerManager.Instance.movementStates = MovementStates.Crouching;
         }
 
-        CheckJumpTimer();
+        if (MainManager.Instance.menuStates == MenuStates.None)
+        {
+            CheckJumpTimer();
+        }
     }
 
 

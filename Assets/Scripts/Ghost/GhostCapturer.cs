@@ -168,7 +168,7 @@ public class GhostCapturer : MonoBehaviour
     {
         if (isActive)
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            ray = MainManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, ghostLayerMask))
             {

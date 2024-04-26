@@ -52,8 +52,6 @@ public class DistanceAboveGround : MonoBehaviour
             return;
         }
 
-        print("2000000. DelayedStart");
-
         point_0_Hit = false;
         point_1_Hit = false;
         point_2_Hit = false;
@@ -103,7 +101,6 @@ public class DistanceAboveGround : MonoBehaviour
                 {
                     if (GroundLookingAt.GetComponent<Model>().gameObject.transform.parent.GetComponent<MoveableObject>())
                     {
-                        print("100000000000000. UpdatePlayerDyingPos");
                         PlayerManager.Instance.UpdatePlayerDyingPos(GroundLookingAt.transform);
                     }
                 }
