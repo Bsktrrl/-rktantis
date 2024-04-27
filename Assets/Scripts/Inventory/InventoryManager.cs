@@ -1063,6 +1063,22 @@ public class InventoryManager : Singleton<InventoryManager>
                     itemInfo.SetInfo_ResearchableItem(false);
                 }
             }
+            else if (MainManager.Instance.menuStates == MenuStates.CropPlotMenu)
+            {
+                if (itemName != Items.ArídisPlantSeed && itemName != Items.GluePlantSeed && itemName != Items.CrimsonCloudBushSeed
+                && itemName != Items.RedCottonPlantSeed && itemName != Items.SpikPlantSeed && itemName != Items.SmallCactusplantSeed
+                && itemName != Items.LargeCactusplantSeed && itemName != Items.PuddingCactusSeed && itemName != Items.StalkFruitSeed
+                && itemName != Items.TripodFruitSeed && itemName != Items.HeatFruitSeed && itemName != Items.FreezeFruitSeed
+                && itemName != Items.TwistedMushroomSeed && itemName != Items.GroundMushroomSeed && itemName != Items.SandTubesSeed
+                && itemName != Items.PalmTreeSeed && itemName != Items.BloodTreeSeed)
+                {
+                    itemInfo.SetInfo_CropPlotItem(true);
+                }
+                else
+                {
+                    itemInfo.SetInfo_CropPlotItem(false);
+                }
+            }
 
             else
             {
@@ -1092,6 +1108,10 @@ public class InventoryManager : Singleton<InventoryManager>
         }
 
         itemInfo_Parent.SetActive(true);
+    }
+    public void ResetItemInfoBox()
+    {
+        itemInfo.HideAllParents();
     }
     public void ChangeItemInfoBox(bool isEntering)
     {

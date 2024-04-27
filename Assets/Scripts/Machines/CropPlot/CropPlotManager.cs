@@ -231,6 +231,34 @@ public class CropPlotManager : Singleton<CropPlotManager>
             }
         }
     }
+    public void UpdateCropPlotMarkers()
+    {
+        hotbarMarkerInt.Clear();
+        durabilityMarkerInt.Clear();
+
+        for (int i = 0; i < InventoryManager.Instance.itemSlotList_Player.Count; i++)
+        {
+            if (InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>())
+            {
+                //Hide Hotbar Marker
+                if (InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().hotbarSelectorParent.activeInHierarchy)
+                {
+                    hotbarMarkerInt.Add(i);
+
+                    InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().hotbarSelectorParent.SetActive(false);
+                }
+
+                //Hide Durability Marker
+                if (InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().durabilityMeterParent.activeInHierarchy)
+                {
+                    durabilityMarkerInt.Add(i);
+
+                    InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().durabilityMeterImage.gameObject.SetActive(false);
+                    InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().durabilityMeterParent.SetActive(false);
+                }
+            }
+        }
+    }
 
 
     //--------------------
@@ -277,69 +305,6 @@ public class CropPlotManager : Singleton<CropPlotManager>
         }
     }
     public void ResetCropPlotItemColor()
-    {
-        for (int i = 0; i < InventoryManager.Instance.itemSlotList_Player.Count; i++)
-        {
-            //Set Image Color
-            if (InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().gameObject.GetComponent<Image>())
-            {
-                if (InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().itemName == Items.None)
-                {
-                    InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().ChangeImageColor(unvisibleColor /*new Color(255, 255, 255, 0)*/);
-                }
-                else
-                {
-                    InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().ChangeImageColor(visibleColor /*new Color(255, 255, 255, 255)*/);
-                }
-            }
-        }
-    }
-
-
-    //--------------------
-
-
-    public void UpdateCropPlotMarkers()
-    {
-        for (int i = 0; i < InventoryManager.Instance.itemSlotList_Player.Count; i++)
-        {
-            for (int j = 0; j < hotbarMarkerInt.Count; j++)
-            {
-                if (hotbarMarkerInt[j] == i)
-                {
-                    if (InventoryManager.Instance.itemSlotList_Player[i].GetComponent<Image>() && InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>())
-                    {
-                        //Show Hotbar Marker
-                        if (!InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().hotbarSelectorParent.activeInHierarchy)
-                        {
-                            InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().hotbarSelectorParent.SetActive(true);
-                        }
-                    }
-
-                    break;
-                }
-            }
-
-            for (int j = 0; j < durabilityMarkerInt.Count; j++)
-            {
-                if (durabilityMarkerInt[j] == i)
-                {
-                    if (InventoryManager.Instance.itemSlotList_Player[i].GetComponent<Image>() && InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>())
-                    {
-                        //Show Durability Marker
-                        if (!InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().durabilityMeterParent.activeInHierarchy)
-                        {
-                            InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().durabilityMeterImage.gameObject.SetActive(true);
-                            InventoryManager.Instance.itemSlotList_Player[i].GetComponent<ItemSlot>().durabilityMeterParent.SetActive(true);
-                        }
-                    }
-
-                    break;
-                }
-            }
-        }
-    }
-    public void SetCropPlotItemInfo()
     {
         for (int i = 0; i < InventoryManager.Instance.itemSlotList_Player.Count; i++)
         {

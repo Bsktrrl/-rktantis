@@ -287,6 +287,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
         else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
         {
+            //print("Info: " + GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active).machinesName.ToString());
             newObject = Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active).objectInfo.worldObject);
         }
         else

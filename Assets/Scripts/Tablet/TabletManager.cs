@@ -358,11 +358,11 @@ public class TabletManager : Singleton<TabletManager>
         menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
         menu_CraftingTable_Button.GetComponent<Image>().sprite = menuButton_Passive;
         menu_ResearchTable_Button.GetComponent<Image>().sprite = menuButton_Passive;
+        menu_CropPlot_Button.GetComponent<Image>().sprite = menuButton_Passive;
         menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Passive;
         menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Passive;
         menu_Journal_Button.GetComponent<Image>().sprite = menuButton_Passive;
         menu_Settings_Button.GetComponent<Image>().sprite = menuButton_Passive;
-        menu_CropPlot_Button.GetComponent<Image>().sprite = menuButton_Passive;
 
         playerInventory_MainParent.SetActive(false);
         chestInventory_MainParent.SetActive(false);
@@ -370,19 +370,19 @@ public class TabletManager : Singleton<TabletManager>
         menu_Inventory.SetActive(false);
         menu_CraftingTable.SetActive(false);
         menu_ResearchTable.SetActive(false);
+        menu_CropPlot.SetActive(false);
         menu_Skilltree.SetActive(false);
         menu_MoveableObjects.SetActive(false);
         journal_Parent.SetActive(false);
         settings_Parent.SetActive(false);
-        menu_CropPlot.SetActive(false);
 
         ResearchManager.Instance.ResetResearchMarkers();
         ResearchManager.Instance.ResetResearchItemColor();
         ResearchManager.Instance.UpdateResearchMarkers();
 
-        CropPlotManager.Instance.ResetCropPlotMarkers();
-        CropPlotManager.Instance.ResetCropPlotItemColor();
-        CropPlotManager.Instance.UpdateCropPlotMarkers();
+        //CropPlotManager.Instance.ResetCropPlotMarkers();
+        //CropPlotManager.Instance.ResetCropPlotItemColor();
+        //CropPlotManager.Instance.UpdateCropPlotMarkers();
 
         InventoryManager.Instance.DisplayInventoryItemInfo();
 
@@ -409,6 +409,10 @@ public class TabletManager : Singleton<TabletManager>
                 InventoryManager.Instance.itemInfo.research_Parent.SetActive(false);
                 menu_ResearchTable.SetActive(false);
                 break;
+            case TabletMenuState.CropPlot:
+                InventoryManager.Instance.itemInfo.research_Parent.SetActive(false);
+                menu_CropPlot.SetActive(false);
+                break;
             case TabletMenuState.SkillTree:
                 menu_Skilltree.SetActive(false);
                 break;
@@ -421,9 +425,6 @@ public class TabletManager : Singleton<TabletManager>
                 break;
             case TabletMenuState.Settings:
                 settings_Parent.SetActive(false);
-                break;
-            case TabletMenuState.CropPlot:
-                menu_CropPlot.SetActive(false);
                 break;
 
             default:
@@ -454,10 +455,9 @@ public class TabletManager : Singleton<TabletManager>
                 menu_Equipment_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Active;
                 menu_Equipment_Button.SetActive(true);
+                menu_Chest_Button.SetActive(true);
 
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
-
-                menu_Chest_Button.SetActive(true);
                 break;
             case TabletMenuState.Equipment:
                 MainManager.Instance.menuStates = MenuStates.EquipmentMenu;
@@ -471,10 +471,9 @@ public class TabletManager : Singleton<TabletManager>
 
                 playerInventory_MainParent.SetActive(true);
                 equipInventory_MainParent.SetActive(true);
+                menu_Inventory.SetActive(true);
 
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
-
-                menu_Inventory.SetActive(true);
                 break;
             case TabletMenuState.Inventory:
                 MainManager.Instance.menuStates = MenuStates.InventoryMenu;
@@ -490,10 +489,9 @@ public class TabletManager : Singleton<TabletManager>
                 menu_Equipment_Button.SetActive(false);
 
                 playerInventory_MainParent.SetActive(true);
+                menu_Inventory.SetActive(true);
 
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Active;
-
-                menu_Inventory.SetActive(true);
                 break;
 
             case TabletMenuState.CraftingTable:
@@ -505,6 +503,7 @@ public class TabletManager : Singleton<TabletManager>
                 CraftingManager.Instance.SetupSelectionScreen();
 
                 CraftingManager.Instance.OpenCraftingScreen();
+                menu_CraftingTable.SetActive(true);
 
                 //Set DurabilityInfo on inventoryItems
                 InventoryManager.Instance.SelectItemDurabilityDisplay();
@@ -528,12 +527,12 @@ public class TabletManager : Singleton<TabletManager>
                 menu_Inventory.SetActive(true);
 
                 CraftingManager.Instance.startup = false;
-
-                menu_CraftingTable.SetActive(true);
                 break;
             case TabletMenuState.ResearchTable:
                 MainManager.Instance.menuStates = MenuStates.ResearchMenu;
                 tabletMenuState = TabletMenuState.ResearchTable;
+
+                menu_ResearchTable.SetActive(true);
 
                 menu_Equipment_Button.SetActive(false);
                 menu_Chest_Button.SetActive(false);
@@ -549,12 +548,34 @@ public class TabletManager : Singleton<TabletManager>
                 chestInventory_MainParent.SetActive(false);
                 equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(true);
+                break;
+            case TabletMenuState.CropPlot:
+                MainManager.Instance.menuStates = MenuStates.CropPlotMenu;
+                tabletMenuState = TabletMenuState.CropPlot;
 
-                menu_ResearchTable.SetActive(true);
+                menu_CropPlot.SetActive(true);
+
+                menu_Equipment_Button.SetActive(false);
+                menu_Chest_Button.SetActive(false);
+
+                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
+                menu_CropPlot_Button.GetComponent<Image>().sprite = menuButton_Active;
+
+                CropPlotManager.Instance.SetupCropPlotSlots();
+
+                CropPlotManager.Instance.UpdateCropPlotItemColor();
+                ResearchManager.Instance.UpdateResearchMarkers();
+
+                playerInventory_MainParent.SetActive(true);
+                chestInventory_MainParent.SetActive(false);
+                equipInventory_MainParent.SetActive(false);
+                menu_Inventory.SetActive(true);
                 break;
             case TabletMenuState.SkillTree:
                 MainManager.Instance.menuStates = MenuStates.SkillTreeMenu;
                 tabletMenuState = TabletMenuState.SkillTree;
+
+                menu_Skilltree.SetActive(true);
 
                 menu_Equipment_Button.SetActive(false);
                 menu_Chest_Button.SetActive(false);
@@ -566,8 +587,6 @@ public class TabletManager : Singleton<TabletManager>
 
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 menu_Skilltree_Button.GetComponent<Image>().sprite = menuButton_Active;
-
-                menu_Skilltree.SetActive(true);
                 break;
             
             case TabletMenuState.BuildingObject:
@@ -575,6 +594,8 @@ public class TabletManager : Singleton<TabletManager>
                 tabletMenuState = TabletMenuState.BuildingObject;
 
                 BuildingDisplayManager.Instance.OpenTablet();
+
+                menu_MoveableObjects.SetActive(true);
 
                 menu_Equipment_Button.SetActive(false);
                 menu_Chest_Button.SetActive(false);
@@ -588,8 +609,6 @@ public class TabletManager : Singleton<TabletManager>
                 menu_MoveableObjects_Button.GetComponent<Image>().sprite = menuButton_Active;
 
                 BuildingSystemMenu.Instance.BuildingBlockSelecter_Enter();
-
-                menu_MoveableObjects.SetActive(true);
                 break;
             
             case TabletMenuState.Journal:
@@ -597,6 +616,8 @@ public class TabletManager : Singleton<TabletManager>
                 tabletMenuState = TabletMenuState.Journal;
 
                 JournalManager.Instance.ResetInfoPage();
+
+                journal_Parent.SetActive(true);
 
                 menu_Equipment_Button.SetActive(false);
                 menu_Chest_Button.SetActive(false);
@@ -610,12 +631,12 @@ public class TabletManager : Singleton<TabletManager>
 
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 menu_Journal_Button.GetComponent<Image>().sprite = menuButton_Active;
-
-                journal_Parent.SetActive(true);
                 break;
             case TabletMenuState.Settings:
                 MainManager.Instance.menuStates = MenuStates.SettingsMenu;
                 tabletMenuState = TabletMenuState.Settings;
+
+                settings_Parent.SetActive(true);
 
                 menu_Equipment_Button.SetActive(false);
                 menu_Chest_Button.SetActive(false);
@@ -627,31 +648,6 @@ public class TabletManager : Singleton<TabletManager>
 
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 menu_Settings_Button.GetComponent<Image>().sprite = menuButton_Active;
-                settings_Parent.SetActive(true);
-                break;
-            case TabletMenuState.CropPlot:
-                MainManager.Instance.menuStates = MenuStates.CropPlotMenu;
-                tabletMenuState = TabletMenuState.CropPlot;
-
-
-                menu_Equipment_Button.SetActive(false);
-                menu_Chest_Button.SetActive(false);
-
-                menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
-                menu_CropPlot_Button.GetComponent<Image>().sprite = menuButton_Active;
-
-                CropPlotManager.Instance.SetupCropPlotSlots();
-
-                CropPlotManager.Instance.UpdateCropPlotItemColor();
-                CropPlotManager.Instance.UpdateCropPlotMarkers();
-                CropPlotManager.Instance.SetCropPlotItemInfo();
-
-                playerInventory_MainParent.SetActive(true);
-                chestInventory_MainParent.SetActive(false);
-                equipInventory_MainParent.SetActive(false);
-                menu_Inventory.SetActive(true);
-
-                menu_CropPlot.SetActive(true);
                 break;
 
 
@@ -715,9 +711,11 @@ public class TabletManager : Singleton<TabletManager>
         if (tabletMenuState == TabletMenuState.None)
         {
             MenuTransition(TabletMenuState.None, TabletMenuState.Inventory);
+            MenuTransition(TabletMenuState.None, TabletMenuState.Inventory);
         }
         else
         {
+            MenuTransition(TabletMenuState.None, tabletMenuState);
             MenuTransition(TabletMenuState.None, tabletMenuState);
         }
 
@@ -783,6 +781,7 @@ public class TabletManager : Singleton<TabletManager>
         }
 
         MenuTransition(TabletMenuState.None, menuToOpen);
+        MenuTransition(TabletMenuState.None, menuToOpen);
 
         if (InventoryManager.Instance.chestInventoryOpen != 0)
         {
@@ -846,17 +845,10 @@ public class TabletManager : Singleton<TabletManager>
         Cursor.lockState = CursorLockMode.Locked;
         MainManager.Instance.menuStates = MenuStates.None;
 
-        //Hide all Requirement_Parents
-        //BuildingManager.Instance.buildingRequirement_Parent.SetActive(false);
-
-        //if (MainManager.Instance.gameStates != GameStates.Cutting)
-        //{
-        //    BuildingManager.Instance.buildingRemoveRequirement_Parent.SetActive(false);
-        //}
-
         //Hide Buttons
         menu_CraftingTable_Button.SetActive(false);
         menu_ResearchTable_Button.SetActive(false);
+        menu_CropPlot_Button.SetActive(false);
         menu_Skilltree_Button.SetActive(false);
         tabletObject.SetActive(false);
     }

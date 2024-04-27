@@ -191,8 +191,6 @@ public class ResearchManager : Singleton<ResearchManager>
                 }
             }
         }
-
-        //print("hotbarMarkerInt: " + hotbarMarkerInt.Count + " | durabilityMarkerInt: " + durabilityMarkerInt.Count);
     }
     public void UpdateResearchItemColor()
     {
@@ -284,6 +282,7 @@ public class ResearchManager : Singleton<ResearchManager>
     //--------------------
 
 
+    #region The Research
     public void SetResearchedItemList()
     {
         researchedItemList_Parent.GetComponent<RectTransform>().sizeDelta = new Vector2(225, 0);
@@ -348,6 +347,7 @@ public class ResearchManager : Singleton<ResearchManager>
             CraftingManager.Instance.noItemResearched_Text.SetActive(false);
         }
     }
+    #endregion
 
 
     //--------------------
