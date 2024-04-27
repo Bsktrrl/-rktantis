@@ -32,6 +32,35 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         {
             InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
+
+        //Change color of itemSlot
+        if (MainManager.Instance.menuStates == MenuStates.CropPlotMenu)
+        {
+            //If not any of the seeds, 
+            if (itemName != Items.ArídisPlantSeed && itemName != Items.GluePlantSeed && itemName != Items.CrimsonCloudBushSeed
+                && itemName != Items.RedCottonPlantSeed && itemName != Items.SpikPlantSeed && itemName != Items.SmallCactusplantSeed
+                && itemName != Items.LargeCactusplantSeed && itemName != Items.PuddingCactusSeed && itemName != Items.StalkFruitSeed
+                && itemName != Items.TripodFruitSeed && itemName != Items.HeatFruitSeed && itemName != Items.FreezeFruitSeed
+                && itemName != Items.TwistedMushroomSeed && itemName != Items.GroundMushroomSeed && itemName != Items.SandTubesSeed
+                && itemName != Items.PalmTreeSeed && itemName != Items.BloodTreeSeed)
+            {
+                ChangeImageColor(Color.white);
+            }
+            else
+            {
+                ChangeImageColor(Color.gray);
+            }
+        }
+
+        else if (MainManager.Instance.menuStates == MenuStates.ResearchMenu)
+        {
+            ChangeImageColor(Color.white);
+        }
+
+        else 
+        {
+            ChangeImageColor(Color.white);
+        }
     }
 
 
@@ -46,6 +75,21 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             && !ResearchManager.Instance.isResearching)
         {
             ResearchManager.Instance.SetResearchItemInfo(itemName);
+        }
+
+        //If player is in a "CropPlot"
+        else if (eventData.button == PointerEventData.InputButton.Left && MainManager.Instance.menuStates == MenuStates.CropPlotMenu)
+        {
+            //If not any of the seeds, 
+            if (itemName != Items.ArídisPlantSeed && itemName != Items.GluePlantSeed && itemName != Items.CrimsonCloudBushSeed
+                && itemName != Items.RedCottonPlantSeed && itemName != Items.SpikPlantSeed && itemName != Items.SmallCactusplantSeed
+                && itemName != Items.LargeCactusplantSeed && itemName != Items.PuddingCactusSeed && itemName != Items.StalkFruitSeed
+                && itemName != Items.TripodFruitSeed && itemName != Items.HeatFruitSeed && itemName != Items.FreezeFruitSeed
+                && itemName != Items.TwistedMushroomSeed && itemName != Items.GroundMushroomSeed && itemName != Items.SandTubesSeed
+                && itemName != Items.PalmTreeSeed && itemName != Items.BloodTreeSeed)
+            {
+
+            }
         }
 
         //If only player inventory is used
@@ -115,6 +159,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
     }
+    
     void RemoveItemFromInventory(bool permanentRemove)
     {
         if (permanentRemove)

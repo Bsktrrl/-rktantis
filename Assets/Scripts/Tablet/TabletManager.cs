@@ -31,6 +31,7 @@ public class TabletManager : Singleton<TabletManager>
     [SerializeField] GameObject menu_ResearchTable;
     [SerializeField] GameObject menu_Skilltree;
     [SerializeField] GameObject menu_MoveableObjects;
+    [SerializeField] GameObject menu_CropPlot;
 
     [Header("Buttons")]
     [SerializeField] GameObject menu_Inventory_Button;
@@ -47,6 +48,8 @@ public class TabletManager : Singleton<TabletManager>
     [SerializeField] GameObject menu_Journal_PlussIcon;
     [SerializeField] GameObject menu_Settings_Button;
     [SerializeField] GameObject menu_Settings_PlussIcon;
+
+    [SerializeField] GameObject menu_CropPlot_Button;
 
     [SerializeField] GameObject menu_Equipment_Button;
     [SerializeField] GameObject menu_Chest_Button;
@@ -1196,7 +1199,9 @@ public enum TabletMenuState
     Equipment,
     Journal,
     Settings,
-    ResearchTable
+    ResearchTable,
+
+    CropPlot
 }
 public enum ObjectInteractingWith
 {
@@ -1205,5 +1210,7 @@ public enum ObjectInteractingWith
     Chest,
     CraftingTable,
     SkillTree,
-    ResearchTable
+    ResearchTable,
+
+    CropPlot
 }

@@ -1366,6 +1366,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 //Set new Parent
                 worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetParent(worldObject_Parent.transform);
 
+                //Set Index
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                {
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().index = worldBuildingObjectListSpawned.Count - 1;
+                }
+
                 //Set position and Rotation to be the same as the Ghost
                 worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(ghostObject_Holding.transform.position, ghostObject_Holding.transform.rotation);
 
@@ -1375,12 +1381,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     {
                         worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().modelList[i].transform.SetLocalPositionAndRotation(ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].transform.localPosition, ghostObject_Holding.GetComponent<MoveableObject>().modelList[i].transform.localRotation);
                     }
-                }
-
-                //Set Index
-                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
-                {
-                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().index = worldBuildingObjectListSpawned.Count - 1;
                 }
 
                 //Remove Building Items from inventory
@@ -1598,13 +1598,22 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             || move.machineObjectName == MachineObjectNames.CropPlotMedium
             || move.machineObjectName == MachineObjectNames.CropPlotBig)
         {
-            worldBuildingObjectInfoList[move.index].cropPlotInfo = move.gameObject.GetComponent<CropPlot>().cropPlotInfo;
+            if (move.gameObject.GetComponent<CropPlot>())
+            {
+                worldBuildingObjectInfoList[move.index].cropPlotInfo = move.gameObject.GetComponent<CropPlot>().cropPlotInfo;
+            }
+            
+            print("777. Update CropPlotMenu | Index: " + move.index + " | SlotAmount: " + worldBuildingObjectInfoList[move.index].cropPlotInfo.cropPlotSlotList.Count);
         }
 
         //If a Ghost Tank
         if (move.machineObjectName == MachineObjectNames.GhostTank)
         {
-            worldBuildingObjectInfoList[move.index].ghostTankContent = move.gameObject.GetComponent<GhostTank>().ghostTankContent;
+            if (move.gameObject.GetComponent<GhostTank>())
+            {
+                worldBuildingObjectInfoList[move.index].ghostTankContent = move.gameObject.GetComponent<GhostTank>().ghostTankContent;
+            }
+            
             //print("777. Update GhostTank | Index: " + move.index + " | Element: " + worldBuildingObjectInfoList[move.index].ghostTankContent.GhostElement.ToString() + " | InteractableType" + worldBuildingObjectInfoList[move.index].ghostTankContent.interactableType.ToString());
         }
 
@@ -1700,7 +1709,7 @@ public class WorldBuildingObject
     [Header("If Chest")]
     public int chestIndex; //Needs Update upon Instantiation
 
-    [Header("If CropPlot")]
+    [Header("If CropPlotMenu")]
     public CropPlotInfo cropPlotInfo; //Needs Update upon Instantiation
 
     [Header("If GhostTank")]

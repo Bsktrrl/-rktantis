@@ -105,6 +105,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6230987876278357032}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f06101b044975849b7a1ecab887b2f3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5191728547552564685}
   m_SourcePrefab: {fileID: 100100000, guid: 4f06101b044975849b7a1ecab887b2f3, type: 3}
 --- !u!1 &1857051026409611558 stripped
 GameObject:
@@ -216,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f7d593ae09aa24a9184f94ab51ee1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   canBePlaced: 0
   isSelectedForMovement: 0
   enoughItemsToBuild: 0
@@ -623,6 +628,20 @@ MonoBehaviour:
     - {x: -0.8164962, y: 0, z: 0.57735085}
     - {x: 0, y: -0.81649697, z: 0.5773497}
     - {x: 0.8164962, y: 0, z: 0.57735085}
+--- !u!114 &5191728547552564685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857051026409611558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b21281b2a5f194c9227261f6510ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropPlotInfo:
+    cropPlotSlotList: []
 --- !u!1 &2928362979055078152 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4442617815020459903, guid: 4f06101b044975849b7a1ecab887b2f3,

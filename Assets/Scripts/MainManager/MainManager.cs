@@ -206,7 +206,9 @@ public enum MenuStates
     CraftingMenu,
     SkillTreeMenu,
     JournalMenu,
-    ResearchMenu
+    ResearchMenu,
+
+    CropPlotMenu
 }
 
 public enum GameStates

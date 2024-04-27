@@ -141,9 +141,9 @@ public enum Items
     [Description("Twisted Mushroom Seed")][InspectorName("Seed/Twisted Mushroom Seed")] TwistedMushroomSeed,
     [Description("Ground Mushroom Seed")][InspectorName("Seed/Ground Mushroom Seed")] GroundMushroomSeed,
 
-    [Description("SandTubes")][InspectorName("Seed/SandTubes")] SandTubes,
-    [Description("PalmTree")][InspectorName("Seed/PalmTree")] PalmTree,
-    [Description("DragonTree")][InspectorName("Seed/DragonTree")] DragonTree,
+    [Description("SandTubesSeed")][InspectorName("Seed/SandTubesSeed")] SandTubesSeed,
+    [Description("PalmTreeSeed")][InspectorName("Seed/PalmTreeSeed")] PalmTreeSeed,
+    [Description("BloodTreeSeed")][InspectorName("Seed/BloodTreeSeed")] BloodTreeSeed,
     [Description("Other4")][InspectorName("Seed/Other4")] S_Other4,
     [Description("Other5")][InspectorName("Seed/Other5")] S_Other5,
     #endregion

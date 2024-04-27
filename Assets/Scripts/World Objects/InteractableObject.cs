@@ -201,7 +201,7 @@ public class InteractableObject : MonoBehaviour
                 #region
                 else if (interactableType == InteracteableType.SkillTreeTable)
                 {
-                    //print("Interract with a SkillTree");
+                    //print("Interact with a SkillTree");
 
                     SoundManager.Instance.Play_InteractableObjects_OpenSkillTreeTable_Clip();
 
@@ -229,6 +229,20 @@ public class InteractableObject : MonoBehaviour
                     if (gameObject.GetComponent<GhostTank>())
                     {
                         gameObject.GetComponent<GhostTank>().InteractWithGhostTank();
+                    }
+                }
+                #endregion
+
+                //If Object is a CropPlot
+                #region
+                else if (interactableType == InteracteableType.CropPlot_x1
+                         || interactableType == InteracteableType.CropPlot_x2
+                         || interactableType == InteracteableType.CropPlot_x4)
+                {
+                    if (GetComponent<CropPlotSlot>())
+                    {
+                        print("Interact with a CropPlotMenu");
+                        GetComponent<CropPlotSlot>().InteractWithCropPlotSlot();
                     }
                 }
                 #endregion
@@ -363,9 +377,9 @@ public enum InteracteableType
     [Description("Heat Regulator")][InspectorName("Machine/Heat Regulator")] HeatRegulator,
     [Description("Resource Converter")][InspectorName("Machine/Resource Converter")] ResourceConverter,
 
-    [Description("CropPlot x1")][InspectorName("Machine/CropPlot x1")] CropPlot_x1,
-    [Description("CropPlot x2")][InspectorName("Machine/CropPlot x2")] CropPlot_x2,
-    [Description("CropPlot x4")][InspectorName("Machine/CropPlot x4")] CropPlot_x4,
+    [Description("CropPlotMenu x1")][InspectorName("Machine/CropPlotMenu x1")] CropPlot_x1,
+    [Description("CropPlotMenu x2")][InspectorName("Machine/CropPlotMenu x2")] CropPlot_x2,
+    [Description("CropPlotMenu x4")][InspectorName("Machine/CropPlotMenu x4")] CropPlot_x4,
 
     [Description("Grill x1")][InspectorName("Machine/Grill x1")] Grill_x1,
     [Description("Grill x2")][InspectorName("Machine/Grill x2")] Grill_x2,
