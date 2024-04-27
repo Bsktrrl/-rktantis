@@ -132,6 +132,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         for (int i = 0; i < worldBuildingObjectInfoList.Count; i++)
         {
+            //BuildingBlock
             if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
             {
                 if (GetBuildingObjectInfo(worldBuildingObjectInfoList[i].buildingBlockObjectName_Active, worldBuildingObjectInfoList[i].buildingMaterial_Active).objectInfo.worldObject != null)
@@ -163,6 +164,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetParent(worldObject_Parent.transform);
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
 
+                    //Set Index
+                    if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                    {
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().index = i;
+                    }
+
                     //Set Rotation of the Model
                     if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
                     {
@@ -173,6 +180,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     }
                 }
             }
+            
+            //Furniture
             else if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.Furniture)
             {
                 if (GetBuildingObjectInfo(worldBuildingObjectInfoList[i].furnitureObjectName_Active).objectInfo.worldObject != null)
@@ -181,6 +190,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetParent(worldObject_Parent.transform);
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
+
+                    //Set Index
+                    if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                    {
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().index = i;
+                    }
 
                     #region If Chest's added
                     //If a small chest, update inventory info
@@ -194,6 +209,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     #endregion
                 }
             }
+            
+            //Machine
             else if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.Machine)
             {
                 if (GetBuildingObjectInfo(worldBuildingObjectInfoList[i].machineObjectName_Active).objectInfo.worldObject != null)
@@ -203,12 +220,38 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetParent(worldObject_Parent.transform);
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
                 }
+
+                //Set Index
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                {
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().index = i;
+                }
+
+                //If CropPlot
+                if (worldBuildingObjectInfoList[i].machineObjectName_Active == MachineObjectNames.CropPlotSmall
+                    || worldBuildingObjectInfoList[i].machineObjectName_Active == MachineObjectNames.CropPlotMedium
+                    || worldBuildingObjectInfoList[i].machineObjectName_Active == MachineObjectNames.CropPlotBig)
+                {
+                    if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<CropPlot>())
+                    {
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<CropPlot>().SetupCropPlot(worldBuildingObjectInfoList[i].cropPlotInfo);
+                    }
+                }
+
+                //If Ghost Tank
+                if (worldBuildingObjectInfoList[i].machineObjectName_Active == MachineObjectNames.GhostTank)
+                {
+                    if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<GhostTank>())
+                    {
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<GhostTank>().SetupGhostTank(worldBuildingObjectInfoList[i].ghostTankContent);
+                    }
+                }
             }
         }
         #endregion
 
 
-        //BuildingObjects
+        //BuildingObjects - Hammer
         SpawnNewSelectedBuildingObject();
         SetupHammerDisplayScreen();
 
@@ -1334,11 +1377,42 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     }
                 }
 
+                //Set Index
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                {
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().index = worldBuildingObjectListSpawned.Count - 1;
+                }
+
                 //Remove Building Items from inventory
                 RemoveItemsFromInventoryAfterPlacingObject();
 
                 //Add the ObjectInfo to the List
                 AddBuildingObjectInfoToList();
+
+
+                //--------------------
+                //Setup Machines
+
+
+                //If CropPlot
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<CropPlot>())
+                {
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<CropPlot>().SetupCropPlot();
+                }
+
+                //If GhostTank
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<GhostTank>())
+                {
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<GhostTank>().SetupGhostTank();
+                }
+
+                //Update Saving Object
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                {
+                    UpdateWorldBuildingObjectInfoList_ToSave(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>());
+                }
+
+                SaveData();
             }
             else
             {
@@ -1357,6 +1431,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         {
             BuildingBlockInfo buildingBlockInfo = GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active);
             WorldBuildingObject worldBuildingObject = new WorldBuildingObject();
+
+            worldBuildingObject.index = worldBuildingObjectListSpawned.Count - 1;
 
             worldBuildingObject.objectPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.position;
             worldBuildingObject.objectRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.rotation;
@@ -1379,6 +1455,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         {
             FurnitureInfo buildingBlockInfo = GetBuildingObjectInfo(activeBuildingObject_Info.furnitureObjectName_Active);
             WorldBuildingObject worldFurnitureObject = new WorldBuildingObject();
+
+            worldFurnitureObject.index = worldBuildingObjectListSpawned.Count - 1;
 
             worldFurnitureObject.objectPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.position;
             worldFurnitureObject.objectRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.rotation;
@@ -1420,6 +1498,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             MachineInfo buildingBlockInfo = GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active);
             WorldBuildingObject worldMachineObject = new WorldBuildingObject();
 
+            worldMachineObject.index = worldBuildingObjectListSpawned.Count - 1;
+
             worldMachineObject.objectPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.position;
             worldMachineObject.objectRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.rotation;
 
@@ -1429,8 +1509,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
             worldBuildingObjectInfoList.Add(worldMachineObject);
         }
-
-        SaveData();
     }
     void RemoveItemsFromInventoryAfterPlacingObject()
     {
@@ -1499,6 +1577,40 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             }
         }
 
+        //Update all Indexes
+        for (int i = 0; i < worldBuildingObjectListSpawned.Count; i++)
+        {
+            if (worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>())
+            {
+                worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>().index = i;
+
+                UpdateWorldBuildingObjectInfoList_ToSave(worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>());
+            }
+        }
+
+        SaveData();
+    }
+
+    public void UpdateWorldBuildingObjectInfoList_ToSave(MoveableObject move)
+    {
+        //If a CropPlot
+        if (move.machineObjectName == MachineObjectNames.CropPlotSmall
+            || move.machineObjectName == MachineObjectNames.CropPlotMedium
+            || move.machineObjectName == MachineObjectNames.CropPlotBig)
+        {
+            worldBuildingObjectInfoList[move.index].cropPlotInfo = move.gameObject.GetComponent<CropPlot>().cropPlotInfo;
+        }
+
+        //If a Ghost Tank
+        if (move.machineObjectName == MachineObjectNames.GhostTank)
+        {
+            worldBuildingObjectInfoList[move.index].ghostTankContent = move.gameObject.GetComponent<GhostTank>().ghostTankContent;
+            //print("777. Update GhostTank | Index: " + move.index + " | Element: " + worldBuildingObjectInfoList[move.index].ghostTankContent.GhostElement.ToString() + " | InteractableType" + worldBuildingObjectInfoList[move.index].ghostTankContent.interactableType.ToString());
+        }
+
+        //Update Index
+        worldBuildingObjectInfoList[move.index].index = move.index;
+
         SaveData();
     }
     #endregion
@@ -1566,6 +1678,9 @@ public class ActiveBuildingObject
 [Serializable]
 public class WorldBuildingObject
 {
+    [Header("Index")]
+    public int index;
+
     [Header("MainObject Posision")]
     public Vector3 objectPos;
     public Quaternion objectRot;
@@ -1583,7 +1698,13 @@ public class WorldBuildingObject
     public MachineObjectNames machineObjectName_Active;
 
     [Header("If Chest")]
-    public int chestIndex;
+    public int chestIndex; //Needs Update upon Instantiation
+
+    [Header("If CropPlot")]
+    public CropPlotInfo cropPlotInfo; //Needs Update upon Instantiation
+
+    [Header("If GhostTank")]
+    public GhostTankContent ghostTankContent; //Needs Update upon Instantiation
 }
 #endregion
 

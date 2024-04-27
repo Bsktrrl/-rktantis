@@ -49,7 +49,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
     private void Update()
     {
         //Exit Game
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && MainManager.Instance.menuStates == MenuStates.None)
         {
             Application.Quit();
         }

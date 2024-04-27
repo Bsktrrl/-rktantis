@@ -5,6 +5,8 @@ using UnityEngine;
 public class MoveableObject : MonoBehaviour
 {
     [Header("General")]
+    public int index;
+
     public bool canBePlaced;
     public bool isSelectedForMovement;
     public bool enoughItemsToBuild;

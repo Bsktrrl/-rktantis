@@ -179,8 +179,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8, y: 0.8, z: 1.8}
-  m_Center: {x: 0, y: 0.4, z: 0}
+  m_Size: {x: 1.8, y: 0.25, z: 1.8}
+  m_Center: {x: 0, y: 0.12, z: 0}
 --- !u!114 &9088193751910091463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
   itemName: 130
   amount: 0
   durability_Current: 0
-  interactableType: 10
+  interactableType: 12
   inventoryIndex: 0
   plantParent: {fileID: 0}
   journalType: 0
@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineMode: 1
   bakeKeys:
   - {fileID: 861835734586640749, guid: 4f06101b044975849b7a1ecab887b2f3, type: 3}
   - {fileID: -3920912603921560777, guid: 4f06101b044975849b7a1ecab887b2f3, type: 3}

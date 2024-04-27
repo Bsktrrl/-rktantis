@@ -235,14 +235,11 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         PerkManager.Instance.LoadData();
         print("21. Perks has Loaded");
 
-        MachineManager.Instance.LoadData();
-        print("22. Machines has Loaded");
-
         ArídianKeyManager.Instance.LoadData();
-        print("23. AríditeKeyManager has Loaded");
+        print("22. AríditeKeyManager has Loaded");
 
         AríditeCrystalManager.Instance.LoadData();
-        print("24. AríditeCrystalManager has Loaded");
+        print("23. AríditeCrystalManager has Loaded");
         #endregion
 
         print("------------------------------");

@@ -90,6 +90,8 @@ public class GhostInTank : MonoBehaviour
                 break;
 
             default:
+                for (int i = 0; i < style2.Count; i++)
+                    style2[i].SetActive(true);
                 break;
         }
     }
