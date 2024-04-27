@@ -39,11 +39,12 @@ public class CropPlotSlot : MonoBehaviour
 
     void OpenCropPlotTabletMenu()
     {
+        //Update the Manager with new info
+        CropPlotManager.Instance.CropPlotInfo_Interacting = parent.GetComponent<CropPlot>().cropPlotInfo;
+
+        //Open Tablet
         TabletManager.Instance.objectInteractingWith_Object = gameObject;
-
-        //Open the crafting menu
         TabletManager.Instance.OpenTablet(TabletMenuState.CropPlot);
-
         TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.CropPlot;
     }
 

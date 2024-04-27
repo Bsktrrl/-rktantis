@@ -434,86 +434,89 @@ public class LookAtManager : Singleton<LookAtManager>
     {
         if (SelectionManager.Instance.selectedObject && SelectionManager.Instance.onTarget)
         {
-            if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+            if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>())
             {
-                if (BuildingSystemManager.Instance.ghostObject_Holding)
+                if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
                 {
-                    if (BuildingSystemManager.Instance.activeBuildingObject_Info.furnitureObjectName_Active == BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().furnitureObjectName
-                    && MainManager.Instance.gameStates == GameStates.Building)
+                    if (BuildingSystemManager.Instance.ghostObject_Holding)
                     {
-                        if (BuildingSystemManager.Instance.ghostObject_Holding)
+                        if (BuildingSystemManager.Instance.activeBuildingObject_Info.furnitureObjectName_Active == BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().furnitureObjectName
+                        && MainManager.Instance.gameStates == GameStates.Building)
                         {
-                            if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>())
+                            if (BuildingSystemManager.Instance.ghostObject_Holding)
                             {
-                                FurnitureInfo tempObject = MainManager.Instance.GetMovableObject(BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().furnitureObjectName);
+                                if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>())
+                                {
+                                    FurnitureInfo tempObject = MainManager.Instance.GetMovableObject(BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().furnitureObjectName);
 
-                                MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
-                                MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
+                                    MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                                    MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
 
-                                if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().enoughItemsToBuild)
-                                {
-                                    MovableObject_Text.text = "Not enough items to build";
-                                }
-                                else if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
-                                {
-                                    MovableObject_Text.text = "Can be Placed";
-                                }
-                                else if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
-                                {
-                                    MovableObject_Text.text = "Needs a Building Block to place on";
+                                    if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().enoughItemsToBuild)
+                                    {
+                                        MovableObject_Text.text = "Not enough items to build";
+                                    }
+                                    else if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
+                                    {
+                                        MovableObject_Text.text = "Can be Placed";
+                                    }
+                                    else if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
+                                    {
+                                        MovableObject_Text.text = "Needs a Building Block to place on";
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                else
-                {
-                    FurnitureInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().furnitureObjectName);
-
-                    MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
-                    MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
-                    MovableObject_Text.text = "Press E to interact";
-                }
-            }
-            else if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
-            {
-                if (BuildingSystemManager.Instance.ghostObject_Holding)
-                {
-                    if (BuildingSystemManager.Instance.activeBuildingObject_Info.machineObjectName_Active == BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().machineObjectName
-                    && MainManager.Instance.gameStates == GameStates.Building)
+                    else
                     {
-                        if (BuildingSystemManager.Instance.ghostObject_Holding)
+                        FurnitureInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().furnitureObjectName);
+
+                        MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                        MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
+                        MovableObject_Text.text = "Press E to interact";
+                    }
+                }
+                else if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+                {
+                    if (BuildingSystemManager.Instance.ghostObject_Holding)
+                    {
+                        if (BuildingSystemManager.Instance.activeBuildingObject_Info.machineObjectName_Active == BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().machineObjectName
+                        && MainManager.Instance.gameStates == GameStates.Building)
                         {
-                            if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>())
+                            if (BuildingSystemManager.Instance.ghostObject_Holding)
                             {
-                                MachineInfo tempObject = MainManager.Instance.GetMovableObject(BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().machineObjectName);
+                                if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>())
+                                {
+                                    MachineInfo tempObject = MainManager.Instance.GetMovableObject(BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().machineObjectName);
 
-                                MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
-                                MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
+                                    MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                                    MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
 
-                                if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().enoughItemsToBuild)
-                                {
-                                    MovableObject_Text.text = "Not enough items to build";
-                                }
-                                else if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
-                                {
-                                    MovableObject_Text.text = "Can be Placed";
-                                }
-                                else if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
-                                {
-                                    MovableObject_Text.text = "Needs a Building Block to place on";
+                                    if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().enoughItemsToBuild)
+                                    {
+                                        MovableObject_Text.text = "Not enough items to build";
+                                    }
+                                    else if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
+                                    {
+                                        MovableObject_Text.text = "Can be Placed";
+                                    }
+                                    else if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
+                                    {
+                                        MovableObject_Text.text = "Needs a Building Block to place on";
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                else
-                {
-                    MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().machineObjectName);
+                    else
+                    {
+                        MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().machineObjectName);
 
-                    MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
-                    MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
-                    MovableObject_Text.text = "Press E to interact";
+                        MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                        MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
+                        MovableObject_Text.text = "Press E to interact";
+                    }
                 }
             }
         }

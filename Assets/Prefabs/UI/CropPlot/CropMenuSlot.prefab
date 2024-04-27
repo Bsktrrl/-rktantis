@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 2462871308475478482}
   - component: {fileID: 2437737323314783779}
   - component: {fileID: 6268613134655151022}
+  - component: {fileID: 2323290304371365085}
   m_Layer: 12
   m_Name: CropMenuSlot
   m_TagString: Untagged
@@ -239,7 +240,7 @@ RectTransform:
   m_GameObject: {fileID: 3868359961455533613}
   m_LocalRotation: {x: -0.00000005960463, y: -0.000000092569216, z: -0.000000020787878,
     w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00076675415}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -250,7 +251,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2437737323314783779
 CanvasRenderer:
@@ -290,6 +291,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 4
+--- !u!114 &2323290304371365085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3868359961455533613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f4738e396018243ad4e89d7e51052c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plant_Image: {fileID: 554478758812624798}
+  fill_Image: {fileID: 367142661514104173}
+  plantName: {fileID: 8228147820760993815}
 --- !u!1 &4821647906247444232
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +372,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d2d457f283fedb24c98a08f34f187cb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a78a82eff9085347a4146c15abfa6de, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

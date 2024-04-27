@@ -1056,12 +1056,10 @@ public class InventoryManager : Singleton<InventoryManager>
             {
                 if (MainManager.Instance.GetItem(itemName).isResearched)
                 {
-                    print("222. isResearched");
                     itemInfo.SetInfo_ResearchableItem(true);
                 }
                 else
                 {
-                    print("222. isNOTResearched");
                     itemInfo.SetInfo_ResearchableItem(false);
                 }
             }
