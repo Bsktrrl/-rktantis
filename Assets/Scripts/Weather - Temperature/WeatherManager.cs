@@ -21,6 +21,7 @@ public class WeatherManager : Singleton<WeatherManager>
     [Header("Temperature Resistances")]
     public float coverValue;
     public float temperatureFruit;
+    public float waterValue;
     public float equippment;
     public float skillTree;
     public float waterCooler;
@@ -87,7 +88,7 @@ public class WeatherManager : Singleton<WeatherManager>
         
         CheckIfPlayerIsInTheCoverageOfBuildingBlock();
         SetTemperature();
-        SetPlayerTemperature(coverValue, temperatureFruit);
+        SetPlayerTemperature(coverValue, temperatureFruit, waterValue);
         SetTemperatureDisplay(temperatureDisplay, playerTemperatureDisplay);
 
         SetTermostatDisplay();
@@ -200,10 +201,10 @@ public class WeatherManager : Singleton<WeatherManager>
             currentWorldTemperature = Mathf.FloorToInt(maxTemperature + calculatingTemperature);
         }
     }
-    void SetPlayerTemperature(float coverValue, float temperatureFruit)
+    void SetPlayerTemperature(float coverValue, float temperatureFruit, float waterValue)
     {
         //Set Temperature for BuildingBlock Coverage (doesn't affect temperature under idealTemperature)
-        float coverResistance = coverValue + temperatureFruit;
+        float coverResistance = coverValue + temperatureFruit + waterValue;
 
         //print("0. coverResistance = " + coverResistance);
         //print("0. PlayerTemperature = " + playerTemperature);

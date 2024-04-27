@@ -7,6 +7,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public float movementSpeed = 4f;
     public float movementSpeedVarianceByMovement = 1f;
     public float movementSpeedVarianceByWeather = 1f;
+    public float movementSpeedVarianceByWater = 1f;
 
     public float gravity = -9.81f * 2;
     public float gravityResistance = 2f;
@@ -112,7 +113,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         //right is the red Axis, forward is the blue axis
         Vector3 move = MainManager.Instance.playerBody.transform.right * movement_X + MainManager.Instance.playerBody.transform.forward * movement_Z;
 
-        controller.Move(move * movementSpeed * movementSpeedVarianceByWeather * movementSpeedVarianceByMovement * PlayerManager.Instance.movementSpeedMultiplier_SkillTree * Time.deltaTime);
+        controller.Move(move * movementSpeed * movementSpeedVarianceByWeather * movementSpeedVarianceByMovement * movementSpeedVarianceByWater * PlayerManager.Instance.movementSpeedMultiplier_SkillTree * Time.deltaTime);
 
         //check if the player is on the ground so he can jump
         if (Input.GetKeyDown(KeyCode.Space) && GetComponent<DistanceAboveGround>().isGrounded)
