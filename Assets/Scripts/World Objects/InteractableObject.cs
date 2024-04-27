@@ -74,12 +74,12 @@ public class InteractableObject : MonoBehaviour
                             //Remove Object from the worldObjectList
                             WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
 
-                            //Update the ArídianKey
+                            //Update the ArídianKey Journal Page
                             if (gameObject.GetComponent<ArídianKey>())
                             {
                                 gameObject.GetComponent<ArídianKey>().ArídianKeyInteraction();
                             }
-                            //Update the AriditeCrystal
+                            //Update the AriditeCrystal Journal Page
                             else if (gameObject.GetComponent<AríditeCrystal>())
                             {
                                 gameObject.GetComponent<AríditeCrystal>().AríditeCrystalInteraction();

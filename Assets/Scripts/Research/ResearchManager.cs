@@ -141,6 +141,11 @@ public class ResearchManager : Singleton<ResearchManager>
 
             //Arídean Key
             researched_SOItem[80] = true;
+
+            //More Seeds
+            researched_SOItem[81] = true;
+            researched_SOItem[82] = true;
+            researched_SOItem[83] = true;
         }
 
         Update_SOItemList();
