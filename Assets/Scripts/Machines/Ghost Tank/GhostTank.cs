@@ -29,8 +29,6 @@ public class GhostTank : MonoBehaviour
     [SerializeField] Material ghostTankWater;
 
     bool setupGhostTank;
-
-    bool fuelIsDraining;
     #endregion
 
 
@@ -54,9 +52,14 @@ public class GhostTank : MonoBehaviour
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         UpdateTankDisplay();
-        ReduceFuel(0.075f * Time.deltaTime);
 
-        if (fuelIsDraining)
+        int growingPlantsTemp = GetAmountOfGrowingPlants();
+
+        print("Growing Plants: " + growingPlantsTemp);
+
+        ReduceFuel(0.075f * growingPlantsTemp * Time.deltaTime);
+
+        if (growingPlantsTemp > 0)
         {
             anim.SetBool("isActive", true);
         }
@@ -338,6 +341,38 @@ public class GhostTank : MonoBehaviour
         }
     }
     #endregion
+
+
+    //--------------------
+
+
+    int GetAmountOfGrowingPlants()
+    {
+        int counter = 0;
+
+        if (gameObject.GetComponent<MoveableObject>().connectionPointObject)
+        {
+            if (gameObject.GetComponent<MoveableObject>().connectionPointObject.GetComponent<ConnectionPoint>().worldObjectIndex_ConnectedWith >= 0)
+            {
+                //Get Connected BuildingObject
+                GameObject obj = BuildingSystemManager.Instance.worldBuildingObjectListSpawned[gameObject.GetComponent<MoveableObject>().connectionPointObject.GetComponent<ConnectionPoint>().worldObjectIndex_ConnectedWith];
+
+                //If getting a CropPlot
+                if (obj.GetComponent<CropPlot>())
+                {
+                    for (int i = 0; i < obj.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count; i++)
+                    {
+                        if (obj.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[i].cropState == CropState.Growing)
+                        {
+                            counter++;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return counter;
+    }
 
 
     //--------------------

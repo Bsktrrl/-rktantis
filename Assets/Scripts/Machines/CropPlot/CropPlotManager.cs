@@ -71,7 +71,7 @@ public class CropPlotManager : Singleton<CropPlotManager>
 
     private void Start()
     {
-        cropPlot_GrowthTime_Max = 10;
+        cropPlot_GrowthTime_Max = 20;
     }
     private void Update()
     {
