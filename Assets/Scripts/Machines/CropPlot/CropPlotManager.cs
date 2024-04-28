@@ -71,7 +71,7 @@ public class CropPlotManager : Singleton<CropPlotManager>
 
     private void Start()
     {
-        cropPlot_GrowthTime_Max = 2;
+        cropPlot_GrowthTime_Max = 10;
     }
     private void Update()
     {
@@ -85,22 +85,22 @@ public class CropPlotManager : Singleton<CropPlotManager>
     //--------------------
 
 
-    public void AddSeed(Items seedName, int cropPlotIndex)
+    public void AddSeed(Items seedName, int cropPlotSlotIndex)
     {
         //Set SeedName
-        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotIndex].seedName_Input = seedName;
+        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotSlotIndex].seedName_Input = seedName;
 
         //Set Timers
-        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotIndex].current_GrowthTime = 0;
-        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotIndex].max_GrowthTime = cropPlot_GrowthTime_Max;
+        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotSlotIndex].current_GrowthTime = 0;
+        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotSlotIndex].max_GrowthTime = cropPlot_GrowthTime_Max;
 
         //Set Plant
-        AddPlantToCropPlotSlot(seedName, SelectionManager.Instance.selectedObject.GetComponent<CropPlotSlot>().plantSpot_Parent, cropPlotIndex);
+        AddPlantToCropPlotSlot(seedName, SelectionManager.Instance.selectedObject.GetComponent<CropPlotSlot>().parent.GetComponent<CropPlot>().slotObjectList[cropPlotSlotIndex].GetComponent<CropPlotSlot>().plantSpot_Parent, cropPlotSlotIndex);
 
         SelectionManager.Instance.selectedObject.GetComponent<CropPlotSlot>().parent.GetComponent<Animations_Objects>().StartAnimation();
 
         //Set CropState
-        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotIndex].cropState = CropState.Growing;
+        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotSlotIndex].cropState = CropState.Growing;
 
         BuildingSystemManager.Instance.UpdateWorldBuildingObjectInfoList_ToSave(SelectionManager.Instance.selectedObject.GetComponent<CropPlotSlot>().parent.gameObject.GetComponent<MoveableObject>());
         BuildingSystemManager.Instance.SaveData();

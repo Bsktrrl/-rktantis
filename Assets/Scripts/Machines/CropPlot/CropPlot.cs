@@ -9,13 +9,14 @@ public class CropPlot : MonoBehaviour
 
     public CropPlotInfo cropPlotInfo = new CropPlotInfo();
 
+    public bool hasLoaded = false;
+
 
     //--------------------
 
 
     private void Update()
     {
-        SaveGrowthProgress();
         CheckAnimation();
     }
 
@@ -41,6 +42,8 @@ public class CropPlot : MonoBehaviour
 
         //Save Object Setup
         BuildingSystemManager.Instance.UpdateWorldBuildingObjectInfoList_ToSave(GetComponent<MoveableObject>());
+
+        hasLoaded = true;
     }
     public void SetupCropPlot(CropPlotInfo _cropPlotInfo) //Loaded CropPlot
     {
@@ -71,16 +74,13 @@ public class CropPlot : MonoBehaviour
                 gameObject.transform.GetChild(i).gameObject.GetComponent<CropPlotSlot>().SetupPlantInCropSlotPlot();
             }
         }
+
+        hasLoaded = true;
     }
 
 
     //--------------------
 
-
-    void SaveGrowthProgress()
-    {
-
-    }
 
     void CheckAnimation()
     {

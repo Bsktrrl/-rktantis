@@ -65,7 +65,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                 {
                     if (CropPlotManager.Instance.CropPlotInfo_Interacting.cropPlotSlotList[i].cropState == CropState.Empty)
                     {
-                        print("Add Seed to CropPlot");
+                        print("Add Seed to CropPlot | Index: " + i);
 
                         //Add Seed
                         CropPlotManager.Instance.AddSeed(itemName, i);

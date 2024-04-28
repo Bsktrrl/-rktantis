@@ -17,20 +17,31 @@ public class CropPlotSlot : MonoBehaviour
     {
         if (BuildingSystemManager.Instance.ghostObject_Holding == parent) { return; }
 
-        //When the Plant grows
-        if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState == CropState.Growing)
-        {
-            //print("Plant - Growing");
+        if (!parent.gameObject.GetComponent<CropPlot>().hasLoaded) { return; }
 
-            SetPlantGrowth();
-        }
-
-        //When the plant gets picked
-        else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState == CropState.Finished)
+        if (parent.gameObject.GetComponent<CropPlot>())
         {
-            if (plantSpot_Parent.transform.childCount <= 0)
+            if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo != null)
             {
-                PickUpPlant_Aftermath();
+                if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count >= slotIndex)
+                {
+                    //When the Plant grows
+                    if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState == CropState.Growing)
+                    {
+                        //print("Plant - Growing");
+
+                        SetPlantGrowth();
+                    }
+
+                    //When the plant gets picked
+                    else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState == CropState.Finished)
+                    {
+                        if (plantSpot_Parent.transform.childCount <= 0)
+                        {
+                            PickUpPlant_Aftermath();
+                        }
+                    }
+                }
             }
         }
     }
@@ -62,8 +73,6 @@ public class CropPlotSlot : MonoBehaviour
 
     public void InteractWithCropPlotSlot()
     {
-        print("InteractWithCropPlotSlot | State: " + GetCropPlotSlotInfo().cropState.ToString());
-
         switch (GetCropPlotSlotInfo().cropState)
         {
             case CropState.Empty:
@@ -107,19 +116,14 @@ public class CropPlotSlot : MonoBehaviour
     }
     void PickUpPlantFromTheCropPlot()
     {
-        print("1. PickUpPlantFromTheCropPlot");
         if (plantSpot_Parent.transform.childCount > 0)
         {
-            print("2. PickUpPlantFromTheCropPlot");
             if (plantSpot_Parent.transform.GetChild(0))
             {
-                print("3. PickUpPlantFromTheCropPlot");
                 if (plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>())
                 {
-                    print("4. PickUpPlantFromTheCropPlot");
                     if (plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().plantIsReadyInCropPlot)
                     {
-                        print("5. PickUpPlantFromTheCropPlot");
                         SoundManager.Instance.Play_Inventory_PickupItem_Clip();
 
                         //Check If item can be added
@@ -180,8 +184,21 @@ public class CropPlotSlot : MonoBehaviour
         //GrowthTimer
         parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime += Time.deltaTime;
 
+        float percentage = parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime / parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime;
+
         //Scale based on GrowthTimer
-        plantSpot_Parent.transform.localScale = Vector3.one * parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime / parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime + new Vector3(0, 0.625f, 0);
+        if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 1)
+        {
+            plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = (Vector3.one * percentage) + (new Vector3(0f, 1.7f, 0f) * percentage);
+        }
+        else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 2)
+        {
+            plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = (Vector3.one * percentage) + (new Vector3(0.33f, 0.7f, -0.6f) * percentage);
+        }
+        else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 4)
+        {
+            plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = (Vector3.one * percentage) + (new Vector3(0.175f, 0.7f, 0.175f) * percentage);
+        }
 
         if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime >= parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime)
         {
@@ -194,7 +211,19 @@ public class CropPlotSlot : MonoBehaviour
             }
             
             parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState = CropState.Finished;
-            plantSpot_Parent.transform.localScale = Vector3.one + new Vector3(0, 0.625f, 0);
+
+            if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 1)
+            {
+                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + new Vector3(0f, 1.7f, 0f);
+            }
+            else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 2)
+            {
+                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + new Vector3(0.33f, 0.7f, -0.6f);
+            }
+            else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 4)
+            {
+                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + new Vector3(0.175f, 0.7f, 0.175f);
+            }
         }
     }
 

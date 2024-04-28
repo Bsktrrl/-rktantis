@@ -64,8 +64,8 @@ Transform:
   m_GameObject: {fileID: 7659117566807072895}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
-  m_LocalScale: {x: 1, y: 0.375, z: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalScale: {x: 1.1, y: 0.3, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3688542662141127386}
@@ -353,7 +353,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a8829b2e7c3ab1444b408541d3567d2d,
         type: 3}
-      insertIndex: -1
+      insertIndex: 0
       addedObject: {fileID: 4521880504374210259}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8829b2e7c3ab1444b408541d3567d2d,
@@ -910,6 +910,7 @@ MonoBehaviour:
   - {fileID: 7659117566807072895}
   cropPlotInfo:
     cropPlotSlotList: []
+  hasLoaded: 0
 --- !u!1 &4643041060090464751 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8645498960391087746, guid: a8829b2e7c3ab1444b408541d3567d2d,
