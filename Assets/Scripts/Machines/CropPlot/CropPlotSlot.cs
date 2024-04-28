@@ -28,14 +28,20 @@ public class CropPlotSlot : MonoBehaviour
                     //When the Plant grows
                     if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState == CropState.Growing)
                     {
-                        //print("Plant - Growing");
-
-                        SetPlantGrowth();
+                        if (plantSpot_Parent.transform.childCount > 0)
+                        {
+                            SetPlantGrowth();
+                        }
                     }
 
                     //When the plant gets picked
                     else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState == CropState.Finished)
                     {
+                        if (plantSpot_Parent.transform.childCount > 0)
+                        {
+                            SetPlantGrowth();
+                        }
+
                         if (plantSpot_Parent.transform.childCount <= 0)
                         {
                             PickUpPlant_Aftermath();
@@ -105,15 +111,6 @@ public class CropPlotSlot : MonoBehaviour
         TabletManager.Instance.OpenTablet(TabletMenuState.CropPlot);
         TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.CropPlot;
     }
-    void PickUpPlant_Aftermath()
-    {
-        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime = 0;
-        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState = CropState.Empty;
-        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].seedName_Input = Items.None;
-        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].plantName_Output = Items.None;
-
-        BuildingSystemManager.Instance.UpdateWorldBuildingObjectInfoList_ToSave(parent.GetComponent<MoveableObject>());
-    }
     void PickUpPlantFromTheCropPlot()
     {
         if (plantSpot_Parent.transform.childCount > 0)
@@ -137,6 +134,15 @@ public class CropPlotSlot : MonoBehaviour
                 }
             }
         }
+    }
+    void PickUpPlant_Aftermath()
+    {
+        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime = 0;
+        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState = CropState.Empty;
+        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].seedName_Input = Items.None;
+        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].plantName_Output = Items.None;
+
+        BuildingSystemManager.Instance.UpdateWorldBuildingObjectInfoList_ToSave(parent.GetComponent<MoveableObject>());
     }
 
     Items GetPlantItem()
@@ -184,24 +190,30 @@ public class CropPlotSlot : MonoBehaviour
         //GrowthTimer
         parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime += Time.deltaTime;
 
+        Vector3 scale_1 = new Vector3(0.1f, 2.8f, -0.1f);
+        Vector3 scale_2 = new Vector3(0.8f, 2.8f, -0.2f);
+        Vector3 scale_3 = new Vector3(0.5f, 2.8f, 0.3f);
+
         float percentage = parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime / parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime;
 
-        //Scale based on GrowthTimer
-        if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 1)
+        //Growing
+        if (percentage < 1)
         {
-            plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = (Vector3.one * percentage) + (new Vector3(0f, 1.7f, 0f) * percentage);
-        }
-        else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 2)
-        {
-            plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = (Vector3.one * percentage) + (new Vector3(0.33f, 0.7f, -0.6f) * percentage);
-        }
-        else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 4)
-        {
-            plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = (Vector3.one * percentage) + (new Vector3(0.175f, 0.7f, 0.175f) * percentage);
-        }
+            parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState = CropState.Growing;
 
-        if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime >= parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime)
-        {
+            if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 1)
+            {
+                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = (Vector3.one * percentage) + (scale_1 * percentage);
+            }
+            else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 2)
+            {
+                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = (Vector3.one * percentage) + (scale_2 * percentage);
+            }
+            else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 4)
+            {
+                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = (Vector3.one * percentage) + (scale_3 * percentage);
+            }
+
             if (plantSpot_Parent.transform.childCount > 0)
             {
                 if (plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>())
@@ -209,20 +221,27 @@ public class CropPlotSlot : MonoBehaviour
                     plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().plantIsReadyInCropPlot = true;
                 }
             }
-            
+        }
+
+        //Finished
+        else
+        {
             parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState = CropState.Finished;
 
             if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 1)
             {
-                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + new Vector3(0f, 1.7f, 0f);
+                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + scale_1;
+                print("1. Finished - Calculate Scale | Scale: " + plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale);
             }
             else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 2)
             {
-                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + new Vector3(0.33f, 0.7f, -0.6f);
+                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + scale_2;
+                print("2. Finished - Calculate Scale | Scale: " + plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale);
             }
             else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 4)
             {
-                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + new Vector3(0.175f, 0.7f, 0.175f);
+                plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + scale_3;
+                print("3. Finished - Calculate Scale | Scale: " + plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale);
             }
         }
     }
