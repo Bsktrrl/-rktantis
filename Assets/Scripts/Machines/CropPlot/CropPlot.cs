@@ -11,13 +11,19 @@ public class CropPlot : MonoBehaviour
 
     public bool hasLoaded = false;
 
+    public bool growthConditions;
+
 
     //--------------------
 
 
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+
         CheckAnimation();
+
+        growthConditions = GetIfGhostTankHasGhost();
     }
 
 
@@ -86,7 +92,7 @@ public class CropPlot : MonoBehaviour
     {
         for (int i = 0; i < cropPlotInfo.cropPlotSlotList.Count; i++)
         {
-            if (cropPlotInfo.cropPlotSlotList[i].cropState == CropState.Growing)
+            if (cropPlotInfo.cropPlotSlotList[i].cropState == CropState.Growing && growthConditions)
             {
                 GetComponent<Animations_Objects>().StartAnimation();
 
@@ -161,6 +167,35 @@ public class CropPlot : MonoBehaviour
         //Destroy CropPlot
         Destroy(gameObject);
     }
+
+
+    //--------------------
+
+
+    bool GetIfGhostTankHasGhost()
+    {
+        if (gameObject.GetComponent<MoveableObject>().connectionPointObject)
+        {
+            if (gameObject.GetComponent<MoveableObject>().connectionPointObject.GetComponent<ConnectionPoint>().worldObjectIndex_ConnectedWith >= 0)
+            {
+                //Get Connected BuildingObject
+                GameObject obj = BuildingSystemManager.Instance.worldBuildingObjectListSpawned[gameObject.GetComponent<MoveableObject>().connectionPointObject.GetComponent<ConnectionPoint>().worldObjectIndex_ConnectedWith];
+
+                //If getting a CropPlot
+                if (obj.GetComponent<GhostTank>())
+                {
+                    if (obj.GetComponent<GhostTank>().ghostTankContent.GhostElement != GhostElement.None)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+
 }
 
 [Serializable]

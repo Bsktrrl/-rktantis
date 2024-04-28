@@ -59,7 +59,7 @@ public class GhostTank : MonoBehaviour
 
         ReduceFuel(0.075f * growingPlantsTemp * Time.deltaTime);
 
-        if (growingPlantsTemp > 0)
+        if (growingPlantsTemp > 0 && ghostTankContent.currentFuelAmount > 0)
         {
             anim.SetBool("isActive", true);
         }

@@ -19,6 +19,10 @@ public class CropPlotSlot : MonoBehaviour
 
         if (!parent.gameObject.GetComponent<CropPlot>().hasLoaded) { return; }
 
+
+        //-----
+
+
         if (parent.gameObject.GetComponent<CropPlot>())
         {
             if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo != null)
@@ -187,9 +191,12 @@ public class CropPlotSlot : MonoBehaviour
     {
         //print("Plant - Growing: Percentage: " + parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime / parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime);
 
-        //GrowthTimer
-        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime += Time.deltaTime;
-
+        //GrowthTimer only when available Ghost
+        if (parent.gameObject.GetComponent<CropPlot>().growthConditions)
+        {
+            parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime += Time.deltaTime;
+        }
+        
         Vector3 scale_1 = new Vector3(0.1f, 2.8f, -0.1f);
         Vector3 scale_2 = new Vector3(0.8f, 2.8f, -0.2f);
         Vector3 scale_3 = new Vector3(0.5f, 2.8f, 0.3f);
