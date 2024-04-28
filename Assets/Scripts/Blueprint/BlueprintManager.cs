@@ -267,7 +267,16 @@ public class BlueprintManager : Singleton<BlueprintManager>
 
         //Set what to display at the start
         activeBuildingBlockObject_SOList[0] = true;
+        activeBuildingBlockObject_SOList[1] = true;
         activeBuildingBlockObject_SOList[2] = true;
+        activeBuildingBlockObject_SOList[3] = true;
+        activeBuildingBlockObject_SOList[4] = true;
+        activeBuildingBlockObject_SOList[5] = true;
+        activeBuildingBlockObject_SOList[6] = true;
+        activeBuildingBlockObject_SOList[7] = true;
+        activeBuildingBlockObject_SOList[8] = true;
+        activeBuildingBlockObject_SOList[9] = true;
+        activeBuildingBlockObject_SOList[10] = true;
     }
     public void SetStart_Furniture_BlueprintSet()
     {

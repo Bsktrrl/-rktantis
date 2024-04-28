@@ -44,9 +44,33 @@ public class CraftButton : MonoBehaviour
                 }
             }
 
-            InventoryManager.Instance.AddItemToInventory(0, CraftingManager.Instance.itemSelected.itemName);
-            //InventoryManager.Instance.CheckHotbarItemInInventory();
+            //If crafting a seed, get x2
+            if (CraftingManager.Instance.itemSelected.itemName == Items.ArídisPlantSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.GluePlantSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.CrimsonCloudBushSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.RedCottonPlantSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.SpikPlantSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.SmallCactusplantSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.PuddingCactusSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.StalkFruitSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.TripodFruitSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.HeatFruitSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.FreezeFruitSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.TwistedMushroomSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.GroundMushroomSeed
+                || CraftingManager.Instance.itemSelected.itemName == Items.SandTubesSeed)
+            {
+                InventoryManager.Instance.AddItemToInventory(0, CraftingManager.Instance.itemSelected.itemName);
+                InventoryManager.Instance.AddItemToInventory(0, CraftingManager.Instance.itemSelected.itemName);
+            }
 
+            //If not crafting a Seed, get x1
+            else
+            {
+                InventoryManager.Instance.AddItemToInventory(0, CraftingManager.Instance.itemSelected.itemName);
+            }
+
+            //InventoryManager.Instance.CheckHotbarItemInInventory();
             SoundManager.Instance.Play_Crafting_PerformCrafting_Clip();
         }
         else

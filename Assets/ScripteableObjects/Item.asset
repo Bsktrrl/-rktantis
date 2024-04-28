@@ -1427,7 +1427,7 @@ MonoBehaviour:
     worldObjectPrefab: {fileID: 1743933868757232438, guid: ff5aec27515579e479c0e277c412edc9,
       type: 3}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -1619,7 +1619,7 @@ MonoBehaviour:
     isCrafteable: 1
     craftingRequirements:
     - itemName: 66
-      amount: 2
+      amount: 1
   - itemName: 78
     categoryName: 3
     subCategoryName: 6
@@ -1776,9 +1776,7 @@ MonoBehaviour:
     isResearched: 0
     researchTime: 5
     isCrafteable: 0
-    craftingRequirements:
-    - itemName: 95
-      amount: 1
+    craftingRequirements: []
   - itemName: 83
     categoryName: 3
     subCategoryName: 7
@@ -1809,8 +1807,8 @@ MonoBehaviour:
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
-    - itemName: 95
-      amount: 2
+    - itemName: 96
+      amount: 1
   - itemName: 84
     categoryName: 3
     subCategoryName: 7
