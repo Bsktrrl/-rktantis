@@ -44,6 +44,7 @@ public class CropPlotManager : Singleton<CropPlotManager>
     public Sprite BloodTreeSprite;
 
     public Sprite emptyImage;
+    public Sprite fillImage;
 
     [Header("Markers and Durability Icons")]
     List<int> hotbarMarkerInt = new List<int>();
@@ -70,7 +71,7 @@ public class CropPlotManager : Singleton<CropPlotManager>
 
     private void Start()
     {
-        cropPlot_GrowthTime_Max = 5;
+        cropPlot_GrowthTime_Max = 2;
     }
     private void Update()
     {
@@ -178,7 +179,49 @@ public class CropPlotManager : Singleton<CropPlotManager>
             plant.transform.SetLocalPositionAndRotation(new Vector3(0, 0.25f, 0), Quaternion.identity);
         }
     }
+    public string GetPlantName(Items seedName)
+    {
+        switch (seedName)
+        {
+            case Items.ArídisPlantSeed:
+                return PlantType.AdrídisFlower.ToString();
+            case Items.GluePlantSeed:
+                return PlantType.GluePlant.ToString();
+            case Items.CrimsonCloudBushSeed:
+                return PlantType.CrimsonCloudBush.ToString();
+            case Items.RedCottonPlantSeed:
+                return PlantType.RedCottonPlant.ToString();
+            case Items.SpikPlantSeed:
+                return PlantType.SpikeOilFruit.ToString();
+            case Items.SmallCactusplantSeed:
+                return PlantType.StemCactus.ToString();
+            case Items.LargeCactusplantSeed:
+                return "Cactus";
+            case Items.PuddingCactusSeed:
+                return PlantType.PuddingCactus.ToString();
+            case Items.StalkFruitSeed:
+                return PlantType.StalkFruit.ToString();
+            case Items.TripodFruitSeed:
+                return PlantType.ThriPod.ToString();
+            case Items.HeatFruitSeed:
+                return PlantType.HeatFruit.ToString();
+            case Items.FreezeFruitSeed:
+                return PlantType.FreezeFruit.ToString();
+            case Items.TwistedMushroomSeed:
+                return PlantType.TwistCap.ToString();
+            case Items.GroundMushroomSeed:
+                return PlantType.WartShroom.ToString();
+            case Items.SandTubesSeed:
+                return PlantType.SandTubes.ToString();
+            case Items.PalmTreeSeed:
+                return "Palm Tree";
+            case Items.BloodTreeSeed:
+                return "Palm Tree";
 
+            default:
+                return "";
+        }
+    }
 
     //--------------------
 
@@ -220,10 +263,13 @@ public class CropPlotManager : Singleton<CropPlotManager>
                 else if (CropPlotInfo_Interacting.cropPlotSlotList[i].cropState == CropState.Growing)
                 {
                     //Set Text
-                    cropPlotSlotList[i].GetComponent<CropMenuSlot>().plantName.text = CropPlotInfo_Interacting.cropPlotSlotList[i].plantName_Output.ToString();
+                    cropPlotSlotList[i].GetComponent<CropMenuSlot>().plantName.text = GetPlantName(CropPlotInfo_Interacting.cropPlotSlotList[i].seedName_Input);
 
                     //Set Plant Image
                     cropPlotSlotList[i].GetComponent<CropMenuSlot>().plant_Image.sprite = GetPlantImage(CropPlotInfo_Interacting.cropPlotSlotList[i].seedName_Input);
+
+                    //Turn on FillImage
+                    cropPlotSlotList[i].GetComponent<CropMenuSlot>().fill_Image.sprite = fillImage;
 
                     //Set Fill Image FillAmount
                     cropPlotSlotList[i].GetComponent<CropMenuSlot>().fill_Image.fillAmount = CropPlotInfo_Interacting.cropPlotSlotList[i].current_GrowthTime / CropPlotInfo_Interacting.cropPlotSlotList[i].max_GrowthTime;
@@ -231,7 +277,7 @@ public class CropPlotManager : Singleton<CropPlotManager>
                 else if (CropPlotInfo_Interacting.cropPlotSlotList[i].cropState == CropState.Finished)
                 {
                     //Set Text
-                    cropPlotSlotList[i].GetComponent<CropMenuSlot>().plantName.text = CropPlotInfo_Interacting.cropPlotSlotList[i].plantName_Output.ToString();
+                    cropPlotSlotList[i].GetComponent<CropMenuSlot>().plantName.text = GetPlantName(CropPlotInfo_Interacting.cropPlotSlotList[i].seedName_Input);
 
                     //Set Plant Image
                     cropPlotSlotList[i].GetComponent<CropMenuSlot>().plant_Image.sprite = GetPlantImage(CropPlotInfo_Interacting.cropPlotSlotList[i].seedName_Input);

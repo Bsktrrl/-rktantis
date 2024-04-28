@@ -62,6 +62,18 @@ public class BuildingDisplaySlot : MonoBehaviour
             BuildingDisplayManager.Instance.ResetDisplay();
         }
 
+        //Remove CropPlot the correct way
+        print("1. DestroyObject");
+        if (BuildingSystemManager.Instance.ghostObject_Holding)
+        {
+            print("2. DestroyObject");
+            if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<CropPlot>())
+            {
+                print("3. DestroyObject");
+                BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<CropPlot>().DestroyThisObject();
+            }
+        }
+
         BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
         BuildingSystemManager.Instance.SpawnNewSelectedBuildingObject();
 

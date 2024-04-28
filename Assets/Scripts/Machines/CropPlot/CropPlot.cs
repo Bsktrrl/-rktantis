@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CropPlot : MonoBehaviour
 {
+    public List<GameObject> slotObjectList;
+
     public CropPlotInfo cropPlotInfo = new CropPlotInfo();
 
 
@@ -93,6 +95,26 @@ public class CropPlot : MonoBehaviour
         }
 
         GetComponent<Animations_Objects>().StopAnimation();
+    }
+
+
+    //--------------------
+
+
+    public void DestroyThisObject()
+    {
+        print("4. DestroyObject");
+
+        for (int i = slotObjectList.Count - 1; i >= 0; i--)
+        {
+            if (slotObjectList[i].GetComponent<InteractableObject>())
+            {
+                print("5. DestroyObject: No: " + i);
+                slotObjectList[i].GetComponent<InteractableObject>().DestroyThisObject();
+            }
+        }
+
+        Destroy(gameObject);
     }
 }
 

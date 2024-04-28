@@ -15,6 +15,8 @@ public class CropPlotSlot : MonoBehaviour
 
     private void Update()
     {
+        if (BuildingSystemManager.Instance.ghostObject_Holding == parent) { return; }
+
         //When the Plant grows
         if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState == CropState.Growing)
         {
@@ -179,7 +181,7 @@ public class CropPlotSlot : MonoBehaviour
         parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime += Time.deltaTime;
 
         //Scale based on GrowthTimer
-        plantSpot_Parent.transform.localScale = Vector3.one * parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime / parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime;
+        plantSpot_Parent.transform.localScale = Vector3.one * parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime / parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime + new Vector3(0, 0.625f, 0);
 
         if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime >= parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime)
         {
@@ -192,7 +194,7 @@ public class CropPlotSlot : MonoBehaviour
             }
             
             parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState = CropState.Finished;
-            plantSpot_Parent.transform.localScale = Vector3.one;
+            plantSpot_Parent.transform.localScale = Vector3.one + new Vector3(0, 0.625f, 0);
         }
     }
 
