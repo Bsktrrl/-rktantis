@@ -30,6 +30,8 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+
         if (MainManager.Instance.menuStates == MenuStates.None)
         {
             if (connectionState == ConnectionState.isConnecting)
@@ -54,14 +56,36 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
     public void LoadData()
     {
         connectionInfoList = DataManager.Instance.connectionInfoList_Store;
+
+        SetupConnections();
     }
     public void SaveData()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+
         DataManager.Instance.connectionInfoList_Store = connectionInfoList;
     }
 
 
     //--------------------
+
+
+    void SetupConnections()
+    {
+        for (int i = 0; i < connectionInfoList.Count; i++)
+        {
+            connectionOngoing.connectionType_1_Index = connectionInfoList[i].connections.object1_Index;
+            connectionOngoing.connectionType_2_Index = connectionInfoList[i].connections.object2_Index;
+
+            FindWorldObjectsToConnect();
+        }
+
+        ClearConnection();
+    }
+
+
+    //--------------------
+
 
 
     public void ConnectObjects()
@@ -71,8 +95,8 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
         connectionInfo.connections.object1_Index = connectionOngoing.connectionType_1_Index;
         connectionInfo.connections.object2_Index = connectionOngoing.connectionType_2_Index;
 
-        connectionInfo.connections.object1_ConnectedToIndex = connectionInfo.connections.object2_Index;
-        connectionInfo.connections.object2_ConnectedToIndex = connectionInfo.connections.object1_Index;
+        connectionInfo.connections.object1_ConnectedToIndex = connectionOngoing.connectionType_2_Index;
+        connectionInfo.connections.object2_ConnectedToIndex = connectionOngoing.connectionType_1_Index;
 
         connectionInfoList.Add(connectionInfo);
 
