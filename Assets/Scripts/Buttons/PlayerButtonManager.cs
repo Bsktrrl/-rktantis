@@ -9,6 +9,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
     //ObjectInteraction
     public static Action objectInterraction_isPressedDown;
+    public static Action objectInteraction_GhostRelease_isPressedDown;
 
     //Hotbar
     public static Action hotbarSelectionDown_isPressed;
@@ -137,6 +138,14 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         else if (Input.GetKeyDown(KeyCode.E) && MainManager.Instance.menuStates == MenuStates.None /*&& BuildingManager_v2.Instance.buildingBlockGhost == null*/)
         {
             objectInterraction_isPressedDown?.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.R) && MainManager.Instance.menuStates == MenuStates.None
+            && SelectionManager.Instance.selectedObject.GetComponent<GhostTank>()/*&& BuildingManager_v2.Instance.buildingBlockGhost == null*/)
+        {
+            if (SelectionManager.Instance.selectedObject.GetComponent<GhostTank>().ghostTankContent.GhostElement != GhostElement.None)
+            {
+                objectInteraction_GhostRelease_isPressedDown?.Invoke();
+            }
         }
         #endregion
 

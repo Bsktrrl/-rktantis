@@ -470,7 +470,7 @@ public class LookAtManager : Singleton<LookAtManager>
 
                             MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
                             MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
-                            MovableObject_Text.text = "Press E to interact";
+                            MovableObject_Text.text = "Press \"E\" to interact";
                         }
                     }
                     else
@@ -479,7 +479,7 @@ public class LookAtManager : Singleton<LookAtManager>
 
                         MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
                         MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
-                        MovableObject_Text.text = "Press E to interact";
+                        MovableObject_Text.text = "Press \"E\" to interact";
                     }
                 }
                 else if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
@@ -516,7 +516,7 @@ public class LookAtManager : Singleton<LookAtManager>
 
                             MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
                             MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
-                            MovableObject_Text.text = "Press E to interact";
+                            MovableObject_Text.text = "Press \"E\" to interact";
                         }
                     }
                     else
@@ -525,7 +525,7 @@ public class LookAtManager : Singleton<LookAtManager>
 
                         MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
                         MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
-                        MovableObject_Text.text = "Press E to interact";
+                        MovableObject_Text.text = "Press \"E\" to interact";
                     }
                 }
             }
@@ -545,13 +545,13 @@ public class LookAtManager : Singleton<LookAtManager>
 
                         MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
                         MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
-                        MovableObject_Text.text = "Press E to interact";
+                        MovableObject_Text.text = "Press \"E\" to interact";
                     }
                     else
                     {
                         MovableObjectImage.sprite = GhostManager.Instance.ghostImage_Water;
                         MovableObjectName.text = "Water Ghost";
-                        MovableObject_Text.text = "Press E to release Ghost";
+                        MovableObject_Text.text = "Press \"R\" to release Ghost";
                     }
                 }
             }
@@ -561,7 +561,7 @@ public class LookAtManager : Singleton<LookAtManager>
     void WaterDisplay()
     {
         WaterDisplay_Image.sprite = MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).hotbarSprite;
-        WaterDisplay_Text.text = "Press E to refill your " + HotbarManager.Instance.selectedItem.ToString();
+        WaterDisplay_Text.text = "Press \"E\" to refill your " + HotbarManager.Instance.selectedItem.ToString();
     }
     void OreDisplay()
     {

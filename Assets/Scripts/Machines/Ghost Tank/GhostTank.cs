@@ -7,6 +7,7 @@ using TMPro;
 
 public class GhostTank : MonoBehaviour
 {
+    #region Variables
     public Animator anim;
     public GameObject ghostObject_Parent;
 
@@ -29,6 +30,9 @@ public class GhostTank : MonoBehaviour
 
     bool setupGhostTank;
 
+    bool fuelIsDraining;
+    #endregion
+
 
     //--------------------
 
@@ -50,21 +54,26 @@ public class GhostTank : MonoBehaviour
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         UpdateTankDisplay();
-        ReduceFuel(Time.deltaTime * 1.5f);
+        ReduceFuel(0.075f * Time.deltaTime);
+
+        if (fuelIsDraining)
+        {
+            anim.SetBool("isActive", true);
+        }
+        else
+        {
+            anim.SetBool("isActive", false);
+        }
 
         if (ghostTankContent.currentFuelAmount > 0 && ghostTankContent.GhostElement != GhostElement.None)
         {
             Display_Parent.SetActive(true);
             ghostObject_Parent.SetActive(true);
-
-            anim.SetBool("isActive", true);
         }
         else
         {
             Display_Parent.SetActive(false);
             ghostObject_Parent.SetActive(false);
-
-            anim.SetBool("isActive", false);
         }
     }
 
@@ -72,6 +81,7 @@ public class GhostTank : MonoBehaviour
     //--------------------
 
 
+    #region Setup Ghost Tank
     public void SetupGhostTank()
     {
         setupGhostTank = true;
@@ -128,11 +138,13 @@ public class GhostTank : MonoBehaviour
 
         setupGhostTank = false;
     }
+    #endregion
 
 
     //--------------------
 
 
+    #region Interact with Ghost Tank
     public void InteractWithGhostTank()
     {
         if (ghostTankContent.GhostElement == GhostElement.None)
@@ -144,10 +156,6 @@ public class GhostTank : MonoBehaviour
                     InsertGhost();
                 }
             }
-        }
-        else
-        {
-            RemoveGhost();
         }
 
         BuildingSystemManager.Instance.UpdateWorldBuildingObjectInfoList_ToSave(GetComponent<MoveableObject>());
@@ -203,7 +211,7 @@ public class GhostTank : MonoBehaviour
 
         anim.SetBool("isActive", true);
     }
-    void RemoveGhost()
+    public void RemoveGhost()
     {
         print("333. Remove Ghost");
 
@@ -227,12 +235,16 @@ public class GhostTank : MonoBehaviour
         skinnedMeshRenderer2.SetMaterials(materials);
 
         anim.SetBool("isActive", false);
+
+        BuildingSystemManager.Instance.UpdateWorldBuildingObjectInfoList_ToSave(GetComponent<MoveableObject>());
     }
+    #endregion
 
 
     //--------------------
 
 
+    #region Display
     void UpdateTankDisplay()
     {
         if (ghostObject_Parent.activeInHierarchy)
@@ -302,7 +314,9 @@ public class GhostTank : MonoBehaviour
             ghostObject_Parent.GetComponent<GhostInTank>().transparencyValue = tempValue;
         }
     }
+    #endregion
 
+    #region Fuel
     public void ReduceFuel(float value) //Temporary just draining //Change to drain based on other Machines (CropPlot)
     {
         if (ghostObject_Parent.activeInHierarchy)
@@ -323,6 +337,7 @@ public class GhostTank : MonoBehaviour
             GhostManager.Instance.SaveData();
         }
     }
+    #endregion
 
 
     //--------------------

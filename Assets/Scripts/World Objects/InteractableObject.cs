@@ -40,6 +40,7 @@ public class InteractableObject : MonoBehaviour
     private void Start()
     {
         PlayerButtonManager.objectInterraction_isPressedDown += ObjectInteraction;
+        PlayerButtonManager.objectInteraction_GhostRelease_isPressedDown += ObjectInteraction_ReleaseGhost;
 
         //Add SphereCollider for the item
         Vector3 scale = gameObject.transform.lossyScale;
@@ -332,6 +333,24 @@ public class InteractableObject : MonoBehaviour
                 #endregion
             }
         }
+    }
+
+    void ObjectInteraction_ReleaseGhost()
+    {
+        if (SelectionManager.Instance.selectedObject)
+        {
+            if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selectedObject == gameObject
+            && MainManager.Instance.menuStates == MenuStates.None)
+            {
+                if (interactableType == InteracteableType.GhostTank)
+                {
+                    if (gameObject.GetComponent<GhostTank>())
+                    {
+                        gameObject.GetComponent<GhostTank>().RemoveGhost();
+                    }
+                }
+            }
+        }      
     }
 
 
