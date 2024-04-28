@@ -13,6 +13,9 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
     public ConnectionState connectionState;
     public ConnectionOngoingInfo connectionOngoing;
 
+    public GameObject linePrefab;
+    public GameObject cubeInstance;
+
 
     //--------------------
 
@@ -79,6 +82,8 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
             connectionOngoing.connectionType_2_Index = connectionInfoList[i].connections.object2_Index;
 
             FindWorldObjectsToConnect();
+
+            SpawnLine(connectionInfoList[i].connections.object1_Index, connectionInfoList[i].connections.object2_Index);
         }
 
         ClearConnection();
@@ -159,6 +164,8 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
         connectionInfoList.Add(connectionInfo);
 
         FindWorldObjectsToConnect();
+
+        SpawnLine(connectionOngoing.connectionType_1_Index, connectionOngoing.connectionType_2_Index);
 
         ClearConnection();
 
@@ -253,6 +260,62 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
         connectionState = ConnectionState.None;
 
         SaveData();
+    }
+
+    public void SpawnLine(int a, int b)
+    {
+        Vector3 pos1 = new Vector3();
+        Vector3 pos2 = new Vector3();
+
+        GameObject pos2Object = new GameObject();
+
+        #region Get Object Positions
+        //Find WorldObject 1
+        MoveableObject move_1 = FindWorldObject(a);
+        if (move_1)
+        {
+            if (move_1.connectionPointObject)
+            {
+                if (move_1.connectionPointObject.GetComponent<ConnectionPoint>())
+                {
+                    pos1 = move_1.connectionPointObject.GetComponent<ConnectionPoint>().gameObject.transform.position;
+                }
+            }
+        }
+
+
+        //Find WorldObject 2
+        MoveableObject move_2 = FindWorldObject(b);
+        if (move_2)
+        {
+            if (move_2.connectionPointObject)
+            {
+                if (move_2.connectionPointObject.GetComponent<ConnectionPoint>())
+                {
+                    pos2 = move_2.connectionPointObject.GetComponent<ConnectionPoint>().gameObject.transform.position;
+
+                    pos2Object = move_2.connectionPointObject.GetComponent<ConnectionPoint>().gameObject;
+                }
+            }
+        }
+        #endregion
+
+        print("pos1: "+ pos1);
+        print("pos2: " + pos2);
+
+        cubeInstance = Instantiate(linePrefab, transform.position, Quaternion.identity);
+
+        //Spawn Line
+        float distance = Vector3.Distance(pos1, pos2);
+
+        // Set the scale of the cube to stretch between the two objects
+        cubeInstance.transform.localScale = new Vector3(0.05f, 0.05f, distance);
+
+        // Position the cube halfway between the two objects
+        cubeInstance.transform.position = (pos1 + pos2) / 2f;
+
+        // Rotate the cube to align with the line between the two objects
+        cubeInstance.transform.LookAt(pos2Object.transform);
     }
 }
 
