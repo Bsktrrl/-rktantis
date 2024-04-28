@@ -53,15 +53,29 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         //If player is in a "CropPlot", add the Seed to the CropPlot, if available
         else if (eventData.button == PointerEventData.InputButton.Left && MainManager.Instance.menuStates == MenuStates.CropPlotMenu)
         {
-            //If not any of the seeds, 
-            if (itemName != Items.ArídisPlantSeed && itemName != Items.GluePlantSeed && itemName != Items.CrimsonCloudBushSeed
-                && itemName != Items.RedCottonPlantSeed && itemName != Items.SpikPlantSeed && itemName != Items.SmallCactusplantSeed
-                && itemName != Items.LargeCactusplantSeed && itemName != Items.PuddingCactusSeed && itemName != Items.StalkFruitSeed
-                && itemName != Items.TripodFruitSeed && itemName != Items.HeatFruitSeed && itemName != Items.FreezeFruitSeed
-                && itemName != Items.TwistedMushroomSeed && itemName != Items.GroundMushroomSeed && itemName != Items.SandTubesSeed
-                && itemName != Items.PalmTreeSeed && itemName != Items.BloodTreeSeed)
+            //If itemSlot contain a Seed
+            if (itemName == Items.ArídisPlantSeed || itemName == Items.GluePlantSeed || itemName == Items.CrimsonCloudBushSeed
+                || itemName == Items.RedCottonPlantSeed || itemName == Items.SpikPlantSeed || itemName == Items.SmallCactusplantSeed
+                || itemName == Items.LargeCactusplantSeed || itemName == Items.PuddingCactusSeed || itemName == Items.StalkFruitSeed
+                || itemName == Items.TripodFruitSeed || itemName == Items.HeatFruitSeed || itemName == Items.FreezeFruitSeed
+                || itemName == Items.TwistedMushroomSeed || itemName == Items.GroundMushroomSeed || itemName == Items.SandTubesSeed
+                || itemName == Items.PalmTreeSeed || itemName == Items.BloodTreeSeed)
             {
+                for (int i = 0; i < CropPlotManager.Instance.CropPlotInfo_Interacting.cropPlotSlotList.Count; i++)
+                {
+                    if (CropPlotManager.Instance.CropPlotInfo_Interacting.cropPlotSlotList[i].cropState == CropState.Empty)
+                    {
+                        print("Add Seed to CropPlot");
 
+                        //Add Seed
+                        CropPlotManager.Instance.AddSeed(itemName, i);
+
+                        //Remove Seed from PlayerInventory
+                        InventoryManager.Instance.RemoveItemFromInventory(0, itemName, itemID, true);
+
+                        break;
+                    }
+                }
             }
         }
 

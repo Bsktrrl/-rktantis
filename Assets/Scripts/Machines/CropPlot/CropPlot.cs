@@ -14,6 +14,7 @@ public class CropPlot : MonoBehaviour
     private void Update()
     {
         SaveGrowthProgress();
+        CheckAnimation();
     }
 
 
@@ -21,14 +22,11 @@ public class CropPlot : MonoBehaviour
 
     public void SetupCropPlot() //New CropPlot
     {
-        print("1. SetupCropPlot - New CropPlotMenu | ChildCount: " + transform.childCount);
-
         //Get child of CropPlot - CropPlotSlot - to set its index for future reference
         for (int i = 0; i < transform.childCount; i++)
         {
             if (transform.GetChild(i).gameObject.GetComponent<CropPlotSlot>())
             {
-                print("11. SetupCropPlot Count" + i);
                 transform.GetChild(i).gameObject.GetComponent<CropPlotSlot>().slotIndex = i;
 
                 CropPlotSlots cropPlotSlots = new CropPlotSlots();
@@ -44,13 +42,9 @@ public class CropPlot : MonoBehaviour
     }
     public void SetupCropPlot(CropPlotInfo _cropPlotInfo) //Loaded CropPlot
     {
-        print("2. SetupCropPlot - Loaded CropPlotMenu");
-
         //Set Info
         for (int i = 0; i < _cropPlotInfo.cropPlotSlotList.Count; i++)
         {
-            print("22. SetupCropPlot Count" + i);
-
             CropPlotSlots cropPlotSlots = new CropPlotSlots();
 
             cropPlotSlots.slotIndex = _cropPlotInfo.cropPlotSlotList[i].slotIndex;
@@ -67,6 +61,14 @@ public class CropPlot : MonoBehaviour
 
         //Save Object Setup
         BuildingSystemManager.Instance.UpdateWorldBuildingObjectInfoList_ToSave(GetComponent<MoveableObject>());
+
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            if (gameObject.transform.GetChild(i).gameObject.GetComponent<CropPlotSlot>())
+            {
+                gameObject.transform.GetChild(i).gameObject.GetComponent<CropPlotSlot>().SetupPlantInCropSlotPlot();
+            }
+        }
     }
 
 
@@ -76,6 +78,21 @@ public class CropPlot : MonoBehaviour
     void SaveGrowthProgress()
     {
 
+    }
+
+    void CheckAnimation()
+    {
+        for (int i = 0; i < cropPlotInfo.cropPlotSlotList.Count; i++)
+        {
+            if (cropPlotInfo.cropPlotSlotList[i].cropState == CropState.Growing)
+            {
+                GetComponent<Animations_Objects>().StartAnimation();
+
+                return;
+            }
+        }
+
+        GetComponent<Animations_Objects>().StopAnimation();
     }
 }
 

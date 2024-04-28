@@ -103,14 +103,30 @@ public class InteractableObject : MonoBehaviour
                     {
                         if (plantParent.GetComponent<Plant>() && !plantParent.GetComponent<Plant>().isPicked)
                         {
-                            for (int i = 0; i < amount; i++)
+                            if (plantParent.GetComponent<Plant>().isInCropPlot)
                             {
-                                SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+                                if (plantParent.GetComponent<Plant>().plantIsReadyInCropPlot)
+                                {
+                                    SoundManager.Instance.Play_Inventory_PickupItem_Clip();
 
-                                //Check If item can be added
-                                InventoryManager.Instance.AddItemToInventory(0, itemName);
+                                    //Check If item can be added
+                                    InventoryManager.Instance.AddItemToInventory(0, itemName);
 
-                                plantParent.GetComponent<Plant>().PickPlant();
+                                    plantParent.GetComponent<Plant>().pickablePart.GetComponent<InteractableObject>().DestroyThisObject();
+                                    plantParent.GetComponent<Plant>().DestroyThisObject();
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < amount; i++)
+                                {
+                                    SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+
+                                    //Check If item can be added
+                                    InventoryManager.Instance.AddItemToInventory(0, itemName);
+
+                                    plantParent.GetComponent<Plant>().PickPlant();
+                                }
                             }
                         }
                     }
@@ -241,7 +257,6 @@ public class InteractableObject : MonoBehaviour
                 {
                     if (GetComponent<CropPlotSlot>())
                     {
-                        print("Interact with a CropPlotMenu");
                         GetComponent<CropPlotSlot>().InteractWithCropPlotSlot();
                     }
                 }

@@ -61,15 +61,121 @@ public class CropPlotManager : Singleton<CropPlotManager>
     [SerializeField] List<GameObject> cropPlotSlotList = new List<GameObject>();
     public CropPlotInfo CropPlotInfo_Interacting;
 
+    [Header("Growth")]
+    public float cropPlot_GrowthTime_Max = 180;
+
 
     //--------------------
 
 
+    private void Start()
+    {
+        cropPlot_GrowthTime_Max = 5;
+    }
     private void Update()
     {
         if (MainManager.Instance.menuStates == MenuStates.CropPlotMenu)
         {
             UpdateCropPlotSlotsInfo();
+        }
+    }
+
+
+    //--------------------
+
+
+    public void AddSeed(Items seedName, int cropPlotIndex)
+    {
+        //Set SeedName
+        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotIndex].seedName_Input = seedName;
+
+        //Set Timers
+        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotIndex].current_GrowthTime = 0;
+        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotIndex].max_GrowthTime = cropPlot_GrowthTime_Max;
+
+        //Set Plant
+        AddPlantToCropPlotSlot(seedName, SelectionManager.Instance.selectedObject.GetComponent<CropPlotSlot>().plantSpot_Parent, cropPlotIndex);
+
+        SelectionManager.Instance.selectedObject.GetComponent<CropPlotSlot>().parent.GetComponent<Animations_Objects>().StartAnimation();
+
+        //Set CropState
+        CropPlotInfo_Interacting.cropPlotSlotList[cropPlotIndex].cropState = CropState.Growing;
+
+        BuildingSystemManager.Instance.UpdateWorldBuildingObjectInfoList_ToSave(SelectionManager.Instance.selectedObject.GetComponent<CropPlotSlot>().parent.gameObject.GetComponent<MoveableObject>());
+        BuildingSystemManager.Instance.SaveData();
+    }
+
+    public void AddPlantToCropPlotSlot(Items seedName, GameObject plantSpot, int cropPlotSlotIndex)
+    {
+        GameObject plant = new GameObject();
+
+        //Insert correct PlantPrefab into the CropPlot
+        switch (seedName)
+        {
+            case Items.ArídisPlantSeed:
+                plant = Instantiate(ArídisPlantObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.GluePlantSeed:
+                plant = Instantiate(GluePlantObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.CrimsonCloudBushSeed:
+                plant = Instantiate(CrimsonCloudBushObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.RedCottonPlantSeed:
+                plant = Instantiate(RedCottonPlantObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.SpikPlantSeed:
+                plant = Instantiate(SpikPlantObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.SmallCactusplantSeed:
+                plant = Instantiate(SmallCactusPlantObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.LargeCactusplantSeed:
+                plant = Instantiate(LargeCactusPlantObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.PuddingCactusSeed:
+                plant = Instantiate(PuddingCactusObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.StalkFruitSeed:
+                plant = Instantiate(StalkFruitObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.TripodFruitSeed:
+                plant = Instantiate(TripodFruitObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.HeatFruitSeed:
+                plant = Instantiate(HeatFruitObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.FreezeFruitSeed:
+                plant = Instantiate(FreezeFruitObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.TwistedMushroomSeed:
+                plant = Instantiate(TwistedMushroomObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.GroundMushroomSeed:
+                plant = Instantiate(GroundMushroomObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.SandTubesSeed:
+                plant = Instantiate(SandTubesObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.PalmTreeSeed:
+                plant = Instantiate(PalmTreeObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+            case Items.BloodTreeSeed:
+                plant = Instantiate(BloodTreeObject, plantSpot.transform.forward, plantSpot.transform.rotation, plantSpot.transform);
+                break;
+
+            default:
+                break;
+        }
+
+        //Set Plant info
+        if (plant.GetComponent<Plant>())
+        {
+            plant.GetComponent<Plant>().plantIsReadyInCropPlot = false;
+            plant.GetComponent<Plant>().isInCropPlot = true;
+            plant.GetComponent<Plant>().CropPlotSlotIndex = cropPlotSlotIndex;
+
+            plant.transform.SetLocalPositionAndRotation(new Vector3(0, 0.25f, 0), Quaternion.identity);
         }
     }
 

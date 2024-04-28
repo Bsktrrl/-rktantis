@@ -7,7 +7,52 @@ public class CropPlotSlot : MonoBehaviour
     public GameObject parent;
     public int slotIndex;
 
-    public GameObject plantSpot;
+    public GameObject plantSpot_Parent;
+
+
+    //--------------------
+
+
+    private void Update()
+    {
+        //When the Plant grows
+        if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState == CropState.Growing)
+        {
+            //print("Plant - Growing");
+
+            SetPlantGrowth();
+        }
+
+        //When the plant gets picked
+        else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState == CropState.Finished)
+        {
+            if (plantSpot_Parent.transform.childCount <= 0)
+            {
+                PickUpPlant_Aftermath();
+            }
+        }
+    }
+
+
+    //--------------------
+
+
+    public void SetupPlantInCropSlotPlot()
+    {
+        if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState != CropState.Empty)
+        {
+            //print("Error - Slotindex: " + slotIndex);
+            CropPlotManager.Instance.AddPlantToCropPlotSlot(parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].seedName_Input, plantSpot_Parent, slotIndex);
+
+            if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState == CropState.Finished)
+            {
+                if (plantSpot_Parent.transform.childCount > 0)
+                {
+                    plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().plantIsReadyInCropPlot = true;
+                }
+            }
+        }
+    }
 
 
     //--------------------
@@ -15,6 +60,8 @@ public class CropPlotSlot : MonoBehaviour
 
     public void InteractWithCropPlotSlot()
     {
+        print("InteractWithCropPlotSlot | State: " + GetCropPlotSlotInfo().cropState.ToString());
+
         switch (GetCropPlotSlotInfo().cropState)
         {
             case CropState.Empty:
@@ -25,7 +72,7 @@ public class CropPlotSlot : MonoBehaviour
                 break;
 
             case CropState.Finished:
-                PickUpPlant();
+                PickUpPlantFromTheCropPlot();
                 break;
 
             default:
@@ -47,84 +94,106 @@ public class CropPlotSlot : MonoBehaviour
         TabletManager.Instance.OpenTablet(TabletMenuState.CropPlot);
         TabletManager.Instance.objectInteractingWith = ObjectInteractingWith.CropPlot;
     }
-
-    void AddSeed()
+    void PickUpPlant_Aftermath()
     {
-        //Insert correct PlantPrefab into the CropPlot
-        //Remove and set the correct image in the Tablet
-        switch (HotbarManager.Instance.selectedItem)
-        {
-            case Items.ArídisPlantSeed:
-                plantSpot = CropPlotManager.Instance.ArídisPlantObject;
-                break;
-            case Items.GluePlantSeed:
-                plantSpot = CropPlotManager.Instance.GluePlantObject;
-                break;
-            case Items.CrimsonCloudBushSeed:
-                plantSpot = CropPlotManager.Instance.CrimsonCloudBushObject;
-                break;
-            case Items.RedCottonPlantSeed:
-                plantSpot = CropPlotManager.Instance.RedCottonPlantObject;
-                break;
-            case Items.SpikPlantSeed:
-                plantSpot = CropPlotManager.Instance.SpikPlantObject;
-                break;
-            case Items.SmallCactusplantSeed:
-                plantSpot = CropPlotManager.Instance.SmallCactusPlantObject;
-                break;
-            case Items.LargeCactusplantSeed:
-                plantSpot = CropPlotManager.Instance.LargeCactusPlantObject;
-                break;
-            case Items.PuddingCactusSeed:
-                plantSpot = CropPlotManager.Instance.PuddingCactusObject;
-                break;
-            case Items.StalkFruitSeed:
-                plantSpot = CropPlotManager.Instance.StalkFruitObject;
-                break;
-            case Items.TripodFruitSeed:
-                plantSpot = CropPlotManager.Instance.TripodFruitObject;
-                break;
-            case Items.HeatFruitSeed:
-                plantSpot = CropPlotManager.Instance.HeatFruitObject;
-                break;
-            case Items.FreezeFruitSeed:
-                plantSpot = CropPlotManager.Instance.FreezeFruitObject;
-                break;
-            case Items.TwistedMushroomSeed:
-                plantSpot = CropPlotManager.Instance.TwistedMushroomObject;
-                break;
-            case Items.GroundMushroomSeed:
-                plantSpot = CropPlotManager.Instance.GroundMushroomObject;
-                break;
-            case Items.SandTubesSeed:
-                plantSpot = CropPlotManager.Instance.SandTubesObject;
-                break;
-            case Items.PalmTreeSeed:
-                plantSpot = CropPlotManager.Instance.PalmTreeObject;
-                break;
-            case Items.BloodTreeSeed:
-                plantSpot = CropPlotManager.Instance.BloodTreeObject;
-                break;
+        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime = 0;
+        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState = CropState.Empty;
+        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].seedName_Input = Items.None;
+        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].plantName_Output = Items.None;
 
-            default:
-                break;
+        BuildingSystemManager.Instance.UpdateWorldBuildingObjectInfoList_ToSave(parent.GetComponent<MoveableObject>());
+    }
+    void PickUpPlantFromTheCropPlot()
+    {
+        print("1. PickUpPlantFromTheCropPlot");
+        if (plantSpot_Parent.transform.childCount > 0)
+        {
+            print("2. PickUpPlantFromTheCropPlot");
+            if (plantSpot_Parent.transform.GetChild(0))
+            {
+                print("3. PickUpPlantFromTheCropPlot");
+                if (plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>())
+                {
+                    print("4. PickUpPlantFromTheCropPlot");
+                    if (plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().plantIsReadyInCropPlot)
+                    {
+                        print("5. PickUpPlantFromTheCropPlot");
+                        SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+
+                        //Check If item can be added
+                        InventoryManager.Instance.AddItemToInventory(0, GetPlantItem());
+
+                        plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().pickablePart.GetComponent<InteractableObject>().DestroyThisObject();
+                        plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().DestroyThisObject();
+                    }
+
+                    InventoryManager.Instance.AddItemToInventory(0, GetCropPlotSlotInfo().plantName_Output);
+                }
+            }
         }
     }
-    void PickUpPlant()
-    {
-        InventoryManager.Instance.AddItemToInventory(0, GetCropPlotSlotInfo().plantName_Output);
-    }
 
+    Items GetPlantItem()
+    {
+        switch (plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().plantType)
+        {
+            case PlantType.AdrídisFlower:
+                return Items.ArídisFlower;
+            case PlantType.FreezeFruit:
+                return Items.FreezeFruit;
+            case PlantType.CrimsonCloudBush:
+                return Items.Cotton;
+            case PlantType.GluePlant:
+                return Items.GlueStick;
+            case PlantType.HeatFruit:
+                return Items.HeatFruit;
+            case PlantType.PuddingCactus:
+                return Items.PuddingCactus;
+            case PlantType.RedCottonPlant:
+                return Items.Cotton;
+            case PlantType.SandTubes:
+                return Items.TubePlastic;
+            case PlantType.SpikeOilFruit:
+                return Items.SpikOil;
+            case PlantType.StalkFruit:
+                return Items.StalkFruit;
+            case PlantType.StemCactus:
+                return Items.Cactus;
+            case PlantType.ThriPod:
+                return Items.TripodFruit;
+            case PlantType.TwistCap:
+                return Items.TwistedMushroom;
+            case PlantType.WartShroom:
+                return Items.TwistedMushroom;
+
+            default:
+                return Items.GlueStick;
+        }
+    }
 
     void SetPlantGrowth()
     {
+        //print("Plant - Growing: Percentage: " + parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime / parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime);
+
         //GrowthTimer
-
-
+        parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime += Time.deltaTime;
 
         //Scale based on GrowthTimer
+        plantSpot_Parent.transform.localScale = Vector3.one * parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime / parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime;
 
-
+        if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].current_GrowthTime >= parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].max_GrowthTime)
+        {
+            if (plantSpot_Parent.transform.childCount > 0)
+            {
+                if (plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>())
+                {
+                    plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().plantIsReadyInCropPlot = true;
+                }
+            }
+            
+            parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList[slotIndex].cropState = CropState.Finished;
+            plantSpot_Parent.transform.localScale = Vector3.one;
+        }
     }
 
 

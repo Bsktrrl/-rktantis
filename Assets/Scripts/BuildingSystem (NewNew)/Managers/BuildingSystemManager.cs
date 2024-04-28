@@ -1603,8 +1603,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             {
                 worldBuildingObjectInfoList[move.index].cropPlotInfo = move.gameObject.GetComponent<CropPlot>().cropPlotInfo;
             }
-            
-            print("777. Update CropPlotMenu | Index: " + move.index + " | SlotAmount: " + worldBuildingObjectInfoList[move.index].cropPlotInfo.cropPlotSlotList.Count);
         }
 
         //If a Ghost Tank

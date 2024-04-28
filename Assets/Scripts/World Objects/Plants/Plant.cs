@@ -29,6 +29,10 @@ public class Plant : MonoBehaviour
 
     [HideInInspector] public int percentageCheck = 0;
 
+    [Header("CropPlot")]
+    public bool isInCropPlot;
+    public int CropPlotSlotIndex;
+    public bool plantIsReadyInCropPlot;
 
 
     //--------------------
@@ -174,22 +178,25 @@ public class Plant : MonoBehaviour
     {
         if (isPicked) { return; }
 
-        if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selectedObject == gameObject
-            && MainManager.Instance.menuStates == MenuStates.None)
+        if (SelectionManager.Instance.selectedObject == gameObject)
         {
-            //If Object is a Plant
-            InteractableObject tempObject = pickablePart.GetComponent<InteractableObject>();
-
-            //Pick the PlantItem from the plant
-            for (int i = 0; i < tempObject.amount; i++)
+            if (SelectionManager.Instance.onTarget && MainManager.Instance.menuStates == MenuStates.None)
             {
-                //Check If item can be added
-                InventoryManager.Instance.AddItemToInventory(0, tempObject.itemName);
+                //If Object is a Plant
+                InteractableObject tempObject = pickablePart.GetComponent<InteractableObject>();
 
-                PickPlant();
+                //Pick the PlantItem from the plant
+                for (int i = 0; i < tempObject.amount; i++)
+                {
+                    //Check If item can be added
+                    InventoryManager.Instance.AddItemToInventory(0, tempObject.itemName);
+
+                    PickPlant();
+                }
             }
         }
     }
+
 
     //--------------------
 
@@ -205,5 +212,17 @@ public class Plant : MonoBehaviour
         }
 
         return null;
+    }
+
+
+    //--------------------
+
+
+    public void DestroyThisObject()
+    {
+        //Unsubscribe from Event
+        PlayerButtonManager.objectInterraction_isPressedDown -= ObjectInteraction;
+
+        Destroy(gameObject);
     }
 }
