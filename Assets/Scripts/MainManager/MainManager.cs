@@ -33,6 +33,9 @@ public class MainManager : Singleton<MainManager>
 
     public bool deleyedStart;
 
+    [Header("Demo Ending")]
+    public GameObject demoEndingText;
+
 
     //--------------------
 
@@ -42,6 +45,7 @@ public class MainManager : Singleton<MainManager>
         Cursor.lockState = CursorLockMode.Locked;
 
         centerImage.SetActive(true);
+        demoEndingText.SetActive(false);
     }
     private void Update()
     {
@@ -177,6 +181,15 @@ public class MainManager : Singleton<MainManager>
     {
         DataPersistanceManager.instance.SaveGame();
     }
+
+
+    //--------------------
+
+
+    public void SetDemoEndingText()
+    {
+        demoEndingText.SetActive(true);
+    }
 }
 
 public enum MenuStates
@@ -193,7 +206,9 @@ public enum MenuStates
     CraftingMenu,
     SkillTreeMenu,
     JournalMenu,
-    ResearchMenu
+    ResearchMenu,
+
+    CropPlotMenu
 }
 
 public enum GameStates

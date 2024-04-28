@@ -63,9 +63,8 @@ public class EquippedItem : MonoBehaviour
                         //Update the Hand to see if slot is empty
                         HotbarManager.Instance.ChangeItemInHand();
 
-
                         //Remove item from Inventory
-                        InventoryManager.Instance.RemoveItemFromInventory(0, InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName, InventoryManager.Instance.inventories[0].itemsInInventory[i].itemID);
+                        InventoryManager.Instance.RemoveItemFromInventory(0, InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName, InventoryManager.Instance.inventories[0].itemsInInventory[i].itemID, true);
                     }
                 }
 
@@ -151,25 +150,6 @@ public class EquippedItem : MonoBehaviour
 
     public void DestroyObject()
     {
-        //If Equipped Object is a BuildingHammer
-        //if (gameObject.GetComponent<BuildingHammer>() != null)
-        //{
-        //    if (gameObject.GetComponent<BuildingHammer>().tempObj_Selected)
-        //    {
-        //        if (gameObject.GetComponent<BuildingHammer>().tempObj_Selected.GetComponent<InteractableObject>())
-        //        {
-        //            gameObject.GetComponent<BuildingHammer>().tempObj_Selected.GetComponent<InteractableObject>().DestroyThisObject();
-        //            gameObject.GetComponent<BuildingHammer>().DestroyThisObject();
-        //        }
-        //        else
-        //        {
-        //            Destroy(gameObject.GetComponent<BuildingHammer>().tempObj_Selected);
-        //        }
-        //    }
-            
-        //    gameObject.GetComponent<BuildingHammer>().tempObj_Selected = null;
-        //}
-
         //If Equipped Object is an Axe
         if (gameObject.GetComponent<Axe>() != null)
         {

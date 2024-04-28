@@ -7,6 +7,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public float movementSpeed = 4f;
     public float movementSpeedVarianceByMovement = 1f;
     public float movementSpeedVarianceByWeather = 1f;
+    public float movementSpeedVarianceByWater = 1f;
 
     public float gravity = -9.81f * 2;
     public float gravityResistance = 2f;
@@ -112,13 +113,35 @@ public class PlayerMovement : Singleton<PlayerMovement>
         //right is the red Axis, forward is the blue axis
         Vector3 move = MainManager.Instance.playerBody.transform.right * movement_X + MainManager.Instance.playerBody.transform.forward * movement_Z;
 
-        controller.Move(move * movementSpeed * movementSpeedVarianceByWeather * movementSpeedVarianceByMovement * PlayerManager.Instance.movementSpeedMultiplier_SkillTree * Time.deltaTime);
+        controller.Move(move * movementSpeed * movementSpeedVarianceByWeather * movementSpeedVarianceByMovement * movementSpeedVarianceByWater * PlayerManager.Instance.movementSpeedMultiplier_SkillTree * Time.deltaTime);
 
         //check if the player is on the ground so he can jump
         if (Input.GetKeyDown(KeyCode.Space) && GetComponent<DistanceAboveGround>().isGrounded)
         {
-            //the equation for jumping
-            velocity.y = Mathf.Sqrt(PlayerManager.Instance.jumpHeight * -gravityResistance * gravity);
+            //Check if the player can jump - is standing on a slope less than 50 degrees
+
+            Vector3 raycastDirection = Vector3.down;
+
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, raycastDirection, out hit, 10))
+            {
+                //Calculate the normal of the surface hit by the raycast
+                Vector3 groundNormal = hit.normal;
+
+                //Calculate the angle between the ground normal and the up direction (vertical)
+                float slopeAngle = Vector3.Angle(groundNormal, Vector3.up);
+
+                //Check if the player can jump
+                if (slopeAngle > 50)
+                {
+
+                }
+                else
+                {
+                    //The equation for jumping
+                    velocity.y = Mathf.Sqrt(PlayerManager.Instance.jumpHeight * -gravityResistance * gravity);
+                }
+            }
         }
 
         if (movement_X == 0 && movement_Z == 0)
@@ -452,7 +475,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 }
 
                 //SettingsManager.Instance.ChangeFOV(FOV_Smoother);
-                movementSpeedVarianceByMovement = 2;
+                movementSpeedVarianceByMovement = 2.5f;
                 break;
             case MovementStates.Crouching:
                 PlayerManager.Instance.FOV_Addon = PlayerManager.Instance.FOV_Crouching;
@@ -563,5 +586,18 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 jumpDistance_End = Vector3.zero;
             }
         }
+    }
+
+    public void Teleport(Vector3 newPos)
+    {
+        print("1. Teleport: Pos: " + transform.position);
+
+        GetComponent<CharacterController>().enabled = false;
+
+        transform.SetPositionAndRotation(newPos, Quaternion.Euler(0, -20, 0));
+
+        GetComponent<CharacterController>().enabled = true;
+
+        print("2. Teleport: Pos: " + transform.position);
     }
 }

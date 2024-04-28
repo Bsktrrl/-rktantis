@@ -30,7 +30,7 @@ public class LightingUpdates : MonoBehaviour
 
         //Intensity of ambient light
         RenderSettings.ambientIntensity = Mathf.Pow(((Mathf.Clamp(mainLight.transform.forward.y, -0.25f, 1) + 0.25f) * 0.8f), 3) * 5 + 1;
-        print(RenderSettings.ambientIntensity);
+        //print(RenderSettings.ambientIntensity);
 
         if (Vector3.Dot(Vector3.Normalize(player.transform.position), mainLight.transform.forward) <= 0.9f)
         {

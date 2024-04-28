@@ -128,7 +128,7 @@ public class SelectionManager : Singleton<SelectionManager>
         Vector3 startPoint = ray.origin /*+ MainManager.Instance.mainMainCamera.transform.forward*/;
 
         //Make Debug Line
-        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), UnityEngine.Color.white);
+        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), Color.white);
 
         if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, ~layersToIgnore))
         {
@@ -174,7 +174,7 @@ public class SelectionManager : Singleton<SelectionManager>
             {
                 if (hit.transform.gameObject.GetComponent<SphereCollider>())
                 {
-                    tag = "";
+                    //tag = "";
                     BuildingDisplayManager.Instance.ResetRewardScreenDisplay();
                     LookAtManager.Instance.typeLookingAt = InteracteableType.None;
                     onTarget = false;
@@ -194,7 +194,7 @@ public class SelectionManager : Singleton<SelectionManager>
 
             else
             {
-                tag = "";
+                //tag = "";
                 BuildingDisplayManager.Instance.ResetRewardScreenDisplay();
                 LookAtManager.Instance.typeLookingAt = InteracteableType.None;
                 onTarget = false;
@@ -207,6 +207,17 @@ public class SelectionManager : Singleton<SelectionManager>
                 selectedObject = selectionTransform.gameObject;
             }
         }
+
+        ////Check for Water
+        //else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, ~layersToIgnore))
+        //{
+        //    // Check if the object hit has the specific tag
+        //    if (hit.collider.CompareTag("Water"))
+        //    {
+        //        tag = hit.collider.tag;
+        //    }
+        //}
+
         else
         {
             tag = "";

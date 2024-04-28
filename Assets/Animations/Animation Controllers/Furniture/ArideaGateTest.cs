@@ -5,22 +5,50 @@ using UnityEngine;
 public class ArideaGateTest : MonoBehaviour
 {
     Animator anim;
-    // Start is called before the first frame update
+
+    [SerializeField] GameObject ArídianKey_1;
+
+
+    //--------------------
+
+
     void Start()
     {
         anim = GetComponent<Animator>();
+
+        ArídianKey_1.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    //--------------------
+
+
+    public void ActivateArídeaGate()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (InventoryManager.Instance.GetAmountOfItemInInventory(0, Items.ArídianKey) > 0)
         {
-            anim.SetTrigger("InsertKey");
+            ArídianKey_1.SetActive(true);
+            SoundManager.Instance.Play_ArídeaGate_KeyPlacement_Clip();
+
+            InventoryManager.Instance.RemoveItemFromInventory(0, Items.ArídianKey, -1, true);
+
+            StartCoroutine(WaitForGateToTurn(2.5f));
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            anim.SetTrigger("Reset");
-        }
+    }
+
+    IEnumerator WaitForGateToTurn(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        SoundManager.Instance.Play_ArídeaGate_Rotate_Clip();
+        anim.SetTrigger("InsertKey");
+
+        yield return new WaitForSeconds(5f);
+
+        SoundManager.Instance.Play_ArídeaGate_InPlace_Clip();
+
+        yield return new WaitForSeconds(2.5f);
+
+        MainManager.Instance.SetDemoEndingText();
     }
 }

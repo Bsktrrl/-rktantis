@@ -21,6 +21,7 @@ public class WeatherManager : Singleton<WeatherManager>
     [Header("Temperature Resistances")]
     public float coverValue;
     public float temperatureFruit;
+    public float waterValue;
     public float equippment;
     public float skillTree;
     public float waterCooler;
@@ -45,10 +46,10 @@ public class WeatherManager : Singleton<WeatherManager>
     public WeatherType weatherType = WeatherType.Sunny;
     public GameObject weatherDisplay_Parent;
     public bool weatherImageDisplay_Day1_isUpgraded = true;
-    public bool weatherImageDisplay_Day2_isUpgraded = true;
-    public bool weatherImageDisplay_Day3_isUpgraded = true;
-    public bool weatherImageDisplay_Day4_isUpgraded = true;
-    public bool weatherImageDisplay_Day5_isUpgraded = true;
+    public bool weatherImageDisplay_Day2_isUpgraded = false;
+    public bool weatherImageDisplay_Day3_isUpgraded = false;
+    public bool weatherImageDisplay_Day4_isUpgraded = false;
+    public bool weatherImageDisplay_Day5_isUpgraded = false;
     public GameObject weatherImageDisplay_Day1_Parent;
     public GameObject weatherImageDisplay_Day2_Parent;
     public GameObject weatherImageDisplay_Day3_Parent;
@@ -87,7 +88,7 @@ public class WeatherManager : Singleton<WeatherManager>
         
         CheckIfPlayerIsInTheCoverageOfBuildingBlock();
         SetTemperature();
-        SetPlayerTemperature(coverValue, temperatureFruit);
+        SetPlayerTemperature(coverValue, temperatureFruit, waterValue);
         SetTemperatureDisplay(temperatureDisplay, playerTemperatureDisplay);
 
         SetTermostatDisplay();
@@ -107,6 +108,17 @@ public class WeatherManager : Singleton<WeatherManager>
             CalculateLastWeather(20);
 
             SetWeather();
+
+            weatherImageDisplay_Day1_isUpgraded = true;
+            weatherImageDisplay_Day2_isUpgraded = false;
+            weatherImageDisplay_Day3_isUpgraded = false;
+            weatherImageDisplay_Day4_isUpgraded = false;
+            weatherImageDisplay_Day5_isUpgraded = false;
+            weatherImageDisplay_Day1_Parent.SetActive(true);
+            weatherImageDisplay_Day2_Parent.SetActive(false);
+            weatherImageDisplay_Day3_Parent.SetActive(false);
+            weatherImageDisplay_Day4_Parent.SetActive(false);
+            weatherImageDisplay_Day5_Parent.SetActive(false);
         }
 
         //If not NewGame, set the parameters given by the list
@@ -118,6 +130,19 @@ public class WeatherManager : Singleton<WeatherManager>
             SetWeatherDisplay();
 
             SaveData();
+
+
+            //As long as the SkillTree isn't up yet
+            weatherImageDisplay_Day1_isUpgraded = true;
+            weatherImageDisplay_Day2_isUpgraded = false;
+            weatherImageDisplay_Day3_isUpgraded = false;
+            weatherImageDisplay_Day4_isUpgraded = false;
+            weatherImageDisplay_Day5_isUpgraded = false;
+            weatherImageDisplay_Day1_Parent.SetActive(true);
+            weatherImageDisplay_Day2_Parent.SetActive(false);
+            weatherImageDisplay_Day3_Parent.SetActive(false);
+            weatherImageDisplay_Day4_Parent.SetActive(false);
+            weatherImageDisplay_Day5_Parent.SetActive(false);
         }
 
         //Set Ghost amount
@@ -176,10 +201,10 @@ public class WeatherManager : Singleton<WeatherManager>
             currentWorldTemperature = Mathf.FloorToInt(maxTemperature + calculatingTemperature);
         }
     }
-    void SetPlayerTemperature(float coverValue, float temperatureFruit)
+    void SetPlayerTemperature(float coverValue, float temperatureFruit, float waterValue)
     {
         //Set Temperature for BuildingBlock Coverage (doesn't affect temperature under idealTemperature)
-        float coverResistance = coverValue + temperatureFruit;
+        float coverResistance = coverValue + temperatureFruit + waterValue;
 
         //print("0. coverResistance = " + coverResistance);
         //print("0. PlayerTemperature = " + playerTemperature);

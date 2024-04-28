@@ -40,6 +40,7 @@ public class InteractableObject : MonoBehaviour
     private void Start()
     {
         PlayerButtonManager.objectInterraction_isPressedDown += ObjectInteraction;
+        PlayerButtonManager.objectInteraction_GhostRelease_isPressedDown += ObjectInteraction_ReleaseGhost;
 
         //Add SphereCollider for the item
         Vector3 scale = gameObject.transform.lossyScale;
@@ -74,19 +75,19 @@ public class InteractableObject : MonoBehaviour
                             //Remove Object from the worldObjectList
                             WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
 
-                            //Update the ArídianKey
+                            //Update the ArídianKey Journal Page
                             if (gameObject.GetComponent<ArídianKey>())
                             {
                                 gameObject.GetComponent<ArídianKey>().ArídianKeyInteraction();
                             }
-                            //Update the AriditeCrystal
+                            //Update the AriditeCrystal Journal Page
                             else if (gameObject.GetComponent<AríditeCrystal>())
                             {
                                 gameObject.GetComponent<AríditeCrystal>().AríditeCrystalInteraction();
                             }
 
                             //Destroy gameObject
-                            DestroyThisObject();
+                            DestroyThisInteractableObject();
                         }
                     }
                 }
@@ -96,21 +97,37 @@ public class InteractableObject : MonoBehaviour
                 #region
                 else if (interactableType == InteracteableType.Plant)
                 {
-                    print("Interract with a PlantItem");
+                    //print("Interract with a PlantItem");
 
                     //Pick the Plant
                     if (plantParent)
                     {
                         if (plantParent.GetComponent<Plant>() && !plantParent.GetComponent<Plant>().isPicked)
                         {
-                            for (int i = 0; i < amount; i++)
+                            if (plantParent.GetComponent<Plant>().isInCropPlot)
                             {
-                                SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+                                if (plantParent.GetComponent<Plant>().plantIsReadyInCropPlot)
+                                {
+                                    SoundManager.Instance.Play_Inventory_PickupItem_Clip();
 
-                                //Check If item can be added
-                                InventoryManager.Instance.AddItemToInventory(0, itemName);
+                                    //Check If item can be added
+                                    InventoryManager.Instance.AddItemToInventory(0, itemName);
 
-                                plantParent.GetComponent<Plant>().PickPlant();
+                                    plantParent.GetComponent<Plant>().pickablePart.GetComponent<InteractableObject>().DestroyThisInteractableObject();
+                                    plantParent.GetComponent<Plant>().DestroyThisPlantObject();
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < amount; i++)
+                                {
+                                    SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+
+                                    //Check If item can be added
+                                    InventoryManager.Instance.AddItemToInventory(0, itemName);
+
+                                    plantParent.GetComponent<Plant>().PickPlant();
+                                }
                             }
                         }
                     }
@@ -201,7 +218,7 @@ public class InteractableObject : MonoBehaviour
                 #region
                 else if (interactableType == InteracteableType.SkillTreeTable)
                 {
-                    //print("Interract with a SkillTree");
+                    //print("Interact with a SkillTree");
 
                     SoundManager.Instance.Play_InteractableObjects_OpenSkillTreeTable_Clip();
 
@@ -224,7 +241,7 @@ public class InteractableObject : MonoBehaviour
                 #region
                 else if (interactableType == InteracteableType.GhostTank)
                 {
-                    print("Interact with a GhostTank");
+                    //print("Interact with a GhostTank");
 
                     if (gameObject.GetComponent<GhostTank>())
                     {
@@ -233,11 +250,24 @@ public class InteractableObject : MonoBehaviour
                 }
                 #endregion
 
+                //If Object is a CropPlot
+                #region
+                else if (interactableType == InteracteableType.CropPlot_x1
+                         || interactableType == InteracteableType.CropPlot_x2
+                         || interactableType == InteracteableType.CropPlot_x4)
+                {
+                    if (GetComponent<CropPlotSlot>())
+                    {
+                        GetComponent<CropPlotSlot>().InteractWithCropPlotSlot();
+                    }
+                }
+                #endregion
+
                 //If Object is a JournalPage
                 #region
                 else if (interactableType == InteracteableType.JournalPage)
                 {
-                    print("Interact with a Journal Page");
+                    //print("Interact with a Journal Page");
 
                     SoundManager.Instance.Play_JournalPage_GetNewJournalPage_Clip();
 
@@ -253,7 +283,7 @@ public class InteractableObject : MonoBehaviour
                     }
 
                     //Destroy gameObject
-                    DestroyThisObject();
+                    DestroyThisInteractableObject();
                 }
                 #endregion
 
@@ -261,7 +291,7 @@ public class InteractableObject : MonoBehaviour
                 #region
                 else if (interactableType == InteracteableType.Blueprint)
                 {
-                    print("Interact with a BlueprintInfo");
+                    //print("Interact with a BlueprintInfo");
 
                     for (int i = 0; i < blueprintInfo.Count; i++)
                     {
@@ -287,11 +317,58 @@ public class InteractableObject : MonoBehaviour
                     }
 
                     //Destroy gameObject
-                    DestroyThisObject();
+                    DestroyThisInteractableObject();
+                }
+                #endregion
+
+                //If Object is the Arídea Gate
+                #region
+                else if (interactableType == InteracteableType.ArídeaGate)
+                {
+                    if (SelectionManager.Instance.selectedObject.GetComponent<ArideaGateTest>())
+                    {
+                        SelectionManager.Instance.selectedObject.GetComponent<ArideaGateTest>().ActivateArídeaGate();
+                    }
+                }
+                #endregion
+
+                //If Object is a Connection
+                #region
+                else if (interactableType == InteracteableType.Connection)
+                {
+                    if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>())
+                    {
+                        if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().worldObjectIndex_ConnectedWith < 0)
+                        {
+                            SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().AddConnectPoint();
+                        }
+                        else
+                        {
+                            SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().RemoveConnectPoint();
+                        }
+                    }
                 }
                 #endregion
             }
         }
+    }
+
+    void ObjectInteraction_ReleaseGhost()
+    {
+        if (SelectionManager.Instance.selectedObject)
+        {
+            if (SelectionManager.Instance.onTarget && SelectionManager.Instance.selectedObject == gameObject
+            && MainManager.Instance.menuStates == MenuStates.None)
+            {
+                if (interactableType == InteracteableType.GhostTank)
+                {
+                    if (gameObject.GetComponent<GhostTank>())
+                    {
+                        gameObject.GetComponent<GhostTank>().RemoveGhost();
+                    }
+                }
+            }
+        }      
     }
 
 
@@ -327,8 +404,10 @@ public class InteractableObject : MonoBehaviour
     //--------------------
 
 
-    public void DestroyThisObject()
+    public void DestroyThisInteractableObject()
     {
+        print("Destroy PickableObject: " + gameObject.name);
+
         //Unsubscribe from Event
         PlayerButtonManager.objectInterraction_isPressedDown -= ObjectInteraction;
 
@@ -352,9 +431,9 @@ public enum InteracteableType
     [Description("Heat Regulator")][InspectorName("Machine/Heat Regulator")] HeatRegulator,
     [Description("Resource Converter")][InspectorName("Machine/Resource Converter")] ResourceConverter,
 
-    [Description("CropPlot x1")][InspectorName("Machine/CropPlot x1")] CropPlot_x1,
-    [Description("CropPlot x2")][InspectorName("Machine/CropPlot x2")] CropPlot_x2,
-    [Description("CropPlot x4")][InspectorName("Machine/CropPlot x4")] CropPlot_x4,
+    [Description("CropPlotMenu x1")][InspectorName("Machine/CropPlotMenu x1")] CropPlot_x1,
+    [Description("CropPlotMenu x2")][InspectorName("Machine/CropPlotMenu x2")] CropPlot_x2,
+    [Description("CropPlotMenu x4")][InspectorName("Machine/CropPlotMenu x4")] CropPlot_x4,
 
     [Description("Grill x1")][InspectorName("Machine/Grill x1")] Grill_x1,
     [Description("Grill x2")][InspectorName("Machine/Grill x2")] Grill_x2,
@@ -401,6 +480,12 @@ public enum InteracteableType
 
     //Blueprint
     [Description("BlueprintInfo")][InspectorName("BlueprintInfo/BlueprintInfo")] Blueprint,
+
+    //Arídea Gate
+    [Description("Arídea Gate")][InspectorName("Arídea Gate/Arídea Gate")] ArídeaGate,
+
+    //Connection
+    [Description("Connection")][InspectorName("Connection/Connection")] Connection,
 }
 
 [Serializable]

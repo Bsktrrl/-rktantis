@@ -118,7 +118,7 @@ public class GameOverManager : Singleton<GameOverManager>
                 && WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().itemName != Items.AríditeCrystal
                 && WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().itemName != Items.Flashlight)
                 {
-                    WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().DestroyThisObject();
+                    WorldObjectManager.Instance.worldObjectList[i].GetComponent<InteractableObject>().DestroyThisInteractableObject();
                 }
             }
         }

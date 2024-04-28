@@ -66,6 +66,12 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] GameObject ghostFight_Panel;
     [SerializeField] Image ghostFightBar;
     [SerializeField] Image ghostImage;
+
+    [Header("Connection Point")]
+    [SerializeField] GameObject ConnectionPoint_Panel;
+    [SerializeField] Image ConnectionPointImage;
+    [SerializeField] TextMeshProUGUI ConnectionPointName;
+    [SerializeField] TextMeshProUGUI ConnectionPoint_Text;
     #endregion
 
 
@@ -342,6 +348,21 @@ public class LookAtManager : Singleton<LookAtManager>
         }
         #endregion
 
+        //If looking at a Connection
+        #region
+        else if (typeLookingAt == InteracteableType.Connection)
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            ConnectionDisplay();
+
+            ConnectionPoint_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
+
 
         //-------------------- Other
 
@@ -404,6 +425,7 @@ public class LookAtManager : Singleton<LookAtManager>
                 }
                 
                 if (plant.growthPrecentage >= 100 || plant.growthPrecentage <= 0)
+
                 {
                     PlantGrowthInfo.text = "Growth: Ready";
                 }
@@ -433,21 +455,100 @@ public class LookAtManager : Singleton<LookAtManager>
     {
         if (SelectionManager.Instance.selectedObject && SelectionManager.Instance.onTarget)
         {
-            if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+            if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>())
             {
-                FurnitureInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().furnitureObjectName);
+                if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Furniture)
+                {
+                    if (BuildingSystemManager.Instance.ghostObject_Holding)
+                    {
+                        if (BuildingSystemManager.Instance.activeBuildingObject_Info.furnitureObjectName_Active == BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().furnitureObjectName
+                        && MainManager.Instance.gameStates == GameStates.Building)
+                        {
+                            if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>())
+                            {
+                                FurnitureInfo tempObject = MainManager.Instance.GetMovableObject(BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().furnitureObjectName);
 
-                MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
-                MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
-                MovableObject_Text.text = "Press E to interact";
-            }
-            else if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
-            {
-                MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().machineObjectName);
+                                MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                                MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
 
-                MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
-                MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
-                MovableObject_Text.text = "Press E to interact";
+                                if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().enoughItemsToBuild)
+                                {
+                                    MovableObject_Text.text = "Not enough items to build";
+                                }
+                                else if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
+                                {
+                                    MovableObject_Text.text = "Can be Placed";
+                                }
+                                else if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
+                                {
+                                    MovableObject_Text.text = "Needs a Building Block to place on";
+                                }
+                            }
+                        }
+                        else
+                        {
+                            FurnitureInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().furnitureObjectName);
+
+                            MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                            MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
+                            MovableObject_Text.text = "Press \"E\" to interact";
+                        }
+                    }
+                    else
+                    {
+                        FurnitureInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().furnitureObjectName);
+
+                        MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                        MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.furnitureName.ToString());
+                        MovableObject_Text.text = "Press \"E\" to interact";
+                    }
+                }
+                else if (SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+                {
+                    if (BuildingSystemManager.Instance.ghostObject_Holding)
+                    {
+                        if (BuildingSystemManager.Instance.activeBuildingObject_Info.machineObjectName_Active == BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().machineObjectName
+                        && MainManager.Instance.gameStates == GameStates.Building)
+                        {
+                            if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>())
+                            {
+                                MachineInfo tempObject = MainManager.Instance.GetMovableObject(BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().machineObjectName);
+
+                                MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                                MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
+
+                                if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().enoughItemsToBuild)
+                                {
+                                    MovableObject_Text.text = "Not enough items to build";
+                                }
+                                else if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
+                                {
+                                    MovableObject_Text.text = "Can be Placed";
+                                }
+                                else if (!BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced)
+                                {
+                                    MovableObject_Text.text = "Needs a Building Block to place on";
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().machineObjectName);
+
+                            MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                            MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
+                            MovableObject_Text.text = "Press \"E\" to interact";
+                        }
+                    }
+                    else
+                    {
+                        MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<MoveableObject>().machineObjectName);
+
+                        MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
+                        MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
+                        MovableObject_Text.text = "Press \"E\" to interact";
+                    }
+                }
             }
         }
     }
@@ -465,13 +566,13 @@ public class LookAtManager : Singleton<LookAtManager>
 
                         MovableObjectImage.sprite = tempObject.objectInfo.objectSprite;
                         MovableObjectName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
-                        MovableObject_Text.text = "Press E to interact";
+                        MovableObject_Text.text = "Press \"E\" to interact";
                     }
                     else
                     {
                         MovableObjectImage.sprite = GhostManager.Instance.ghostImage_Water;
                         MovableObjectName.text = "Water Ghost";
-                        MovableObject_Text.text = "Press E to release Ghost";
+                        MovableObject_Text.text = "Press \"R\" to release Ghost";
                     }
                 }
             }
@@ -481,7 +582,7 @@ public class LookAtManager : Singleton<LookAtManager>
     void WaterDisplay()
     {
         WaterDisplay_Image.sprite = MainManager.Instance.GetItem(HotbarManager.Instance.selectedItem).hotbarSprite;
-        WaterDisplay_Text.text = "Press E to refill your " + HotbarManager.Instance.selectedItem.ToString();
+        WaterDisplay_Text.text = "Press \"E\" to refill your " + HotbarManager.Instance.selectedItem.ToString();
     }
     void OreDisplay()
     {
@@ -882,6 +983,41 @@ public class LookAtManager : Singleton<LookAtManager>
         }
     }
 
+    void ConnectionDisplay()
+    {
+        if (SelectionManager.Instance.selectedObject && SelectionManager.Instance.onTarget)
+        {
+            if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>())
+            {
+                if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().parent.GetComponent<MoveableObject>())
+                {
+                    if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().parent.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+                    {
+                        //Connect NO
+                        if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().worldObjectIndex_ConnectedWith < 0)
+                        {
+                            MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().parent.GetComponent<MoveableObject>().machineObjectName);
+
+                            ConnectionPointImage.sprite = tempObject.objectInfo.objectSprite;
+                            ConnectionPointName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
+                            ConnectionPoint_Text.text = "Press \"E\" to start connecting";
+                        }
+
+                        //Connect OFF
+                        else
+                        {
+                            MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().parent.GetComponent<MoveableObject>().machineObjectName);
+
+                            ConnectionPointImage.sprite = tempObject.objectInfo.objectSprite;
+                            ConnectionPointName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
+                            ConnectionPoint_Text.text = "Press \"E\" to remove connection";
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     #endregion
 
 
@@ -904,5 +1040,7 @@ public class LookAtManager : Singleton<LookAtManager>
         ghostFight_Panel.SetActive(false);
 
         centerImage.SetActive(true);
+
+        ConnectionPoint_Panel.SetActive(false);
     }
 }

@@ -58,8 +58,6 @@ public class SettingsManager : Singleton<SettingsManager>
             && DataManager.Instance.settingsValues_Store.camera_FOV <= 0
             && DataManager.Instance.settingsValues_Store.camera_MouseSensitivity <= 0)
         {
-            print("1000000. DataManager.Instance.settingsValues_Store == null");
-
             //Setup Basic values
             settingsValues.sound_Master = 1f;
             settingsValues.sound_WorldSFX = 1f;

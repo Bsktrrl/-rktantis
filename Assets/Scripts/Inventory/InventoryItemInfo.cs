@@ -19,6 +19,9 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
     [Header("Research Item")]
     public GameObject research_Parent;
 
+    [Header("CropPlot Item")]
+    public GameObject cropPlot_Parent;
+
     [Header("Equip Hand Item")]
     public GameObject equipHandItem_Parent;
     public GameObject equipHandItem_NotHand;
@@ -120,6 +123,19 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
             research_Parent.SetActive(true);
         }
     }
+    public void SetInfo_CropPlotItem(bool isResearched)
+    {
+        HideAllParents();
+
+        if (isResearched)
+        {
+            cropPlot_Parent.SetActive(false);
+        }
+        else
+        {
+            cropPlot_Parent.SetActive(true);
+        }
+    }
     public void SetInfo_EquipableHandItem(ItemSlot itemSlot)
     {
         HideAllParents();
@@ -199,7 +215,7 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
     //--------------------
 
 
-    void HideAllParents()
+    public void HideAllParents()
     {
         staticItem_Parent.SetActive(false);
         chest_Parent.SetActive(false);
@@ -208,6 +224,7 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
         ConsumableItem_Parent.SetActive(false);
         equipment_Parent.SetActive(false);
         research_Parent.SetActive(false);
+        cropPlot_Parent.SetActive(false);
     }
 
 

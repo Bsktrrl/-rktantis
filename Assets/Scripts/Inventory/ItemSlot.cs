@@ -32,6 +32,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         {
             InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
+
+        InventoryManager.Instance.ResetItemInfoBox();
     }
 
 
@@ -46,6 +48,35 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             && !ResearchManager.Instance.isResearching)
         {
             ResearchManager.Instance.SetResearchItemInfo(itemName);
+        }
+
+        //If player is in a "CropPlot", add the Seed to the CropPlot, if available
+        else if (eventData.button == PointerEventData.InputButton.Left && MainManager.Instance.menuStates == MenuStates.CropPlotMenu)
+        {
+            //If itemSlot contain a Seed
+            if (itemName == Items.ArídisPlantSeed || itemName == Items.GluePlantSeed || itemName == Items.CrimsonCloudBushSeed
+                || itemName == Items.RedCottonPlantSeed || itemName == Items.SpikPlantSeed || itemName == Items.SmallCactusplantSeed
+                || itemName == Items.LargeCactusplantSeed || itemName == Items.PuddingCactusSeed || itemName == Items.StalkFruitSeed
+                || itemName == Items.TripodFruitSeed || itemName == Items.HeatFruitSeed || itemName == Items.FreezeFruitSeed
+                || itemName == Items.TwistedMushroomSeed || itemName == Items.GroundMushroomSeed || itemName == Items.SandTubesSeed
+                || itemName == Items.PalmTreeSeed || itemName == Items.BloodTreeSeed)
+            {
+                for (int i = 0; i < CropPlotManager.Instance.CropPlotInfo_Interacting.cropPlotSlotList.Count; i++)
+                {
+                    if (CropPlotManager.Instance.CropPlotInfo_Interacting.cropPlotSlotList[i].cropState == CropState.Empty)
+                    {
+                        print("Add Seed to CropPlot | Index: " + i);
+
+                        //Add Seed
+                        CropPlotManager.Instance.AddSeed(itemName, i);
+
+                        //Remove Seed from PlayerInventory
+                        InventoryManager.Instance.RemoveItemFromInventory(0, itemName, itemID, true);
+
+                        break;
+                    }
+                }
+            }
         }
 
         //If only player inventory is used
@@ -115,6 +146,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
     }
+    
     void RemoveItemFromInventory(bool permanentRemove)
     {
         if (permanentRemove)
@@ -412,7 +444,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             InventoryManager.Instance.SetPlayerItemInfo(Items.None, false);
         }
 
-        InventoryManager.Instance.ChangeItemInfoBox(false);
+        InventoryManager.Instance.ResetItemInfoBox();
 
         InventoryManager.Instance.SetItemSelectedHighlight_Active(inventoryIndex, itemID, itemName, false);
 

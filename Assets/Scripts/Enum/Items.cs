@@ -141,9 +141,9 @@ public enum Items
     [Description("Twisted Mushroom Seed")][InspectorName("Seed/Twisted Mushroom Seed")] TwistedMushroomSeed,
     [Description("Ground Mushroom Seed")][InspectorName("Seed/Ground Mushroom Seed")] GroundMushroomSeed,
 
-    [Description("Other1")][InspectorName("Seed/Other1")] S_Other1,
-    [Description("Other2")][InspectorName("Seed/Other2")] S_Other2,
-    [Description("Other3")][InspectorName("Seed/Other3")] S_Other3,
+    [Description("SandTubesSeed")][InspectorName("Seed/SandTubesSeed")] SandTubesSeed,
+    [Description("PalmTreeSeed")][InspectorName("Seed/PalmTreeSeed")] PalmTreeSeed,
+    [Description("BloodTreeSeed")][InspectorName("Seed/BloodTreeSeed")] BloodTreeSeed,
     [Description("Other4")][InspectorName("Seed/Other4")] S_Other4,
     [Description("Other5")][InspectorName("Seed/Other5")] S_Other5,
     #endregion
@@ -239,7 +239,7 @@ public enum Items
     [Description("Big Chest")][InspectorName("Furniture/Big Chest")] BigChest,
 
     [Description("Lamp")][InspectorName("Furniture/Lamp")] Lamp,
-    [Description("Lamp_Spot")][InspectorName("Furniture/Lamp_Spot")] Spotlight,
+    [Description("LampSpot")][InspectorName("Furniture/LampSpot")] Spotlight,
 
     [Description("Medium Chest")][InspectorName("Furniture/Medium Chest")] MediumChest,
     [Description("Research Table")][InspectorName("Furniture/Research Table")] ResearchTable,

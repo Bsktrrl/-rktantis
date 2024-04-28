@@ -144,6 +144,7 @@ public class GhostManager : Singleton<GhostManager>
             {
                 ghostCapturerStats.ghostCapturedStats[i].isTaken = true;
                 ghostCapturerStats.ghostCapturedStats[i].ghostState = GhostStates.Idle;
+                ghostCapturerStats.ghostCapturedStats[i].ghostElement = GhostElement.Water;
                 ghostCapturerStats.ghostCapturedStats[i].ghostAppearance = ghostStats.ghostAppearance;
                 ghostCapturerStats.ghostCapturedStats[i].isBeard = ghostStats.isBeard;
                 ghostCapturerStats.ghostCapturedStats[i].elementFuel_Amount = 100;

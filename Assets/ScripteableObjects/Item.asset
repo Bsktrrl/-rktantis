@@ -38,7 +38,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 0
     isCrafteable: 0
     craftingRequirements: []
@@ -194,7 +194,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 2027518484237026213, guid: c2dde6a92636bbb4384752f7c4dc677c,
       type: 3}
-    isResearched: 1
+    isResearched: 0
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -455,7 +455,7 @@ MonoBehaviour:
     worldObjectPrefab: {fileID: 8304985152739549739, guid: aa63b124521404a49a0b9098b6b9e100,
       type: 3}
     equippedPrefab: {fileID: 0}
-    isResearched: 1
+    isResearched: 0
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -470,11 +470,11 @@ MonoBehaviour:
     itemDescription: Enables any Machine to use Ghost energy
     hotbarSprite: {fileID: -2117151816, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
-    - {fileID: 1038535126, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
-    - {fileID: 933157543, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
+    - {fileID: -54209029, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
+    - {fileID: 1764233488, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
     itemSelected_SpriteList:
-    - {fileID: 1477072057, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
-    - {fileID: 619935025, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
+    - {fileID: 647051398, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
+    - {fileID: -951867151, guid: c64b669e62c2f20418e659fd5ff3cc8e, type: 3}
     isConsumeable: 0
     isEquipableInHand: 0
     isEquipableClothes: 0
@@ -490,7 +490,7 @@ MonoBehaviour:
     worldObjectPrefab: {fileID: 368946190395319720, guid: 6add69ae8268d464f99e27731f7ec7e1,
       type: 3}
     equippedPrefab: {fileID: 0}
-    isResearched: 1
+    isResearched: 0
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -521,14 +521,14 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 40
+    durability_Max: 2
     orePower: 0
     treePower: 1
     worldObjectPrefab: {fileID: 5035480046617749617, guid: 72cd27aa8bafccd419a3b5d2540d0ee3,
       type: 3}
     equippedPrefab: {fileID: 3740131063225789348, guid: 1f7757978dc54374cb9b915b9fecbc6e,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -564,7 +564,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 5654400252719517320, guid: e8aabaa9c00a2c846802c8d343075e6b,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -601,9 +601,9 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 7535996872031319195, guid: 97318f5df5efd264c82e55d7627cfadb,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
-    isCrafteable: 1
+    isCrafteable: 0
     craftingRequirements:
     - itemName: 6
       amount: 3
@@ -638,7 +638,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 610790753315421977, guid: 6a9be7faffb83a646a68dcb78cbe9adb,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -674,7 +674,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 6029739926404462652, guid: 8bfb044d0671ff749a492cb4ccd4c727,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -712,7 +712,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 434736963171876714, guid: 033202c8807919049a09265db9e21513,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -751,7 +751,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 1430489478524335158, guid: 9ef0e97319c980243859e5148d621a34,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -790,7 +790,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 2383225863483182673, guid: e2ff56243dc021b4d8987ae93beeffc0,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -828,7 +828,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 8971755898630984601, guid: c9efa3ae2eaf15b468ae7bed81ba6644,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -866,7 +866,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 6222287741510366711, guid: e2d6c98dea2879643b1e233c2b05bd5e,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -905,7 +905,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 199626688575356975, guid: f463f4e834c7f66408f3eb5bc4043cd9,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -944,7 +944,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 2587112584172054734, guid: bd12b692ecc9eb24e8ea833683375907,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -1018,7 +1018,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -1058,7 +1058,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -1099,7 +1099,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -1137,7 +1137,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -1176,7 +1176,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -1215,7 +1215,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -1253,7 +1253,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -1292,7 +1292,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -1331,7 +1331,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -1553,7 +1553,7 @@ MonoBehaviour:
     worldObjectPrefab: {fileID: 320030197387143633, guid: f4c29f6428408ed4fbffcedc238dc1ac,
       type: 3}
     equippedPrefab: {fileID: 0}
-    isResearched: 1
+    isResearched: 0
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -1580,7 +1580,8 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 4097114634480862350, guid: 9327f86f903076147a0d772a11800491,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
@@ -1610,7 +1611,8 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 7248933985274335294, guid: eba5a5851bf26084aac3174622f98933,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
@@ -1641,7 +1643,8 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 8536713333457536861, guid: 63425f98947332d49a7b8cfa3b08d98c,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
@@ -1672,7 +1675,8 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 8536713333457536861, guid: 705927d88ad5a9846926bce0d14167f3,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
@@ -1702,7 +1706,8 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 8942014879224477685, guid: 4244037227ae3ae4e982435a56046b18,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
@@ -1733,7 +1738,8 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 7093665726204310138, guid: ecbd491159b69c74d88ce67ddb366159,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
@@ -1764,11 +1770,12 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 7093665726204310138, guid: e967add94d95e0a4fa17ef660c87e474,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
-    isCrafteable: 1
+    isCrafteable: 0
     craftingRequirements:
     - itemName: 95
       amount: 1
@@ -1795,7 +1802,8 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 815764652672950277, guid: fdb1f51e0f0931749a649a5e1b4c1303,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
@@ -1826,7 +1834,8 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 1419844969905540328, guid: 35edcf44e0cfff4448244057b87a7cbc,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
@@ -1857,7 +1866,8 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 7705518421211660047, guid: 8b9c4c3c321ebf04a8fbfad441d9bf08,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
@@ -1888,7 +1898,8 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 49038128417122064, guid: 51b530af4ce52144ab267702d04fd76a,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
@@ -1919,7 +1930,8 @@ MonoBehaviour:
     durability_Max: 0
     orePower: 0
     treePower: 0
-    worldObjectPrefab: {fileID: 0}
+    worldObjectPrefab: {fileID: 5207702260518994733, guid: 020c2b6c763adf749bfa25018e11273a,
+      type: 3}
     equippedPrefab: {fileID: 0}
     isResearched: 0
     researchTime: 5
@@ -2205,7 +2217,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2233,7 +2245,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2261,7 +2273,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2290,7 +2302,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2319,7 +2331,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2348,7 +2360,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2378,7 +2390,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2408,7 +2420,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2438,7 +2450,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2472,7 +2484,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2503,7 +2515,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2534,7 +2546,7 @@ MonoBehaviour:
     treePower: 0
     worldObjectPrefab: {fileID: 0}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2570,7 +2582,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 5994904331811257363, guid: ce23f25e2a8cbea4aa26576c2dee0f50,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -2595,8 +2607,8 @@ MonoBehaviour:
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
-    mainHealthHeal: 10
-    heatresistanceHealthHeal: 25
+    mainHealthHeal: 0
+    heatresistanceHealthHeal: 10
     hungerHealthHeal: 0
     thirstHealthHeal: 25
     heatColdRegulator: 0
@@ -2608,7 +2620,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 583844602863912719, guid: 7d22cb1a14f57374990c958474f0ae6c,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -2629,8 +2641,8 @@ MonoBehaviour:
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
-    mainHealthHeal: 10
-    heatresistanceHealthHeal: 25
+    mainHealthHeal: 0
+    heatresistanceHealthHeal: 10
     hungerHealthHeal: 0
     thirstHealthHeal: 25
     heatColdRegulator: 0
@@ -2642,7 +2654,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 1884002324475986137, guid: 98089548e96e14a4c8dd1ec392b83d93,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -2665,8 +2677,8 @@ MonoBehaviour:
     isConsumeable: 0
     isEquipableInHand: 1
     isEquipableClothes: 0
-    mainHealthHeal: 10
-    heatresistanceHealthHeal: 25
+    mainHealthHeal: 0
+    heatresistanceHealthHeal: 10
     hungerHealthHeal: 0
     thirstHealthHeal: 25
     heatColdRegulator: 0
@@ -2678,7 +2690,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 4785710050809358832, guid: 8e1c4834f4b28914f8869214dcf68bd7,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -2722,7 +2734,7 @@ MonoBehaviour:
       type: 3}
     equippedPrefab: {fileID: 3557832132896401826, guid: 33189b07b2d693b4d86ab20da35bc2ea,
       type: 3}
-    isResearched: 0
+    isResearched: 1
     researchTime: 5
     isCrafteable: 1
     craftingRequirements:
@@ -2763,7 +2775,98 @@ MonoBehaviour:
     worldObjectPrefab: {fileID: 5531314140673949488, guid: d22ff745e8dda6f4e9e6e493eb878980,
       type: 3}
     equippedPrefab: {fileID: 0}
-    isResearched: 0
+    isResearched: 1
+    researchTime: 5
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 90
+    categoryName: 3
+    subCategoryName: 6
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Sand Tubes
+      Plant
+    hotbarSprite: {fileID: -1920780250, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1926111854, guid: 9220f6cfe990a9c4c9cb71cd8bc01aea, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: 1686180522, guid: 9220f6cfe990a9c4c9cb71cd8bc01aea, type: 3}
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    mainHealthHeal: 0
+    heatresistanceHealthHeal: 0
+    hungerHealthHeal: 0
+    thirstHealthHeal: 0
+    heatColdRegulator: 0
+    heatColdRegulatorDuration: 0
+    durability_Max: 0
+    orePower: 0
+    treePower: 0
+    worldObjectPrefab: {fileID: 1049864396665315862, guid: 9f178e484b7356343958e327bbb38b27,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    isCrafteable: 1
+    craftingRequirements:
+    - itemName: 71
+      amount: 1
+  - itemName: 91
+    categoryName: 3
+    subCategoryName: 6
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Palm Tree
+    hotbarSprite: {fileID: 1304467813, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1996662471, guid: ac559c6a960b9e141b433cb1456bb156, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1767495859, guid: ac559c6a960b9e141b433cb1456bb156, type: 3}
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    mainHealthHeal: 0
+    heatresistanceHealthHeal: 0
+    hungerHealthHeal: 0
+    thirstHealthHeal: 0
+    heatColdRegulator: 0
+    heatColdRegulatorDuration: 0
+    durability_Max: 0
+    orePower: 0
+    treePower: 0
+    worldObjectPrefab: {fileID: 4710737038185264839, guid: fc7f96210bcc5034783cef72dc333e98,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    isResearched: 1
+    researchTime: 5
+    isCrafteable: 0
+    craftingRequirements: []
+  - itemName: 92
+    categoryName: 3
+    subCategoryName: 6
+    itemSize: {x: 1, y: 1}
+    itemDescription: A Seed that can be planted in a Crop Plot to grow the Dragon
+      Tree
+    hotbarSprite: {fileID: 1304467813, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
+    itemSpriteList:
+    - {fileID: -1996662471, guid: ac559c6a960b9e141b433cb1456bb156, type: 3}
+    itemSelected_SpriteList:
+    - {fileID: -1767495859, guid: ac559c6a960b9e141b433cb1456bb156, type: 3}
+    isConsumeable: 0
+    isEquipableInHand: 0
+    isEquipableClothes: 0
+    mainHealthHeal: 0
+    heatresistanceHealthHeal: 0
+    hungerHealthHeal: 0
+    thirstHealthHeal: 0
+    heatColdRegulator: 0
+    heatColdRegulatorDuration: 0
+    durability_Max: 0
+    orePower: 0
+    treePower: 0
+    worldObjectPrefab: {fileID: 4710737038185264839, guid: 89647a15c7ea0ac4e9752ff0c4fcff85,
+      type: 3}
+    equippedPrefab: {fileID: 0}
+    isResearched: 1
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []

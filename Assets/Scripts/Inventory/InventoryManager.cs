@@ -108,6 +108,9 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             print("AddInventory");
             AddInventory(new Vector2(5, 7));
+            AddInventory(new Vector2(4, 4));
+            AddInventory(new Vector2(4, 4));
+            AddInventory(new Vector2(4, 4));
 
             SaveData();
         }
@@ -1053,13 +1056,27 @@ public class InventoryManager : Singleton<InventoryManager>
             {
                 if (MainManager.Instance.GetItem(itemName).isResearched)
                 {
-                    print("222. isResearched");
                     itemInfo.SetInfo_ResearchableItem(true);
                 }
                 else
                 {
-                    print("222. isNOTResearched");
                     itemInfo.SetInfo_ResearchableItem(false);
+                }
+            }
+            else if (MainManager.Instance.menuStates == MenuStates.CropPlotMenu)
+            {
+                if (itemName != Items.ArídisPlantSeed && itemName != Items.GluePlantSeed && itemName != Items.CrimsonCloudBushSeed
+                && itemName != Items.RedCottonPlantSeed && itemName != Items.SpikPlantSeed && itemName != Items.SmallCactusplantSeed
+                && itemName != Items.LargeCactusplantSeed && itemName != Items.PuddingCactusSeed && itemName != Items.StalkFruitSeed
+                && itemName != Items.TripodFruitSeed && itemName != Items.HeatFruitSeed && itemName != Items.FreezeFruitSeed
+                && itemName != Items.TwistedMushroomSeed && itemName != Items.GroundMushroomSeed && itemName != Items.SandTubesSeed
+                && itemName != Items.PalmTreeSeed && itemName != Items.BloodTreeSeed)
+                {
+                    itemInfo.SetInfo_CropPlotItem(true);
+                }
+                else
+                {
+                    itemInfo.SetInfo_CropPlotItem(false);
                 }
             }
 
@@ -1091,6 +1108,10 @@ public class InventoryManager : Singleton<InventoryManager>
         }
 
         itemInfo_Parent.SetActive(true);
+    }
+    public void ResetItemInfoBox()
+    {
+        itemInfo.HideAllParents();
     }
     public void ChangeItemInfoBox(bool isEntering)
     {

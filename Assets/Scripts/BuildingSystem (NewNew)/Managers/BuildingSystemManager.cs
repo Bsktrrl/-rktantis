@@ -132,6 +132,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         for (int i = 0; i < worldBuildingObjectInfoList.Count; i++)
         {
+            //BuildingBlock
             if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.BuildingBlock)
             {
                 if (GetBuildingObjectInfo(worldBuildingObjectInfoList[i].buildingBlockObjectName_Active, worldBuildingObjectInfoList[i].buildingMaterial_Active).objectInfo.worldObject != null)
@@ -163,6 +164,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetParent(worldObject_Parent.transform);
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
 
+                    //Set Index
+                    if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                    {
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().index = i;
+                    }
+
                     //Set Rotation of the Model
                     if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
                     {
@@ -173,6 +180,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     }
                 }
             }
+            
+            //Furniture
             else if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.Furniture)
             {
                 if (GetBuildingObjectInfo(worldBuildingObjectInfoList[i].furnitureObjectName_Active).objectInfo.worldObject != null)
@@ -181,6 +190,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetParent(worldObject_Parent.transform);
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
+
+                    //Set Index
+                    if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                    {
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().index = i;
+                    }
 
                     #region If Chest's added
                     //If a small chest, update inventory info
@@ -194,6 +209,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     #endregion
                 }
             }
+            
+            //Machine
             else if (worldBuildingObjectInfoList[i].buildingObjectType_Active == BuildingObjectTypes.Machine)
             {
                 if (GetBuildingObjectInfo(worldBuildingObjectInfoList[i].machineObjectName_Active).objectInfo.worldObject != null)
@@ -203,12 +220,38 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetParent(worldObject_Parent.transform);
                     worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(worldBuildingObjectInfoList[i].objectPos, worldBuildingObjectInfoList[i].objectRot);
                 }
+
+                //Set Index
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                {
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().index = i;
+                }
+
+                //If CropPlot
+                if (worldBuildingObjectInfoList[i].machineObjectName_Active == MachineObjectNames.CropPlotSmall
+                    || worldBuildingObjectInfoList[i].machineObjectName_Active == MachineObjectNames.CropPlotMedium
+                    || worldBuildingObjectInfoList[i].machineObjectName_Active == MachineObjectNames.CropPlotBig)
+                {
+                    if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<CropPlot>())
+                    {
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<CropPlot>().SetupCropPlot(worldBuildingObjectInfoList[i].cropPlotInfo);
+                    }
+                }
+
+                //If Ghost Tank
+                if (worldBuildingObjectInfoList[i].machineObjectName_Active == MachineObjectNames.GhostTank)
+                {
+                    if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<GhostTank>())
+                    {
+                        worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<GhostTank>().SetupGhostTank(worldBuildingObjectInfoList[i].ghostTankContent);
+                    }
+                }
             }
         }
         #endregion
 
 
-        //BuildingObjects
+        //BuildingObjects - Hammer
         SpawnNewSelectedBuildingObject();
         SetupHammerDisplayScreen();
 
@@ -244,6 +287,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
         else if (activeBuildingObject_Info.buildingObjectType_Active == BuildingObjectTypes.Machine)
         {
+            //print("Info: " + GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active).machinesName.ToString());
             newObject = Instantiate(GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active).objectInfo.worldObject);
         }
         else
@@ -302,7 +346,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         {
             if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<InteractableObject>())
             {
-                WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<InteractableObject>().DestroyThisObject();
+                WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<InteractableObject>().DestroyThisInteractableObject();
             }
             else if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>())
             {
@@ -518,6 +562,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         ghostObject_Holding.GetComponent<MoveableObject>().modelList[index].GetComponent<MeshRenderer>().materials = materials;
+
+        ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced = true;
     }
     void Materials_MeshRenderer_Cannot(int index)
     {
@@ -529,6 +575,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         ghostObject_Holding.GetComponent<MoveableObject>().modelList[index].GetComponent<MeshRenderer>().materials = materials;
+
+        ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced = false;
     }
     void Materials_SkinnedMeshRenderer_Can(int index)
     {
@@ -540,6 +588,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         ghostObject_Holding.GetComponent<MoveableObject>().modelList[index].GetComponent<SkinnedMeshRenderer>().materials = materials;
+
+        ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced = true;
     }
     void Materials_SkinnedMeshRenderer_Cannot(int index)
     {
@@ -551,6 +601,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         ghostObject_Holding.GetComponent<MoveableObject>().modelList[index].GetComponent<SkinnedMeshRenderer>().materials = materials;
+
+        ghostObject_Holding.GetComponent<MoveableObject>().canBePlaced = false;
     }
 
     public bool CanPlaceBuildingObject_Check() //- Fixed
@@ -1315,6 +1367,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 //Set new Parent
                 worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetParent(worldObject_Parent.transform);
 
+                //Set Index
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                {
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>().index = worldBuildingObjectListSpawned.Count - 1;
+                }
+
                 //Set position and Rotation to be the same as the Ghost
                 worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.SetPositionAndRotation(ghostObject_Holding.transform.position, ghostObject_Holding.transform.rotation);
 
@@ -1331,6 +1389,31 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 //Add the ObjectInfo to the List
                 AddBuildingObjectInfoToList();
+
+
+                //--------------------
+                //Setup Machines
+
+
+                //If CropPlot
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<CropPlot>())
+                {
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<CropPlot>().SetupCropPlot();
+                }
+
+                //If GhostTank
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<GhostTank>())
+                {
+                    worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<GhostTank>().SetupGhostTank();
+                }
+
+                //Update Saving Object
+                if (worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>())
+                {
+                    UpdateWorldBuildingObjectInfoList_ToSave(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<MoveableObject>());
+                }
+
+                SaveData();
             }
             else
             {
@@ -1349,6 +1432,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         {
             BuildingBlockInfo buildingBlockInfo = GetBuildingObjectInfo(activeBuildingObject_Info.buildingBlockObjectName_Active, activeBuildingObject_Info.buildingMaterial_Active);
             WorldBuildingObject worldBuildingObject = new WorldBuildingObject();
+
+            worldBuildingObject.index = worldBuildingObjectListSpawned.Count - 1;
 
             worldBuildingObject.objectPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.position;
             worldBuildingObject.objectRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.rotation;
@@ -1372,6 +1457,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             FurnitureInfo buildingBlockInfo = GetBuildingObjectInfo(activeBuildingObject_Info.furnitureObjectName_Active);
             WorldBuildingObject worldFurnitureObject = new WorldBuildingObject();
 
+            worldFurnitureObject.index = worldBuildingObjectListSpawned.Count - 1;
+
             worldFurnitureObject.objectPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.position;
             worldFurnitureObject.objectRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.rotation;
 
@@ -1381,7 +1468,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
             #region If Chests added
             //If a small chest, update inventory info
-            if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.Chest_Small)
+            if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestSmall)
             {
                 InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.smallChest_Size);
 
@@ -1389,7 +1476,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             }
 
             //If a small chest, update inventory info
-            else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.Chest_Medium)
+            else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestMedium)
             {
                 InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.mediumChest_Size);
 
@@ -1397,7 +1484,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             }
 
             //If a big chest, update inventory info
-            else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.Chest_Big)
+            else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestBig)
             {
                 InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.bigChest_Size);
 
@@ -1412,6 +1499,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             MachineInfo buildingBlockInfo = GetBuildingObjectInfo(activeBuildingObject_Info.machineObjectName_Active);
             WorldBuildingObject worldMachineObject = new WorldBuildingObject();
 
+            worldMachineObject.index = worldBuildingObjectListSpawned.Count - 1;
+
             worldMachineObject.objectPos = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.position;
             worldMachineObject.objectRot = worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].transform.rotation;
 
@@ -1421,8 +1510,6 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
             worldBuildingObjectInfoList.Add(worldMachineObject);
         }
-
-        SaveData();
     }
     void RemoveItemsFromInventoryAfterPlacingObject()
     {
@@ -1474,10 +1561,41 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 worldBuildingObjectInfoList.RemoveAt(i);
 
-                if (worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>())
+                //If removing a CropPlot
+                if (worldBuildingObjectListSpawned[i].GetComponent<CropPlot>())
                 {
-                    worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>().DestroyThisObject();
+                    worldBuildingObjectListSpawned[i].GetComponent<CropPlot>().DestroyThisCropPlotObject();
                 }
+
+                //If removing a GhostTank
+                else if (worldBuildingObjectListSpawned[i].GetComponent<GhostTank>())
+                {
+                    if (worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>())
+                    {
+                        if (worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>().connectionPointObject)
+                        {
+                            if (worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>().connectionPointObject.GetComponent<InteractableObject>())
+                            {
+                                worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>().connectionPointObject.GetComponent<InteractableObject>().DestroyThisInteractableObject();
+                            }
+                        }
+                    }
+
+                    if (worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>())
+                    {
+                        worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>().gameObject.GetComponent<InteractableObject>().DestroyThisInteractableObject();
+                    }
+
+                    Destroy(worldBuildingObjectListSpawned[i]);
+                }
+
+                //If removing an InteractableObject
+                else if (worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>())
+                {
+                    worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>().DestroyThisInteractableObject();
+                }
+
+                //If removing something else
                 else
                 {
                     Destroy(worldBuildingObjectListSpawned[i]);
@@ -1485,11 +1603,59 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 worldBuildingObjectListSpawned.RemoveAt(i);
 
+                //Update Connections between machines
+                ConnectionPointManager.Instance.RemoveBrokenConnections(i);
+                ConnectionPointManager.Instance.UpdateConnectionsAfterRemovingBuildingObject(i);
+
                 buildingBlock_Hit = null;
 
                 break;
             }
         }
+
+        //Update all Indexes
+        for (int i = 0; i < worldBuildingObjectListSpawned.Count; i++)
+        {
+            if (worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>())
+            {
+                worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>().index = i;
+
+                UpdateWorldBuildingObjectInfoList_ToSave(worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>());
+            }
+        }
+
+        ConnectionPointManager.Instance.ResetWorldObjectConnection();
+        ConnectionPointManager.Instance.SetupConnections();
+
+        SaveData();
+    }
+
+    public void UpdateWorldBuildingObjectInfoList_ToSave(MoveableObject move)
+    {
+        //If a CropPlot
+        if (move.machineObjectName == MachineObjectNames.CropPlotSmall
+            || move.machineObjectName == MachineObjectNames.CropPlotMedium
+            || move.machineObjectName == MachineObjectNames.CropPlotBig)
+        {
+            if (move.gameObject.GetComponent<CropPlot>())
+            {
+                worldBuildingObjectInfoList[move.index].cropPlotInfo = move.gameObject.GetComponent<CropPlot>().cropPlotInfo;
+            }
+        }
+
+        //If a Ghost Tank
+        if (move.machineObjectName == MachineObjectNames.GhostTank)
+        {
+            if (move.gameObject.GetComponent<GhostTank>())
+            {
+                worldBuildingObjectInfoList[move.index].ghostTankContent = move.gameObject.GetComponent<GhostTank>().ghostTankContent;
+            }
+            
+            //print("777. Update GhostTank | Index: " + move.index + " | Element: " + worldBuildingObjectInfoList[move.index].ghostTankContent.GhostElement.ToString() + " | InteractableType" + worldBuildingObjectInfoList[move.index].ghostTankContent.interactableType.ToString());
+        }
+
+        //Update Index
+        worldBuildingObjectInfoList[move.index].index = move.index;
 
         SaveData();
     }
@@ -1558,6 +1724,9 @@ public class ActiveBuildingObject
 [Serializable]
 public class WorldBuildingObject
 {
+    [Header("Index")]
+    public int index;
+
     [Header("MainObject Posision")]
     public Vector3 objectPos;
     public Quaternion objectRot;
@@ -1575,7 +1744,13 @@ public class WorldBuildingObject
     public MachineObjectNames machineObjectName_Active;
 
     [Header("If Chest")]
-    public int chestIndex;
+    public int chestIndex; //Needs Update upon Instantiation
+
+    [Header("If CropPlotMenu")]
+    public CropPlotInfo cropPlotInfo; //Needs Update upon Instantiation
+
+    [Header("If GhostTank")]
+    public GhostTankContent ghostTankContent; //Needs Update upon Instantiation
 }
 #endregion
 
@@ -1627,14 +1802,14 @@ public enum FurnitureObjectNames
     [Description("Research Table")][InspectorName("Research Table")] ResearchTable,
     [Description("Skill Table")][InspectorName("Skill Table")] SkillTreeTable,
 
-    [Description("Chest Small")][InspectorName("Chest Small")] Chest_Small,
-    [Description("Chest Medium")][InspectorName("Chest Medium")] Chest_Medium,
-    [Description("Chest Big")][InspectorName("Chest Big")] Chest_Big,
+    [Description("Chest Small")][InspectorName("Chest Small")] ChestSmall,
+    [Description("Chest Medium")][InspectorName("Chest Medium")] ChestMedium,
+    [Description("Chest Big")][InspectorName("Chest Big")] ChestBig,
 
-    [Description("Lamp Area")][InspectorName("Lamp Area")] Lamp_Area,
-    [Description("Lamp Spot")][InspectorName("Lamp Spot")] Lamp_Spot,
-    [Description("Lamp Arídia Area")][InspectorName("Lamp Arídia Area")] Lamp_Arídia_Area,
-    [Description("Lamp Arídia Spot")][InspectorName("Lamp Arídia Spot")] Lamp_Arídia_Spot,
+    [Description("Lamp Area")][InspectorName("Lamp Area")] LampArea,
+    [Description("Lamp Spot")][InspectorName("Lamp Spot")] LampSpot,
+    [Description("Lamp Arídia Area")][InspectorName("Lamp Arídia Area")] LampArídiaArea,
+    [Description("Lamp Arídia Spot")][InspectorName("Lamp Arídia Spot")] LampArídiaSpot,
 
     [Description("Other1")][InspectorName("Other1")] FU_Other1,
     [Description("Other2")][InspectorName("Other2")] FU_Other2,
@@ -1655,17 +1830,17 @@ public enum MachineObjectNames
     [Description("Resource Converter")][InspectorName("Resource Converter")] ResourceConverter,
     [Description("Blender")][InspectorName("Blender")] Blender,
 
-    [Description("Crop Plot Small")][InspectorName("Crop Plot Small")] CropPlot_Small,
-    [Description("Crop Plot Medium")][InspectorName("Crop Plot Medium")] CropPlot_Medium,
-    [Description("Crop Plot Big")][InspectorName("Crop Plot Big")] CropPlot_Big,
+    [Description("Crop Plot Small")][InspectorName("Crop Plot Small")] CropPlotSmall,
+    [Description("Crop Plot Medium")][InspectorName("Crop Plot Medium")] CropPlotMedium,
+    [Description("Crop Plot Big")][InspectorName("Crop Plot Big")] CropPlotBig,
 
-    [Description("Grill Small")][InspectorName("Grill Small")] Grill_Small,
-    [Description("Grill Medium")][InspectorName("Grill Medium")] Grill_Medium,
-    [Description("Grill Big")][InspectorName("Grill Big")] Grill_Big,
+    [Description("Grill Small")][InspectorName("Grill Small")] GrillSmall,
+    [Description("Grill Medium")][InspectorName("Grill Medium")] GrillMedium,
+    [Description("Grill Big")][InspectorName("Grill Big")] GrillBig,
 
-    [Description("Battery Small")][InspectorName("Battery Small")] Battery_Small,
-    [Description("Battery Medium")][InspectorName("Battery Medium")] Battery_Medium,
-    [Description("Battery Big")][InspectorName("Battery Big")] Battery_Big,
+    [Description("Battery Small")][InspectorName("Battery Small")] BatterySmall,
+    [Description("Battery Medium")][InspectorName("Battery Medium")] BatteryMedium,
+    [Description("Battery Big")][InspectorName("Battery Big")] BatteryBig,
 
     [Description("Other1")][InspectorName("Other1")] MA_Other1,
     [Description("Other2")][InspectorName("Other2")] MA_Other2,

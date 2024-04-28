@@ -99,6 +99,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public Perks perks_Store = new Perks();
     [HideInInspector] public PerkActivations perkActivations_Store = new PerkActivations();
 
+    //Connections
+    [HideInInspector] public List<ConnectionInfo> connectionInfoList_Store = new List<ConnectionInfo>();
+
 
     //--------------------
 
@@ -165,6 +168,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         this.perks_Store = gameData.perks_Save;
         this.perkActivations_Store = gameData.perkActivations_Save;
+
+        this.connectionInfoList_Store = gameData.connectionInfoList_Save;
         #endregion
 
         //Load the saved data into the project
@@ -235,14 +240,14 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         PerkManager.Instance.LoadData();
         print("21. Perks has Loaded");
 
-        MachineManager.Instance.LoadData();
-        print("22. Machines has Loaded");
-
         ArídianKeyManager.Instance.LoadData();
-        print("23. AríditeKeyManager has Loaded");
+        print("22. AríditeKeyManager has Loaded");
 
         AríditeCrystalManager.Instance.LoadData();
-        print("24. AríditeCrystalManager has Loaded");
+        print("23. AríditeCrystalManager has Loaded");
+
+        ConnectionPointManager.Instance.LoadData();
+        print("24. ConnectionPointManager has Loaded");
         #endregion
 
         print("------------------------------");
@@ -312,6 +317,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         gameData.perks_Save = this.perks_Store;
         gameData.perkActivations_Save = this.perkActivations_Store;
+
+        gameData.connectionInfoList_Save = this.connectionInfoList_Store;
 
         print("Data has Saved");
     }

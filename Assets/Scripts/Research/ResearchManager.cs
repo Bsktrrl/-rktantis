@@ -43,17 +43,10 @@ public class ResearchManager : Singleton<ResearchManager>
     //--------------------
 
 
-    private void Start()
-    {
-        //for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)
-        //{
-        //    MainManager.Instance.item_SO.itemList[i].researchTime = 5;
-        //}
-    }
     private void Update()
     {
         //Run when something is researched
-        if (isResearching)
+        if (isResearching && DataManager.Instance.hasLoaded)
         {
             researchTime_Current += Time.deltaTime;
 
@@ -87,6 +80,72 @@ public class ResearchManager : Singleton<ResearchManager>
             {
                 researched_SOItem.Add(false);
             }
+
+            print("Researched");
+
+            //Set Items to be Researched
+            //Nothing
+            researched_SOItem[0] = true;
+
+            //Tools
+            researched_SOItem[14] = true;
+            researched_SOItem[15] = true;
+            researched_SOItem[16] = true;
+            researched_SOItem[17] = true;
+            researched_SOItem[18] = true;
+            researched_SOItem[19] = true;
+            researched_SOItem[20] = true;
+            researched_SOItem[21] = true;
+            researched_SOItem[22] = true;
+            researched_SOItem[23] = true;
+            researched_SOItem[24] = true;
+            researched_SOItem[25] = true;
+
+            //MenuEquipments
+            researched_SOItem[27] = true;
+            researched_SOItem[28] = true;
+            researched_SOItem[29] = true;
+            researched_SOItem[30] = true;
+            researched_SOItem[31] = true;
+            researched_SOItem[32] = true;
+            researched_SOItem[33] = true;
+            researched_SOItem[34] = true;
+            researched_SOItem[35] = true;
+
+            //Juice
+            researched_SOItem[63] = true;
+            researched_SOItem[64] = true;
+            researched_SOItem[65] = true;
+            researched_SOItem[66] = true;
+            researched_SOItem[67] = true;
+            researched_SOItem[68] = true;
+
+            //Grilled
+            researched_SOItem[69] = true;
+            researched_SOItem[70] = true;
+            researched_SOItem[71] = true;
+            researched_SOItem[72] = true;
+            researched_SOItem[73] = true;
+            researched_SOItem[74] = true;
+
+            //Flashlight
+            researched_SOItem[75] = true;
+
+            //Drinkable
+            researched_SOItem[76] = true;
+            researched_SOItem[77] = true;
+            researched_SOItem[78] = true;
+
+            //Ghost Capturer
+            researched_SOItem[79] = true;
+
+            //Arídean Key
+            researched_SOItem[80] = true;
+
+            //More Seeds
+            researched_SOItem[81] = true;
+            researched_SOItem[82] = true;
+            researched_SOItem[83] = true;
         }
 
         Update_SOItemList();
@@ -132,8 +191,6 @@ public class ResearchManager : Singleton<ResearchManager>
                 }
             }
         }
-
-        //print("hotbarMarkerInt: " + hotbarMarkerInt.Count + " | durabilityMarkerInt: " + durabilityMarkerInt.Count);
     }
     public void UpdateResearchItemColor()
     {
@@ -225,6 +282,7 @@ public class ResearchManager : Singleton<ResearchManager>
     //--------------------
 
 
+    #region The Research
     public void SetResearchedItemList()
     {
         researchedItemList_Parent.GetComponent<RectTransform>().sizeDelta = new Vector2(225, 0);
@@ -289,6 +347,7 @@ public class ResearchManager : Singleton<ResearchManager>
             CraftingManager.Instance.noItemResearched_Text.SetActive(false);
         }
     }
+    #endregion
 
 
     //--------------------
