@@ -101,19 +101,64 @@ public class CropPlot : MonoBehaviour
     //--------------------
 
 
-    public void DestroyThisObject()
+    public void DestroyThisCropPlotObject()
     {
-        print("4. DestroyObject");
+        print("444444. DestroyCropPlotObject");
 
         for (int i = slotObjectList.Count - 1; i >= 0; i--)
         {
-            if (slotObjectList[i].GetComponent<InteractableObject>())
+            print("--------------------------------");
+
+            if (slotObjectList[i].GetComponent<CropPlotSlot>())
             {
-                print("5. DestroyObject: No: " + i);
-                slotObjectList[i].GetComponent<InteractableObject>().DestroyThisObject();
+                if (slotObjectList[i].GetComponent<CropPlotSlot>().plantSpot_Parent.transform.childCount > 0)
+                {
+                    if (slotObjectList[i].GetComponent<CropPlotSlot>().plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>())
+                    {
+                        //Destroy PickableObject from plant
+                        if (slotObjectList[i].GetComponent<CropPlotSlot>().plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().pickablePart)
+                        {
+                            if (slotObjectList[i].GetComponent<CropPlotSlot>().plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().pickablePart.GetComponent<InteractableObject>())
+                            {
+                                slotObjectList[i].GetComponent<CropPlotSlot>().plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().pickablePart.GetComponent<InteractableObject>().DestroyThisInteractableObject();
+                            }
+                        }
+
+                        //Destroy Plant
+                        slotObjectList[i].GetComponent<CropPlotSlot>().plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().DestroyThisPlantObject();
+                    }
+                }
+
+                //Destroy CropPlotSlot
+                slotObjectList[i].GetComponent<InteractableObject>().DestroyThisInteractableObject();
             }
         }
 
+        print("--------------------------------");
+
+        //Destroy Connection
+        if (gameObject.GetComponent<MoveableObject>())
+        {
+            if (gameObject.GetComponent<MoveableObject>().connectionPointObject)
+            {
+                if (gameObject.GetComponent<MoveableObject>().connectionPointObject.GetComponent<ConnectionPoint>())
+                {
+                    gameObject.GetComponent<MoveableObject>().connectionPointObject.GetComponent<ConnectionPoint>().DestroyThisConnectionObject();
+                }
+            }
+        }
+
+        print("--------------------------------");
+
+        if (gameObject.GetComponent<InteractableObject>())
+        {
+            gameObject.GetComponent<InteractableObject>().DestroyThisInteractableObject();
+        }
+
+        print("--------------------------------");
+
+        print("Destroy GameObject: " + gameObject.name);
+        //Destroy CropPlot
         Destroy(gameObject);
     }
 }

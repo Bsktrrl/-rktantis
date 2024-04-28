@@ -56,4 +56,20 @@ public class ConnectionPoint : MonoBehaviour
             ConnectionPointManager.Instance.RemoveConnection(worldObjectIndex_ConnectedWith);
         }
     }
+
+
+    //--------------------
+
+
+    public void DestroyThisConnectionObject()
+    {
+        if (gameObject.GetComponent<InteractableObject>())
+        {
+            print("Destroy Connection: " + gameObject.name);
+
+            gameObject.GetComponent<InteractableObject>().DestroyThisInteractableObject();
+        }
+
+        Destroy(gameObject);
+    }
 }

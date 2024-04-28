@@ -218,8 +218,10 @@ public class Plant : MonoBehaviour
     //--------------------
 
 
-    public void DestroyThisObject()
+    public void DestroyThisPlantObject()
     {
+        print("Destroy PlantObject: " + gameObject.name);
+
         //Unsubscribe from Event
         PlayerButtonManager.objectInterraction_isPressedDown -= ObjectInteraction;
 

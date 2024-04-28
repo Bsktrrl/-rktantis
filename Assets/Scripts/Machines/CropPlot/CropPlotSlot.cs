@@ -126,8 +126,8 @@ public class CropPlotSlot : MonoBehaviour
                         //Check If item can be added
                         InventoryManager.Instance.AddItemToInventory(0, GetPlantItem());
 
-                        plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().pickablePart.GetComponent<InteractableObject>().DestroyThisObject();
-                        plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().DestroyThisObject();
+                        plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().pickablePart.GetComponent<InteractableObject>().DestroyThisInteractableObject();
+                        plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().DestroyThisPlantObject();
                     }
 
                     InventoryManager.Instance.AddItemToInventory(0, GetCropPlotSlotInfo().plantName_Output);

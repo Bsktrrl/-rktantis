@@ -70,7 +70,7 @@ public class BuildingDisplaySlot : MonoBehaviour
             if (BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<CropPlot>())
             {
                 print("3. DestroyObject");
-                BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<CropPlot>().DestroyThisObject();
+                BuildingSystemManager.Instance.ghostObject_Holding.GetComponent<CropPlot>().DestroyThisCropPlotObject();
             }
         }
 

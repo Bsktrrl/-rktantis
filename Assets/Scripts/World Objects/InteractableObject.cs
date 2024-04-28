@@ -87,7 +87,7 @@ public class InteractableObject : MonoBehaviour
                             }
 
                             //Destroy gameObject
-                            DestroyThisObject();
+                            DestroyThisInteractableObject();
                         }
                     }
                 }
@@ -113,8 +113,8 @@ public class InteractableObject : MonoBehaviour
                                     //Check If item can be added
                                     InventoryManager.Instance.AddItemToInventory(0, itemName);
 
-                                    plantParent.GetComponent<Plant>().pickablePart.GetComponent<InteractableObject>().DestroyThisObject();
-                                    plantParent.GetComponent<Plant>().DestroyThisObject();
+                                    plantParent.GetComponent<Plant>().pickablePart.GetComponent<InteractableObject>().DestroyThisInteractableObject();
+                                    plantParent.GetComponent<Plant>().DestroyThisPlantObject();
                                 }
                             }
                             else
@@ -283,7 +283,7 @@ public class InteractableObject : MonoBehaviour
                     }
 
                     //Destroy gameObject
-                    DestroyThisObject();
+                    DestroyThisInteractableObject();
                 }
                 #endregion
 
@@ -317,7 +317,7 @@ public class InteractableObject : MonoBehaviour
                     }
 
                     //Destroy gameObject
-                    DestroyThisObject();
+                    DestroyThisInteractableObject();
                 }
                 #endregion
 
@@ -404,8 +404,10 @@ public class InteractableObject : MonoBehaviour
     //--------------------
 
 
-    public void DestroyThisObject()
+    public void DestroyThisInteractableObject()
     {
+        print("Destroy PickableObject: " + gameObject.name);
+
         //Unsubscribe from Event
         PlayerButtonManager.objectInterraction_isPressedDown -= ObjectInteraction;
 

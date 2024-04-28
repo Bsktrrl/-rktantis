@@ -346,7 +346,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         {
             if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<InteractableObject>())
             {
-                WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<InteractableObject>().DestroyThisObject();
+                WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<InteractableObject>().DestroyThisInteractableObject();
             }
             else if (WorldObjectGhost_Parent.transform.GetChild(0).gameObject.GetComponent<MoveableObject>())
             {
@@ -1561,16 +1561,51 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 worldBuildingObjectInfoList.RemoveAt(i);
 
-                if (worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>())
+                //If removing a CropPlot
+                if (worldBuildingObjectListSpawned[i].GetComponent<CropPlot>())
                 {
-                    worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>().DestroyThisObject();
+                    worldBuildingObjectListSpawned[i].GetComponent<CropPlot>().DestroyThisCropPlotObject();
                 }
+
+                //If removing a GhostTank
+                else if (worldBuildingObjectListSpawned[i].GetComponent<GhostTank>())
+                {
+                    if (worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>())
+                    {
+                        if (worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>().connectionPointObject)
+                        {
+                            if (worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>().connectionPointObject.GetComponent<InteractableObject>())
+                            {
+                                worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>().connectionPointObject.GetComponent<InteractableObject>().DestroyThisInteractableObject();
+                            }
+                        }
+                    }
+
+                    if (worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>())
+                    {
+                        worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>().gameObject.GetComponent<InteractableObject>().DestroyThisInteractableObject();
+                    }
+
+                    Destroy(worldBuildingObjectListSpawned[i]);
+                }
+
+                //If removing an InteractableObject
+                else if (worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>())
+                {
+                    worldBuildingObjectListSpawned[i].GetComponent<InteractableObject>().DestroyThisInteractableObject();
+                }
+
+                //If removing something else
                 else
                 {
                     Destroy(worldBuildingObjectListSpawned[i]);
                 }
 
                 worldBuildingObjectListSpawned.RemoveAt(i);
+
+                //Update Connections between machines
+                ConnectionPointManager.Instance.RemoveBrokenConnections(i);
+                ConnectionPointManager.Instance.UpdateConnectionsAfterRemovingBuildingObject(i);
 
                 buildingBlock_Hit = null;
 
@@ -1588,6 +1623,9 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
                 UpdateWorldBuildingObjectInfoList_ToSave(worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>());
             }
         }
+
+        ConnectionPointManager.Instance.ResetWorldObjectConnection();
+        ConnectionPointManager.Instance.SetupConnections();
 
         SaveData();
     }

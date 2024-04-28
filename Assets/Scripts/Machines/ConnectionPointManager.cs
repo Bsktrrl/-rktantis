@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ConnectionPointManager : Singleton<ConnectionPointManager>
@@ -70,7 +71,7 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
     //--------------------
 
 
-    void SetupConnections()
+    public void SetupConnections()
     {
         for (int i = 0; i < connectionInfoList.Count; i++)
         {
@@ -81,6 +82,63 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
         }
 
         ClearConnection();
+    }
+    public void UpdateConnectionsAfterRemovingBuildingObject(int index)
+    {
+        //Decrease indexes - Works
+        for (int i = connectionInfoList.Count - 1; i >= 0; i--)
+        {
+            //Set all connectionObjects with a higher index -1 to keep its connection
+            if (connectionInfoList[i].connections.object1_Index > index)
+            {
+                connectionInfoList[i].connections.object1_Index -= 1;
+            }
+            if (connectionInfoList[i].connections.object2_Index > index)
+            {
+                connectionInfoList[i].connections.object2_Index -= 1;
+            }
+
+            //Set all connectedObjects with a higher index -1 to keep its connection
+            if (connectionInfoList[i].connections.object1_ConnectedToIndex > index)
+            {
+                connectionInfoList[i].connections.object1_ConnectedToIndex -= 1;
+            }
+            if (connectionInfoList[i].connections.object2_ConnectedToIndex > index)
+            {
+                connectionInfoList[i].connections.object2_ConnectedToIndex -= 1;
+            }
+        }
+        
+        SaveData();
+    }
+    public void RemoveBrokenConnections(int index)
+    {
+        for (int i = 0; i < connectionInfoList.Count; i++)
+        {
+            if (connectionInfoList[i].connections.object1_ConnectedToIndex == index
+                || connectionInfoList[i].connections.object2_ConnectedToIndex == index)
+            {
+                connectionInfoList.RemoveAt(i);
+
+                break;
+            }
+        }
+    }
+    public void ResetWorldObjectConnection()
+    {
+        for (int i = 0; i < BuildingSystemManager.Instance.worldBuildingObjectListSpawned.Count; i++)
+        {
+            if (BuildingSystemManager.Instance.worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>())
+            {
+                if (BuildingSystemManager.Instance.worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>().connectionPointObject)
+                {
+                    if (BuildingSystemManager.Instance.worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>().connectionPointObject.GetComponent<ConnectionPoint>())
+                    {
+                        BuildingSystemManager.Instance.worldBuildingObjectListSpawned[i].GetComponent<MoveableObject>().connectionPointObject.GetComponent<ConnectionPoint>().worldObjectIndex_ConnectedWith = -1;
+                    }
+                }
+            }
+        }
     }
 
 
@@ -112,13 +170,10 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
         MoveableObject move_1 = FindWorldObject(connectionOngoing.connectionType_1_Index);
         if (move_1)
         {
-            print("1.0. FindWorldObject");
             if (move_1.connectionPointObject)
             {
-                print("1.1. FindWorldObject");
                 if (move_1.connectionPointObject.GetComponent<ConnectionPoint>())
                 {
-                    print("1.2. FindWorldObject");
                     move_1.connectionPointObject.GetComponent<ConnectionPoint>().worldObjectIndex_ConnectedWith = connectionOngoing.connectionType_2_Index;
                 }
             }
@@ -129,13 +184,10 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
         MoveableObject move_2 = FindWorldObject(connectionOngoing.connectionType_2_Index);
         if (move_2)
         {
-            print("2.0. FindWorldObject");
             if (move_2.connectionPointObject)
             {
-                print("2.1. FindWorldObject");
                 if (move_2.connectionPointObject.GetComponent<ConnectionPoint>())
                 {
-                    print("2.3. FindWorldObject");
                     move_2.connectionPointObject.GetComponent<ConnectionPoint>().worldObjectIndex_ConnectedWith = connectionOngoing.connectionType_1_Index;
                 }
             }
