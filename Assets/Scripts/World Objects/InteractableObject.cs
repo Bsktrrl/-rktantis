@@ -331,6 +331,24 @@ public class InteractableObject : MonoBehaviour
                     }
                 }
                 #endregion
+
+                //If Object is a Connection
+                #region
+                else if (interactableType == InteracteableType.Connection)
+                {
+                    if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>())
+                    {
+                        if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().worldObjectIndex_ConnectedWith < 0)
+                        {
+                            SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().AddConnectPoint();
+                        }
+                        else
+                        {
+                            SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().RemoveConnectPoint();
+                        }
+                    }
+                }
+                #endregion
             }
         }
     }
@@ -463,6 +481,9 @@ public enum InteracteableType
 
     //Arídea Gate
     [Description("Arídea Gate")][InspectorName("Arídea Gate/Arídea Gate")] ArídeaGate,
+
+    //Connection
+    [Description("Connection")][InspectorName("Connection/Connection")] Connection,
 }
 
 [Serializable]

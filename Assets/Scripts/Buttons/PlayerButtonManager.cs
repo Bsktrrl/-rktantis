@@ -10,6 +10,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
     //ObjectInteraction
     public static Action objectInterraction_isPressedDown;
     public static Action objectInteraction_GhostRelease_isPressedDown;
+    public static Action releaseConnection_isPressed;
 
     //Hotbar
     public static Action hotbarSelectionDown_isPressed;
@@ -130,27 +131,36 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
             && (MainManager.Instance.menuStates != MenuStates.None))
         {
             ClosePlayerInventory_isPressedDown?.Invoke();
-        }  
+        }
         #endregion
 
         //Object Interaction
         #region
-        else if (Input.GetKeyDown(KeyCode.E) && MainManager.Instance.menuStates == MenuStates.None /*&& BuildingManager_v2.Instance.buildingBlockGhost == null*/)
+        else if (Input.GetKeyDown(KeyCode.R) && MainManager.Instance.menuStates == MenuStates.None
+            && ConnectionPointManager.Instance.connectionState == ConnectionState.isConnecting)
+        {
+            releaseConnection_isPressed?.Invoke();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.E) && MainManager.Instance.menuStates == MenuStates.None)
         {
             objectInterraction_isPressedDown?.Invoke();
         }
         else if (Input.GetKeyDown(KeyCode.R) && MainManager.Instance.menuStates == MenuStates.None
-            && SelectionManager.Instance.selectedObject.GetComponent<GhostTank>()/*&& BuildingManager_v2.Instance.buildingBlockGhost == null*/)
+            && SelectionManager.Instance.selectedObject)
         {
-            if (SelectionManager.Instance.selectedObject.GetComponent<GhostTank>().ghostTankContent.GhostElement != GhostElement.None)
+            if (SelectionManager.Instance.selectedObject.GetComponent<GhostTank>())
             {
-                objectInteraction_GhostRelease_isPressedDown?.Invoke();
+                if (SelectionManager.Instance.selectedObject.GetComponent<GhostTank>().ghostTankContent.GhostElement != GhostElement.None)
+                {
+                    objectInteraction_GhostRelease_isPressedDown?.Invoke();
+                }
             }
         }
         #endregion
 
-        //Hotbar
-        #region
+            //Hotbar
+            #region
         else if (Input.GetAxis("Mouse ScrollWheel") > 0 /*&& MainManager.Instance.menuStates != MenuStates.None*/)
         {
             hotbarSelectionDown_isPressed?.Invoke();

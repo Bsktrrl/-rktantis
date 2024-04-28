@@ -25,6 +25,9 @@ public class MoveableObject : MonoBehaviour
     [Header("Colliders")]
     public GameObject collidersOnObject;
 
+    [Header("ConnectionPoint")]
+    public GameObject connectionPointObject;
+
 
     //--------------------
 

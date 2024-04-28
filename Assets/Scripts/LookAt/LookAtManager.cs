@@ -66,6 +66,12 @@ public class LookAtManager : Singleton<LookAtManager>
     [SerializeField] GameObject ghostFight_Panel;
     [SerializeField] Image ghostFightBar;
     [SerializeField] Image ghostImage;
+
+    [Header("Connection Point")]
+    [SerializeField] GameObject ConnectionPoint_Panel;
+    [SerializeField] Image ConnectionPointImage;
+    [SerializeField] TextMeshProUGUI ConnectionPointName;
+    [SerializeField] TextMeshProUGUI ConnectionPoint_Text;
     #endregion
 
 
@@ -337,6 +343,21 @@ public class LookAtManager : Singleton<LookAtManager>
             BlueprintDisplay();
 
             blueprintDisplay_Panel.SetActive(true);
+
+            return;
+        }
+        #endregion
+
+        //If looking at a Connection
+        #region
+        else if (typeLookingAt == InteracteableType.Connection)
+        {
+            //Turn off all screens
+            TurnOffScreens();
+
+            ConnectionDisplay();
+
+            ConnectionPoint_Panel.SetActive(true);
 
             return;
         }
@@ -962,6 +983,41 @@ public class LookAtManager : Singleton<LookAtManager>
         }
     }
 
+    void ConnectionDisplay()
+    {
+        if (SelectionManager.Instance.selectedObject && SelectionManager.Instance.onTarget)
+        {
+            if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>())
+            {
+                if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().parent.GetComponent<MoveableObject>())
+                {
+                    if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().parent.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.Machine)
+                    {
+                        //Connect NO
+                        if (SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().worldObjectIndex_ConnectedWith < 0)
+                        {
+                            MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().parent.GetComponent<MoveableObject>().machineObjectName);
+
+                            ConnectionPointImage.sprite = tempObject.objectInfo.objectSprite;
+                            ConnectionPointName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
+                            ConnectionPoint_Text.text = "Press \"E\" to start connecting";
+                        }
+
+                        //Connect OFF
+                        else
+                        {
+                            MachineInfo tempObject = MainManager.Instance.GetMovableObject(SelectionManager.Instance.selectedObject.GetComponent<ConnectionPoint>().parent.GetComponent<MoveableObject>().machineObjectName);
+
+                            ConnectionPointImage.sprite = tempObject.objectInfo.objectSprite;
+                            ConnectionPointName.text = SpaceTextConverting.Instance.SetText(tempObject.machinesName.ToString());
+                            ConnectionPoint_Text.text = "Press \"E\" to remove connection";
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     #endregion
 
 
@@ -984,5 +1040,7 @@ public class LookAtManager : Singleton<LookAtManager>
         ghostFight_Panel.SetActive(false);
 
         centerImage.SetActive(true);
+
+        ConnectionPoint_Panel.SetActive(false);
     }
 }

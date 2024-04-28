@@ -88,6 +88,9 @@ public class GameData
     [HideInInspector] public Perks perks_Save = new Perks();
     [HideInInspector] public PerkActivations perkActivations_Save = new PerkActivations();
 
+    //Connection
+    [HideInInspector] public List<ConnectionInfo> connectionInfoList_Save = new List<ConnectionInfo>();
+
 
     //--------------------
 
@@ -130,5 +133,7 @@ public class GameData
         this.ghostTankList_Save.Clear();
 
         this.itemStates_Save.Clear();
+
+        this.connectionInfoList_Save.Clear();
     }
 }

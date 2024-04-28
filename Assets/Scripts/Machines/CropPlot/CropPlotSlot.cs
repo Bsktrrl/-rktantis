@@ -231,17 +231,14 @@ public class CropPlotSlot : MonoBehaviour
             if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 1)
             {
                 plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + scale_1;
-                print("1. Finished - Calculate Scale | Scale: " + plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale);
             }
             else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 2)
             {
                 plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + scale_2;
-                print("2. Finished - Calculate Scale | Scale: " + plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale);
             }
             else if (parent.gameObject.GetComponent<CropPlot>().cropPlotInfo.cropPlotSlotList.Count == 4)
             {
                 plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale = Vector3.one + scale_3;
-                print("3. Finished - Calculate Scale | Scale: " + plantSpot_Parent.transform.GetChild(0).gameObject.transform.localScale);
             }
         }
     }
