@@ -14,7 +14,6 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
     public ConnectionOngoingInfo connectionOngoing;
 
     public GameObject linePrefab;
-    public GameObject cubeInstance;
 
 
     //--------------------
@@ -209,6 +208,8 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
             if (connectionInfoList[i].connections.object1_Index == a
                 || connectionInfoList[i].connections.object2_Index == a)
             {
+                Destroy(connectionInfoList[i].line);
+
                 //Remove ConnectionInfo
                 connectionInfoList.RemoveAt(i);
 
@@ -303,19 +304,19 @@ public class ConnectionPointManager : Singleton<ConnectionPointManager>
         print("pos1: "+ pos1);
         print("pos2: " + pos2);
 
-        cubeInstance = Instantiate(linePrefab, transform.position, Quaternion.identity);
+        connectionInfoList[connectionInfoList.Count - 1].line = Instantiate(linePrefab, transform.position, Quaternion.identity);
 
         //Spawn Line
         float distance = Vector3.Distance(pos1, pos2);
 
         // Set the scale of the cube to stretch between the two objects
-        cubeInstance.transform.localScale = new Vector3(0.05f, 0.05f, distance);
+        connectionInfoList[connectionInfoList.Count - 1].line.transform.localScale = new Vector3(0.05f, 0.05f, distance);
 
         // Position the cube halfway between the two objects
-        cubeInstance.transform.position = (pos1 + pos2) / 2f;
+        connectionInfoList[connectionInfoList.Count - 1].line.transform.position = (pos1 + pos2) / 2f;
 
         // Rotate the cube to align with the line between the two objects
-        cubeInstance.transform.LookAt(pos2Object.transform);
+        connectionInfoList[connectionInfoList.Count - 1].line.transform.LookAt(pos2Object.transform);
     }
 }
 
@@ -333,6 +334,8 @@ public class Connections
 public class ConnectionInfo
 {
     public Connections connections = new Connections();
+
+    public GameObject line;
 }
 
 [Serializable]
