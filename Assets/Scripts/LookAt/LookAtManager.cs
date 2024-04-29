@@ -777,8 +777,8 @@ public class LookAtManager : Singleton<LookAtManager>
                                 treeDisplay_LineObject.SetActive(true);
                                 break;
                             case InteracteableType.BloodTreeBush:
-                                treeDisplay_Text.text = "Requires a \"Wood Axe\", \"Stone Axe\" or \"Cryonite Axe\"";
-                                treeDisplay_LineObject.SetActive(true);
+                                //treeDisplay_Text.text = "Requires a \"Wood Axe\", \"Stone Axe\" or \"Cryonite Axe\"";
+                                //treeDisplay_LineObject.SetActive(true);
                                 break;
                             case InteracteableType.Tree_4:
                                 break;

@@ -519,7 +519,8 @@ public class Arms : Singleton<Arms>
                                 //Tree 3
                                 else if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTreeBush)
                                 {
-                                    CannotHit();
+                                    EquippmentManager.Instance.Hit(equippedItem);
+                                    CanHit();
                                 }
 
                                 //Tree 4
@@ -911,7 +912,8 @@ public class Arms : Singleton<Arms>
                     //Tree_3
                     if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.BloodTreeBush)
                     {
-                        CannotHit();
+                        EquippmentManager.Instance.Hit(equippedItem);
+                        CanHit();
                     }
                     //Tree_4
                     if (SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>().interactableType == InteracteableType.Tree_4)
