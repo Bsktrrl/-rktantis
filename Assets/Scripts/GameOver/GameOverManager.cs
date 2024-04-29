@@ -132,7 +132,9 @@ public class GameOverManager : Singleton<GameOverManager>
     {
         for (int i = InventoryManager.Instance.inventories[0].itemsInInventory.Count - 1; i >= 0; i--)
         {
-            if (InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName != Items.ArídianKey)
+            if (InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName != Items.ArídianKey
+                && InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName != Items.AríditeCrystal
+                && InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName != Items.Flashlight)
             {
                 InventoryManager.Instance.RemoveItemFromInventory(0, InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName, InventoryManager.Instance.inventories[0].itemsInInventory[i].itemID, true);
             }

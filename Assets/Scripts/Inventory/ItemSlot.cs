@@ -137,6 +137,18 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
                 {
                     AssignItemToHotbar();
                 }
+
+                //If clicked item is a Consumable
+                else if (MainManager.Instance.GetItem(itemName).isConsumeable)
+                {
+                    EatConsumable();
+                }
+
+                //If clicked item is a Clothing
+                else if (MainManager.Instance.GetItem(itemName).isEquipableClothes)
+                {
+                    AssignItemToClothingSlot();
+                }
             }
             #endregion
         }

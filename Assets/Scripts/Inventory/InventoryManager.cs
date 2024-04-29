@@ -108,6 +108,7 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             print("AddInventory");
             AddInventory(new Vector2(5, 7));
+
             AddInventory(new Vector2(4, 4));
             AddInventory(new Vector2(4, 4));
             AddInventory(new Vector2(4, 4));
@@ -264,8 +265,15 @@ public class InventoryManager : Singleton<InventoryManager>
         item.inventoryIndex = inventory;
         item.itemName = itemName;
         item.itemSize = MainManager.Instance.GetItem(itemName).itemSize;
-        item.durability_Current = MainManager.Instance.GetItem(itemName).durability_Max;
-
+        if (itemName == Items.Cup || itemName == Items.Bottle || itemName == Items.Bucket)
+        {
+            item.durability_Current =0;
+        }
+        else
+        {
+            item.durability_Current = MainManager.Instance.GetItem(itemName).durability_Max;
+        }
+        
         lastItemToGet = itemName;
 
         //Give the item an ID to be unique

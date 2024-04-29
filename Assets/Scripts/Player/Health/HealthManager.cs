@@ -285,7 +285,7 @@ public class HealthManager : Singleton<HealthManager>
             mainHealthValue += -Mathf.Abs(mainHealth_Speed * mainHealth_SpeedMultiplier_ByWeather * mainHealthValueMultiplier * mainHealthCounter);
         }
        
-        if (mainHealthValue <= 0)
+        if (mainHealthValue <= 0.12f)
         {
             mainHealthValue = 0;
 

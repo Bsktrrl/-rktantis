@@ -10,7 +10,7 @@ public class WaterDetection : MonoBehaviour
         {
             print("Entering Water");
 
-            PlayerMovement.Instance.movementSpeedVarianceByWater = 0.25f;
+            PlayerMovement.Instance.movementSpeedVarianceByWater = 0.5f;
             WeatherManager.Instance.waterValue = 20;
         }
     }

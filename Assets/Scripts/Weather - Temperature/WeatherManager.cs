@@ -204,7 +204,17 @@ public class WeatherManager : Singleton<WeatherManager>
     void SetPlayerTemperature(float coverValue, float temperatureFruit, float waterValue)
     {
         //Set Temperature for BuildingBlock Coverage (doesn't affect temperature under idealTemperature)
-        float coverResistance = coverValue + temperatureFruit + waterValue;
+        float coverResistance = 0;
+
+        if (currentWorldTemperature >= idealTemperature)
+        {
+            coverResistance = coverValue + temperatureFruit - waterValue;
+        }
+        else
+        {
+            coverResistance = coverValue + temperatureFruit + waterValue;
+        }
+        
 
         //print("0. coverResistance = " + coverResistance);
         //print("0. PlayerTemperature = " + playerTemperature);
@@ -385,7 +395,7 @@ public class WeatherManager : Singleton<WeatherManager>
                 //Set HealthParameters
                 HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.Down_1;
                 HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.Down_2;
-                //HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1.25f;
+                HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1f;
             }
 
             //Cloudy
@@ -399,8 +409,9 @@ public class WeatherManager : Singleton<WeatherManager>
                 maxTemperature = 30;
 
                 //Set HealthParameters
-                HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.Up_1;
-                HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.Up_1;
+                HealthManager.Instance.hungerValueMultiplier_Check = HealthValueMultiplier.None;
+                HealthManager.Instance.thirstValueMultiplier_Check = HealthValueMultiplier.None;
+                HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1.25f;
             }
 
             //Windy

@@ -104,7 +104,7 @@ public class LookAtManager : Singleton<LookAtManager>
 
         //If looking at water
         #region
-        else if ((HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
+        if ((HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
             && SelectionManager.Instance.tag == "Water")
         {
             //Turn off all screens

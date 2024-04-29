@@ -10,6 +10,27 @@ public class JournalObject : MonoBehaviour
     public int journalPageIndex_x;
     public int journalPageIndex_y;
 
+    [SerializeField] GameObject campFlag;
+
+
+    //--------------------
+
+
+    private void Start()
+    {
+        if (campFlag)
+        {
+            campFlag.SetActive(true);
+        }
+    }
+    private void Update()
+    {
+        if (campFlag && isPicked)
+        {
+            campFlag.SetActive(false);
+        }
+    }
+
 
     //--------------------
 

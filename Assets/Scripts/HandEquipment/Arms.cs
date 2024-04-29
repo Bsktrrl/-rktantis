@@ -62,6 +62,28 @@ public class Arms : Singleton<Arms>
         {
             if (Cooldown()) { return; }
 
+            if (EquippmentManager.Instance.toolHolderParent.transform.childCount > 1)
+            {
+                if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(2).gameObject.GetComponent<EquippedItem>().itemName == Items.Cup
+                || EquippmentManager.Instance.toolHolderParent.transform.GetChild(2).gameObject.GetComponent<EquippedItem>().itemName == Items.Bottle
+                || EquippmentManager.Instance.toolHolderParent.transform.GetChild(2).gameObject.GetComponent<EquippedItem>().itemName == Items.Bucket)
+                {
+                    for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
+                    {
+                        for (int j = 0; j < InventoryManager.Instance.inventories[0].itemsInInventory.Count; j++)
+                        {
+                            if (HotbarManager.Instance.hotbarList[i].itemID == InventoryManager.Instance.inventories[0].itemsInInventory[j].itemID)
+                            {
+                                if (InventoryManager.Instance.inventories[0].itemsInInventory[j].durability_Current <= 0)
+                                {
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
             anim.SetTrigger("Click");
         }
     }

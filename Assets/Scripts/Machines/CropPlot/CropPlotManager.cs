@@ -63,7 +63,7 @@ public class CropPlotManager : Singleton<CropPlotManager>
     public CropPlotInfo CropPlotInfo_Interacting;
 
     [Header("Growth")]
-    public float cropPlot_GrowthTime_Max = 180;
+    public float cropPlot_GrowthTime_Max = 120;
 
 
     //--------------------
@@ -71,7 +71,7 @@ public class CropPlotManager : Singleton<CropPlotManager>
 
     private void Start()
     {
-        cropPlot_GrowthTime_Max = 20;
+        cropPlot_GrowthTime_Max = 120;
     }
     private void Update()
     {

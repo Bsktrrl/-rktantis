@@ -521,7 +521,7 @@ MonoBehaviour:
     thirstHealthHeal: 0
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
-    durability_Max: 2
+    durability_Max: 40
     orePower: 0
     treePower: 1
     worldObjectPrefab: {fileID: 5035480046617749617, guid: 72cd27aa8bafccd419a3b5d2540d0ee3,
@@ -1427,7 +1427,7 @@ MonoBehaviour:
     worldObjectPrefab: {fileID: 1743933868757232438, guid: ff5aec27515579e479c0e277c412edc9,
       type: 3}
     equippedPrefab: {fileID: 0}
-    isResearched: 1
+    isResearched: 0
     researchTime: 5
     isCrafteable: 0
     craftingRequirements: []
@@ -2000,7 +2000,7 @@ MonoBehaviour:
     subCategoryName: 19
     itemSize: {x: 1, y: 2}
     itemDescription: Heals Hunger slightly, Thirst slightly and Increase Heat Resistance
-      slightly
+      minimal
     hotbarSprite: {fileID: -993071880, guid: e0d26eb1393b4784480dae185f2f8eb1, type: 3}
     itemSpriteList:
     - {fileID: -13486799, guid: c15e568b9f9442f41b3212b5c796493c, type: 3}
@@ -2012,9 +2012,9 @@ MonoBehaviour:
     isEquipableInHand: 0
     isEquipableClothes: 0
     mainHealthHeal: 0
-    heatresistanceHealthHeal: 10
-    hungerHealthHeal: 10
-    thirstHealthHeal: 10
+    heatresistanceHealthHeal: 0
+    hungerHealthHeal: 20
+    thirstHealthHeal: 20
     heatColdRegulator: 0
     heatColdRegulatorDuration: 0
     durability_Max: 0
