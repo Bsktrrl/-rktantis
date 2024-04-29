@@ -121,6 +121,7 @@ public class InteractableObject : MonoBehaviour
                             {
                                 for (int i = 0; i < amount; i++)
                                 {
+                                    print("Pickplant");
                                     SoundManager.Instance.Play_Inventory_PickupItem_Clip();
 
                                     //Check If item can be added

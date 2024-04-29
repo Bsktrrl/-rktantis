@@ -191,6 +191,8 @@ public class Plant : MonoBehaviour
                     //Check If item can be added
                     InventoryManager.Instance.AddItemToInventory(0, tempObject.itemName);
 
+                    SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+
                     PickPlant();
                 }
             }

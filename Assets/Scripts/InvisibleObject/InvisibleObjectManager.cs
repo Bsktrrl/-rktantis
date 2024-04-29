@@ -10,5 +10,5 @@ public class InvisibleObjectManager : Singleton<InvisibleObjectManager>
 
     public float flashlight_Distance = 7;
     public float ghostCapture_Distance = 5;
-    public float aríditeCrystal_Distance = 3;
+    public float aríditeCrystal_Distance = 4.5f;
 }

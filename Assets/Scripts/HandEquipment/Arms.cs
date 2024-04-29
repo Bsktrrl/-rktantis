@@ -64,19 +64,25 @@ public class Arms : Singleton<Arms>
 
             if (EquippmentManager.Instance.toolHolderParent.transform.childCount > 1)
             {
-                if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(2).gameObject.GetComponent<EquippedItem>().itemName == Items.Cup
-                || EquippmentManager.Instance.toolHolderParent.transform.GetChild(2).gameObject.GetComponent<EquippedItem>().itemName == Items.Bottle
-                || EquippmentManager.Instance.toolHolderParent.transform.GetChild(2).gameObject.GetComponent<EquippedItem>().itemName == Items.Bucket)
+                if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject)
                 {
-                    for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
+                    if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>())
                     {
-                        for (int j = 0; j < InventoryManager.Instance.inventories[0].itemsInInventory.Count; j++)
+                        if (EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Cup
+                            || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Bottle
+                            || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Bucket)
                         {
-                            if (HotbarManager.Instance.hotbarList[i].itemID == InventoryManager.Instance.inventories[0].itemsInInventory[j].itemID)
+                            for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
                             {
-                                if (InventoryManager.Instance.inventories[0].itemsInInventory[j].durability_Current <= 0)
+                                for (int j = 0; j < InventoryManager.Instance.inventories[0].itemsInInventory.Count; j++)
                                 {
-                                    return;
+                                    if (HotbarManager.Instance.hotbarList[i].itemID == InventoryManager.Instance.inventories[0].itemsInInventory[j].itemID)
+                                    {
+                                        if (InventoryManager.Instance.inventories[0].itemsInInventory[j].durability_Current <= 0)
+                                        {
+                                            return;
+                                        }
+                                    }
                                 }
                             }
                         }
