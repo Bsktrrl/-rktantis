@@ -52,6 +52,7 @@ public class InteractableObject : MonoBehaviour
 
     void ObjectInteraction()
     {
+        if (BuildingSystemManager.Instance.WorldObjectGhost_Parent.activeInHierarchy) { return; }
         //if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         if (SelectionManager.Instance.selectedObject)

@@ -9,7 +9,7 @@ public class JournalManager : Singleton<JournalManager>
 {
     #region Variables
     public JournalMenuState journalMenuState;
-    int activeJournalPageIndex;
+    public int activeJournalPageIndex;
 
     [Header("Scriptable Objects")]
     public JournalPage_SO mentorJournalPage_SO;
@@ -544,7 +544,7 @@ public class JournalManager : Singleton<JournalManager>
         journalMenuState = JournalMenuState.MentorJournal;
         journalPageIsSelected = false;
 
-        ResetInfoPage();
+        //ResetInfoPage();
 
         //Set the "Content" Size of the visible Journal List
         journal_Content_Menu.GetComponent<RectTransform>().sizeDelta = new Vector2(500, 0);
@@ -563,7 +563,7 @@ public class JournalManager : Singleton<JournalManager>
         journalMenuState = JournalMenuState.PlayerJournal;
         journalPageIsSelected = false;
 
-        ResetInfoPage();
+        //ResetInfoPage();
 
         //Set the "Content" Size of the visible Journal List
         journal_Content_Menu.GetComponent<RectTransform>().sizeDelta = new Vector2(500, 0);
@@ -582,7 +582,7 @@ public class JournalManager : Singleton<JournalManager>
         journalMenuState = JournalMenuState.PersonalJournal;
         journalPageIsSelected = false;
 
-        ResetInfoPage();
+        //ResetInfoPage();
 
         //Set the "Content" Size of the visible Journal List
         journal_Content_Menu.GetComponent<RectTransform>().sizeDelta = new Vector2(500, 0);

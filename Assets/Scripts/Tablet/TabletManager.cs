@@ -10,6 +10,7 @@ public class TabletManager : Singleton<TabletManager>
     #region Main Tablet Variables
     [Header("General")]
     public TabletMenuState tabletMenuState;
+    public TabletMenuState tabletMenuState_Save;
     public ObjectInteractingWith objectInteractingWith;
     public GameObject objectInteractingWith_Object;
 
@@ -351,6 +352,14 @@ public class TabletManager : Singleton<TabletManager>
     #region
     void MenuTransition(TabletMenuState currentMenu, TabletMenuState newMenu)
     {
+        if (newMenu == TabletMenuState.Inventory
+            || newMenu == TabletMenuState.BuildingObject
+            || newMenu == TabletMenuState.Journal
+            || newMenu == TabletMenuState.Settings)
+        {
+            tabletMenuState_Save = newMenu;
+        }
+
         MainManager.Instance.menuStates = MenuStates.None;
 
         menu_Chest_Button.GetComponent<Image>().sprite = menuButton_Passive;
@@ -615,7 +624,7 @@ public class TabletManager : Singleton<TabletManager>
                 MainManager.Instance.menuStates = MenuStates.JournalMenu;
                 tabletMenuState = TabletMenuState.Journal;
 
-                JournalManager.Instance.ResetInfoPage();
+                //JournalManager.Instance.ResetInfoPage();
 
                 journal_Parent.SetActive(true);
 
@@ -627,7 +636,18 @@ public class TabletManager : Singleton<TabletManager>
                 equipInventory_MainParent.SetActive(false);
                 menu_Inventory.SetActive(false);
 
-                JournalManager.Instance.MentorJournalButton_isPressed();
+                if (JournalManager.Instance.journalMenuState == JournalMenuState.MentorJournal)
+                {
+                    JournalManager.Instance.MentorJournalButton_isPressed();
+                }
+                else if (JournalManager.Instance.journalMenuState == JournalMenuState.PlayerJournal)
+                {
+                    JournalManager.Instance.PlayerJournalButton_isPressed();
+                }
+                else if (JournalManager.Instance.journalMenuState == JournalMenuState.PersonalJournal)
+                {
+                    JournalManager.Instance.PersonalJournalButton_isPressed();
+                }
 
                 menu_Inventory_Button.GetComponent<Image>().sprite = menuButton_Passive;
                 menu_Journal_Button.GetComponent<Image>().sprite = menuButton_Active;
@@ -692,12 +712,6 @@ public class TabletManager : Singleton<TabletManager>
 
         InventoryManager.Instance.ClosePlayerInventory();
 
-        //If BuildingHammer is in hand, open the MoveableObjectMenu
-        if (HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer)
-        {
-            MenuTransition(tabletMenuState, TabletMenuState.BuildingObject);
-        }
-
         //Set the MenuButtonBackround size
         menuButton_Background.GetComponent<RectTransform>().sizeDelta = new Vector2((150 * tempMenuAmount) + 35, menuButton_Background.GetComponent<RectTransform>().sizeDelta.y) ;
 
@@ -739,7 +753,7 @@ public class TabletManager : Singleton<TabletManager>
         menu_Equipment_Button.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
-        MainManager.Instance.menuStates = MenuStates.InventoryMenu;
+        //MainManager.Instance.menuStates = MenuStates.InventoryMenu;
     }
 
     //When Opening Tablet from an InteracteableObject
@@ -828,7 +842,15 @@ public class TabletManager : Singleton<TabletManager>
         //Set InteracteableInfo to be displayed again
         LookAtManager.Instance.LookAt_Parent.SetActive(true);
 
-        tabletMenuState = TabletMenuState.None;
+        if (tabletMenuState != TabletMenuState.Inventory
+            && tabletMenuState != TabletMenuState.BuildingObject
+            && tabletMenuState != TabletMenuState.Journal
+            && tabletMenuState != TabletMenuState.Settings)
+        {
+            tabletMenuState = tabletMenuState_Save;
+        }
+
+        //tabletMenuState = TabletMenuState.None;
         objectInteractingWith = ObjectInteractingWith.None;
 
         //Stop Animation when not used anymore
