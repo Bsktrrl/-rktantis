@@ -16,6 +16,8 @@ public class Tree : MonoBehaviour
     [Header("Stats")]
     public float treeHealth;
     [SerializeField] float tempTreeHealth;
+    public Vector2 dropRate;
+    [HideInInspector] public Vector2 dropRateUpgrade;
 
     [Header("Dormant")]
     public bool isCut;
@@ -274,39 +276,27 @@ public class Tree : MonoBehaviour
     }
     void SpawnItemsAfterFalling(InteracteableType interactableType, Items itemName)
     {
-        //Spawn at least 1 item into the World
-        SpawnTreeItemsToWorld(interactableType);
+        //Spawn Wood
+        #region
+        Vector2 spawnBuff = Vector2.zero;
 
-        //Spawn additional items into the World based on the Axe used
-        bool isSpawningItems = true;
-        float modifier = 0;
-        while (isSpawningItems)
+        //Get buffs based on equippedItem
+        if (HotbarManager.Instance.selectedItem == Items.WoodAxe)
+            spawnBuff = new Vector2(0, 1);
+        else if (HotbarManager.Instance.selectedItem == Items.StoneAxe)
+            spawnBuff = new Vector2(1, 2);
+        else if (HotbarManager.Instance.selectedItem == Items.CryoniteAxe)
+            spawnBuff = new Vector2(2, 3);
+
+        //Calculate oreDrop
+        int spawnCount = (int)Random.Range(dropRate.x + spawnBuff.x + dropRateUpgrade.x, dropRate.y + spawnBuff.y + dropRateUpgrade.y);
+
+        //Spawn Wood
+        for (int i = 0; i < spawnCount; i++)
         {
-            float rand = Random.Range(0, 100);
-
-            if ((itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal) && rand <= (TreeManager.Instance.woodAxe_Droprate - modifier))
-            {
-                SpawnTreeItemsToWorld(interactableType);
-            }
-            else if (itemName == Items.WoodAxe && rand <= (TreeManager.Instance.woodAxe_Droprate - modifier))
-            {
-                SpawnTreeItemsToWorld(interactableType);
-            }
-            else if (itemName == Items.StoneAxe && rand <= (TreeManager.Instance.stoneAxe_Droprate - modifier))
-            {
-                SpawnTreeItemsToWorld(interactableType);
-            }
-            else if (itemName == Items.CryoniteAxe && rand <= (TreeManager.Instance.cryoniteAxe_Droprate - modifier))
-            {
-                SpawnTreeItemsToWorld(interactableType);
-            }
-            else
-            {
-                isSpawningItems = false;
-            }
-
-            modifier += TreeManager.Instance.treeDropRateReducer;
+            SpawnTreeItemsToWorld(interactableType);
         }
+        #endregion
 
         //Hide Tree Object for a time
         mesh.SetActive(false);

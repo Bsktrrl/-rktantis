@@ -13,6 +13,8 @@ public class Ore : MonoBehaviour
     [Header("Stats")]
     public float oreHealth;
     [SerializeField] float tempOreHealth;
+    public Vector2 dropRate;
+    [HideInInspector] public Vector2 dropRateUpgrade;
 
     [Header("Dormant")]
     public bool isHacked;
@@ -97,6 +99,7 @@ public class Ore : MonoBehaviour
             print("Interact with an Ore - " + itemName);
 
             //Play HackingSound
+            #region
             float tempPitchCount = (float)(oreHealth / 5);
 
             if (itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal)
@@ -207,6 +210,7 @@ public class Ore : MonoBehaviour
                     SoundManager.Instance.Play_PickaxeUsage_CryonitePickaxe_Clip(1);
                 }
             }
+            #endregion
 
             //Reduce the Ore's health
             if (itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal)
@@ -227,39 +231,27 @@ public class Ore : MonoBehaviour
                 //Play OreDestroy sound
                 SoundManager.Instance.Play_PickaxeUsage_OreIsDestroyd_Clip();
 
-                //Spawn at least 1 item into the World
-                SpawnOreItems(interactableType);
+                //Spawn Ores
+                #region
+                Vector2 spawnBuff = Vector2.zero;
 
-                //Spawn additional items into the World based on the pickaxe used
-                bool isSpawningItems = true;
-                float modifier = 0;
-                while (isSpawningItems)
+                //Get buffs based on equippedItem
+                if (HotbarManager.Instance.selectedItem == Items.WoodPickaxe)
+                    spawnBuff = new Vector2(0, 1);
+                else if (HotbarManager.Instance.selectedItem == Items.StonePickaxe)
+                    spawnBuff = new Vector2(1, 2);
+                else if (HotbarManager.Instance.selectedItem == Items.CryonitePickaxe)
+                    spawnBuff = new Vector2(2, 3);
+
+                //Calculate oreDrop
+                int spawnCount = (int)Random.Range(dropRate.x + spawnBuff.x + dropRateUpgrade.x, dropRate.y + spawnBuff.y + dropRateUpgrade.y);
+
+                //Spawn Ores
+                for (int i = 0; i < spawnCount; i++)
                 {
-                    float rand = Random.Range(0, 100);
-
-                    if ((itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal) && rand <= (OreManager.Instance.woodPickaxe_Droprate - modifier))
-                    {
-                        SpawnOreItems(interactableType);
-                    }
-                    else if (itemName == Items.WoodPickaxe && rand <= (OreManager.Instance.woodPickaxe_Droprate - modifier))
-                    {
-                        SpawnOreItems(interactableType);
-                    }
-                    else if (itemName == Items.StonePickaxe && rand <= (OreManager.Instance.stonePickaxe_Droprate - modifier))
-                    {
-                        SpawnOreItems(interactableType);
-                    }
-                    else if (itemName == Items.CryonitePickaxe && rand <= (OreManager.Instance.cryonitePickaxe_Droprate - modifier))
-                    {
-                        SpawnOreItems(interactableType);
-                    }
-                    else
-                    {
-                        isSpawningItems = false;
-                    }
-
-                    modifier += OreManager.Instance.oreDropRateReducer;
+                    SpawnOreItems(interactableType);
                 }
+                #endregion
 
                 //Hide Ore Object for a time
                 oreVein.SetActive(false);

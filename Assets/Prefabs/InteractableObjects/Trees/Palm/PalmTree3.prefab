@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4692790835998744271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 307376828238153929}
+  - component: {fileID: 257065619615186634}
+  m_Layer: 0
+  m_Name: Mesh - Stem
+  m_TagString: Tree
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &307376828238153929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692790835998744271}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4376942966941746583}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &257065619615186634
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692790835998744271}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1418010270223362412, guid: 3aa6da0e0ba5fa042ba19886006eb368, type: 3}
 --- !u!1 &7888824090279689637
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +218,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5033173870013710364}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3aa6da0e0ba5fa042ba19886006eb368,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 307376828238153929}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3aa6da0e0ba5fa042ba19886006eb368,
         type: 3}
@@ -281,6 +339,8 @@ MonoBehaviour:
   treeObject_LOD2: {fileID: 0}
   treeHealth: 6
   tempTreeHealth: 0
+  dropRate: {x: 1, y: 3}
+  dropRateUpgrade: {x: 0, y: 0}
   isCut: 0
   dormantTimer: 0
   dormantPercentage: 0
@@ -299,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineMode: 1
   bakeKeys:
   - {fileID: -1418010270223362412, guid: 3aa6da0e0ba5fa042ba19886006eb368, type: 3}
   - {fileID: -7309723314182712654, guid: 3aa6da0e0ba5fa042ba19886006eb368, type: 3}
