@@ -172,7 +172,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     }
     public void AssignItemToHotbar()
     {
-        if (itemName != Items.None)
+        if (itemName != Items.None && MainManager.Instance.GetItem(itemName).isEquipableInHand)
         {
             //Check if item is already on the Hotbar, to remove it
             #region
@@ -240,7 +240,7 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     }
     public void AssignItemToHotbar(int slotNumber)
     {
-        if (itemName != Items.None)
+        if (itemName != Items.None && MainManager.Instance.GetItem(itemName).isEquipableInHand)
         {
             //Check if item is already on the Hotbar, to remove it
             #region
@@ -403,6 +403,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        HotbarManager.Instance.hoveredItem = itemName;
+
         //Play ItemEntering Sound
         if (itemName != Items.None)
         {
@@ -447,6 +449,8 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        HotbarManager.Instance.hoveredItem = Items.None;
+
         if (inventoryIndex <= 0)
         {
             InventoryManager.Instance.SetPlayerItemInfo(Items.None, true);

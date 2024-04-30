@@ -15,6 +15,7 @@ public class HotbarManager : Singleton<HotbarManager>
     public List<Hotbar> hotbarList = new List<Hotbar>();
     public int selectedSlot = 0;
     public Items selectedItem;
+    public Items hoveredItem;
 
     bool loadDataisFinished = false;
 
@@ -292,83 +293,104 @@ public class HotbarManager : Singleton<HotbarManager>
     #region QuickSlots
     void QuickHotbarSelect_1()
     {
-        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
-
-        for (int i = 0; i < hotbarList.Count; i++)
+        if (MainManager.Instance.GetItem(hoveredItem).isEquipableInHand)
         {
-            hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
+            print("QuickHotbarSelect_1");
+
+            SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
+            for (int i = 0; i < hotbarList.Count; i++)
+            {
+                hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
+            }
+
+            selectedSlot = 0;
+            hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotActive();
+            selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
+
+            ChangeItemInHand();
+            SaveData();
         }
-
-        selectedSlot = 0;
-        hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotActive();
-        selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
-
-        ChangeItemInHand();
-        SaveData();
     }
     void QuickHotbarSelect_2()
     {
-        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
-
-        for (int i = 0; i < hotbarList.Count; i++)
+        if (MainManager.Instance.GetItem(hoveredItem).isEquipableInHand)
         {
-            hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
+            print("QuickHotbarSelect_2");
+            SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
+            for (int i = 0; i < hotbarList.Count; i++)
+            {
+                hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
+            }
+
+            selectedSlot = 1;
+            hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotActive();
+            selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
+
+            ChangeItemInHand();
+            SaveData();
         }
-
-        selectedSlot = 1;
-        hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotActive();
-        selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
-
-        ChangeItemInHand();
-        SaveData();
     }
     void QuickHotbarSelect_3()
     {
-        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
-
-        for (int i = 0; i < hotbarList.Count; i++)
+        if (MainManager.Instance.GetItem(hoveredItem).isEquipableInHand)
         {
-            hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
+            print("QuickHotbarSelect_3");
+            SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
+            for (int i = 0; i < hotbarList.Count; i++)
+            {
+                hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
+            }
+
+            selectedSlot = 2;
+            hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotActive();
+            selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
+
+            ChangeItemInHand();
+            SaveData();
         }
-
-        selectedSlot = 2;
-        hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotActive();
-        selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
-
-        ChangeItemInHand();
-        SaveData();
     }
     void QuickHotbarSelect_4()
     {
-        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
-
-        for (int i = 0; i < hotbarList.Count; i++)
+        if (MainManager.Instance.GetItem(hoveredItem).isEquipableInHand)
         {
-            hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
+            print("QuickHotbarSelect_4");
+            SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
+            for (int i = 0; i < hotbarList.Count; i++)
+            {
+                hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
+            }
+
+            selectedSlot = 3;
+            hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotActive();
+            selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
+
+            ChangeItemInHand();
+            SaveData();
         }
-
-        selectedSlot = 3;
-        hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotActive();
-        selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
-
-        ChangeItemInHand();
-        SaveData();
     }
     void QuickHotbarSelect_5()
     {
-        SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
-
-        for (int i = 0; i < hotbarList.Count; i++)
+        if (MainManager.Instance.GetItem(hoveredItem).isEquipableInHand)
         {
-            hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
+            print("QuickHotbarSelect_5");
+            SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+
+            for (int i = 0; i < hotbarList.Count; i++)
+            {
+                hotbarList[i].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotUnactive();
+            }
+
+            selectedSlot = 4;
+            hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotActive();
+            selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
+
+            ChangeItemInHand();
+            SaveData();
         }
-
-        selectedSlot = 4;
-        hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().SetHotbarSlotActive();
-        selectedItem = hotbarList[selectedSlot].hotbar.GetComponent<HotbarSlot>().hotbarItemName;
-
-        ChangeItemInHand();
-        SaveData();
     }
     #endregion
 

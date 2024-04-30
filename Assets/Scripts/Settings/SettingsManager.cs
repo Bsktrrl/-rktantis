@@ -47,6 +47,9 @@ public class SettingsManager : Singleton<SettingsManager>
 
     private void Start()
     {
+        UI_Camera_FOV.gameObject.SetActive(false);
+        UI_Camera_FOV_Text.gameObject.SetActive(false);
+
         if (DataManager.Instance.settingsValues_Store.sound_Master <= 0
             && DataManager.Instance.settingsValues_Store.sound_WorldSFX <= 0
             && DataManager.Instance.settingsValues_Store.sound_MenuSFX <= 0
@@ -88,8 +91,8 @@ public class SettingsManager : Singleton<SettingsManager>
             SaveData();
         }
 
-        MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
-        MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
+        MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 70;
+        MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 70;
     }
 
 
