@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
-public class DistanceAboveGround : MonoBehaviour
+public class DistanceAboveGround : Singleton<DistanceAboveGround>
 {
     RaycastHit hit;
 
@@ -27,6 +28,10 @@ public class DistanceAboveGround : MonoBehaviour
     public bool isGrounded;
     public GameObject GroundLookingAt;
 
+    public bool isInside;
+    [SerializeField] LayerMask roof_LayerMask;
+    [SerializeField] LayerMask player_LayerMask;
+
 
     //--------------------
 
@@ -34,12 +39,6 @@ public class DistanceAboveGround : MonoBehaviour
     private void Start()
     {
         raycastDistance_CheckGround = 0.25f;
-
-        //point_0.transform.SetLocalPositionAndRotation(new Vector3(0, -1, 0), Quaternion.identity);
-        //point_1.transform.SetLocalPositionAndRotation(new Vector3(0, -1, 0.5f), Quaternion.identity);
-        //point_2.transform.SetLocalPositionAndRotation(new Vector3(0, -1, -0.5f), Quaternion.identity);
-        //point_3.transform.SetLocalPositionAndRotation(new Vector3(0.5f, -1, 0), Quaternion.identity);
-        //point_4.transform.SetLocalPositionAndRotation(new Vector3(-0.5f, -1, 0), Quaternion.identity);
     }
     private void Update()
     {
@@ -51,6 +50,8 @@ public class DistanceAboveGround : MonoBehaviour
         {
             return;
         }
+
+        isInside = CheckIfInside();
 
         point_0_Hit = false;
         point_1_Hit = false;
@@ -114,5 +115,23 @@ public class DistanceAboveGround : MonoBehaviour
 
             return false;
         }
+    }
+
+    bool CheckIfInside()
+    {
+        Vector3 startPos = new Vector3(MainManager.Instance.playerBody.transform.position.x, MainManager.Instance.playerBody.transform.position.y + 0.5f, MainManager.Instance.playerBody.transform.position.z);
+
+        //Debug.DrawRay(startPos, Vector3.up, Color.white, 2.5f);
+
+        if (Physics.Raycast(startPos, Vector3.up, out hit, 2.5f, ~player_LayerMask))
+        {
+            if (hit.collider.gameObject.layer == 8
+                || hit.collider.gameObject.layer == 3)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
