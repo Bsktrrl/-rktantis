@@ -999,8 +999,6 @@ public class Arms : Singleton<Arms>
     }
     void CannotHit()
     {
-        print("44444. Cannot Hit");
-
         SoundManager.Instance.Play_PickaxeUsage_CannotHit_Clip();
 
         cannotHit = true;

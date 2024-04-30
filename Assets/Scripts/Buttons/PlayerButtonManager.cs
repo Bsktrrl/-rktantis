@@ -118,7 +118,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         {
             OpenPlayerInventory_isPressedDown?.Invoke();
         }
-        else if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
+        else if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
             && (MainManager.Instance.menuStates != MenuStates.None))
         {
             ClosePlayerInventory_isPressedDown?.Invoke();
