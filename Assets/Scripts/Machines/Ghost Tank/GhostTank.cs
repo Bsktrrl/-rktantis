@@ -55,8 +55,6 @@ public class GhostTank : MonoBehaviour
 
         int growingPlantsTemp = GetAmountOfGrowingPlants();
 
-        print("Growing Plants: " + growingPlantsTemp);
-
         ReduceFuel(0.075f * growingPlantsTemp * Time.deltaTime);
 
         if (growingPlantsTemp > 0 && ghostTankContent.currentFuelAmount > 0)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
@@ -60,7 +61,15 @@ public class PlayerManager : Singleton<PlayerManager>
         if (playerStats.playerGameOverPos == Vector3.zero)
         {
             //Set Player Start Position - New Game
-            MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-26.5f, 29.9f, -45.1f), Quaternion.identity); //Main Scene
+            if (SceneManager.GetActiveScene().name == "Adrian")
+            {
+                MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-12f, 2f, 6f), Quaternion.identity); //Main Scene
+            }
+            else if (SceneManager.GetActiveScene().name == "Landscape")
+            {
+                MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-26.5f, 30f, -45.1f), Quaternion.identity); //Main Scene
+            }
+            
             //MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(17f, 2f, 25f), Quaternion.identity); //Adrian Secene
 
             //Also set StartDeathPos to catch if the player dies before building Floors

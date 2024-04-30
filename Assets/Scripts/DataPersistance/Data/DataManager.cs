@@ -2,7 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements.Experimental;
 
 [Serializable]
 public class DataManager : Singleton<DataManager>, IDataPersistance
@@ -10,12 +13,24 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     public static Action dataIsSaving;
     public static Action datahasLoaded;
 
+    public GameObject loadingMenu_Parent;
+    public Image loadingImage;
+    public Image loadingImage_Icon;
+    public TextMeshProUGUI loadingText;
+
     public bool hasLoaded;
+
+    bool fading;
+    bool hasCompletedFading;
+    float fadingNotificationImageValue_Icon;
+    float fadingNotificationImageValue;
+    bool towardsVisible;
 
 
     //--------------------
 
 
+    #region Variables
     //Player Stats
     [HideInInspector] public PlayerStats playerStats_Store = new PlayerStats();
 
@@ -101,6 +116,34 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
     //Connections
     [HideInInspector] public List<ConnectionInfo> connectionInfoList_Store = new List<ConnectionInfo>();
+    #endregion
+
+
+    //--------------------
+
+
+    private void Start()
+    {
+        fadingNotificationImageValue = 1;
+
+        loadingMenu_Parent.SetActive(true);
+    }
+    private void Update()
+    {
+        //Whe loading
+        if (!hasLoaded)
+        {
+            //Fading In/Out Icon
+            FadingInOutIcon();
+        }
+
+        //After loading
+        if (fading)
+        {
+            //Fading whe screen
+            FadingOutLoadingScreen();
+        }
+    }
 
 
     //--------------------
@@ -250,8 +293,15 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         print("24. ConnectionPointManager has Loaded");
         #endregion
 
+        StartCoroutine(LoadingDelay(1.5f));
+    }
+    IEnumerator LoadingDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+
         print("------------------------------");
 
+        fading = true;
         hasLoaded = true;
     }
 
@@ -321,5 +371,51 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.connectionInfoList_Save = this.connectionInfoList_Store;
 
         print("Data has Saved");
+    }
+
+
+
+    //--------------------
+
+
+    void FadingInOutIcon()
+    {
+        //Change Visible Value
+        if (towardsVisible)
+        {
+            fadingNotificationImageValue_Icon += Time.deltaTime;
+        }
+        else
+        {
+            fadingNotificationImageValue_Icon -= Time.deltaTime;
+        }
+
+        //Set if Visibility is going Up or Down
+        if (fadingNotificationImageValue_Icon >= 1 && towardsVisible)
+        {
+            towardsVisible = false;
+        }
+        else if (fadingNotificationImageValue_Icon <= 0 && !towardsVisible)
+        {
+            towardsVisible = true;
+        }
+
+        //Change Visibility
+        loadingImage_Icon.color = new Color(1, 1, 1, fadingNotificationImageValue_Icon);
+    }
+    void FadingOutLoadingScreen()
+    {
+        fadingNotificationImageValue -= Time.deltaTime * 2;
+
+        loadingImage.color = new Color(loadingImage.color.r, loadingImage.color.g, loadingImage.color.b, fadingNotificationImageValue);
+        loadingImage_Icon.color = new Color(loadingImage_Icon.color.r, loadingImage_Icon.color.g, loadingImage_Icon.color.b, fadingNotificationImageValue * fadingNotificationImageValue_Icon);
+        loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, fadingNotificationImageValue);
+
+        if (fadingNotificationImageValue <= 0)
+        {
+            fading = false;
+
+            loadingMenu_Parent.SetActive(false);
+        }
     }
 }

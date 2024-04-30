@@ -24,6 +24,7 @@ public class JournalMessagesManager : Singleton<JournalMessagesManager>
 
             //Events
             CapturingGhost();
+            FirstGameOver();
         }
     }
 
@@ -149,6 +150,16 @@ public class JournalMessagesManager : Singleton<JournalMessagesManager>
             ActivateJournalPage(6);
         }
     }
+
+    void FirstGameOver()
+    {
+        if (!messagesConditionChecks.firstgameOver && GameOverManager.Instance.GameOverResetButton)
+        {
+            messagesConditionChecks.firstgameOver = true;
+
+            ActivateJournalPage(7);
+        }
+    }
 }
 
 [Serializable]
@@ -158,6 +169,7 @@ public class MessagesConditionChecks
 
     public bool openingTablet;
     public bool tableInteraction;
+    public bool firstgameOver;
 
     public bool holdingArídianCrystal;
     public bool holdingGhostCapturer;

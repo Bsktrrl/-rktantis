@@ -16,12 +16,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     bool movementAppearance_isHappening;
     float FOV_Smoother = 0;
-    //float crouch_Kneel = -0.75f;
-    float crouch_Up = -0.5f;
 
     float movement_X;
     float movement_Z;
-
 
     [Header("RaycastHit Distance")]
     [SerializeField] GameObject pointUp_0;
@@ -37,11 +34,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField] Vector3 jumpDistance_Start;
     [SerializeField] Vector3 jumpDistance_End;
     [SerializeField] float totalJumpDistance = 0;
-    [SerializeField] float safeJumpDistance = 10f;
+    [SerializeField] float safeJumpDistance = 4f;
     [SerializeField] float fallDamage = 0;
 
-    public float normalRaycastPos = -1.4f;
-    public float crouchRaycastPos = -1.2f;
+    public float notCrouchingPos_Y = -0.5f;
+    public float crouchingPos_Y = -0.75f;
 
 
     //--------------------
@@ -49,6 +46,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     private void Start()
     {
+        notCrouchingPos_Y = -0.5f;
+        crouchingPos_Y = -0.75f;
+
+        raycastDistance = 0.2f;
+
         //Set Player to the height it's supposed to be
         MainManager.Instance.playerBody.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), transform.rotation);
 
@@ -61,6 +63,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     void Update()
     {
         if (MainManager.Instance.gameStates == GameStates.GameOver)  { return; }
+        if (!DataManager.Instance.hasLoaded) { return; }
 
         //Perform the movement
         Movement();
@@ -116,7 +119,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         controller.Move(move * movementSpeed * movementSpeedVarianceByWeather * movementSpeedVarianceByMovement * movementSpeedVarianceByWater * PlayerManager.Instance.movementSpeedMultiplier_SkillTree * Time.deltaTime);
 
         //check if the player is on the ground so he can jump
-        if (Input.GetKeyDown(KeyCode.Space) && GetComponent<DistanceAboveGround>().isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && GetComponent<DistanceAboveGround>().isGrounded && !DistanceAboveGround.Instance.isInside)
         {
             //Check if the player can jump - is standing on a slope less than 50 degrees
 
@@ -172,25 +175,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 {
                     PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
 
-                    if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
-                    {
-                        //MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                        //                                                             MainManager.Instance.playerBody.transform.localPosition.x,
-                        //                                                             crouch_Up,
-                        //                                                             MainManager.Instance.playerBody.transform.localPosition.z);
-                    }
-
-                    //MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
-
-                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, normalRaycastPos, 0);
-                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, normalRaycastPos, 0.5f);
-                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, normalRaycastPos, -0.5f);
-                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, normalRaycastPos, 0);
-                    //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, normalRaycastPos, 0);
-
-                    //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
-                    //MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
-
                     movementAppearance_isHappening = true;
                     jumpDistance_Start = MainManager.Instance.playerBody.transform.position;
                     jumping = true;
@@ -208,22 +192,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
                     if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
                     {
-                        //MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                        //                                                             MainManager.Instance.playerBody.transform.localPosition.x,
-                        //                                                             crouch_Up,
-                        //                                                             MainManager.Instance.playerBody.transform.localPosition.z);
+                        SetNotCrouchingState();
                     }
-
-                    MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
-
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, normalRaycastPos, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, normalRaycastPos, 0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, normalRaycastPos, -0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, normalRaycastPos, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, normalRaycastPos, 0);
-
-                    MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
-                    MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
 
                     movementAppearance_isHappening = true;
                     jumping = false;
@@ -242,21 +212,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 {
                     PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
 
-                    //MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                    //                                                                 MainManager.Instance.playerBody.transform.localPosition.x,
-                    //                                                                 /*crouch_Kneel*/crouch_Up,
-                    //                                                                 MainManager.Instance.playerBody.transform.localPosition.z);
-
-                    MainManager.Instance.player.GetComponent<CharacterController>().height = 0.25f;
-
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, crouchRaycastPos, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, crouchRaycastPos, 0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, crouchRaycastPos, -0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, crouchRaycastPos, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, crouchRaycastPos, 0);
-
-                    MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.2f;
-                    MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.5f, 0f);
+                    SetCrouchingState();
 
                     movementAppearance_isHappening = true;
                     jumping = false;
@@ -275,24 +231,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 {
                     PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
 
-                    if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
-                    {
-                        //MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                        //                                                             MainManager.Instance.playerBody.transform.localPosition.x,
-                        //                                                             crouch_Up,
-                        //                                                             MainManager.Instance.playerBody.transform.localPosition.z);
-                    }
-
-                    MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
-
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, normalRaycastPos, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, normalRaycastPos, 0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, normalRaycastPos, -0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, normalRaycastPos, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, normalRaycastPos, 0);
-
-                    MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
-                    MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
+                    SetNotCrouchingState();
 
                     movementAppearance_isHappening = true;
                     jumping = false;
@@ -311,24 +250,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 {
                     PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
 
-                    if (PlayerManager.Instance.oldMovementStates == MovementStates.Crouching)
-                    {
-                        //MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                        //                                                             MainManager.Instance.playerBody.transform.localPosition.x,
-                        //                                                             crouch_Up,
-                        //                                                             MainManager.Instance.playerBody.transform.localPosition.z);
-                    }
-
-                    MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
-
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, normalRaycastPos, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, normalRaycastPos, 0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, normalRaycastPos, -0.5f);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, normalRaycastPos, 0);
-                    MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, normalRaycastPos, 0);
-
-                    MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
-                    MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
+                    SetNotCrouchingState();
 
                     movementAppearance_isHappening = true;
                     jumping = false;
@@ -346,21 +268,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             PlayerManager.Instance.oldMovementStates = PlayerManager.Instance.movementStates;
 
-            MainManager.Instance.playerBody.transform.localPosition = new Vector3(
-                                                                         MainManager.Instance.playerBody.transform.localPosition.x,
-                                                                         crouch_Up,
-                                                                         MainManager.Instance.playerBody.transform.localPosition.z);
-
-            MainManager.Instance.player.GetComponent<CharacterController>().height = 1.1f;
-
-            //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_0.transform.localPosition = new Vector3(0, -1, 0);
-            //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_1.transform.localPosition = new Vector3(0, -1, 0.5f);
-            //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_2.transform.localPosition = new Vector3(0, -1, -0.5f);
-            //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_3.transform.localPosition = new Vector3(0.5f, -1, 0);
-            //MainManager.Instance.player.GetComponent<DistanceAboveGround>().point_4.transform.localPosition = new Vector3(-0.5f, -1, 0);
-
-            MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().height = 1.75f;
-            MainManager.Instance.playerBody.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0f, 0f);
+            SetNotCrouchingState();
 
             movementAppearance_isHappening = true;
             jumping = false;
@@ -370,6 +278,20 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
             PlayerManager.Instance.movementStates = MovementStates.Standing;
         }
+    }
+    void SetCrouchingState()
+    {
+        MainManager.Instance.playerBody.transform.localPosition = new Vector3(
+                                                                         0 /*MainManager.Instance.playerBody.transform.localPosition.x*/,
+                                                                         crouchingPos_Y,
+                                                                         0 /*MainManager.Instance.playerBody.transform.localPosition.z*/);
+    }
+    void SetNotCrouchingState()
+    {
+        MainManager.Instance.playerBody.transform.localPosition = new Vector3(
+                                                                        0 /*MainManager.Instance.playerBody.transform.localPosition.x*/,
+                                                                        notCrouchingPos_Y,
+                                                                        0 /*MainManager.Instance.playerBody.transform.localPosition.z*/);
     }
 
     void UpdateHealthValues()
@@ -567,7 +489,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
             if (jumpDistance_Start != Vector3.zero && jumpDistance_End != Vector3.zero)
             {
-                totalJumpDistance = Vector3.Distance(jumpDistance_Start, jumpDistance_End);
+                //totalJumpDistance = Vector3.Distance(jumpDistance_Start, jumpDistance_End);
+                totalJumpDistance = Mathf.Abs(jumpDistance_Start.y - jumpDistance_End.y);
 
                 if (totalJumpDistance >= safeJumpDistance)
                 {
@@ -575,7 +498,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
                     fallDamage = totalJumpDistance - safeJumpDistance;
 
-                    float damageTaken = fallDamage / 20;
+                    float damageTaken = fallDamage / 14;
                     HealthManager.Instance.mainHealthValue -= damageTaken;
 
                     print("1. Height: " + totalJumpDistance + " | Damage: " + damageTaken);

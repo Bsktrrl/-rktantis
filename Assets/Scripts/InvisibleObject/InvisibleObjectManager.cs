@@ -8,7 +8,7 @@ public class InvisibleObjectManager : Singleton<InvisibleObjectManager>
 
     public LayerMask invisibleObjectLayerMask;
 
-    public float flashlight_Distance = 7;
-    public float ghostCapture_Distance = 5;
-    public float aríditeCrystal_Distance = 4.5f;
+    public float flashlight_Distance = 9;
+    public float ghostCapture_Distance = 7;
+    public float aríditeCrystal_Distance = 5f;
 }

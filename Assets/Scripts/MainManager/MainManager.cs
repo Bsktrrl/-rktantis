@@ -189,6 +189,15 @@ public class MainManager : Singleton<MainManager>
     public void SetDemoEndingText()
     {
         demoEndingText.SetActive(true);
+
+        StartCoroutine(RemoveDemoEndingText(5));
+    }
+
+    IEnumerator RemoveDemoEndingText(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        demoEndingText.SetActive(false);
     }
 }
 

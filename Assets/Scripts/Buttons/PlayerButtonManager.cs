@@ -112,22 +112,13 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         }
         #endregion
 
-        //Crafting
-        #region
-        //else if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape))
-        //    && MainManager.Instance.menuStates == MenuStates.CraftingMenu)
-        //{
-        //    isPressed_CloseCraftingMenu?.Invoke();
-        //}
-        #endregion
-
         //PlayerInventory
         #region
         else if (Input.GetKeyDown(KeyCode.Tab) && MainManager.Instance.menuStates == MenuStates.None)
         {
             OpenPlayerInventory_isPressedDown?.Invoke();
         }
-        else if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape))
+        else if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
             && (MainManager.Instance.menuStates != MenuStates.None))
         {
             ClosePlayerInventory_isPressedDown?.Invoke();
@@ -159,8 +150,8 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         }
         #endregion
 
-            //Hotbar
-            #region
+        //Hotbar
+        #region
         else if (Input.GetAxis("Mouse ScrollWheel") > 0 /*&& MainManager.Instance.menuStates != MenuStates.None*/)
         {
             hotbarSelectionDown_isPressed?.Invoke();

@@ -102,6 +102,8 @@ MonoBehaviour:
   oreVein: {fileID: 240532401378305070}
   oreHealth: 4
   tempOreHealth: 0
+  dropRate: {x: 1, y: 2}
+  dropRateUpgrade: {x: 0, y: 0}
   isHacked: 0
   dormantTimer: 0
   dormantPercentage: 0
@@ -123,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineMode: 1
   bakeKeys:
   - {fileID: -5559269858378902441, guid: 9adccb09aa188c348a58a9c1d3999321, type: 3}
   - {fileID: -6618874528207214460, guid: 9adccb09aa188c348a58a9c1d3999321, type: 3}
