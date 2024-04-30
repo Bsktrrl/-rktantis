@@ -63,7 +63,7 @@ public class HealthManager : Singleton<HealthManager>
 
     public int mainHealthCounter = 1;
     #endregion
-
+    
 
     //--------------------
 
@@ -73,10 +73,10 @@ public class HealthManager : Singleton<HealthManager>
         health_Parent.SetActive(true);
 
         //Set HealthParameters
-        //hungerValue = 1;
-        //heatResistanceValue = 1;
-        //thirstValue = 1;
-        //mainHealthValue = 1;
+        hunger_Speed = 2e-05f;
+        heatResistance_Speed = 2e-05f;
+        thirst_Speed = 2e-05f;
+        mainHealth_Speed = 8e-06f;
 
         //Set Arrows unactive
         #region

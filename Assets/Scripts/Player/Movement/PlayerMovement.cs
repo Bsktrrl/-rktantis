@@ -37,7 +37,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField] Vector3 jumpDistance_Start;
     [SerializeField] Vector3 jumpDistance_End;
     [SerializeField] float totalJumpDistance = 0;
-    [SerializeField] float safeJumpDistance = 10f;
+    [SerializeField] float safeJumpDistance = 4f;
     [SerializeField] float fallDamage = 0;
 
     public float normalRaycastPos = -1.4f;
@@ -61,6 +61,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     void Update()
     {
         if (MainManager.Instance.gameStates == GameStates.GameOver)  { return; }
+        if (!DataManager.Instance.hasLoaded) { return; }
 
         //Perform the movement
         Movement();
@@ -567,7 +568,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
             if (jumpDistance_Start != Vector3.zero && jumpDistance_End != Vector3.zero)
             {
-                totalJumpDistance = Vector3.Distance(jumpDistance_Start, jumpDistance_End);
+                //totalJumpDistance = Vector3.Distance(jumpDistance_Start, jumpDistance_End);
+                totalJumpDistance = Mathf.Abs(jumpDistance_Start.y - jumpDistance_End.y);
 
                 if (totalJumpDistance >= safeJumpDistance)
                 {
@@ -575,7 +577,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
                     fallDamage = totalJumpDistance - safeJumpDistance;
 
-                    float damageTaken = fallDamage / 20;
+                    float damageTaken = fallDamage / 14;
                     HealthManager.Instance.mainHealthValue -= damageTaken;
 
                     print("1. Height: " + totalJumpDistance + " | Damage: " + damageTaken);
