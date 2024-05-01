@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class DistanceAboveGround : Singleton<DistanceAboveGround>
 {
@@ -58,6 +59,12 @@ public class DistanceAboveGround : Singleton<DistanceAboveGround>
         point_3_Hit = false;
         point_4_Hit = false;
 
+        Debug.DrawRay(point_0.transform.position, Vector3.down, Color.gray, raycastDistance_CheckGround);
+        Debug.DrawRay(point_1.transform.position, Vector3.down, Color.gray, raycastDistance_CheckGround);
+        Debug.DrawRay(point_2.transform.position, Vector3.down, Color.gray, raycastDistance_CheckGround);
+        Debug.DrawRay(point_3.transform.position, Vector3.down, Color.gray, raycastDistance_CheckGround);
+        Debug.DrawRay(point_4.transform.position, Vector3.down, Color.gray, raycastDistance_CheckGround);
+
         if (RaycastHit(point_0.transform.position))
         {
             point_0_Hit = true;
@@ -91,6 +98,7 @@ public class DistanceAboveGround : Singleton<DistanceAboveGround>
 
     bool RaycastHit(Vector3 pos)
     {
+
         if (Physics.Raycast(pos, Vector3.down, out hit, raycastDistance_CheckGround))
         {
             GroundLookingAt = hit.transform.gameObject;

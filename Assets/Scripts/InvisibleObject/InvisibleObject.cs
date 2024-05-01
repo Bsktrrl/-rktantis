@@ -27,6 +27,7 @@ public class InvisibleObject : MonoBehaviour
     public bool isVisible;
     float distance;
 
+    [Header("If Image")]
     [SerializeField] bool isPicture;
     [SerializeField] Texture pictureSprite;
 

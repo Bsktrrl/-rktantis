@@ -102,8 +102,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     void Movement()
     {
-        print("2. MouseMovement");
-
         movement_X = Input.GetAxis("Horizontal");
         movement_Z = Input.GetAxis("Vertical");
 

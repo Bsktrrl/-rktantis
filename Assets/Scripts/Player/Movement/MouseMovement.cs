@@ -32,8 +32,6 @@ public class MouseMovement : Singleton<MouseMovement>
 
     void Movement()
     {
-        print("1. MouseMovement");
-
         if (MainManager.Instance.menuStates == MenuStates.None)
         {
             //Get Mouse Axis
