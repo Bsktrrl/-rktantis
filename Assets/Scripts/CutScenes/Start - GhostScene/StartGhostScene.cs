@@ -12,6 +12,7 @@ public class StartGhostScene : MonoBehaviour
 
     GameObject ghostObject;
     GameObject ghostMovingObject;
+    GameObject ghostCrystalObject;
 
 
     //--------------------
@@ -56,12 +57,19 @@ public class StartGhostScene : MonoBehaviour
 
             startCutscene = true;
 
-            StartCoroutine(EndCutscene(7.35f));
+            StartCoroutine(EndCutscene(7.45f));
         }
     }
     IEnumerator EndCutscene(float time)
     {
         yield return new WaitForSeconds(time);
+
+        ghostCrystalObject = FindChild(ghostObject.transform, "AriditeCrystal(Clone)").gameObject;
+
+        if (ghostCrystalObject.GetComponent<InteractableObject>())
+        {
+            ghostCrystalObject.GetComponent<InteractableObject>().DestroyThisInteractableObject();
+        }
 
         endCutscene = true;
 
