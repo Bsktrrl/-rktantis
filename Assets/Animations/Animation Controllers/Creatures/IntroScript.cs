@@ -8,11 +8,17 @@ public class IntroScript : MonoBehaviour
     public GameObject Crystal1;
     public GameObject SpawnCrystal;
     public GameObject CrystalBone;
-    private void Start()
+
+
+    //--------------------
+
+
+    public void StartMovement()
     {
         Crystal.SetActive(true);
         Crystal1.SetActive(false);
     }
+
     void CrystalSwap ()
     {
         Crystal.SetActive(false);

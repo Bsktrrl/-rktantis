@@ -141,6 +141,8 @@ public class TabletManager : Singleton<TabletManager>
     }
     private void Update()
     {
+        if (PauseGameManager.Instance.GetPause()) { return; }
+
         if (tablet_Parent.activeInHierarchy)
         {
             SetPlussIcons();

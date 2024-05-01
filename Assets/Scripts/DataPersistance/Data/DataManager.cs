@@ -116,6 +116,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
     //Connections
     [HideInInspector] public List<ConnectionInfo> connectionInfoList_Store = new List<ConnectionInfo>();
+
+    //CutScenes
+    [HideInInspector] public CutScenes cutScenes_Store = new CutScenes();
     #endregion
 
 
@@ -213,6 +216,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.perkActivations_Store = gameData.perkActivations_Save;
 
         this.connectionInfoList_Store = gameData.connectionInfoList_Save;
+
+        this.cutScenes_Store = gameData.cutScenes_Save;
         #endregion
 
         //Load the saved data into the project
@@ -291,6 +296,9 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         ConnectionPointManager.Instance.LoadData();
         print("24. ConnectionPointManager has Loaded");
+
+        CutSceneManager.Instance.LoadData();
+        print("25. CutSceneManager has Loaded");
         #endregion
 
         StartCoroutine(LoadingDelay(1.5f));
@@ -369,6 +377,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.perkActivations_Save = this.perkActivations_Store;
 
         gameData.connectionInfoList_Save = this.connectionInfoList_Store;
+
+        gameData.cutScenes_Save = this.cutScenes_Store;
 
         print("Data has Saved");
     }

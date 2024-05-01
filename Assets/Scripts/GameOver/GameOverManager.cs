@@ -98,6 +98,10 @@ public class GameOverManager : Singleton<GameOverManager>
                 MainManager.Instance.gameStates = GameStates.None;
             }
 
+            SettingsManager.Instance.UI_Camera_FOV.value = 0f;
+            MainManager.Instance.mainMainCamera.fieldOfView = (SettingsManager.Instance.settingsValues.camera_FOV * 20) + 60;
+            MainManager.Instance.mainCamera.fieldOfView = (SettingsManager.Instance.settingsValues.camera_FOV * 20) + 60;
+
             SoundManager.Instance.Stop_GameOver_Clip();
         }
     }

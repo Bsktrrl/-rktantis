@@ -91,6 +91,9 @@ public class GameData
     //Connection
     [HideInInspector] public List<ConnectionInfo> connectionInfoList_Save = new List<ConnectionInfo>();
 
+    //CutScenes
+    [HideInInspector] public CutScenes cutScenes_Save = new CutScenes();
+
 
     //--------------------
 

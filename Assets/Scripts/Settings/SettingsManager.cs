@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SettingsManager : Singleton<SettingsManager>
 {
     [Header("Interactable Variables")]
-    [SerializeField] SettingsValues settingsValues;
+    public SettingsValues settingsValues;
 
     [Header("UI Elements")]
     [SerializeField] Slider UI_Sound_Master;
@@ -32,7 +32,7 @@ public class SettingsManager : Singleton<SettingsManager>
     [SerializeField] TextMeshProUGUI UI_Sound_Weather_Text;
     [Space(5)]
 
-    [SerializeField] Slider UI_Camera_FOV;
+    public Slider UI_Camera_FOV;
     [SerializeField] TextMeshProUGUI UI_Camera_FOV_Text;
     [Space(5)]
     [SerializeField] Slider UI_Camera_MouseSensitivity;
@@ -90,9 +90,13 @@ public class SettingsManager : Singleton<SettingsManager>
 
             SaveData();
         }
+        else
+        {
+            UI_Camera_FOV.value = 0f;
+        }
 
-        MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 70;
-        MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 70;
+        MainManager.Instance.mainMainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
+        MainManager.Instance.mainCamera.fieldOfView = (settingsValues.camera_FOV * 20) + 60;
     }
 
 

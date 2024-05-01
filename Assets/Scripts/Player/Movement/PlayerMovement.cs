@@ -65,6 +65,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (MainManager.Instance.gameStates == GameStates.GameOver)  { return; }
         if (!DataManager.Instance.hasLoaded) { return; }
 
+        if (PauseGameManager.Instance.GetPause()) { return; }
+
         //Perform the movement
         Movement();
 
@@ -100,6 +102,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     void Movement()
     {
+        print("2. MouseMovement");
+
         movement_X = Input.GetAxis("Horizontal");
         movement_Z = Input.GetAxis("Vertical");
 
