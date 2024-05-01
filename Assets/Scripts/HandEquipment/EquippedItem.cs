@@ -123,6 +123,8 @@ public class EquippedItem : MonoBehaviour
             {
                 if (InventoryManager.Instance.inventories[0].itemsInInventory[i].itemID == HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].itemID)
                 {
+                    print("Update WaterDurability");
+
                     //Reduce the Durability
                     InventoryManager.Instance.inventories[0].itemsInInventory[i].durability_Current = MainManager.Instance.GetItem(itemName).durability_Max;
 

@@ -96,6 +96,7 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
             || HotbarManager.Instance.selectedItem == Items.GhostCapturer
             ))
         {
+            print("isPressed_EquipmentActivate");
             isPressed_EquipmentActivate?.Invoke();
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0) && MainManager.Instance.menuStates == MenuStates.None

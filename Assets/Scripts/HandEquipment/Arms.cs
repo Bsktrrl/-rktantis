@@ -72,16 +72,15 @@ public class Arms : Singleton<Arms>
                             || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Bottle
                             || EquippmentManager.Instance.toolHolderParent.transform.GetChild(1).gameObject.GetComponent<EquippedItem>().itemName == Items.Bucket)
                         {
-                            for (int i = 0; i < HotbarManager.Instance.hotbarList.Count; i++)
+                            for (int j = 0; j < InventoryManager.Instance.inventories[0].itemsInInventory.Count; j++)
                             {
-                                for (int j = 0; j < InventoryManager.Instance.inventories[0].itemsInInventory.Count; j++)
+                                if (HotbarManager.Instance.hotbarList[HotbarManager.Instance.selectedSlot].itemID == InventoryManager.Instance.inventories[0].itemsInInventory[j].itemID)
                                 {
-                                    if (HotbarManager.Instance.hotbarList[i].itemID == InventoryManager.Instance.inventories[0].itemsInInventory[j].itemID)
+                                    if (InventoryManager.Instance.inventories[0].itemsInInventory[j].durability_Current <= 0)
                                     {
-                                        if (InventoryManager.Instance.inventories[0].itemsInInventory[j].durability_Current <= 0)
-                                        {
-                                            return;
-                                        }
+                                        print("durability_Current <= 0: " + InventoryManager.Instance.inventories[0].itemsInInventory[j].itemName);
+
+                                        return;
                                     }
                                 }
                             }
@@ -91,6 +90,8 @@ public class Arms : Singleton<Arms>
             }
             
             anim.SetTrigger("Click");
+
+            print("Click");
         }
     }
     bool Cooldown()
