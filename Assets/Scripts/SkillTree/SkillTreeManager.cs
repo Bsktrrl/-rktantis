@@ -28,14 +28,18 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     public Sprite BG_Ready;
     public Sprite BG_Active;
 
+    public Color perkTier_0_Color;
     public Color perkTier_1_Color;
     public Color perkTier_2_Color;
     public Color perkTier_3_Color;
 
-    public Color perkRingColor_Passive;
-    public Color perkRingColor_Hovered;
-    public Color perkRingColor_Pressed;
-    public Color perkRingColor_Active;
+    //public Color perkFrameColor_Passive;
+    //public Color perkFrameColor_Ready;
+    //public Color perkFrameColor_Active;
+
+    public Color perkIconColor_Passive;
+    public Color perkIconColor_Ready;
+    public Color perkIconColor_Active;
 
     [Header("information")]
     [SerializeField] TextMeshProUGUI header_Text;
@@ -215,15 +219,49 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     public void Upgrade_Button_isPressed()
     {
         print("Button is pressed");
+
+        if (activePerk)
+        {
+            if (activePerk.GetComponent<Perk>().perkInfo.perkState == PerkState.Ready)
+            {
+                SoundManager.Instance.Play_SkillTree_CompletedPerk_Clip();
+
+                activePerk.GetComponent<Perk>().ActivatePerk();
+
+                for (int i = 0; i < perktList.Count; i++)
+                {
+                    if (perktList[i].GetComponent<Perk>())
+                    {
+                        perktList[i].GetComponent<Perk>().UpdatePerk();
+                    }
+                }
+            }
+
+            ResetSkillTree_Information();
+
+            pressedPerk = null;
+        }
     }
-
-
-    //--------------------
-
-
-    public void ActivationButton_isClicked()
+    public void A_PerkHasBeenPressed(Perk perk)
     {
-        SoundManager.Instance.Play_SkillTree_CompletedPerk_Clip();
+        //Reset Perk Pressed State
+        for (int i = 0; i < perktList.Count; i++)
+        {
+            if (perktList[i].GetComponent<Perk>())
+            {
+                perktList[i].GetComponent<Perk>().perkInfo.perkInteractionState = PerkInteractionState.Passive;
+
+                perktList[i].GetComponent<Perk>().UpdatePerk();
+            }
+        }
+
+        //Change Perk Info
+        pressedPerk = perk;
+
+        if (perk)
+        {
+            SetupSkillTree_Information(perk.gameObject);
+        }
     }
 }
 
@@ -243,11 +281,11 @@ public class PerkInfo
     public PerkState perkState;
     public PerkInteractionState perkInteractionState;
 
-    [Header("Requirement")]
-    public List<CraftingRequirements> requirementList = new List<CraftingRequirements>();
-
     [Header("Connections")]
     public List<GameObject> perkConnectionList = new List<GameObject>();
+
+    [Header("Requirement")]
+    public List<CraftingRequirements> requirementList = new List<CraftingRequirements>();
 }
 
 public enum PerkState

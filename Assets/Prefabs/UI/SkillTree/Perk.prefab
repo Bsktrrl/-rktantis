@@ -144,7 +144,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -193,15 +193,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29dc6691c80d0b41a30e9e8fe48465c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perk_BG_Image: {fileID: 6118682092466625202}
-  perkImage: {fileID: 185578118151546405}
+  perk_Frame: {fileID: 2675660903149435259}
+  perk_BG: {fileID: 6118682092466625202}
+  perk_Icon: {fileID: 185578118151546405}
   perkInfo:
     perkName: Upgrade
-    perkDescription: 
     skillTreeType: 0
-    perkIcon: {fileID: 0}
+    perkTier: 0
+    perkDescription: 
+    perkIcon: {fileID: 21300000, guid: 0741c7ad4b7046d4fa0ea6b12089f062, type: 3}
     perkState: 1
+    perkInteractionState: 0
     perkConnectionList: []
+    requirementList: []
 --- !u!114 &-3150056966853204980
 MonoBehaviour:
   m_ObjectHideFlags: 0
