@@ -333,5 +333,13 @@ public class InvisibleObject : MonoBehaviour
         {
             sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.ghostCapture_Distance;
         }
+        else if (HotbarManager.Instance.selectedItem == Items.Lamp)
+        {
+            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.ghostCapture_Distance;
+        }
+        else
+        {
+            sphereCollider.GetComponent<SphereCollider>().radius = 4;
+        }
     }
 }
