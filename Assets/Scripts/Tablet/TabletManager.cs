@@ -324,7 +324,7 @@ public class TabletManager : Singleton<TabletManager>
         skillTree_GhostCapture_Button.GetComponent<Image>().sprite = menuButton_Active;
         skillTree_CrystalLight_Button.GetComponent<Image>().sprite = menuButton_Passive;
 
-        SkillTreeManager.Instance.skillTreeMenu_Type = SkillTreeType.GhostCapture;
+        SkillTreeManager.Instance.skillTreeMenu_Type = SkillTreeType.Tools;
 
         SkillTreeManager.Instance.ResetSkillTree_Information();
     }
@@ -340,7 +340,7 @@ public class TabletManager : Singleton<TabletManager>
         skillTree_GhostCapture_Button.GetComponent<Image>().sprite = menuButton_Passive;
         skillTree_CrystalLight_Button.GetComponent<Image>().sprite = menuButton_Active;
 
-        SkillTreeManager.Instance.skillTreeMenu_Type = SkillTreeType.CrystalLight;
+        SkillTreeManager.Instance.skillTreeMenu_Type = SkillTreeType.Arídean;
 
         SkillTreeManager.Instance.ResetSkillTree_Information();
     }

@@ -9,6 +9,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 {
     [Header("General")]
     public SkillTreeType skillTreeMenu_Type;
+    public Perk pressedPerk;
     public Perk activePerk;
     [SerializeField] List<GameObject> perktList = new List<GameObject>();
 
@@ -26,6 +27,15 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     public Sprite BG_Passive;
     public Sprite BG_Ready;
     public Sprite BG_Active;
+
+    public Color perkTier_1_Color;
+    public Color perkTier_2_Color;
+    public Color perkTier_3_Color;
+
+    public Color perkRingColor_Passive;
+    public Color perkRingColor_Hovered;
+    public Color perkRingColor_Pressed;
+    public Color perkRingColor_Active;
 
     [Header("information")]
     [SerializeField] TextMeshProUGUI header_Text;
@@ -201,7 +211,16 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
     //--------------------
 
-    
+
+    public void Upgrade_Button_isPressed()
+    {
+        print("Button is pressed");
+    }
+
+
+    //--------------------
+
+
     public void ActivationButton_isClicked()
     {
         SoundManager.Instance.Play_SkillTree_CompletedPerk_Clip();
@@ -211,15 +230,23 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 [Serializable]
 public class PerkInfo
 {
+    [Header("General")]
     public string perkName;
-    [TextArea(5, 10)] public string perkDescription;
     public SkillTreeType skillTreeType;
+    public PerkTier perkTier;
+    [TextArea(5, 10)] public string perkDescription;
 
+    [Header("Icon")]
     public Sprite perkIcon;
+
+    [Header("States")]
     public PerkState perkState;
+    public PerkInteractionState perkInteractionState;
 
-    //public List<ItemRequirement> requirementList = new List<ItemRequirement>();
+    [Header("Requirement")]
+    public List<CraftingRequirements> requirementList = new List<CraftingRequirements>();
 
+    [Header("Connections")]
     public List<GameObject> perkConnectionList = new List<GameObject>();
 }
 
@@ -231,10 +258,26 @@ public enum PerkState
     Ready,
     Active
 }
+public enum PerkInteractionState
+{
+    Passive,
+    Hovered,
+    Pressed
+}
+
 public enum SkillTreeType
 {
     Inventory,
     Equipment,
-    GhostCapture,
-    CrystalLight
+    Tools,
+    Arídean
+}
+
+public enum PerkTier
+{
+    Tier_0,
+    Tier_1,
+    Tier_2,
+    Tier_3,
+    Tier_4
 }

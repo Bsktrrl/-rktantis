@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 //[ExecuteInEditMode]
-public class Perk : MonoBehaviour, IPointerEnterHandler
+public class Perk : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Image perk_BG_Image;
     public Image perkImage;
+
+    public Image perk_Frame;
+    public Image perk_BG;
+
     public PerkInfo perkInfo;
 
     float lineWidth = 5;
@@ -30,8 +31,6 @@ public class Perk : MonoBehaviour, IPointerEnterHandler
     }
     private void Update()
     {
-        //UpdateState();
-
         SetSprite();
     }
 
@@ -49,11 +48,11 @@ public class Perk : MonoBehaviour, IPointerEnterHandler
         {
             return SkillTreeManager.Instance.skillTree_Equipment_Lines;
         }
-        else if (perkInfo.skillTreeType == SkillTreeType.GhostCapture)
+        else if (perkInfo.skillTreeType == SkillTreeType.Tools)
         {
             return SkillTreeManager.Instance.skillTree_GhostCapture_Lines;
         }
-        else if (perkInfo.skillTreeType == SkillTreeType.CrystalLight)
+        else if (perkInfo.skillTreeType == SkillTreeType.Arídean)
         {
             return SkillTreeManager.Instance.skillTree_CrystalLight_Lines;
         }
@@ -135,19 +134,21 @@ public class Perk : MonoBehaviour, IPointerEnterHandler
         //Change State
         if (perkInfo.perkState == PerkState.Ready)
         {
-            print("Pressed a Ready Perk");
+            //print("Pressed a Ready Perk");
 
-            perkInfo.perkState = PerkState.Active;
-            perk_BG_Image.sprite = SkillTreeManager.Instance.BG_Active;
+            //perkInfo.perkState = PerkState.Active;
+            //perk_BG_Image.sprite = SkillTreeManager.Instance.BG_Active;
 
-            //Remove items from player inventory
-            //for (int i = 0; i < perkInfo.requirementList.Count; i++)
-            //{
-            //    for (int j = 0; j < perkInfo.requirementList[i].amount; j++)
-            //    {
-            //        InventoryManager.Instance.RemoveItemFromInventory(0, perkInfo.requirementList[i].itemName, -1, false);
-            //    }
-            //}
+            ////Remove items from player inventory
+            ////for (int i = 0; i < perkInfo.requirementList.Count; i++)
+            ////{
+            ////    for (int j = 0; j < perkInfo.requirementList[i].amount; j++)
+            ////    {
+            ////        InventoryManager.Instance.RemoveItemFromInventory(0, perkInfo.requirementList[i].itemName, -1, false);
+            ////    }
+            ////}
+
+            SkillTreeManager.Instance.pressedPerk = this;
 
             SkillTreeManager.Instance.SetupSkillTree_Information(gameObject);
         }
@@ -180,9 +181,110 @@ public class Perk : MonoBehaviour, IPointerEnterHandler
     //--------------------
 
 
+    void UpdatePerk()
+    {
+        if (perkInfo.perkState == PerkState.Passive)
+        {
+            switch (PerkInteractionState.Passive)
+            {
+                case PerkInteractionState.Passive:
+                    break;
+                case PerkInteractionState.Hovered:
+                    break;
+                case PerkInteractionState.Pressed:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        else if (perkInfo.perkState == PerkState.Ready)
+        {
+            switch (PerkInteractionState.Passive)
+            {
+                case PerkInteractionState.Passive:
+                    break;
+                case PerkInteractionState.Hovered:
+                    break;
+                case PerkInteractionState.Pressed:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        else if (perkInfo.perkState == PerkState.Active)
+        {
+            switch (PerkInteractionState.Passive)
+            {
+                case PerkInteractionState.Passive:
+                    break;
+                case PerkInteractionState.Hovered:
+                    break;
+                case PerkInteractionState.Pressed:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        else if (perkInfo.perkState == PerkState.Invisible)
+        {
+            switch (PerkInteractionState.Passive)
+            {
+                case PerkInteractionState.Passive:
+                    break;
+                case PerkInteractionState.Hovered:
+                    break;
+                case PerkInteractionState.Pressed:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+
+    //--------------------
+
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.Instance.Play_Inventory_ItemHover_Clip();
         SkillTreeManager.Instance.SetupSkillTree_Information(gameObject);
+
+        //Set InteractionState
+        if (true)
+        {
+           // perkInteractionState = 
+        }
+
+
+        UpdatePerk();
+    }
+
+
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+
+        if (SkillTreeManager.Instance.pressedPerk)
+        {
+            SkillTreeManager.Instance.SetupSkillTree_Information(SkillTreeManager.Instance.pressedPerk.gameObject);
+        }
+
+        if (SkillTreeManager.Instance.pressedPerk == gameObject)
+        {
+
+        }
+        else
+        {
+
+        }
+
+        UpdatePerk();
     }
 }
