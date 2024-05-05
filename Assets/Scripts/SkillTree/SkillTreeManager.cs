@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,6 +14,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     public bool canUpgrade;
 
     [SerializeField] List<GameObject> perktList = new List<GameObject>();
+    public List<bool> perkActivationList = new List<bool>();
 
     [Header("LineParents")]
     public GameObject skillTree_Inventory_Lines;
@@ -84,6 +84,63 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
                 PerkRequirements(perktList[i].GetComponent<Perk>());
             }
         }
+    }
+
+
+
+    //--------------------
+
+
+    public void LoadData()
+    {
+        perkActivationList = DataManager.Instance.perkActivationList_Store;
+
+        //If NewGame
+        if (perkActivationList.Count <= 0)
+        {
+            for (int i = 0; i < perktList.Count; i++)
+            {
+                perkActivationList.Add(false);
+            }
+        }
+
+        SetupPerksFromLoad();
+    }
+    public void SaveData()
+    {
+        DataManager.Instance.perkActivationList_Store = perkActivationList;
+    }
+
+
+    //--------------------
+
+
+    public void SetupPerksFromLoad()
+    {
+        for (int i = 0; i < perkActivationList.Count; i++)
+        {
+            if (perkActivationList[i])
+            {
+                perktList[i].GetComponent<Perk>().perkInfo.perkState = PerkState.Active;
+
+                perktList[i].GetComponent<Perk>().UpdatePerk();
+            }
+        }
+    }
+
+    public void UpdateActivePerkList(string perkName)
+    {
+        for (int i = 0; i < perktList.Count; i++)
+        {
+            if (perktList[i].GetComponent<Perk>().perkInfo.perkName == perkName)
+            {
+                perkActivationList[i] = true;
+
+                break;
+            }
+        }
+
+        SaveData();
     }
 
 
@@ -331,6 +388,9 @@ public class PerkInfo
 
     [Header("Requirement")]
     public List<CraftingRequirements> requirementList = new List<CraftingRequirements>();
+
+    [Header("What to Activate?")]
+    public PerkValues perkValues = new PerkValues();
 }
 
 public enum PerkState

@@ -85,8 +85,8 @@ public class GameData
     [HideInInspector] public List<GhostTankContent> ghostTankList_Save = new List<GhostTankContent>();
 
     //Perks
-    [HideInInspector] public Perks perks_Save = new Perks();
-    [HideInInspector] public PerkActivations perkActivations_Save = new PerkActivations();
+    [HideInInspector] public PerkValues perks_Save = new PerkValues();
+    [HideInInspector] public List<bool> perkActivationList_Save = new List<bool>();
 
     //Connection
     [HideInInspector] public List<ConnectionInfo> connectionInfoList_Save = new List<ConnectionInfo>();
@@ -132,6 +132,8 @@ public class GameData
 
         this.researchedItemsListNames_Save.Clear();
         this.researched_SOItem_Save.Clear();
+
+        this.perkActivationList_Save.Clear();
 
         this.ghostTankList_Save.Clear();
 

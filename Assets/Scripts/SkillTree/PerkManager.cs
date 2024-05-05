@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PerkManager : Singleton<PerkManager>
 {
-    public Perks perks;
-    public PerkActivations perkActivations;
+    public PerkValues perkValues;
+    //public PerkActivations perkActivations;
 
 
     //--------------------
@@ -12,18 +15,48 @@ public class PerkManager : Singleton<PerkManager>
 
     public void LoadData()
     {
-        perks = DataManager.Instance.perks_Store;
-        perkActivations = DataManager.Instance.perkActivations_Store;
+        perkValues = DataManager.Instance.perks_Store;
+        //perkActivations = DataManager.Instance.perkActivations_Store;
     }
     public void SaveData()
     {
-        DataManager.Instance.perks_Store = perks;
-        DataManager.Instance.perkActivations_Store = perkActivations;
+        DataManager.Instance.perks_Store = perkValues;
+        //DataManager.Instance.perkActivations_Store = perkActivations;
+    }
+
+
+    //--------------------
+
+
+    public void UpdatePerkValues(Perk perk) //Make a long "else if"-list of ALL Perks, to be enabled
+    {
+        //floats
+        if (perk.perkInfo.perkValues.ghostMovementReducer_Right > 0)
+        {
+            perkValues.ghostMovementReducer_Right = perk.perkInfo.perkValues.ghostMovementReducer_Right;
+        }
+        else if (perk.perkInfo.perkValues.ghostMovementReducer_Up > 0)
+        {
+            perkValues.ghostMovementReducer_Up = perk.perkInfo.perkValues.ghostMovementReducer_Up;
+        }
+        else if (perk.perkInfo.perkValues.ghostMovementReducer_Speed > 0)
+        {
+            perkValues.ghostMovementReducer_Speed = perk.perkInfo.perkValues.ghostMovementReducer_Speed;
+        }
+
+        //Bools
+
+
+
+        //--------------------
+
+
+        SaveData();
     }
 }
 
 [Serializable]
-public class Perks
+public class PerkValues
 {
     [Header("Player")]
 
@@ -44,30 +77,33 @@ public class Perks
     public float ghostMovementReducer_Speed = 0;
 }
 
-[Serializable]
-public class PerkActivations
-{
-    [Header("Player")]
+//[Serializable]
+//public class PerkActivations
+//{
+
+//    [Header("Player")]
 
 
-    [Header("Inventory")]
+//    [Header("Inventory")]
 
 
-    [Header("Tools")]
+//    [Header("Tools")]
 
 
-    [Header("Arídite")]
+//    [Header("Arídite")]
 
 
-    [Header("Ghost")]
-    //MovementReducer
-    public bool ghost_T1_MovementReducer_Right = false;
-    public bool ghost_T1_MovementReducer_Up = false;
-    public bool ghost_T1_MovementReducer_Speed = false;
-    public bool ghost_T2_MovementReducer_Right = false;
-    public bool ghost_T2_MovementReducer_Up = false;
-    public bool ghost_T2_MovementReducer_Speed = false;
-    public bool ghost_T3_MovementReducer_Right = false;
-    public bool ghost_T3_MovementReducer_Up = false;
-    public bool ghost_T3_MovementReducer_Speed = false;
-}
+//    [Header("Ghost")]
+//    //MovementReducer
+//    public bool ghost_T1_MovementReducer_Right = false;
+//    public bool ghost_T1_MovementReducer_Up = false;
+//    public bool ghost_T1_MovementReducer_Speed = false;
+
+//    public bool ghost_T2_MovementReducer_Right = false;
+//    public bool ghost_T2_MovementReducer_Up = false;
+//    public bool ghost_T2_MovementReducer_Speed = false;
+
+//    public bool ghost_T3_MovementReducer_Right = false;
+//    public bool ghost_T3_MovementReducer_Up = false;
+//    public bool ghost_T3_MovementReducer_Speed = false;
+//}

@@ -431,7 +431,7 @@ public class Ghost : MonoBehaviour
 
 
         //Change Right-Vector to random
-        fleeRightDirectionTimerCheck = Random.Range(-10f + PerkManager.Instance.perks.ghostMovementReducer_Right, 10f - PerkManager.Instance.perks.ghostMovementReducer_Right);
+        fleeRightDirectionTimerCheck = Random.Range(-10f + PerkManager.Instance.perkValues.ghostMovementReducer_Right, 10f - PerkManager.Instance.perkValues.ghostMovementReducer_Right);
         fleeRightDirectionTimer += fleeRightDirectionTimerCheck * Time.deltaTime;
 
         if (fleeRightDirectionTimer != 0)
@@ -446,7 +446,7 @@ public class Ghost : MonoBehaviour
 
 
         //Change Up-vector to random
-        fleeUpDirectionTimerCheck = Random.Range(-0.75f + PerkManager.Instance.perks.ghostMovementReducer_Up, 0.75f - PerkManager.Instance.perks.ghostMovementReducer_Up);
+        fleeUpDirectionTimerCheck = Random.Range(-0.75f + PerkManager.Instance.perkValues.ghostMovementReducer_Up, 0.75f - PerkManager.Instance.perkValues.ghostMovementReducer_Up);
 
         //Check for height and terrain collision
         if (terrainDirection_Down == 1 || terrainDirection_Forward == 1)
@@ -466,7 +466,7 @@ public class Ghost : MonoBehaviour
 
 
         //Change Speed to random
-        fleeSpeedTimerCheck = Random.Range(-0.75f + PerkManager.Instance.perks.ghostMovementReducer_Speed, 0.75f - PerkManager.Instance.perks.ghostMovementReducer_Speed);
+        fleeSpeedTimerCheck = Random.Range(-0.75f + PerkManager.Instance.perkValues.ghostMovementReducer_Speed, 0.75f - PerkManager.Instance.perkValues.ghostMovementReducer_Speed);
         fleeTempSpeedMultiplier += fleeSpeedTimerCheck * Time.deltaTime;
 
         if (fleeTempSpeedMultiplier <= 0.1f)

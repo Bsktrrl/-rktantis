@@ -111,8 +111,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<GhostTankContent> ghostTankList_Store = new List<GhostTankContent>();
 
     //Perks
-    [HideInInspector] public Perks perks_Store = new Perks();
-    [HideInInspector] public PerkActivations perkActivations_Store = new PerkActivations();
+    [HideInInspector] public PerkValues perks_Store = new PerkValues();
+    [HideInInspector] public List<bool> perkActivationList_Store = new List<bool>();
 
     //Connections
     [HideInInspector] public List<ConnectionInfo> connectionInfoList_Store = new List<ConnectionInfo>();
@@ -213,7 +213,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.ghostTankList_Store = gameData.ghostTankList_Save;
 
         this.perks_Store = gameData.perks_Save;
-        this.perkActivations_Store = gameData.perkActivations_Save;
+        this.perkActivationList_Store = gameData.perkActivationList_Save;
 
         this.connectionInfoList_Store = gameData.connectionInfoList_Save;
 
@@ -286,19 +286,22 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         print("20. Ghost has Loaded");
 
         PerkManager.Instance.LoadData();
-        print("21. Perks has Loaded");
+        print("21. PerkValues has Loaded");
+
+        SkillTreeManager.Instance.LoadData();
+        print("22. SkillTreeManager has Loaded");
 
         ArídianKeyManager.Instance.LoadData();
-        print("22. AríditeKeyManager has Loaded");
+        print("23. AríditeKeyManager has Loaded");
 
         AríditeCrystalManager.Instance.LoadData();
-        print("23. AríditeCrystalManager has Loaded");
+        print("24. AríditeCrystalManager has Loaded");
 
         ConnectionPointManager.Instance.LoadData();
-        print("24. ConnectionPointManager has Loaded");
+        print("25. ConnectionPointManager has Loaded");
 
         CutSceneManager.Instance.LoadData();
-        print("25. CutSceneManager has Loaded");
+        print("26. CutSceneManager has Loaded");
         #endregion
 
         StartCoroutine(LoadingDelay(1.5f));
@@ -374,7 +377,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.ghostTankList_Save = this.ghostTankList_Store;
 
         gameData.perks_Save = this.perks_Store;
-        gameData.perkActivations_Save = this.perkActivations_Store;
+        gameData.perkActivationList_Save = this.perkActivationList_Store;
 
         gameData.connectionInfoList_Save = this.connectionInfoList_Store;
 
@@ -388,6 +391,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //--------------------
 
 
+    #region LoadingScreen
     void FadingInOutIcon()
     {
         //Change Visible Value
@@ -428,4 +432,5 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
             loadingMenu_Parent.SetActive(false);
         }
     }
+    #endregion
 }

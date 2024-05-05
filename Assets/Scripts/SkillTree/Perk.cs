@@ -119,6 +119,9 @@ public class Perk : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                     InventoryManager.Instance.RemoveItemFromInventory(0, perkInfo.requirementList[i].itemName, -1, false);
                 }
             }
+
+            PerkManager.Instance.UpdatePerkValues(this);
+            SkillTreeManager.Instance.UpdateActivePerkList(perkInfo.perkName);
         }
 
         UpdatePerk();
