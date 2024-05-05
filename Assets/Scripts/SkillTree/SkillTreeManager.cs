@@ -13,7 +13,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
     public bool canUpgrade;
 
-    [SerializeField] List<GameObject> perktList = new List<GameObject>();
+    [SerializeField] List<GameObject> perkList = new List<GameObject>();
     public List<bool> perkActivationList = new List<bool>();
 
     [Header("LineParents")]
@@ -51,8 +51,6 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     [SerializeField] GameObject requirement_Prefab;
     [SerializeField] List<GameObject> perkRequirementList = new List<GameObject>();
 
-    bool perkSetup;
-
 
     //--------------------
 
@@ -77,13 +75,13 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
     private void Update()
     {
-        if (!perkSetup)
-        {
-            for (int i = 0; i < perktList.Count; i++)
-            {
-                PerkRequirements(perktList[i].GetComponent<Perk>());
-            }
-        }
+        //if (DataManager.Instance.hasLoaded)
+        //{
+        //    for (int i = 0; i < perktList.Count; i++)
+        //    {
+        //        PerkRequirements(perktList[i].GetComponent<Perk>());
+        //    }
+        //}
     }
 
 
@@ -98,7 +96,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         //If NewGame
         if (perkActivationList.Count <= 0)
         {
-            for (int i = 0; i < perktList.Count; i++)
+            for (int i = 0; i < perkList.Count; i++)
             {
                 perkActivationList.Add(false);
             }
@@ -121,18 +119,18 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         {
             if (perkActivationList[i])
             {
-                perktList[i].GetComponent<Perk>().perkInfo.perkState = PerkState.Active;
+                perkList[i].GetComponent<Perk>().perkInfo.perkState = PerkState.Active;
 
-                perktList[i].GetComponent<Perk>().UpdatePerk();
+                perkList[i].GetComponent<Perk>().UpdatePerk();
             }
         }
     }
 
     public void UpdateActivePerkList(string perkName)
     {
-        for (int i = 0; i < perktList.Count; i++)
+        for (int i = 0; i < perkList.Count; i++)
         {
-            if (perktList[i].GetComponent<Perk>().perkInfo.perkName == perkName)
+            if (perkList[i].GetComponent<Perk>().perkInfo.perkName == perkName)
             {
                 perkActivationList[i] = true;
 
@@ -226,8 +224,6 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
     public void SetupSkillTree_Information(GameObject perk)
     {
-        perkSetup = true;
-
         activePerk = perk.GetComponent<Perk>();
 
         canUpgrade = CheckIfPerkCanUpgrade(activePerk);
@@ -244,7 +240,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         }
 
         header_Text.text = SpaceTextConverting.Instance.SetText(skillTreeMenu_Type.ToString());
-        perkName_Text.text = SpaceTextConverting.Instance.SetText(perk.GetComponent<Perk>().perkInfo.perkName);
+        perkName_Text.text = perk.GetComponent<Perk>().perkInfo.perkName;
         perkDescription_Text.text = perk.GetComponent<Perk>().perkInfo.perkDescription;
 
         //PerkRequirementList
@@ -269,13 +265,9 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         #endregion
 
         UpdateRequirementDisplay(perk.gameObject.GetComponent<Perk>());
-
-        perkSetup = false;
     }
     public void ResetSkillTree_Information()
     {
-        perkSetup = true;
-
         header_Text.text = SpaceTextConverting.Instance.SetText(skillTreeMenu_Type.ToString());
         perkName_Text.text = "";
         perkDescription_Text.text = "";
@@ -289,8 +281,6 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
         upgrade_Button.GetComponent<Button>().image.sprite = slot_Orange;
         upgrade_Button_Text.color = MainManager.Instance.mainColor_Orange;
-
-        perkSetup = false;
     }
 
 
@@ -307,11 +297,11 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
                 activePerk.GetComponent<Perk>().ActivatePerk();
 
-                for (int i = 0; i < perktList.Count; i++)
+                for (int i = 0; i < perkList.Count; i++)
                 {
-                    if (perktList[i].GetComponent<Perk>())
+                    if (perkList[i].GetComponent<Perk>())
                     {
-                        perktList[i].GetComponent<Perk>().UpdatePerk();
+                        perkList[i].GetComponent<Perk>().UpdatePerk();
                     }
                 }
             }
@@ -324,13 +314,13 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     public void A_PerkHasBeenPressed(Perk perk)
     {
         //Reset Perk Pressed State
-        for (int i = 0; i < perktList.Count; i++)
+        for (int i = 0; i < perkList.Count; i++)
         {
-            if (perktList[i].GetComponent<Perk>())
+            if (perkList[i].GetComponent<Perk>())
             {
-                perktList[i].GetComponent<Perk>().perkInfo.perkInteractionState = PerkInteractionState.Passive;
+                perkList[i].GetComponent<Perk>().perkInfo.perkInteractionState = PerkInteractionState.Passive;
 
-                perktList[i].GetComponent<Perk>().UpdatePerk();
+                perkList[i].GetComponent<Perk>().UpdatePerk();
             }
         }
 
