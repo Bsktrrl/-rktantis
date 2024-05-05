@@ -38956,6 +38956,7 @@ Transform:
   - {fileID: 635001082}
   - {fileID: 1475940984}
   - {fileID: 1847421848}
+  - {fileID: 1749284336}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &935458860
@@ -41648,6 +41649,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120162777062804714, guid: cd9a8f07b5d2fc747916340b223af79f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167880754291885356, guid: cd9a8f07b5d2fc747916340b223af79f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643917569375808978, guid: cd9a8f07b5d2fc747916340b223af79f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4832848992811730282, guid: cd9a8f07b5d2fc747916340b223af79f,
         type: 3}
@@ -66624,6 +66640,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1556664227}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1557107887
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1958918549798363544, guid: d0d37f843fd71984a8638d4d99fadd1f,
+        type: 3}
+      propertyPath: m_Name
+      value: Magnetite Ore Vein
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470143692447416003, guid: d0d37f843fd71984a8638d4d99fadd1f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -54.134
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470143692447416003, guid: d0d37f843fd71984a8638d4d99fadd1f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 62.843
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470143692447416003, guid: d0d37f843fd71984a8638d4d99fadd1f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 130.765
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470143692447416003, guid: d0d37f843fd71984a8638d4d99fadd1f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.87273616
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470143692447416003, guid: d0d37f843fd71984a8638d4d99fadd1f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.029873628
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470143692447416003, guid: d0d37f843fd71984a8638d4d99fadd1f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.485976
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470143692447416003, guid: d0d37f843fd71984a8638d4d99fadd1f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0355882
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470143692447416003, guid: d0d37f843fd71984a8638d4d99fadd1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 4.976
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470143692447416003, guid: d0d37f843fd71984a8638d4d99fadd1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 301.861
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470143692447416003, guid: d0d37f843fd71984a8638d4d99fadd1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 1.903
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d0d37f843fd71984a8638d4d99fadd1f, type: 3}
 --- !u!1001 &1560754523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74445,6 +74529,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1748434986}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1749284335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1749284336}
+  m_Layer: 0
+  m_Name: Area5_Magnetite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1749284336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749284335}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 931609802}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1751180149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91647,3 +91762,4 @@ SceneRoots:
   - {fileID: 337832212}
   - {fileID: 698120733}
   - {fileID: 1204698152}
+  - {fileID: 1557107887}

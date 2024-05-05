@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class Perk : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [Header("Perk Info")]
+    public PerkInfo perkInfo;
+
+    [Space(20)]
+
+    [Header("Perk Image Objects")]
     public Image perk_Frame;
     public Image perk_BG;
     public Image perk_Icon;
-
-    public PerkInfo perkInfo;
 
     float lineWidth = 5;
     Vector2 graphScale = Vector2.one;

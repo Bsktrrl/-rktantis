@@ -115,7 +115,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 37.5, y: 37.5}
-  m_SizeDelta: {x: 75, y: 75}
+  m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2424084555014821285
 CanvasRenderer:
@@ -193,9 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29dc6691c80d0b41a30e9e8fe48465c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perk_Frame: {fileID: 2675660903149435259}
-  perk_BG: {fileID: 6118682092466625202}
-  perk_Icon: {fileID: 185578118151546405}
   perkInfo:
     perkName: Upgrade
     skillTreeType: 0
@@ -206,6 +203,35 @@ MonoBehaviour:
     perkInteractionState: 0
     perkConnectionList: []
     requirementList: []
+    perkValues:
+      playerInventory_Increase_Row: 0
+      playerInventory_Increase_Column: 0
+      healthByEating_Increasing_Percent: 0
+      chestInventory_Increase_Row: 0
+      chestInventory_Increase_Column: 0
+      keepInventoryItemsOnGameOver_Check: 0
+      upgradeableSuit_Check: 0
+      playerTemperatureBuff_Upgrade: 0
+      weatherReport_Increase_ExtraDays: 0
+      playerMovement_Increase_Percentage: 0
+      playerRange_Increase_Percentage: 0
+      healthResistance_Increase_Percentage: 0
+      researchTime_Decrease_Percentage: 0
+      oreVeinDurability_Decrease: 0
+      treeDurability_Decrease: 0
+      toolDurability_Increase_Percentage: 0
+      resource_DropRate_Increase: {x: 0, y: 0}
+      toolsCooldown_Decrease_Percentage: 0
+      ghostCapturer_Slots_Increase: 0
+      ghostCapturer_CaptureEfficiency_Increase_Percentage: 0
+      "ar\xEDdeanLight_Range_Increase_Percentage": 0
+      "ar\xEDdean_Visible_Check": 0
+      ghostMovementReducer_Right: 0
+      ghostMovementReducer_Up: 0
+      ghostMovementReducer_Speed: 0
+  perk_Frame: {fileID: 2675660903149435259}
+  perk_BG: {fileID: 6118682092466625202}
+  perk_Icon: {fileID: 185578118151546405}
 --- !u!114 &-3150056966853204980
 MonoBehaviour:
   m_ObjectHideFlags: 0
