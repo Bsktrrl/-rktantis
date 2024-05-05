@@ -11,6 +11,9 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     public SkillTreeType skillTreeMenu_Type;
     public Perk pressedPerk;
     public Perk activePerk;
+
+    public bool canUpgrade;
+
     [SerializeField] List<GameObject> perktList = new List<GameObject>();
 
     [Header("LineParents")]
@@ -19,27 +22,25 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
     public GameObject skillTree_GhostCapture_Lines;
     public GameObject skillTree_CrystalLight_Lines;
 
+    public GameObject upgrade_Button;
+    public TextMeshProUGUI upgrade_Button_Text;
+
     [Header("Line")]
     public Sprite line;
     public Color lineColor;
 
-    [Header("Sprites")]
-    public Sprite BG_Passive;
-    public Sprite BG_Ready;
-    public Sprite BG_Active;
-
+    [Header("Colors")]
     public Color perkTier_0_Color;
     public Color perkTier_1_Color;
     public Color perkTier_2_Color;
     public Color perkTier_3_Color;
 
-    //public Color perkFrameColor_Passive;
-    //public Color perkFrameColor_Ready;
-    //public Color perkFrameColor_Active;
-
     public Color perkIconColor_Passive;
     public Color perkIconColor_Ready;
     public Color perkIconColor_Active;
+
+    public Sprite slot_Blue;
+    public Sprite slot_Orange;
 
     [Header("information")]
     [SerializeField] TextMeshProUGUI header_Text;
@@ -166,6 +167,54 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         }
     }
 
+    public void SetupSkillTree_Information(GameObject perk)
+    {
+        perkSetup = true;
+
+        activePerk = perk.GetComponent<Perk>();
+
+        canUpgrade = CheckIfPerkCanUpgrade(activePerk);
+
+        if (canUpgrade) 
+        {
+            upgrade_Button.GetComponent<Button>().image.sprite = slot_Blue;
+            upgrade_Button_Text.color = MainManager.Instance.mainColor_Blue;
+        }
+        else
+        {
+            upgrade_Button.GetComponent<Button>().image.sprite = slot_Orange;
+            upgrade_Button_Text.color = MainManager.Instance.mainColor_Orange;
+        }
+
+        header_Text.text = SpaceTextConverting.Instance.SetText(skillTreeMenu_Type.ToString());
+        perkName_Text.text = SpaceTextConverting.Instance.SetText(perk.GetComponent<Perk>().perkInfo.perkName);
+        perkDescription_Text.text = perk.GetComponent<Perk>().perkInfo.perkDescription;
+
+        //PerkRequirementList
+        #region
+        //Reset the perkRequirementList
+        for (int i = 0; i < perkRequirementList.Count; i++)
+        {
+            perkRequirementList[i].GetComponent<PerkRequirementSlot>().DestroyThisObject();
+        }
+        perkRequirementList.Clear();
+
+        //Build the perkRequirementList
+        if (perk)
+        {
+            for (int i = 0; i < perk.GetComponent<Perk>().perkInfo.requirementList.Count; i++)
+            {
+                perkRequirementList.Add(Instantiate(requirement_Prefab, requirement_Parent.transform));
+
+                perkRequirementList[perkRequirementList.Count - 1].GetComponent<PerkRequirementSlot>().SetRequirementSlot(MainManager.Instance.GetItem(perk.GetComponent<Perk>().perkInfo.requirementList[i].itemName).hotbarSprite, perk.GetComponent<Perk>().perkInfo.requirementList[i].itemName, perk.GetComponent<Perk>().perkInfo.requirementList[i].amount);
+            }
+        }
+        #endregion
+
+        UpdateRequirementDisplay(perk.gameObject.GetComponent<Perk>());
+
+        perkSetup = false;
+    }
     public void ResetSkillTree_Information()
     {
         perkSetup = true;
@@ -181,33 +230,8 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         }
         perkRequirementList.Clear();
 
-        perkSetup = false;
-    }
-    public void SetupSkillTree_Information(GameObject perk)
-    {
-        perkSetup = true;
-
-        activePerk = perk.GetComponent<Perk>();
-
-        header_Text.text = SpaceTextConverting.Instance.SetText(skillTreeMenu_Type.ToString());
-        perkName_Text.text = SpaceTextConverting.Instance.SetText(perk.GetComponent<Perk>().perkInfo.perkName);
-        perkDescription_Text.text = perk.GetComponent<Perk>().perkInfo.perkDescription;
-
-        //Reset the perkRequirementList
-        for (int i = 0; i < perkRequirementList.Count; i++)
-        {
-            perkRequirementList[i].GetComponent<PerkRequirementSlot>().DestroyThisObject();
-        }
-        perkRequirementList.Clear();
-
-        //for (int i = 0; i < perk.GetComponent<Perk>().perkInfo.requirementList.Count; i++)
-        //{
-        //    perkRequirementList.Add(Instantiate(requirement_Prefab, requirement_Parent.transform));
-
-        //    perkRequirementList[perkRequirementList.Count - 1].GetComponent<PerkRequirementSlot>().SetRequirementSlot(MainManager.Instance.GetItem(perk.GetComponent<Perk>().perkInfo.requirementList[i].itemName).hotbarSprite, perk.GetComponent<Perk>().perkInfo.requirementList[i].itemName, perk.GetComponent<Perk>().perkInfo.requirementList[i].amount);
-        //}
-
-        UpdateRequirementDisplay(perk.gameObject.GetComponent<Perk>());
+        upgrade_Button.GetComponent<Button>().image.sprite = slot_Orange;
+        upgrade_Button_Text.color = MainManager.Instance.mainColor_Orange;
 
         perkSetup = false;
     }
@@ -218,9 +242,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
     public void Upgrade_Button_isPressed()
     {
-        print("Button is pressed");
-
-        if (activePerk)
+        if (activePerk && canUpgrade)
         {
             if (activePerk.GetComponent<Perk>().perkInfo.perkState == PerkState.Ready)
             {
@@ -262,6 +284,29 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         {
             SetupSkillTree_Information(perk.gameObject);
         }
+    }
+
+
+    //--------------------
+
+
+    bool CheckIfPerkCanUpgrade(Perk perk)
+    {
+        if (!perk) { return false; }
+
+        bool canUpgradeTemp = true;
+
+        for (int i = 0; i < perk.GetComponent<Perk>().perkInfo.requirementList.Count; i++)
+        {
+            if (perk.GetComponent<Perk>().perkInfo.requirementList[i].amount > InventoryManager.Instance.GetAmountOfItemInInventory(0, perk.GetComponent<Perk>().perkInfo.requirementList[i].itemName))
+            {
+                canUpgradeTemp = false;
+
+                break;
+            }
+        }
+
+        return canUpgradeTemp;
     }
 }
 

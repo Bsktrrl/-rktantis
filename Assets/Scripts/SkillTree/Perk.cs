@@ -111,19 +111,14 @@ public class Perk : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             perkInfo.perkState = PerkState.Active;
 
-            //print("Pressed a Ready Perk");
-
-            //perkInfo.perkState = PerkState.Active;
-            //perk_BG_Image.sprite = SkillTreeManager.Instance.BG_Active;
-
-            ////Remove items from player inventory
-            ////for (int i = 0; i < perkInfo.requirementList.Count; i++)
-            ////{
-            ////    for (int j = 0; j < perkInfo.requirementList[i].amount; j++)
-            ////    {
-            ////        InventoryManager.Instance.RemoveItemFromInventory(0, perkInfo.requirementList[i].itemName, -1, false);
-            ////    }
-            ////}
+            //Remove items from player inventory
+            for (int i = 0; i < perkInfo.requirementList.Count; i++)
+            {
+                for (int j = 0; j < perkInfo.requirementList[i].amount; j++)
+                {
+                    InventoryManager.Instance.RemoveItemFromInventory(0, perkInfo.requirementList[i].itemName, -1, false);
+                }
+            }
         }
 
         UpdatePerk();
