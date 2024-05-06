@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -120,6 +121,10 @@ public class InventoryManager : Singleton<InventoryManager>
         smallChest_Size = DataManager.Instance.smallChest_Size_Store;
         mediumChest_Size = DataManager.Instance.mediumChest_Size_Store;
         bigChest_Size = DataManager.Instance.bigChest_Size_Store;
+        #endregion
+
+        #region _SO_ToolsDurability
+        SetToolsDurability();
         #endregion
     }
     public void SaveData()
@@ -1609,7 +1614,52 @@ public class InventoryManager : Singleton<InventoryManager>
 
         SaveData();
     }
-    
+
+    #endregion
+    #region Set Tools Durability
+    public void SetToolsDurability()
+    {
+        for (int i = 0; i < MainManager.Instance.item_SO.itemList.Count; i++)
+        {
+            //Wood
+            if (MainManager.Instance.item_SO.itemList[i].itemName == Items.WoodAxe
+                || MainManager.Instance.item_SO.itemList[i].itemName == Items.WoodBuildingHammer
+                || MainManager.Instance.item_SO.itemList[i].itemName == Items.WoodPickaxe
+                || MainManager.Instance.item_SO.itemList[i].itemName == Items.WoodSword)
+            {
+                float percentage = (float)(PerkManager.Instance.perkValues.toolDurability_Increase_Percentage / 100);
+                int newDurability = Mathf.CeilToInt(MainManager.Instance.toolDurability_Wood * (1 + percentage));
+
+                MainManager.Instance.item_SO.itemList[i].durability_Max = newDurability;
+
+                print("1. Wood Durability: " + newDurability + " | Percentage: " + percentage + " | PerkPercent: " + PerkManager.Instance.perkValues.toolDurability_Increase_Percentage);
+            }
+            else if (MainManager.Instance.item_SO.itemList[i].itemName == Items.StoneAxe
+                || MainManager.Instance.item_SO.itemList[i].itemName == Items.StoneBuildingHammer
+                || MainManager.Instance.item_SO.itemList[i].itemName == Items.StonePickaxe
+                || MainManager.Instance.item_SO.itemList[i].itemName == Items.StoneSword)
+            {
+                float percentage = (float)(PerkManager.Instance.perkValues.toolDurability_Increase_Percentage / 100);
+                int newDurability = Mathf.CeilToInt(MainManager.Instance.toolDurability_Stone * (1 + percentage));
+
+                MainManager.Instance.item_SO.itemList[i].durability_Max = newDurability;
+
+                print("2. Stone Durability: " + newDurability + " | Percentage: " + percentage + " | PerkPercent: " + PerkManager.Instance.perkValues.toolDurability_Increase_Percentage);
+            }
+            else if (MainManager.Instance.item_SO.itemList[i].itemName == Items.CryoniteAxe
+                || MainManager.Instance.item_SO.itemList[i].itemName == Items.CryoniteBuildingHammer
+                || MainManager.Instance.item_SO.itemList[i].itemName == Items.CryonitePickaxe
+                || MainManager.Instance.item_SO.itemList[i].itemName == Items.CryoniteSword)
+            {
+                float percentage = (float)(PerkManager.Instance.perkValues.toolDurability_Increase_Percentage / 100);
+                int newDurability = Mathf.CeilToInt(MainManager.Instance.toolDurability_Cryonite * (1 + percentage));
+
+                MainManager.Instance.item_SO.itemList[i].durability_Max = newDurability;
+
+                print("3. Cryonite Durability: " + newDurability + " | Percentage: " + percentage + " | PerkPercent: " + PerkManager.Instance.perkValues.toolDurability_Increase_Percentage);
+            }
+        }
+    }
     #endregion
 
 

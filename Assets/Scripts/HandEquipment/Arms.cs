@@ -91,7 +91,7 @@ public class Arms : Singleton<Arms>
             
             anim.SetTrigger("Click");
 
-            print("Click");
+            //print("Click");
         }
     }
     bool Cooldown()
@@ -100,25 +100,27 @@ public class Arms : Singleton<Arms>
         {
             if (HotbarManager.Instance.selectedItem == Items.WoodAxe || HotbarManager.Instance.selectedItem == Items.WoodBuildingHammer || HotbarManager.Instance.selectedItem == Items.WoodPickaxe || HotbarManager.Instance.selectedItem == Items.WoodSword)
             {
-                cooldownTimer = cooldownTimer_Tier1;
+                cooldownTimer = cooldownTimer_Tier1 * (1 - (PerkManager.Instance.perkValues.toolsCooldown_Decrease_Percentage / 100));
             }
             else if (HotbarManager.Instance.selectedItem == Items.StoneAxe || HotbarManager.Instance.selectedItem == Items.StoneBuildingHammer || HotbarManager.Instance.selectedItem == Items.StonePickaxe || HotbarManager.Instance.selectedItem == Items.StoneSword)
             {
-                cooldownTimer = cooldownTimer_Tier2;
+                cooldownTimer = cooldownTimer_Tier2 * (1 - (PerkManager.Instance.perkValues.toolsCooldown_Decrease_Percentage / 100));
             }
             else if (HotbarManager.Instance.selectedItem == Items.CryoniteAxe || HotbarManager.Instance.selectedItem == Items.CryoniteBuildingHammer || HotbarManager.Instance.selectedItem == Items.CryonitePickaxe || HotbarManager.Instance.selectedItem == Items.CryoniteSword)
             {
-                cooldownTimer = cooldownTimer_Tier3;
+                cooldownTimer = cooldownTimer_Tier3 * (1 - (PerkManager.Instance.perkValues.toolsCooldown_Decrease_Percentage / 100));
             }
             else if (HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
             {
-                cooldownTimer = cooldownTimer_Drinking;
+                cooldownTimer = cooldownTimer_Drinking * (1 - (PerkManager.Instance.perkValues.toolsCooldown_Decrease_Percentage / 100));
             }
             else if (HotbarManager.Instance.selectedItem == Items.Flashlight || HotbarManager.Instance.selectedItem == Items.AríditeCrystal
                 || HotbarManager.Instance.selectedItem == Items.None)
             {
-                cooldownTimer = cooldownTimer_Arms;
+                cooldownTimer = cooldownTimer_Arms * (1 - (PerkManager.Instance.perkValues.toolsCooldown_Decrease_Percentage / 100));
             }
+
+            print("CooldownTimer: " + cooldownTimer);
 
             cooldown = true;
 

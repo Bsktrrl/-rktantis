@@ -17,7 +17,6 @@ public class Tree : MonoBehaviour
     public float treeHealth;
     [SerializeField] float tempTreeHealth;
     public Vector2 dropRate;
-    [HideInInspector] public Vector2 dropRateUpgrade;
 
     [Header("Dormant")]
     public bool isCut;
@@ -99,7 +98,7 @@ public class Tree : MonoBehaviour
             || interactableType == InteracteableType.Cactus)
             && SelectionManager.Instance.onTarget)
         {
-            print("Interact with a Tree - " + _itemName);
+            //print("Interact with a Tree - " + _itemName);
 
             //Play hit animation when tree is hit
             anim.SetTrigger("GotHit");
@@ -221,11 +220,11 @@ public class Tree : MonoBehaviour
             //Reduce the Tree's health
             if (_itemName == Items.None || _itemName == Items.Flashlight || _itemName == Items.AríditeCrystal)
             {
-                tempTreeHealth -= 0.5f;
+                tempTreeHealth -= (0.5f + PerkManager.Instance.perkValues.treeDurability_Decrease);
             }
             else
             {
-                tempTreeHealth -= MainManager.Instance.GetItem(_itemName).treePower;
+                tempTreeHealth -= (MainManager.Instance.GetItem(_itemName).treePower + PerkManager.Instance.perkValues.treeDurability_Decrease);
             }
 
             //Check if the TreeHealth is 0
@@ -289,7 +288,7 @@ public class Tree : MonoBehaviour
             spawnBuff = new Vector2(2, 3);
 
         //Calculate oreDrop
-        int spawnCount = (int)Random.Range(dropRate.x + spawnBuff.x + dropRateUpgrade.x, dropRate.y + spawnBuff.y + dropRateUpgrade.y);
+        int spawnCount = (int)Random.Range(dropRate.x + spawnBuff.x + PerkManager.Instance.perkValues.resource_DropRate_Increase.x, dropRate.y + spawnBuff.y + PerkManager.Instance.perkValues.resource_DropRate_Increase.y);
 
         //Spawn Wood
         for (int i = 0; i < spawnCount; i++)

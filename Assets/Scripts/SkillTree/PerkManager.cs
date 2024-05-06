@@ -114,6 +114,8 @@ public class PerkManager : Singleton<PerkManager>
         if (perk.perkInfo.perkValues.toolDurability_Increase_Percentage > 0)
         {
             perkValues.toolDurability_Increase_Percentage = perk.perkInfo.perkValues.toolDurability_Increase_Percentage;
+
+            InventoryManager.Instance.SetToolsDurability();
         }
         if (perk.perkInfo.perkValues.resource_DropRate_Increase.x > 0 || perk.perkInfo.perkValues.resource_DropRate_Increase.y > 0)
         {
@@ -184,12 +186,12 @@ public class PerkValues
 
     [Header("Tools")]
     #region
-    public int oreVeinDurability_Decrease = 0; //Round up to whole numbers in the code
-    public int treeDurability_Decrease = 0; //Round up to whole numbers in the code
-    public int toolDurability_Increase_Percentage = 0; //Round up to whole numbers in the code
+    public float oreVeinDurability_Decrease = 0; //Complete
+    public float treeDurability_Decrease = 0; //Complete
+    public float toolDurability_Increase_Percentage = 0; //Complete
 
-    public Vector2 resource_DropRate_Increase = new Vector2(); 
-    public float toolsCooldown_Decrease_Percentage = 0; 
+    public Vector2 resource_DropRate_Increase = new Vector2(); //Complete
+    public float toolsCooldown_Decrease_Percentage = 0; //Complete
     #endregion
 
     [Header("Arídean")]

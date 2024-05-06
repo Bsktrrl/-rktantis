@@ -14,7 +14,6 @@ public class Ore : MonoBehaviour
     public float oreHealth;
     [SerializeField] float tempOreHealth;
     public Vector2 dropRate;
-    [HideInInspector] public Vector2 dropRateUpgrade;
 
     [Header("Dormant")]
     public bool isHacked;
@@ -96,7 +95,7 @@ public class Ore : MonoBehaviour
                  || interactableType == InteracteableType.AríditeCrystal_Ore)
                  && SelectionManager.Instance.onTarget)
         {
-            print("Interact with an Ore - " + itemName);
+            //print("Interact with an Ore - " + itemName);
 
             //Play HackingSound
             #region
@@ -215,11 +214,11 @@ public class Ore : MonoBehaviour
             //Reduce the Ore's health
             if (itemName == Items.None || itemName == Items.Flashlight || itemName == Items.AríditeCrystal)
             {
-                tempOreHealth -= 0.5f;
+                tempOreHealth -= (0.5f + PerkManager.Instance.perkValues.oreVeinDurability_Decrease);
             }
             else
             {
-                tempOreHealth -= MainManager.Instance.GetItem(itemName).orePower;
+                tempOreHealth -= (MainManager.Instance.GetItem(itemName).orePower + PerkManager.Instance.perkValues.oreVeinDurability_Decrease);
             }
 
             //Update Cracks
@@ -244,7 +243,7 @@ public class Ore : MonoBehaviour
                     spawnBuff = new Vector2(2, 3);
 
                 //Calculate oreDrop
-                int spawnCount = (int)Random.Range(dropRate.x + spawnBuff.x + dropRateUpgrade.x, dropRate.y + spawnBuff.y + dropRateUpgrade.y);
+                int spawnCount = (int)Random.Range(dropRate.x + spawnBuff.x + PerkManager.Instance.perkValues.resource_DropRate_Increase.x, dropRate.y + spawnBuff.y + PerkManager.Instance.perkValues.resource_DropRate_Increase.y);
 
                 //Spawn Ores
                 for (int i = 0; i < spawnCount; i++)

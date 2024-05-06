@@ -36,6 +36,11 @@ public class MainManager : Singleton<MainManager>
     [Header("Demo Ending")]
     public GameObject demoEndingText;
 
+    [Header("Player")]
+    public int toolDurability_Wood = 40;
+    public int toolDurability_Stone = 100;
+    public int toolDurability_Cryonite = 200;
+
 
     //--------------------
 
