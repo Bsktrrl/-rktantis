@@ -61,7 +61,7 @@ public class GhostManager : Singleton<GhostManager>
     {
         ghostCapturerStats = DataManager.Instance.ghostCapturerStats_Store;
 
-        //Make sure there is 8 slots int the list
+        //Make sure there is 8 slots in the list
         if (ghostCapturerStats != null)
         {
             if (ghostCapturerStats.ghostCapturedStats != null)
@@ -87,10 +87,7 @@ public class GhostManager : Singleton<GhostManager>
                     }
                 }
 
-                if (ghostCapturerStats.slotsActivated == 0)
-                {
-                    ghostCapturerStats.slotsActivated = 1;
-                }
+                SetGhostCapturerSlots();
             }
         }
 
@@ -334,6 +331,35 @@ public class GhostManager : Singleton<GhostManager>
 
         //Spawn New Ghost to keep up with the set amount
         SpawnGhost();
+    }
+
+
+    //--------------------
+
+
+    public void SetGhostCapturerSlots()
+    {
+        //Change Slot amount
+        if (ghostCapturerStats.slotsActivated == 0)
+        {
+            ghostCapturerStats.slotsActivated = 1 + PerkManager.Instance.perkValues.ghostCapturer_Slots_Increase;
+        }
+        else
+        {
+            ghostCapturerStats.slotsActivated = 1 + PerkManager.Instance.perkValues.ghostCapturer_Slots_Increase;
+        }
+
+        //Update GhostCapture if in hand
+        if (HotbarManager.Instance.selectedItem == Items.GhostCapturer)
+        {
+            if (HotbarManager.Instance.equippedItem)
+            {
+                if (HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>())
+                {
+                    HotbarManager.Instance.equippedItem.GetComponent<GhostCapturer>().UpdateGhostCapturer();
+                }
+            }
+        }
     }
 }
 

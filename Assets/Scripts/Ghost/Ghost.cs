@@ -186,7 +186,7 @@ public class Ghost : MonoBehaviour
         
         if (isTargeted)
         {
-            capturedRate += (GhostManager.Instance.capturedRateSpeed * 1.5f) * Time.deltaTime;
+            capturedRate += (GhostManager.Instance.capturedRateSpeed * 1.5f) * (1 + (PerkManager.Instance.perkValues.ghostCapturer_CaptureEfficiency_Increase_Percentage / 100)) * Time.deltaTime;
 
             if (capturedRate > 1)
             {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GhostCapturer : MonoBehaviour
 {
-    Animator anim;
+    public Animator anim;
 
     [Header("General")]
     public bool isActive;
@@ -33,7 +33,7 @@ public class GhostCapturer : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
 
         anim.SetBool("Capturing", false);
 

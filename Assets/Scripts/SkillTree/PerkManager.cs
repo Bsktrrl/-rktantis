@@ -132,6 +132,8 @@ public class PerkManager : Singleton<PerkManager>
         if (perk.perkInfo.perkValues.ghostCapturer_Slots_Increase > 0)
         {
             perkValues.ghostCapturer_Slots_Increase = perk.perkInfo.perkValues.ghostCapturer_Slots_Increase;
+
+            GhostManager.Instance.SetGhostCapturerSlots();
         }
         if (perk.perkInfo.perkValues.ghostCapturer_CaptureEfficiency_Increase_Percentage > 0)
         {
@@ -196,11 +198,11 @@ public class PerkValues
 
     [Header("Arídean")]
     #region
-    public int ghostCapturer_Slots_Increase = 0; 
-    public float ghostCapturer_CaptureEfficiency_Increase_Percentage = 0; 
-    public float arídeanLight_Range_Increase_Percentage = 0; 
+    public int ghostCapturer_Slots_Increase = 0; //Complete
+    public float ghostCapturer_CaptureEfficiency_Increase_Percentage = 0; //Complete
+    public float arídeanLight_Range_Increase_Percentage = 0; //Complete
 
-    public bool arídean_Visible_Check; 
+    public bool arídean_Visible_Check; //Complete
 
 
     //--------------------

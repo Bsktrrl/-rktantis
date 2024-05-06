@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InvisibleObject : MonoBehaviour
@@ -141,7 +140,15 @@ public class InvisibleObject : MonoBehaviour
                 if (collidingObjectList.Count <= 0)
                 {
                     distance = 0;
-                    transparencyValue = 1;
+
+                    if (PerkManager.Instance.perkValues.arídean_Visible_Check)
+                    {
+                        transparencyValue = 0;
+                    }
+                    else
+                    {
+                        transparencyValue = 1;
+                    }
 
                     UpdateVisibilityNew();
                 }
@@ -151,8 +158,15 @@ public class InvisibleObject : MonoBehaviour
                 {
                     if (collidingObjectList.Count == 1)
                     {
-                        distance = Vector3.Distance(transform.position, collidingObjectList[0].transform.position);
-                        transparencyValue = (distance / sphereCollider.GetComponent<SphereCollider>().radius);
+                        if (PerkManager.Instance.perkValues.arídean_Visible_Check)
+                        {
+                            transparencyValue = 0;
+                        }
+                        else
+                        {
+                            distance = Vector3.Distance(transform.position, collidingObjectList[0].transform.position);
+                            transparencyValue = (distance / sphereCollider.GetComponent<SphereCollider>().radius);
+                        }
                     }
                     else
                     {
@@ -175,8 +189,15 @@ public class InvisibleObject : MonoBehaviour
                             }
                         }
 
-                        distance = Vector3.Distance(transform.position, collidingObjectList[lowestElement].transform.position);
-                        transparencyValue = (distance / sphereCollider.GetComponent<SphereCollider>().radius);
+                        if (PerkManager.Instance.perkValues.arídean_Visible_Check)
+                        {
+                            transparencyValue = 0;
+                        }
+                        else
+                        {
+                            distance = Vector3.Distance(transform.position, collidingObjectList[lowestElement].transform.position);
+                            transparencyValue = (distance / sphereCollider.GetComponent<SphereCollider>().radius);
+                        }
                     }
 
                     UpdateVisibilityNew();
@@ -190,8 +211,15 @@ public class InvisibleObject : MonoBehaviour
 
                 }
 
-                transparencyValue = 1;
-
+                if (PerkManager.Instance.perkValues.arídean_Visible_Check)
+                {
+                    transparencyValue = 0;
+                }
+                else
+                {
+                    transparencyValue = 1;
+                }
+                
                 UpdateVisibilityNew();
             }
         }
@@ -323,23 +351,23 @@ public class InvisibleObject : MonoBehaviour
     {
         if (HotbarManager.Instance.selectedItem == Items.Flashlight)
         {
-            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.flashlight_Distance;
+            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.flashlight_Distance * (1 + (PerkManager.Instance.perkValues.arídeanLight_Range_Increase_Percentage / 100));
         }
         else if (HotbarManager.Instance.selectedItem == Items.AríditeCrystal)
         {
-            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.aríditeCrystal_Distance;
+            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.aríditeCrystal_Distance * (1 + (PerkManager.Instance.perkValues.arídeanLight_Range_Increase_Percentage / 100));
         }
         else if (HotbarManager.Instance.selectedItem == Items.GhostCapturer)
         {
-            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.ghostCapture_Distance;
+            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.ghostCapture_Distance * (1 + (PerkManager.Instance.perkValues.arídeanLight_Range_Increase_Percentage / 100));
         }
         else if (HotbarManager.Instance.selectedItem == Items.Lamp)
         {
-            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.ghostCapture_Distance;
+            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.ghostCapture_Distance * (1 + (PerkManager.Instance.perkValues.arídeanLight_Range_Increase_Percentage / 100));
         }
         else
         {
-            sphereCollider.GetComponent<SphereCollider>().radius = 4;
+            sphereCollider.GetComponent<SphereCollider>().radius = 4 * (1 + (PerkManager.Instance.perkValues.arídeanLight_Range_Increase_Percentage / 100));
         }
     }
 }

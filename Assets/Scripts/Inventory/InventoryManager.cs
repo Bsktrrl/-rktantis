@@ -1632,7 +1632,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
                 MainManager.Instance.item_SO.itemList[i].durability_Max = newDurability;
 
-                print("1. Wood Durability: " + newDurability + " | Percentage: " + percentage + " | PerkPercent: " + PerkManager.Instance.perkValues.toolDurability_Increase_Percentage);
+                //print("1. Wood Durability: " + newDurability + " | Percentage: " + percentage + " | PerkPercent: " + PerkManager.Instance.perkValues.toolDurability_Increase_Percentage);
             }
             else if (MainManager.Instance.item_SO.itemList[i].itemName == Items.StoneAxe
                 || MainManager.Instance.item_SO.itemList[i].itemName == Items.StoneBuildingHammer
@@ -1644,7 +1644,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
                 MainManager.Instance.item_SO.itemList[i].durability_Max = newDurability;
 
-                print("2. Stone Durability: " + newDurability + " | Percentage: " + percentage + " | PerkPercent: " + PerkManager.Instance.perkValues.toolDurability_Increase_Percentage);
+                //print("2. Stone Durability: " + newDurability + " | Percentage: " + percentage + " | PerkPercent: " + PerkManager.Instance.perkValues.toolDurability_Increase_Percentage);
             }
             else if (MainManager.Instance.item_SO.itemList[i].itemName == Items.CryoniteAxe
                 || MainManager.Instance.item_SO.itemList[i].itemName == Items.CryoniteBuildingHammer
@@ -1656,7 +1656,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
                 MainManager.Instance.item_SO.itemList[i].durability_Max = newDurability;
 
-                print("3. Cryonite Durability: " + newDurability + " | Percentage: " + percentage + " | PerkPercent: " + PerkManager.Instance.perkValues.toolDurability_Increase_Percentage);
+                //print("3. Cryonite Durability: " + newDurability + " | Percentage: " + percentage + " | PerkPercent: " + PerkManager.Instance.perkValues.toolDurability_Increase_Percentage);
             }
         }
     }
