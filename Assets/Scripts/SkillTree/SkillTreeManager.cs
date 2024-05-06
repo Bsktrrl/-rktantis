@@ -401,7 +401,7 @@ public enum PerkInteractionState
 public enum SkillTreeType
 {
     Inventory,
-    Equipment,
+    Player,
     Tools,
     Arídean
 }

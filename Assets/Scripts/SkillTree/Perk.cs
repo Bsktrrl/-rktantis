@@ -42,7 +42,7 @@ public class Perk : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             return SkillTreeManager.Instance.skillTree_Inventory_Lines;
         }
-        else if (perkInfo.skillTreeType == SkillTreeType.Equipment)
+        else if (perkInfo.skillTreeType == SkillTreeType.Player)
         {
             return SkillTreeManager.Instance.skillTree_Equipment_Lines;
         }

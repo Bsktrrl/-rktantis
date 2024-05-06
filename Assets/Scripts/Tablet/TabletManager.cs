@@ -280,7 +280,7 @@ public class TabletManager : Singleton<TabletManager>
     #endregion
 
     #region SkillTree Buttons
-    public void SkillTreeButton_Inventory_onClick()
+    public void SkillTreeButton_Inventory_onClick() //Inventory
     {
         skillTree_Inventory_Parent.SetActive(true);
         skillTree_Equipment_Parent.SetActive(false);
@@ -296,7 +296,7 @@ public class TabletManager : Singleton<TabletManager>
 
         SkillTreeManager.Instance.ResetSkillTree_Information();
     }
-    public void SkillTreeButton_Equipment_onClick()
+    public void SkillTreeButton_Player_onClick() //Player
     {
         skillTree_Inventory_Parent.SetActive(false);
         skillTree_Equipment_Parent.SetActive(true);
@@ -308,11 +308,11 @@ public class TabletManager : Singleton<TabletManager>
         skillTree_GhostCapture_Button.GetComponent<Image>().sprite = menuButton_Passive;
         skillTree_CrystalLight_Button.GetComponent<Image>().sprite = menuButton_Passive;
 
-        SkillTreeManager.Instance.skillTreeMenu_Type = SkillTreeType.Equipment;
+        SkillTreeManager.Instance.skillTreeMenu_Type = SkillTreeType.Player;
 
         SkillTreeManager.Instance.ResetSkillTree_Information();
     }
-    public void SkillTreeButton_GhostCapture_onClick()
+    public void SkillTreeButton_Tools_onClick() //Tools
     {
         skillTree_Inventory_Parent.SetActive(false);
         skillTree_Equipment_Parent.SetActive(false);
@@ -328,7 +328,7 @@ public class TabletManager : Singleton<TabletManager>
 
         SkillTreeManager.Instance.ResetSkillTree_Information();
     }
-    public void SkillTreeButton_CrystalLight_onClick()
+    public void SkillTreeButton_Arídean_onClick() //Arídean
     {
         skillTree_Inventory_Parent.SetActive(false);
         skillTree_Equipment_Parent.SetActive(false);
