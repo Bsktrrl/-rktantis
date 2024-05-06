@@ -230,68 +230,68 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         SettingsManager.Instance.LoadData();
         print("1. SettingsManager has Loaded");
 
-        PlayerManager.Instance.LoadData();
-        print("2. PlayerManager has Loaded");
-
-        InventoryManager.Instance.LoadData();
-        print("3. InventoryManager has Loaded");
-
-        MenuEquipmentManager.Instance.LoadData();
-        print("4. MenuEquipmentManager has Loaded");
-
-        HotbarManager.Instance.LoadData();
-        print("5. HotbarManager has Loaded");
-
-        BuildingSystemManager.Instance.LoadData();
-        print("6. BuildingSystemManager has Loaded");
-
-        BuildingDisplayManager.Instance.LoadData();
-        print("7. BuildingDisplayManager has Loaded");
-
-        WorldObjectManager.Instance.LoadData();
-        print("8. WorldObjectManager has Loaded");
-
-        BlueprintManager.Instance.LoadData();
-        print("9. BlueprintManager has Loaded");
-
-        HealthManager.Instance.LoadData();
-        print("10. HealthManager has Loaded");
-
-        TimeManager.Instance.LoadData();
-        print("11. TimeManager has Loaded");
-
-        PlantManager.Instance.LoadData();
-        print("12. Plants has Loaded");
-
-        OreManager.Instance.LoadData();
-        print("13. Ores has Loaded");
-
-        TreeManager.Instance.LoadData();
-        print("14. Trees has Loaded");
-
-        JournalManager.Instance.LoadData();
-        print("15. Journals has Loaded");
-
-        JournalMessagesManager.Instance.LoadData();
-        print("16. JournalMessagesManager has Loaded");
-
-        WeatherManager.Instance.LoadData();
-        print("17. Weather has Loaded");
-
-        ResearchManager.Instance.LoadData(this.researched_SOItem_Store);
-        print("18. Research has Loaded");
-
-        CraftingManager.Instance.LoadData();
-        print("19. Crafting has Loaded");
-
-        GhostManager.Instance.LoadData();
-        print("20. Ghost has Loaded");
-
         PerkManager.Instance.LoadData();
-        print("21. PerkValues has Loaded");
+        print("2. PerkValues has Loaded");
 
         SkillTreeManager.Instance.LoadData();
-        print("22. SkillTreeManager has Loaded");
+        print("3. SkillTreeManager has Loaded");
+
+        PlayerManager.Instance.LoadData();
+        print("4. PlayerManager has Loaded");
+
+        InventoryManager.Instance.LoadData();
+        print("5. InventoryManager has Loaded");
+
+        MenuEquipmentManager.Instance.LoadData();
+        print("6. MenuEquipmentManager has Loaded");
+
+        HotbarManager.Instance.LoadData();
+        print("7. HotbarManager has Loaded");
+
+        BuildingSystemManager.Instance.LoadData();
+        print("8. BuildingSystemManager has Loaded");
+
+        BuildingDisplayManager.Instance.LoadData();
+        print("9. BuildingDisplayManager has Loaded");
+
+        WorldObjectManager.Instance.LoadData();
+        print("10. WorldObjectManager has Loaded");
+
+        BlueprintManager.Instance.LoadData();
+        print("11. BlueprintManager has Loaded");
+
+        HealthManager.Instance.LoadData();
+        print("12. HealthManager has Loaded");
+
+        TimeManager.Instance.LoadData();
+        print("13. TimeManager has Loaded");
+
+        PlantManager.Instance.LoadData();
+        print("14. Plants has Loaded");
+
+        OreManager.Instance.LoadData();
+        print("15. Ores has Loaded");
+
+        TreeManager.Instance.LoadData();
+        print("16. Trees has Loaded");
+
+        JournalManager.Instance.LoadData();
+        print("17. Journals has Loaded");
+
+        JournalMessagesManager.Instance.LoadData();
+        print("18. JournalMessagesManager has Loaded");
+
+        WeatherManager.Instance.LoadData();
+        print("19. Weather has Loaded");
+
+        ResearchManager.Instance.LoadData(this.researched_SOItem_Store);
+        print("20. Research has Loaded");
+
+        CraftingManager.Instance.LoadData();
+        print("21. Crafting has Loaded");
+
+        GhostManager.Instance.LoadData();
+        print("22. Ghost has Loaded");
 
         ArídianKeyManager.Instance.LoadData();
         print("23. AríditeKeyManager has Loaded");

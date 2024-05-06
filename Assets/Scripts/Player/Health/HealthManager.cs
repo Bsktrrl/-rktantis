@@ -11,16 +11,16 @@ public class HealthManager : Singleton<HealthManager>
 
     public HealthToSave health_ToSave;
 
-    public float hunger_Speed = 0.000001f;
+    public float hunger_Speed = 2e-05f;
     public float hunger_SpeedMultiplier_ByWeather = 1f;
 
-    public float heatResistance_Speed = 0.000001f;
+    public float heatResistance_Speed = 2e-05f;
     public float heatResistance_SpeedMultiplier_ByWeather = 1f;
 
-    public float thirst_Speed = 0.000001f;
+    public float thirst_Speed = 2e-05f;
     public float thirst_SpeedMultiplier_ByWeather = 1f;
 
-    public float mainHealth_Speed = 0.000025f;
+    public float mainHealth_Speed = 8e-06f;
     public float mainHealth_SpeedMultiplier_ByWeather = 1f;
 
 
@@ -727,6 +727,18 @@ public class HealthManager : Singleton<HealthManager>
             default:
                 break;
         }
+    }
+
+
+    //--------------------
+
+
+    public void SetPlayerHealthSpeed()
+    {
+        hunger_Speed = 2e-05f * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
+        heatResistance_Speed = 2e-05f * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
+        thirst_Speed = 2e-05f * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
+        mainHealth_Speed = 8e-06f * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
     }
 }
 

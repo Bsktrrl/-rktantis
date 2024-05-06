@@ -147,6 +147,9 @@ public class WeatherManager : Singleton<WeatherManager>
 
         //Set Ghost amount
         GhostManager.Instance.SetGhostSpawnAmount();
+
+        //Set Weather Report Display
+        SetWeatherReportDisplay();
     }
     public void SaveData()
     {
@@ -208,11 +211,11 @@ public class WeatherManager : Singleton<WeatherManager>
 
         if (currentWorldTemperature >= idealTemperature)
         {
-            coverResistance = coverValue + temperatureFruit - waterValue;
+            coverResistance = coverValue + temperatureFruit - waterValue - PerkManager.Instance.perkValues.playerTemperatureBuff_Upgrade;
         }
         else
         {
-            coverResistance = coverValue + temperatureFruit + waterValue;
+            coverResistance = coverValue + temperatureFruit + waterValue + PerkManager.Instance.perkValues.playerTemperatureBuff_Upgrade;
         }
         
 
@@ -518,6 +521,58 @@ public class WeatherManager : Singleton<WeatherManager>
             return weatherImage_Cold;
 
         return null;
+    }
+
+
+    //--------------------
+
+
+    public void SetWeatherReportDisplay()
+    {
+        if (PerkManager.Instance.perkValues.weatherReport_Increase_ExtraDays <= 0)
+        {
+
+        }
+        else if (PerkManager.Instance.perkValues.weatherReport_Increase_ExtraDays == 1)
+        {
+            weatherImageDisplay_Day2_isUpgraded = true;
+            weatherImageDisplay_Day2_Parent.SetActive(true);
+
+            SaveData();
+        }
+        else if (PerkManager.Instance.perkValues.weatherReport_Increase_ExtraDays == 2)
+        {
+            weatherImageDisplay_Day2_isUpgraded = true;
+            weatherImageDisplay_Day3_isUpgraded = true;
+            weatherImageDisplay_Day2_Parent.SetActive(true);
+            weatherImageDisplay_Day3_Parent.SetActive(true);
+
+            SaveData();
+        }
+        else if (PerkManager.Instance.perkValues.weatherReport_Increase_ExtraDays == 3)
+        {
+            weatherImageDisplay_Day2_isUpgraded = true;
+            weatherImageDisplay_Day3_isUpgraded = true;
+            weatherImageDisplay_Day4_isUpgraded = true;
+            weatherImageDisplay_Day2_Parent.SetActive(true);
+            weatherImageDisplay_Day3_Parent.SetActive(true);
+            weatherImageDisplay_Day4_Parent.SetActive(true);
+
+            SaveData();
+        }
+        else if (PerkManager.Instance.perkValues.weatherReport_Increase_ExtraDays == 4)
+        {
+            weatherImageDisplay_Day2_isUpgraded = true;
+            weatherImageDisplay_Day3_isUpgraded = true;
+            weatherImageDisplay_Day4_isUpgraded = true;
+            weatherImageDisplay_Day5_isUpgraded = true;
+            weatherImageDisplay_Day2_Parent.SetActive(true);
+            weatherImageDisplay_Day3_Parent.SetActive(true);
+            weatherImageDisplay_Day4_Parent.SetActive(true);
+            weatherImageDisplay_Day5_Parent.SetActive(true);
+
+            SaveData();
+        }
     }
 
 

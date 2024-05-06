@@ -128,9 +128,9 @@ public class SelectionManager : Singleton<SelectionManager>
         Vector3 startPoint = ray.origin /*+ MainManager.Instance.mainMainCamera.transform.forward*/;
 
         //Make Debug Line
-        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), Color.white);
+        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), Color.white);
 
-        if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, ~layersToIgnore))
+        if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), ~layersToIgnore))
         {
             Transform selectionTransform = hit.transform;
 
@@ -184,7 +184,7 @@ public class SelectionManager : Singleton<SelectionManager>
             }
 
             //If hitting a Door
-            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Door))
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance * (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out hit, PlayerManager.Instance.InteractableDistance * (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Door))
             {
                 oldSelectedObject = hit.transform.gameObject;
 
@@ -209,7 +209,7 @@ public class SelectionManager : Singleton<SelectionManager>
         }
 
         ////Check for Water
-        //else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, ~layersToIgnore))
+        //else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), ~layersToIgnore))
         //{
         //    // Check if the object hit has the specific tag
         //    if (hit.collider.CompareTag("Water"))
@@ -305,12 +305,12 @@ public class SelectionManager : Singleton<SelectionManager>
             Vector3 startPoint = ray.origin /*+ MainManager.Instance.mainMainCamera.transform.forward*/;
 
             //Make Debug Line
-            Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), UnityEngine.Color.blue);
+            Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), UnityEngine.Color.blue);
 
             //Check if hitting an Object with a Layer
             #region
             //Furniture
-            if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_Furniture))
+            if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), BuildingSystemManager.Instance.layerMask_Furniture))
             {
                 if (hit.transform.gameObject.GetComponent<MoveableObject>())
                 {
@@ -319,7 +319,7 @@ public class SelectionManager : Singleton<SelectionManager>
             }
 
             //Machine
-            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_Machine))
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), BuildingSystemManager.Instance.layerMask_Machine))
             {
                 if (hit.transform.gameObject.GetComponent<MoveableObject>())
                 {
@@ -328,9 +328,9 @@ public class SelectionManager : Singleton<SelectionManager>
             }
 
             //BuildingBlock
-            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Floor)
-                || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Wall)
-                || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Ramp))
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Floor)
+                || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Wall)
+                || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Ramp))
             {
                 if (hit.transform.gameObject.GetComponent<Model>())
                 {
@@ -341,7 +341,7 @@ public class SelectionManager : Singleton<SelectionManager>
             }
 
             //Door
-            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out hit, PlayerManager.Instance.InteractableDistance, BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Door))
+            else if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), BuildingSystemManager.Instance.layerMask_BuildingBlockModel_Door))
             {
                 //oldSelectedObject = hit.transform.gameObject;
 
