@@ -274,8 +274,8 @@ public class Perk : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 break;
         }
 
-        perk_Icon.sprite = perkInfo.perkIcon;
-
+        //perk_Icon.sprite = perkInfo.perkIcon;
+        
         #endregion
 
         #endregion

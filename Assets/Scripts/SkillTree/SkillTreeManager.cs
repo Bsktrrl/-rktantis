@@ -367,7 +367,7 @@ public class PerkInfo
     [TextArea(5, 10)] public string perkDescription;
 
     [Header("Icon")]
-    public Sprite perkIcon;
+    //public Sprite perkIcon;
 
     [Header("States")]
     public PerkState perkState;
