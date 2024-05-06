@@ -261,13 +261,13 @@ public class Perk : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             case PerkState.Invisible:
                 break;
             case PerkState.Passive:
-                perk_Icon.color = SkillTreeManager.Instance.perkIconColor_Passive;
+                perk_Icon.color = new Color(perk_BG.color.r - 0.3f, perk_BG.color.g - 0.3f, perk_BG.color.b - 0.3f, 1) /*SkillTreeManager.Instance.perkIconColor_Passive*/;
                 break;
             case PerkState.Ready:
-                perk_Icon.color = SkillTreeManager.Instance.perkIconColor_Ready;
+                perk_Icon.color = Color.white /*SkillTreeManager.Instance.perkIconColor_Ready*/;
                 break;
             case PerkState.Active:
-                perk_Icon.color = SkillTreeManager.Instance.perkIconColor_Active;
+                perk_Icon.color = new Color(perk_BG.color.r - 0.75f, perk_BG.color.g - 0.75f, perk_BG.color.b - 0.75f, 1) /*SkillTreeManager.Instance.perkIconColor_Active*/;
                 break;
 
             default:
