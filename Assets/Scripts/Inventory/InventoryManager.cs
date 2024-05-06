@@ -9,7 +9,7 @@ public class InventoryManager : Singleton<InventoryManager>
 {
     #region Variables
     [Header("Inventory")]
-    public Vector2 inventorySize;
+    public Vector2 player_inventorySize;
     public int cellsize = 70;
 
     public Vector2 smallChest_Size = new Vector2(4, 4);
@@ -76,9 +76,8 @@ public class InventoryManager : Singleton<InventoryManager>
         PlayerButtonManager.isPressed_4 += QuickHotbarSelect_4;
         PlayerButtonManager.isPressed_5 += QuickHotbarSelect_5;
 
-        smallChest_Size = new Vector2(4, 4);
-        mediumChest_Size = new Vector2(6, 6);
-        bigChest_Size = new Vector2(8, 8);
+        SetChestSize();
+        SetPlayerInventorySize();
 
         itemInfo = itemInfo_Parent.GetComponent<InventoryItemInfo>();
     }
@@ -107,11 +106,11 @@ public class InventoryManager : Singleton<InventoryManager>
         if (inventories.Count <= 0)
         {
             print("AddInventory");
-            AddInventory(new Vector2(5, 7));
+            AddInventory(InventoryType.Player);
 
-            AddInventory(new Vector2(4, 4));
-            AddInventory(new Vector2(4, 4));
-            AddInventory(new Vector2(4, 4));
+            AddInventory(InventoryType.Chest_Small);
+            AddInventory(InventoryType.Chest_Small);
+            AddInventory(InventoryType.Chest_Small);
 
             SaveData();
         }
@@ -119,6 +118,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
         #region Chest Sizes
         smallChest_Size = DataManager.Instance.smallChest_Size_Store;
+        mediumChest_Size = DataManager.Instance.mediumChest_Size_Store;
         bigChest_Size = DataManager.Instance.bigChest_Size_Store;
         #endregion
     }
@@ -129,6 +129,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
         //Chest Sizes (may be upgraded in the SkillTree)
         DataManager.Instance.smallChest_Size_Store = smallChest_Size;
+        DataManager.Instance.mediumChest_Size_Store = mediumChest_Size;
         DataManager.Instance.bigChest_Size_Store = bigChest_Size;
 }
     public void SaveData(ref GameData gameData)
@@ -144,22 +145,38 @@ public class InventoryManager : Singleton<InventoryManager>
 
 
     #region Add/Remove Inventory
-    public void AddInventory(Vector2 size)
+    public void AddInventory(/*Vector2 size,*/ InventoryType _inventoryType)
     {
         //Add empty inventory
         Inventory inventory = new Inventory();
-
         inventories.Add(inventory);
 
         //Set inventory stats
         inventories[inventories.Count - 1].inventoryIndex = inventories.Count - 1;
-        inventories[inventories.Count - 1].inventorySize = size;
+        inventories[inventories.Count - 1].inventoryType = _inventoryType;
+
+        if (_inventoryType == InventoryType.Player)
+        {
+            inventories[inventories.Count - 1].inventorySize = player_inventorySize;
+        }
+        else if (_inventoryType == InventoryType.Chest_Small)
+        {
+            inventories[inventories.Count - 1].inventorySize = smallChest_Size;
+        }
+        else if (_inventoryType == InventoryType.Chest_Medium)
+        {
+            inventories[inventories.Count - 1].inventorySize = mediumChest_Size;
+        }
+        else if (_inventoryType == InventoryType.Chest_Big)
+        {
+            inventories[inventories.Count - 1].inventorySize = bigChest_Size;
+        }
 
         SaveData();
     }
-    public void AddInventory(InteractableObject chest, Vector2 size)
+    public void AddInventory(InteractableObject chest, /*Vector2 size,*/ InventoryType _inventoryType)
     {
-        AddInventory(size);
+        AddInventory(/*size,*/ _inventoryType);
 
         //Add index to the chest to connect it to the inventoriesList
         chest.inventoryIndex = inventories.Count - 1;
@@ -1536,6 +1553,69 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    #region Set Inventory Size
+    public void SetPlayerInventorySize()
+    {
+        player_inventorySize = new Vector2(4 + PerkManager.Instance.perkValues.playerInventory_Increase_Row, 4 + PerkManager.Instance.perkValues.playerInventory_Increase_Column);
+
+        inventories[0].inventorySize = player_inventorySize;
+
+        ClosePlayerInventory();
+        OpenPlayerInventory();
+
+        SaveData();
+    }
+    public void SetChestSize()
+    {
+        //Update Global Size
+        #region
+        //Small Chest Size
+        smallChest_Size = new Vector2(4 + PerkManager.Instance.perkValues.chestInventory_Increase_Row, 4 + PerkManager.Instance.perkValues.chestInventory_Increase_Column);
+
+        //Medium Chest Size
+        if (PerkManager.Instance.perkValues.chestInventory_Increase_Row < 3 && PerkManager.Instance.perkValues.chestInventory_Increase_Column < 3)
+        {
+            mediumChest_Size = new Vector2(6 + PerkManager.Instance.perkValues.chestInventory_Increase_Row, 6 + PerkManager.Instance.perkValues.chestInventory_Increase_Column);
+        }
+        else if (PerkManager.Instance.perkValues.chestInventory_Increase_Row >= 3 && PerkManager.Instance.perkValues.chestInventory_Increase_Column < 3)
+        {
+            mediumChest_Size = new Vector2(8, 6 + PerkManager.Instance.perkValues.chestInventory_Increase_Column);
+        }
+        else if (PerkManager.Instance.perkValues.chestInventory_Increase_Row < 3 && PerkManager.Instance.perkValues.chestInventory_Increase_Column >= 3)
+        {
+            mediumChest_Size = new Vector2(6 + PerkManager.Instance.perkValues.chestInventory_Increase_Row, 8);
+        }
+
+        //Big Chest Size
+        bigChest_Size = new Vector2(8, 8);
+        #endregion
+
+        //Add Size to chests
+        for (int i = 1; i < inventories.Count; i++)
+        {
+            if (inventories[i].inventoryType == InventoryType.Chest_Small)
+            {
+                inventories[i].inventorySize = smallChest_Size;
+            }
+            else if (inventories[i].inventoryType == InventoryType.Chest_Medium)
+            {
+                inventories[i].inventorySize = mediumChest_Size;
+            }
+            if (inventories[i].inventoryType == InventoryType.Chest_Big)
+            {
+                inventories[i].inventorySize = bigChest_Size;
+            }
+        }
+
+        SaveData();
+    }
+    
+    #endregion
+
+
+    //--------------------
+
+
     #region Open/Close Inventory Menu
     public void OpenPlayerInventory()
     {
@@ -1583,6 +1663,7 @@ public class Inventory
 {
     [Header("General")]
     public int inventoryIndex;
+    public InventoryType inventoryType;
     public Vector2 inventorySize;
 
     [Header("List of items in this inventory")]
@@ -1599,4 +1680,12 @@ public class InventoryItem
     public int itemID;
 
     public int durability_Current;
+}
+
+public enum InventoryType
+{
+    Player,
+    Chest_Small,
+    Chest_Medium,
+    Chest_Big,
 }

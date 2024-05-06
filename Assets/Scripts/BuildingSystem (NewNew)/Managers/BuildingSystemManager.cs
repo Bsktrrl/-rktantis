@@ -1470,7 +1470,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             //If a small chest, update inventory info
             if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestSmall)
             {
-                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.smallChest_Size);
+                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryType.Chest_Small);
 
                 worldFurnitureObject.chestIndex = InventoryManager.Instance.inventories.Count - 1;
             }
@@ -1478,7 +1478,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             //If a small chest, update inventory info
             else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestMedium)
             {
-                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.mediumChest_Size);
+                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryType.Chest_Medium);
 
                 worldFurnitureObject.chestIndex = InventoryManager.Instance.inventories.Count - 1;
             }
@@ -1486,7 +1486,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             //If a big chest, update inventory info
             else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestBig)
             {
-                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.bigChest_Size);
+                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryType.Chest_Big);
 
                 worldFurnitureObject.chestIndex = InventoryManager.Instance.inventories.Count - 1;
             }

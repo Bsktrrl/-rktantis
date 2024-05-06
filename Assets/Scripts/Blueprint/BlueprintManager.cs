@@ -151,7 +151,7 @@ public class BlueprintManager : Singleton<BlueprintManager>
                 {
                     if (blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(j))
                     {
-                        print("New Blueprint: [" + i + "][" + j + "]");
+                        //print("New Blueprint: [" + i + "][" + j + "]");
                         //Give all Legal Objects an index
                         blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Blueprint>().blueprintIndex_x = i;
                         blueprintWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<Blueprint>().blueprintIndex_y = j;

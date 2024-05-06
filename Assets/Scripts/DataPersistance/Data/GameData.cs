@@ -11,6 +11,7 @@ public class GameData
     //Inventories
     [HideInInspector] public List<Inventory> Inventories_SaveList = new List<Inventory>();
     [HideInInspector] public Vector2 smallChest_Size_Save;
+    [HideInInspector] public Vector2 mediumChest_Size_Save;
     [HideInInspector] public Vector2 bigChest_Size_Save;
 
     //MenuEquipment

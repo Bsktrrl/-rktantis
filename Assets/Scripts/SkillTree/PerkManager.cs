@@ -30,13 +30,18 @@ public class PerkManager : Singleton<PerkManager>
     public void UpdatePerkValues(Perk perk) //Make a long "else if"-list of ALL Perks, to be enabled
     {
         //Inventory
+        #region
         if (perk.perkInfo.perkValues.playerInventory_Increase_Row > 0)
         {
             perkValues.playerInventory_Increase_Row = perk.perkInfo.perkValues.playerInventory_Increase_Row;
+
+            InventoryManager.Instance.SetPlayerInventorySize();
         }
         else if (perk.perkInfo.perkValues.playerInventory_Increase_Column > 0)
         {
             perkValues.playerInventory_Increase_Column = perk.perkInfo.perkValues.playerInventory_Increase_Column;
+
+            InventoryManager.Instance.SetPlayerInventorySize();
         }
         else if (perk.perkInfo.perkValues.healthByEating_Increasing_Percent > 0)
         {
@@ -45,17 +50,23 @@ public class PerkManager : Singleton<PerkManager>
         else if (perk.perkInfo.perkValues.chestInventory_Increase_Row > 0)
         {
             perkValues.chestInventory_Increase_Row = perk.perkInfo.perkValues.chestInventory_Increase_Row;
+
+            InventoryManager.Instance.SetChestSize();
         }
         else if (perk.perkInfo.perkValues.chestInventory_Increase_Column > 0)
         {
             perkValues.chestInventory_Increase_Column = perk.perkInfo.perkValues.chestInventory_Increase_Column;
+
+            InventoryManager.Instance.SetChestSize();
         }
         else if (perk.perkInfo.perkValues.keepInventoryItemsOnGameOver_Check == true)
         {
             perkValues.keepInventoryItemsOnGameOver_Check = perk.perkInfo.perkValues.keepInventoryItemsOnGameOver_Check;
         }
+        #endregion
 
         //Player
+        #region
         else if (perk.perkInfo.perkValues.upgradeableSuit_Check == true)
         {
             perkValues.upgradeableSuit_Check = perk.perkInfo.perkValues.upgradeableSuit_Check;
@@ -84,8 +95,10 @@ public class PerkManager : Singleton<PerkManager>
         {
             perkValues.researchTime_Decrease_Percentage = perk.perkInfo.perkValues.researchTime_Decrease_Percentage;
         }
+        #endregion
 
         //Tools
+        #region
         else if (perk.perkInfo.perkValues.oreVeinDurability_Decrease > 0)
         {
             perkValues.oreVeinDurability_Decrease = perk.perkInfo.perkValues.oreVeinDurability_Decrease;
@@ -106,8 +119,10 @@ public class PerkManager : Singleton<PerkManager>
         {
             perkValues.toolsCooldown_Decrease_Percentage = perk.perkInfo.perkValues.toolsCooldown_Decrease_Percentage;
         }
+        #endregion
 
         //Arídean
+        #region
         else if (perk.perkInfo.perkValues.ghostCapturer_Slots_Increase > 0)
         {
             perkValues.ghostCapturer_Slots_Increase = perk.perkInfo.perkValues.ghostCapturer_Slots_Increase;
@@ -124,6 +139,7 @@ public class PerkManager : Singleton<PerkManager>
         {
             perkValues.arídean_Visible_Check = perk.perkInfo.perkValues.arídean_Visible_Check;
         }
+        #endregion
 
 
         //--------------------
