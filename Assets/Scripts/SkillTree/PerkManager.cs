@@ -154,13 +154,13 @@ public class PerkValues
 {
     [Header("Inventory")]
     #region
-    public int playerInventory_Increase_Row = 0;
-    public int playerInventory_Increase_Column = 0;
+    public int playerInventory_Increase_Row = 0; //Complete
+    public int playerInventory_Increase_Column = 0; //Complete
 
     public float healthByEating_Increasing_Percent = 0;
 
-    public int chestInventory_Increase_Row = 0;
-    public int chestInventory_Increase_Column = 0;
+    public int chestInventory_Increase_Row = 0; //Complete
+    public int chestInventory_Increase_Column = 0; //Complete
 
     public bool keepInventoryItemsOnGameOver_Check = false;
     #endregion
@@ -195,6 +195,10 @@ public class PerkValues
     public float arídeanLight_Range_Increase_Percentage = 0;
 
     public bool arídean_Visible_Check;
+
+
+    //--------------------
+
 
     [Space(20)]
 

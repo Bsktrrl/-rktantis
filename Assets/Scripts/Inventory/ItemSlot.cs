@@ -329,7 +329,10 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         //If item is healing the MainHealth
         if (MainManager.Instance.GetItem(itemName).mainHealthHeal > 0)
         {
-            float percentage = (float)MainManager.Instance.GetItem(itemName).mainHealthHeal / 100;
+            float buffPercent = 1 + (PerkManager.Instance.perkValues.healthByEating_Increasing_Percent / 100);
+            float percentage = (float)(MainManager.Instance.GetItem(itemName).mainHealthHeal * buffPercent / 100);
+            print("1. MainHealth Percentage: " + percentage);
+
             HealthManager.Instance.mainHealthValue += percentage;
 
             if (HealthManager.Instance.mainHealthValue > 1)
@@ -341,7 +344,10 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         //If item is healing the heatResistaceHealth
         if (MainManager.Instance.GetItem(itemName).heatresistanceHealthHeal > 0)
         {
-            float percentage = (float)MainManager.Instance.GetItem(itemName).heatresistanceHealthHeal / 100;
+            float buffPercent = 1 + (PerkManager.Instance.perkValues.healthByEating_Increasing_Percent / 100);
+            float percentage = (MainManager.Instance.GetItem(itemName).heatresistanceHealthHeal * buffPercent / 100);
+            print("2. HeatResistaceHealth Percentage: " + percentage);
+
             HealthManager.Instance.heatResistanceValue += percentage;
 
             if (HealthManager.Instance.heatResistanceValue > 1)
@@ -353,7 +359,10 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         //If item is healing the hungerHealth
         if (MainManager.Instance.GetItem(itemName).hungerHealthHeal > 0)
         {
-            float percentage = (float)MainManager.Instance.GetItem(itemName).hungerHealthHeal / 100;
+            float buffPercent = 1 + (PerkManager.Instance.perkValues.healthByEating_Increasing_Percent / 100);
+            float percentage = (MainManager.Instance.GetItem(itemName).hungerHealthHeal * buffPercent / 100);
+            print("3. HungerValue Percentage: " + percentage);
+
             HealthManager.Instance.hungerValue += percentage;
 
             if (HealthManager.Instance.hungerValue > 1)
@@ -365,7 +374,10 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         //If item is healing the thirstHealth
         if (MainManager.Instance.GetItem(itemName).thirstHealthHeal > 0)
         {
-            float percentage = (float)MainManager.Instance.GetItem(itemName).thirstHealthHeal / 100;
+            float buffPercent = 1 + (PerkManager.Instance.perkValues.healthByEating_Increasing_Percent / 100);
+            float percentage = (MainManager.Instance.GetItem(itemName).thirstHealthHeal * buffPercent / 100);
+            print("4. ThirstHealth Percentage: " + percentage);
+
             HealthManager.Instance.thirstValue += percentage;
 
             if (HealthManager.Instance.thirstValue > 1)
