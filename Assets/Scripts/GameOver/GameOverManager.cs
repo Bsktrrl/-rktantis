@@ -134,6 +134,8 @@ public class GameOverManager : Singleton<GameOverManager>
 
     void RemoveAllInventoryItems()
     {
+        if (PerkManager.Instance.perkValues.keepInventoryItemsOnGameOver_Check) { return; }
+
         for (int i = InventoryManager.Instance.inventories[0].itemsInInventory.Count - 1; i >= 0; i--)
         {
             if (InventoryManager.Instance.inventories[0].itemsInInventory[i].itemName != Items.ArídianKey

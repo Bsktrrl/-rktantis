@@ -157,12 +157,12 @@ public class PerkValues
     public int playerInventory_Increase_Row = 0; //Complete
     public int playerInventory_Increase_Column = 0; //Complete
 
-    public float healthByEating_Increasing_Percent = 0;
+    public float healthByEating_Increasing_Percent = 0; //Complete
 
     public int chestInventory_Increase_Row = 0; //Complete
     public int chestInventory_Increase_Column = 0; //Complete
 
-    public bool keepInventoryItemsOnGameOver_Check = false;
+    public bool keepInventoryItemsOnGameOver_Check = false; //Complete
     #endregion
 
     [Header("Player")]
