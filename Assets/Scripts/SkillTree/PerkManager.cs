@@ -46,9 +46,9 @@ public class PerkManager : Singleton<PerkManager>
         {
             perkValues.chestInventory_Increase_Row = perk.perkInfo.perkValues.chestInventory_Increase_Row;
         }
-        else if (perk.perkInfo.perkValues.playerInventory_Increase_Column > 0)
+        else if (perk.perkInfo.perkValues.chestInventory_Increase_Column > 0)
         {
-            perkValues.playerInventory_Increase_Column = perk.perkInfo.perkValues.playerInventory_Increase_Column;
+            perkValues.chestInventory_Increase_Column = perk.perkInfo.perkValues.chestInventory_Increase_Column;
         }
         else if (perk.perkInfo.perkValues.keepInventoryItemsOnGameOver_Check == true)
         {

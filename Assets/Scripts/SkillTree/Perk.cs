@@ -125,7 +125,7 @@ public class Perk : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
 
             PerkManager.Instance.UpdatePerkValues(this);
-            SkillTreeManager.Instance.UpdateActivePerkList(perkInfo.perkName);
+            SkillTreeManager.Instance.UpdateActivePerkList(this /*perkInfo.perkName*/);
         }
 
         UpdatePerk();

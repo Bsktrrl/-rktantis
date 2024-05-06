@@ -126,11 +126,11 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         }
     }
 
-    public void UpdateActivePerkList(string perkName)
+    public void UpdateActivePerkList(Perk perk)
     {
         for (int i = 0; i < perkList.Count; i++)
         {
-            if (perkList[i].GetComponent<Perk>().perkInfo.perkName == perkName)
+            if (perkList[i].GetComponent<Perk>() == perk)
             {
                 perkActivationList[i] = true;
 
@@ -289,7 +289,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
     public void Upgrade_Button_isPressed()
     {
-        if (activePerk && canUpgrade)
+        if (activePerk /*&& canUpgrade*/)
         {
             if (activePerk.GetComponent<Perk>().perkInfo.perkState == PerkState.Ready)
             {
