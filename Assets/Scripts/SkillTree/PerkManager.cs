@@ -94,6 +94,8 @@ public class PerkValues
 
     public bool arídean_Visible_Check;
 
+    [Space(20)]
+
     public float ghostMovementReducer_Right = 0;
     public float ghostMovementReducer_Up = 0;
     public float ghostMovementReducer_Speed = 0;

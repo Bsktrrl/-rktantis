@@ -173,8 +173,10 @@ public class Perk : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             case PerkState.Invisible:
                 break;
             case PerkState.Passive:
+                perk_BG.color = new Color(perk_BG.color.r - 0.1f, perk_BG.color.g - 0.1f, perk_BG.color.b - 0.1f, 1);
                 break;
             case PerkState.Ready:
+                perk_BG.color = new Color(perk_BG.color.r, perk_BG.color.g, perk_BG.color.b, 1);
                 break;
             case PerkState.Active:
                 perk_BG.color = new Color(perk_BG.color.r - 0.6f, perk_BG.color.g - 0.6f, perk_BG.color.b - 0.6f, 1);
