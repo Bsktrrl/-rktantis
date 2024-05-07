@@ -289,7 +289,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
     public void Upgrade_Button_isPressed()
     {
-        if (activePerk /*&& canUpgrade*/)
+        if (activePerk && canUpgrade)
         {
             if (activePerk.GetComponent<Perk>().perkInfo.perkState == PerkState.Ready)
             {
