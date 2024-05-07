@@ -1,16 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-//[ExecuteInEditMode]
-public class Perk : MonoBehaviour, IPointerEnterHandler
+public class Perk : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Image perk_BG_Image;
-    public Image perkImage;
+    [Header("Perk Info")]
     public PerkInfo perkInfo;
+
+    [Space(20)]
+
+    [Header("Perk Image Objects")]
+    public Image perk_Frame;
+    public Image perk_BG;
+    public Image perk_Icon;
 
     float lineWidth = 5;
     Vector2 graphScale = Vector2.one;
@@ -21,18 +24,12 @@ public class Perk : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
-        perk_BG_Image.sprite = SkillTreeManager.Instance.BG_Passive;
-
         for (int i = 0; i < perkInfo.perkConnectionList.Count; i++)
         {
             MakeLine(gameObject.GetComponent<RectTransform>().localPosition, perkInfo.perkConnectionList[i].GetComponent<RectTransform>().localPosition, PrepareLine());
         }
-    }
-    private void Update()
-    {
-        //UpdateState();
 
-        SetSprite();
+        UpdatePerk();
     }
 
 
@@ -45,15 +42,15 @@ public class Perk : MonoBehaviour, IPointerEnterHandler
         {
             return SkillTreeManager.Instance.skillTree_Inventory_Lines;
         }
-        else if (perkInfo.skillTreeType == SkillTreeType.Equipment)
+        else if (perkInfo.skillTreeType == SkillTreeType.Player)
         {
             return SkillTreeManager.Instance.skillTree_Equipment_Lines;
         }
-        else if (perkInfo.skillTreeType == SkillTreeType.GhostCapture)
+        else if (perkInfo.skillTreeType == SkillTreeType.Tools)
         {
             return SkillTreeManager.Instance.skillTree_GhostCapture_Lines;
         }
-        else if (perkInfo.skillTreeType == SkillTreeType.CrystalLight)
+        else if (perkInfo.skillTreeType == SkillTreeType.Arídean)
         {
             return SkillTreeManager.Instance.skillTree_CrystalLight_Lines;
         }
@@ -89,90 +86,221 @@ public class Perk : MonoBehaviour, IPointerEnterHandler
     //--------------------
 
 
-    void UpdateState()
+    public void PerkButton_OnCLick()
     {
         if (perkInfo.perkState == PerkState.Active) { return; }
 
-
-        //-----
-
-
-        if (perkInfo.perkConnectionList.Count > 0)
+        if (perkInfo.perkInteractionState == PerkInteractionState.Pressed)
         {
-            int count = 0;
-
-            //Check if this perk can become active
-            for (int i = 0; i < perkInfo.perkConnectionList.Count; i++)
-            {
-                if (perkInfo.perkConnectionList[i])
-                {
-                    if (perkInfo.perkConnectionList[i].GetComponent<Perk>().perkInfo.perkState == PerkState.Active)
-                    {
-                        count++;
-                    }
-                }
-            }
-
-            if (count >= perkInfo.perkConnectionList.Count)
-            {
-                perkInfo.perkState = PerkState.Ready;
-            }
-            else
-            {
-                perkInfo.perkState = PerkState.Passive;
-            }
+            SkillTreeManager.Instance.A_PerkHasBeenPressed(null);
+            perkInfo.perkInteractionState = PerkInteractionState.Passive;
         }
         else
         {
-            perkInfo.perkState = PerkState.Ready;
+            SkillTreeManager.Instance.A_PerkHasBeenPressed(this);
+            perkInfo.perkInteractionState = PerkInteractionState.Pressed;
         }
 
-        SetSprite();
+        UpdatePerk();
     }
 
-    public void PerkButton_OnCLick()
+    public void ActivatePerk()
     {
         //Change State
         if (perkInfo.perkState == PerkState.Ready)
         {
-            print("Pressed a Ready Perk");
+            perkInfo.perkInteractionState = PerkInteractionState.Passive;
+
+            UpdatePerk();
 
             perkInfo.perkState = PerkState.Active;
-            perk_BG_Image.sprite = SkillTreeManager.Instance.BG_Active;
 
             //Remove items from player inventory
-            //for (int i = 0; i < perkInfo.requirementList.Count; i++)
-            //{
-            //    for (int j = 0; j < perkInfo.requirementList[i].amount; j++)
-            //    {
-            //        InventoryManager.Instance.RemoveItemFromInventory(0, perkInfo.requirementList[i].itemName, -1, false);
-            //    }
-            //}
+            for (int i = 0; i < perkInfo.requirementList.Count; i++)
+            {
+                for (int j = 0; j < perkInfo.requirementList[i].amount; j++)
+                {
+                    InventoryManager.Instance.RemoveItemFromInventory(0, perkInfo.requirementList[i].itemName, -1, false);
+                }
+            }
 
-            SkillTreeManager.Instance.SetupSkillTree_Information(gameObject);
+            PerkManager.Instance.UpdatePerkValues(this);
+            SkillTreeManager.Instance.UpdateActivePerkList(this /*perkInfo.perkName*/);
         }
+
+        UpdatePerk();
     }
 
-    void SetSprite()
-    {
-        perk_BG_Image.gameObject.SetActive(true);
 
-        //Change Sprite
+    //--------------------
+
+
+    public void UpdatePerk()
+    {
+        //Colors
+        #region
+
+        //Perk BG Color
+        #region
+
+        //Change Background Color
+        switch (perkInfo.perkTier)
+        {
+            case PerkTier.Tier_0:
+                perk_BG.color = SkillTreeManager.Instance.perkTier_0_Color;
+                break;
+            case PerkTier.Tier_1:
+                perk_BG.color = SkillTreeManager.Instance.perkTier_1_Color;
+                break;
+            case PerkTier.Tier_2:
+                perk_BG.color = SkillTreeManager.Instance.perkTier_2_Color;
+                break;
+            case PerkTier.Tier_3:
+                perk_BG.color = SkillTreeManager.Instance.perkTier_3_Color;
+                break;
+            case PerkTier.Tier_4:
+                perk_BG.color = Color.yellow;
+                break;
+
+            default:
+                perk_BG.color = Color.white;
+                break;
+        }
+
+        //Change Color if Active
+        switch (perkInfo.perkState)
+        {
+            case PerkState.Invisible:
+                break;
+            case PerkState.Passive:
+                perk_BG.color = new Color(perk_BG.color.r - 0.1f, perk_BG.color.g - 0.1f, perk_BG.color.b - 0.1f, 1);
+                break;
+            case PerkState.Ready:
+                perk_BG.color = new Color(perk_BG.color.r, perk_BG.color.g, perk_BG.color.b, 1);
+                break;
+            case PerkState.Active:
+                perk_BG.color = new Color(perk_BG.color.r - 0.6f, perk_BG.color.g - 0.6f, perk_BG.color.b - 0.6f, 1);
+                break;
+
+            default:
+                break;
+        }
+
+        //Change darkness of color based on PerkInteractionState
+        switch (perkInfo.perkInteractionState)
+        {
+            case PerkInteractionState.Passive:
+                break;
+            case PerkInteractionState.Hovered:
+                if (perkInfo.perkState == PerkState.Active) { return; }
+                perk_BG.color = new Color(perk_BG.color.r - 0.15f, perk_BG.color.g - 0.15f, perk_BG.color.b - 0.15f, 1);
+                break;
+            case PerkInteractionState.Pressed:
+                if (perkInfo.perkState == PerkState.Active) { return; }
+                perk_BG.color = new Color(perk_BG.color.r - 0.3f, perk_BG.color.g - 0.3f, perk_BG.color.b - 0.3f, 1);
+                break;
+
+            default:
+                break;
+        }
+
+        #endregion
+
+        //Perk Frame Color
+        #region
+
+        //Change Frame Color
+        if (perkInfo.perkState != PerkState.Active)
+        {
+            perk_Frame.color = perk_BG.color;
+        }
+
+        //Change Color if Active
+        switch (perkInfo.perkState)
+        {
+            case PerkState.Invisible:
+                break;
+            case PerkState.Passive:
+                break;
+            case PerkState.Ready:
+                break;
+            case PerkState.Active:
+                perk_Frame.color = new Color(perk_BG.color.r - 0.6f, perk_BG.color.g - 0.6f, perk_BG.color.b - 0.6f, 1);
+                break;
+
+            default:
+                break;
+        }
+
+        //Change darkness of Frame color based on PerkInteractionState
+        switch (perkInfo.perkInteractionState)
+        {
+            case PerkInteractionState.Passive:
+                break;
+            case PerkInteractionState.Hovered:
+                if (perkInfo.perkState == PerkState.Active) { return; }
+                perk_Frame.color = new Color(perk_Frame.color.r - 0.15f, perk_Frame.color.g - 0.15f, perk_Frame.color.b - 0.15f, 1);
+                break;
+            case PerkInteractionState.Pressed:
+                if (perkInfo.perkState == PerkState.Active) { return; }
+                perk_Frame.color = new Color(perk_Frame.color.r - 0.3f, perk_Frame.color.g - 0.3f, perk_Frame.color.b - 0.3f, 1);
+                break;
+
+            default:
+                break;
+        }
+
+        #endregion
+
+        //Icon
+        #region
+
+        //Change Icon Color
+        switch (perkInfo.perkState)
+        {
+            case PerkState.Invisible:
+                break;
+            case PerkState.Passive:
+                perk_Icon.color = new Color(perk_BG.color.r - 0.3f, perk_BG.color.g - 0.3f, perk_BG.color.b - 0.3f, 1) /*SkillTreeManager.Instance.perkIconColor_Passive*/;
+                break;
+            case PerkState.Ready:
+                perk_Icon.color = Color.white /*SkillTreeManager.Instance.perkIconColor_Ready*/;
+                break;
+            case PerkState.Active:
+                perk_Icon.color = new Color(perk_BG.color.r - 0.75f, perk_BG.color.g - 0.75f, perk_BG.color.b - 0.75f, 1) /*SkillTreeManager.Instance.perkIconColor_Active*/;
+                break;
+
+            default:
+                break;
+        }
+
+        //perk_Icon.sprite = perkInfo.perkIcon;
+        
+        #endregion
+
+        #endregion
+
+        //State based on connections
         if (perkInfo.perkState == PerkState.Passive)
         {
-            perk_BG_Image.sprite = SkillTreeManager.Instance.BG_Passive;
-        }
-        else if (perkInfo.perkState == PerkState.Ready)
-        {
-            perk_BG_Image.sprite = SkillTreeManager.Instance.BG_Ready;
-        }
-        else if (perkInfo.perkState == PerkState.Active)
-        {
-            perk_BG_Image.sprite = SkillTreeManager.Instance.BG_Active;
-        }
-        else if (perkInfo.perkState == PerkState.Invisible)
-        {
-            perk_BG_Image.gameObject.SetActive(false);
+            bool makeReady = true;
+
+            for (int i = 0; i < perkInfo.perkConnectionList.Count; i++)
+            {
+                if (perkInfo.perkConnectionList[i].GetComponent<Perk>().perkInfo.perkState != PerkState.Active)
+                {
+                    makeReady = false;
+
+                    break;
+                }
+            }
+
+            if (makeReady)
+            {
+                perkInfo.perkState = PerkState.Ready;
+
+                UpdatePerk();
+            }
         }
     }
 
@@ -182,7 +310,48 @@ public class Perk : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
         SkillTreeManager.Instance.SetupSkillTree_Information(gameObject);
+
+        if (perkInfo.perkState == PerkState.Active) { return; }
+
+
+        //-----
+
+
+        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
+
+        if (perkInfo.perkInteractionState != PerkInteractionState.Pressed)
+        {
+            perkInfo.perkInteractionState = PerkInteractionState.Hovered;
+        }
+
+        UpdatePerk();
+    }
+
+
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (SkillTreeManager.Instance.pressedPerk)
+        {
+            SkillTreeManager.Instance.SetupSkillTree_Information(SkillTreeManager.Instance.pressedPerk.gameObject);
+        }
+        else
+        {
+            SkillTreeManager.Instance.ResetSkillTree_Information();
+        }
+
+        if (perkInfo.perkState == PerkState.Active) { return; }
+
+
+        //-----
+
+
+        if (perkInfo.perkInteractionState != PerkInteractionState.Pressed)
+        {
+            perkInfo.perkInteractionState = PerkInteractionState.Passive;
+        }
+
+        UpdatePerk();
     }
 }

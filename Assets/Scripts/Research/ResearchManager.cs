@@ -48,11 +48,15 @@ public class ResearchManager : Singleton<ResearchManager>
         //Run when something is researched
         if (isResearching && DataManager.Instance.hasLoaded)
         {
+            float temptime = researchTime_Max * (1 - (PerkManager.Instance.perkValues.researchTime_Decrease_Percentage / 100));
+
+            print("ResearchTime: " + temptime);
+
             researchTime_Current += Time.deltaTime;
 
-            researchProgressBar.GetComponent<Image>().fillAmount = (researchTime_Current / (researchTime_Max * researchTime_Multiplier));
+            researchProgressBar.GetComponent<Image>().fillAmount = researchTime_Current / temptime;
 
-            if (researchTime_Current >= (researchTime_Max * researchTime_Multiplier))
+            if (researchTime_Current >= temptime)
             {
                 CompleteResearch();
 

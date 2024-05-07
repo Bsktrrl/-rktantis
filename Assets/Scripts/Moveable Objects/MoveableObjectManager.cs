@@ -334,7 +334,15 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             //If a small chest, update inventory info
             if (tempToSave.furnitureType == FurnitureObjectNames.ChestSmall)
             {
-                InventoryManager.Instance.AddInventory(placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.smallChest_Size);
+                InventoryManager.Instance.AddInventory(placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryType.Chest_Small);
+
+                tempToSave.chestIndex = InventoryManager.Instance.inventories.Count - 1;
+            }
+
+            //If a medium chest, update inventory info
+            else if (tempToSave.furnitureType == FurnitureObjectNames.ChestBig)
+            {
+                InventoryManager.Instance.AddInventory(placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryType.Chest_Medium);
 
                 tempToSave.chestIndex = InventoryManager.Instance.inventories.Count - 1;
             }
@@ -342,7 +350,7 @@ public class MoveableObjectManager : Singleton<MoveableObjectManager>
             //If a big chest, update inventory info
             else if (tempToSave.furnitureType == FurnitureObjectNames.ChestBig)
             {
-                InventoryManager.Instance.AddInventory(placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.bigChest_Size);
+                InventoryManager.Instance.AddInventory(placedMoveableWorldObjectsList[placedMoveableWorldObjectsList.Count - 1].GetComponent<InteractableObject>(), InventoryType.Chest_Big);
 
                 tempToSave.chestIndex = InventoryManager.Instance.inventories.Count - 1;
             }

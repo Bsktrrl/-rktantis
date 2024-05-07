@@ -9,7 +9,6 @@ public class PlayerManager : Singleton<PlayerManager>
 {
     [Header("Stats")]
     public float InteractableDistance = 3.5f;
-    public float movementSpeedMultiplier_SkillTree = 1f;
 
     public float jumpHeight = 1.5f;
 
@@ -86,8 +85,6 @@ public class PlayerManager : Singleton<PlayerManager>
             //    UpdatePlayerDyingPos(MainManager.Instance.player.transform);
             //}
 
-            movementSpeedMultiplier_SkillTree = playerStats.movementSpeedMultiplier_SkillTree;
-
             jumpHeight = playerStats.jumpHeight;
         }
 
@@ -98,7 +95,6 @@ public class PlayerManager : Singleton<PlayerManager>
         playerStats.playerPos = MainManager.Instance.player.transform.position;
         playerStats.playerRot = MainManager.Instance.player.transform.rotation;
 
-        playerStats.movementSpeedMultiplier_SkillTree = movementSpeedMultiplier_SkillTree;
         playerStats.jumpHeight = jumpHeight;
 
         DataManager.Instance.playerStats_Store = playerStats;

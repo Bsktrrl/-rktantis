@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GhostCapturer : MonoBehaviour
 {
-    Animator anim;
+    public Animator anim;
 
     [Header("General")]
     public bool isActive;
@@ -33,7 +33,7 @@ public class GhostCapturer : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
 
         anim.SetBool("Capturing", false);
 
@@ -170,7 +170,7 @@ public class GhostCapturer : MonoBehaviour
         {
             ray = MainManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, ghostLayerMask))
+            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance * (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), ghostLayerMask))
             {
                 if (hit.collider.gameObject.GetComponent<Ghost>() && hit.collider.gameObject.GetComponent<InvisibleObject>())
                 {

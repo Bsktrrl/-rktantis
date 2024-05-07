@@ -52,7 +52,9 @@ public class LampFlickering : MonoBehaviour
     void TurnOff()
     {
         collisionPoint.SetActive(false);
-        lamp.SetActive(false);
+        //lamp.SetActive(false);
+
+        lamp.GetComponent<Light>().intensity = 1f /*new Color(lampColor_On.r, lampColor_On.g, lampColor_On.b, 50)*/;
 
         //lampMaterial.SetColor("_AlbedoColor", lampColor_Off);
 
@@ -68,7 +70,9 @@ public class LampFlickering : MonoBehaviour
     void TurnOn()
     {
         collisionPoint.SetActive(true);
-        lamp.SetActive(true);
+        //lamp.SetActive(true);
+
+        lamp.GetComponent<Light>().intensity = 5 /*new Color(lampColor_On.r, lampColor_On.g, lampColor_On.b, 255)*/;
 
         //lampMaterial.SetColor("_AlbedoColor", lampColor_On);
 

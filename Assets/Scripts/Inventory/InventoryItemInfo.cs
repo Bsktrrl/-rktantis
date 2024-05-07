@@ -12,7 +12,7 @@ public class InventoryItemInfo : MonoBehaviour, IPointerEnterHandler
     [Header("Chest Item")]
     public GameObject chest_Parent;
 
-    [Header("Equipment Item")]
+    [Header("Player Item")]
     public GameObject inventoryItemInfo_Parent;
     public GameObject equipment_Parent;
 

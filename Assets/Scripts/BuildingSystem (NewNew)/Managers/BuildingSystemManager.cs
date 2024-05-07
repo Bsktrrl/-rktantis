@@ -432,14 +432,14 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
                 ray = MainManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Floor)
-                    //|| Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Wall)
-                    || Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Ramp))
+                if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_BuildingBlockModel_Floor)
+                    //|| Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_BuildingBlockModel_Wall)
+                    || Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_BuildingBlockModel_Ramp))
                 {
                     isTouchingABuildingBlock = true;
                     SetPosToGroundAndBuildingBlock();
                 }
-                else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_Ground))
+                else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_Ground))
                 {
                     isTouchingABuildingBlock = false;
                     SetPosToGroundAndBuildingBlock();
@@ -464,14 +464,14 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
             ray = MainManager.Instance.mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Floor)
-                //|| Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Wall)
-                || Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_BuildingBlockModel_Ramp))
+            if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_BuildingBlockModel_Floor)
+                //|| Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_BuildingBlockModel_Wall)
+                || Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_BuildingBlockModel_Ramp))
             {
                 isTouchingABuildingBlock = true;
                 SetPosToGroundAndBuildingBlock();
             }
-            else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance, layerMask_Ground))
+            else if (Physics.Raycast(ray, out hit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_Ground))
             {
                 isTouchingABuildingBlock = false;
                 SetPosToGroundAndBuildingBlock();
@@ -804,12 +804,12 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
 
         Vector3 startPoint = ray.origin + direction /** 0.5f*/;
 
-        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), color);
+        Debug.DrawRay(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), color);
 
-        if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlock)
-            || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Floor)
-            //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Wall)
-            //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance), layerMask_BuildingBlockModel_Ramp)
+        if (Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out rayHit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_BuildingBlock)
+            || Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out rayHit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_BuildingBlockModel_Floor)
+            //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out rayHit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_BuildingBlockModel_Wall)
+            //|| Physics.Raycast(startPoint, MainManager.Instance.mainMainCamera.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out rayHit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100)), layerMask_BuildingBlockModel_Ramp)
             )
         {
             //Get the Transform of GameObject hit
@@ -855,7 +855,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
         }
 
         //Looking at something not a BuildingBlock
-        else if (Physics.Raycast(startPoint, Camera.main.transform.forward * (PlayerManager.Instance.InteractableDistance), out rayHit, (PlayerManager.Instance.InteractableDistance)))
+        else if (Physics.Raycast(startPoint, Camera.main.transform.forward * (PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))), out rayHit, PlayerManager.Instance.InteractableDistance + (1 + (PerkManager.Instance.perkValues.playerRange_Increase_Percentage / 100))))
         {
             switch (_raycastDirection)
             {
@@ -1470,7 +1470,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             //If a small chest, update inventory info
             if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestSmall)
             {
-                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.smallChest_Size);
+                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryType.Chest_Small);
 
                 worldFurnitureObject.chestIndex = InventoryManager.Instance.inventories.Count - 1;
             }
@@ -1478,7 +1478,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             //If a small chest, update inventory info
             else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestMedium)
             {
-                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.mediumChest_Size);
+                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryType.Chest_Medium);
 
                 worldFurnitureObject.chestIndex = InventoryManager.Instance.inventories.Count - 1;
             }
@@ -1486,7 +1486,7 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
             //If a big chest, update inventory info
             else if (worldFurnitureObject.furnitureObjectName_Active == FurnitureObjectNames.ChestBig)
             {
-                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryManager.Instance.bigChest_Size);
+                InventoryManager.Instance.AddInventory(worldBuildingObjectListSpawned[worldBuildingObjectListSpawned.Count - 1].GetComponent<InteractableObject>(), InventoryType.Chest_Big);
 
                 worldFurnitureObject.chestIndex = InventoryManager.Instance.inventories.Count - 1;
             }

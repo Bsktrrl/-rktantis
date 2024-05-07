@@ -8,6 +8,7 @@ public class PerkRequirementSlot : MonoBehaviour
 {
     public Image requirement_image;
     public Image requirement_BGimage;
+    public Image requirement_requirementImage;
     public TextMeshProUGUI requirement_amount;
 
 
@@ -17,7 +18,16 @@ public class PerkRequirementSlot : MonoBehaviour
     public void SetRequirementSlot(Sprite sprite, Items itemName, int amount)
     {
         requirement_image.sprite = sprite;
-        requirement_amount.text = "x" + amount.ToString() + "/" + InventoryManager.Instance.GetAmountOfItemInInventory(0, itemName);
+        requirement_amount.text = "x" + InventoryManager.Instance.GetAmountOfItemInInventory(0, itemName) + "/" + amount.ToString();
+
+        if (amount > InventoryManager.Instance.GetAmountOfItemInInventory(0, itemName))
+        {
+            requirement_requirementImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            requirement_requirementImage.gameObject.SetActive(false);
+        }
     }
 
     public void DestroyThisObject()

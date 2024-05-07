@@ -40,6 +40,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //Inventories
     [HideInInspector] public List<Inventory> Inventories_StoreList = new List<Inventory>();
     [HideInInspector] public Vector2 smallChest_Size_Store;
+    [HideInInspector] public Vector2 mediumChest_Size_Store;
     [HideInInspector] public Vector2 bigChest_Size_Store;
 
     //MenuEquipment
@@ -111,8 +112,8 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     [HideInInspector] public List<GhostTankContent> ghostTankList_Store = new List<GhostTankContent>();
 
     //Perks
-    [HideInInspector] public Perks perks_Store = new Perks();
-    [HideInInspector] public PerkActivations perkActivations_Store = new PerkActivations();
+    [HideInInspector] public PerkValues perks_Store = new PerkValues();
+    [HideInInspector] public List<bool> perkActivationList_Store = new List<bool>();
 
     //Connections
     [HideInInspector] public List<ConnectionInfo> connectionInfoList_Store = new List<ConnectionInfo>();
@@ -165,6 +166,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.menuEquipedItemList_StoreList = gameData.menuEquipedItemList_SaveList;
 
         this.smallChest_Size_Store = gameData.smallChest_Size_Save;
+        this.mediumChest_Size_Store = gameData.mediumChest_Size_Save;
         this.bigChest_Size_Store = gameData.bigChest_Size_Save;
 
         this.hotbarItem_StoreList = gameData.hotbarItem_SaveList;
@@ -213,7 +215,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         this.ghostTankList_Store = gameData.ghostTankList_Save;
 
         this.perks_Store = gameData.perks_Save;
-        this.perkActivations_Store = gameData.perkActivations_Save;
+        this.perkActivationList_Store = gameData.perkActivationList_Save;
 
         this.connectionInfoList_Store = gameData.connectionInfoList_Save;
 
@@ -228,77 +230,80 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         SettingsManager.Instance.LoadData();
         print("1. SettingsManager has Loaded");
 
+        PerkManager.Instance.LoadData();
+        print("2. PerkValues has Loaded");
+
+        SkillTreeManager.Instance.LoadData();
+        print("3. SkillTreeManager has Loaded");
+
         PlayerManager.Instance.LoadData();
-        print("2. PlayerManager has Loaded");
+        print("4. PlayerManager has Loaded");
 
         InventoryManager.Instance.LoadData();
-        print("3. InventoryManager has Loaded");
+        print("5. InventoryManager has Loaded");
 
         MenuEquipmentManager.Instance.LoadData();
-        print("4. MenuEquipmentManager has Loaded");
+        print("6. MenuEquipmentManager has Loaded");
 
         HotbarManager.Instance.LoadData();
-        print("5. HotbarManager has Loaded");
+        print("7. HotbarManager has Loaded");
 
         BuildingSystemManager.Instance.LoadData();
-        print("6. BuildingSystemManager has Loaded");
+        print("8. BuildingSystemManager has Loaded");
 
         BuildingDisplayManager.Instance.LoadData();
-        print("7. BuildingDisplayManager has Loaded");
+        print("9. BuildingDisplayManager has Loaded");
 
         WorldObjectManager.Instance.LoadData();
-        print("8. WorldObjectManager has Loaded");
+        print("10. WorldObjectManager has Loaded");
 
         BlueprintManager.Instance.LoadData();
-        print("9. BlueprintManager has Loaded");
+        print("11. BlueprintManager has Loaded");
 
         HealthManager.Instance.LoadData();
-        print("10. HealthManager has Loaded");
+        print("12. HealthManager has Loaded");
 
         TimeManager.Instance.LoadData();
-        print("11. TimeManager has Loaded");
+        print("13. TimeManager has Loaded");
 
         PlantManager.Instance.LoadData();
-        print("12. Plants has Loaded");
+        print("14. Plants has Loaded");
 
         OreManager.Instance.LoadData();
-        print("13. Ores has Loaded");
+        print("15. Ores has Loaded");
 
         TreeManager.Instance.LoadData();
-        print("14. Trees has Loaded");
+        print("16. Trees has Loaded");
 
         JournalManager.Instance.LoadData();
-        print("15. Journals has Loaded");
+        print("17. Journals has Loaded");
 
         JournalMessagesManager.Instance.LoadData();
-        print("16. JournalMessagesManager has Loaded");
+        print("18. JournalMessagesManager has Loaded");
 
         WeatherManager.Instance.LoadData();
-        print("17. Weather has Loaded");
+        print("19. Weather has Loaded");
 
         ResearchManager.Instance.LoadData(this.researched_SOItem_Store);
-        print("18. Research has Loaded");
+        print("20. Research has Loaded");
 
         CraftingManager.Instance.LoadData();
-        print("19. Crafting has Loaded");
+        print("21. Crafting has Loaded");
 
         GhostManager.Instance.LoadData();
-        print("20. Ghost has Loaded");
-
-        PerkManager.Instance.LoadData();
-        print("21. Perks has Loaded");
+        print("22. Ghost has Loaded");
 
         ArídianKeyManager.Instance.LoadData();
-        print("22. AríditeKeyManager has Loaded");
+        print("23. AríditeKeyManager has Loaded");
 
         AríditeCrystalManager.Instance.LoadData();
-        print("23. AríditeCrystalManager has Loaded");
+        print("24. AríditeCrystalManager has Loaded");
 
         ConnectionPointManager.Instance.LoadData();
-        print("24. ConnectionPointManager has Loaded");
+        print("25. ConnectionPointManager has Loaded");
 
         CutSceneManager.Instance.LoadData();
-        print("25. CutSceneManager has Loaded");
+        print("26. CutSceneManager has Loaded");
         #endregion
 
         StartCoroutine(LoadingDelay(1.5f));
@@ -324,6 +329,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
         gameData.Inventories_SaveList = this.Inventories_StoreList;
         gameData.smallChest_Size_Save = this.smallChest_Size_Store;
+        gameData.mediumChest_Size_Save = this.mediumChest_Size_Store;
         gameData.bigChest_Size_Save = this.bigChest_Size_Store;
 
         gameData.menuEquipedItemList_SaveList = this.menuEquipedItemList_StoreList;
@@ -374,7 +380,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
         gameData.ghostTankList_Save = this.ghostTankList_Store;
 
         gameData.perks_Save = this.perks_Store;
-        gameData.perkActivations_Save = this.perkActivations_Store;
+        gameData.perkActivationList_Save = this.perkActivationList_Store;
 
         gameData.connectionInfoList_Save = this.connectionInfoList_Store;
 
@@ -388,6 +394,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     //--------------------
 
 
+    #region LoadingScreen
     void FadingInOutIcon()
     {
         //Change Visible Value
@@ -428,4 +435,5 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
             loadingMenu_Parent.SetActive(false);
         }
     }
+    #endregion
 }
