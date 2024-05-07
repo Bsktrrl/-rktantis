@@ -57,7 +57,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     [Header("Item Info")]
     public GameObject itemInfo_Parent;
-    [HideInInspector] public InventoryItemInfo itemInfo;
+    public InventoryItemInfo itemInfo;
     #endregion
 
 
@@ -84,6 +84,8 @@ public class InventoryManager : Singleton<InventoryManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+
         if (MainManager.Instance.menuStates == MenuStates.InventoryMenu
             || MainManager.Instance.menuStates == MenuStates.ChestMenu
             || MainManager.Instance.menuStates == MenuStates.EquipmentMenu
@@ -112,6 +114,8 @@ public class InventoryManager : Singleton<InventoryManager>
             AddInventory(InventoryType.Chest_Small);
             AddInventory(InventoryType.Chest_Small);
             AddInventory(InventoryType.Chest_Small);
+
+            SetPlayerInventorySize();
 
             SaveData();
         }
@@ -1086,11 +1090,17 @@ public class InventoryManager : Singleton<InventoryManager>
             {
                 if (MainManager.Instance.GetItem(itemName).isResearched)
                 {
-                    itemInfo.SetInfo_ResearchableItem(true);
+                    if (itemInfo)
+                    {
+                        itemInfo.SetInfo_ResearchableItem(true);
+                    }
                 }
                 else
                 {
-                    itemInfo.SetInfo_ResearchableItem(false);
+                    if (itemInfo)
+                    {
+                        itemInfo.SetInfo_ResearchableItem(false);
+                    }
                 }
             }
             else if (MainManager.Instance.menuStates == MenuStates.CropPlotMenu)
@@ -1102,11 +1112,17 @@ public class InventoryManager : Singleton<InventoryManager>
                 && itemName != Items.TwistedMushroomSeed && itemName != Items.GroundMushroomSeed && itemName != Items.SandTubesSeed
                 && itemName != Items.PalmTreeSeed && itemName != Items.BloodTreeSeed)
                 {
-                    itemInfo.SetInfo_CropPlotItem(true);
+                    if (itemInfo)
+                    {
+                        itemInfo.SetInfo_CropPlotItem(true);
+                    }
                 }
                 else
                 {
-                    itemInfo.SetInfo_CropPlotItem(false);
+                    if (itemInfo)
+                    {
+                        itemInfo.SetInfo_CropPlotItem(false);
+                    }
                 }
             }
 
@@ -1114,19 +1130,31 @@ public class InventoryManager : Singleton<InventoryManager>
             {
                 if (MainManager.Instance.GetItem(itemName).isEquipableInHand)
                 {
-                    itemInfo.SetInfo_EquipableHandItem(itemSlot);
+                    if (itemInfo)
+                    {
+                        itemInfo.SetInfo_EquipableHandItem(itemSlot);
+                    }
                 }
                 else if (MainManager.Instance.GetItem(itemName).isEquipableClothes)
                 {
-                    itemInfo.SetInfo_EquipableClothesItem();
+                    if (itemInfo)
+                    {
+                        itemInfo.SetInfo_EquipableClothesItem();
+                    }
                 }
                 else if (MainManager.Instance.GetItem(itemName).isConsumeable)
                 {
-                    itemInfo.SetInfo_ConsumableItem();
+                    if (itemInfo)
+                    {
+                        itemInfo.SetInfo_ConsumableItem();
+                    }
                 }
                 else
                 {
-                    itemInfo.SetInfo_StaticItem();
+                    if (itemInfo)
+                    {
+                        itemInfo.SetInfo_StaticItem();
+                    }
                 }
             }
         }
@@ -1134,24 +1162,36 @@ public class InventoryManager : Singleton<InventoryManager>
         //ItemSlot from Chest Inventory
         else
         {
-            itemInfo.SetInfo_ChestItem();
+            if (itemInfo)
+            {
+                itemInfo.SetInfo_ChestItem();
+            }
         }
 
         itemInfo_Parent.SetActive(true);
     }
     public void ResetItemInfoBox()
     {
-        itemInfo.HideAllParents();
+        if (itemInfo)
+        {
+            itemInfo.HideAllParents();
+        }
     }
     public void ChangeItemInfoBox(bool isEntering)
     {
         if (isEntering)
         {
-            itemInfo.SetInfo_EquippedItem();
+            if (itemInfo)
+            {
+                itemInfo.SetInfo_EquippedItem();
+            }
         }
         else
         {
-            itemInfo.HideInfo_EquippedItem();
+            if (itemInfo)
+            {
+                itemInfo.HideInfo_EquippedItem();
+            }
         }
         
         itemInfo_Parent.SetActive(true);
@@ -1563,11 +1603,14 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         player_inventorySize = new Vector2(4 + PerkManager.Instance.perkValues.playerInventory_Increase_Row, 4 + PerkManager.Instance.perkValues.playerInventory_Increase_Column);
 
-        inventories[0].inventorySize = player_inventorySize;
+        if (inventories.Count > 0)
+        {
+            inventories[0].inventorySize = player_inventorySize;
 
-        ClosePlayerInventory();
-        OpenPlayerInventory();
-
+            ClosePlayerInventory();
+            OpenPlayerInventory();
+        }
+        
         SaveData();
     }
     public void SetChestSize()

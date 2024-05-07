@@ -33,7 +33,10 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
             InventoryManager.Instance.ChangeItemInfoBox(itemName, this);
         }
 
-        InventoryManager.Instance.ResetItemInfoBox();
+        if (InventoryManager.Instance.itemInfo)
+        {
+            InventoryManager.Instance.ResetItemInfoBox();
+        }
     }
 
 
