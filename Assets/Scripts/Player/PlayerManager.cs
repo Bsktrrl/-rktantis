@@ -32,13 +32,23 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public bool isHittingHeadRaycast = true;
 
+    [Header("Player Movement Sounds")]
+    public Vector3 player_PreviousPosition;
+    public float movementSoundTimer;
+    public bool hasStartedToMove = true;
+    public bool isJumping;
+
 
     //--------------------
 
 
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+
         SaveData();
+
+        PlayerWalkingSounds();
     }
 
 
@@ -104,6 +114,138 @@ public class PlayerManager : Singleton<PlayerManager>
         SaveData();
 
         print("Save_PlayerManager");
+    }
+
+
+    //--------------------
+
+
+    void PlayerWalkingSounds()
+    {
+        Vector3 currentPosition = transform.position;
+
+        //If in the air
+        if (DistanceAboveGround.Instance.GroundLookingAt == null)
+        {
+            StopWaterMovementSound();
+
+            hasStartedToMove = false;
+            isJumping = true;
+        }
+
+        //If landing
+        else if (DistanceAboveGround.Instance.GroundLookingAt && isJumping)
+        {
+            isJumping = false;
+            StartMovementSound();
+        }
+
+        //If on the ground
+        else if (currentPosition.x != player_PreviousPosition.x && currentPosition.z != player_PreviousPosition.z)
+        {
+            //Moving outside of water
+            if (PlayerMovement.Instance.movementSpeedVarianceByWater >= 1)
+            {
+                StopWaterMovementSound();
+            }
+
+            if (!hasStartedToMove)
+            {
+                hasStartedToMove = true;
+
+                StartMovementSound();
+                movementSoundTimer = 0;
+            }
+            
+            else if (movementStates == MovementStates.Walking)
+            {
+                movementSoundTimer += Time.deltaTime;
+
+                if (movementSoundTimer > 0.8f)
+                {
+                    movementSoundTimer = 0;
+
+                    StartMovementSound();
+                }
+            }
+            else if (movementStates == MovementStates.Crouching)
+            {
+                movementSoundTimer += Time.deltaTime;
+
+                if (movementSoundTimer > 1.2f)
+                {
+                    movementSoundTimer = 0;
+
+                    StartMovementSound();
+                }
+            }
+            else if (movementStates == MovementStates.Running)
+            {
+                movementSoundTimer += Time.deltaTime;
+
+                if (movementSoundTimer > 0.4f)
+                {
+                    movementSoundTimer = 0;
+
+                    StartMovementSound();
+                }
+            }
+            else
+            {
+                movementSoundTimer = 0;
+                StopWaterMovementSound();
+            }
+        }
+
+        else
+        {
+            StopWaterMovementSound();
+
+            hasStartedToMove = false;
+        }
+
+        player_PreviousPosition = MainManager.Instance.player.transform.position;
+    }
+    public void StartMovementSound()
+    {
+        if (!SoundManager.Instance.audioSource_PlayerMovement_WalkingRunning.isPlaying)
+        {
+            //Water
+            if (PlayerMovement.Instance.movementSpeedVarianceByWater < 1)
+            {
+                if (!SoundManager.Instance.audioSource_PlayerMovement_WalkingRunning_Water.isPlaying)
+                {
+                    SoundManager.Instance.Play_Player_Walking_Water_Clip();
+                }
+            }
+
+            //Other
+            else if (DistanceAboveGround.Instance.GroundTagLookingAt == "Ground_Sand")
+            {
+                SoundManager.Instance.Play_Player_Walking_Sand_Clip();
+            }
+            else if (DistanceAboveGround.Instance.GroundTagLookingAt == "Ground_Ruin")
+            {
+                SoundManager.Instance.Play_Player_Walking_Ruin_Clip();
+            }
+
+            else if (DistanceAboveGround.Instance.GroundTagLookingAt == "Ground_Wood")
+            {
+                SoundManager.Instance.Play_Player_Walking_Wood_Clip();
+            }
+            else if (DistanceAboveGround.Instance.GroundTagLookingAt == "Ground_Stone")
+            {
+                SoundManager.Instance.Play_Player_Walking_Stone_Clip();
+            }
+            else if (DistanceAboveGround.Instance.GroundTagLookingAt == "GroundCryonite")
+            {
+                SoundManager.Instance.Play_Player_Walking_Cryonite_Clip();
+            }
+        }
+    }
+    void StopWaterMovementSound()
+    {
+        SoundManager.Instance.Stop_Player_Walking_Water_Clip();
     }
 
 

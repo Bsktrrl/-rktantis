@@ -29,6 +29,7 @@ public class SoundManager : Singleton<SoundManager>
 
     [Header("Player Movement")]
     public AudioSource audioSource_PlayerMovement_WalkingRunning; //
+    public AudioSource audioSource_PlayerMovement_WalkingRunning_Water; //
     public AudioSource audioSource_PlayerMovement_FallDamage; //
 
     [Header("Tablet")]
@@ -140,18 +141,11 @@ public class SoundManager : Singleton<SoundManager>
     #region Player
     [Header("Player")]
     [SerializeField] AudioClip player_Walking_Sand_Clip; //
-    [SerializeField] AudioClip player_Walking_Grass_Clip; //
+    [SerializeField] AudioClip player_Walking_Ruin_Clip; //
     [SerializeField] AudioClip player_Walking_Water_Clip; //
     [SerializeField] AudioClip player_Walking_Stone_Clip; //
     [SerializeField] AudioClip player_Walking_Wood_Clip; //
     [SerializeField] AudioClip player_Walking_Cryonite_Clip; //
-
-    [SerializeField] AudioClip player_Sprinting_Sand_Clip; //
-    [SerializeField] AudioClip player_Sprinting_Grass_Clip; //
-    [SerializeField] AudioClip player_Sprinting_Water_Clip; //
-    [SerializeField] AudioClip player_Sprinting_Stone_Clip; //
-    [SerializeField] AudioClip player_Sprinting_Wood_Clip; //
-    [SerializeField] AudioClip player_Sprinting_Cryonite_Clip; //
 
     [SerializeField] AudioClip player_FallDamage_Clip; //
     #endregion
@@ -376,6 +370,7 @@ public class SoundManager : Singleton<SoundManager>
 
         //Player Movement
         audioSource_PlayerMovement_WalkingRunning.volume = sound_World;
+        audioSource_PlayerMovement_WalkingRunning_Water.volume = sound_World;
         audioSource_PlayerMovement_FallDamage.volume = sound_World;
 
         //Tablet
@@ -580,30 +575,38 @@ public class SoundManager : Singleton<SoundManager>
     #endregion
 
     #region Player //Have yet to be implemented
+    public void Play_Player_Walking_Water_Clip()
+    {
+        if (audioSource_PlayerMovement_WalkingRunning_Water != null)
+        {
+            audioSource_PlayerMovement_WalkingRunning_Water.clip = player_Walking_Water_Clip;
+            audioSource_PlayerMovement_WalkingRunning_Water.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning_Water.Play();
+        }
+    }
+    public void Stop_Player_Walking_Water_Clip()
+    {
+        if (audioSource_PlayerMovement_WalkingRunning_Water != null)
+        {
+            audioSource_PlayerMovement_WalkingRunning_Water.Stop();
+        }
+    }
+
     public void Play_Player_Walking_Sand_Clip()
     {
         if (audioSource_PlayerMovement_WalkingRunning != null)
         {
             audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Sand_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.pitch = Random.Range(0.8f, 1.2f); //1f
             audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
-    public void Play_Player_Walking_Grass_Clip()
+    public void Play_Player_Walking_Ruin_Clip()
     {
         if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Grass_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Walking_Water_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Water_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Ruin_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = Random.Range(1.3f, 1.7f); //1.5f
             audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
@@ -612,7 +615,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_PlayerMovement_WalkingRunning != null)
         {
             audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Stone_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.pitch = Random.Range(0.8f, 1.2f); //1f
             audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
@@ -621,7 +624,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_PlayerMovement_WalkingRunning != null)
         {
             audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Wood_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.pitch = Random.Range(1.8f, 2.2f); //2f
             audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
@@ -630,62 +633,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_PlayerMovement_WalkingRunning != null)
         {
             audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Cryonite_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-
-    public void Play_Player_Sprinting_Sand_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Sand_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Sprinting_Grass_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Grass_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Sprinting_Water_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Water_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Sprinting_Stone_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Stone_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Sprinting_Wood_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Wood_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Sprinting_Cryonite_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Cryonite_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.pitch = Random.Range(0.5f, 0.7f); //0.6f
             audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
@@ -694,8 +642,15 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_PlayerMovement_FallDamage != null)
         {
             audioSource_PlayerMovement_FallDamage.clip = player_FallDamage_Clip;
-            audioSource_PlayerMovement_FallDamage.pitch = 1f;
+            audioSource_PlayerMovement_FallDamage.pitch = Random.Range(0.8f, 1.2f); //1f
             audioSource_PlayerMovement_FallDamage.Play();
+        }
+    }
+    public void Stop_Player_Walking_Clip()
+    {
+        if (audioSource_PlayerMovement_WalkingRunning != null)
+        {
+            audioSource_PlayerMovement_WalkingRunning.Stop();
         }
     }
     #endregion
