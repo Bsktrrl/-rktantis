@@ -153,10 +153,16 @@ public class TimeManager : Singleton<TimeManager>
         if (GetTime() <= GetHour(5)) //Night
         {
             timeOfDay = TimeOfDay.Night;
+
+            if (!SoundManager.Instance.audioSource_WeatherSound_Night.isPlaying)
+            {
+                SoundManager.Instance.Play_Weather_Night_Clip();
+            }
         }
         else if (GetTime() <= GetHour(7))
         {
             timeOfDay = TimeOfDay.Morning;
+            SoundManager.Instance.Stop_Weather_Night_Clip();
         }
         else if (GetTime() <= GetHour(17))
         {
@@ -165,10 +171,20 @@ public class TimeManager : Singleton<TimeManager>
         else if (GetTime() <= GetHour(19))
         {
             timeOfDay = TimeOfDay.Evening;
+
+            if (!SoundManager.Instance.audioSource_WeatherSound_Night.isPlaying)
+            {
+                SoundManager.Instance.Play_Weather_Night_Clip();
+            }
         }
         else
         {
             timeOfDay = TimeOfDay.Night;
+
+            if (!SoundManager.Instance.audioSource_WeatherSound_Night.isPlaying)
+            {
+                SoundManager.Instance.Play_Weather_Night_Clip();
+            }
         }
     }
     

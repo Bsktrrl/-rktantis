@@ -358,7 +358,7 @@ public class SoundManager : Singleton<SoundManager>
         sound_Menu = SettingsManager.Instance.Get_Sound_MenuSFX() * sound_Master;
         sound_Creatures = SettingsManager.Instance.Get_Sound_CreaturesSFX() * sound_Master;
         sound_Music = SettingsManager.Instance.Get_Sound_Music() * sound_Master;
-        sound_Weather = SettingsManager.Instance.Get_Sound_WeatherSFX() * sound_Master;
+        sound_Weather = SettingsManager.Instance.Get_Sound_WeatherSFX() * sound_Master * 0.6f;
         sound_Voice = SettingsManager.Instance.Get_Sound_Voice() * sound_Master;
         #endregion
 
@@ -492,53 +492,6 @@ public class SoundManager : Singleton<SoundManager>
             audioSource__Music_Seclusion.clip = music_Seclusion_Clip;
             audioSource__Music_Seclusion.pitch = 1f;
             audioSource__Music_Seclusion.Play();
-        }
-    }
-
-
-    public void Play_Music_WeatherSound1_Clip()
-    {
-        if (audioSource_WeatherSound_Cloudy != null)
-        {
-            audioSource_WeatherSound_Cloudy.clip = weather_Cloudy_Clip;
-            audioSource_WeatherSound_Cloudy.pitch = 1f;
-            audioSource_WeatherSound_Cloudy.Play();
-        }
-    }
-    public void Play_Music_WeatherSound2_Clip()
-    {
-        if (audioSource_WeatherSound_Cold != null)
-        {
-            audioSource_WeatherSound_Cold.clip = weather_Cold_Clip;
-            audioSource_WeatherSound_Cold.pitch = 1f;
-            audioSource_WeatherSound_Cold.Play();
-        }
-    }
-    public void Play_Music_WeatherSound3_Clip()
-    {
-        if (audioSource_WeatherSound_Warm != null)
-        {
-            audioSource_WeatherSound_Warm.clip = weather_Hot_Clip;
-            audioSource_WeatherSound_Warm.pitch = 1f;
-            audioSource_WeatherSound_Warm.Play();
-        }
-    }
-    public void Play_Music_WeatherSound4_Clip()
-    {
-        if (audioSource_WeatherSound_Windy != null)
-        {
-            audioSource_WeatherSound_Windy.clip = weather_Windy_Clip;
-            audioSource_WeatherSound_Windy.pitch = 1f;
-            audioSource_WeatherSound_Windy.Play();
-        }
-    }
-    public void Play_Music_WeatherSound5_Clip()
-    {
-        if (audioSource_WeatherSound_Night != null)
-        {
-            audioSource_WeatherSound_Night.clip = weather_Night_Clip;
-            audioSource_WeatherSound_Night.pitch = 1f;
-            audioSource_WeatherSound_Night.Play();
         }
     }
     #endregion
@@ -877,7 +830,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_Hotbar_ChangeHotbarSlot != null)
         {
             audioSource_Hotbar_ChangeHotbarSlot.clip = hotbar_ChangeSelectedItem_Clip;
-            audioSource_Hotbar_ChangeHotbarSlot.pitch = 1f;
+            audioSource_Hotbar_ChangeHotbarSlot.pitch = 20f;
             audioSource_Hotbar_ChangeHotbarSlot.Play();
         }
     }
@@ -966,15 +919,6 @@ public class SoundManager : Singleton<SoundManager>
             audioSource_CompletePerk.clip = skillTree_CompletedPerk_Clip;
             audioSource_CompletePerk.pitch = 1f;
             audioSource_CompletePerk.Play();
-        }
-    }
-    public void Play_SkillTree_CannotUpgrade_Clip()
-    {
-        if (audioSource_CannotUpgrade != null)
-        {
-            audioSource_CannotUpgrade.clip = skillTree_CompletedPerk_Clip;
-            audioSource_CannotUpgrade.pitch = 1f;
-            audioSource_CannotUpgrade.Play();
         }
     }
     #endregion

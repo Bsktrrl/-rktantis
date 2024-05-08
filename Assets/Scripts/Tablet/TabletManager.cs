@@ -231,7 +231,7 @@ public class TabletManager : Singleton<TabletManager>
     public void MenuButton_Skilltree_onClick()
     {
         //Play Change Menu Sound
-        //SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
 
         MenuTransition(tabletMenuState, TabletMenuState.SkillTree);
     }
@@ -282,6 +282,9 @@ public class TabletManager : Singleton<TabletManager>
     #region SkillTree Buttons
     public void SkillTreeButton_Inventory_onClick() //Inventory
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         skillTree_Inventory_Parent.SetActive(true);
         skillTree_Equipment_Parent.SetActive(false);
         skillTree_GhostCapture_Parent.SetActive(false);
@@ -298,6 +301,9 @@ public class TabletManager : Singleton<TabletManager>
     }
     public void SkillTreeButton_Player_onClick() //Player
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         skillTree_Inventory_Parent.SetActive(false);
         skillTree_Equipment_Parent.SetActive(true);
         skillTree_GhostCapture_Parent.SetActive(false);
@@ -314,6 +320,9 @@ public class TabletManager : Singleton<TabletManager>
     }
     public void SkillTreeButton_Tools_onClick() //Tools
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         skillTree_Inventory_Parent.SetActive(false);
         skillTree_Equipment_Parent.SetActive(false);
         skillTree_GhostCapture_Parent.SetActive(true);
@@ -330,6 +339,9 @@ public class TabletManager : Singleton<TabletManager>
     }
     public void SkillTreeButton_Arídean_onClick() //Arídean
     {
+        //Play Change Menu Sound
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         skillTree_Inventory_Parent.SetActive(false);
         skillTree_Equipment_Parent.SetActive(false);
         skillTree_GhostCapture_Parent.SetActive(false);

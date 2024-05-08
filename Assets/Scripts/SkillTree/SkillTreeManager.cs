@@ -312,7 +312,7 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         }
         else
         {
-            SoundManager.Instance.Play_SkillTree_CannotUpgrade_Clip();
+            SoundManager.Instance.Play_Crafting_CannotCraft_Clip();
         }
     }
     public void A_PerkHasBeenPressed(Perk perk)

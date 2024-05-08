@@ -66,13 +66,37 @@ public class InteractableObject : MonoBehaviour
                 {
                     //print("Interact with a Pickup");
 
+                    #region PickUpSound
+                    float slotSize = 0;
+                    float pickupItemSize = 0;
+                    float inventorySize = 0;
+
+                    //Calculate if there is room for the pickedUpItem
+                    for (int j = 0; j < InventoryManager.Instance.inventories[0].itemsInInventory.Count; j++)
+                    {
+                        slotSize += InventoryManager.Instance.inventories[0].itemsInInventory[j].itemSize.x * InventoryManager.Instance.inventories[0].itemsInInventory[j].itemSize.y;
+                    }
+                    pickupItemSize = MainManager.Instance.GetItem(itemName).itemSize.x * MainManager.Instance.GetItem(itemName).itemSize.y;
+                    inventorySize = InventoryManager.Instance.inventories[0].inventorySize.x * InventoryManager.Instance.inventories[0].inventorySize.y;
+
+                    //Set SOund based on predicted itemSpace
+                    if (slotSize + pickupItemSize <= inventorySize)
+                    {
+                        SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+                        print("Is room: " + slotSize + " + " + pickupItemSize + " <= " + inventorySize);
+                    }
+                    else
+                    {
+                        SoundManager.Instance.Play_Inventory_InventoryIsFull_Clip();
+                        print("Is Full: " + slotSize + " + " + pickupItemSize + " <= " + inventorySize);
+                    }
+                    #endregion
+
                     //Check If item can be added
                     for (int i = 0; i < amount; i++)
                     {
                         if (InventoryManager.Instance.AddItemToInventory(0, gameObject, false))
                         {
-                            SoundManager.Instance.Play_Inventory_PickupItem_Clip();
-
                             //Remove Object from the worldObjectList
                             WorldObjectManager.Instance.WorldObject_SaveState_RemoveObjectFromWorld(gameObject);
 
@@ -105,11 +129,37 @@ public class InteractableObject : MonoBehaviour
                     {
                         if (plantParent.GetComponent<Plant>() && !plantParent.GetComponent<Plant>().isPicked)
                         {
+                            #region PickUpSound
+                            float slotSize = 0;
+                            float pickupItemSize = 0;
+                            float inventorySize = 0;
+
+                            //Calculate if there is room for the pickedUpItem
+                            for (int j = 0; j < InventoryManager.Instance.inventories[0].itemsInInventory.Count; j++)
+                            {
+                                slotSize += InventoryManager.Instance.inventories[0].itemsInInventory[j].itemSize.x * InventoryManager.Instance.inventories[0].itemsInInventory[j].itemSize.y;
+                            }
+                            pickupItemSize = MainManager.Instance.GetItem(itemName).itemSize.x * MainManager.Instance.GetItem(itemName).itemSize.y;
+                            inventorySize = InventoryManager.Instance.inventories[0].inventorySize.x * InventoryManager.Instance.inventories[0].inventorySize.y;
+
+                            //Set Sound based on predicted itemSpace
+                            if (slotSize + pickupItemSize <= inventorySize)
+                            {
+                                SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+                                print("2. Is room: " + slotSize + " + " + pickupItemSize + " <= " + inventorySize);
+                            }
+                            else
+                            {
+                                SoundManager.Instance.Play_Inventory_InventoryIsFull_Clip();
+                                print("2. Is Full: " + slotSize + " + " + pickupItemSize + " <= " + inventorySize);
+                            }
+                            #endregion
+
                             if (plantParent.GetComponent<Plant>().isInCropPlot)
                             {
                                 if (plantParent.GetComponent<Plant>().plantIsReadyInCropPlot)
                                 {
-                                    SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+                                    //SoundManager.Instance.Play_Inventory_PickupItem_Clip();
 
                                     //Check If item can be added
                                     InventoryManager.Instance.AddItemToInventory(0, itemName);
@@ -123,7 +173,7 @@ public class InteractableObject : MonoBehaviour
                                 for (int i = 0; i < amount; i++)
                                 {
                                     print("Pickplant");
-                                    SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+                                    //SoundManager.Instance.Play_Inventory_PickupItem_Clip();
 
                                     //Check If item can be added
                                     InventoryManager.Instance.AddItemToInventory(0, itemName);
