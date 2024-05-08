@@ -351,7 +351,7 @@ public class SoundManager : Singleton<SoundManager>
         sound_World = SettingsManager.Instance.Get_Sound_WorldSFX() * sound_Master;
         sound_Menu = SettingsManager.Instance.Get_Sound_MenuSFX() * sound_Master;
         sound_Creatures = SettingsManager.Instance.Get_Sound_CreaturesSFX() * sound_Master;
-        sound_Music = SettingsManager.Instance.Get_Sound_Music() * sound_Master;
+        sound_Music = SettingsManager.Instance.Get_Sound_Music() * sound_Master * 0.5f;
         sound_Weather = SettingsManager.Instance.Get_Sound_WeatherSFX() * sound_Master * 0.6f;
         sound_Voice = SettingsManager.Instance.Get_Sound_Voice() * sound_Master;
         #endregion
@@ -362,6 +362,7 @@ public class SoundManager : Singleton<SoundManager>
         audioSource__Music_HomeBase.volume = sound_Music;
         audioSource__Music_MysteriousSand.volume = sound_Music;
         audioSource__Music_Seclusion.volume = sound_Music;
+
         audioSource_WeatherSound_Cloudy.volume = sound_Weather;
         audioSource_WeatherSound_Cold.volume = sound_Weather;
         audioSource_WeatherSound_Warm.volume = sound_Weather;
@@ -466,25 +467,25 @@ public class SoundManager : Singleton<SoundManager>
     {
         if (audioSource__Music_HomeBase != null)
         {
-            audioSource__Music_HomeBase.clip = music_HomeBase_Clip;
+            //audioSource__Music_HomeBase.clip = music_HomeBase_Clip;
             audioSource__Music_HomeBase.pitch = 1f;
             audioSource__Music_HomeBase.Play();
         }
     }
-    public void Play_Music_MysteriuosSand_Clip()
+    public void Play_Music_MysteriousSand_Clip()
     {
         if (audioSource__Music_MysteriousSand != null)
         {
-            audioSource__Music_MysteriousSand.clip = music_MysteriousSand_Clip;
+            //audioSource__Music_MysteriousSand.clip = music_MysteriousSand_Clip;
             audioSource__Music_MysteriousSand.pitch = 1f;
             audioSource__Music_MysteriousSand.Play();
         }
     }
-    public void Play_Music_Seclution_Clip()
+    public void Play_Music_Seclusion_Clip()
     {
         if (audioSource__Music_Seclusion != null)
         {
-            audioSource__Music_Seclusion.clip = music_Seclusion_Clip;
+            //audioSource__Music_Seclusion.clip = music_Seclusion_Clip;
             audioSource__Music_Seclusion.pitch = 1f;
             audioSource__Music_Seclusion.Play();
         }
