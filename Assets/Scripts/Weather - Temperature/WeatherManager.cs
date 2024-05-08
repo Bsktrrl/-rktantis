@@ -125,6 +125,7 @@ public class WeatherManager : Singleton<WeatherManager>
         else
         {
             //Set the stats for today's weather
+            SetUpStartWeather();
 
             //Display the weather for today and the next 4 days
             SetWeatherDisplay();
@@ -342,6 +343,20 @@ public class WeatherManager : Singleton<WeatherManager>
         }
     }
 
+    void SetUpStartWeather()
+    {
+        //Set the stats for today's weather
+        SetWeatherStats_Today();
+
+        //Display the weather for today and the next 4 days
+        SetWeatherDisplay();
+
+        //Set new Ghost amount
+        GhostManager.Instance.SetGhostSpawnAmount();
+
+        SaveData();
+    }
+
     public void SetWeather()
     {
         //Add new Weather Type
@@ -376,6 +391,11 @@ public class WeatherManager : Singleton<WeatherManager>
     }
     void SetWeatherStats_Today()
     {
+        SoundManager.Instance.Stop_Weather_Cloudy_Clip();
+        SoundManager.Instance.Stop_Weather_Cold_Clip();
+        SoundManager.Instance.Stop_Weather_Warm_Clip();
+        SoundManager.Instance.Stop_Weather_Windy_Clip();
+
         PlayerMovement.Instance.movementSpeedVarianceByWeather = 1f;
 
         HealthManager.Instance.hunger_SpeedMultiplier_ByWeather = 1f;
@@ -388,6 +408,9 @@ public class WeatherManager : Singleton<WeatherManager>
         {
             if (weatherTypeDayList[0] == WeatherType.Sunny)
             {
+                //Set Sound
+                SoundManager.Instance.Play_Weather_Warm_Clip();
+
                 //Set Weather Type
                 weatherType = WeatherType.Sunny;
 
@@ -404,6 +427,9 @@ public class WeatherManager : Singleton<WeatherManager>
             //Cloudy
             else if (weatherTypeDayList[0] == WeatherType.Cloudy)
             {
+                //Set Sound
+                SoundManager.Instance.Play_Weather_Cloudy_Clip();
+
                 //Set Weather Type
                 weatherType = WeatherType.Cloudy;
 
@@ -420,6 +446,9 @@ public class WeatherManager : Singleton<WeatherManager>
             //Windy
             else if (weatherTypeDayList[0] == WeatherType.Windy)
             {
+                //Set Sound
+                SoundManager.Instance.Play_Weather_Windy_Clip();
+
                 //Set Weather Type
                 weatherType = WeatherType.Windy;
 
@@ -438,6 +467,9 @@ public class WeatherManager : Singleton<WeatherManager>
             //Cold
             else if (weatherTypeDayList[0] == WeatherType.Cold)
             {
+                //Set Sound
+                SoundManager.Instance.Play_Weather_Cold_Clip();
+
                 //Set Weather Type
                 weatherType = WeatherType.Cold;
 

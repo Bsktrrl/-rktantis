@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class BuildingDisplaySlot : MonoBehaviour
+public class BuildingDisplaySlot : MonoBehaviour, IPointerEnterHandler
 {
     public BuildingObjectTypes buildingObjectType;
     public BuildingMaterial buildingMaterial;
@@ -32,6 +33,8 @@ public class BuildingDisplaySlot : MonoBehaviour
 
     public void SelectButton_isPressed()
     {
+        SoundManager.Instance.Play_Crafting_ChangeCraftingMenu_Clip();
+
         BuildingDisplayManager.Instance.UpdateMenuPlussSignsSave(gameObject);
 
         if (Image_Pluss)
@@ -78,5 +81,10 @@ public class BuildingDisplaySlot : MonoBehaviour
         BuildingSystemManager.Instance.SpawnNewSelectedBuildingObject();
 
         BuildingSystemManager.Instance.SaveData();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        SoundManager.Instance.Play_Inventory_ItemHover_Clip();
     }
 }

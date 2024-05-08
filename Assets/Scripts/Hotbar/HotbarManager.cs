@@ -297,7 +297,7 @@ public class HotbarManager : Singleton<HotbarManager>
         {
             print("QuickHotbarSelect_1");
 
-            SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+            //SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
 
             for (int i = 0; i < hotbarList.Count; i++)
             {
@@ -317,7 +317,7 @@ public class HotbarManager : Singleton<HotbarManager>
         if (MainManager.Instance.GetItem(hoveredItem).isEquipableInHand)
         {
             print("QuickHotbarSelect_2");
-            SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+            //SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
 
             for (int i = 0; i < hotbarList.Count; i++)
             {
@@ -337,7 +337,7 @@ public class HotbarManager : Singleton<HotbarManager>
         if (MainManager.Instance.GetItem(hoveredItem).isEquipableInHand)
         {
             print("QuickHotbarSelect_3");
-            SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+            //SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
 
             for (int i = 0; i < hotbarList.Count; i++)
             {
@@ -357,7 +357,7 @@ public class HotbarManager : Singleton<HotbarManager>
         if (MainManager.Instance.GetItem(hoveredItem).isEquipableInHand)
         {
             print("QuickHotbarSelect_4");
-            SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+            //SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
 
             for (int i = 0; i < hotbarList.Count; i++)
             {
@@ -377,7 +377,7 @@ public class HotbarManager : Singleton<HotbarManager>
         if (MainManager.Instance.GetItem(hoveredItem).isEquipableInHand)
         {
             print("QuickHotbarSelect_5");
-            SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
+            //SoundManager.Instance.Play_Hotbar_ChangeSelectedItem_Clip();
 
             for (int i = 0; i < hotbarList.Count; i++)
             {

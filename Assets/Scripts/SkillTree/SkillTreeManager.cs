@@ -310,6 +310,10 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
 
             pressedPerk = null;
         }
+        else
+        {
+            SoundManager.Instance.Play_Crafting_CannotCraft_Clip();
+        }
     }
     public void A_PerkHasBeenPressed(Perk perk)
     {

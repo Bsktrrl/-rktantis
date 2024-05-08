@@ -17,11 +17,11 @@ public class CraftButton : MonoBehaviour
         {
             if (CraftingManager.Instance.totalRequirementMet)
             {
-                craftingButton.GetComponent<Image>().sprite = craftingButtonColor_Active;
+                craftingButton.GetComponent<Image>().sprite = craftingButtonColor_Inactive;
             }
             else
             {
-                craftingButton.GetComponent<Image>().sprite = craftingButtonColor_Inactive;
+                craftingButton.GetComponent<Image>().sprite = craftingButtonColor_Active;
             }
         }
     }

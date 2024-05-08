@@ -51,7 +51,7 @@ public class CategoryButton : MonoBehaviour, IPointerEnterHandler
         //Set Frame Orange
         GetComponent<Image>().sprite = TabletManager.Instance.squareButton_Passive;
 
-        SoundManager.Instance.Play_Crafting_ChangeCraftingMenu_Clip();
+        SoundManager.Instance.Play_Crafting_SelectCraftingItem_Clip();
 
         CraftingManager.Instance.activeCategory = categoryType;
         CraftingManager.Instance.SetupSelectionScreen();

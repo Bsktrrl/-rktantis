@@ -26,6 +26,7 @@ public class DistanceAboveGround : Singleton<DistanceAboveGround>
     [Header("isGrounded")]
     public bool isGrounded;
     public GameObject GroundLookingAt;
+    public string GroundTagLookingAt;
 
     public bool isInside;
     [SerializeField] LayerMask roof_LayerMask;
@@ -101,6 +102,7 @@ public class DistanceAboveGround : Singleton<DistanceAboveGround>
         if (Physics.Raycast(pos, Vector3.down, out hit, raycastDistance_CheckGround))
         {
             GroundLookingAt = hit.transform.gameObject;
+            GroundTagLookingAt = hit.transform.gameObject.tag;
 
             if (GroundLookingAt)
             {

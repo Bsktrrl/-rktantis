@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f7d593ae09aa24a9184f94ab51ee1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   canBePlaced: 0
   isSelectedForMovement: 0
   enoughItemsToBuild: 0
@@ -329,6 +330,7 @@ MonoBehaviour:
   modelList:
   - {fileID: 8815233503749311390}
   collidersOnObject: {fileID: 6914302463606165046}
+  connectionPointObject: {fileID: 0}
 --- !u!1 &6914302463606165046
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +521,7 @@ GameObject:
   - component: {fileID: 2523081699889344215}
   m_Layer: 8
   m_Name: Model
-  m_TagString: BuildingBlock
+  m_TagString: GroundCryonite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

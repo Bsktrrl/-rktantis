@@ -17,18 +17,19 @@ public class SoundManager : Singleton<SoundManager>
 
     #region Sound Categories
     [Header("Everywhere")]
-    public AudioSource audioSource_Everywhere_Music1; //Music Source
-    public AudioSource audioSource_Everywhere_Music2; //Music Source
-    public AudioSource audioSource_Everywhere_Music3; //Music Source
+    public AudioSource audioSource__Music_HomeBase; //Music Source
+    public AudioSource audioSource__Music_MysteriousSand; //Music Source
+    public AudioSource audioSource__Music_Seclusion; //Music Source
 
-    public AudioSource audioSource_Everywhere_WeatherSound1; //Weather Sound Source
-    public AudioSource audioSource_Everywhere_WeatherSound2; //Weather Sound Source
-    public AudioSource audioSource_Everywhere_WeatherSound3; //Weather Sound Source
-    public AudioSource audioSource_Everywhere_WeatherSound4; //Weather Sound Source
-    public AudioSource audioSource_Everywhere_WeatherSound5; //Weather Sound Source
+    public AudioSource audioSource_WeatherSound_Cloudy; //Weather Sound Source
+    public AudioSource audioSource_WeatherSound_Cold; //Weather Sound Source
+    public AudioSource audioSource_WeatherSound_Warm; //Weather Sound Source
+    public AudioSource audioSource_WeatherSound_Windy; //Weather Sound Source
+    public AudioSource audioSource_WeatherSound_Night; //Weather Sound Source
 
     [Header("Player Movement")]
     public AudioSource audioSource_PlayerMovement_WalkingRunning; //
+    public AudioSource audioSource_PlayerMovement_WalkingRunning_Water; //
     public AudioSource audioSource_PlayerMovement_FallDamage; //
 
     [Header("Tablet")]
@@ -54,6 +55,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource audioSource_SkillTree_PerkHover; //
     public AudioSource audioSource_SkillTree_ChangeSkillTreeMenu; //
     public AudioSource audioSource_CompletePerk; //
+    public AudioSource audioSource_CannotUpgrade; //
 
     [Header("Equipped Items")]
     public AudioSource audioSource_EquippedItems_BreakEquipment; //
@@ -123,34 +125,27 @@ public class SoundManager : Singleton<SoundManager>
 
     #region Music
     [Header("Music")]
-    [SerializeField] AudioClip music_mainMusic1_Clip; //
-    [SerializeField] AudioClip music_mainMusic2_Clip; //
-    [SerializeField] AudioClip music_mainMusic3_Clip; //
+    [SerializeField] AudioClip music_HomeBase_Clip; //
+    [SerializeField] AudioClip music_MysteriousSand_Clip; //
+    [SerializeField] AudioClip music_Seclusion_Clip; //
     #endregion
     #region Weather
     [Header("Weather")]
-    [SerializeField] AudioClip weather_sound1_Clip; //
-    [SerializeField] AudioClip weather_sound2_Clip; //
-    [SerializeField] AudioClip weather_sound3_Clip; //
-    [SerializeField] AudioClip weather_sound4_Clip; //
-    [SerializeField] AudioClip weather_sound5_Clip; //
+    [SerializeField] AudioClip weather_Cloudy_Clip; //
+    [SerializeField] AudioClip weather_Cold_Clip; //
+    [SerializeField] AudioClip weather_Hot_Clip; //
+    [SerializeField] AudioClip weather_Windy_Clip; //
+    [SerializeField] AudioClip weather_Night_Clip; //
     #endregion
 
     #region Player
     [Header("Player")]
     [SerializeField] AudioClip player_Walking_Sand_Clip; //
-    [SerializeField] AudioClip player_Walking_Grass_Clip; //
+    [SerializeField] AudioClip player_Walking_Ruin_Clip; //
     [SerializeField] AudioClip player_Walking_Water_Clip; //
     [SerializeField] AudioClip player_Walking_Stone_Clip; //
     [SerializeField] AudioClip player_Walking_Wood_Clip; //
     [SerializeField] AudioClip player_Walking_Cryonite_Clip; //
-
-    [SerializeField] AudioClip player_Sprinting_Sand_Clip; //
-    [SerializeField] AudioClip player_Sprinting_Grass_Clip; //
-    [SerializeField] AudioClip player_Sprinting_Water_Clip; //
-    [SerializeField] AudioClip player_Sprinting_Stone_Clip; //
-    [SerializeField] AudioClip player_Sprinting_Wood_Clip; //
-    [SerializeField] AudioClip player_Sprinting_Cryonite_Clip; //
 
     [SerializeField] AudioClip player_FallDamage_Clip; //
     #endregion
@@ -356,25 +351,27 @@ public class SoundManager : Singleton<SoundManager>
         sound_World = SettingsManager.Instance.Get_Sound_WorldSFX() * sound_Master;
         sound_Menu = SettingsManager.Instance.Get_Sound_MenuSFX() * sound_Master;
         sound_Creatures = SettingsManager.Instance.Get_Sound_CreaturesSFX() * sound_Master;
-        sound_Music = SettingsManager.Instance.Get_Sound_Music() * sound_Master;
-        sound_Weather = SettingsManager.Instance.Get_Sound_WeatherSFX() * sound_Master;
+        sound_Music = SettingsManager.Instance.Get_Sound_Music() * sound_Master * 0.5f;
+        sound_Weather = SettingsManager.Instance.Get_Sound_WeatherSFX() * sound_Master * 0.6f;
         sound_Voice = SettingsManager.Instance.Get_Sound_Voice() * sound_Master;
         #endregion
 
         //Add Volume to the audioSources
         #region 
         //Everywhere
-        audioSource_Everywhere_Music1.volume = sound_Music;
-        audioSource_Everywhere_Music2.volume = sound_Music;
-        audioSource_Everywhere_Music3.volume = sound_Music;
-        audioSource_Everywhere_WeatherSound1.volume = sound_Weather;
-        audioSource_Everywhere_WeatherSound2.volume = sound_Weather;
-        audioSource_Everywhere_WeatherSound3.volume = sound_Weather;
-        audioSource_Everywhere_WeatherSound4.volume = sound_Weather;
-        audioSource_Everywhere_WeatherSound5.volume = sound_Weather;
+        audioSource__Music_HomeBase.volume = sound_Music;
+        audioSource__Music_MysteriousSand.volume = sound_Music;
+        audioSource__Music_Seclusion.volume = sound_Music;
+
+        audioSource_WeatherSound_Cloudy.volume = sound_Weather;
+        audioSource_WeatherSound_Cold.volume = sound_Weather;
+        audioSource_WeatherSound_Warm.volume = sound_Weather;
+        audioSource_WeatherSound_Windy.volume = sound_Weather;
+        audioSource_WeatherSound_Night.volume = sound_Weather;
 
         //Player Movement
         audioSource_PlayerMovement_WalkingRunning.volume = sound_World;
+        audioSource_PlayerMovement_WalkingRunning_Water.volume = sound_World;
         audioSource_PlayerMovement_FallDamage.volume = sound_World;
 
         //Tablet
@@ -400,6 +397,7 @@ public class SoundManager : Singleton<SoundManager>
         audioSource_SkillTree_PerkHover.volume = sound_Menu;
         audioSource_SkillTree_ChangeSkillTreeMenu.volume = sound_Menu;
         audioSource_CompletePerk.volume = sound_Menu;
+        audioSource_CannotUpgrade.volume = sound_Menu;
 
         //Equipped Item
         audioSource_EquippedItems_BreakEquipment.volume = sound_World;
@@ -465,110 +463,151 @@ public class SoundManager : Singleton<SoundManager>
 
 
     #region Music
-    public void Play_Music_Music1_Clip()
+    public void Play_Music_HomeBase_Clip()
     {
-        if (audioSource_Everywhere_Music1 != null)
+        if (audioSource__Music_HomeBase != null)
         {
-            audioSource_Everywhere_Music1.clip = music_mainMusic1_Clip;
-            audioSource_Everywhere_Music1.pitch = 1f;
-            audioSource_Everywhere_Music1.Play();
+            //audioSource__Music_HomeBase.clip = music_HomeBase_Clip;
+            audioSource__Music_HomeBase.pitch = 1f;
+            audioSource__Music_HomeBase.Play();
         }
     }
-    public void Play_Music_Music2_Clip()
+    public void Play_Music_MysteriousSand_Clip()
     {
-        if (audioSource_Everywhere_Music2 != null)
+        if (audioSource__Music_MysteriousSand != null)
         {
-            audioSource_Everywhere_Music2.clip = music_mainMusic2_Clip;
-            audioSource_Everywhere_Music2.pitch = 1f;
-            audioSource_Everywhere_Music2.Play();
+            //audioSource__Music_MysteriousSand.clip = music_MysteriousSand_Clip;
+            audioSource__Music_MysteriousSand.pitch = 1f;
+            audioSource__Music_MysteriousSand.Play();
         }
     }
-    public void Play_Music_Music3_Clip()
+    public void Play_Music_Seclusion_Clip()
     {
-        if (audioSource_Everywhere_Music3 != null)
+        if (audioSource__Music_Seclusion != null)
         {
-            audioSource_Everywhere_Music3.clip = music_mainMusic3_Clip;
-            audioSource_Everywhere_Music3.pitch = 1f;
-            audioSource_Everywhere_Music3.Play();
-        }
-    }
-
-
-    public void Play_Music_WeatherSound1_Clip()
-    {
-        if (audioSource_Everywhere_WeatherSound1 != null)
-        {
-            audioSource_Everywhere_WeatherSound1.clip = weather_sound1_Clip;
-            audioSource_Everywhere_WeatherSound1.pitch = 1f;
-            audioSource_Everywhere_WeatherSound1.Play();
-        }
-    }
-    public void Play_Music_WeatherSound2_Clip()
-    {
-        if (audioSource_Everywhere_WeatherSound2 != null)
-        {
-            audioSource_Everywhere_WeatherSound2.clip = weather_sound2_Clip;
-            audioSource_Everywhere_WeatherSound2.pitch = 1f;
-            audioSource_Everywhere_WeatherSound2.Play();
-        }
-    }
-    public void Play_Music_WeatherSound3_Clip()
-    {
-        if (audioSource_Everywhere_WeatherSound3 != null)
-        {
-            audioSource_Everywhere_WeatherSound3.clip = weather_sound3_Clip;
-            audioSource_Everywhere_WeatherSound3.pitch = 1f;
-            audioSource_Everywhere_WeatherSound3.Play();
-        }
-    }
-    public void Play_Music_WeatherSound4_Clip()
-    {
-        if (audioSource_Everywhere_WeatherSound4 != null)
-        {
-            audioSource_Everywhere_WeatherSound4.clip = weather_sound4_Clip;
-            audioSource_Everywhere_WeatherSound4.pitch = 1f;
-            audioSource_Everywhere_WeatherSound4.Play();
-        }
-    }
-    public void Play_Music_WeatherSound5_Clip()
-    {
-        if (audioSource_Everywhere_WeatherSound5 != null)
-        {
-            audioSource_Everywhere_WeatherSound5.clip = weather_sound5_Clip;
-            audioSource_Everywhere_WeatherSound5.pitch = 1f;
-            audioSource_Everywhere_WeatherSound5.Play();
+            //audioSource__Music_Seclusion.clip = music_Seclusion_Clip;
+            audioSource__Music_Seclusion.pitch = 1f;
+            audioSource__Music_Seclusion.Play();
         }
     }
     #endregion
 
     #region Weather
+    public void Play_Weather_Cloudy_Clip()
+    {
+        if (audioSource_WeatherSound_Cloudy != null)
+        {
+            audioSource_WeatherSound_Cloudy.clip = weather_Cloudy_Clip;
+            audioSource_WeatherSound_Cloudy.pitch = 1f;
+            audioSource_WeatherSound_Cloudy.Play();
+        }
+    }
+    public void Stop_Weather_Cloudy_Clip()
+    {
+        if (audioSource_WeatherSound_Cloudy != null)
+        {
+            audioSource_WeatherSound_Cloudy.Stop();
+        }
+    }
+    public void Play_Weather_Cold_Clip()
+    {
+        if (audioSource_WeatherSound_Cold != null)
+        {
+            audioSource_WeatherSound_Cold.clip = weather_Cold_Clip;
+            audioSource_WeatherSound_Cold.pitch = 1f;
+            audioSource_WeatherSound_Cold.Play();
+        }
+    }
+    public void Stop_Weather_Cold_Clip()
+    {
+        if (audioSource_WeatherSound_Cold != null)
+        {
+            audioSource_WeatherSound_Cold.Stop();
+        }
+    }
+    public void Play_Weather_Warm_Clip()
+    {
+        if (audioSource_WeatherSound_Warm != null)
+        {
+            audioSource_WeatherSound_Warm.clip = weather_Hot_Clip;
+            audioSource_WeatherSound_Warm.pitch = 1f;
+            audioSource_WeatherSound_Warm.Play();
+        }
+    }
+    public void Stop_Weather_Warm_Clip()
+    {
+        if (audioSource_WeatherSound_Warm != null)
+        {
+            audioSource_WeatherSound_Warm.Stop();
+        }
+    }
+    public void Play_Weather_Windy_Clip()
+    {
+        if (audioSource_WeatherSound_Windy != null)
+        {
+            audioSource_WeatherSound_Windy.clip = weather_Windy_Clip;
+            audioSource_WeatherSound_Windy.pitch = 1f;
+            audioSource_WeatherSound_Windy.Play();
+        }
+    }
+    public void Stop_Weather_Windy_Clip()
+    {
+        if (audioSource_WeatherSound_Windy != null)
+        {
+            audioSource_WeatherSound_Windy.Stop();
+        }
+    }
+    public void Play_Weather_Night_Clip()
+    {
+        if (audioSource_WeatherSound_Night != null)
+        {
+            audioSource_WeatherSound_Night.clip = weather_Night_Clip;
+            audioSource_WeatherSound_Night.pitch = 1f;
+            audioSource_WeatherSound_Night.Play();
+        }
+    }
+    public void Stop_Weather_Night_Clip()
+    {
+        if (audioSource_WeatherSound_Night != null)
+        {
+            audioSource_WeatherSound_Night.Stop();
+        }
+    }
     #endregion
 
     #region Player //Have yet to be implemented
+    public void Play_Player_Walking_Water_Clip()
+    {
+        if (audioSource_PlayerMovement_WalkingRunning_Water != null)
+        {
+            audioSource_PlayerMovement_WalkingRunning_Water.clip = player_Walking_Water_Clip;
+            audioSource_PlayerMovement_WalkingRunning_Water.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning_Water.Play();
+        }
+    }
+    public void Stop_Player_Walking_Water_Clip()
+    {
+        if (audioSource_PlayerMovement_WalkingRunning_Water != null)
+        {
+            audioSource_PlayerMovement_WalkingRunning_Water.Stop();
+        }
+    }
+
     public void Play_Player_Walking_Sand_Clip()
     {
         if (audioSource_PlayerMovement_WalkingRunning != null)
         {
             audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Sand_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.pitch = Random.Range(0.8f, 1.2f); //1f
             audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
-    public void Play_Player_Walking_Grass_Clip()
+    public void Play_Player_Walking_Ruin_Clip()
     {
         if (audioSource_PlayerMovement_WalkingRunning != null)
         {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Grass_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Walking_Water_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Water_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Ruin_Clip;
+            audioSource_PlayerMovement_WalkingRunning.pitch = Random.Range(1.3f, 1.7f); //1.5f
             audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
@@ -577,7 +616,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_PlayerMovement_WalkingRunning != null)
         {
             audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Stone_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.pitch = Random.Range(0.8f, 1.2f); //1f
             audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
@@ -586,7 +625,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_PlayerMovement_WalkingRunning != null)
         {
             audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Wood_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.pitch = Random.Range(1.8f, 2.2f); //2f
             audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
@@ -595,62 +634,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_PlayerMovement_WalkingRunning != null)
         {
             audioSource_PlayerMovement_WalkingRunning.clip = player_Walking_Cryonite_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-
-    public void Play_Player_Sprinting_Sand_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Sand_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Sprinting_Grass_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Grass_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Sprinting_Water_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Water_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Sprinting_Stone_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Stone_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Sprinting_Wood_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Wood_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
-            audioSource_PlayerMovement_WalkingRunning.Play();
-        }
-    }
-    public void Play_Player_Sprinting_Cryonite_Clip()
-    {
-        if (audioSource_PlayerMovement_WalkingRunning != null)
-        {
-            audioSource_PlayerMovement_WalkingRunning.clip = player_Sprinting_Cryonite_Clip;
-            audioSource_PlayerMovement_WalkingRunning.pitch = 1f;
+            audioSource_PlayerMovement_WalkingRunning.pitch = Random.Range(0.5f, 0.7f); //0.6f
             audioSource_PlayerMovement_WalkingRunning.Play();
         }
     }
@@ -659,8 +643,15 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_PlayerMovement_FallDamage != null)
         {
             audioSource_PlayerMovement_FallDamage.clip = player_FallDamage_Clip;
-            audioSource_PlayerMovement_FallDamage.pitch = 1f;
+            audioSource_PlayerMovement_FallDamage.pitch = Random.Range(0.8f, 1.2f); //1f
             audioSource_PlayerMovement_FallDamage.Play();
+        }
+    }
+    public void Stop_Player_Walking_Clip()
+    {
+        if (audioSource_PlayerMovement_WalkingRunning != null)
+        {
+            audioSource_PlayerMovement_WalkingRunning.Stop();
         }
     }
     #endregion
@@ -795,7 +786,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_Hotbar_ChangeHotbarSlot != null)
         {
             audioSource_Hotbar_ChangeHotbarSlot.clip = hotbar_ChangeSelectedItem_Clip;
-            audioSource_Hotbar_ChangeHotbarSlot.pitch = 1f;
+            audioSource_Hotbar_ChangeHotbarSlot.pitch = 20f;
             audioSource_Hotbar_ChangeHotbarSlot.Play();
         }
     }
@@ -864,7 +855,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_SkillTree_PerkHover != null)
         {
             audioSource_SkillTree_PerkHover.clip = skillTree_HoverPerk_Clip;
-            audioSource_SkillTree_PerkHover.pitch = 1f;
+            audioSource_SkillTree_PerkHover.pitch = 20f;
             audioSource_SkillTree_PerkHover.Play();
         }
     }
@@ -1061,7 +1052,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_Building_Placement != null)
         {
             audioSource_Building_Placement.clip = building_Place_Stone_Clip;
-            audioSource_Building_Placement.pitch = 0.7f;
+            audioSource_Building_Placement.pitch = 0.9f;
             audioSource_Building_Placement.Play();
         }
     }
@@ -1089,7 +1080,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_Building_Remove != null)
         {
             audioSource_Building_Remove.clip = building_Remove_Stone_Clip;
-            audioSource_Building_Remove.pitch = 0.7f;
+            audioSource_Building_Remove.pitch = 0.9f;
             audioSource_Building_Remove.Play();
         }
     }
@@ -1108,7 +1099,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_CannotPlace != null)
         {
             audioSource_CannotPlace.clip = building_CannotPlaceBlock_Clip;
-            audioSource_CannotPlace.pitch = 0.5f;
+            audioSource_CannotPlace.pitch = 1f;
             audioSource_CannotPlace.Play();
         }
     }
@@ -1231,7 +1222,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_Chest_Open != null)
         {
             audioSource_Chest_Open.clip = chests_OpenBigChest_Clip;
-            audioSource_Chest_Open.pitch = 1f;
+            audioSource_Chest_Open.pitch = 0.75f;
             audioSource_Chest_Open.Play();
         }
     }
@@ -1240,7 +1231,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_Chest_Close != null)
         {
             audioSource_Chest_Close.clip = chests_CloseBigChest_Clip;
-            audioSource_Chest_Close.pitch = 1f;
+            audioSource_Chest_Close.pitch = 0.75f;
             audioSource_Chest_Close.Play();
         }
     }

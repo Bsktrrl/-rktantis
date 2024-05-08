@@ -8,7 +8,7 @@ public class WaterDetection : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            print("Entering Water");
+            //print("Entering Water");
 
             PlayerMovement.Instance.movementSpeedVarianceByWater = 0.5f;
             WeatherManager.Instance.waterValue = 20;
@@ -19,7 +19,7 @@ public class WaterDetection : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            print("Exiting Water");
+            //print("Exiting Water");
 
             PlayerMovement.Instance.movementSpeedVarianceByWater = 1f;
             WeatherManager.Instance.waterValue = 0;

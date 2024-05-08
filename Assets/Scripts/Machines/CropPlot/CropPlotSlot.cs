@@ -125,7 +125,34 @@ public class CropPlotSlot : MonoBehaviour
                 {
                     if (plantSpot_Parent.transform.GetChild(0).gameObject.GetComponent<Plant>().plantIsReadyInCropPlot)
                     {
-                        SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+                        #region PickUpSound
+                        float slotSize = 0;
+                        float pickupItemSize = 0;
+                        float inventorySize = 0;
+
+                        //Calculate if there is room for the pickedUpItem
+                        for (int j = 0; j < InventoryManager.Instance.inventories[0].itemsInInventory.Count; j++)
+                        {
+                            slotSize += InventoryManager.Instance.inventories[0].itemsInInventory[j].itemSize.x * InventoryManager.Instance.inventories[0].itemsInInventory[j].itemSize.y;
+                        }
+                        pickupItemSize = MainManager.Instance.GetItem(GetCropPlotSlotInfo().plantName_Output).itemSize.x * MainManager.Instance.GetItem(GetCropPlotSlotInfo().plantName_Output).itemSize.y;
+                        inventorySize = InventoryManager.Instance.inventories[0].inventorySize.x * InventoryManager.Instance.inventories[0].inventorySize.y;
+
+                        //Set SOund based on predicted itemSpace
+                        if (slotSize + pickupItemSize <= inventorySize)
+                        {
+                            SoundManager.Instance.Play_Inventory_PickupItem_Clip();
+                            print("3. Is room: " + slotSize + " + " + pickupItemSize + " <= " + inventorySize);
+                        }
+                        else
+                        {
+                            SoundManager.Instance.Play_Inventory_InventoryIsFull_Clip();
+                            print("3. Is Full: " + slotSize + " + " + pickupItemSize + " <= " + inventorySize);
+                        }
+                        #endregion
+
+
+                        //SoundManager.Instance.Play_Inventory_PickupItem_Clip();
 
                         //Check If item can be added
                         InventoryManager.Instance.AddItemToInventory(0, GetPlantItem());

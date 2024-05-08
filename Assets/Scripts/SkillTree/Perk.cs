@@ -90,6 +90,8 @@ public class Perk : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (perkInfo.perkState == PerkState.Active) { return; }
 
+        SoundManager.Instance.Play_Crafting_ChangeCraftingMenu_Clip();
+
         if (perkInfo.perkInteractionState == PerkInteractionState.Pressed)
         {
             SkillTreeManager.Instance.A_PerkHasBeenPressed(null);
