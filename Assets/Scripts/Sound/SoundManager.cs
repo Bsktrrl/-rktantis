@@ -1266,7 +1266,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_Chest_Open != null)
         {
             audioSource_Chest_Open.clip = chests_OpenBigChest_Clip;
-            audioSource_Chest_Open.pitch = 1f;
+            audioSource_Chest_Open.pitch = 0.75f;
             audioSource_Chest_Open.Play();
         }
     }
@@ -1275,7 +1275,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_Chest_Close != null)
         {
             audioSource_Chest_Close.clip = chests_CloseBigChest_Clip;
-            audioSource_Chest_Close.pitch = 1f;
+            audioSource_Chest_Close.pitch = 0.75f;
             audioSource_Chest_Close.Play();
         }
     }
