@@ -220,6 +220,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5038223539252665796, guid: be453323b8ac9cd44a44033b678bb64a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8be300487ec7b564db68eb0d90da3020, type: 2}
     - target: {fileID: -253803450467449483, guid: be453323b8ac9cd44a44033b678bb64a,
         type: 3}
       propertyPath: m_IsActive
@@ -388,13 +393,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2377caf940a2892419a95a491612e5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparencyValue: 1
+  transparencyValue: 0.75
   objectCollider: {fileID: 7098828802597423836}
   objectPartsList_Base:
   - {fileID: 6447839391528776900}
   objectPartsList_Pickable: []
   materialList:
-  - {fileID: 2100000, guid: 3dabe33d20c4b574e8885e948abb238c, type: 2}
+  - {fileID: 2100000, guid: 8be300487ec7b564db68eb0d90da3020, type: 2}
   rendererList:
   - {fileID: 6746306451274812339}
   collidingObjectList:
