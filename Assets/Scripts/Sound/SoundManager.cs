@@ -1096,7 +1096,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_Building_Placement != null)
         {
             audioSource_Building_Placement.clip = building_Place_Stone_Clip;
-            audioSource_Building_Placement.pitch = 0.7f;
+            audioSource_Building_Placement.pitch = 0.9f;
             audioSource_Building_Placement.Play();
         }
     }
@@ -1124,7 +1124,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_Building_Remove != null)
         {
             audioSource_Building_Remove.clip = building_Remove_Stone_Clip;
-            audioSource_Building_Remove.pitch = 0.7f;
+            audioSource_Building_Remove.pitch = 0.9f;
             audioSource_Building_Remove.Play();
         }
     }
@@ -1143,7 +1143,7 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource_CannotPlace != null)
         {
             audioSource_CannotPlace.clip = building_CannotPlaceBlock_Clip;
-            audioSource_CannotPlace.pitch = 0.5f;
+            audioSource_CannotPlace.pitch = 1f;
             audioSource_CannotPlace.Play();
         }
     }
