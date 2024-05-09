@@ -218,6 +218,8 @@ public class GhostManager : Singleton<GhostManager>
     {
         if (CountActiveGhosts() >= ghostSpawnAmount)
         {
+            print("1111. Don't spawn more ghosts");
+
             return;
         }
 
@@ -227,6 +229,8 @@ public class GhostManager : Singleton<GhostManager>
         {
             if (!obj.activeInHierarchy)
             {
+                print("2222. DonSpawn Ghosts ghosts");
+
                 obj.transform.position = GetSpawnPosition();
                 obj.GetComponent<InvisibleObject>().transparencyValue = 1;
                 obj.GetComponent<InvisibleObject>().UpdateRenderList();

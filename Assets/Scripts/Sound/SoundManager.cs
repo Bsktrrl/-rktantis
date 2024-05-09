@@ -305,6 +305,7 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip ghost_TargetGhost_Clip; //
 
     [SerializeField] AudioClip ghost_GhostMood_Targeted_Clip; //
+
     [SerializeField] AudioClip ghost_GhostMood_Happy_Clip; //
     [SerializeField] AudioClip ghost_GhostMood_Sad_Clip; //
     [SerializeField] AudioClip ghost_GhostMood_Moderate_Clip; //
@@ -1513,7 +1514,6 @@ public class SoundManager : Singleton<SoundManager>
         }
     }
 
-    //In Roaming Sounds
     public void Play_Ghost_GhostMood_Targeted_Clip(AudioSource objSource)
     {
         if (objSource != null)
@@ -1523,6 +1523,8 @@ public class SoundManager : Singleton<SoundManager>
             objSource.Play();
         }
     }
+
+    //In Roaming Sounds
     public void Play_Ghost_GhostMood_Happy_Clip(AudioSource objSource)
     {
         if (objSource != null)
@@ -1573,7 +1575,6 @@ public class SoundManager : Singleton<SoundManager>
         if (objSource != null)
         {
             objSource.clip = ghost_GhostMood_Whispering_Clip;
-            objSource.pitch = 1f;
             objSource.Play();
         }
     }

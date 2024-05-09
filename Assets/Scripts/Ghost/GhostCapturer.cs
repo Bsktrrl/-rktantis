@@ -138,10 +138,13 @@ public class GhostCapturer : MonoBehaviour
 
     public void StartCapturing()
     {
+        print("1. StartCapturing");
         for (int i = 0; i < GhostManager.Instance.ghostCapturerStats.slotsActivated; i++)
         {
+            print("2. StartCapturing");
             if (!GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[i].isTaken)
             {
+                print("3. StartCapturing");
                 invisibleObjectCollider.layer = LayerMask.NameToLayer(invisibleLightLayer);
                 isActive = true;
 

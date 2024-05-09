@@ -29,6 +29,8 @@ public class GhostTank : MonoBehaviour
     [SerializeField] Material ghostTankWater;
 
     bool setupGhostTank;
+
+    float ghostAnimationWaitingTime;
     #endregion
 
 
@@ -45,7 +47,7 @@ public class GhostTank : MonoBehaviour
             anim.SetBool("isActive", false);
         }
 
-        StartCoroutine(WaitForNextTankAnimation(UnityEngine.Random.Range(10, 60)));
+        ghostAnimationWaitingTime = UnityEngine.Random.Range(5f, 5f);
     }
     private void Update()
     {
@@ -76,6 +78,8 @@ public class GhostTank : MonoBehaviour
             Display_Parent.SetActive(false);
             ghostObject_Parent.SetActive(false);
         }
+
+        AnimationRunCheck();
     }
 
 
@@ -376,17 +380,27 @@ public class GhostTank : MonoBehaviour
     //--------------------
 
 
-    IEnumerator WaitForNextTankAnimation(float time)
+    void AnimationRunCheck()
+    {
+        ghostAnimationWaitingTime -= Time.deltaTime;
+
+        if (ghostObject_Parent.GetComponent<GhostInTank>() && ghostAnimationWaitingTime < 0)
+        {
+            ghostObject_Parent.GetComponent<GhostInTank>().SetGhostAnimation();
+
+            ghostAnimationWaitingTime = UnityEngine.Random.Range(5f, 5f);
+
+            StartCoroutine(ResetGhostAnimation(1f));
+        }
+    }
+    IEnumerator ResetGhostAnimation(float time)
     {
         if (ghostObject_Parent.GetComponent<GhostInTank>())
         {
-            ghostObject_Parent.GetComponent<GhostInTank>().SetGhostAnimation();
-        }
-        
-        yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(time);
 
-        int tankAnimationTimer = UnityEngine.Random.Range(10, 60);
-        StartCoroutine(WaitForNextTankAnimation(tankAnimationTimer));
+            ghostObject_Parent.GetComponent<GhostInTank>().ResetGhostAnimation();
+        }
     }
 }
 

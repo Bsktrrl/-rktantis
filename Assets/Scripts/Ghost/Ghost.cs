@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Ghost : MonoBehaviour
 {
@@ -57,6 +58,10 @@ public class Ghost : MonoBehaviour
 
     float fleeDirectionKeepTimer;
 
+    [Header("Sounds")]
+    float timeBetweenEachSound = 10;
+    float timeBetweenEachSound_Temp;
+    float volume;
 
     [Header("In GhostTank")]
     float tankAnimationTimer;
@@ -71,6 +76,8 @@ public class Ghost : MonoBehaviour
         anim = GetComponent<Animator>();
 
         interactableType = InteracteableType.Ghost;
+
+        timeBetweenEachSound_Temp = timeBetweenEachSound;
 
         GhostManager.Instance.ghostMovementSpeed = 2f;
         rotationSpeed = 4f;
@@ -213,16 +220,44 @@ public class Ghost : MonoBehaviour
     }
     void UpdateGhostSounds()
     {
-        if (!isTargeted)
+        if (GetComponent<InvisibleObject>() && ghostStats.ghostState == GhostStates.Moving && ghostStats.ghostState != GhostStates.Fleeing)
         {
-            //Play Roaming Sounds with a silent timer in between
-            //...
+            volume = (1f - GetComponent<InvisibleObject>().transparencyValue);
+            audioSource_Ghost_GhostSounds.volume = volume;
 
-            //SoundManager.Instance.Play_Ghost_GhostMood_Happy_Clip(audioSource_Ghost_GhostSounds);
-        }
-        else
-        {
-            
+            timeBetweenEachSound_Temp -= Time.deltaTime;
+
+            if (!isTargeted && timeBetweenEachSound_Temp < 0)
+            {
+                timeBetweenEachSound_Temp = timeBetweenEachSound;
+
+                float soundCheck = Random.Range(0, 5);
+
+                if (soundCheck == 0)
+                {
+                    SoundManager.Instance.Play_Ghost_GhostMood_Happy_Clip(audioSource_Ghost_GhostSounds);
+                }
+                else if (soundCheck == 1)
+                {
+                    SoundManager.Instance.Play_Ghost_GhostMood_Sad_Clip(audioSource_Ghost_GhostSounds);
+                }
+                else if (soundCheck == 2)
+                {
+                    SoundManager.Instance.Play_Ghost_GhostMood_Moderate_Clip(audioSource_Ghost_GhostSounds);
+                }
+                else if (soundCheck == 3)
+                {
+                    SoundManager.Instance.Play_Ghost_GhostMood_Thinking_Clip(audioSource_Ghost_GhostSounds);
+                }
+                else if (soundCheck == 4)
+                {
+                    SoundManager.Instance.Play_Ghost_GhostMood_Enjoying_Clip(audioSource_Ghost_GhostSounds);
+                }
+                else if (soundCheck == 5)
+                {
+                    SoundManager.Instance.Play_Ghost_GhostMood_Whispering_Clip(audioSource_Ghost_GhostSounds);
+                }
+            }
         }
     }
 
