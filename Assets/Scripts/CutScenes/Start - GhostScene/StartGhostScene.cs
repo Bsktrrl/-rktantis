@@ -57,7 +57,7 @@ public class StartGhostScene : MonoBehaviour
 
             startCutscene = true;
 
-            StartCoroutine(EndCutscene(7.45f));
+            StartCoroutine(EndCutscene(8 /*7.45f*/));
         }
     }
     IEnumerator EndCutscene(float time)

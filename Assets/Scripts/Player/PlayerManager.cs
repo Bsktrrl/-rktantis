@@ -183,7 +183,7 @@ public class PlayerManager : Singleton<PlayerManager>
             {
                 movementSoundTimer += Time.deltaTime;
 
-                if (movementSoundTimer > 0.4f)
+                if (movementSoundTimer > 0.35f)
                 {
                     movementSoundTimer = 0;
 

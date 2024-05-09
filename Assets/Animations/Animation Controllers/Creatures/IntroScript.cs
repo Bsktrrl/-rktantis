@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class IntroScript : MonoBehaviour
 {
+    public AudioSource ghostSound;
+
     public GameObject Crystal;
     public GameObject Crystal1;
     public GameObject SpawnCrystal;
@@ -13,10 +15,20 @@ public class IntroScript : MonoBehaviour
     //--------------------
 
 
+    private void Start()
+    {
+        ghostSound.Play();
+    }
+
+
+    //--------------------
+
+
     public void StartMovement()
     {
         Crystal.SetActive(true);
         Crystal1.SetActive(false);
+
     }
 
     void CrystalSwap ()

@@ -377,6 +377,7 @@ public class WeatherManager : Singleton<WeatherManager>
 
         //Set new Ghost amount
         GhostManager.Instance.SetGhostSpawnAmount();
+        GhostManager.Instance.SpawnGhost();
 
         SaveData();
     }

@@ -220,6 +220,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5038223539252665796, guid: be453323b8ac9cd44a44033b678bb64a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8be300487ec7b564db68eb0d90da3020, type: 2}
     - target: {fileID: -253803450467449483, guid: be453323b8ac9cd44a44033b678bb64a,
         type: 3}
       propertyPath: m_IsActive
@@ -261,6 +266,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -9047083902900314916}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: be453323b8ac9cd44a44033b678bb64a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1243290243424983911}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: be453323b8ac9cd44a44033b678bb64a,
         type: 3}
       insertIndex: -1
@@ -359,6 +368,102 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &1243290243424983911
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7731126171969066206}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3a25715e732e0e64489bfd09c5c7e4a4, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 50
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &126737237911987387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,6 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57ff1108c83bd84aa4319fedef8c117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ghostSound: {fileID: 1243290243424983911}
   Crystal: {fileID: 6346587203375407642}
   Crystal1: {fileID: 2013492215013354746}
   SpawnCrystal: {fileID: 3994159277824107152, guid: d568e8be0a3e1c04ca4fcf66b18d322f,
@@ -388,13 +494,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2377caf940a2892419a95a491612e5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparencyValue: 1
+  transparencyValue: 0.75
   objectCollider: {fileID: 7098828802597423836}
   objectPartsList_Base:
   - {fileID: 6447839391528776900}
   objectPartsList_Pickable: []
   materialList:
-  - {fileID: 2100000, guid: 3dabe33d20c4b574e8885e948abb238c, type: 2}
+  - {fileID: 2100000, guid: 8be300487ec7b564db68eb0d90da3020, type: 2}
   rendererList:
   - {fileID: 6746306451274812339}
   collidingObjectList:

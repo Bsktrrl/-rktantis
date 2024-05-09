@@ -105,12 +105,15 @@ public class GhostInTank : MonoBehaviour
         if (anim.GetInteger("IdleAnimation") != 0)
         {
             anim.SetInteger("IdleAnimation", 0);
+
+            print("111. Idle");
         }
         else
         {
+            print("222. Play Animation");
+
             //Set Animation
-            //anim.SetInteger("IdleAnimation", Random.Range(0, 8));
-            anim.SetInteger("IdleAnimation", 1);
+            anim.SetInteger("IdleAnimation", Random.Range(1, 8));
 
             //Set Animation Sound
             if (anim.GetInteger("IdleAnimation") == 1)
@@ -142,5 +145,11 @@ public class GhostInTank : MonoBehaviour
                 SoundManager.Instance.Play_GhostAnimation_Wave_Clip(audioSource_Ghost_GhostSounds);
             }
         }
+    }
+    public void ResetGhostAnimation()
+    {
+        print("333. ResetGhostAnimation");
+
+        anim.SetInteger("IdleAnimation", 0);
     }
 }
