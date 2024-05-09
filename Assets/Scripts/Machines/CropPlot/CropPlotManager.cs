@@ -75,6 +75,10 @@ public class CropPlotManager : Singleton<CropPlotManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         if (MainManager.Instance.menuStates == MenuStates.CropPlotMenu)
         {
             UpdateCropPlotSlotsInfo();

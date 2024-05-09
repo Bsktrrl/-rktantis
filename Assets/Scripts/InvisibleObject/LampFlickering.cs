@@ -30,6 +30,10 @@ public class LampFlickering : MonoBehaviour
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         turnOff_Timer -= Time.deltaTime;
         turnOn_Timer -= Time.deltaTime;
 

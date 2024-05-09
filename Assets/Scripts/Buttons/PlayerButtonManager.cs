@@ -50,7 +50,9 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
         if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         //Exit Game
         if (Input.GetKeyDown(KeyCode.Escape) && MainManager.Instance.menuStates == MenuStates.None)

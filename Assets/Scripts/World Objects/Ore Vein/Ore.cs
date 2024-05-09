@@ -45,6 +45,10 @@ public class Ore : MonoBehaviour
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         if (isHacked)
         {
             dormantTimer += Time.deltaTime;

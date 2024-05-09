@@ -92,6 +92,9 @@ public class Ghost : MonoBehaviour
     private void Update()
     {
         if (ghostStats.ghostState == GhostStates.Tank) { return; }
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         if (gameObject.activeInHierarchy)
         {

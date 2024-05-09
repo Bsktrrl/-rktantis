@@ -48,9 +48,9 @@ public class BuildingDisplayManager : Singleton<BuildingDisplayManager>
     }
     private void Update()
     {
-        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
-
         if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         UpdateScreenBuildingRequirementDisplay();
 

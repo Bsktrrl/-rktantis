@@ -55,6 +55,10 @@ public class GhostAnimations : MonoBehaviour
 
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         //Press G to randomize style
         if (Input.GetKeyDown(KeyCode.G))
         {

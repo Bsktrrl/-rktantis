@@ -55,6 +55,8 @@ public class MainManager : Singleton<MainManager>
     private void Update()
     {
         if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (gameStates == GameStates.GameOver) { return; }
 
         UpdateGameStates();
 

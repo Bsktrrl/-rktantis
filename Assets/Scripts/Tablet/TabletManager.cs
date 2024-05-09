@@ -141,7 +141,10 @@ public class TabletManager : Singleton<TabletManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
         if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
 
         if (tablet_Parent.activeInHierarchy)
         {

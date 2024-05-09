@@ -45,6 +45,10 @@ public class ResearchManager : Singleton<ResearchManager>
 
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         //Run when something is researched
         if (isResearching && DataManager.Instance.hasLoaded)
         {

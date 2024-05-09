@@ -73,18 +73,6 @@ public class SkillTreeManager : Singleton<SkillTreeManager>
         ResetSkillTree_Information();
     }
 
-    private void Update()
-    {
-        //if (DataManager.Instance.hasLoaded)
-        //{
-        //    for (int i = 0; i < perktList.Count; i++)
-        //    {
-        //        PerkRequirements(perktList[i].GetComponent<Perk>());
-        //    }
-        //}
-    }
-
-
 
     //--------------------
 

@@ -32,6 +32,10 @@ public class Arms : Singleton<Arms>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         //Run Cooldown timer
         if (cooldown)
         {

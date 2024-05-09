@@ -85,6 +85,8 @@ public class InventoryManager : Singleton<InventoryManager>
     private void Update()
     {
         if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         if (MainManager.Instance.menuStates == MenuStates.InventoryMenu
             || MainManager.Instance.menuStates == MenuStates.ChestMenu

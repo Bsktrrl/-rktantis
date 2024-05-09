@@ -6,6 +6,10 @@ public class Model : MonoBehaviour
 {
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         //BuildingBlock
         if (gameObject.transform.parent.gameObject == BuildingSystemManager.Instance.ghostObject_Holding
             && gameObject.transform.parent.gameObject.GetComponent<MoveableObject>().buildingObjectType == BuildingObjectTypes.BuildingBlock)

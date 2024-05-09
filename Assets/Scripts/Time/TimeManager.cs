@@ -29,6 +29,10 @@ public class TimeManager : Singleton<TimeManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         RunClock();
         SetTimeOfDay();
 

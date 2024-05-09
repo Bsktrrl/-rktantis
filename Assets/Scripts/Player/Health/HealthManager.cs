@@ -101,7 +101,7 @@ public class HealthManager : Singleton<HealthManager>
     private void Update()
     {
         if (!DataManager.Instance.hasLoaded) { return; }
-
+        if (PauseGameManager.Instance.GetPause()) { return; }
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         SetHealthValues();
