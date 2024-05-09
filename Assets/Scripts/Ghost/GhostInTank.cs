@@ -130,15 +130,15 @@ public class GhostInTank : MonoBehaviour
             }
             else if (anim.GetInteger("IdleAnimation") == 4)
             {
-                SoundManager.Instance.Play_GhostAnimation_FakeDeath_Clip(audioSource_Ghost_GhostSounds);
+                SoundManager.Instance.Play_GhostAnimation_Sneeze1_Clip(audioSource_Ghost_GhostSounds);
             }
             else if (anim.GetInteger("IdleAnimation") == 5)
             {
-                SoundManager.Instance.Play_GhostAnimation_Sneeze1_Clip(audioSource_Ghost_GhostSounds);
+                SoundManager.Instance.Play_GhostAnimation_Sneeze2_Clip(audioSource_Ghost_GhostSounds);
             }
             else if (anim.GetInteger("IdleAnimation") == 6)
             {
-                SoundManager.Instance.Play_GhostAnimation_Sneeze2_Clip(audioSource_Ghost_GhostSounds);
+                SoundManager.Instance.Play_GhostAnimation_FakeDeath_Clip(audioSource_Ghost_GhostSounds);
             }
             else if (anim.GetInteger("IdleAnimation") == 7)
             {

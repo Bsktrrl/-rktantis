@@ -47,7 +47,7 @@ public class GhostTank : MonoBehaviour
             anim.SetBool("isActive", false);
         }
 
-        ghostAnimationWaitingTime = UnityEngine.Random.Range(5f, 5f);
+        ghostAnimationWaitingTime = UnityEngine.Random.Range(20f, 60f);
     }
     private void Update()
     {
@@ -388,7 +388,7 @@ public class GhostTank : MonoBehaviour
         {
             ghostObject_Parent.GetComponent<GhostInTank>().SetGhostAnimation();
 
-            ghostAnimationWaitingTime = UnityEngine.Random.Range(5f, 5f);
+            ghostAnimationWaitingTime = UnityEngine.Random.Range(20f, 60f);
 
             StartCoroutine(ResetGhostAnimation(1f));
         }
