@@ -15,7 +15,7 @@ public class TabletManager : Singleton<TabletManager>
     public GameObject objectInteractingWith_Object;
 
     [Header("Menus")]
-    public int menuAmount = 6;
+    public int menuAmount = 3;
     int tempMenuAmount;
     bool menuObjectIsOpened;
 
@@ -134,6 +134,8 @@ public class TabletManager : Singleton<TabletManager>
     {
         PlayerButtonManager.OpenPlayerInventory_isPressedDown += OpenTablet;
         PlayerButtonManager.ClosePlayerInventory_isPressedDown += CloseTablet;
+
+        menuAmount = 3;
 
         tablet_Parent.SetActive(false);
         tabletObject.SetActive(false);

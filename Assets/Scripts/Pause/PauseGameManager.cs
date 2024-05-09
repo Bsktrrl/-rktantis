@@ -7,6 +7,8 @@ public class PauseGameManager : Singleton<PauseGameManager>
 {
     public bool gameIsPaused = false;
 
+    public PauseMenuStates pauseMenuStates;
+
     [Header("Main UI")]
     [SerializeField] GameObject UI_Pause;
 
@@ -28,21 +30,38 @@ public class PauseGameManager : Singleton<PauseGameManager>
 
     private void Start()
     {
-        PlayerButtonManager.pauseMenu_isPressed += PauseGame;
+        pauseMenuStates = PauseMenuStates.None;
 
         UI_Pause.SetActive(false);
         saved_Text.SetActive(false);
+
+        menu_Info.SetActive(false);
+        menu_Settings.SetActive(false);
     }
     private void Update()
     {
         if (!DataManager.Instance.hasLoaded) { return; }
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
-        if (gameIsPaused)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            switch (pauseMenuStates)
             {
-                BackToGame_Button_isPressed();
+                case PauseMenuStates.None:
+                    PauseGame();
+                    break;
+                case PauseMenuStates.PauseMenu:
+                    BackToGame_Button_isPressed();
+                    break;
+                case PauseMenuStates.SettingsMenu:
+                    BackToPauseMenu_Button_isPressed();
+                    break;
+                case PauseMenuStates.InfoMenu:
+                    BackToPauseMenu_Button_isPressed();
+                    break;
+
+                default:
+                    break;
             }
         }
     }
@@ -51,11 +70,17 @@ public class PauseGameManager : Singleton<PauseGameManager>
     //--------------------
 
 
-    public void PauseGame()
+    public void PauseGame() //Menu
     {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        pauseMenuStates = PauseMenuStates.PauseMenu;
+        MainManager.Instance.menuStates = MenuStates.PauseMenu;
+
         gameIsPaused = true;
 
         UI_Pause.SetActive(true);
+        buttons_Panel.SetActive(true);
 
         UI_Info.SetActive(false);
         UI_hotbar.SetActive(false);
@@ -63,11 +88,14 @@ public class PauseGameManager : Singleton<PauseGameManager>
 
         Cursor.lockState = CursorLockMode.None;
     }
+    public void PauseGame(bool noMenuOpen) //Not Menu
+    {
+        gameIsPaused = true;
+    }
     public void UnpauseGame()
     {
-        print("UnpauseGame");
-
-        gameIsPaused = false;
+        pauseMenuStates = PauseMenuStates.None;
+        MainManager.Instance.menuStates = MenuStates.None;
 
         UI_Pause.SetActive(false);
 
@@ -75,8 +103,9 @@ public class PauseGameManager : Singleton<PauseGameManager>
         UI_hotbar.SetActive(true);
         UI_HealthParameters.SetActive(true);
 
-        Cursor.lockState = CursorLockMode.Locked;
+        gameIsPaused = false;
 
+        Cursor.lockState = CursorLockMode.Locked;
     }
     public bool GetPause()
     {
@@ -89,37 +118,59 @@ public class PauseGameManager : Singleton<PauseGameManager>
 
     //Buttons
     #region
-    public void BackToPauseMenu_Button_isPressed()
-    {
-        menu_Info.SetActive(false);
-        menu_Settings.SetActive(false);
-
-        buttons_Panel.SetActive(true);
-    }
-
     public void BackToGame_Button_isPressed()
     {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        pauseMenuStates = PauseMenuStates.None;
+
         UnpauseGame();
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
     public void Info_Button_isPressed()
     {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        pauseMenuStates = PauseMenuStates.InfoMenu;
+
         buttons_Panel.SetActive(false);
         menu_Info.SetActive(true);
     }
     public void Settings_Button_isPressed()
     {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        pauseMenuStates = PauseMenuStates.SettingsMenu;
+
         buttons_Panel.SetActive(false);
         menu_Settings.SetActive(true);
     }
     public void Save_Button_isPressed()
     {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
         DataManager.Instance.SaveData(ref DataManager.Instance.gameData);
 
         StartCoroutine(savedText());
     }
     public void MainMenu_Button_isPressed()
     {
-        Application.Quit(); //Temporary
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        Application.Quit(); //Temporary - swap to "Change Scene"
+    }
+
+    public void BackToPauseMenu_Button_isPressed()
+    {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        pauseMenuStates = PauseMenuStates.PauseMenu;
+
+        menu_Info.SetActive(false);
+        menu_Settings.SetActive(false);
+
+        buttons_Panel.SetActive(true);
     }
 
     IEnumerator savedText()
@@ -131,4 +182,14 @@ public class PauseGameManager : Singleton<PauseGameManager>
         saved_Text.SetActive(false);
     }
     #endregion
+}
+
+public enum PauseMenuStates
+{
+    None,
+
+    PauseMenu,
+
+    SettingsMenu,
+    InfoMenu
 }

@@ -28,13 +28,13 @@ public class GameOverManager : Singleton<GameOverManager>
         if (PauseGameManager.Instance.GetPause()) { return; }
 
         //For testing
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            //SoundManager.Instance.Play_GameOver_Clip();
-            PlayerManager.Instance.TransferPlayerToDyingPos();
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    //SoundManager.Instance.Play_GameOver_Clip();
+        //    PlayerManager.Instance.TransferPlayerToDyingPos();
 
-            RemoveAllWorldItems();
-        }
+        //    RemoveAllWorldItems();
+        //}
 
         //Set "GameOver" Screen
         if (MainManager.Instance.gameStates == GameStates.GameOver)

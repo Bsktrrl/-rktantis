@@ -133,14 +133,6 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
         }
         #endregion
 
-        //PauseMenu
-        #region
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pauseMenu_isPressed?.Invoke();
-        }
-        #endregion
-
         //Object Interaction
         #region
         else if (Input.GetKeyDown(KeyCode.R) && MainManager.Instance.menuStates == MenuStates.None
