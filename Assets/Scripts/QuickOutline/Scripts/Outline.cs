@@ -109,6 +109,9 @@ public class Outline : MonoBehaviour {
 
     void Update()
     {
+        if (PauseGameManager.Instance.GetPause()) { return; }
+
+
         if (needsUpdate)
         {
             needsUpdate = false;
@@ -123,6 +126,8 @@ public class Outline : MonoBehaviour {
 
     void OnEnable()
     {
+        if (PauseGameManager.Instance.GetPause()) { return; }
+
         foreach (var renderer in renderers)
         {
 
@@ -138,7 +143,6 @@ public class Outline : MonoBehaviour {
 
     void OnValidate() 
     {
-
         // Update material properties
         needsUpdate = true;
 
@@ -158,6 +162,8 @@ public class Outline : MonoBehaviour {
 
     void OnDisable()
     {
+        if (PauseGameManager.Instance.GetPause()) { return; }
+
         foreach (var renderer in renderers)
         {
 
@@ -173,7 +179,6 @@ public class Outline : MonoBehaviour {
 
     void OnDestroy()
     {
-
         // Destroy material instances
         Destroy(outlineMaskMaterial);
         Destroy(outlineFillMaterial);

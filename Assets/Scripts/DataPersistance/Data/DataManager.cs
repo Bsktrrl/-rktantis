@@ -1,15 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements.Experimental;
 
 [Serializable]
 public class DataManager : Singleton<DataManager>, IDataPersistance
 {
+    public GameData gameData;
+
     public static Action dataIsSaving;
     public static Action datahasLoaded;
 
