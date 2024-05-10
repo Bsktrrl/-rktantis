@@ -13,6 +13,8 @@ public class StartMenuManager : MonoBehaviour
 
     [SerializeField] GameObject continue_Button;
 
+    [SerializeField] GameObject logo;
+
 
     //--------------------
 
@@ -68,6 +70,7 @@ public class StartMenuManager : MonoBehaviour
 
         menu_Main.SetActive(false);
         menu_Info.SetActive(true);
+        logo.SetActive(false);
     }
     public void Exit_Button_isPressed()
     {
@@ -82,5 +85,6 @@ public class StartMenuManager : MonoBehaviour
 
         menu_Main.SetActive(true);
         menu_Info.SetActive(false);
+        logo.SetActive(true);
     }
 }
