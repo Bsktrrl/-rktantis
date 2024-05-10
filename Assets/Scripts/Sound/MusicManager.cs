@@ -125,7 +125,7 @@ public class MusicManager : MonoBehaviour
                 music_Seclusion_Counter = 0;
             }
         }
-        else if (music_MysteriousSand_Counter >= timeForCountersToReach)
+        else if (music_MysteriousSand_Counter >= timeForCountersToReach * 3)
         {
             if (CheckIfMusicCanBePlayed())
             {

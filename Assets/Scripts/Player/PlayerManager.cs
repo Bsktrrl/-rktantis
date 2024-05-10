@@ -38,6 +38,10 @@ public class PlayerManager : Singleton<PlayerManager>
     public bool hasStartedToMove = true;
     public bool isJumping;
 
+    public float randomWalkingSound_Timer = 0.65f;
+    public float randomRunningSound_Timer = 0.4f;
+    public float randomCrouchingSound_Timer = 0.9f;
+
 
     //--------------------
 
@@ -78,7 +82,7 @@ public class PlayerManager : Singleton<PlayerManager>
             }
             else if (SceneManager.GetActiveScene().name == "Landscape")
             {
-                MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-42.54f, 30f, -40.4f), Quaternion.Euler(-4.9f, -1.7f, 0.33f)); //Main Scene
+                MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-42.54f, 30f, -40.4f), Quaternion.Euler(0, -1.7f, 0)); //Main Scene
                 //MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-26.5f, 30f, -45.1f), Quaternion.identity); //Main Scene
             }
             
@@ -164,9 +168,11 @@ public class PlayerManager : Singleton<PlayerManager>
             {
                 movementSoundTimer += Time.deltaTime;
 
-                if (movementSoundTimer > 0.65f)
+                if (movementSoundTimer > randomWalkingSound_Timer)
                 {
                     movementSoundTimer = 0;
+
+                    randomWalkingSound_Timer = UnityEngine.Random.Range(0.63f, 0.67f);
 
                     StartMovementSound();
                 }
@@ -175,9 +181,11 @@ public class PlayerManager : Singleton<PlayerManager>
             {
                 movementSoundTimer += Time.deltaTime;
 
-                if (movementSoundTimer > 0.9f)
+                if (movementSoundTimer > randomRunningSound_Timer)
                 {
                     movementSoundTimer = 0;
+
+                    randomRunningSound_Timer = UnityEngine.Random.Range(0.88f, 0.92f);
 
                     StartMovementSound();
                 }
@@ -186,9 +194,11 @@ public class PlayerManager : Singleton<PlayerManager>
             {
                 movementSoundTimer += Time.deltaTime;
 
-                if (movementSoundTimer > 0.35f)
+                if (movementSoundTimer > randomCrouchingSound_Timer)
                 {
                     movementSoundTimer = 0;
+
+                    randomCrouchingSound_Timer = UnityEngine.Random.Range(0.38f, 0.42f);
 
                     StartMovementSound();
                 }

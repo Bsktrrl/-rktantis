@@ -585,7 +585,7 @@ public class SoundManager : Singleton<SoundManager>
     }
     #endregion
 
-    #region Player //Have yet to be implemented
+    #region Player
     public void Play_Player_Walking_Water_Clip()
     {
         if (audioSource_PlayerMovement_WalkingRunning_Water != null)

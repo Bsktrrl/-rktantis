@@ -14,7 +14,7 @@ public class HealthManager : Singleton<HealthManager>
     public float hunger_Speed = 2e-05f;
     public float hunger_SpeedMultiplier_ByWeather = 1f;
 
-    public float heatResistance_Speed = 2e-05f;
+    public float heatResistance_Speed = 1.5e-05f;
     public float heatResistance_SpeedMultiplier_ByWeather = 1f;
 
     public float thirst_Speed = 2e-05f;
@@ -74,7 +74,7 @@ public class HealthManager : Singleton<HealthManager>
 
         //Set HealthParameters
         hunger_Speed = 2e-05f;
-        heatResistance_Speed = 2e-05f;
+        heatResistance_Speed = 1.5e-05f;
         thirst_Speed = 2e-05f;
         mainHealth_Speed = 8e-06f;
 
@@ -103,6 +103,8 @@ public class HealthManager : Singleton<HealthManager>
         if (!DataManager.Instance.hasLoaded) { return; }
         if (PauseGameManager.Instance.GetPause()) { return; }
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
+        SetPlayerHealthSpeed();
 
         SetHealthValues();
         SetHealthDisplay(hunger_Image, hungerValueMultiplier_Image,
@@ -738,7 +740,20 @@ public class HealthManager : Singleton<HealthManager>
         hunger_Speed = 2e-05f * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
         heatResistance_Speed = 2e-05f * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
         thirst_Speed = 2e-05f * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
-        mainHealth_Speed = 8e-06f * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
+
+        //Moving Up
+        if (hungerValue > 0 && thirstValue > 0 && heatResistanceValue > 0)
+        {
+            print("Moving UP");
+            mainHealth_Speed = 8e-06f * 6 * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
+        }
+
+        //Moving Down
+        else
+        {
+            print("Moving DOWN");
+            mainHealth_Speed = 8e-06f * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
+        }
     }
 }
 
