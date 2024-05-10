@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [Serializable]
@@ -23,7 +24,7 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
     bool fading;
     bool hasCompletedFading;
     float fadingNotificationImageValue_Icon;
-    float fadingNotificationImageValue;
+    float fadingNotificationImageValue = 1;
     bool towardsVisible;
 
 
@@ -128,23 +129,38 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
 
     private void Start()
     {
-        fadingNotificationImageValue = 1;
+        if (SceneManager.GetActiveScene().name != "Landscape")
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            fadingNotificationImageValue = 1;
 
-        loadingMenu_Parent.SetActive(true);
+            loadingMenu_Parent.SetActive(true);
+        }
     }
     private void Update()
     {
-        //Whe loading
+        if (SceneManager.GetActiveScene().name != "Landscape") { return; }
+
+        //When loading
         if (!hasLoaded)
         {
+            //loadingMenu_Parent.SetActive(true);
+
             //Fading In/Out Icon
             FadingInOutIcon();
+
+            print("1. Loading");
         }
 
         //After loading
         if (fading)
         {
-            //Fading whe screen
+            print("2. Fading");
+
+            //Fading the screen
             FadingOutLoadingScreen();
         }
     }

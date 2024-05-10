@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseGameManager : Singleton<PauseGameManager>
@@ -43,7 +44,7 @@ public class PauseGameManager : Singleton<PauseGameManager>
         if (!DataManager.Instance.hasLoaded) { return; }
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && (MainManager.Instance.menuStates == MenuStates.None || MainManager.Instance.menuStates == MenuStates.PauseMenu))
         {
             switch (pauseMenuStates)
             {
@@ -158,7 +159,9 @@ public class PauseGameManager : Singleton<PauseGameManager>
     {
         SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
 
-        Application.Quit(); //Temporary - swap to "Change Scene"
+        Application.Quit();
+
+        //SceneManager.LoadScene("StartMenu");
     }
 
     public void BackToPauseMenu_Button_isPressed()
