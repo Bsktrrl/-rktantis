@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
-public class DataPersistanceManager : MonoBehaviour
+public class DataPersistanceManager : Singleton<DataPersistanceManager>
 {
     [Header("File Storage Config")]
     [SerializeField] string fileName;
@@ -30,6 +31,8 @@ public class DataPersistanceManager : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name != "Landscape") { return; }
+
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistanceObjects = FindAllDataPersistenceObjects();
 
@@ -64,6 +67,8 @@ public class DataPersistanceManager : MonoBehaviour
     }
     public void SaveGame()
     {
+        if (SceneManager.GetActiveScene().name != "Landscape") { return; }
+
         //Pass the data to other scripts so thay can update it
         foreach (IDataPersistance dataPersistanceObj in dataPersistanceObjects)
         {

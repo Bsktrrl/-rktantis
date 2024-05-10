@@ -26,6 +26,10 @@ public class MusicManager : MonoBehaviour
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         //Play Music
         if (SoundManager.Instance.audioSource__Music_HomeBase.isPlaying
             || SoundManager.Instance.audioSource__Music_Seclusion.isPlaying

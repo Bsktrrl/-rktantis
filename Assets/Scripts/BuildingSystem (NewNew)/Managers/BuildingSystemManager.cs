@@ -108,6 +108,8 @@ public class BuildingSystemManager : Singleton<BuildingSystemManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         Snapping_RaycastSettings();

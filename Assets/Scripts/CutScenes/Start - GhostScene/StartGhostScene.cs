@@ -21,6 +21,7 @@ public class StartGhostScene : MonoBehaviour
     private void Update()
     {
         if (!DataManager.Instance.hasLoaded) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         if (startCutscene && !endCutscene)
         {
@@ -47,7 +48,7 @@ public class StartGhostScene : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player") && !CutSceneManager.Instance.cutScenes.start_GhostCrystal_Scene)
         {
-            PauseGameManager.Instance.PauseGame();
+            PauseGameManager.Instance.PauseGame(true);
 
             ghostObject = Instantiate(ghost);
             ghostObject.transform.SetPositionAndRotation(new Vector3(-58.21f, 30.92f, 52.38f), Quaternion.Euler(0, 58, 0));

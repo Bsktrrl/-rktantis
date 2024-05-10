@@ -39,6 +39,9 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
     //Drink
     public static Action refillBottle_isPressed;
 
+    //PauseMenu
+    public static Action pauseMenu_isPressed;
+
 
 
     //Testing Buttons
@@ -50,17 +53,19 @@ public class PlayerButtonManager : Singleton<PlayerButtonManager>
 
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
         if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         //Exit Game
-        if (Input.GetKeyDown(KeyCode.Escape) && MainManager.Instance.menuStates == MenuStates.None)
-        {
-            Application.Quit();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape) && MainManager.Instance.menuStates == MenuStates.None)
+        //{
+        //    Application.Quit();
+        //}
         
         //Refill WaterConsumable
         #region
-        else if (Input.GetKeyDown(KeyCode.E)
+        if (Input.GetKeyDown(KeyCode.E)
             && (HotbarManager.Instance.selectedItem == Items.Cup || HotbarManager.Instance.selectedItem == Items.Bottle || HotbarManager.Instance.selectedItem == Items.Bucket)
             && SelectionManager.Instance.tag == "Water")
         {

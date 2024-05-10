@@ -17,7 +17,9 @@ public class CropPlotSlot : MonoBehaviour
     {
         if (BuildingSystemManager.Instance.ghostObject_Holding == parent) { return; }
 
-        if (!parent.gameObject.GetComponent<CropPlot>().hasLoaded) { return; }
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
 
         //-----

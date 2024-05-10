@@ -80,6 +80,10 @@ public class WeatherManager : Singleton<WeatherManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         SetSunRotation();
         if (temperatureFruitList.Count > 0)
         {

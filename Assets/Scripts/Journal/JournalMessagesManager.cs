@@ -10,6 +10,9 @@ public class JournalMessagesManager : Singleton<JournalMessagesManager>
 
     private void Update()
     {
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         if (DataManager.Instance.hasLoaded)
         {
             //The Beginning

@@ -38,6 +38,10 @@ public class HotbarManager : Singleton<HotbarManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
+        if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
+
         if (loadDataisFinished && hotbar_Parent.activeInHierarchy)
         {
             for (int i = 0; i < hotbarList.Count; i++)

@@ -89,6 +89,8 @@ public class CraftingManager : Singleton<CraftingManager>
     }
     private void Update()
     {
+        if (!DataManager.Instance.hasLoaded) { return; }
+        if (PauseGameManager.Instance.GetPause()) { return; }
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
         if (MainManager.Instance.menuStates == MenuStates.CraftingMenu)

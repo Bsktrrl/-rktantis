@@ -24,10 +24,6 @@ public class MenuEquipmentFunctionalty : MonoBehaviour
     {
         MenuEquipmentManager.updateEquipment += UpdateEquipmentToRun;
     }
-    private void Update()
-    {
-
-    }
 
 
     //--------------------

@@ -32,10 +32,23 @@ public class LightingUpdates : MonoBehaviour
         RenderSettings.ambientIntensity = Mathf.Pow(((Mathf.Clamp(mainLight.transform.forward.y, -0.25f, 1) + 0.25f) * 0.8f), 3) * 5 + 1;
         //print(RenderSettings.ambientIntensity);
 
-        if (Vector3.Dot(Vector3.Normalize(player.transform.position), mainLight.transform.forward) <= 0.9f)
+        if (player)
         {
-            DynamicGI.UpdateEnvironment();
+            if (Vector3.Dot(Vector3.Normalize(player.transform.position), mainLight.transform.forward) <= 0.9f)
+            {
+                DynamicGI.UpdateEnvironment();
+            }
         }
+        else
+        {
+            Camera mainCamera = FindObjectOfType<Camera>();
+
+            if (Vector3.Dot(Vector3.Normalize(mainCamera.transform.position), mainLight.transform.forward) <= 0.9f)
+            {
+                DynamicGI.UpdateEnvironment();
+            }
+        }
+
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(UpdateLighting());
     }
