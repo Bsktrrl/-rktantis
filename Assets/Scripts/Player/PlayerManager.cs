@@ -78,7 +78,8 @@ public class PlayerManager : Singleton<PlayerManager>
             }
             else if (SceneManager.GetActiveScene().name == "Landscape")
             {
-                MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-26.5f, 30f, -45.1f), Quaternion.identity); //Main Scene
+                MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-42.54f, 30f, -40.4f), Quaternion.Euler(-4.9f, -1.7f, 0.33f)); //Main Scene
+                //MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(-26.5f, 30f, -45.1f), Quaternion.identity); //Main Scene
             }
             
             //MainManager.Instance.player.transform.SetPositionAndRotation(new Vector3(17f, 2f, 25f), Quaternion.identity); //Adrian Secene

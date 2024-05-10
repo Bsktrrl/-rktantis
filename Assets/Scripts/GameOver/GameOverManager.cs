@@ -54,6 +54,11 @@ public class GameOverManager : Singleton<GameOverManager>
             gameOver_Text.color = new Color(MainManager.Instance.mainColor_Blue.r, MainManager.Instance.mainColor_Blue.g, MainManager.Instance.mainColor_Blue.b, transparencyValue);
             reset_Text.color = new Color(MainManager.Instance.mainColor_Blue.r, MainManager.Instance.mainColor_Blue.g, MainManager.Instance.mainColor_Blue.b, transparencyValue);
         }
+
+        if (Input.GetKeyDown(KeyCode.E) && MainManager.Instance.menuStates == MenuStates.None && MainManager.Instance.gameStates == GameStates.GameOver)
+        {
+            ResetAfterGameOver();
+        }
     }
 
 

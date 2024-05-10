@@ -47,6 +47,11 @@ public class TimeManager : Singleton<TimeManager>
     {
         currentTime = DataManager.Instance.currentTime_Store;
         day = DataManager.Instance.day_Store;
+
+        if (DataManager.Instance.currentTime_Store <= 0)
+        {
+            currentTime = 20000;
+        }
     }
     void SaveData()
     {
