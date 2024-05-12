@@ -32,9 +32,9 @@ public enum Items
 
     //Crafting Materials
     #region
-    [Description("Perk Cube Tier 1")][InspectorName("Crafting Materials/Perk Cube Tier 1")] PerkCube_Tier1,
-    [Description("Perk Cube Tier 2")][InspectorName("Crafting Materials/Perk Cube Tier 2")] PerkCube_Tier2,
-    [Description("Perk Cube Tier 3")][InspectorName("Crafting Materials/Perk Cube Tier 3")] PerkCube_Tier3,
+    [Description("Green Perk Cube")][InspectorName("Crafting Materials/Green Perk Cube")] GreenPerkCube,
+    [Description("Yellow Perk Cube")][InspectorName("Crafting Materials/Yellow Perk Cube")] YellowPerkCube,
+    [Description("Red Perk Cube")][InspectorName("Crafting Materials/Red Perk Cube")] RedPerkCube,
     [Description("Power Core")][InspectorName("Crafting Materials/Power Core")] PowerCore,
     [Description("Shard of Arídis")][InspectorName("Crafting Materials/Shard of Arídis")] ShardOfArídis,
 
