@@ -106,13 +106,12 @@ public class HealthManager : Singleton<HealthManager>
 
         SetPlayerHealthSpeed();
 
+        SetPlayerHeatResistance();
         SetHealthValues();
         SetHealthDisplay(hunger_Image, hungerValueMultiplier_Image,
                          heatResistance_Image, heatResistanceValueMultiplier_Image,
                          thirst_Image, thirstValueMultiplier_Image,
                          mainHealth_Image);
-
-        SetPlayerHeatResistance();
 
         SaveData();
     }
@@ -381,39 +380,6 @@ public class HealthManager : Singleton<HealthManager>
         {
             return 0;
         }
-
-        //switch (multiplier_Check)
-        //{
-        //    case HealthValueMultiplier.Down_6:
-                
-        //    case HealthValueMultiplier.Down_5:
-        //        return -5;
-        //    case HealthValueMultiplier.Down_4:
-        //        return -4;
-        //    case HealthValueMultiplier.Down_3:
-        //        return -3;
-        //    case HealthValueMultiplier.Down_2:
-        //        return -2;
-        //    case HealthValueMultiplier.Down_1:
-        //        return -1;
-        //    case HealthValueMultiplier.None:
-        //        return 0;
-        //    case HealthValueMultiplier.Up_1:
-        //        return 1;
-        //    case HealthValueMultiplier.Up_2:
-        //        return 2;
-        //    case HealthValueMultiplier.Up_3:
-        //        return 3;
-        //    case HealthValueMultiplier.Up_4:
-        //        return 4;
-        //    case HealthValueMultiplier.Up_5:
-        //        return 5;
-        //    case HealthValueMultiplier.Up_6:
-        //        return 6;
-
-        //    default:
-        //        return 0;
-        //}
     }
     HealthValueMultiplier SetCheckValue(int value)
     {
@@ -602,40 +568,6 @@ public class HealthManager : Singleton<HealthManager>
                 imagesList[5].SetActive(true);
                 imagesList[6].SetActive(true);
             }
-
-
-            //switch (multiplier)
-            //{
-            //    case -6:
-            //        break;
-            //    case -5:
-            //        break;
-            //    case HealthValueMultiplier.Down_4:
-            //        break;
-            //    case HealthValueMultiplier.Down_3:
-            //        break;
-            //    case HealthValueMultiplier.Down_2:
-            //        break;
-            //    case HealthValueMultiplier.Down_1:
-            //        break;
-            //    case HealthValueMultiplier.None:
-            //        break;
-            //    case HealthValueMultiplier.Up_1:
-            //        break;
-            //    case HealthValueMultiplier.Up_2:
-            //        break;
-            //    case HealthValueMultiplier.Up_3:
-            //        break;
-            //    case HealthValueMultiplier.Up_4:
-            //        break;
-            //    case HealthValueMultiplier.Up_5:
-            //        break;
-            //    case HealthValueMultiplier.Up_6:
-            //        break;
-
-            //    default:
-            //        break;
-            //}
         }
     }
 
@@ -645,9 +577,11 @@ public class HealthManager : Singleton<HealthManager>
 
     void SetPlayerHeatResistance()
     {
+        print("WeatherManager.Instance.playerTemperature: " + WeatherManager.Instance.playerTemperature);
+
         switch (WeatherManager.Instance.playerTemperature)
         {
-            //High Temperature (26 - 50)
+            //High Temperature
             case >= 50:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_6;
                 break;
@@ -663,50 +597,54 @@ public class HealthManager : Singleton<HealthManager>
             case >= 30:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_2;
                 break;
-            case > 25:
+            case >= 25:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_1;
                 break;
 
-            //None (25)
-            case 25:
+            //None
+            case >= 24:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.None;
                 break;
 
-            //Up (16 - 24)
-            case 24:
+            //Up
+            case >= 23f:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_1;
                 break;
-            case 23:
+            case >= 22f:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_2;
                 break;
-            case 22:
+            case >= 21f:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_3;
                 break;
-            case 21:
+            case > 20f:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_4;
                 break;
-            case 20:
+
+            //Ideal
+            case 20f:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_5;
                 break;
-            case 19:
+
+            //Up
+            case >= 19f:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_4;
                 break;
-            case 18:
+            case >= 18f:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_3;
                 break;
-            case 17:
+            case >= 17f:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_2;
                 break;
-            case 16:
+            case >= 16f:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Up_1;
                 break;
 
-            //None(15)
-            case 15:
+            //None
+            case >= 15f:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.None;
                 break;
 
-            //Low Temperature (-15 - 14)
+            //Low Temperature
             case >= 10:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_1;
                 break;
@@ -719,10 +657,10 @@ public class HealthManager : Singleton<HealthManager>
             case >= -5:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_4;
                 break;
-            case >= -10:
+            case > -10:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_5;
                 break;
-            case < -10:
+            case <= -10:
                 heatResistanceValueMultiplier_Check = HealthValueMultiplier.Down_6;
                 break;
 
@@ -744,14 +682,14 @@ public class HealthManager : Singleton<HealthManager>
         //Moving Up
         if (hungerValue > 0 && thirstValue > 0 && heatResistanceValue > 0)
         {
-            print("Moving UP");
+            //print("Moving UP");
             mainHealth_Speed = 8e-06f * 6 * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
         }
 
         //Moving Down
         else
         {
-            print("Moving DOWN");
+            //print("Moving DOWN");
             mainHealth_Speed = 8e-06f * (1 + (PerkManager.Instance.perkValues.healthResistance_Increase_Percentage / 100));
         }
     }

@@ -390,7 +390,7 @@ public class GhostTank : MonoBehaviour
         {
             ghostObject_Parent.GetComponent<GhostInTank>().SetGhostAnimation();
 
-            ghostAnimationWaitingTime = UnityEngine.Random.Range(20f, 60f);
+            ghostAnimationWaitingTime = UnityEngine.Random.Range(20f, 35f);
 
             StartCoroutine(ResetGhostAnimation(1f));
         }

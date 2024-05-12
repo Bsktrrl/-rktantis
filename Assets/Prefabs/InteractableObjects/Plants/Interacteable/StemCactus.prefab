@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantType: 19
   pickablePart: {fileID: 5106027264915972012}
-  thisGrowthTime: 300
+  thisGrowthTime: 200
   ColorMeshObject:
   - {fileID: 1106561203523302402}
   - {fileID: 2550104531668100636}
@@ -254,6 +254,9 @@ MonoBehaviour:
   plantIndex_x: 0
   plantIndex_y: 0
   percentageCheck: 0
+  isInCropPlot: 0
+  CropPlotSlotIndex: 0
+  plantIsReadyInCropPlot: 0
 --- !u!114 &-6002980136003501971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineMode: 1
   bakeKeys:
   - {fileID: -2307664376317300276, guid: 0b9b841d389aacf46b89c2b21af82175, type: 3}
   - {fileID: -5615370702485192589, guid: 0b9b841d389aacf46b89c2b21af82175, type: 3}
@@ -2144,6 +2148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineMode: 1
   bakeKeys:
   - {fileID: -4092073191195690512, guid: 0b9b841d389aacf46b89c2b21af82175, type: 3}
   - {fileID: 7537749765195819686, guid: 0b9b841d389aacf46b89c2b21af82175, type: 3}

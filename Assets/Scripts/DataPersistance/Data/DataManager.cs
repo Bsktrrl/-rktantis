@@ -152,13 +152,13 @@ public class DataManager : Singleton<DataManager>, IDataPersistance
             //Fading In/Out Icon
             FadingInOutIcon();
 
-            print("1. Loading");
+            //print("1. Loading");
         }
 
         //After loading
         if (fading)
         {
-            print("2. Fading");
+            //print("2. Fading");
 
             //Fading the screen
             FadingOutLoadingScreen();

@@ -180,33 +180,75 @@ public class WeatherManager : Singleton<WeatherManager>
 
     void SetTemperature()
     {
-        currentWorldTemperature = 50;
+        currentWorldTemperature = idealTemperature;
 
-        //Check if there is night
-        if (TimeManager.Instance.GetTime() <= TimeManager.Instance.GetHour(6))
+        //Check where it's coldest: 22:00 - 02:00
+        if (TimeManager.Instance.GetTime() > TimeManager.Instance.GetHour(22) || TimeManager.Instance.GetTime() < TimeManager.Instance.GetHour(2))
         {
-            currentWorldTemperature = minTemperature;
-            return;
-        }
-        else if (TimeManager.Instance.GetTime() >= TimeManager.Instance.GetHour(18))
-        {
+            print("11. Coldest Temperature");
             currentWorldTemperature = minTemperature;
             return;
         }
 
-        //Check temperature during the day
-        if (TimeManager.Instance.GetTime() > TimeManager.Instance.GetHour(6)
-            && TimeManager.Instance.GetTime() < TimeManager.Instance.GetHour(18))
+        //Check where it's warmest: 10:00 - 14:00
+        else if (TimeManager.Instance.GetTime() > TimeManager.Instance.GetHour(10) && TimeManager.Instance.GetTime() < TimeManager.Instance.GetHour(14))
         {
-            float timeSpan = TimeManager.Instance.GetHour(6) - TimeManager.Instance.GetHour(12);
-            float timeAwayFromMidthday = Mathf.Abs(TimeManager.Instance.GetTime() - TimeManager.Instance.GetHour(12));
-            float maxTemperatureRange = maxTemperature - minTemperature;
+            print("22. Warmest Temperature");
+            currentWorldTemperature = maxTemperature;
+            return;
+        }
 
-            float timeSlize = timeSpan / maxTemperatureRange;
+        //Check Ideal temperatures: 05:00 - 06:00 && 18:00 - 19:00
+        else if ((TimeManager.Instance.GetTime() > TimeManager.Instance.GetHour(5) && TimeManager.Instance.GetTime() < TimeManager.Instance.GetHour(6))
+                || (TimeManager.Instance.GetTime() > TimeManager.Instance.GetHour(18) && TimeManager.Instance.GetTime() < TimeManager.Instance.GetHour(19)))
+        {
+            print("33. Ideal Temperature");
+            currentWorldTemperature = idealTemperature;
+            return;
+        }
 
-            float calculatingTemperature = timeAwayFromMidthday / timeSlize;
+        //Calculate the temperature in-between
+        else
+        {
+            //From Cold to Ideal
+            if (TimeManager.Instance.GetTime() >= TimeManager.Instance.GetHour(2) && TimeManager.Instance.GetTime() <= TimeManager.Instance.GetHour(5))
+            {
+                print("1. From Cold to Ideal");
+                float timeStep = (TimeManager.Instance.GetHour(5) - TimeManager.Instance.GetTime()) / (TimeManager.Instance.GetHour(5) - TimeManager.Instance.GetHour(2)); //Percentage
+                float temperatureBuff = (1 - timeStep) * (idealTemperature - minTemperature) + minTemperature;
 
-            currentWorldTemperature = Mathf.FloorToInt(maxTemperature + calculatingTemperature);
+                currentWorldTemperature = temperatureBuff;
+            }
+
+            //From Ideal to Hot
+            else if (TimeManager.Instance.GetTime() >= TimeManager.Instance.GetHour(6) && TimeManager.Instance.GetTime() <= TimeManager.Instance.GetHour(10))
+            {
+                print("2. From Ideal to Hot");
+                float timeStep = (TimeManager.Instance.GetHour(10) - TimeManager.Instance.GetTime()) / (TimeManager.Instance.GetHour(10) - TimeManager.Instance.GetHour(6)); //Percentage
+                float temperatureBuff = (1 - timeStep) * (maxTemperature - idealTemperature) + idealTemperature;
+
+                currentWorldTemperature = temperatureBuff;
+            }
+
+            //From Hot to Ideal
+            else if (TimeManager.Instance.GetTime() >= TimeManager.Instance.GetHour(14) && TimeManager.Instance.GetTime() <= TimeManager.Instance.GetHour(18))
+            {
+                print("3. From Hot to Ideal");
+                float timeStep = (TimeManager.Instance.GetHour(18) - TimeManager.Instance.GetTime()) / (TimeManager.Instance.GetHour(18) - TimeManager.Instance.GetHour(14)); //Percentage
+                float temperatureBuff = timeStep * (maxTemperature - idealTemperature) + idealTemperature;
+
+                currentWorldTemperature = temperatureBuff;
+            }
+
+            //From Ideal to Cold
+            else if (TimeManager.Instance.GetTime() >= TimeManager.Instance.GetHour(19) && TimeManager.Instance.GetTime() <= TimeManager.Instance.GetHour(22))
+            {
+                print("4. From Ideal ot Cold");
+                float timeStep = (TimeManager.Instance.GetHour(22) - TimeManager.Instance.GetTime()) / (TimeManager.Instance.GetHour(22) - TimeManager.Instance.GetHour(19)); //Percentage
+                float temperatureBuff = timeStep * (idealTemperature - minTemperature) + minTemperature;
+
+                currentWorldTemperature = temperatureBuff;
+            }
         }
     }
     void SetPlayerTemperature(float coverValue, float temperatureFruit, float waterValue)
@@ -387,11 +429,29 @@ public class WeatherManager : Singleton<WeatherManager>
     }
     public void CalculateLastWeather(int daysForward)
     {
-        int enumSize = Enum.GetValues(typeof(WeatherType)).Length;
-
-        for (int i = 0; i < daysForward; i++)
+        if (daysForward == 20)
         {
-            weatherTypeDayList.Add((WeatherType)UnityEngine.Random.Range(0, enumSize));
+            print("Setup Cloudy Weather");
+            
+            weatherTypeDayList.Add(WeatherType.Cloudy);
+            weatherTypeDayList.Add(WeatherType.Cloudy);
+            weatherTypeDayList.Add(WeatherType.Cloudy);
+
+            int enumSize = Enum.GetValues(typeof(WeatherType)).Length;
+            for (int i = 0; i < daysForward - 3; i++)
+            {
+                weatherTypeDayList.Add((WeatherType)UnityEngine.Random.Range(0, enumSize));
+            }
+        }
+        else
+        {
+            print("Setup Random Weather");
+
+            int enumSize = Enum.GetValues(typeof(WeatherType)).Length;
+            for (int i = 0; i < daysForward; i++)
+            {
+                weatherTypeDayList.Add((WeatherType)UnityEngine.Random.Range(0, enumSize));
+            }
         }
     }
     void SetWeatherStats_Today()
@@ -640,7 +700,9 @@ public class WeatherManager : Singleton<WeatherManager>
     {
         if (Physics.Raycast(MainManager.Instance.player.transform.position, raycastDirection, out hit, maxRange))
         {
-            if (hit.transform.CompareTag("BuildingBlock")) //It's a "Model"-Block
+            if (hit.transform.CompareTag("Ground_Wood")
+                || hit.transform.CompareTag("Ground_Stone")
+                || hit.transform.CompareTag("GroundCryonite")) //It's a "Model"-Block
             {
                 if (hit.transform.gameObject.GetComponent<Model>())
                 {
@@ -699,15 +761,15 @@ public class WeatherManager : Singleton<WeatherManager>
                     coverValue = 0;
                 }
             }
-            else if (hit.transform.CompareTag("Ground")) //Is inside eks. a cave
+            else if (hit.transform.CompareTag("Ground_Ruin")) //Is inside eks. a cave
             {
                 if (isWarm)
                 {
-                    coverValue = -wood_Cover;
+                    coverValue = -stone_Cover;
                 }
                 else
                 {
-                    coverValue = wood_Cover;
+                    coverValue = stone_Cover;
                 }
             }
             else

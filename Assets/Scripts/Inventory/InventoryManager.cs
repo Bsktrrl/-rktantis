@@ -110,7 +110,7 @@ public class InventoryManager : Singleton<InventoryManager>
         //Safty Inventory check if starting a new game - Always have at least 1 inventory
         if (inventories.Count <= 0)
         {
-            print("AddInventory");
+            //print("AddInventory");
             AddInventory(InventoryType.Player);
 
             AddInventory(InventoryType.Chest_Small);

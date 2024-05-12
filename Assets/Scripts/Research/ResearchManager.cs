@@ -89,7 +89,7 @@ public class ResearchManager : Singleton<ResearchManager>
                 researched_SOItem.Add(false);
             }
 
-            print("Researched");
+            //print("Researched");
 
             //Set Items to be Researched
             //Nothing

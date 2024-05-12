@@ -103,7 +103,7 @@ public class TimeManager : Singleton<TimeManager>
         int minutes = Mathf.FloorToInt(currentTime / secondsPerMinute) % 60;
 
         //Set New Weather
-        if (hours <= 0 && minutes <= 0 && !newDay_Weather)
+        if (hours <= 0 && minutes <= 0 && timeOfDay == TimeOfDay.Night && !newDay_Weather)
         {
             if (!newDay_Weather)
             {

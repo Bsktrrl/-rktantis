@@ -142,7 +142,7 @@ public class ArídianKeyManager : Singleton<ArídianKeyManager>
                 {
                     if (arídianKeyWorldObject_Parent.transform.GetChild(i).transform.GetChild(j))
                     {
-                        print("New ArídianKey: [" + i + "][" + j + "]");
+                        //print("New ArídianKey: [" + i + "][" + j + "]");
                         //Give all Legal Objects an index
                         arídianKeyWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<ArídianKey>().arídianKeyIndex_x = i;
                         arídianKeyWorldObject_Parent.transform.GetChild(i).transform.GetChild(j).GetComponent<ArídianKey>().arídianKeyIndex_y = j;

@@ -109,16 +109,16 @@ public class GhostManager : Singleton<GhostManager>
             switch (WeatherManager.Instance.weatherTypeDayList[0])
             {
                 case WeatherType.Cold:
-                    ghostSpawnAmount = 6;
+                    ghostSpawnAmount = 7;
                     break;
                 case WeatherType.Cloudy:
-                    ghostSpawnAmount = 4;
+                    ghostSpawnAmount = 5;
                     break;
                 case WeatherType.Sunny:
-                    ghostSpawnAmount = 2;
+                    ghostSpawnAmount = 3;
                     break;
                 case WeatherType.Windy:
-                    ghostSpawnAmount = 0;
+                    ghostSpawnAmount = 1;
                     break;
 
                 default:
@@ -218,7 +218,7 @@ public class GhostManager : Singleton<GhostManager>
     {
         if (CountActiveGhosts() >= ghostSpawnAmount)
         {
-            print("1111. Don't spawn more ghosts");
+            //print("1111. Don't spawn more ghosts");
 
             return;
         }
@@ -229,7 +229,7 @@ public class GhostManager : Singleton<GhostManager>
         {
             if (!obj.activeInHierarchy)
             {
-                print("2222. DonSpawn Ghosts ghosts");
+                //print("2222. DonSpawn Ghosts ghosts");
 
                 obj.transform.position = GetSpawnPosition();
                 obj.GetComponent<InvisibleObject>().transparencyValue = 1;
