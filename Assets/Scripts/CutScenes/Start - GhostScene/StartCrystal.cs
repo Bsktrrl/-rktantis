@@ -23,10 +23,10 @@ public class StartCrystal : MonoBehaviour
     private void Update()
     {
         if (!DataManager.Instance.hasLoaded) { return; }
-        if (PauseGameManager.Instance.GetPause()) { return; }
+        //if (PauseGameManager.Instance.GetPause()) { return; }
         if (MainManager.Instance.gameStates == GameStates.GameOver) { return; }
 
-        if (CutSceneManager.Instance.cutScenes.start_GhostCrystal_Scene && !isTurnedOn)
+        if (CutSceneManager.Instance.cutScenes.start_GhostCrystal_Scene && !isTurnedOn && !PauseGameManager.Instance.GetPause())
         {
             if (gameObject)
             {
