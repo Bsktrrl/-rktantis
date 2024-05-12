@@ -185,7 +185,6 @@ public class WeatherManager : Singleton<WeatherManager>
         //Check where it's coldest: 22:00 - 02:00
         if (TimeManager.Instance.GetTime() > TimeManager.Instance.GetHour(22) || TimeManager.Instance.GetTime() < TimeManager.Instance.GetHour(2))
         {
-            print("11. Coldest Temperature");
             currentWorldTemperature = minTemperature;
             return;
         }
@@ -193,7 +192,6 @@ public class WeatherManager : Singleton<WeatherManager>
         //Check where it's warmest: 10:00 - 14:00
         else if (TimeManager.Instance.GetTime() > TimeManager.Instance.GetHour(10) && TimeManager.Instance.GetTime() < TimeManager.Instance.GetHour(14))
         {
-            print("22. Warmest Temperature");
             currentWorldTemperature = maxTemperature;
             return;
         }
@@ -202,7 +200,6 @@ public class WeatherManager : Singleton<WeatherManager>
         else if ((TimeManager.Instance.GetTime() > TimeManager.Instance.GetHour(5) && TimeManager.Instance.GetTime() < TimeManager.Instance.GetHour(6))
                 || (TimeManager.Instance.GetTime() > TimeManager.Instance.GetHour(18) && TimeManager.Instance.GetTime() < TimeManager.Instance.GetHour(19)))
         {
-            print("33. Ideal Temperature");
             currentWorldTemperature = idealTemperature;
             return;
         }
@@ -213,7 +210,6 @@ public class WeatherManager : Singleton<WeatherManager>
             //From Cold to Ideal
             if (TimeManager.Instance.GetTime() >= TimeManager.Instance.GetHour(2) && TimeManager.Instance.GetTime() <= TimeManager.Instance.GetHour(5))
             {
-                print("1. From Cold to Ideal");
                 float timeStep = (TimeManager.Instance.GetHour(5) - TimeManager.Instance.GetTime()) / (TimeManager.Instance.GetHour(5) - TimeManager.Instance.GetHour(2)); //Percentage
                 float temperatureBuff = (1 - timeStep) * (idealTemperature - minTemperature) + minTemperature;
 
@@ -223,7 +219,6 @@ public class WeatherManager : Singleton<WeatherManager>
             //From Ideal to Hot
             else if (TimeManager.Instance.GetTime() >= TimeManager.Instance.GetHour(6) && TimeManager.Instance.GetTime() <= TimeManager.Instance.GetHour(10))
             {
-                print("2. From Ideal to Hot");
                 float timeStep = (TimeManager.Instance.GetHour(10) - TimeManager.Instance.GetTime()) / (TimeManager.Instance.GetHour(10) - TimeManager.Instance.GetHour(6)); //Percentage
                 float temperatureBuff = (1 - timeStep) * (maxTemperature - idealTemperature) + idealTemperature;
 
@@ -233,7 +228,6 @@ public class WeatherManager : Singleton<WeatherManager>
             //From Hot to Ideal
             else if (TimeManager.Instance.GetTime() >= TimeManager.Instance.GetHour(14) && TimeManager.Instance.GetTime() <= TimeManager.Instance.GetHour(18))
             {
-                print("3. From Hot to Ideal");
                 float timeStep = (TimeManager.Instance.GetHour(18) - TimeManager.Instance.GetTime()) / (TimeManager.Instance.GetHour(18) - TimeManager.Instance.GetHour(14)); //Percentage
                 float temperatureBuff = timeStep * (maxTemperature - idealTemperature) + idealTemperature;
 
@@ -243,7 +237,6 @@ public class WeatherManager : Singleton<WeatherManager>
             //From Ideal to Cold
             else if (TimeManager.Instance.GetTime() >= TimeManager.Instance.GetHour(19) && TimeManager.Instance.GetTime() <= TimeManager.Instance.GetHour(22))
             {
-                print("4. From Ideal ot Cold");
                 float timeStep = (TimeManager.Instance.GetHour(22) - TimeManager.Instance.GetTime()) / (TimeManager.Instance.GetHour(22) - TimeManager.Instance.GetHour(19)); //Percentage
                 float temperatureBuff = timeStep * (idealTemperature - minTemperature) + minTemperature;
 

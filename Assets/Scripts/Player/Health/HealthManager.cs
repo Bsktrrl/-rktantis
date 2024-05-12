@@ -577,8 +577,6 @@ public class HealthManager : Singleton<HealthManager>
 
     void SetPlayerHeatResistance()
     {
-        print("WeatherManager.Instance.playerTemperature: " + WeatherManager.Instance.playerTemperature);
-
         switch (WeatherManager.Instance.playerTemperature)
         {
             //High Temperature

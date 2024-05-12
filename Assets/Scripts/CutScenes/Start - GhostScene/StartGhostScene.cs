@@ -51,7 +51,8 @@ public class StartGhostScene : MonoBehaviour
             PauseGameManager.Instance.PauseGame(true);
 
             ghostObject = Instantiate(ghost);
-            ghostObject.transform.SetPositionAndRotation(new Vector3(-58.21f, 30.92f, 52.38f), Quaternion.Euler(0, 58, 0));
+            ghostObject.transform.SetPositionAndRotation(new Vector3(-57.71f, 30.92f, 51.59f), Quaternion.Euler(0, 58, 0));
+            //ghostObject.transform.SetPositionAndRotation(new Vector3(-58.21f, 30.92f, 52.38f), Quaternion.Euler(0, 58, 0));
             ghostObject.SetActive(true);
 
             ghostMovingObject = FindChild(ghostObject.transform, "Spine1_Jnt").gameObject;
