@@ -545,6 +545,8 @@ public class JournalManager : Singleton<JournalManager>
 
     public void MentorJournalButton_isPressed()
     {
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         journalMenuState = JournalMenuState.MentorJournal;
         journalPageIsSelected = false;
 
@@ -564,6 +566,8 @@ public class JournalManager : Singleton<JournalManager>
     }
     public void PlayerJournalButton_isPressed()
     {
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         journalMenuState = JournalMenuState.PlayerJournal;
         journalPageIsSelected = false;
 
@@ -583,6 +587,8 @@ public class JournalManager : Singleton<JournalManager>
     }
     public void PersonalJournalButton_isPressed()
     {
+        SoundManager.Instance.Play_Tablet_ChangeMenu_Clip();
+
         journalMenuState = JournalMenuState.PersonalJournal;
         journalPageIsSelected = false;
 
