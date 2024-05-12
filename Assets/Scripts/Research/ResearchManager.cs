@@ -428,7 +428,6 @@ public class ResearchManager : Singleton<ResearchManager>
                 AddToResearchedItemList(activeItem);
                 Update_SOItemList();
                 UpdateResearchItemColor();
-
                 break;
             }
         }
@@ -465,6 +464,10 @@ public class ResearchManager : Singleton<ResearchManager>
         }
 
         SetResearchItemInfo(Items.None);
+
+        //Update Researched Icons
+        InventoryManager.Instance.UpdateResearchedIcon();
+
         SaveData();
     }
 }

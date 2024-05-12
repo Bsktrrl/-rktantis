@@ -19,6 +19,9 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     public int durabilityMax;
     public int durabilityCurrent;
 
+    [Header("Researched Icon")]
+    public GameObject researchedIconParent;
+
 
     //--------------------
 
@@ -508,6 +511,15 @@ public class ItemSlot : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         durabilityMeterParent.SetActive(false);
     }
 
+
+    public void ActivateResearchIcon()
+    {
+        researchedIconParent.SetActive(true);
+    }
+    public void DeactivateResearchIcon()
+    {
+        researchedIconParent.SetActive(false);
+    }
 
     //--------------------
 

@@ -284,6 +284,9 @@ public class InventoryManager : Singleton<InventoryManager>
         BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
         BuildingDisplayManager.Instance.DisplayRequirements();
 
+        //Update Researched Icons
+        UpdateResearchedIcon();
+
         return true;
     }
     public bool AddItemToInventory(int inventory, Items itemName)
@@ -338,6 +341,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
         BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
         BuildingDisplayManager.Instance.DisplayRequirements();
+
+        //Update Researched Icons
+        UpdateResearchedIcon();
 
         return true;
     }
@@ -407,6 +413,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
         BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
         BuildingDisplayManager.Instance.DisplayRequirements();
+
+        //Update Researched Icons
+        UpdateResearchedIcon();
 
         SaveData();
     }
@@ -583,6 +592,9 @@ public class InventoryManager : Singleton<InventoryManager>
         BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
         BuildingDisplayManager.Instance.DisplayRequirements();
 
+        //Update Researched Icons
+        UpdateResearchedIcon();
+
         SaveData();
     }
 
@@ -616,9 +628,16 @@ public class InventoryManager : Singleton<InventoryManager>
         BuildingDisplayManager.Instance.UpdateScreenBuildingRequirementDisplayInfo();
         BuildingDisplayManager.Instance.DisplayRequirements();
 
+        //Update Researched Icons
+        UpdateResearchedIcon();
+
         SaveData();
     }
     
+
+    //-----
+
+
     public void SpawnItemToWorld(Items itemName, GameObject dropPos, bool dropSound, InventoryItem item, float spawnPos_Offset)
     {
         if (MainManager.Instance.GetItem(itemName).worldObjectPrefab)
@@ -702,6 +721,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    //CheckHotbarItemInInventory
     #region
     public void CheckHotbarItemInInventory()
     {
@@ -918,6 +938,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    //GetAmountOfItemInInventory
     #region
     public int GetAmountOfItemInInventory(int inventory, Items itemName)
     {
@@ -952,6 +973,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    //Item Info to Hotbar
     #region
     public void SelectItemInfoToHotbar()
     {
@@ -1024,6 +1046,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    //Durability
     #region
     public void SelectItemDurabilityDisplay()
     {
@@ -1082,6 +1105,89 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    //Researched Icon
+    #region
+    public void UpdateResearchedIcon()
+    {
+        print("UpdateResearchedIcon");
+
+        //Hide all NotResearchedIcons on all itemSlots - Both Player and Chest
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            itemSlotList_Player[i].GetComponent<ItemSlot>().DeactivateResearchIcon();
+        }
+        for (int i = 0; i < itemSlotList_Chest.Count; i++)
+        {
+            itemSlotList_Chest[i].GetComponent<ItemSlot>().DeactivateResearchIcon();
+        }
+
+        //Find all items that is not yet researched - Both Player and Chest
+
+        //Player
+        List<int> ID_List = new List<int>();
+
+        for (int i = 0; i < itemSlotList_Player.Count; i++)
+        {
+            if (!MainManager.Instance.GetItem(itemSlotList_Player[i].GetComponent<ItemSlot>().itemName).isResearched)
+            {
+                bool isTaken = false;
+
+                for (int j = 0; j < ID_List.Count; j++)
+                {
+                    if (itemSlotList_Player[i].GetComponent<ItemSlot>().itemID == ID_List[j])
+                    {
+                        isTaken = true;
+
+                        break;
+                    }
+                }
+
+                if (!isTaken)
+                {
+                    //Activate the top right itemSlot to display the NotResearchedIcon
+                    itemSlotList_Player[i + (int)MainManager.Instance.GetItem(itemSlotList_Player[i].GetComponent<ItemSlot>().itemName).itemSize.x - 1].GetComponent<ItemSlot>().ActivateResearchIcon();
+
+                    ID_List.Add(itemSlotList_Player[i].GetComponent<ItemSlot>().itemID);
+                }
+            }
+        }
+        
+        //Chest
+        ID_List.Clear();
+
+        for (int i = 0; i < itemSlotList_Chest.Count; i++)
+        {
+            if (!MainManager.Instance.GetItem(itemSlotList_Chest[i].GetComponent<ItemSlot>().itemName).isResearched)
+            {
+                bool isTaken = false;
+
+                for (int j = 0; j < ID_List.Count; j++)
+                {
+                    if (itemSlotList_Chest[i].GetComponent<ItemSlot>().itemID == ID_List[j])
+                    {
+                        isTaken = true;
+
+                        break;
+                    }
+                }
+
+                if (!isTaken)
+                {
+                    //Activate the top right itemSlot to display the NotResearchedIcon
+                    itemSlotList_Chest[i + (int)MainManager.Instance.GetItem(itemSlotList_Chest[i].GetComponent<ItemSlot>().itemName).itemSize.x - 1].GetComponent<ItemSlot>().ActivateResearchIcon();
+
+                    ID_List.Add(itemSlotList_Chest[i].GetComponent<ItemSlot>().itemID);
+                }
+            }
+        }
+    }
+    #endregion
+
+
+    //--------------------
+
+
+    //ItemInfoBox
     #region
     public void ChangeItemInfoBox(Items itemName, ItemSlot itemSlot)
     {
@@ -1216,6 +1322,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    //HotbarSlots_Quick
     #region HotbarSlots_Quick
     void QuickHotbarSelect_1()
     {
@@ -1298,6 +1405,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    //InventoryUI
     #region InventoryUI
     public void PrepareInventoryUI(int inventory, bool isMovingItem)
     {
@@ -1600,6 +1708,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    //Set Inventory Size
     #region Set Inventory Size
     public void SetPlayerInventorySize()
     {
@@ -1661,6 +1770,8 @@ public class InventoryManager : Singleton<InventoryManager>
     }
 
     #endregion
+
+    //Set Tools Durability
     #region Set Tools Durability
     public void SetToolsDurability()
     {
@@ -1711,6 +1822,7 @@ public class InventoryManager : Singleton<InventoryManager>
     //--------------------
 
 
+    //Open/Close Inventory Menu
     #region Open/Close Inventory Menu
     public void OpenPlayerInventory()
     {

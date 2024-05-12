@@ -773,6 +773,9 @@ public class TabletManager : Singleton<TabletManager>
 
         Cursor.lockState = CursorLockMode.None;
         //MainManager.Instance.menuStates = MenuStates.InventoryMenu;
+
+        //Update Researched Icons
+        InventoryManager.Instance.UpdateResearchedIcon();
     }
 
     //When Opening Tablet from an InteracteableObject
@@ -820,6 +823,9 @@ public class TabletManager : Singleton<TabletManager>
         {
             InventoryManager.Instance.PrepareInventoryUI(InventoryManager.Instance.chestInventoryOpen, false);
         }
+
+        //Update Researched Icons
+        InventoryManager.Instance.UpdateResearchedIcon();
     }
     
     public void CloseTablet()

@@ -367,11 +367,11 @@ public class InvisibleObject : MonoBehaviour
         }
         else if (HotbarManager.Instance.selectedItem == Items.Lamp)
         {
-            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.ghostCapture_Distance * (1 + (PerkManager.Instance.perkValues.arídeanLight_Range_Increase_Percentage / 100));
+            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.aríditeCrystal_Distance * (1 + (PerkManager.Instance.perkValues.arídeanLight_Range_Increase_Percentage / 100));
         }
         else
         {
-            sphereCollider.GetComponent<SphereCollider>().radius = 4 * (1 + (PerkManager.Instance.perkValues.arídeanLight_Range_Increase_Percentage / 100));
+            sphereCollider.GetComponent<SphereCollider>().radius = InvisibleObjectManager.Instance.aríditeCrystal_Distance * (1 + (PerkManager.Instance.perkValues.arídeanLight_Range_Increase_Percentage / 100));
         }
     }
 }

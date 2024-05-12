@@ -18,7 +18,7 @@ public class StartMenuGhost : MonoBehaviour
 
     private void Start()
     {
-        ghostAnimationWaitingTime = Random.Range(4f, 7f);
+        ghostAnimationWaitingTime = Random.Range(2f, 4f);
 
         for (int i = 0; i < 7; i++)
         {
