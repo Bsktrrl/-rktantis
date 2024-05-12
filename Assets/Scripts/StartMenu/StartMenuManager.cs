@@ -15,6 +15,14 @@ public class StartMenuManager : MonoBehaviour
 
     [SerializeField] GameObject logo;
 
+    [Header("InfoMenus")]
+    [SerializeField] GameObject infoMenu_Controls;
+    [SerializeField] GameObject infoMenu_Health;
+    [SerializeField] GameObject infoMenu_Thermometer;
+    [SerializeField] GameObject infoMenu_Weather;
+    [SerializeField] GameObject infoMenu_Tablets;
+    [SerializeField] GameObject infoMenu_BuildingHammers;
+
 
     //--------------------
 
@@ -22,6 +30,8 @@ public class StartMenuManager : MonoBehaviour
     private void Start()
     {
         string fullPath = Path.Combine(Application.persistentDataPath, "data.game");
+
+        menu_Info.SetActive(false);
 
         if (File.Exists(fullPath))
         {
@@ -87,4 +97,67 @@ public class StartMenuManager : MonoBehaviour
         menu_Info.SetActive(false);
         logo.SetActive(true);
     }
+
+
+    //InfoButtons
+    #region
+    public void InfoMenu_Controls_Button_isPressed()
+    {
+        StartMenuSounds.Instance.Play_Inventory_ButtonPressed_Clip();
+
+        ResetMenus();
+
+        infoMenu_Controls.SetActive(true);
+    }
+    public void InfoMenu_Health_Button_isPressed()
+    {
+        StartMenuSounds.Instance.Play_Inventory_ButtonPressed_Clip();
+
+        ResetMenus();
+
+        infoMenu_Health.SetActive(true);
+    }
+    public void InfoMenu_Thermometer_Button_isPressed()
+    {
+        StartMenuSounds.Instance.Play_Inventory_ButtonPressed_Clip();
+
+        ResetMenus();
+
+        infoMenu_Thermometer.SetActive(true);
+    }
+    public void InfoMenu_Weather_Button_isPressed()
+    {
+        StartMenuSounds.Instance.Play_Inventory_ButtonPressed_Clip();
+
+        ResetMenus();
+
+        infoMenu_Weather.SetActive(true);
+    }
+    public void InfoMenu_Tables_Button_isPressed()
+    {
+        StartMenuSounds.Instance.Play_Inventory_ButtonPressed_Clip();
+
+        ResetMenus();
+
+        infoMenu_Tablets.SetActive(true);
+    }
+    public void InfoMenu_BuildingHammers_Button_isPressed()
+    {
+        StartMenuSounds.Instance.Play_Inventory_ButtonPressed_Clip();
+
+        ResetMenus();
+
+        infoMenu_BuildingHammers.SetActive(true);
+    }
+
+    void ResetMenus()
+    {
+        infoMenu_Controls.SetActive(false);
+        infoMenu_Health.SetActive(false);
+        infoMenu_Thermometer.SetActive(false);
+        infoMenu_Weather.SetActive(false);
+        infoMenu_Tablets.SetActive(false);
+        infoMenu_BuildingHammers.SetActive(false);
+    }
+    #endregion
 }

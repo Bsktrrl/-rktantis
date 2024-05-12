@@ -149,7 +149,7 @@ public class GhostCapturer : MonoBehaviour
             if (!GhostManager.Instance.ghostCapturerStats.ghostCapturedStats[i].isTaken)
             {
                 print("3. StartCapturing");
-                invisibleObjectCollider.layer = LayerMask.NameToLayer(invisibleLightLayer);
+                //invisibleObjectCollider.layer = LayerMask.NameToLayer(invisibleLightLayer);
                 isActive = true;
 
                 SoundManager.Instance.Play_Ghost_TargetGhost_Clip();
@@ -160,7 +160,7 @@ public class GhostCapturer : MonoBehaviour
     }
     public void StopCapturing()
     {
-        invisibleObjectCollider.layer = LayerMask.NameToLayer(defaultLayer);
+        //invisibleObjectCollider.layer = LayerMask.NameToLayer(defaultLayer);
 
         SoundManager.Instance.Stop_Ghost_TargetGhost_Clip();
 

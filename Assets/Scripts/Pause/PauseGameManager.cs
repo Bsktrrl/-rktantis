@@ -25,6 +25,14 @@ public class PauseGameManager : Singleton<PauseGameManager>
     [SerializeField] GameObject menu_Info;
     [SerializeField] GameObject menu_Settings;
 
+    [Header("InfoMenus")]
+    [SerializeField] GameObject infoMenu_Controls;
+    [SerializeField] GameObject infoMenu_Health;
+    [SerializeField] GameObject infoMenu_Thermometer;
+    [SerializeField] GameObject infoMenu_Weather;
+    [SerializeField] GameObject infoMenu_Tablets;
+    [SerializeField] GameObject infoMenu_BuildingHammers;
+
 
     //--------------------
 
@@ -38,6 +46,8 @@ public class PauseGameManager : Singleton<PauseGameManager>
 
         menu_Info.SetActive(false);
         menu_Settings.SetActive(false);
+
+        infoMenu_Controls.SetActive(true);
     }
     private void Update()
     {
@@ -183,6 +193,68 @@ public class PauseGameManager : Singleton<PauseGameManager>
 
         yield return new WaitForSeconds(3);
         saved_Text.SetActive(false);
+    }
+    #endregion
+
+    //InfoButtons
+    #region
+    public void InfoMenu_Controls_Button_isPressed()
+    {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        ResetMenus();
+
+        infoMenu_Controls.SetActive(true);
+    }
+    public void InfoMenu_Health_Button_isPressed()
+    {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        ResetMenus();
+
+        infoMenu_Health.SetActive(true);
+    }
+    public void InfoMenu_Thermometer_Button_isPressed()
+    {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        ResetMenus();
+
+        infoMenu_Thermometer.SetActive(true);
+    }
+    public void InfoMenu_Weather_Button_isPressed()
+    {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        ResetMenus();
+
+        infoMenu_Weather.SetActive(true);
+    }
+    public void InfoMenu_Tables_Button_isPressed()
+    {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        ResetMenus();
+
+        infoMenu_Tablets.SetActive(true);
+    }
+    public void InfoMenu_BuildingHammers_Button_isPressed()
+    {
+        SoundManager.Instance.Play_JournalPage_SelectingJournalPage_Clip();
+
+        ResetMenus();
+
+        infoMenu_BuildingHammers.SetActive(true);
+    }
+
+    void ResetMenus()
+    {
+        infoMenu_Controls.SetActive(false);
+        infoMenu_Health.SetActive(false);
+        infoMenu_Thermometer.SetActive(false);
+        infoMenu_Weather.SetActive(false);
+        infoMenu_Tablets.SetActive(false);
+        infoMenu_BuildingHammers.SetActive(false);
     }
     #endregion
 }
