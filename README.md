@@ -1,4 +1,4 @@
-<img src="https://github.com/Bsktrrl/Bsktrrl.github.io/tree/main/images/Aridea.gif" width="70%"/>
+<img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea.gif" width="70%"/>
 <img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea.jpg" width="70%"/>
 
 
