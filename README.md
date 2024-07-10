@@ -71,3 +71,6 @@ The "Upgrade Table" functions as the players' quests, in the sense that the play
 
 ## Walktrough Video (In Norwegien)
 <a href="https://www.youtube.com/watch?v=AQKkpu5VTW0" class="special">Walktrough</a>
+
+## Bachelor Report
+<a href="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/Attachments/Aridea_Raport.pdf" class="special">Bachelor Report</a>
