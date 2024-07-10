@@ -1,5 +1,7 @@
 <img src="https://github.com/Bsktrrl/Bsktrrl.github.io/tree/main/images/Aridea.gif" width="70%"/>
-<img src="https://github.com/Bsktrrl/Bsktrrl.github.io/tree/main/images/Aridea.jpg" width="70%"/>
+<img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea.jpg" width="70%"/>
+
+
 
 # Arídea: The Forgotten Desert
 A Game demo of a Survival Adventure game, made as a bachelor project in "Game Technology and Simulation" at Høgskolen Innlandet.
