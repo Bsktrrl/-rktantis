@@ -41,7 +41,7 @@ For our inventory we have taken inspiration from "Subnautica", making an upgrade
 </table>
 <br>
 
-## Base Building
+## Build Bases
 There is no proper Survival Adventure game without base building. The desert is hot and if not careful, the player may die of heat stroke. Building bases all across the desert will shelter the player, leaving higher survival possibilities. The player may also furnish its base with tables (Crafting, Research and Upgrade) and machines to advance in the game.
 <table width="70%">
       <tr><td><b>Building Base</b></td>
@@ -51,7 +51,7 @@ There is no proper Survival Adventure game without base building. The desert is 
 </table>
 <br>
 
-## Tables
+## Interactable Tables
 In the game, three tables are essential for the games' progression.<br> 
 The "Research Table" let the player research resources form the world, making recipes appear in the Crafting table.<br>
 The "Crafting Table" let the player acquire tools and items to advance the game.<br>
@@ -62,6 +62,7 @@ The "Upgrade Table" functions as the players' quests, in the sense that the play
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video3.gif"/></td>
       <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video10.gif"/></td>
 </table>
+<br>
 <br>
 
 
