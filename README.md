@@ -19,13 +19,17 @@ The Identity of the game lays in the elemental ghosts which are roaming the land
 <br>
 
 ## Inventory and Items
-For our inventory we have taken inspiration from "Subnautica", making an upgradeable grid-based system with items of different sizes. Resources can be gathered from the world or transfered from/to chests for storage. Resources are deleted from the player inventory during game over, leaving only key items behind.
+For our inventory we have taken inspiration from "Subnautica", making an upgradeable grid-based system with items of different sizes. Resources can be gathered from the world or transferred from/to chests for storage. Resources are deleted from the player inventory during game over, leaving only key items behind.
 <table width="70%">
       <tr><td><b>Inventory</b></td>
       <td><b>Gather Resources</b></td></tr>
-      <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video9.gif"/></td>
-      <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video4.gif"/></td></tr>
+      <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video4.gif"/></td>
+      <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video9.gif"/></td></tr>
 </table>
+<br>
+
+## Base Building
+There is no proper Survival Adventure game without base building. The desert is hot and if not careful, the player may die of heat stroke. Building bases all across the desert will shelter the player, leaving higher survival possibilities. The player may also furnish its base with tables (Crafting, Research and Upgrade) and machines to advance in the game.
 <table width="70%">
       <tr><td><b>Building Base</b></td>
       <td><b>Building Machines</b></td></tr>
