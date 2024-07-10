@@ -21,6 +21,16 @@ The Identity of the game lays in the elemental ghosts which are roaming the land
 </table>
 <br>
 
+## World Building
+Even if the demo focus mostly on the concrete aspects of the game, there is an underlying story that can be found by the player. Through research notes found across the game, the player gets introduced to its mentor and why he sent you to the desert. Through hidden images scattered across the biomes, an ancient story about the Adrídean people and how Arídea became forgotten, is unfold. This story will progress alongside the gameplay, and will reward players for taking their time searching.
+<table width="70%">
+      <tr><td><b>Hidden Messages</b></td>
+      <td><b>Day/Night Sycle</b></td></tr>
+      <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video2.gif"/></td>
+      <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video5.gif"/></td>
+</table>
+<br>
+
 ## Inventory and Items
 For our inventory we have taken inspiration from "Subnautica", making an upgradeable grid-based system with items of different sizes. Resources can be gathered from the world or transferred from/to chests for storage. Resources are deleted from the player inventory during game over, leaving only key items behind.
 <table width="70%">
@@ -52,16 +62,7 @@ The "Upgrade Table" functions as the players' quests, in the sense that the play
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video3.gif"/></td>
       <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video10.gif"/></td>
 </table>
-
-## World Building
-Even if the demo focus mostly on the concrete aspects of the game, there is an underlying story that can be found by the player. Through research notes found across the game, the player gets introduced to its mentor and why he sent you to the desert. Through hidden images scattered across the biomes, an ancient story about the Adrídean people and how Arídea became forgotten, is unfold. This story will progress alongside the gameplay, and will reward players for taking their time searching.
-<table width="70%">
-      <tr><td><b>Hidden Messages</b></td>
-      <td><b>Day/Night Sycle</b></td></tr>
-      <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video2.gif"/></td>
-      <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video5.gif"/></td>
-</table>
-
+<br>
 
 
 ## Trailer
