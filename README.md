@@ -11,7 +11,6 @@ The purpose of this project has been to *create a first level of a Survival Adve
       <td><b>Inventory</b></td></tr>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video1.gif"/></td>
       <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video4.gif"/></td></tr>
-      
       <tr><td><b>Hidden Messages</b></td>
       <td><b>Research Resources</b></td></tr>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video2.gif"/></td>
