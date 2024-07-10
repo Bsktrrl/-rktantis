@@ -18,12 +18,10 @@ The purpose of this project has been to *create a first level of a Survival Adve
       <tr><td><b>Building Base</b></td>
       <td><b>Building Machines</b></td></tr>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video8.gif"/></td>
-      <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video7.gif"/><br></td></tr>
-      <tr><td><b>Hidden Messages</b></td>
+      <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video7.gif"/><br></td>        <tr><td><b>Hidden Messages</b></td>
       <td><b>Research Resources</b></td></tr>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video2.gif"/></td>
-      <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video3.gif"/><br></td></tr>
-      <td><b>Upgrades</b></td></tr>
+      <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video3.gif"/><br></td>        <td><b>Upgrades</b></td></tr>
       <td><b>Day/Night Sycle</b></td></tr>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video10.gif"/></td>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video5.gif"/></td>
