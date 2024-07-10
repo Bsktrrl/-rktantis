@@ -8,12 +8,12 @@ The purpose of this project has been to *create a first level of a Survival Adve
 
 <table width="70%">
       <tr><td><b>Elemental Ghost</b></td>
-      <tr><td><b>Elemental Ghost</b></td>
+      <td><b>Elemental Ghost</b></td></tr>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video1.gif"/></td>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video6.gif"/></td>
 </table>
 <table width="70%">
-      <td><b>Inventory</b></td></tr>
+      <tr><td><b>Inventory</b></td></tr>
       <td><b>Gather Resources</b></td></tr>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video9.gif"/></td>
       <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video4.gif"/></td></tr>
@@ -29,7 +29,7 @@ The purpose of this project has been to *create a first level of a Survival Adve
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video2.gif"/></td>
       <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video3.gif"/><br></td>  </table>
 <table width="70%">
-      <td><b>Upgrades</b></td></tr>
+      <tr><td><b>Upgrades</b></td></tr>
       <td><b>Day/Night Sycle</b></td></tr>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video10.gif"/></td>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video5.gif"/></td>
