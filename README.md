@@ -6,6 +6,7 @@ This is a Game demo of a Survival Adventure game, made as a bachelor project in 
 ## Project Description
 The purpose of this project has been to *create a first level of a Survival Adventure game* and see if this was possible in the time period of one semester. The group featured two students, one designer an one programmer, where all assets and code has been made from scratch.
 <br>
+<br>
 
 ## The Identity of the game
 The Identity of the game lays in the elemental ghosts which are roaming the lands. The ghosts can be captured and their elements extracted for use in machines, advancing the game. The ghosts only turns visible in the range of an Arídean light source, and it's up to the player to hunt them down. Later in the game, the player will get hold of information that make them question the ghosts' identity and if what they do to them is ethically questionable.
