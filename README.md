@@ -15,6 +15,7 @@ The Identity of the game lays in the elemental ghosts which are roaming the land
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video1.gif"/></td>
       <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video6.gif"/></td>
 </table>
+<br>
 
 ## Inventory and Items
 For our inventory we have taken inspiration from "Subnautica", making an upgradeable grid-based system with items of different sizes. Resources can be gathered from the world or transfered from/to chests for storage. Resources are deleted from the player inventory during game over, leaving only key items behind.
