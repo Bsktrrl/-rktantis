@@ -6,7 +6,7 @@ This is a Game demo of a Survival Adventure game, made as a bachelor project in 
 ## Project Description
 The purpose of this project has been to *create a first level of a Survival Adventure game*. The group featured two students, one designer an one programmer. 
 
-<table width="100%">
+<table width="70%">
       <tr><td><b>Elemental Ghost</b></td>
       <tr><td><b>Elemental Ghost</b></td>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video1.gif"/></td>
