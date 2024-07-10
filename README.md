@@ -36,16 +36,19 @@ There is no proper Survival Adventure game without base building. The desert is 
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video8.gif"/></td>
       <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video7.gif"/><br></td>
 </table>
+<br>
+
+## Base Building
 <table width="70%">
-      <tr><td><b>Hidden Messages</b></td>
       <td><b>Research Resources</b></td></tr>
-      <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video2.gif"/></td>
+      <tr><td><b>Upgrades</b></td>
       <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video3.gif"/><br></td>
+      <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video10.gif"/></td>
 </table>
 <table width="70%">
-      <tr><td><b>Upgrades</b></td>
+      <tr><td><b>Hidden Messages</b></td>
       <td><b>Day/Night Sycle</b></td></tr>
-      <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video10.gif"/></td>
+      <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video2.gif"/></td>
       <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video5.gif"/></td>
 </table>
 
