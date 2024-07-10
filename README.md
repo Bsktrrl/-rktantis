@@ -39,9 +39,13 @@ There is no proper Survival Adventure game without base building. The desert is 
 <br>
 
 ## Tables
+In the game, three tabes are essential for the games' progression.<br> 
+The "Research Table" let the player research resources form the world, making recipes appear in the Crafting table.<br>
+The "Crafting Table" let the player aquire tools and items to advance the game.<br>
+The "Upgrade Table" functions as the players' quests, in the sence that the player can invest resources to upgrade different parts of the gameplay.
 <table width="70%">
       <tr><td><b>Research Resources</b></td>
-      <td><b>Day/Upgrades</b></td></tr>
+      <td><b>Upgrades</b></td></tr>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video3.gif"/></td>
       <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video10.gif"/></td>
 </table>
