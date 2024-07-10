@@ -7,7 +7,6 @@ This is a Game demo of a Survival Adventure game, made as a bachelor project in 
 The purpose of this project has been to *create a first level of a Survival Adventure game*. The group featured two students, one designer an one programmer. 
 
 <table width="100%">
-      
       <tr><td><b>Elemental Ghost</b></td>
       <td><b>Inventory</b></td></tr>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video1.gif"/></td>
@@ -17,7 +16,6 @@ The purpose of this project has been to *create a first level of a Survival Adve
       <td><b>Research Resources</b></td></tr>
       <tr><td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video2.gif"/></td>
       <td><img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/video3.gif"/><br></td></tr>
-      
 </table>
 
 
