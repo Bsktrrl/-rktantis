@@ -1,7 +1,10 @@
 <img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/Aridea/Aridea.gif" width="70%"/><br>
 
 # Arídea: The Forgotten Desert
-This is a Game demo of a Survival Adventure game, made as a bachelor project in "Game Technology and Simulation" at Høgskolen Innlandet. The demo feature the first biome in the game, where the player will find one of five keys to the gate blocking the entrance to the forgotten city Arídea. This is a classical Survival Adventure game where the goal of the player is to survive and explore, find resources and craft them into useful tools, improving the gameplay.
+This is a Game demo of a Survival Adventure game, made as a bachelor project in "Game Technology and Simulation" at Høgskolen Innlandet. The demo feature the first biome in the game, where the player is sent to the desert by its mentor in the search of 5 keys to the gate blocking the entrance to the forgotten city Arídea. The demo ends with the player acquiring one of the keys.
+<br>
+<br>
+This is a classical Survival Adventure game where the goal of the player is to survive and explore, find resources and craft them into useful tools, improving the gameplay.
 
 ## Project Description
 The purpose of this project has been to *create a first level of a Survival Adventure game* and see if this was possible in the time period of one semester. The group featured two students, one designer an one programmer, where all assets and code has been made from scratch.
@@ -51,6 +54,7 @@ The "Upgrade Table" functions as the players' quests, in the sense that the play
 </table>
 
 ## World Building
+Even if the demo focus mostly on the concrete aspects of the game, there is an underlying story that can be found by the player. Through research notes found across the game, the player gets introduced to its mentor and why he sent you to the desert. Through hidden images scattered across the biomes, an ancient story about the Adrídean people and how Arídea became forgotten, is unfold. This story will progress alongside the gameplay, and will reward players for taking their time searching.
 <table width="70%">
       <tr><td><b>Hidden Messages</b></td>
       <td><b>Day/Night Sycle</b></td></tr>
